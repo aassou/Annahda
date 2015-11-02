@@ -27,6 +27,8 @@
 		$caisseSortiesManager = new CaisseSortiesManager($pdo);
 		$operationsManager = new OperationManager($pdo);
 		//classes and vars
+		$idProjet = $_GET['idProjet'];
+        $projet = $projetManager->getProjetById($idProjet);
 		//users number
 		$usersNumber = $usersManager->getUsersNumber();
 		$mailsNumberToday = $mailsManager->getMailsNumberToday();
@@ -86,7 +88,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->	
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -99,18 +101,23 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Statistiques
+							Gestion des projet - Projet : <strong><?= $projet->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-dashboard"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<a>Tableau de bord</a>
+							    <i class="icon-briefcase"></i>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li>
 								<a>Statistiques</a>
 							</li>
