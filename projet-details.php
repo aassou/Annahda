@@ -118,7 +118,7 @@
                                         <a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons / Fournisseurs</a>
                                     </div>
                                     <div class="portfolio-info">
-                                        <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width">Gérer employés du projet</a>
+                                        <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width blue">Statistiques</a>
                                     </div>
                                     <!--div class="portfolio-info">
@@ -126,26 +126,7 @@
                                     </div-->
                                 </div>
                             </div>
-                            <br><br>
-                            <!-- delete box begin-->
-                            <div id="delete<?php echo $projet->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h3>Supprimer Projet <?= $projet->nom() ?></h3>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm" action="controller/ProjetDeleteController.php" method="post">
-                                        <p>Êtes-vous sûr de vouloir supprimer ce projet <strong><?= $projet->nom() ?></strong> ?</p>
-                                        <div class="control-group">
-                                            <label class="right-label"></label>
-                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- delete box end -->     
+                            <br><br>     
                         </div>
                         <!-- END EXAMPLE TABLE PORTLET-->
                     </div>

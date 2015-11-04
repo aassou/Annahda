@@ -1,6 +1,13 @@
 <?php
+/**
+ * This is a ModelManager class for the Project component
+ * Created By : AASSOU Abdelilah
+ * Date       : 03/11/2015
+ * Github     : @aassou
+ * email      : aassou.abdelilah@gmail.com
+ */
 class ProjetManager{
-//attributes
+    //attributes
     private $_db;
     
     //constructor
@@ -10,26 +17,34 @@ class ProjetManager{
     
     //CRUD operations
     public function add(Projet $projet){
-        $query = $this->_db->prepare('INSERT INTO t_projet (nom, adresse, superficie, description, budget)
-                                VALUES (:nom, :adresse, :superficie, :description, :budget)') or die(print_r($this->_db->errorInfo()));
+        $query = $this->_db->prepare(
+        'INSERT INTO t_projet (nom, adresse, superficie, description, budget, createdBy, created)
+        VALUES (:nom, :adresse, :superficie, :description, :budget, :createdBy, :created)') 
+        or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $projet->nom());
         $query->bindValue(':adresse', $projet->adresse());
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':budget', $projet->budget());
+        $query->bindValue(':created', $projet->created());
+        $query->bindValue(':createdBy', $projet->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(Projet $projet){
-        $query = $this->_db->prepare('UPDATE t_projet SET nom=:nom, adresse=:adresse, 
-        superficie=:superficie, description=:description, budget=:budget WHERE id=:id')or die(print_r($this->_db->errorInfo()));
+        $query = $this->_db->prepare(
+        'UPDATE t_projet SET nom=:nom, adresse=:adresse, superficie=:superficie, description=:description, 
+        budget=:budget, updatedBy=:updatedBy, updated=:updated WHERE id=:id')
+        or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $projet->id());
         $query->bindValue(':nom', $projet->nom());
         $query->bindValue(':adresse', $projet->adresse());
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':budget', $projet->budget());
+        $query->bindValue(':updated', $projet->updated());
+        $query->bindValue(':updatedBy', $projet->updatedBy());
         $query->execute();
         $query->closeCursor();
     }

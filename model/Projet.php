@@ -1,4 +1,11 @@
 <?php
+/**
+ * This is a Model class for the project component
+ * Created By : AASSOU Abdelilah
+ * Date       : 03/11/2015
+ * Github     : @aassou
+ * email      : aassou.abdelilah@gmail.com
+ */
 class Projet{
 
     //attributes
@@ -8,6 +15,10 @@ class Projet{
     private $_superficie;
     private $_description;
     private $_budget;
+    private $_created;
+    private $_createdBy;
+    private $_updated;
+    private $_updatedBy;
     //le constructeur
     public function __construct($data){
         $this->hydrate($data);
@@ -49,6 +60,22 @@ class Projet{
         $this->_budget = $budget;
     }
     
+    public function setCreated($created){
+        $this->_created = $created;
+    }
+    
+    public function setCreatedBy($createdBy){
+        $this->_createdBy = $createdBy;
+    }
+    
+    public function setUpdated($updated){
+        $this->_updated = $updated;
+    }
+    
+    public function setUpdatedBy($updatedBy){
+        $this->_updatedBy = $updatedBy;
+    }
+    
     //getters
     
     public function id(){
@@ -73,6 +100,22 @@ class Projet{
     
     public function budget(){
         return $this->_budget;
+    }
+    
+    public function created(){
+        return $this->_created;
+    }
+    
+    public function createdBy(){
+        return $this->_createdBy;
+    }
+    
+    public function updated(){
+        return $this->_updated;
+    }
+    
+    public function updatedBy(){
+        return $this->_updatedBy;
     }
         
 }

@@ -202,6 +202,21 @@ select:focus {
   color: #fff !important;
 }
 
+.btn.dark-cyan {
+  color: white; 
+  text-shadow: none;	
+  background-color: #00B38F;
+}
+.btn.dark-cyan:hover, 
+.btn.dark-cyan:focus, 
+.btn.dark-cyan:active, 
+.btn.dark-cyan.active, 
+.btn.dark-cyan.disabled,
+.btn.dark-cyan[disabled] { 
+  background-color: #006652 !important;
+  color: #fff !important;
+}
+
 .mini 
 {
   height: 13px;

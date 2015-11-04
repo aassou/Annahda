@@ -32,7 +32,9 @@
 				<!---------------------------- Gestion des projets Begin ----------------------------------->
 				<?php 
 					$gestionProjetClass="";
-					if($currentPage=="projet-list.php" 
+					if($currentPage=="projet-list.php"
+					or $currentPage=="projets.php"
+					or $currentPage=="projet-details.php"
 					or $currentPage=="projet-add.php"
 					or $currentPage=="suivi-projets.php"  
 					or $currentPage=="projet-update.php"

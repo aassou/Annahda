@@ -4962,3 +4962,12 @@ div#fancy_print {
 .btn-fixed-width{
 	width: 200px;
 }
+
+.projets{
+	margin-bottom: 20px;
+}
+
+/* I use this class to mention a margin-bottom between some elements */
+.get-down{
+	margin-bottom: 10px;
+}

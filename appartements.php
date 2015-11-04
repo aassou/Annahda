@@ -47,7 +47,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -76,7 +76,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -89,19 +89,23 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Appartements
+							Gestion des Appartements - Projet : <strong><?= $projet->nom() ?></strong>   
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li><a>Gestion des appartements</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -112,11 +116,98 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="projet-list.php#<?= $idProjet ?>" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-							</div>
+						<div class="pull-right get-down">
+							<a href="#addAppartement" class="btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
 						</div>
+						<!-- addProjet box begin-->
+                        <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Ajouter Nouvel Appartement</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">Code</label>
+                                        <div class="controls">
+                                            <input type="text" name="code" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Supérficie</label>
+                                        <div class="controls">
+                                            <input type="text" name="superficie" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Façade</label>
+                                        <div class="controls">
+                                            <input type="text" name="facade" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre de pièces</label>
+                                        <div class="controls">
+                                            <input type="text" name="nombrePiece" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Prix</label>
+                                        <div class="controls">
+                                            <input type="text" name="prix" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="niveau">Niveau</label>
+                                        <div class="controls">
+                                            <select style="width:150px" name="niveau" class="m-wrap">
+                                                <option value="RC">RC</option>
+                                                <option value="Mezzanine">Mezzanine</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="status">Status</label>
+                                        <div class="controls">
+                                            <select style="width:150px" name="status" id="status" class="m-wrap">
+                                                <option value="Non">Disponible</option>
+                                                <option value="Oui">Réservé</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="cave">Cave</label>
+                                        <div class="controls">
+                                            <select style="width:150px" name="cave" class="m-wrap">
+                                                <option value="Avec">Avec</option>
+                                                <option value="Sans">Sans</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Réservé par </label>
+                                        <div class="controls">
+                                            <input type="text" name="par" class="m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input type="hidden" name="action" value="add" />  
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- addProjet box end -->
 						<!-- BEGIN Terrain TABLE PORTLET-->
 						<?php if(isset($_SESSION['pieces-add-success'])){ ?>
                          	<div class="alert alert-success">
@@ -151,13 +242,6 @@
                          	unset($_SESSION['appartement-changed-status']);
                          ?>
 						<div class="portlet">
-							<div class="portlet-title">
-								<h4>Liste des appartements du projet : <strong><?= $projet->nom() ?></strong></h4>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
 							<div class="portlet-body">
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
@@ -652,7 +736,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

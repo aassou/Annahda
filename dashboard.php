@@ -46,7 +46,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="UTF-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -74,7 +74,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->	
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -85,30 +85,17 @@
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Tableau de bord
+							Accueil
 						</h3>
-						<ul class="breadcrumb">
-							<li>
-								<i class="icon-dashboard"></i>
-								<a>Accueil</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<a>Tableau de bord</a>
-							</li>
-						</ul>
-						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
 				</div>
 				<!--      BEGIN TILES      -->
 				<div class="row-fluid">
 					<div class="span12">
-						<h4><i class="icon-hand-right"></i> Raccourcis</h4>
-						<hr class="line">
+						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Raccourcis</h4>
 						<div class="tiles">
-							<a href="projet-list.php">
+							<a href="projets.php">
 							<div class="tile bg-green">
 								<div class="tile-body">
 									<i class="icon-briefcase"></i>
@@ -153,20 +140,6 @@
 								</div>
 							</div>
 							</a>
-							<!--a href="statistiques.php">
-							<div class="tile bg-grey">
-								<div class="tile-body">
-									<i class="icon-bar-chart"></i>
-								</div>
-								<div class="tile-object">
-									<div class="name">
-										Statistiques
-									</div>
-									<div class="number">
-									</div>
-								</div>
-							</div>
-							</a-->
 							<a href="recherches.php">
 							<div class="tile bg-red">
 								<div class="tile-body">
@@ -200,8 +173,7 @@
 				</div>
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
-				<h4><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
-				<hr class="line">
+				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
 					<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
 						<div class="dashboard-stat yellow">
@@ -264,8 +236,8 @@
 				<div class="span12">
 					<!-- BEGIN PORTLET-->
 					<div class="portlet paddingless">
-						<div class="portlet-title line">
-							<h4><i class="icon-bell"></i>Nouveautés</h4>
+						<div>
+							<h4 class="breadcrumb"><i class="icon-bell"></i>&nbsp;Nouveautés</h4>
 						</div>
 						<div class="portlet-body">
 							<!--BEGIN TABS-->
