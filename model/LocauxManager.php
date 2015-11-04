@@ -8,8 +8,11 @@ class LocauxManager{
     }
     //CRUD operations
     public function add(Locaux $locaux){
-        $query = $this->_db->prepare('INSERT INTO t_locaux (nom, superficie, facade, prix, mezzanine, status, idProjet, par)
-        VALUES (:nom, :superficie, :facade, :prix, :mezzanine, :status, :idProjet, :par)') 
+        $query = $this->_db->prepare(
+        'INSERT INTO t_locaux (nom, superficie, facade, prix, 
+        mezzanine, status, idProjet, par, created, createdBy)
+        VALUES (:nom, :superficie, :facade, :prix, :mezzanine, 
+        :status, :idProjet, :par, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':nom', $locaux->nom());
         $query->bindValue(':superficie', $locaux->superficie());
@@ -19,13 +22,17 @@ class LocauxManager{
 		$query->bindValue(':status', $locaux->status());
 		$query->bindValue(':idProjet', $locaux->idProjet());
 		$query->bindValue(':par', $locaux->par());
+        $query->bindValue(':created', $locaux->created());
+        $query->bindValue(':createdBy', $locaux->createdBy());
         $query->execute();
         $query->closeCursor();
     }
 	
 	public function update(Locaux $locaux){
-		$query = $this->_db->prepare('UPDATE t_locaux SET nom=:nom, superficie=:superficie, facade=:facade, prix=:prix, 
-		mezzanine=:mezzanine, status=:status WHERE id=:idLocaux') 
+		$query = $this->_db->prepare(
+		'UPDATE t_locaux SET nom=:nom, superficie=:superficie, facade=:facade, 
+		prix=:prix, mezzanine=:mezzanine, status=:status, par=:par, updated=:updated, 
+		updatedBy=:updatedBy WHERE id=:idLocaux') 
 		or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':idLocaux', $locaux->id());
 		$query->bindValue(':nom', $locaux->nom());
@@ -34,6 +41,9 @@ class LocauxManager{
 		$query->bindValue(':prix', $locaux->prix());
 		$query->bindValue(':mezzanine', $locaux->mezzanine());
 		$query->bindValue(':status', $locaux->status());
+        $query->bindValue(':par', $locaux->par());
+        $query->bindValue(':updated', $locaux->updated());
+        $query->bindValue(':updatedBy', $locaux->updatedBy());
         $query->execute();
         $query->closeCursor();
 	}
@@ -96,15 +106,28 @@ class LocauxManager{
         return new Locaux($data);
     }
 
-	public function getLocauxByIdProjet($idProjet, $begin , $end){
+	public function getLocauxByIdProjet($idProjet){
         $locaux = array();
-        $query = $this->_db->prepare('SELECT * FROM t_locaux WHERE idProjet=:idProjet ORDER BY id DESC
-        LIMIT '.$begin.' , '.$end)
+        $query = $this->_db->prepare('SELECT * FROM t_locaux WHERE idProjet=:idProjet ORDER BY status ASC')
 		or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
         	$locaux[] = new Locaux($data);
+        }
+        $query->closeCursor();
+        return $locaux;
+    }
+    
+    public function getLocauxByIdProjetByLimits($idProjet, $begin , $end){
+        $locaux = array();
+        $query = $this->_db->prepare('SELECT * FROM t_locaux WHERE idProjet=:idProjet ORDER BY id DESC
+        LIMIT '.$begin.' , '.$end)
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $locaux[] = new Locaux($data);
         }
         $query->closeCursor();
         return $locaux;

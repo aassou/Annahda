@@ -8,6 +8,10 @@ class ReglementFournisseur{
 	private $_idProjet;
 	private $_modePaiement;
 	private $_numeroCheque;
+    private $_created;
+    private $_createdBy;
+    private $_updated;
+    private $_updatedBy;
     
     //le constructeur
     public function __construct($data){
@@ -54,6 +58,22 @@ class ReglementFournisseur{
 	public function setNumeroCheque($numeroCheque){
 		$this->_numeroCheque = $numeroCheque;
 	}
+    
+    public function setCreated($created){
+        $this->_created = $created;
+    }
+    
+    public function setCreatedBy($createdBy){
+        $this->_createdBy = $createdBy;
+    }
+    
+    public function setUpdated($updated){
+        $this->_updated = $updated;
+    }
+    
+    public function setUpdatedBy($updatedBy){
+        $this->_updatedBy = $updatedBy;
+    }
 	
     //getters
     
@@ -84,4 +104,20 @@ class ReglementFournisseur{
 	public function numeroCheque(){
 		return $this->_numeroCheque;
 	}
+    
+    public function created(){
+        return $this->_created;
+    }
+    
+    public function createdBy(){
+        return $this->_createdBy;
+    }
+    
+    public function updated(){
+        return $this->_updated;
+    }
+    
+    public function updatedBy(){
+        return $this->_updatedBy;
+    }
 }

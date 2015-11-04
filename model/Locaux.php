@@ -10,6 +10,10 @@ class Locaux{
 	private $_status;
 	private $_idProjet;
 	private $_par;
+    private $_created;
+    private $_createdBy;
+    private $_updated;
+    private $_updatedBy;
 	
 	//le constructeur
     public function __construct($data){
@@ -63,6 +67,22 @@ class Locaux{
 	public function setPar($par){
 		$this->_par = $par;
 	}
+    
+    public function setCreated($created){
+        $this->_created = $created;
+    }
+    
+    public function setCreatedBy($createdBy){
+        $this->_createdBy = $createdBy;
+    }
+    
+    public function setUpdated($updated){
+        $this->_updated = $updated;
+    }
+    
+    public function setUpdatedBy($updatedBy){
+        $this->_updatedBy = $updatedBy;
+    }
 	
 	//getters
 	public function id(){
@@ -100,4 +120,20 @@ class Locaux{
 	public function par(){
 		return $this->_par;
 	}
+    
+    public function created(){
+        return $this->_created;
+    }
+    
+    public function createdBy(){
+        return $this->_createdBy;
+    }
+    
+    public function updated(){
+        return $this->_updated;
+    }
+    
+    public function updatedBy(){
+        return $this->_updatedBy;
+    }
 }

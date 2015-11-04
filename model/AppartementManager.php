@@ -9,8 +9,10 @@ class AppartementManager{
     //CRUD operations
     public function add(Appartement $appartement){
         $query = $this->_db->prepare(
-        'INSERT INTO t_appartement (nom, superficie, prix, niveau, facade, nombrePiece, status, cave, idProjet, par)
-        VALUES (:nom, :superficie, :prix, :niveau, :facade, :nombrePiece, :status, :cave, :idProjet, :par)') 
+        'INSERT INTO t_appartement (nom, superficie, prix, niveau, facade, 
+        nombrePiece, status, cave, idProjet, par, created, createdBy)
+        VALUES (:nom, :superficie, :prix, :niveau, :facade, :nombrePiece, 
+        :status, :cave, :idProjet, :par, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':nom', $appartement->nom());
         $query->bindValue(':superficie', $appartement->superficie());
@@ -22,6 +24,8 @@ class AppartementManager{
 		$query->bindValue(':status', $appartement->status());
 		$query->bindValue(':idProjet', $appartement->idProjet());
 		$query->bindValue(':par', $appartement->par());
+        $query->bindValue(':created', $appartement->created());
+        $query->bindValue(':createdBy', $appartement->createdBy());
         $query->execute();
         $query->closeCursor();
     }
@@ -29,7 +33,8 @@ class AppartementManager{
 	public function update(Appartement $appartement){
 		$query = $this->_db->prepare('
 		UPDATE t_appartement SET nom=:nom, superficie=:superficie, prix=:prix, niveau=:niveau, facade=:facade, 
-		nombrePiece=:nombrePiece, status=:status, cave=:cave, par=:par WHERE id=:idAppartement') 
+		nombrePiece=:nombrePiece, status=:status, cave=:cave, par=:par, updated=:updated,
+		updatedBy=:updatedBy WHERE id=:idAppartement') 
 		or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':idAppartement', $appartement->id());
 		$query->bindValue(':nom', $appartement->nom());
@@ -41,10 +46,13 @@ class AppartementManager{
 		$query->bindValue(':cave', $appartement->cave());
 		$query->bindValue(':status', $appartement->status());
 		$query->bindValue(':par', $appartement->par());
+        $query->bindValue(':updated', $appartement->updated());
+        $query->bindValue(':updatedBy', $appartement->updatedBy());
         $query->execute();
         $query->closeCursor();
 	}
 	
+    //this method is used to update the attribute reservePar
 	public function updatePar($par, $idAppartement){
 		$query = $this->_db->prepare('
 		UPDATE t_appartement SET par=:par WHERE id=:idAppartement') 
@@ -103,7 +111,20 @@ class AppartementManager{
         return new Appartement($data);
     }
 
-	public function getAppartementByIdProjet($idProjet, $begin , $end){
+    public function getAppartementByIdProjet($idProjet){
+        $appartements = array();
+        $query = $this->_db->prepare('SELECT * FROM t_appartement WHERE idProjet=:idProjet ORDER BY status ASC, niveau ASC')
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $appartements[] = new Appartement($data);
+        }
+        $query->closeCursor();
+        return $appartements;
+    }
+
+	public function getAppartementByIdProjetByLimits($idProjet, $begin , $end){
 		$appartements = array();
         $query = $this->_db->prepare('SELECT * FROM t_appartement WHERE idProjet=:idProjet ORDER BY id DESC
         LIMIT '.$begin.' , '.$end)

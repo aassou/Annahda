@@ -7,6 +7,10 @@ class LivraisonDetail{
     private $_quantite;
     private $_prixUnitaire;
     private $_idLivraison;
+    private $_created;
+    private $_createdBy;
+    private $_updated;
+    private $_updatedBy;
     
     //le constructeur
     public function __construct($data){
@@ -48,6 +52,22 @@ class LivraisonDetail{
     public function setIdLivraison($idLivraison){
         $this->_idLivraison = $idLivraison;
     }
+    
+    public function setCreated($created){
+        $this->_created = $created;
+    }
+    
+    public function setCreatedBy($createdBy){
+        $this->_createdBy = $createdBy;
+    }
+    
+    public function setUpdated($updated){
+        $this->_updated = $updated;
+    }
+    
+    public function setUpdatedBy($updatedBy){
+        $this->_updatedBy = $updatedBy;
+    }
 	
     //getters
     public function id(){
@@ -72,6 +92,22 @@ class LivraisonDetail{
     
     public function idLivraison(){
         return $this->_idLivraison;
+    }
+    
+    public function created(){
+        return $this->_created;
+    }
+    
+    public function createdBy(){
+        return $this->_createdBy;
+    }
+    
+    public function updated(){
+        return $this->_updated;
+    }
+    
+    public function updatedBy(){
+        return $this->_updatedBy;
     }
 	
 }

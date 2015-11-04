@@ -25,7 +25,7 @@
 			//test the locaux object number: if exists get locaux else do nothing
 			$locauxNumber = $locauxManager->getLocauxNumberByIdProjet($idProjet);
 			if($locauxNumber != 0){
-				$locauxPerPage = 10;
+				/*$locauxPerPage = 10;
 		        $pageNumber = ceil($locauxNumber/$locauxPerPage);
 		        $p = 1;
 		        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
@@ -35,8 +35,8 @@
 		            $p = 1;
 		        }
 		        $begin = ($p - 1) * $locauxPerPage;
-		        $pagination = paginate('locaux.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);
-				$locaux = $locauxManager->getLocauxByIdProjet($idProjet, $begin, $locauxPerPage);	
+		        $pagination = paginate('locaux.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);*/
+				$locaux = $locauxManager->getLocauxByIdProjet($idProjet);	
 			}
 		}
 ?>
@@ -47,7 +47,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -76,7 +76,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -89,19 +89,23 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Locaux Commerciaux
+							Gestion des Locaux Commerciaux - Projet : <strong><?= $projet->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li><a>Gestion des locaux commerciaux</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -112,83 +116,105 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-							</div>
-						</div>
+						<div class="pull-right get-down">
+                            <a href="#addLocaux" class="btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
+                        </div>
+                        <!-- addLocaux box begin-->
+                        <div id="addLocaux" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Ajouter Nouvel Local Commercial</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">Code</label>
+                                        <div class="controls">
+                                            <input type="text" name="code" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Supérficie</label>
+                                        <div class="controls">
+                                            <input type="text" name="superficie" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Façade</label>
+                                        <div class="controls">
+                                            <input type="text" name="facade" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Prix</label>
+                                        <div class="controls">
+                                            <input type="text" name="prix" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="status">Status</label>
+                                        <div class="controls">
+                                            <select style="width:150px" name="status" id="status" class="m-wrap">
+                                                <option value="Disponible">Disponible</option>
+                                                <option value="Réservé">Réservé</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="mezzanine">Mezzanine</label>
+                                        <div class="controls">
+                                            <select style="width:150px" name="mezzanine" class="m-wrap">
+                                                <option value="Avec">Avec</option>
+                                                <option value="Sans">Sans</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" id="par" style="display: none">
+                                        <label class="control-label">Réservé par </label>
+                                        <div class="controls">
+                                            <input type="text" name="par" class="m-wrap">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input type="hidden" name="action" value="add" />  
+                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- addLocaux box end -->
 						<!-- BEGIN Terrain TABLE PORTLET-->
-						<?php if(isset($_SESSION['pieces-add-success'])){ ?>
-                         	<div class="alert alert-success">
+						<?php if(isset($_SESSION['locaux-action-message']) 
+						and isset($_SESSION['locaux-type-message'])){ 
+						              $message = $_SESSION['locaux-action-message'];
+                                      $typeMessage = $_SESSION['locaux-type-message'];
+						?>
+						    <br><br>
+                         	<div class="alert alert-<?= $typeMessage ?>">
 								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-success'] ?>		
+								<?= $message ?>		
 							</div>
                          <?php } 
-                         	unset($_SESSION['pieces-add-success']);
+                         	unset($_SESSION['locaux-action-message']);
+                            unset($_SESSION['locaux-type-message']);
                          ?>
-						<?php if(isset($_SESSION['pieces-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-error'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['pieces-add-error']);
-                         ?>
-                         <?php if(isset($_SESSION['pieces-delete-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-delete-success'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['pieces-delete-success']);
-                         ?>
-                         <?php if(isset($_SESSION['locaux-update-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['locaux-update-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['locaux-update-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['locaux-delete-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['locaux-delete-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['locaux-delete-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['locaux-update-error'])){ ?>
-	                         	<div class="alert alert-error">
-									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['locaux-update-error'] ?>		
-								</div>
-	                         <?php } 
-	                         	unset($_SESSION['locaux-update-error']);
-	                         ?>
 						<div class="portlet">
-							<div class="portlet-title">
-								<h4>Liste des locaux commerciaux du projet : <strong><?= $projet->nom() ?></strong></h4>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
 							<div class="portlet-body">
+							    <div class="scroller" data-height="600px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
 											<th>Code</th>
 											<th>Superficie</th>
-											<th class="hidden-phone">Façade</th>
+											<th>Façade</th>
 											<th>Prix</th>
-											<th class="hidden-phone"> Mezzanine</th>
+											<th>Mezzanine</th>
 											<th>Status</th>
 											<th></th>
-											<!--th class="hidden-phone">Docs</th>
-											<th class="hidden-phone">Docs</th>
-											<th class="hidden-phone">Modifier</th>
-											<th class="hidden-phone">Supprimer</th-->
 										</tr>
 									</thead>
 									<tbody>
@@ -226,16 +252,16 @@
 											<td><?= number_format($locau->prix(), 2, ',', ' ') ?></td>
 											<td class="hidden-phone">
 												<?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
-												<?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini purple"><?= $locau->mezzanine() ?></a><?php } ?>
+												<?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
 											</td>
 											<td>
 												<?php
-												if($locau->status()=="Oui"){ ?>
+												if($locau->status()=="R&eacute;serv&eacute;"){ ?>
 													<a class="btn mini red" href="#changeToDisponible<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Réservé
 													</a>
 												<?php } ?>
-												<?php if($locau->status()=="Non"){ ?>
+												<?php if($locau->status()=="Disponible"){ ?>
 													<a class="btn mini green" href="#changeToReserve<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Disponible
 													</a>
@@ -246,7 +272,7 @@
 											</td>
 											<td>
 												<?php
-												if( $locau->status()=="Oui" ){
+												if( $locau->status()=="R&eacute;serv&eacute;" ){
 												?>
 												<a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 													Par : <?= $locau->par() ?>
@@ -255,26 +281,6 @@
 												}
 												?>
 											</td>
-											<!--td class="hidden-phone">
-												<a class="btn mini purple" href="#addPieces<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-													Ajouter
-												</a>
-											</td-->
-											<!--td class="hidden-phone">
-												<a class="btn mini yellow" href="pieces-locaux.php?idProjet=<?= $idProjet ?>&idLocaux=<?= $locau->id() ?>">
-													Gérer
-												</a>
-											</td-->
-											<!--td class="hidden-phone">
-												<a href="#updateLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-													Modifier
-												</a>
-											</td>
-											<td class="hidden-phone">
-												<a href="#deleteLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-													Supprimer
-												</a>
-											</td-->
 										</tr>
 										<!-- updateClient box begin -->
 										<div id="updateClient<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -283,14 +289,14 @@
 												<h3>Changer le client <strong><?= $locau->par() ?></strong> </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/LocauxUpdateParController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $locau->par() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Réservé par</label>
 														<input type="text" name="par" value="<?= $locau->par() ?>" />
 													</div>
 													<div class="control-group">
-														<label class="right-label"></label>
+														<input type="hidden" name="action" value="updateClient" />														
 														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -307,12 +313,13 @@
 												<h3>Changer le status vers "Disponible"</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxChangeStatusController.php" method="post" enctype="multipart/form-data">
+												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini red">Réservé</a> vers 
 														<a class="btn mini green">Disponible</a> ?</p>
 													<div class="control-group">
-														<input type="hidden" name="status" value="Non" />
+													    <input type="hidden" name="action" value="updateStatus" />
+														<input type="hidden" name="status" value="Disponible" />
 														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -329,12 +336,13 @@
 												<h3>Changer le status vers "Réservé"</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxChangeStatusController.php" method="post" enctype="multipart/form-data">
+												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini green">Disponible</a> vers 
 														<a class="btn mini red">Réservé</a> ?</p>
 													<div class="control-group">
-														<input type="hidden" name="status" value="Oui" />
+													    <input type="hidden" name="action" value="updateStatus" />
+														<input type="hidden" name="status" value="Réservé" />
 														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -375,7 +383,7 @@
 												<h3>Modifier Infos Local commercial</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxUpdateController.php" method="post">
+												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir modifier les informations du local <strong><?= $locau->nom() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Code</label>
@@ -402,56 +410,35 @@
 														</div>
 													</div>
 													<div class="control-group">
-														<?php
-														$statusReserve = "";
-														$statusNonReserve = "";
-														if($locau->status()=="Oui"){
-															$statusReserve = "selected";
-															$statusNonReserve = "";		
-														}
-														if($locau->status()=="Oui"){
-															$statusReserve = "";
-															$statusNonReserve = "selected";		
-														}
-														?>
 														<label class="right-label">Status</label>
 														<div class="controls">
 															<select name="status" class="m-wrap">
-																<option value="Non" <?php echo $statusReserve; echo $statusNonReserve ?> >
-																	Non réservé
-																</option>
-	                                             				<option value="Oui" <?php echo $statusReserve; echo $statusNonReserve ?> >
-	                                             					Réservé
-	                                             				</option>
+															    <option value="<?= $locau->status() ?>"><?= $locau->status() ?></option>
+															    <option disabled="disabled">------------</option>
+																<option value="Disponible">Disponible</option>
+	                                             				<option value="Réservé">Réservé</option>
 															</select>
 														</div>
 													</div>
 													<div class="control-group">
-														<?php
-														$avecMezzanine = "";
-														$sansMezzanine = "";
-														if($locau->mezzanine()=="Avec"){
-															$avecMezzanine = "selected";
-															$sansMezzanine = "";		
-														}
-														if($locau->status()=="Sans"){
-															$avecMezzanine = "";
-															$sansMezzanine = "selected";		
-														}
-														?>
 														<div class="controls">
 															<label class="right-label">Mezzanine</label>
 															<select name="mezzanine" class="m-wrap">
-																<option value="Sans" <?php echo $avecMezzanine; echo $sansMezzanine ?> >
-																	Sans
-																</option>
-	                                             				<option value="Avec" <?php echo $avecMezzanine; echo $sansMezzanine ?> >
-	                                             					Avec
-	                                             				</option>
+															    <option value="<?= $locau->mezzanine() ?>"><?= $locau->mezzanine() ?></option>
+															    <option disabled="disabled">------------</option>
+																<option value="Sans">Sans</option>
+	                                             				<option value="Avec">Avec</option>
 															</select>
 														</div>
 													</div>
 													<div class="control-group">
+                                                        <label class="right-label">Réservé Par</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="par" value="<?= $locau->par() ?>" />
+                                                        </div>
+                                                    </div>
+													<div class="control-group">
+													    <input type="hidden" name="action" value="update" />
 														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<div class="controls">	
@@ -463,61 +450,25 @@
 											</div>
 										</div>
 										<!-- update box end -->	
-										<!-- delete box begin-->
-										<div id="deleteLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-												<h3>Supprimer Local commercial <?= $locau->nom() ?> </h3>
-											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/LocauxDeleteController.php" method="post">
-													<p>Êtes-vous sûr de vouloir supprimer ce local <strong><?= $locau->nom() ?></strong> ?</p>
-													<div class="control-group">
-														<label class="right-label"></label>
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
-										</div>
-										<!-- delete box end -->	
 										<?php
 										}//end of loop
 										}//end of if
 										?>
 									</tbody>
 									<?php
-									if($locauxNumber != 0){
+									/*if($locauxNumber != 0){
 										echo $pagination;	
-									}
+									}*/
 									?>
 								</table>
 							</div>
 						</div>
+						</div><!-- END DIV SCROLLER -->
 						<!-- END Terrain TABLE PORTLET-->
 					</div>
 				</div>
-				<div class="row-fluid">
+				<!--div class="row-fluid">
 					<div class="span12">
-						<div class="tab-pane active" id="tab_1">
-							<?php if(isset($_SESSION['locaux-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['locaux-add-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['locaux-add-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['locaux-add-error'])){ ?>
-	                         	<div class="alert alert-error">
-									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['locaux-add-error'] ?>		
-								</div>
-	                         <?php } 
-	                         	unset($_SESSION['locaux-add-error']);
-	                         ?>
                            <div class="portlet box grey">
                               <div class="portlet-title">
                                  <h4><i class="icon-edit"></i>Ajouter un nouveau local commercial pour le projet : <strong><?= $projet->nom() ?></strong></h4>
@@ -527,7 +478,6 @@
                                  </div>
                               </div>
                               <div class="portlet-body form">
-                                 <!-- BEGIN FORM-->
                                  <form action="controller/LocauxAddController.php" method="POST" class="horizontal-form">
                                     <div class="row-fluid">
                                        <div class="span4 ">
@@ -602,12 +552,11 @@
                                     	<button type="submit" class="btn black">Enregistrer <i class="icon-save"></i></button>
                                     	<button type="reset" class="btn red">Annuler</button>
                                     </div>
-                                 </form>
-                                 <!-- END FORM--> 
+                                 </form> 
                               </div>
                            </div>
                         </div>
-					</div>
+					</div-->
 				</div>
 				<?php }
 				else{
@@ -628,7 +577,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -647,6 +596,8 @@
 	<script src="assets/js/excanvas.js"></script>
 	<script src="assets/js/respond.js"></script>
 	<![endif]-->	
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
@@ -658,7 +609,7 @@
 			App.init();
 		});
 		$('#status').on('change',function(){
-	        if( $(this).val()==="Oui"){
+	        if( $(this).val()!=="Disponible"){
 	        $("#par").show()
 	        }
 	        else{

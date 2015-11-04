@@ -8,6 +8,10 @@ class Terrain{
 	private $_superficie;
 	private $_emplacement;
 	private $_idProjet;
+    private $_created;
+    private $_createdBy;
+    private $_updated;
+    private $_updatedBy;
 	
 	//le constructeur
     public function __construct($data){
@@ -52,6 +56,22 @@ class Terrain{
 	public function setIdProjet($idProjet){
 		$this->_idProjet = $idProjet;
 	}
+    
+    public function setCreated($created){
+        $this->_created = $created;
+    }
+    
+    public function setCreatedBy($createdBy){
+        $this->_createdBy = $createdBy;
+    }
+    
+    public function setUpdated($updated){
+        $this->_updated = $updated;
+    }
+    
+    public function setUpdatedBy($updatedBy){
+        $this->_updatedBy = $updatedBy;
+    }
 	
 	//getters
 	public function id(){
@@ -81,4 +101,20 @@ class Terrain{
 	public function idProjet(){
 		return $this->_idProjet;
 	}
+    
+    public function created(){
+        return $this->_created;
+    }
+    
+    public function createdBy(){
+        return $this->_createdBy;
+    }
+    
+    public function updated(){
+        return $this->_updated;
+    }
+    
+    public function updatedBy(){
+        return $this->_updatedBy;
+    }
 }

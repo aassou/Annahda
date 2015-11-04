@@ -9,8 +9,8 @@ class TerrainManager{
     //CRUD operations
     public function add(Terrain $terrain){
         $query = $this->_db->prepare(
-        'INSERT INTO t_terrain (prix, vendeur, fraisAchat, superficie, emplacement, idProjet)
-        VALUES (:prix, :vendeur, :fraisAchat, :superficie, :emplacement, :idProjet)') 
+        'INSERT INTO t_terrain (prix, vendeur, fraisAchat, superficie, emplacement, idProjet, created, createdBy)
+        VALUES (:prix, :vendeur, :fraisAchat, :superficie, :emplacement, :idProjet, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':prix', $terrain->prix());
 		$query->bindValue(':vendeur', $terrain->vendeur());
@@ -18,6 +18,8 @@ class TerrainManager{
 		$query->bindValue(':superficie', $terrain->superficie());
 		$query->bindValue(':emplacement', $terrain->emplacement());
 		$query->bindValue(':idProjet', $terrain->idProjet());
+        $query->bindValue(':created', $terrain->created());
+        $query->bindValue(':createdBy', $terrain->createdBy());
         $query->execute();
         $query->closeCursor();
     }
@@ -25,7 +27,7 @@ class TerrainManager{
 	public function update(Terrain $terrain){
 		$query = $this->_db->prepare('
 		UPDATE t_terrain SET prix=:prix, vendeur=:vendeur, fraisAchat=:fraisAchat, superficie=:superficie, 
-		emplacement=:emplacement WHERE id=:idTerrain') 
+		emplacement=:emplacement, updated=:updated, updatedBy=:updatedBy WHERE id=:idTerrain') 
 		or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':idTerrain', $terrain->id());
 		$query->bindValue(':prix', $terrain->prix());
@@ -33,6 +35,8 @@ class TerrainManager{
 		$query->bindValue(':fraisAchat', $terrain->fraisAchat());
 		$query->bindValue(':superficie', $terrain->superficie());
 		$query->bindValue(':emplacement', $terrain->emplacement());
+        $query->bindValue(':updated', $appartement->updated());
+        $query->bindValue(':updatedBy', $appartement->updatedBy());
         $query->execute();
         $query->closeCursor();
 	}

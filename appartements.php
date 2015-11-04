@@ -25,7 +25,7 @@
 			//test the appartement object number: if exists get appartement else do nothing
 			$appartementNumber = $appartementManager->getAppartementNumberByIdProjet($idProjet);
 			if($appartementNumber != 0){
-				$appartementPerPage = 10;
+				/*$appartementPerPage = 10;
 		        $pageNumber = ceil($appartementNumber/$appartementPerPage);
 		        $p = 1;
 		        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
@@ -35,8 +35,8 @@
 		            $p = 1;
 		        }
 		        $begin = ($p - 1) * $appartementPerPage;
-		        $pagination = paginate('appartements.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);
-				$appartements = $appartementManager->getAppartementByIdProjet($idProjet, $begin, $appartementPerPage);	
+		        $pagination = paginate('appartements.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);*/
+				$appartements = $appartementManager->getAppartementByIdProjet($idProjet);	
 			}
 		}
 ?>
@@ -119,7 +119,7 @@
 						<div class="pull-right get-down">
 							<a href="#addAppartement" class="btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
 						</div>
-						<!-- addProjet box begin-->
+						<!-- addAppartement box begin-->
                         <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -177,8 +177,8 @@
                                         <label class="control-label" for="status">Status</label>
                                         <div class="controls">
                                             <select style="width:150px" name="status" id="status" class="m-wrap">
-                                                <option value="Non">Disponible</option>
-                                                <option value="Oui">Réservé</option>
+                                                <option value="Disponible">Disponible</option>
+                                                <option value="Réservé">Réservé</option>
                                             </select>
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group" id="par" style="display: none">
                                         <label class="control-label">Réservé par </label>
                                         <div class="controls">
                                             <input type="text" name="par" class="m-wrap">
@@ -200,6 +200,7 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />  
+                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -207,57 +208,38 @@
                                 </form>
                             </div>
                         </div>
-                        <!-- addProjet box end -->
+                        <!-- addAppartement box end -->
 						<!-- BEGIN Terrain TABLE PORTLET-->
-						<?php if(isset($_SESSION['pieces-add-success'])){ ?>
-                         	<div class="alert alert-success">
+						<?php 
+						if(isset($_SESSION['appartement-action-message']) 
+						and isset($_SESSION['appartement-type-message'])){ 
+						      $message = $_SESSION['appartement-action-message'];
+                              $typeMessage = $_SESSION['appartement-type-message'];
+						?>
+						    <br><br>
+                         	<div class="alert alert-<?= $typeMessage ?>">
 								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-success'] ?>		
+							    <?= $message ?>
 							</div>
                          <?php } 
-                         	unset($_SESSION['pieces-add-success']);
-                         ?>
-						<?php if(isset($_SESSION['pieces-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-error'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['pieces-add-error']);
-                         ?>
-                         <?php if(isset($_SESSION['pieces-delete-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-delete-success'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['pieces-delete-success']);
-                         ?>
-                         <?php if(isset($_SESSION['appartement-changed-status'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['appartement-changed-status'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['appartement-changed-status']);
+                         	unset($_SESSION['appartement-action-message']);
+                            unset($_SESSION['appartement-type-message']);
                          ?>
 						<div class="portlet">
 							<div class="portlet-body">
+							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
-											<th style="width: 5%">Code</th>
-											<th style="width: 25%">Prix</th>
-											<th style="width: 8%">Superf</th>
-											<th style="width: 8%" class="hidden-phone">Façade</th>
-											<th style="width: 5%" class="hidden-phone">Pièces</th>
-											<th style="width: 5%" class="hidden-phone">Niveau</th>
-											<th style="width: 5%" class="hidden-phone">Cave</th>
-											<th style="width: 9%">Status</th>
-											<th style="width: 30%" class="hidden-phone"></th>
-											<!--th class="hidden-phone">Docs</th-->
-											<!--th class="hidden-phone">Modif</th>
-											<th class="hidden-phone">Suppri</th-->
+											<th style="width: 10%">Code</th>
+											<th style="width: 10%" class="hidden-phone">Niveau</th>
+											<th style="width: 15%">Prix&nbsp;DH</th>
+											<th style="width: 10%">Superficie</th>
+											<th style="width: 10%" class="hidden-phone">Façade</th>
+											<th style="width: 10%" class="hidden-phone">Nbr.Pièces</th>
+											<th style="width: 10%" class="hidden-phone">Cave</th>
+											<th style="width: 10%">Status</th>
+											<th style="width: 15%"></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -277,9 +259,6 @@
 												        	<a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
 																Fiche descriptif
 															</a>
-												        	<!--a href="contrat-create.php?idAppartement=<?= $appartement->id() ?>">
-												        		Créer contrat
-												        	</a-->
 												        	<a href="#addPieces<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 																Ajouter Document
 															</a>
@@ -293,25 +272,25 @@
 												    </ul>
 												</div>
 											</td>
-											<td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
-											<td><?= $appartement->superficie() ?></td>
-											<td class="hidden-phone"><?= $appartement->facade() ?></td>
-											<td class="hidden-phone"><?= $appartement->nombrePiece() ?></td>
 											<td class="hidden-phone"><?= $appartement->niveau() ?></td>
+											<td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
+											<td><?= $appartement->superficie() ?> m<sup>2</sup></td>
+											<td class="hidden-phone"><?= $appartement->facade() ?></td>
+											<td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
 											<td class="hidden-phone">
 												<?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
-												<?php if($appartement->cave()=="Avec"){ ?><a class="btn mini purple">Avec</a><?php } ?>
+												<?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
 											</td>
 											<td>
 												<?php
-												if($appartement->status()=="Oui"){ ?>
-													<a class="btn mini red" href="#changeToDisponible<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-														Réservé
-													</a>
-												<?php } ?>
-												<?php if($appartement->status()=="Non"){ ?>
+												if($appartement->status()=="Disponible"){ ?>
 													<a class="btn mini green" href="#changeToReserve<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 														Disponible
+													</a>
+												<?php } ?>
+												<?php if($appartement->status()=="R&eacute;serv&eacute;"){ ?>
+													<a class="btn mini red" href="#changeToDisponible<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
+														Réservé
 													</a>
 												<?php } ?>
 												<?php if($appartement->status()=="Vendu"){ ?>
@@ -320,7 +299,7 @@
 											</td>
 											<td class="hidden-phone">
 												<?php
-												if( $appartement->status()=="Oui" ){
+												if( $appartement->status()=="R&eacute;serv&eacute;" ){
 												?>
 												<a href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 													Par : <?= $appartement->par() ?>
@@ -329,21 +308,6 @@
 												}
 												?>
 											</td>
-											<!--td class="hidden-phone">
-												<a class="btn mini yellow" href="pieces-appartement.php?idProjet=<?= $idProjet ?>&idAppartement=<?= $appartement->id() ?>">
-													Gérer
-												</a>
-											</td-->
-											<!--td class="hidden-phone">
-												<a href="#updateAppartement<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-													Modif	
-												</a>
-											</td>
-											<td class="hidden-phone">
-												<a href="#deleteAppartement<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-													Suppri
-												</a>
-											</td-->
 										</tr>
 										<!-- change to disponible box begin-->
 										<div id="changeToDisponible<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -352,12 +316,13 @@
 												<h3>Changer le status vers "Disponible"</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementChangeStatusController.php" method="post" enctype="multipart/form-data">
+												<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini red">Réservé</a> vers 
 														<a class="btn mini green">Disponible</a> ?</p>
 													<div class="control-group">
-														<input type="hidden" name="status" value="Non" />
+													    <input type="hidden" name="action" value="updateStatus" />
+														<input type="hidden" name="status" value="Disponible" />
 														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -374,12 +339,13 @@
 												<h3>Changer le status vers "Réservé"</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementChangeStatusController.php" method="post" enctype="multipart/form-data">
+												<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini green">Disponible</a> vers 
 														<a class="btn mini red">Réservé</a> ?</p>
 													<div class="control-group">
-														<input type="hidden" name="status" value="Oui" />
+													    <input type="hidden" name="action" value="updateStatus" />
+														<input type="hidden" name="status" value="Réservé" />
 														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -396,16 +362,16 @@
 												<h3>Ajouter des pièces pour cette appartement</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementPiecesAddController.php?p=1" method="post" enctype="multipart/form-data">
+												<form class="form-horizontal" action="controller/AppartementActionController.php?p=1" method="post" enctype="multipart/form-data">
 													<p>Êtes-vous sûr de vouloir ajouter des pièces pour cette appartement ?</p>
 													<div class="control-group">
 														<label class="right-label">Nom Pièce</label>
 														<input type="text" name="nom" />
 														<label class="right-label">Lien</label>
 														<input type="file" name="url" />
+														<input type="hidden" name="action" value="addPieces" />
 														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<label class="right-label"></label>
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
 														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 													</div>
@@ -413,90 +379,104 @@
 											</div>
 										</div>
 										<!-- add files box end -->	
-										<!-- update box begin-->
-										<div id="updateAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-												<h3>Modifier Infos Appartement <strong><?= $appartement->nom() ?></strong></h3>
-											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementUpdateController.php?p=1" method="post">
-													<p>Êtes-vous sûr de vouloir modifier les informations de l'appartement ?</p>
-													<div class="control-group">
-														<label class="right-label">Code</label>
-														<input type="text" name="code" value="<?= $appartement->nom() ?>" />
-														<label class="right-label">Supérficie</label>
-														<input type="text" name="superficie" value="<?= $appartement->superficie() ?>" />
-														<label class="right-label">Façade</label>
-														<input type="text" name="facade" value="<?= $appartement->facade() ?>" />
-														<label class="right-label">Niveau</label>
-														<select name="niveau" class="m-wrap">
-															<option value="<?= $appartement->niveau() ?>"><?= $appartement->niveau() ?></option>
-															<option disabled="disabled">-------</option>
-		                                             		<option value="RC">RC</option>
-		                                             		<option value="Mezzanine">Mezzanine</option>
-		                                             		<option value="1">1</option>
-		                                             		<option value="2">2</option>
-		                                             		<option value="3">3</option>
-		                                             		<option value="4">4</option>
-		                                             		<option value="5">5</option>
-		                                             		<option value="6">6</option>
-		                                             		<option value="7">7</option>
-		                                             </select>
-														<label class="right-label">Nombre Pièces</label>
-														<input type="text" name="nombrePiece" value="<?= $appartement->nombrePiece() ?>" />
-														<label class="right-label">Prix</label>
-														<input type="text" name="prix" value="<?= $appartement->prix() ?>" />
-														<label class="right-label">Status</label>
-														<?php
-														$statusReserve = "";
-														$statusNonReserve = "";
-														if($appartement->status()=="Oui"){
-															$statusReserve = "selected";
-															$statusNonReserve = "";		
-														}
-														if($appartement->status()=="Oui"){
-															$statusReserve = "";
-															$statusNonReserve = "selected";		
-														}
-														?>
-														<select name="status" class="m-wrap">
-															<option value="Non" <?php echo $statusReserve; echo $statusNonReserve ?> >
-																Disponible
-															</option>
-                                             				<option value="Oui" <?php echo $statusReserve; echo $statusNonReserve ?> >
-                                             					Réservé
-                                             				</option>
-														</select>
-														<label class="right-label">Cave</label>
-														<?php
-														$avecCave = "";
-														$sansCave = "";
-														if($appartement->cave()=="Avec"){
-															$avecCave = "selected";
-															$sansCave = "";		
-														}
-														if($appartement->cave()=="Sans"){
-															$avecCave = "";
-															$sansCave = "selected";		
-														}
-														?>
-														<select name="cave" class="m-wrap">
-															<option value="<?= $appartement->cave() ?>"><?= $appartement->cave() ?></option>
-															<option disabled="disabled">---------------</option>
-															<option value="Sans">Sans</option>
-                                             				<option value="Avec">Avec</option>
-														</select>
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<label class="right-label"></label>
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
-										</div>
-										<!-- update box end -->
+										<!-- updateAppartement box begin-->
+                                        <div id="updateAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier Appartement</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                                                    <p>Êtes-vous sûr de vouloir modifier <strong>Appartement : <?= $appartement->nom() ?>- Niveau : <?= $appartement->niveau() ?></strong></p>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <label class="control-label">Code</label>
+                                                            <input type="text" name="code" value="<?= $appartement->nom() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Supérficie</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="superficie" value="<?= $appartement->superficie() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Façade</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="facade" value="<?= $appartement->facade() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Nombre de pièces</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="nombrePiece" value="<?= $appartement->nombrePiece() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Prix</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="prix" value="<?= $appartement->prix() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="niveau">Niveau</label>
+                                                        <div class="controls">
+                                                            <select style="width:150px" name="niveau" class="m-wrap">
+                                                                <option value="<?= $appartement->niveau() ?>"><?= $appartement->niveau() ?></option>
+                                                                <option disabled="disabled">-----------------</option>
+                                                                <option value="RC">RC</option>
+                                                                <option value="Mezzanine">Mezzanine</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="status">Status</label>
+                                                        <div class="controls">
+                                                            <select style="width:150px" name="status" id="status" class="m-wrap">
+                                                                <option value="<?= $appartement->status() ?>"><?= $appartement->status() ?></option>
+                                                                <option disabled="disabled">-----------------</option>
+                                                                <option value="Disponible">Disponible</option>
+                                                                <option value="Réservé">Réservé</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="cave">Cave</label>
+                                                        <div class="controls">
+                                                            <select style="width:150px" name="cave" class="m-wrap">
+                                                                <option value="<?= $appartement->cave() ?>"><?= $appartement->cave() ?></option>
+                                                                <option disabled="disabled">-----------------</option>
+                                                                <option value="Avec">Avec</option>
+                                                                <option value="Sans">Sans</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Réservé par </label>
+                                                        <div class="controls">
+                                                            <input type="text" name="par" class="m-wrap" value="<?= $appartement->par() ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="hidden" name="action" value="update" />  
+                                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                            <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateAppartement box end -->
 										<!-- updateClient box begin -->
 										<div id="updateClient<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 											<div class="modal-header">
@@ -504,14 +484,14 @@
 												<h3>Changer le client <strong><?= $appartement->par() ?></strong> </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/AppartementUpdateParController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $appartement->par() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Réservé par</label>
 														<input type="text" name="par" value="<?= $appartement->par() ?>" />
 													</div>
 													<div class="control-group">
-														<label class="right-label"></label>
+														<input type="hidden" name="action" value="updateClient" />
 														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -547,59 +527,20 @@
 										?>
 									</tbody>
 									<?php
-									if($appartementNumber != 0){
+									/*if($appartementNumber != 0){
 										echo $pagination;	
-									}
+									}*/
 									?>
 								</table>
 							</div>
 						</div>
+						</div><!-- END DIV SCROLLER -->
 						<!-- END Terrain TABLE PORTLET-->
 					</div>
 				</div>
-				<div class="row-fluid">
+				<!--div class="row-fluid">
 					<div class="span12">
 						<div class="tab-pane active" id="tab_1">
-							<?php if(isset($_SESSION['appartement-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['appartement-add-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['appartement-add-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['appartement-update-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['appartement-update-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['appartement-update-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['appartement-delete-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['appartement-delete-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['appartement-delete-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['appartement-add-error'])){ ?>
-	                         	<div class="alert alert-error">
-									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['appartement-add-error'] ?>		
-								</div>
-	                         <?php } 
-	                         	unset($_SESSION['appartement-add-error']);
-	                         ?>
-	                         <?php if(isset($_SESSION['appartement-update-error'])){ ?>
-	                         	<div class="alert alert-error">
-									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['appartement-update-error'] ?>		
-								</div>
-	                         <?php } 
-	                         	unset($_SESSION['appartement-update-error']);
-	                         ?>
                            <div class="portlet box blue">
                               <div class="portlet-title">
                                  <h4><i class="icon-edit"></i>Ajouter un nouvel appartement pour le projet : <strong><?= $projet->nom() ?></strong></h4>
@@ -609,7 +550,6 @@
                                  </div>
                               </div>
                               <div class="portlet-body form">
-                                 <!-- BEGIN FORM-->
                                  <form action="controller/AppartementAddController.php" method="POST" class="horizontal-form">
                                     <div class="row-fluid">
                                        <div class="span3">
@@ -710,13 +650,12 @@
                                     	<button type="submit" class="btn blue">Enregistrer <i class="icon-save"></i></button>
                                     	<button type="reset" class="btn red">Annuler</button>
                                     </div>
-                                 </form>
-                                 <!-- END FORM--> 
+                                 </form> 
                               </div>
                            </div>
                         </div>
 					</div>
-				</div>
+				</div-->
 				<?php }
 				else{
 				?>
@@ -754,7 +693,9 @@
 	<!--[if lt IE 9]>
 	<script src="assets/js/excanvas.js"></script>
 	<script src="assets/js/respond.js"></script>
-	<![endif]-->	
+	<![endif]-->
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>	
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
@@ -766,7 +707,7 @@
 			App.init();
 		});
 		$('#status').on('change',function(){
-	        if( $(this).val()==="Oui"){
+	        if( $(this).val()!=="Disponible"){
 	        $("#par").show()
 	        }
 	        else{
