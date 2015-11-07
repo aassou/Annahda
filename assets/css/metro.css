@@ -217,6 +217,21 @@ select:focus {
   color: #fff !important;
 }
 
+.btn.dark-red {
+  color: white; 
+  text-shadow: none;	
+  background-color: #731531;
+}
+.btn.dark-red:hover, 
+.btn.dark-red:focus, 
+.btn.dark-red:active, 
+.btn.dark-red.active, 
+.btn.dark-red.disabled,
+.btn.dark-red[disabled] { 
+  background-color: #702940 !important;
+  color: #fff !important;
+}
+
 .mini 
 {
   height: 13px;

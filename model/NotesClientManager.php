@@ -10,24 +10,28 @@ class NotesClientManager{
     
     //CRUD operations
     public function add(NotesClient $note){
-        $query = $this->_db->prepare('INSERT INTO t_notes_client (note, created, idProjet, codeContrat)
-        VALUES (:note, :created, :idProjet, :codeContrat)') 
+        $query = $this->_db->prepare(
+        'INSERT INTO t_notes_client (note, idProjet, codeContrat, created, createdBy)
+        VALUES (:note, :created, :idProjet, :codeContrat, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':note', $note->note());
-        $query->bindValue(':created', $note->created());
 		$query->bindValue(':idProjet', $note->idProjet());
 		$query->bindValue(':codeContrat', $note->codeContrat());
+        $query->bindValue(':created', $note->created());
+        $query->bindValue(':createdBy', $note->createdBy());
         $query->execute();
         $query->closeCursor();
     }
 	
 	public function update(NotesClient $note){
-        $query = $this->_db->prepare(' UPDATE t_notes_client SET note=:note, created=:created 
-         WHERE codeContrat=:codeContrat ') 
+        $query = $this->_db->prepare(
+        ' UPDATE t_notes_client SET note=:note, updated=:updated, 
+        updatedBy=:updatedBy WHERE codeContrat=:codeContrat') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':note', $note->note());
-        $query->bindValue(':created', $note->created());
 		$query->bindValue(':codeContrat', $note->codeContrat());
+        $query->bindValue(':updated', $note->updated());
+        $query->bindValue(':updatedBy', $note->updatedBy());
         $query->execute();
         $query->closeCursor();
     }

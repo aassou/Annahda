@@ -14,6 +14,7 @@
 				<!---------------------------- Dashboard Begin  -------------------------------------------->
 				<li class="start <?php if($currentPage=="dashboard.php" 
 				or $currentPage=="recherches.php"
+				or $currentPage=="compte-bancaire.php"
 				or $currentPage=="conges.php"
 				or $currentPage=="statistiques.php"
 				or $currentPage=="users.php"
@@ -35,6 +36,7 @@
 					if($currentPage=="projet-list.php"
 					or $currentPage=="projets.php"
 					or $currentPage=="projet-details.php"
+					or $currentPage=="projet-charges.php"
 					or $currentPage=="projet-add.php"
 					or $currentPage=="suivi-projets.php"  
 					or $currentPage=="projet-update.php"

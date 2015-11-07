@@ -1,5 +1,5 @@
 <?php
-class PiecesAppartement{
+class AppartementPieces{
 	//attributes
 	private $_id;
 	private $_nom;

@@ -120,6 +120,7 @@
                                     <div class="portfolio-info">
                                         <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width blue">Statistiques</a>
+                                        <a href="projet-charges.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
                                     </div>
                                     <!--div class="portfolio-info">
                                         <a class="btn brown arabic" href="contrats-travail.php?idProjet=<?= $projet->id() ?>" class="btn">تنظيم عقود العمل</a>

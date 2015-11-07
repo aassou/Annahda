@@ -1,5 +1,5 @@
 <?php
-class PiecesAppartementManager{
+class AppartementPiecesManager{
 	//attributes
     private $_db;
     //constructor
@@ -7,7 +7,7 @@ class PiecesAppartementManager{
         $this->_db = $db;
     }
     //CRUD operations
-    public function add(PiecesAppartement $piecesAppartement){
+    public function add(AppartementPieces $piecesAppartement){
         $query = $this->_db->prepare(
         'INSERT INTO t_pieces_appartement (nom, url, idAppartement)
         VALUES (:nom, :url, :idAppartement)') 
@@ -19,7 +19,7 @@ class PiecesAppartementManager{
         $query->closeCursor();
     }
 	
-	public function update(PiecesAppartement $piecesAppartement){
+	public function update(AppartementPieces $piecesAppartement){
 		$query = $this->_db->prepare('
 		UPDATE t_pieces_appartement SET nom=:nom, url=:url WHERE id=:idPiecesAppartement') 
 		or die(print_r($this->_db->errorInfo()));
@@ -92,6 +92,3 @@ class PiecesAppartementManager{
         return $id;
     }
 }
-	
-		
-	

@@ -25,6 +25,7 @@
 		$caisseEntreesManager = new CaisseEntreesManager($pdo);
 		$caisseSortiesManager = new CaisseSortiesManager($pdo);
 		$operationsManager = new OperationManager($pdo);
+        $compteBancaire = new CompteBancaireManager($pdo);
 		//classes and vars
 		//users number
 		$projetNumber = ($projetManager->getProjetsNumber());
@@ -126,6 +127,20 @@
 								</div>
 							</div>
 							</a>
+							<a href="compte-bancaire.php">
+                            <div class="tile bg-grey">
+                                <div class="tile-body">
+                                    <i class="icon-credit-card"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Compte Bancaire
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<a href="caisse.php">
 							<div class="tile bg-purple">
 								<div class="tile-body">
@@ -175,7 +190,7 @@
 				<!-- BEGIN DASHBOARD STATS -->
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
-					<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat yellow">
 							<div class="visual">
 								<i class="icon-signal"></i>
@@ -190,7 +205,7 @@
 							</div>					
 						</div>
 					</div>
-					<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat green">
 							<div class="visual">
 								<i class="icon-shopping-cart"></i>
@@ -201,7 +216,7 @@
 							</div>					
 						</div>
 					</div>
-					<div class="span3 responsive" data-tablet="span6 fix-offset" data-desktop="span3">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat blue">
 							<div class="visual">
 								<i class="icon-group"></i>
@@ -212,7 +227,7 @@
 							</div>			
 						</div>
 					</div>	
-					<div class="span3 responsive" data-tablet="span6" data-desktop="span3">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<a class="more" href="caisse.php">
 						<div class="dashboard-stat purple">
 							<div class="visual">
@@ -221,9 +236,8 @@
 							<div class="details">
 								<div class="number">
 									<?= number_format($caisseEntreesManager->getTotalCaisseEntrees()-$caisseSortiesManager->getTotalCaisseSorties(), '2', ',', ' ') ?>
-									DH
 								</div>
-								<div class="desc">Bilan de la caisse</div>
+								<div class="desc">DH en caisse</div>
 							</div>					
 						</div>
 						</a>

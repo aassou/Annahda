@@ -36,10 +36,6 @@ class NotesClient{
         $this->_note = $note;
     }
     
-    public function setCreated($created){
-        $this->_created = $created;
-    }
-    
     public function setIdProjet($idProjet){
         $this->_idProjet = $idProjet;
     }
@@ -72,10 +68,6 @@ class NotesClient{
     
 	public function note(){
         return $this->_note;
-    }
-	
-    public function created(){
-        return $this->_created;
     }
     
     public function idProjet(){
