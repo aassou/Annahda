@@ -85,7 +85,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <i class="icon-sitemap"></i>
+                                <i class="icon-briefcase"></i>
                                 <a href="projets.php">Gestion des projets</a> 
                                 <i class="icon-angle-right"></i>
                             </li>

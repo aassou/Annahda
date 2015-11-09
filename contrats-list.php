@@ -190,30 +190,28 @@
 						 <?php } 
 							unset($_SESSION['contrat-activation-error']);
 						 ?>
-						<div class="portlet">
-							<div class="row-fluid">
-							    <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
-                                    <i class="icon-print"></i>
-                                     Version Imprimable
-                                </a>
-								<form action="" method="post">
-								    <div class="input-box autocomplet_container">
-										<input class="m-wrap" name="nomClient" id="nomClient" type="text" onkeyup="autocompletClient()" placeholder="Chercher un client...">
-											<ul id="clientList"></ul>
-										</input>
-										<input name="idClient" id="idClient" type="hidden" />
-										<button type="submit" class="btn red"><i class="icon-search"></i></button>
-								    </div>
-								</form>
-							</div>
+						 <div class="row-fluid">
+                            <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
+                                <i class="icon-print"></i>
+                                 Version Imprimable
+                            </a>
+                            <form action="" method="post">
+                                <div class="input-box autocomplet_container">
+                                    <input class="m-wrap" name="client" id="client" type="text" placeholder="Chercher un client...">
+                                    </input>
+                                </div>
+                            </form>
+                        </div>
+						<div class="portlet contrats">
 							<div class="portlet-body">
+							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
 											<th style="width:20%">Client</th>
 											<th style="width:10%" class="hidden-phone">Type</th>
 											<th style="width:5%">Bien</th>
-											<th style="width:11%" class="hidden-phone">Prix</th>
+											<th style="width:11%" class="hidden-phon e">Prix</th>
 											<th style="width:10%" class="hidden-phone">Réglements</th>
 											<th style="width:10%" class="hidden-phone">Reste</th>
 											<th style="width:8%">Paiements</th>
@@ -432,6 +430,7 @@
 									}
 									?>
 								</table>
+								</div><!-- END DIV SCROLLER -->
 							</div>
 						</div>
 						<!-- END Terrain TABLE PORTLET-->
@@ -479,6 +478,8 @@
 	<script src="assets/js/respond.js"></script>
 	<![endif]-->	
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
 	<script src="assets/js/app.js"></script>
@@ -488,6 +489,16 @@
 			// initiate layout and plugins
 			//App.setPage("table_editable");
 			App.init();
+			 $('.contrats').show();
+            $('#client').keyup(function(){
+                $('.contrats').hide();
+               var txt = $('#client').val();
+               $('.contrats').each(function(){
+                   if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                       $(this).show();
+                   }
+                });
+            }); 
 		});
 	</script>
 </body>

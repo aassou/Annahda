@@ -36,7 +36,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -65,7 +65,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -78,19 +78,23 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des terrains
+							Gestion des terrains - Projet : <?= $projet->nom() ?>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li><a>Gestion des terrains</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -101,12 +105,10 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid">
 					<div class="span12">
+					    <div class="pull-right get-down">
+                            <a href="#addTerrain" class="btn icn-only green">Ajouter Nouveau Terrain</a>
+                        </div>
 						<div class="tab-pane active" id="tab_1">
-							<div class="row-fluid add-portfolio">
-								<div class="pull-left">
-									<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-								</div>
-							</div>
 							<?php if(isset($_SESSION['terrain-add-success'])){ ?>
                          	<div class="alert alert-success">
 								<button class="close" data-dismiss="alert"></button>

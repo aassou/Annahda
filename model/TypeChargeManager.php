@@ -57,8 +57,7 @@ class TypeChargeManager{
 
 	public function getTypeCharges(){
 		$typeCharges = array();
-		$query = $this->_db->query('SELECT * FROM t_typeCharge
-		ORDER BY id DESC');
+		$query = $this->_db->query('SELECT * FROM t_typecharge ORDER BY id DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$typeCharges[] = new TypeCharge($data);
 		}

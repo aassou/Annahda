@@ -78,9 +78,6 @@
 					<span class="arrow "></span>
 					</a>
 					<ul class="sub">
-						<li <?php if($currentPage=="projet-add.php"){?> class="active" <?php } ?> >
-							<a href="projet-add.php">Nouveau projet</a>
-						</li>
 						<li <?php if($currentPage=="projet-update.php"
 						or $currentPage=="projet-search.php" 
 						or $currentPage=="projet-list.php"
@@ -107,7 +104,7 @@
 						or $currentPage=="locaux-detail.php"
 						)
 						{?> class="active" <?php } ?> >
-							<a href="projet-list.php">Gérer les projets</a>
+							<a href="projets.php">Gérer les projets</a>
 						</li>
 						<li <?php if($currentPage=="fournisseurs.php"
 						or $currentPage=="livraison-fournisseur-list.php"

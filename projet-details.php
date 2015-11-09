@@ -26,7 +26,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>ImmoERP - Management Application</title>
+    <title>AnnahdaERP - Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -115,12 +115,12 @@
                                     <div class="portfolio-info">
                                         <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
                                         <a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width green">Listes Clients et Contrats</a>
-                                        <a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons / Fournisseurs</a>
+                                        <a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a>
                                     </div>
                                     <div class="portfolio-info">
+                                        <a href="projet-charges.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
                                         <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width blue">Statistiques</a>
-                                        <a href="projet-charges.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
                                     </div>
                                     <!--div class="portfolio-info">
                                         <a class="btn brown arabic" href="contrats-travail.php?idProjet=<?= $projet->id() ?>" class="btn">تنظيم عقود العمل</a>
@@ -141,7 +141,7 @@
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
-        2015 &copy; MerlaTravERP. Management Application.
+        2015 &copy; AnnahdaERP. Management Application.
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>

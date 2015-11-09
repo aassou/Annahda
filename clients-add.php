@@ -119,7 +119,7 @@
                               </div>
                               <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ClientActionController.php" method="POST" class="horizontal-form">
+                                 <form action="controller/ClientActionController.php" method="POST" id="clientForm" class="horizontal-form">
                                     <div class="row-fluid">
                                     	<div class="span12">
                                     		<div class="progress progress-striped progress-success">
@@ -127,12 +127,28 @@
 											</div>
                                     	</div>
                                     </div>
+                                    <?php
+                                    $nom = "";
+                                    $cin = "";
+                                    $adresse = "";
+                                    $telephone1 = "";
+                                    $telephone2 = "";
+                                    $email = "";
+                                    if( isset($_SESSION['myFormData']) ){
+                                        $nom = $_SESSION['myFormData']['nom'] ;
+                                        $cin = $_SESSION['myFormData']['cin'] ;
+                                        $adresse = $_SESSION['myFormData']['adresse'];
+                                        $telephone1 = $_SESSION['myFormData']['telephone1'];
+                                        $telephone2 = $_SESSION['myFormData']['telephone2'];
+                                        $email = $_SESSION['myFormData']['email'];
+                                    }
+                                    ?>
                                     <div class="row-fluid">
                                        <div class="span4">
                                           <div class="control-group autocomplet_container">
                                              <label class="control-label" for="nom">Nom</label>
                                              <div class="controls">
-                                                <input type="text" id="nomClient" name="nom" class="m-wrap span12" onkeyup="autocompletClient()">
+                                                <input required="required" type="text" id="nomClient" name="nom" value="<?= $nom ?>" class="m-wrap span12" onkeyup="autocompletClient()">
                                                 <ul id="clientList"></ul>
                                              </div>
                                           </div>
@@ -141,7 +157,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="cin">CIN</label>
                                              <div class="controls">
-                                                <input type="text" id="cin" name="cin" class="m-wrap span12">
+                                                <input type="text" id="cin" name="cin" value="<?= $cin ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -149,7 +165,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="adresse">Adresse</label>
                                              <div class="controls">
-                                                <input type="text" id="adresse" name="adresse" class="m-wrap span12">
+                                                <input type="text" id="adresse" name="adresse" value="<?= $adresse ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -159,7 +175,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="telephone1">Téléphone 1</label>
                                              <div class="controls">
-                                                <input type="text" id="telephone1" name="telephone2" class="m-wrap span12">
+                                                <input type="text" id="telephone1" name="telephone1" value="<?= $telephone1 ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -167,7 +183,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="telephone2">Téléphone 2</label>
                                              <div class="controls">
-                                                <input type="text" id="telephone2" name="telephone2" class="m-wrap span12">
+                                                <input type="text" id="telephone2" name="telephone2" value="<?= $telephone2 ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -175,7 +191,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="email">Email</label>
                                              <div class="controls">
-                                                <input type="text" id="email" name="email" class="m-wrap span12">
+                                                <input type="text" id="email" name="email" value="<?= $email ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -187,6 +203,9 @@
                                        	<button type="submit" class="btn blue">Continuer <i class="m-icon-swapright m-icon-white"></i></button>
                                     </div>
                                  </form>
+                                 <?php
+                                    unset($_SESSION['myFormData']);
+                                 ?>
                                  <!-- END FORM--> 
                               </div>
                            </div>
@@ -232,6 +251,7 @@
 	<script src="assets/js/respond.js"></script>
 	<![endif]-->	
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
+	<script type="text/javascript" src="assets/jquery-validation/jquery.validate.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
 	<script src="assets/js/app.js"></script>
@@ -241,6 +261,10 @@
 			// initiate layout and plugins
 			//App.setPage("table_editable");
 			App.init();
+			$("#clientForm").validate({
+			     errorClass: "error-class",
+                 validClass: "alid-class"
+			});
 		});
 	</script>
 </body>

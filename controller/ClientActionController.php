@@ -29,6 +29,7 @@
     //add action, update action or delete action
     $action = htmlentities($_POST['action']);
     $idProjet = htmlentities($_POST['idProjet']);
+    $_SESSION['myFormData'] = $_POST;
     //This var contains result message of CRUD action and the redirection url link
     $actionMessage = "";
     $typeMessage = "";

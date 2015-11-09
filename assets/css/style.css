@@ -4976,3 +4976,7 @@ div#fancy_print {
 	margin-left: 5px;
 	margin-right: 5px;
 }
+
+.error-class {
+    color: #FF0000;
+}
