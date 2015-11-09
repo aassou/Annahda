@@ -14,7 +14,9 @@
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
-    	$idProjet = 0;
+    	if( isset($_GET['idProjet']) ){
+    	   $idProjet = $_GET['idProjet'];   
+    	}
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
@@ -51,7 +53,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -81,7 +83,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -94,23 +96,30 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Clients et Contrats
+							Résumé Contrat Client - Projet : <strong><?= $projet->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a>Gestion des clients/contrats</a></li>
-							<?php 
-								$clientManager = new ClientManager($pdo);
-							?>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+							<li>
+							    <a href="contrats-list.php?idProjet=<?= $projet->id() ?>">Liste des contrats clients</a>
+							    <i class="icon-angle-right"></i>
+							</li>
+							<li>
+                                <a>Résumé contrat</a>
+                            </li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -119,59 +128,10 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
-						<?php if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
-						?>
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des contrats du projet : <strong><?= $projet->nom() ?></strong></a>
-							</div>
-							<div class="pull-right">
-								<a href="projet-list.php" class="btn icn-only green">Aller vers Liste des projets <i class="m-icon-swapright m-icon-white"></i></a>
-							</div>
-						</div>
-	                     <?php if(isset($_SESSION['contrat-add-success'])){ ?>
-	                     	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-add-success'] ?>		
-							</div>
-	                     <?php } 
-	                     	unset($_SESSION['contrat-add-success']);
-	                     ?>
-	                     <?php if(isset($_SESSION['client-update-success'])){ ?>
-	                     	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['client-update-success'] ?>		
-							</div>
-	                     <?php } 
-	                     	unset($_SESSION['client-update-success']);
-	                     ?>
-	                     <?php if(isset($_SESSION['client-update-error'])){ ?>
-	                     	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['client-update-error'] ?>		
-							</div>
-	                     <?php } 
-	                     	unset($_SESSION['client-update-error']);
-	                     ?>
-	                     <?php if(isset($_SESSION['contrat-update-success'])){ ?>
-	                     	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-update-success'] ?>		
-							</div>
-	                     <?php } 
-	                     	unset($_SESSION['contrat-update-success']);
-	                     ?>
-	                      <?php if(isset($_SESSION['contrat-update-error'])){ ?>
-	                     	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-update-error'] ?>		
-							</div>
-	                     <?php } 
-	                     	unset($_SESSION['contrat-update-error']);
-	                     ?>
-	                     <?php
+						<?php if(isset($_GET['codeContrat']) and 
+						(bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 	                     //progress bar processing
-	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id()) )/$contrat->prixVente())*100);
+	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id())  +$contrat->avance() )/$contrat->prixVente())*100);
 						 $statusBar = "";
 						 if( $statistiquesResult>0 and $statistiquesResult<25 ){
 						 	$statusBar = "progress-danger";
@@ -184,15 +144,40 @@
 						 }
 	                     ?>
 	                    <h3>Résumé du Contrat&nbsp;&nbsp;
-	                    	<a class="btn big blue" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
+	                    	<a class="btn blue pull-right" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
 	                    </h3>
-	                    <hr>
-	                    <h4>Avancement du contrat</h4>
+	                    <h4 style="text-align: center">Avancement du contrat</h4>
 	                    <div class="progress <?= $statusBar ?>">
     						<div class="bar" style="width: <?= $statistiquesResult ?>%;"><?= $statistiquesResult ?>%</div>
 						</div>
+		                 <?php if( isset($_SESSION['contrat-action-message']) 
+                                   and isset($_SESSION['contrat-type-message']) ){
+                                       $message = $_SESSION['contrat-action-message'];
+                                       $typeMessage = $_SESSION['contrat-type-message'];
+                         ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php } 
+                            unset($_SESSION['contrat-action-message']);
+                            unset($_SESSION['contrat-type-message']);
+                         ?>
+                         <?php if( isset($_SESSION['client-action-message']) 
+                                   and isset($_SESSION['client-type-message']) ){
+                                       $message = $_SESSION['client-action-message'];
+                                       $typeMessage = $_SESSION['client-type-message'];
+                         ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php } 
+                            unset($_SESSION['client-action-message']);
+                            unset($_SESSION['client-type-message']);
+                         ?>
                        <div class="span5">
 						<div class="portlet sale-summary">
 							<div class="portlet-title">
@@ -228,9 +213,6 @@
 									<span class="sale-num"><?= $client->email() ?></span>
 								</li>
 							</ul>
-							<!--a href="controller/ClientFichePrintController.php?idContrat=<?= $contrat->id() ?>" class="btn big purple">
-									<i class="icon-print"></i> Fiche Client
-								</a-->
 						</div>
 					 </div>
 					 <div class="span6">
@@ -257,21 +239,39 @@
 									</span>
 								</li>
 								<li>
-									<span class="sale-info">Nom du Bien</span> 
+									<span class="sale-info">Code du Bien</span> 
 									<span class="sale-num"><?= $biens->nom() ?></span>
 								</li>
 								<li>
 									<span class="sale-info">Superficie</span> 
 									<span class="sale-num"><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></span>
 								</li>
+								<?php if($contrat->typeBien()=="appartement"){ ?>
 								<li>
 									<span class="sale-info">Niveau</span> 
 									<span class="sale-num"><?= $niveau ?></span>
 								</li>
+								<?php } ?>
 								<li>
 									<span class="sale-info">Prix de Vente</span> 
 									<span class="sale-num"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH</span>
 								</li>
+								<li>
+                                    <span class="sale-info">Avance</span> 
+                                    <span class="sale-num"><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                </li>
+                                <li>
+                                    <span class="sale-info">Durée Paiement</span> 
+                                    <span class="sale-num"><?= number_format($contrat->dureePaiement(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                </li>
+                                <li>
+                                    <span class="sale-info">Nombre Mois</span> 
+                                    <span class="sale-num"><?= number_format($contrat->nombreMois(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                </li>
+                                <li>
+                                    <span class="sale-info">Echéance</span> 
+                                    <span class="sale-num"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                </li>
 								<li>
 									<?php
 									//if($contrat->avance()!=0 or $contrat->avance()!='NULL' ){
@@ -289,10 +289,6 @@
 									<span class="sale-num">
 										<?= number_format($contrat->prixVente()-($sommeOperations), 2, ',', ' ') ?>&nbsp;DH
 									</span>
-								</li>
-								<li>
-									<span class="sale-info">Echéance</span> 
-									<span class="sale-num"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</span>
 								</li>
 							</ul>
 							<!--a href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>" class="btn big blue">
@@ -386,7 +382,7 @@
 						<h3>Modifier les informations du client </h3>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal" action="controller/ClientUpdateController.php" method="post">
+						<form class="form-horizontal" action="controller/ClientActionController.php" method="post">
 							<p>Êtes-vous sûr de vouloir modifier les infos du client <strong><?= $client->nom() ?></strong> ?</p>
 							<div class="control-group">
 								<label class="control-label">Nom</label>
@@ -407,13 +403,13 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Tél.Fix</label>
+								<label class="control-label">Téléphone 1</label>
 								<div class="controls">
 									<input type="text" name="telephone1" value="<?= $client->telephone1() ?>" />
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Tél.Mobil</label>
+								<label class="control-label">Téléphone 2</label>
 								<div class="controls">
 									<input type="text" name="telephone2" value="<?= $client->telephone2() ?>" />
 								</div>
@@ -425,6 +421,8 @@
 								</div>	
 							</div>
 							<div class="control-group">
+							    <input type="hidden" name="action" value="update" />
+							    <input type="hidden" name="source" value="contrat" />
 								<input type="hidden" name="idClient" value="<?= $client->id() ?>" />
 								<input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
 								<div class="controls">	
@@ -443,8 +441,14 @@
 						<h3>Modifier les informations du contrat </h3>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal" action="controller/ContratUpdateController.php" method="post">
+						<form class="form-horizontal" action="controller/ContratActionController.php" method="post">
 							<p>Êtes-vous sûr de vouloir modifier le contrat <strong>N°<?= $contrat->id() ?></strong>  ?</p>
+							<div class="control-group">
+                                <label class="control-label">Numéro Contrat</label>
+                                <div class="controls">
+                                    <input type="text" name="numero" value="<?= $contrat->numero() ?>" />
+                                </div>
+                            </div>  
 							<div class="control-group">
 								<label class="control-label">Date Création</label>
 								<div class="controls">
@@ -454,15 +458,33 @@
 							<div class="control-group">
 								<label class="control-label">Prix Vente</label>
 								<div class="controls">
-									<input type="text" name="prixVente" value="<?= $contrat->prixVente() ?>" />
+									<input type="text" id="prixVente" name="prixVente" value="<?= $contrat->prixVente() ?>" />
 								</div>
 							</div>	
 							<div class="control-group">
-								<label class="control-label">avance</label>
+								<label class="control-label">Avance</label>
 								<div class="controls">
-									<input type="text" name="avance" value="<?= $contrat->avance() ?>" />
+									<input type="text" id="avance" name="avance" value="<?= $contrat->avance() ?>" />
 								</div>
 							</div>
+							<div class="control-group">
+                                <label class="control-label">Durée de paiement</label>
+                                <div class="controls">
+                                    <input type="text" id="dureePaiement" name="dureePaiement" value="<?= $contrat->dureePaiement() ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Nombre Mois</label>
+                                <div class="controls">
+                                    <input type="text" id="nombreMois" name="nombreMois" value="<?= $contrat->nombreMois() ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Echéance</label>
+                                <div class="controls">
+                                    <input type="text" id="echeance" name="echeance" value="<?= $contrat->echeance() ?>" />
+                                </div>
+                            </div>
 							<div class="control-group">
 								<label class="control-label">Mode de paiement</label>
 								<div class="controls">
@@ -478,17 +500,11 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label">Durée de paiement</label>
-								<div class="controls">
-									<input type="text" name="dureePaiement" value="<?= $contrat->dureePaiement() ?>" />
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label">Echéance</label>
-								<div class="controls">
-									<input type="text" name="echeance" value="<?= $contrat->echeance() ?>" />
-								</div>
-							</div>
+                                <label class="control-label">Numéro Opération</label>
+                                <div class="controls">
+                                    <input type="text" name="numeroCheque" value="<?= $contrat->numeroCheque() ?>" />
+                                </div>
+                            </div>
 							<div class="control-group">
 								<label class="control-label">Note Client</label>
 								<div class="controls">
@@ -519,6 +535,8 @@
                             	</div>
                           	</div>
 							<div class="control-group">
+							    <input type="hidden" name="action" value="update" />
+							    <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
 								<input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
 								<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
 								<div class="controls">	
@@ -607,6 +625,14 @@
 					}
 				});
 			});
+			$('#nombreMois').change(function(){
+                var dureePaiement = $('#dureePaiement').val();
+                var prixNegocie = $('#prixVente').val();
+                var avance = $('#avance').val();
+                var nombreMois = $(this).val();
+                var echeance = Math.round( ( prixNegocie - avance ) / ( dureePaiement / nombreMois ) );
+                $('#echeance').val(echeance);
+            });
 		});
 	</script>
 </body>

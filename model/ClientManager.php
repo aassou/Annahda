@@ -11,8 +11,8 @@ class ClientManager{
     //CRUD operations
     public function add(Client $client){
         $query = $this->_db->prepare(
-        'INSERT INTO t_client (nom, adresse, telephone1, telephone2, cin, email, created, code)
-        VALUES (:nom, :adresse, :telephone1, :telephone2, :cin, :email, :created, :code)') 
+        'INSERT INTO t_client (nom, adresse, telephone1, telephone2, cin, email, code, created, createdBy)
+        VALUES (:nom, :adresse, :telephone1, :telephone2, :cin, :email, :code, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $client->nom());
         $query->bindValue(':adresse', $client->adresse());
@@ -20,15 +20,17 @@ class ClientManager{
         $query->bindValue(':telephone2', $client->telephone2());
         $query->bindValue(':cin', $client->cin());
         $query->bindValue(':email', $client->email());
-        $query->bindValue(':created', $client->created());
 		$query->bindValue(':code', $client->code());
+        $query->bindValue(':created', $client->created());
+        $query->bindValue(':createdBy', $client->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(Client $client){
-        $query = $this->_db->prepare('UPDATE t_client SET nom=:nom, adresse=:adresse, telephone1=:telephone1, 
-        telephone2=:telephone2, cin=:cin, email=:email WHERE id=:id') 
+        $query = $this->_db->prepare(
+        'UPDATE t_client SET nom=:nom, adresse=:adresse, telephone1=:telephone1, 
+        telephone2=:telephone2, cin=:cin, email=:email, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $client->nom());
         $query->bindValue(':adresse', $client->adresse());
@@ -36,6 +38,8 @@ class ClientManager{
         $query->bindValue(':telephone2', $client->telephone2());
         $query->bindValue(':cin', $client->cin());
         $query->bindValue(':email', $client->email());
+        $query->bindValue(':updated', $client->updated());
+        $query->bindValue(':updatedBy', $client->updatedBy());
         $query->bindValue(':id', $client->id());
         $query->execute();
         $query->closeCursor();

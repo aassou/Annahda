@@ -55,7 +55,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -85,7 +85,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -98,20 +98,26 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des contrats
+							Liste des contrats clients - Projet : <strong><?= $projet->nom() ?></strong>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a>Liste des contrats</a></li>
+							<li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+							<li>
+							    <a>Liste des contrats clients</a>
+							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -119,11 +125,6 @@
 				<!-- END PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-							</div>
-						</div>
 						<!-- BEGIN Terrain TABLE PORTLET-->
 						<?php if(isset($_SESSION['operation-add-error'])){ ?>
 							<div class="alert alert-error">
@@ -190,19 +191,11 @@
 							unset($_SESSION['contrat-activation-error']);
 						 ?>
 						<div class="portlet">
-							<div class="portlet-title">
-								<h4>Liste des contrats du projet : <strong><?= $projet->nom() ?></strong>
-								
-								</h4>&nbsp;<a class="btn big blue" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
-								    <i class="icon-print"></i>
-								     Version Imprimable
-								</a>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
 							<div class="row-fluid">
+							    <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
+                                    <i class="icon-print"></i>
+                                     Version Imprimable
+                                </a>
 								<form action="" method="post">
 								    <div class="input-box autocomplet_container">
 										<input class="m-wrap" name="nomClient" id="nomClient" type="text" onkeyup="autocompletClient()" placeholder="Chercher un client...">

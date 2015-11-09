@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -58,7 +58,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -71,20 +71,24 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Clients
+							Création Contrat Client - Projet : <strong><?= $projet->nom() ?></strong>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
-								<i class="icon-home"></i>
-								<a>Accueil</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
-								<i class="icon-angle-right"></i>
-							</li>
-							<li><a>Gestion des clients</a></li>
+                                <i class="icon-home"></i>
+                                <a href="dashboard.php">Accueil</a> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <i class="icon-briefcase"></i>
+                                <a href="projets.php">Gestion des projets</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="projets.php">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li><a>Création Contrat Client</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -95,35 +99,27 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="tab-pane active" id="tab_1">
-							<div class="row-fluid add-portfolio">
-								<div class="pull-left">
-									<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-								</div>
-							</div>
-	                         <?php if(isset($_SESSION['client-add-error'])){ ?>
-	                         	<div class="alert alert-error">
+	                         <?php if( isset($_SESSION['client-action-message'])
+                                    and isset($_SESSION['client-type-message']) ){
+                                        $message = $_SESSION['client-action-message'];
+                                        $typeMessage = $_SESSION['client-type-message']; 
+	                             
+	                         ?>
+	                         	<div class="alert alert-<?= $typeMessage ?>">
 									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['client-add-error'] ?>		
+									<?= $message ?>		
 								</div>
 	                         <?php } 
-	                         	unset($_SESSION['client-add-error']);
+	                         	unset($_SESSION['client-action-message']);
+                                unset($_SESSION['client-type-message']);
 	                         ?>
-                           <div class="portlet box grey">
+                           <div class="portlet box blue">
                               <div class="portlet-title">
-                                 <h4><i class="icon-edit"></i>Nouveau Client/Contrat pour le projet : <strong><?= $projet->nom() ?></strong></h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
+                                 <h4><strong>Etape 1 : </strong> Informations Client</h4>
                               </div>
                               <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ClientAddController.php" method="POST" class="horizontal-form">
-                                    <div class="row-fluid">
-                                    	<div class="span12">
-                                    		<img src="assets/img/form_wizard_client_contrat_1.png">
-                                    	</div>
-                                    </div>
+                                 <form action="controller/ClientActionController.php" method="POST" class="horizontal-form">
                                     <div class="row-fluid">
                                     	<div class="span12">
                                     		<div class="progress progress-striped progress-success">
@@ -185,10 +181,10 @@
                                        </div>
                                     </div>
                                     <div class="form-actions">
-                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>" class="m-wrap span12">
-                                    	<input type="hidden" id="idClient" name="idClient" class="m-wrap span12">
-                                       	<button type="reset" class="btn red">Annuler</button>
-                                       	<button type="submit" class="btn black">Continuer <i class="m-icon-swapright m-icon-white"></i></button>
+                                        <input type="hidden" name="action" value="add">
+                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>">
+                                    	<input type="hidden" id="idClient" name="idClient">
+                                       	<button type="submit" class="btn blue">Continuer <i class="m-icon-swapright m-icon-white"></i></button>
                                     </div>
                                  </form>
                                  <!-- END FORM--> 

@@ -9,6 +9,7 @@ class Contrat{
     private $_avance;
 	private $_modePaiement;
 	private $_dureePaiement;
+    private $_nombreMois;
     private $_echeance;
     private $_note;
     private $_idClient;
@@ -66,6 +67,10 @@ class Contrat{
 	
 	public function setDureePaiement($dureePaiement){
         $this->_dureePaiement = $dureePaiement;
+    }
+    
+    public function setNombreMois($nombreMois){
+        $this->_nombreMois = $nombreMois;
     }
 	
 	public function setEcheance($echeance){
@@ -150,6 +155,10 @@ class Contrat{
         return $this->_dureePaiement;
     }
 	
+    public function nombreMois(){
+        return $this->_nombreMois;
+    }
+    
     public function echeance(){
         return $this->_echeance;
     }

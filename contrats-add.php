@@ -32,7 +32,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -62,7 +62,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -75,23 +75,24 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Contrats
+							Création Contrat Client - Projet : <strong><?= $projet->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
-							<li><a>Gestion des contrats</a></li>
-							<?php 
-								$clientManager = new ClientManager($pdo);
-							?>
+							<li>
+                                <a href="projets.php">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+							<li><a>Création Contrat Client</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -102,11 +103,6 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="tab-pane active" id="tab_1">
-							<div class="row-fluid add-portfolio">
-								<div class="pull-left">
-									<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-								</div>
-							</div>
 	                         <?php if(isset($_SESSION['contrat-add-error'])){ ?>
 	                         	<div class="alert alert-error">
 									<button class="close" data-dismiss="alert"></button>
@@ -115,22 +111,18 @@
 	                         <?php } 
 	                         	unset($_SESSION['contrat-add-error']);
 	                         ?>
-                           <div class="portlet box grey">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-edit"></i>Nouveau Client/Contrat pour le projet : <strong><?= $projet->nom() ?></strong></h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
+                           <div class="portlet box blue">
+                                  <div class="portlet-title">
+                                     <h4><strong>Etape 2 : </strong> Informations Contrat</h4>
+                                  </div>
+                                <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ContratAddController.php" method="POST" class="horizontal-form">
-                                    <div class="row-fluid">
+                                 <form action="controller/ContratActionController.php" method="POST" class="horizontal-form">
+                                    <!--div class="row-fluid">
                                     	<div class="span12">
                                     		<img src="assets/img/form_wizard_client_contrat_2.png">
                                     	</div>
-                                    </div>
+                                    </div-->
                                     <div class="row-fluid">
                                     	<div class="span12">
                                     		<div class="progress progress-striped progress-success">
@@ -138,68 +130,66 @@
 											</div>
                                     	</div>
                                     </div>
-                                    <legend>Création du Contrat pour le Client : <?= $client->nom() ?></legend>
+                                    <legend>Création du Contrat pour le Client : <strong><?= $client->nom() ?></strong></legend>
                                     <div class="row-fluid">
-                                       <div class="span4">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="numero">Numéro du contrat</label>
                                              <div class="controls">
-                                                <input type="text" id="numero" name="numero" class="m-wrap span12">
+                                                <input type="text" id="numero" name="numero" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                       <div class="span4">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="dateCreation">Date de création</label>
                                              <div class="controls">
                                                 <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-				                                    <input name="dateCreation" id="dateCreation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
-				                                    <span class="add-on"><i class="icon-calendar"></i></span>
-				                                 </div>
+                                                    <input name="dateCreation" id="dateCreation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                 </div>
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span4">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label">Type du bien</label>
                                              <div class="controls">
                                                 <label class="radio">
-				                                 <input type="radio" class="typeBien" name="typeBien" value="localCommercial" />
-				                                 Local commercial
-				                                </label>
-				                                <label class="radio">
-				                                 <input type="radio" class="typeBien" name="typeBien" value="appartement" />
-				                                 Appartement
-				                                </label>
+                                                 <input type="radio" class="typeBien" name="typeBien" value="localCommercial" />
+                                                 Locaux
+                                                </label>
+                                                <label class="radio">
+                                                 <input type="radio" class="typeBien" name="typeBien" value="appartement" />
+                                                 Appartement
+                                                </label>
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span4 hidenBlock">
+                                       <div class="span3 hidenBlock">
                                           <div class="control-group">
                                              <div class="controls">
-                                             	<label class="control-label" for="" id="nomBienLabel"></label>
-                                             	<select class="m-wrap" name="bien" id="bien">
-                                             	</select>
+                                                <label class="control-label" for="" id="nomBienLabel"></label>
+                                                <select class="m-wrap" name="bien" id="bien">
+                                                </select>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="row-fluid">
-                                    	<div class="span3">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="prixNegocie">Prix négocié</label>
                                              <div class="controls">
-                                                <input type="text" id="prixNegocie" name="prixNegocie" class="m-wrap span12">
+                                                <input type="text" id="prixNegocie" name="prixNegocie" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
-                                    	<div class="span3">
+                                        <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="avance">Avance</label>
                                              <div class="controls">
-                                                <input type="text" id="avance" name="avance" class="m-wrap span12">
+                                                <input type="text" id="avance" name="avance" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -207,61 +197,69 @@
                                           <div class="control-group">
                                              <label class="control-label" for="dureePaiement">Durée de paiement</label>
                                              <div class="controls">
-                                             	<input type="text" id="dureePaiement" name="dureePaiement" class="m-wrap span12">
+                                                <input type="text" id="dureePaiement" name="dureePaiement" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
-                                    	<div class="span3">
+                                       <div class="span3">
                                           <div class="control-group">
-                                             <label class="control-label" for="echeance">Echéance</label>
+                                             <label class="control-label" for="nombreMois">Nombre de mois</label>
                                              <div class="controls">
-                                             	<input type="text" id="echeance" name="echeance" class="m-wrap span12">
+                                                <input type="text" id="nombreMois" name="nombreMois" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="row-fluid">
-                                    	<div class="span6">
+                                    	<div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="echeance">Echéance</label>
+                                             <div class="controls">
+                                             	<input type="text" id="echeance" name="echeance" class="m-wrap">
+                                             </div>
+                                          </div>
+                                        </div>
+                                        <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="modePaiement">Mode de paiement</label>
                                              <div class="controls">
                                                 <div class="controls">
-													<select name="modePaiement" id="modePaiement">
-														<option value="Especes">Espèces</option>
-														<option value="Cheque">Chèque</option>
-														<option value="Versement">Versement</option>
-														<option value="Virement">Virement</option>
-														<option value="Lettre de change">Lettre de change</option>
-														<option value="Remise">Remise</option>
-													</select>
-												</div>
+                                                    <select class="m-wrap" name="modePaiement" id="modePaiement">
+                                                        <option value="Especes">Espèces</option>
+                                                        <option value="Cheque">Chèque</option>
+                                                        <option value="Versement">Versement</option>
+                                                        <option value="Virement">Virement</option>
+                                                        <option value="Lettre de change">Lettre de change</option>
+                                                        <option value="Remise">Remise</option>
+                                                    </select>
+                                                </div>
                                              </div>
                                           </div>
-                                       </div>
-                                    	<div class="span6">
+                                        </div>
+                                        <div class="span3">
                                           <div class="control-group">
-                                             <label class="control-label" for="note">Note client</label>
-                                             <div class="controls">
-                                                <textarea id="note" name="note"></textarea>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid" id="numeroCheque" style="display: none">
-                                    	<div class="span6">
-                                          <div class="control-group">
-                                             <label class="control-label">N°Chèque</label>
+                                             <label class="control-label">N° Opération</label>
                                              <div class="controls">
                                                 <input type="text" name="numeroCheque" class="m-wrap">
                                              </div>
                                           </div>
-                                       </div>
+                                        </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Note client</label>
+                                             <div class="controls">
+                                                <input type="text" id="note" name="note" class="m-wrap" />
+                                             </div>
+                                          </div>
+                                        </div>
                                     </div>
                                     <div class="form-actions">
-                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>" class="m-wrap span12">
-                                    	<input type="hidden" id="idClient" name="idClient" value="<?= $client->id() ?>" class="m-wrap span12">
-                                    	<input type="hidden" id="codeClient" name="codeClient" value="<?= $codeClient ?>" class="m-wrap span12">
-                                       <button type="submit" class="btn black">Terminer <i class="icon-ok m-icon-white"></i></button>
+                                        <input type="hidden" name="action" value="add">
+                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>">
+                                    	<input type="hidden" id="idClient" name="idClient" value="<?= $client->id() ?>">
+                                    	<input type="hidden" id="codeClient" name="codeClient" value="<?= $codeClient ?>">
+                                    	<a href="clients-add.php?idProjet=<?= $idProjet ?>" class="btn blue"><i class="m-icon-swapleft m-icon-white"></i>&nbsp;Retour</a>
+                                       <button type="submit" class="btn green">Terminer <i class="icon-ok m-icon-white"></i></button>
                                     </div>
                                  </form>
                                  <!-- END FORM--> 
@@ -289,7 +287,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -346,22 +344,15 @@
 					}
 				});
 			});
-			$('#dureePaiement').change(function(){
-				var dureePaiement = $(this).val();
+			$('#nombreMois').change(function(){
+				var dureePaiement = $('#dureePaiement').val();
 				var prixNegocie = $('#prixNegocie').val();
 				var avance = $('#avance').val();
-				var echeance = Math.round( ( prixNegocie - avance ) / dureePaiement );
+				var nombreMois = $(this).val();
+				var echeance = Math.round( ( prixNegocie - avance ) / ( dureePaiement / nombreMois ) );
 				$('#echeance').val(echeance);
 			});
 		});
-		$('#modePaiement').on('change',function(){
-	        if( $(this).val()==="Cheque"){
-	        $("#numeroCheque").show()
-	        }
-	        else{
-	        $("#numeroCheque").hide()
-	        }
-	    });
 		</script>
 </body>
 <!-- END BODY -->

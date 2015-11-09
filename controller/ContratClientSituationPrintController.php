@@ -47,10 +47,15 @@
 ob_start();
 ?>
 <style type="text/css">
-	p, h1{
-		text-align: center;
-		text-decoration: underline;
-	}
+	p, h1, h2, h4{
+        text-align: center;
+        font-family : Arial;
+        font-weight: 100;
+        margin-bottom: 0px;
+    }
+    h2{
+        font-size: 20px;
+    }
 	table {
 	    border-collapse: collapse;
 	    width:auto;
@@ -68,9 +73,9 @@ ob_start();
 	}
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
-    <img src="../assets/img/logo_company.png" style="width: 110px" />
-    <br><br><br><br><br>
-    <h1>Fiche de situation du client</h1>
+    <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
+    <h1>Résumé du Contrat Client</h1>
+    <h2>Projet <?= $projet->nom() ?> </h2>
     <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
     <br><br>
     <h3>Résumé du Contrat</h3>
@@ -204,8 +209,8 @@ ob_start();
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;">STE MERLA TRAV SARL : Au capital de 100 000,00 DH – Siège social Hay Al Matar En face de l'institution AR'RISSALA 2, Nador. 
-    	<br>Tèl 0536381458/ 0661668860 IF : 40451179   RC : 10999  Patente 56126681</p>
+    <p style="text-align: center;font-size: 9pt;">STE Annahda SARL : Au capital de 200 000,00 DH – siège social XXXXXXXXXX, Nador. 
+        <br>Tél XXXXX / XXXXX IF : XXXXX   RC : XXXXX  Patente XXXXX</p>
     </page_footer>
 </page>    
 <?php

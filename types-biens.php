@@ -1,17 +1,18 @@
 <?php
+include('config.php');  
 if(isset($_POST['typeBien'])){
 	$typeBien = htmlentities($_POST['typeBien']);
 	$idProjet = htmlentities($_POST['idProjet']);
 	if($typeBien=="appartement"){
-		$requete = " SELECT * FROM t_appartement WHERE idProjet=".$idProjet." AND status = 'Non' ";	
+		$requete = " SELECT * FROM t_appartement WHERE idProjet=".$idProjet." AND status = 'Disponible' ";	
 	}
 	else if($typeBien=="localCommercial"){
-		$requete = " SELECT * FROM t_locaux WHERE idProjet=".$idProjet." AND status = 'Non' ";
+		$requete = " SELECT * FROM t_locaux WHERE idProjet=".$idProjet." AND status = 'Disponible' ";
 	}
 	
 	// connexion à la base de données
     try{
-        $bdd = new PDO('mysql:host=mysql.hostinger.co.uk;dbname=u250696044_trav', 'u250696044_yassi', 'MerlaHost2015Db2');
+        $bdd = $pdo;
     } 
 	catch(Exception $e){
         exit('Impossible de se connecter à la base de données.');

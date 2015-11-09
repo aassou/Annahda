@@ -11,10 +11,12 @@ class ContratManager{
     //CRUD operations
     public function add(Contrat $contrat){
         $query = $this->_db->prepare('
-        INSERT INTO t_contrat (numero, dateCreation, prixVente, avance, modePaiement, dureePaiement, echeance, 
-        note, idClient, idProjet, idBien, typeBien, code, status, numeroCheque)
-        VALUES (:numero, :dateCreation, :prixVente, :avance, :modePaiement, :dureePaiement, :echeance, :note, :idClient, 
-		 :idProjet, :idBien, :typeBien, :code, :status, :numeroCheque)') 
+        INSERT INTO t_contrat (numero, dateCreation, prixVente, avance, 
+        modePaiement, dureePaiement, nombreMois, echeance, note, idClient, idProjet,
+         idBien, typeBien, code, status, numeroCheque, created, createdBy)
+        VALUES (:numero, :dateCreation, :prixVente, :avance, :modePaiement, 
+        :dureePaiement, :nombreMois, :echeance, :note, :idClient, :idProjet, :idBien, 
+        :typeBien, :code, :status, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':numero', $contrat->numero());
         $query->bindValue(':dateCreation', $contrat->dateCreation());
@@ -22,6 +24,7 @@ class ContratManager{
         $query->bindValue(':avance', $contrat->avance());
 		$query->bindValue(':modePaiement', $contrat->modePaiement());
 		$query->bindValue(':dureePaiement', $contrat->dureePaiement());
+        $query->bindValue(':nombreMois', $contrat->nombreMois());
         $query->bindValue(':echeance', $contrat->echeance());
 		$query->bindValue(':note', $contrat->note());
         $query->bindValue(':idClient', $contrat->idClient());
@@ -31,24 +34,32 @@ class ContratManager{
 		$query->bindValue(':code', $contrat->code());
 		$query->bindValue(':status', 'actif');
 		$query->bindValue(':numeroCheque', $contrat->numeroCheque());
+        $query->bindValue(':created', $contrat->created());
+        $query->bindValue(':createdBy', $contrat->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(Contrat $contrat){
-        $query = $this->_db->prepare('UPDATE t_contrat SET numero=:numero, dateCreation=:dateCreation, prixVente=:prixVente,
-        avance=:avance, modePaiement=:modePaiement, dureePaiement=:dureePaiement, echeance=:echeance,  
-        note=:note WHERE id=:id') 
+        $query = $this->_db->prepare(
+        'UPDATE t_contrat SET numero=:numero, dateCreation=:dateCreation, 
+        prixVente=:prixVente, avance=:avance, modePaiement=:modePaiement, numeroCheque=:numeroCheque,
+        nombreMois=:nombreMois, dureePaiement=:dureePaiement, echeance=:echeance,  
+        note=:note, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $contrat->id());
 		$query->bindValue(':numero', $contrat->numero());
         $query->bindValue(':dateCreation', $contrat->dateCreation());
         $query->bindValue(':prixVente', $contrat->prixVente());
         $query->bindValue(':avance', $contrat->avance());
 		$query->bindValue(':modePaiement', $contrat->modePaiement());
 		$query->bindValue(':dureePaiement', $contrat->dureePaiement());
+        $query->bindValue(':numeroCheque', $contrat->numeroCheque());
+        $query->bindValue(':nombreMois', $contrat->nombreMois());
         $query->bindValue(':echeance', $contrat->echeance());
 		$query->bindValue(':note', $contrat->note());
-        $query->bindValue(':id', $contrat->id());
+        $query->bindValue(':updated', $contrat->updated());
+        $query->bindValue(':updatedBy', $contrat->updatedBy());
         $query->execute();
         $query->closeCursor();
     }
