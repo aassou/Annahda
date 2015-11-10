@@ -31,20 +31,7 @@
 				$contratNumber = -1;
 			}
 			else{
-				$contratNumber = $contratManager->getContratsNumberByIdProjet($idProjet);
-				if($contratNumber != 0){
-					$contratPerPage = 10;
-			        $pageNumber = ceil($contratNumber/$contratPerPage);
-			        $p = 1;
-			        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-			            $p = $_GET['p'];
-			        }
-			        else{
-			            $p = 1;
-			        }
-			        $begin = ($p - 1) * $contratPerPage;
-			        $pagination = paginate('contrats-list.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);
-					$contrats = $contratManager->getContratsByIdProjet($idProjet, $begin, $contratPerPage);	
+				    $contrats = $contratManager->getContratsByIdProjetOnly($idProjet);	
 				}		
 			}	
 ?>
@@ -424,11 +411,6 @@
 										}//end of if
 										?>
 									</tbody>
-									<?php
-									if($contratNumber != 0 and $contratNumber!=-1){
-										echo $pagination;	
-									}
-									?>
 								</table>
 								</div><!-- END DIV SCROLLER -->
 							</div>
