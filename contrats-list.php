@@ -210,7 +210,6 @@
 									</thead>
 									<tbody>
 										<?php
-										if($contratNumber != 0){
 										foreach($contrats as $contrat){
 											$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
 											$sommeOperations = $operationManager->sommeOperations($contrat->id());
@@ -407,7 +406,6 @@
 										<!-- delete box end -->	
 										<?php
 										}//end of loop
-										}//end of if
 										?>
 									</tbody>
 								</table>
