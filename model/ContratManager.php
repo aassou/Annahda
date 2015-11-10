@@ -212,7 +212,7 @@ class ContratManager{
 	
 	public function getContratsByIdProjetOnly($idProjet){
         $contrats = array();    
-        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet");
+        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet ORDER BY status ASC, dateCreation DESC");
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
