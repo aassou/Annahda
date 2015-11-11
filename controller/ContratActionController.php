@@ -30,6 +30,15 @@
     //add action, update action or delete action
     $action = htmlentities($_POST['action']);
     $idProjet = htmlentities($_POST['idProjet']);
+    //In this session variable we put all the POST, to get it in the contrats-add file
+    //In case of error, and this help the user to do not put again what he filled out.
+    $_SESSION['contrat-form-data'] = $_POST;
+    //If we get to this current ContratActionController through ClientActionController,
+    //which means, that the client data are valid, so we need to destroy the session
+    //"myFormData", that stores the client data form inputs 
+    if( isset($_SESSION['myFormData']) ){
+        unset($_SESSION['myFormData']);
+    } 
     //This var contains result message of CRUD action and the redirection url link
     $actionMessage = "";
     $typeMessage = "";
@@ -42,7 +51,10 @@
     if($action == "add"){
         $codeClient = $_POST['codeClient'];
         //post input validation
-        if( !empty($_POST['typeBien']) ){
+        if( !empty($_POST['typeBien']) and !empty($_POST['prixNegocie']) and !empty($_POST['numero'])
+         and !empty($_POST['bien']) and !empty($_POST['dateCreation']) and !empty($_POST['avance'])
+         and !empty($_POST['modePaiement']) and !empty($_POST['dureePaiement']) and !empty($_POST['nombreMois'])
+         and !empty($_POST['echeance']) and !empty($_POST['numeroCheque']) ){
             if( !empty($_POST['prixNegocie']) ){
                 $prixNegocie = htmlentities($_POST['prixNegocie']);
                 $numero = htmlentities($_POST['numero']);
@@ -90,14 +102,9 @@
                 $typeMessage = "success";
                 $redirectLink = 'Location:../contrat.php?codeContrat='.$codeContrat."&idProjet=".$idProjet;
             }
-            else{
-                $actionMessage = "<strong>Erreur Création Contrat : </strong>Vous devez remplir le champ <strong>&lt;Prix négocié&gt;</strong>.";
-                $typeMessage = "error";
-                $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
-            }
         }
         else{
-            $actionMessage = "<strong>Erreur Création Contrat : </strong>Vous devez choisir un <strong>&lt;Type de bien&gt;</strong.";
+            $actionMessage = "<strong>Erreur Création Contrat : </strong>Tous les champs sont obligatoires.";
             $typeMessage = "error";    
             $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
         }

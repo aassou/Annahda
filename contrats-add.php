@@ -89,7 +89,7 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-                                <a href="projets.php">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <strong><?= $projet->nom() ?></strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
 							<li><a>Création Contrat Client</a></li>
@@ -103,13 +103,19 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="tab-pane active" id="tab_1">
-	                         <?php if(isset($_SESSION['contrat-add-error'])){ ?>
-	                         	<div class="alert alert-error">
+	                         <?php 
+	                         if( isset($_SESSION['contrat-action-message'])
+                             and isset($_SESSION['contrat-type-message']) ){
+                                 $message = $_SESSION['contrat-action-message'];
+                                 $typeMessage = $_SESSION['contrat-type-message'];
+                             ?>
+	                         	<div class="alert alert-<?= $typeMessage ?>">
 									<button class="close" data-dismiss="alert"></button>
-									<?= $_SESSION['contrat-add-error'] ?>		
+									<?= $message ?>		
 								</div>
 	                         <?php } 
-	                         	unset($_SESSION['contrat-add-error']);
+	                         	unset($_SESSION['contrat-action-message']);
+                                unset($_SESSION['contrat-type-message']);
 	                         ?>
                            <div class="portlet box blue">
                                   <div class="portlet-title">
@@ -117,7 +123,7 @@
                                   </div>
                                 <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ContratActionController.php" method="POST" class="horizontal-form">
+                                 <form action="controller/ContratActionController.php" method="POST" id="contratForm" class="horizontal-form">
                                     <!--div class="row-fluid">
                                     	<div class="span12">
                                     		<img src="assets/img/form_wizard_client_contrat_2.png">
@@ -130,13 +136,33 @@
 											</div>
                                     	</div>
                                     </div>
+                                    <?php
+                                    $numero = "";
+                                    $prixNegocie = "";
+                                    $avance = "";
+                                    $dureePaiement = "";
+                                    $nombreMois = "";
+                                    $echeance = "";
+                                    $numeroOperation ="";
+                                    $note = "";
+                                    if( isset($_SESSION['contrat-form-data']) ){
+                                        $numero = $_SESSION['contrat-form-data']['numero'] ;
+                                        $prixNegocie = $_SESSION['contrat-form-data']['prixNegocie'] ;
+                                        $avance = $_SESSION['contrat-form-data']['avance'] ;
+                                        $dureePaiement = $_SESSION['contrat-form-data']['dureePaiement'] ;
+                                        $nombreMois = $_SESSION['contrat-form-data']['nombreMois'] ;
+                                        $echeance = $_SESSION['contrat-form-data']['echeance'] ;
+                                        $numeroOperation = $_SESSION['contrat-form-data']['numeroOperation'] ;
+                                        $note = $_SESSION['note'];
+                                    }
+                                    ?>
                                     <legend>Création du Contrat pour le Client : <strong><?= $client->nom() ?></strong></legend>
                                     <div class="row-fluid">
                                        <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="numero">Numéro du contrat</label>
                                              <div class="controls">
-                                                <input type="text" id="numero" name="numero" class="m-wrap">
+                                                <input required="required" type="text" id="numero" name="numero" value="<?= $numero ?>" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -181,7 +207,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="prixNegocie">Prix négocié</label>
                                              <div class="controls">
-                                                <input type="text" id="prixNegocie" name="prixNegocie" class="m-wrap">
+                                                <input required="required" type="text" id="prixNegocie" value="<?= $prixNegocie ?>" name="prixNegocie" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -189,7 +215,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="avance">Avance</label>
                                              <div class="controls">
-                                                <input type="text" id="avance" name="avance" class="m-wrap">
+                                                <input required="required" type="text" id="avance" value="<?= $avance ?>" name="avance" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -197,7 +223,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="dureePaiement">Durée de paiement</label>
                                              <div class="controls">
-                                                <input type="text" id="dureePaiement" name="dureePaiement" class="m-wrap">
+                                                <input required="required" type="text" id="dureePaiement" value="<?= $dureePaiement ?>" name="dureePaiement" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -205,7 +231,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="nombreMois">Nombre de mois</label>
                                              <div class="controls">
-                                                <input type="text" id="nombreMois" name="nombreMois" class="m-wrap">
+                                                <input required="required" type="text" id="nombreMois" value="<?= $nombreMois ?>" name="nombreMois" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -215,7 +241,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="echeance">Echéance</label>
                                              <div class="controls">
-                                             	<input type="text" id="echeance" name="echeance" class="m-wrap">
+                                             	<input required="required" type="text" id="echeance" value="<?= $echeance ?>" name="echeance" class="m-wrap">
                                              </div>
                                           </div>
                                         </div>
@@ -240,7 +266,7 @@
                                           <div class="control-group">
                                              <label class="control-label">N° Opération</label>
                                              <div class="controls">
-                                                <input type="text" name="numeroCheque" class="m-wrap">
+                                                <input required="required" type="text" value="<?= $numeroOperation ?>" name="numeroCheque" class="m-wrap">
                                              </div>
                                           </div>
                                         </div>
@@ -248,7 +274,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="note">Note client</label>
                                              <div class="controls">
-                                                <input type="text" id="note" name="note" class="m-wrap" />
+                                                <input type="text" id="note" name="note" value="<?= $note ?>" class="m-wrap" />
                                              </div>
                                           </div>
                                         </div>
@@ -262,6 +288,9 @@
                                        <button type="submit" class="btn green">Terminer <i class="icon-ok m-icon-white"></i></button>
                                     </div>
                                  </form>
+                                 <?php
+                                    unset($_SESSION['contrat-form-data']);
+                                 ?>
                                  <!-- END FORM--> 
                               </div>
                            </div>
@@ -300,6 +329,7 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>		
 	<script src="assets/js/jquery.blockui.js"></script>
 	<script src="assets/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="assets/jquery-validation/jquery.validate.js"></script>
 	<script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>	
 	<script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
@@ -320,8 +350,6 @@
 			$('.hidenBlock').hide();
 			App.init();
 		});
-	</script>
-	<script>
 		$(document).ready(function() {
 			$('.typeBien').change(function(){
 				$('.hidenBlock').show();
@@ -352,6 +380,32 @@
 				var echeance = Math.round( ( prixNegocie - avance ) / ( dureePaiement / nombreMois ) );
 				$('#echeance').val(echeance);
 			});
+			$("#contratForm").validate({
+			     rules:{
+			       prixNegocie: {
+			           number: true,
+			           required: true
+			       },
+			       avance: {
+			           number: true,
+			           required: true
+			       },
+			       nombreMois: {
+			           number: true,
+			           required: true
+			       },
+			       dureePaiement: {
+			           number: true,
+			           required: true
+			       },
+			       echeance: {
+			           number: true,
+			           required: true
+			       }
+			     },
+                 errorClass: "error-class",
+                 validClass: "alid-class"
+            });
 		});
 		</script>
 </body>

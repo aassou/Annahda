@@ -85,7 +85,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="projets.php">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <strong><?= $projet->nom() ?></strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li><a>Création Contrat Client</a></li>
@@ -134,6 +134,7 @@
                                     $telephone1 = "";
                                     $telephone2 = "";
                                     $email = "";
+                                    $idClient = "";
                                     if( isset($_SESSION['myFormData']) ){
                                         $nom = $_SESSION['myFormData']['nom'] ;
                                         $cin = $_SESSION['myFormData']['cin'] ;
@@ -141,6 +142,7 @@
                                         $telephone1 = $_SESSION['myFormData']['telephone1'];
                                         $telephone2 = $_SESSION['myFormData']['telephone2'];
                                         $email = $_SESSION['myFormData']['email'];
+                                        $idClient = $_SESSION['myFormData']['idClient'];
                                     }
                                     ?>
                                     <div class="row-fluid">
@@ -157,7 +159,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="cin">CIN</label>
                                              <div class="controls">
-                                                <input type="text" id="cin" name="cin" value="<?= $cin ?>" class="m-wrap span12">
+                                                <input required="required" type="text" id="cin" name="cin" value="<?= $cin ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -199,7 +201,7 @@
                                     <div class="form-actions">
                                         <input type="hidden" name="action" value="add">
                                     	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>">
-                                    	<input type="hidden" id="idClient" name="idClient">
+                                    	<input type="hidden" id="idClient" name="idClient" value="<?= $idClient ?>">
                                        	<button type="submit" class="btn blue">Continuer <i class="m-icon-swapright m-icon-white"></i></button>
                                     </div>
                                  </form>

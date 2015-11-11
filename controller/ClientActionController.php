@@ -29,6 +29,8 @@
     //add action, update action or delete action
     $action = htmlentities($_POST['action']);
     $idProjet = htmlentities($_POST['idProjet']);
+    //In this session variable we put all the POST, to get it in the contrats-add file
+    //in case of error, and this help the user to do not put again what he filled out.
     $_SESSION['myFormData'] = $_POST;
     //This var contains result message of CRUD action and the redirection url link
     $actionMessage = "";
@@ -56,10 +58,11 @@
         else if( empty($_POST['idClient']) ){
             //Case 1 :  if we tray to force the creation of an existing customer
             //we get an error message indicating that we do have a customer with that name 
-            if( !empty($_POST['nom'])){
+            if( !empty($_POST['nom']) and !empty($_POST['cin'])){
                 $nom = htmlentities($_POST['nom']);
-                if( $clientManager->exists($nom) ){
-                    $actionMessage = "<strong>Erreur Création Client : </strong>Un client existe déjà avec ce nom : <strong>&lt;".$nom."&gt;</strong>.";
+                $cin = htmlentities($_POST['cin']);
+                if( $clientManager->existsCIN($cin) ){
+                    $actionMessage = "<strong>Erreur Création Client : </strong>Un client existe déjà avec ce CIN : <strong>".$cin."</strong>.";
                     $typeMessage = "error";
                     $redirectLink = 'Location:../clients-add.php?idProjet='.$idProjet;
                 }
@@ -67,7 +70,6 @@
                 //and the send its generated code to the contrats-add.php url   
                 else{
                     //input posts processing
-                    $cin = htmlentities($_POST['cin']);
                     $adresse = htmlentities($_POST['adresse']);
                     $telephone1 = htmlentities($_POST['telephone1']);
                     $telephone2 = htmlentities($_POST['telephone2']);

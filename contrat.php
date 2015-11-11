@@ -262,11 +262,11 @@
                                 </li>
                                 <li>
                                     <span class="sale-info">Durée Paiement</span> 
-                                    <span class="sale-num"><?= number_format($contrat->dureePaiement(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                    <span class="sale-num"><?= $contrat->dureePaiement() ?>&nbsp;Mois</span>
                                 </li>
                                 <li>
                                     <span class="sale-info">Nombre Mois</span> 
-                                    <span class="sale-num"><?= number_format($contrat->nombreMois(), 2, ',', ' ') ?>&nbsp;DH</span>
+                                    <span class="sale-num"><?= $contrat->nombreMois() ?>&nbsp;Mois</span>
                                 </li>
                                 <li>
                                     <span class="sale-info">Echéance</span> 
