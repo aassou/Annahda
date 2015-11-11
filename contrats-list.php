@@ -181,13 +181,11 @@
                                 <i class="icon-print"></i>
                                  Version Imprimable
                             </a>
-                            <form action="" method="post">
-                                <div class="input-box">
-                                    <input class="m-wrap" name="client" id="client" type="text" placeholder="Chercher un client..." />
-                                </div>
-                            </form>
+                            <div class="input-box">
+                                <input class="m-wrap" name="customer" id="customer" type="text" placeholder="Chercher un client..." />
+                            </div>
                         </div>
-						<div class="portlet contrats">
+						<div class="portlet contrats-list">
 							<div class="portlet-body">
 							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover">
@@ -434,7 +432,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -442,24 +440,24 @@
 	<!-- END FOOTER -->
 	<!-- BEGIN JAVASCRIPTS -->
 	<!-- Load javascripts at bottom, this will reduce page load time -->
-	<script src="assets/js/jquery-1.8.3.min.js"></script>	
-	<script src="assets/breakpoints/breakpoints.js"></script>	
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>		
-	<script src="assets/js/jquery.blockui.js"></script>
-	<script src="assets/js/jquery.cookie.js"></script>
-	<script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
-	<script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
-	<!-- ie8 fixes -->
-	<!--[if lt IE 9]>
-	<script src="assets/js/excanvas.js"></script>
-	<script src="assets/js/respond.js"></script>
-	<![endif]-->	
-	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
-	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/js/jquery-1.8.3.min.js"></script>   
+    <script src="assets/breakpoints/breakpoints.js"></script>   
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>        
+    <script src="assets/js/jquery.blockui.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <!-- ie8 fixes -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/excanvas.js"></script>
+    <script src="assets/js/respond.js"></script>
+    <![endif]-->    
+    <script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+    <script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
     <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
-	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
 	<script src="assets/js/app.js"></script>
 	<script src="script.js"></script>		
 	<script>
@@ -468,11 +466,11 @@
 			//App.setPage("table_editable");
 			App.init();
 		});
-		$('.contrats').show();
-        $('#client').keyup(function(){
-            $('.contrats').hide();
-           var txt = $('#client').val();
-           $('.contrats').each(function(){
+		$('.contrats-list').show();
+        $('#customer').keyup(function(){
+            $('.contrats-list').hide();
+           var txt = $('#customer').val();
+           $('.contrats-list').each(function(){
                if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
                    $(this).show();
                }

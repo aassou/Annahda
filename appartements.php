@@ -116,8 +116,9 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
-						<div class="pull-right get-down">
-							<a href="#addAppartement" class="btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
+						<div class="get-down">
+						    <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
+							<a href="#addAppartement" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
 						</div>
 						<!-- addAppartement box begin-->
                         <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -225,7 +226,7 @@
                          	unset($_SESSION['appartement-action-message']);
                             unset($_SESSION['appartement-type-message']);
                          ?>
-						<div class="portlet">
+						<div class="portlet appartements">
 							<div class="portlet-body">
 							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover">
@@ -683,7 +684,7 @@
 	<!-- END FOOTER -->
 	<!-- BEGIN JAVASCRIPTS -->
 	<!-- Load javascripts at bottom, this will reduce page load time -->
-	<script src="assets/js/jquery-1.8.3.min.js"></script>	
+	<script src="assets/js/jquery-1.8.3.min.js"></script>
 	<script src="assets/breakpoints/breakpoints.js"></script>	
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>		
 	<script src="assets/js/jquery.blockui.js"></script>
@@ -699,22 +700,32 @@
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
-	<script src="assets/js/app.js"></script>		
+	<script src="assets/js/app.js"></script>
 	<script>
-		jQuery(document).ready(function() {			
-			// initiate layout and plugins
-			//App.setPage("table_editable");
-			App.init();
-		});
-		$('#status').on('change',function(){
-	        if( $(this).val()!=="Disponible"){
-	        $("#par").show()
-	        }
-	        else{
-	        $("#par").hide()
-	        }
-	    });
-	</script>
+        jQuery(document).ready(function() {         
+            // initiate layout and plugins
+            //App.setPage("table_editable");
+            App.init();
+        });
+        $('.appartements').show();
+        $('#criteria').keyup(function(){
+            $('.appartements').hide();
+           var txt = $('#criteria').val();
+           $('.appartements').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
+        });
+        $('#status').on('change',function(){
+            if( $(this).val()!=="Disponible"){
+            $("#par").show()
+            }
+            else{
+            $("#par").hide()
+            }
+        });
+    </script>   
 </body>
 <!-- END BODY -->
 </html>
