@@ -182,9 +182,8 @@
                                  Version Imprimable
                             </a>
                             <form action="" method="post">
-                                <div class="input-box autocomplet_container">
-                                    <input class="m-wrap" name="client" id="client" type="text" placeholder="Chercher un client...">
-                                    </input>
+                                <div class="input-box">
+                                    <input class="m-wrap" name="client" id="client" type="text" placeholder="Chercher un client..." />
                                 </div>
                             </form>
                         </div>
@@ -468,17 +467,17 @@
 			// initiate layout and plugins
 			//App.setPage("table_editable");
 			App.init();
-			 $('.contrats').show();
-            $('#client').keyup(function(){
-                $('.contrats').hide();
-               var txt = $('#client').val();
-               $('.contrats').each(function(){
-                   if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
-                       $(this).show();
-                   }
-                });
-            }); 
 		});
+		$('.contrats').show();
+        $('#client').keyup(function(){
+            $('.contrats').hide();
+           var txt = $('#client').val();
+           $('.contrats').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
+        }); 
 	</script>
 </body>
 <!-- END BODY -->

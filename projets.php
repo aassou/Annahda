@@ -166,8 +166,8 @@
                             foreach($projets as $projet){
                             ?>
                             <div class="row'fluid">
-                                <div class="btn-group span2 projets">
-                                    <a style="width: 100px"  class="btn big blue dropdown-toggle" data-toggle="dropdown" href="#">
+                                <div class="btn-group span3 projets">
+                                    <a style="width: 230px"  class="btn big blue dropdown-toggle" data-toggle="dropdown" href="#">
                                     <strong><?= $projet->nom() ?></strong> <i class="icon-angle-down"></i>
                                     </a>
                                     <ul class="dropdown-menu">
