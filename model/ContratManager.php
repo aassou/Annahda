@@ -118,6 +118,18 @@ class ContratManager{
         return $data['nom'];
     }
     
+    public function getIdClientByIdProjetByIdBienTypeBien($idProjet, $idBien, $typeBien){
+        $query = $this->_db->prepare('SELECT idClient FROM t_contrat 
+        WHERE idProjet=:idProjet AND idBien=:idBien AND typeBien=:typeBien');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':idBien', $idBien);
+        $query->bindValue(':typeBien', $typeBien);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['idClient'];
+    }
+    
     public function getContratsNumber(){
         $query = $this->_db->query('SELECT COUNT(*) AS contratNumbers FROM t_contrat');
         $data = $query->fetch(PDO::FETCH_ASSOC);

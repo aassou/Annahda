@@ -21,6 +21,8 @@
 			$idProjet = $_GET['idProjet'];
 			$projet = $projetManager->getProjetById($idProjet);
 			$appartementManager = new AppartementManager($pdo);
+            $contratManager = new ContratManager($pdo);
+            $clientManager = new ClientManager($pdo);
 			$appartements = "";
 			//test the appartement object number: if exists get appartement else do nothing
 			$appartementNumber = $appartementManager->getAppartementNumberByIdProjet($idProjet);
@@ -303,10 +305,17 @@
 												if( $appartement->status()=="R&eacute;serv&eacute;" ){
 												?>
 												<a href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-													Par : <?= $appartement->par() ?>
+													Pour : <?= $appartement->par() ?>
 												</a>
 												<?php
 												}
+                                                else if( $appartement->status()=="Vendu" ){
+                                                ?>
+                                                    <a>
+                                                        Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>
+                                                    </a>
+                                                <?php    
+                                                }
 												?>
 											</td>
 										</tr>

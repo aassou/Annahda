@@ -152,8 +152,8 @@
                                         $dureePaiement = $_SESSION['contrat-form-data']['dureePaiement'] ;
                                         $nombreMois = $_SESSION['contrat-form-data']['nombreMois'] ;
                                         $echeance = $_SESSION['contrat-form-data']['echeance'] ;
-                                        $numeroOperation = $_SESSION['contrat-form-data']['numeroOperation'] ;
-                                        $note = $_SESSION['note'];
+                                        $numeroOperation = $_SESSION['contrat-form-data']['numeroCheque'] ;
+                                        $note = $_SESSION['contrat-form-data']['note'];
                                     }
                                     ?>
                                     <legend>Création du Contrat pour le Client : <strong><?= $client->nom() ?></strong></legend>

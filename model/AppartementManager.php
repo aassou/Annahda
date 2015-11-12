@@ -62,6 +62,18 @@ class AppartementManager{
         $query->execute();
         $query->closeCursor();
 	}
+    
+    //This method is used when a contract is done, so we need to change the price of our property
+    //from the older one to the new price
+    public function updatePrix($prix, $idAppartement){
+        $query = $this->_db->prepare('
+        UPDATE t_appartement SET prix=:prix WHERE id=:idAppartement') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idAppartement', $idAppartement);
+        $query->bindValue(':prix', $prix);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function delete($idAppartement){
 		$query = $this->_db->prepare('DELETE FROM t_appartement WHERE id=:idAppartement')

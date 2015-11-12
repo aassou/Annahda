@@ -57,6 +57,18 @@ class LocauxManager{
         $query->execute();
         $query->closeCursor();
 	}
+
+    //This method is used when a contract is done, so we need to change the price of our property
+    //from the older one to the new price
+    public function updatePrix($prix, $idLocaux){
+        $query = $this->_db->prepare('
+        UPDATE t_locaux SET prix=:prix WHERE id=:idLocaux') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idLocaux', $idLocaux);
+        $query->bindValue(':prix', $prix);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function delete($idLocaux){
 		$query = $this->_db->prepare('DELETE FROM t_locaux WHERE id=:idLocaux')

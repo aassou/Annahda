@@ -84,14 +84,17 @@
                 'numeroCheque' => $numeroCheque, 'created' => $created, 'createdBy' => $createdBy));
                 //adding the contract object to our database
                 $contratManager->add($contrat);
-                //in the next if elseif statement, we test the type of property to change its status from
+                //in the next if elseif statement, we test the type of the property to change its status
+                //and its price
                 if($typeBien=="appartement"){
                     $appartementManager = new AppartementManager($pdo);
                     $appartementManager->changeStatus($idBien, "Vendu");
+                    $appartementManager->updatePrix($prixNegocie, $idBien);
                 }
                 else if($typeBien=="localCommercial"){
                     $locauxManager = new LocauxManager($pdo);
                     $locauxManager->changeStatus($idBien, "Vendu");
+                    $locauxManager->updatePrix($prixNegocie, $idBien);
                 }
                 //add contract note into db and show it in the dashboard
                 $notesClientManager = new NotesClientManager($pdo);
@@ -157,14 +160,17 @@
                 else if( $contrat->typeBien()=="localCommercial" ){
                     $locauxManager->changeStatus($contrat->idBien(), "Disponible");
                 }
-                //change status of the new contrat Bien from Disponible to Réservé
+                //change status of the new contrat Bien from Disponible to Vendu
+                //and change the property price to the price of sold
                 if( $typeBien=="appartement" ){
                     $contratManager->changerBien($idContrat, $idBien, $typeBien);
                     $appartementManager->changeStatus($idBien, "Vendu");
+                    $appartementManager->updatePrix($prixVente, $idBien);
                 }
                 else if( $typeBien=="localCommercial" ){
                     $contratManager->changerBien($idContrat, $idBien, $typeBien);
                     $locauxManager->changeStatus($idBien, "Vendu");
+                    $locauxManager->updatePrix($prixVente, $idBien);
                 }
             }
             $actionMessage = "<strong>Opération Valide : </strong>Contrat modifié(e) avec succès.";

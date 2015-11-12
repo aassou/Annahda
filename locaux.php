@@ -21,6 +21,8 @@
 			$idProjet = $_GET['idProjet'];
 			$projet = $projetManager->getProjetById($idProjet);
 			$locauxManager = new LocauxManager($pdo);
+            $contratManager = new ContratManager($pdo);
+            $clientManager = new ClientManager($pdo);
 			$locaux = "";
 			//test the locaux object number: if exists get locaux else do nothing
 			$locauxNumber = $locauxManager->getLocauxNumberByIdProjet($idProjet);
@@ -272,13 +274,20 @@
 											</td>
 											<td>
 												<?php
-												if( $locau->status()=="R&eacute;serv&eacute;" ){
+												if( $locau->status() == "R&eacute;serv&eacute;" ){
 												?>
 												<a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 													Par : <?= $locau->par() ?>
 												</a>
 												<?php
 												}
+                                                elseif( $locau->status() == "Vendu" ){
+                                                ?>
+                                                <a>
+                                                    Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $locau->id(), "localCommercial"))->nom() ?>
+                                                </a>
+                                                <?php
+                                                }
 												?>
 											</td>
 										</tr>

@@ -191,10 +191,11 @@
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
-											<th style="width:20%">Client</th>
+											<th style="width:10%">Client</th>
 											<th style="width:10%" class="hidden-phone">Type</th>
 											<th style="width:5%">Bien</th>
-											<th style="width:11%" class="hidden-phon e">Prix</th>
+											<th style="width:10%">Etage</th>
+											<th style="width:11%" class="hidden-phone">Prix</th>
 											<th style="width:10%" class="hidden-phone">Réglements</th>
 											<th style="width:10%" class="hidden-phone">Reste</th>
 											<th style="width:8%">Paiements</th>
@@ -212,13 +213,16 @@
 											$sommeOperations = $operationManager->sommeOperations($contrat->id());
 											$bien = "";
 											$typeBien = "";
+                                            $etage = "";
 											if($contrat->typeBien()=="appartement"){
 												$bien = $appartementManager->getAppartementById($contrat->idBien());
 												$typeBien = "Appart";
+                                                $etage = "Etage ".$bien->niveau();
 											}
 											else{
 												$bien = $locauxManager->getLocauxById($contrat->idBien());
 												$typeBien = "Local.Com";
+                                                $etage = "";
 											}
 										?>		
 										<tr>
@@ -263,6 +267,7 @@
 											</td>
 											<td class="hidden-phone"><?= $typeBien ?></td>
 											<td><?= $bien->nom() ?></td>
+											<td><?= $etage ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
