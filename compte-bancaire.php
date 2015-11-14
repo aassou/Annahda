@@ -25,7 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>GELM - Management Application</title>
+    <title>AnnahdaERP- Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -110,6 +110,12 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Dénomination</label>
+                                        <div class="controls">
+                                            <input type="text" name="denomination">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">Date de création</label>
                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                             <input name="dateCreation" id="dateCreation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
@@ -148,7 +154,8 @@
                                     <thead>
                                         <tr>
                                             <th>Numéro compte</th>
-                                            <th class="hidden-phone">Date création</th>
+                                            <th>Dénomination</th>
+                                            <th>Date création</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -176,7 +183,8 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($compte->dateCreation())) ?></td>
+                                            <td><?= $compte->denomination() ?></td>
+                                            <td><?= date('d/m/Y', strtotime($compte->dateCreation())) ?></td>
                                         </tr>
                                         <!-- updateCompte box begin-->
                                         <div id="updateCompte<?= $compte->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -193,6 +201,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
+                                                        <label class="control-label">Dénomination</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="denomination" value="<?= $compte->denomination() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
                                                         <label class="control-label">Date Création</label>
                                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                                             <input name="dateCreation" id="dateCreation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $compte->dateCreation() ?>" />
@@ -201,7 +215,7 @@
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="hidden" name="idCompte" value="<?= $compte->id() ?>">
+                                                            <input type="hidden" name="idCompteBancaire" value="<?= $compte->id() ?>">
                                                             <input type="hidden" name="action" value="update" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>

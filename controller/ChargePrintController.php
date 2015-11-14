@@ -18,17 +18,33 @@
         $chargeManager = new ChargeManager($pdo);
         $idProjet = htmlentities($_POST['idProjet']);
         $projet = $projetManager->getProjetById($idProjet);
-        $charges = $chargeManager->getChargesByIdProjet($idProjet);
-        $totalCharges = number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ');
-        $titreDocument = "Liste de toutes les charges";
         $criteria = htmlentities($_POST['criteria']);
-        if($criteria=="parDate"){
+        if( $criteria=="parDate" ) {
             $dateFrom = htmlentities($_POST['dateFrom']);
-            $dateTo = htmlentities($_POST['dateTo']);   
-            $charges = $chargeManager->getChargesByIdProjetByDates($idProjet, $dateFrom, $dateTo);
-            $totalCharges = number_format($chargeManager->getTotalByIdProjetByDates($idProjet, $dateFrom, $dateTo), 2, ',', ' ');
-            $titreDocument = "Liste des charges entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));
+            $dateTo = htmlentities($_POST['dateTo']); 
+            $type = htmlentities($_POST['type']);
+            if( $type == "Toutes" ) {
+                $charges = $chargeManager->getChargesByIdProjetByDates($idProjet, $dateFrom, $dateTo);
+                $totalCharges = number_format($chargeManager->getTotalByIdProjetByDates($idProjet, $dateFrom, $dateTo), 2, ',', ' ');
+                $titreDocument = "Liste des charges entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));   
+            }
+            else {
+                $charges = $chargeManager->getChargesByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type);
+                $totalCharges = number_format($chargeManager->getTotalByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type), 2, ',', ' ');
+                $titreDocument = "Liste des charges ".$type." entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));
+            }
         }
+        else if ( $criteria=="toutesCharges" ) {
+            $charges = $chargeManager->getChargesByIdProjet($idProjet);
+            $totalCharges = number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ');
+            $titreDocument = "Liste de toutes les charges";   
+            if ( isset($_POST['typeCharge']) ) {
+                $type = htmlentities($_POST['typeCharge']);
+                $charges = $chargeManager->getChargesByIdProjetByType($idProjet, $type);
+                $totalCharges = number_format($chargeManager->getTotalByIdProjetByType($idProjet, $type), 2, ',', ' ');
+                $titreDocument = "Liste des charges de ".$type;
+            }
+        } 
 
 ob_start();
 ?>

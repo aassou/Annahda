@@ -12,10 +12,11 @@ class CompteBancaireManager{
 	//BAISC CRUD OPERATIONS
 	public function add(CompteBancaire $CompteBancaire){
     	$query = $this->_db->prepare(' INSERT INTO t_CompteBancaire (
-		numero, dateCreation, created, createdBy)
-		VALUES (:numero, :dateCreation, :created, :createdBy)')
+		numero, denomination, dateCreation, created, createdBy)
+		VALUES (:numero, :denomination, :dateCreation, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':numero', $CompteBancaire->numero());
+        $query->bindValue(':denomination', $CompteBancaire->denomination());
 		$query->bindValue(':dateCreation', $CompteBancaire->dateCreation());
 		$query->bindValue(':created', $CompteBancaire->created());
 		$query->bindValue(':createdBy', $CompteBancaire->createdBy());
@@ -24,12 +25,13 @@ class CompteBancaireManager{
 	}
 
 	public function update(CompteBancaire $CompteBancaire){
-    	$query = $this->_db->prepare(' UPDATE t_CompteBancaire SET 
-		numero=:numero, dateCreation=:dateCreation, updated=:updated, updatedBy=:updatedBy
+    	$query = $this->_db->prepare('UPDATE t_CompteBancaire SET 
+		numero=:numero, denomination=:denomination, dateCreation=:dateCreation, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $CompteBancaire->id());
 		$query->bindValue(':numero', $CompteBancaire->numero());
+        $query->bindValue(':denomination', $CompteBancaire->denomination());
 		$query->bindValue(':dateCreation', $CompteBancaire->dateCreation());
 		$query->bindValue(':updated', $CompteBancaire->updated());
 		$query->bindValue(':updatedBy', $CompteBancaire->updatedBy());

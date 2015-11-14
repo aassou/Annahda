@@ -30,7 +30,7 @@
 <body class="login">
   <!-- BEGIN LOGO -->
   <div class="logo">
-    <img src="assets/img/big-logo.png" alt="" /> 
+    <img src="assets/img/big-logo-new.png" alt="" /> 
   </div>
   <!-- END LOGO -->
   <!-- BEGIN LOGIN -->
@@ -84,7 +84,7 @@
   <!-- END LOGIN -->
   <!-- BEGIN COPYRIGHT -->
   <div class="copyright">
-    2015 &copy; MerlaTravERP. Management Application.
+    2015 &copy; AnnahdaERP. Management Application.
   </div>
   <!-- END COPYRIGHT -->
   <!-- BEGIN JAVASCRIPTS -->

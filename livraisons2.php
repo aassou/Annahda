@@ -128,7 +128,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -176,15 +176,13 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-truck"></i>
 								<a>Gestion des livraisons</a>
-								<i class="icon-angle-right"></i>
 							</li>
-							<li><a>Liste des Livraisons</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -303,24 +301,6 @@
 											<input type="text" name="libelle" value="" />
 										</div>
 									</div>
-									<!--div class="control-group">
-										<label class="control-label">Désignation</label>
-										<div class="controls">
-											<input type="text" name="designation" value="" />
-										</div>
-									</div-->
-									<!--div class="control-group">
-										<label class="control-label">Prix Unitaire</label>
-										<div class="controls">
-											<input type="text" name="prixUnitaire" value="" />
-										</div>	
-									</div-->
-									<!--div class="control-group">
-										<label class="control-label">Quantité</label>
-										<div class="controls">
-											<input type="text" name="quantite" value="" />
-										</div>	
-									</div-->
 									<div class="control-group">
 										<div class="controls">	
 											<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -416,6 +396,7 @@
 									<input name="idFournisseur" id="idFournisseur" type="hidden" />
 									<input name="idProjet" id="idProjet" type="hidden" />
 									<button type="submit" class="btn red"><i class="icon-search"></i></button>
+									<a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
 							    </div>
 							</form>
 						</div>
@@ -517,13 +498,6 @@
 							unset($_SESSION['livraison-list-delete-success']);
 						 ?>
 						<div class="portlet">
-							<div class="portlet-title">
-								<h4><?= $titreLivraison ?></h4>&nbsp;<a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue big"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
 							<div class="portlet-body">
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
@@ -753,7 +727,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

@@ -28,12 +28,14 @@
     	if($action == "add"){
         if( !empty($_POST['numero']) ){
 			$numero = htmlentities($_POST['numero']);
+            $denomination = htmlentities($_POST['denomination']);
 			$dateCreation = htmlentities($_POST['dateCreation']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
             $CompteBancaire = new CompteBancaire(array(
 				'numero' => $numero,
+				'denomination' => $denomination,
 				'dateCreation' => $dateCreation,
 				'created' => $created,
             	'createdBy' => $createdBy
@@ -54,15 +56,22 @@
         $idCompteBancaire = htmlentities($_POST['idCompteBancaire']);
         if(!empty($_POST['numero'])){
 			$numero = htmlentities($_POST['numero']);
+            $denomination = htmlentities($_POST['denomination']);
 			$dateCreation = htmlentities($_POST['dateCreation']);
+            $updatedBy = $_SESSION['userMerlaTrav']->login();
+            $updated = date('Y-m-d h:i:s');
 			$CompteBancaire = new CompteBancaire(array(
 				'id' => $idCompteBancaire,
 				'numero' => $numero,
+				'denomination' => $denomination,
 				'dateCreation' => $dateCreation,
+				'updated' => $updated,
+				'updatedBy' => $updatedBy
 			));
             $CompteBancaireManager->update($CompteBancaire);
             $actionMessage = "Opération Valide : CompteBancaire Modifié(e) avec succès.";
             $typeMessage = "success";
+            echo print_r($CompteBancaire);
         }
         else{
             $actionMessage = "Erreur Modification CompteBancaire : Vous devez remplir le champ <strong>Numero Compte Bancaire</strong>.";

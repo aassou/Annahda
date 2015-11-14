@@ -32,6 +32,7 @@ class ClientManager{
         'UPDATE t_client SET nom=:nom, adresse=:adresse, telephone1=:telephone1, 
         telephone2=:telephone2, cin=:cin, email=:email, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $client->id());
         $query->bindValue(':nom', $client->nom());
         $query->bindValue(':adresse', $client->adresse());
         $query->bindValue(':telephone1', $client->telephone1());
@@ -40,7 +41,6 @@ class ClientManager{
         $query->bindValue(':email', $client->email());
         $query->bindValue(':updated', $client->updated());
         $query->bindValue(':updatedBy', $client->updatedBy());
-        $query->bindValue(':id', $client->id());
         $query->execute();
         $query->closeCursor();
     }

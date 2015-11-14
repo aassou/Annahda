@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<!-- BEGIN LOGO -->
 		<a class="brand">
-		<img src="assets/img/big-logo.png" alt="logo" />
+		<img src="assets/img/big-logo-new.png" alt="logo" />
 		</a>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->

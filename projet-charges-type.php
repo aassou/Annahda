@@ -19,10 +19,12 @@
         $chargeManager = new ChargeManager($pdo);
         $typeChargeManager = new TypeChargeManager($pdo);
         //
+        $typeCharge = $_GET['type'];
         if(isset($_GET['idProjet']) and 
         ($_GET['idProjet'] >=1 and $_GET['idProjet'] <= $projetManager->getLastId()) ){
             $idProjet = $_GET['idProjet'];
-            $charges = $chargeManager->getChargesByIdProjet($idProjet);
+            $charges = $chargeManager->getChargesByIdProjetByType($idProjet, $typeCharge);
+            $total = number_format($chargeManager->getTotalByIdProjetByType($idProjet, $typeCharge), 2, ',', ' ');
             $typeCharges = $typeChargeManager->getTypeCharges();
             $projet = $projetManager->getProjetById($idProjet);
         }       
@@ -95,7 +97,11 @@
                             </li>
                             <li>
                                 <i class="icon-bar-chart"></i>
-                                <a href="projet-charges.php?idProjet=<?= $idProjet ?>">Gestion des charges</a> 
+                                <a href="projet-charges-grouped.php?idProjet=<?= $idProjet ?>">Gestion des charges</a>
+                                <i class="icon-angle-right"></i> 
+                            </li>
+                            <li>
+                                <a>Détails des charges de <strong><?= $typeCharge ?></strong></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -188,11 +194,10 @@
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
-                                <input class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
                                 <input class="m-wrap" name="designation" id="designation" type="text" placeholder="Désignation..." />
                                 <input class="m-wrap" name="societe" id="societe" type="text" placeholder="Société..." />
                                 <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
-                                    <i class="icon-print"></i>&nbsp;Les Charges
+                                    <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
                                     Type Charge <i class="icon-plus-sign "></i>
@@ -219,7 +224,7 @@
                                                  <span>
                                                      <input type="radio" class="criteriaPrint" name="criteria" value="toutesCharges" style="opacity: 0;">
                                                  </span>
-                                             </div> Toutes les charges
+                                             </div> Toute la liste
                                          </label>
                                          <label class="radio">
                                              <div class="radio" id="date">
@@ -239,6 +244,7 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
+                                            <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -270,7 +276,7 @@
                                     <th style="width: 20%"></th>
                                     <th style="width: 20%"></th>
                                     <th style="width: 20%"></th>
-                                    <th style="width: 20%"><a><strong><?= number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                 </tr>
                             </thead>
                         </table>
@@ -294,7 +300,7 @@
                                         <tr class="charges">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a class="btn black mini dropdown-toggle dropDownButton btn-fixed-width" href="#" data-toggle="dropdown">
+                                                    <a class="btn mini dropdown-toggle dropDownButton btn-fixed-width" href="#" data-toggle="dropdown">
                                                         <?= $charge->type() ?>             
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -409,7 +415,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <th><strong><a><?= number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th><strong><a><?= number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -4963,6 +4963,10 @@ div#fancy_print {
 	width: 200px;
 }
 
+.btn-fixed-height{
+	height: 15px;
+}
+
 .projets{
 	margin-bottom: 20px;
 }

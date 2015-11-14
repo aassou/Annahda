@@ -332,7 +332,7 @@
 													</div>
 													<div class="col2">
 														<div class="date">
-															<?= $client->created() ?>
+															<?= date('d/m/Y', strtotime($client->created())) ?>
 														</div>
 													</div>
 												</li>
@@ -432,7 +432,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

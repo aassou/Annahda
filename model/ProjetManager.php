@@ -116,7 +116,7 @@ class ProjetManager{
     }
     
     public function getProjetById($id){
-        $query = $this->_db->prepare('SELECT * FROM t_projet WHERE id =:id');
+        $query = $this->_db->prepare('SELECT * FROM t_projet WHERE id=:id');
         $query->bindValue(':id', $id);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);

@@ -87,6 +87,31 @@ class ChargeManager{
         $query->closeCursor();
         return $charges;
     }
+    
+    public function getChargesByIdProjetByType($idProjet, $type){
+        $charges = array();
+        $query = $this->_db->prepare('SELECT * FROM t_charge WHERE idProjet=:idProjet AND type=:type ORDER BY dateOperation');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':type', $type);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $charges[] = new Charge($data);
+        }
+        $query->closeCursor();
+        return $charges;
+    }
+    
+    public function getChargesByGroupByIdProjet($idProjet){
+        $charges = array();
+        $query = $this->_db->prepare('SELECT id, type, SUM(montant) AS montant FROM t_charge WHERE idProjet=:idProjet GROUP BY type');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $charges[] = new Charge($data);
+        }
+        $query->closeCursor();
+        return $charges;
+    }
 
 	public function getChargesByLimits($begin, $end){
 		$charges = array();
@@ -114,9 +139,36 @@ class ChargeManager{
         return $charges;
     }
     
+    public function getChargesByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type){
+        $charges = array();
+        $query = $this->_db->prepare('SELECT * FROM t_charge WHERE idProjet=:idProjet AND type=:type
+        AND dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->bindValue(':type', $type);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $charges[] = new Charge($data);
+        }
+        $query->closeCursor();
+        return $charges;
+    }
+    
     public function getTotalByIdProjet($idProjet){
         $query = $this->_db->prepare('SELECT SUM(montant) as total FROM t_charge WHERE idProjet=:idProjet');
         $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
+    public function getTotalByIdProjetByType($idProjet, $type){
+        $query = $this->_db->prepare(
+        'SELECT SUM(montant) as total FROM t_charge WHERE idProjet=:idProjet AND type=:type');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':type', $type);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
@@ -129,6 +181,19 @@ class ChargeManager{
         $query->bindValue(':idProjet', $idProjet);
         $query->bindValue(':dateFrom', $dateFrom);
         $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
+    public function getTotalByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type){
+        $query = $this->_db->prepare('SELECT SUM(montant) as total FROM t_charge 
+        WHERE idProjet=:idProjet AND type=:type AND dateOperation BETWEEN :dateFrom AND :dateTo ');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->bindValue(':type', $type);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();

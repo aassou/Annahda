@@ -22,7 +22,7 @@
         if(isset($_GET['idProjet']) and 
         ($_GET['idProjet'] >=1 and $_GET['idProjet'] <= $projetManager->getLastId()) ){
             $idProjet = $_GET['idProjet'];
-            $charges = $chargeManager->getChargesByIdProjet($idProjet);
+            $charges = $chargeManager->getChargesByGroupByIdProjet($idProjet);
             $typeCharges = $typeChargeManager->getTypeCharges();
             $projet = $projetManager->getProjetById($idProjet);
         }       
@@ -76,7 +76,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Détails des charges - Projet : <strong><?= $projet->nom() ?></strong>
+                            Gestion des charges - Projet : <strong><?= $projet->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -95,7 +95,7 @@
                             </li>
                             <li>
                                 <i class="icon-bar-chart"></i>
-                                <a href="projet-charges.php?idProjet=<?= $idProjet ?>">Gestion des charges</a> 
+                                <a>Gestion des charges</a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -189,10 +189,8 @@
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
                                 <input class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
-                                <input class="m-wrap" name="designation" id="designation" type="text" placeholder="Désignation..." />
-                                <input class="m-wrap" name="societe" id="societe" type="text" placeholder="Société..." />
                                 <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
-                                    <i class="icon-print"></i>&nbsp;Les Charges
+                                    <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
                                     Type Charge <i class="icon-plus-sign "></i>
@@ -219,24 +217,37 @@
                                                  <span>
                                                      <input type="radio" class="criteriaPrint" name="criteria" value="toutesCharges" style="opacity: 0;">
                                                  </span>
-                                             </div> Toutes les charges
+                                             </div> Toute la liste
                                          </label>
                                          <label class="radio">
                                              <div class="radio" id="date">
                                                  <span class="checked">
                                                      <input type="radio" class="criteriaPrint" name="criteria" value="parDate" checked="" style="opacity: 0;">
                                                  </span>
-                                             </div> Par date
+                                             </div> Par Choix
                                          </label>  
                                       </div>
                                    </div>
-                                    <div class="control-group" id="showDateRange">
+                                   <div id="showDateRange">
+                                    <div class="control-group">
+                                        <label class="control-label">Date</label>
                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                            <input style="width:100px" name="dateFrom" id="dateFrom" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
                                            &nbsp;-&nbsp;
                                            <input style="width:100px" name="dateTo" id="dateTo" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Type Charge</label>
+                                        <div class="controls">
+                                            <select class="m-wrap" name="type">
+                                                <?php foreach($typeCharges as $type){ ?>
+                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   </div>
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -280,11 +291,8 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Type</th>
-                                            <th style="width: 20%">Date Opération</th>
-                                            <th style="width: 20%">Désignation</th>
-                                            <th style="width: 20%">Société</th>
-                                            <th style="width: 20%">Montant</th>
+                                            <th style="width: 50%">Type</th>
+                                            <th style="width: 50%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -293,26 +301,10 @@
                                         ?>      
                                         <tr class="charges">
                                             <td>
-                                                <div class="btn-group">
-                                                    <a class="btn black mini dropdown-toggle dropDownButton btn-fixed-width" href="#" data-toggle="dropdown">
-                                                        <?= $charge->type() ?>             
-                                                        <i class="icon-angle-down"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>                                                                
-                                                            <a href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>">
-                                                                Modifier
-                                                            </a>
-                                                            <a href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>">
-                                                                Supprimer
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <a class="btn mini btn-fixed-width btn-fixed-height" href="projet-charges-type.php?idProjet=<?= $idProjet ?>&type=<?= $charge->type() ?>">
+                                                    Charges <?= $charge->type() ?> 
+                                                </a>
                                             </td>
-                                            <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
-                                            <td class="hidden-phone"><?= $charge->designation() ?></td>
-                                            <td class="hidden-phone"><?= $charge->societe() ?></td>
                                             <td class="hidden-phone"><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
                                         </tr>
                                         <!-- updateCharge box begin-->
@@ -399,15 +391,9 @@
                                         ?>
                                         <tr>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <th><strong>Total des charges</strong></th>
                                         </tr>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <th><strong><a><?= number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         </tr>

@@ -4,6 +4,7 @@ class CompteBancaire{
 	//attributes
 	private $_id;
 	private $_numero;
+    private $_denomination;
 	private $_dateCreation;
 	private $_created;
 	private $_createdBy;
@@ -33,6 +34,10 @@ class CompteBancaire{
 	public function setNumero($numero){
 		$this->_numero = $numero;
    	}
+    
+    public function setDenomination($denomination){
+        $this->_denomination = $denomination;
+    }
 
 	public function setDateCreation($dateCreation){
 		$this->_dateCreation = $dateCreation;
@@ -61,6 +66,10 @@ class CompteBancaire{
 	public function numero(){
 		return $this->_numero;
    	}
+    
+    public function denomination(){
+        return $this->_denomination;
+    }
 
 	public function dateCreation(){
 		return $this->_dateCreation;
