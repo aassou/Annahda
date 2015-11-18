@@ -23,11 +23,17 @@ class LivraisonManager{
     }
 
     public function update(Livraison $livraison){
-        $query = $this->_db->prepare('UPDATE t_livraison SET dateLivraison=:dateLivraison, libelle=:libelle
+        $query = $this->_db->prepare(
+        'UPDATE t_livraison SET dateLivraison=:dateLivraison, libelle=:libelle, idProjet=:idProjet,
+        idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
         WHERE id=:id') or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $livraison->id());
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
-        $query->bindValue(':id', $livraison->id());
+        $query->bindValue(':idProjet', $livraison->idProjet());
+        $query->bindValue(':idFournisseur', $livraison->idFournisseur());
+        $query->bindValue(':updated', $livraison->updated());
+        $query->bindValue(':updatedBy', $livraison->updatedBy());
         $query->execute();
         $query->closeCursor();
     }
@@ -42,7 +48,7 @@ class LivraisonManager{
     
 	public function getLivraisonsByLimit($begin, $end){
 		$livraisons = array();
-        $query = $this->_db->query('SELECT * FROM t_livraison ORDER BY dateLivraison DESC LIMIT '.$begin.', '.$end);
+        $query = $this->_db->query('SELECT * FROM t_livraison GROUP BY idFournisseur ORDER BY id DESC LIMIT '.$begin.', '.$end);
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $livraisons[] = new Livraison($data);
         }
@@ -65,7 +71,7 @@ class LivraisonManager{
 	public function getLivraisonsByIdFournisseurByLimits($idFournisseur, $begin, $end){
         $livraisons = array();
         $query = $this->_db->prepare('SELECT * FROM t_livraison WHERE idFournisseur=:idFournisseur
-        ORDER BY dateLivraison DESC LIMIT '.$begin.', '.$end);
+        ORDER BY id DESC LIMIT '.$begin.', '.$end);
         $query->bindValue(':idFournisseur', $idFournisseur);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
@@ -228,7 +234,7 @@ class LivraisonManager{
     }
 
 	public function getLivraisonByCode($code){
-        $query = $this->_db->prepare('SELECT * FROM t_livraison WHERE code=:code');
+        $query = $this->_db->prepare('SELECT * FROM t_livraison WHERE code=:code ORDER BY created DESC');
         $query->bindValue(':code', $code);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);

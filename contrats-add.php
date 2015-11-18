@@ -17,6 +17,7 @@
     	$idProjet = 0;
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
+        $projet = "";
 		if((isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId())
 		and (isset($_GET['codeClient']) and (bool)$clientManager->getCodeClient($_GET['codeClient']) )){
 			$idProjet = $_GET['idProjet'];
@@ -404,7 +405,7 @@
 			       }
 			     },
                  errorClass: "error-class",
-                 validClass: "alid-class"
+                 validClass: "valid-class"
             });
 		});
 		</script>

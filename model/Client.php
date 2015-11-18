@@ -4,10 +4,12 @@ class Client{
     //attributes
     private $_id;
     private $_nom;
+    private $_nomArabe;
     private $_cin;
     private $_email;
     private $_facebook;
     private $_adresse;
+    private $_adresseArabe;
     private $_telephone1;
     private $_telephone2;
 	private $_code;
@@ -42,8 +44,16 @@ class Client{
         $this->_nom = $nom;
     }
     
+    public function setNomArabe($nomArabe){
+        $this->_nomArabe = $nomArabe;
+    }
+    
     public function setAdresse($adresse){
         $this->_adresse = $adresse;
+    }
+    
+    public function setAdresseArabe($adresseArabe){
+        $this->_adresseArabe = $adresseArabe;
     }
     
     public function setTelephone1($telephone1){
@@ -96,8 +106,16 @@ class Client{
         return $this->_nom;
     }
     
+    public function nomArabe(){
+        return $this->_nomArabe;
+    }
+    
     public function adresse(){
         return $this->_adresse;
+    }
+    
+    public function adresseArabe(){
+        return $this->_adresseArabe;
     }
     
     public function telephone1(){

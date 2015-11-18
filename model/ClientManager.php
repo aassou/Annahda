@@ -11,11 +11,13 @@ class ClientManager{
     //CRUD operations
     public function add(Client $client){
         $query = $this->_db->prepare(
-        'INSERT INTO t_client (nom, adresse, telephone1, telephone2, cin, email, code, created, createdBy)
-        VALUES (:nom, :adresse, :telephone1, :telephone2, :cin, :email, :code, :created, :createdBy)') 
+        'INSERT INTO t_client (nom, nomArabe, adresse, adresseArabe, telephone1, telephone2, cin, email, code, created, createdBy)
+        VALUES (:nom, :nomArabe, :adresse, :adresseArabe, :telephone1, :telephone2, :cin, :email, :code, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $client->nom());
+        $query->bindValue(':nomArabe', $client->nomArabe());
         $query->bindValue(':adresse', $client->adresse());
+        $query->bindValue(':adresseArabe', $client->adresseArabe());
         $query->bindValue(':telephone1', $client->telephone1());
         $query->bindValue(':telephone2', $client->telephone2());
         $query->bindValue(':cin', $client->cin());
@@ -29,12 +31,14 @@ class ClientManager{
     
     public function update(Client $client){
         $query = $this->_db->prepare(
-        'UPDATE t_client SET nom=:nom, adresse=:adresse, telephone1=:telephone1, 
+        'UPDATE t_client SET nom=:nom, nomArabe=:nomArabe, adresse=:adresse, adresseArabe=:adresseArabe, telephone1=:telephone1, 
         telephone2=:telephone2, cin=:cin, email=:email, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $client->id());
         $query->bindValue(':nom', $client->nom());
+        $query->bindValue(':nomArabe', $client->nomArabe());
         $query->bindValue(':adresse', $client->adresse());
+        $query->bindValue(':adresseArabe', $client->adresseArabe());
         $query->bindValue(':telephone1', $client->telephone1());
         $query->bindValue(':telephone2', $client->telephone2());
         $query->bindValue(':cin', $client->cin());

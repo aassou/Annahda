@@ -53,17 +53,10 @@
 					or $currentPage=="contrat-details.php"
 					or $currentPage=="operations.php"
 					or $currentPage=="fournisseur-add.php"
-					or $currentPage=="livraison.php"
-					or $currentPage=="livraisons.php"
-					or $currentPage=="livraisons2.php"
-					or $currentPage=="livraisons-details.php"
-					or $currentPage=="livraison-add.php"
-					or $currentPage=="livraisons-list.php"
 					or $currentPage=="fournisseur-reglement.php"
 					or $currentPage=="employes-projet.php"
 					or $currentPage=="employe-projet-profile.php"
 					or $currentPage=="fournisseurs.php"
-					or $currentPage=="livraison-fournisseur-list.php"
 					or $currentPage=="fournisseurs-reglements.php"
 					or $currentPage=="appartement-detail.php"
 					or $currentPage=="locaux-detail.php"
@@ -94,9 +87,6 @@
 						or $currentPage=="contrat-details.php"
 						or $currentPage=="operations.php"
 						or $currentPage=="fournisseur-add.php"
-						or $currentPage=="livraison.php"
-						or $currentPage=="livraison-add.php"
-						or $currentPage=="livraisons-list.php"
 						or $currentPage=="fournisseur-reglement.php"
 						or $currentPage=="employes-projet.php"
 						or $currentPage=="employe-projet-profile.php"
@@ -113,14 +103,20 @@
 						{?> class="active" <?php } ?> >
 							<a href="fournisseurs.php">Gérer les fournisseurs</a>
 						</li>
-						<li <?php if($currentPage=="livraisons2.php" 
-						or $currentPage=="livraisons-details.php")
-						{?> class="active" <?php } ?> >
-							<a href="livraisons2.php">Gérer les livraisons</a>
-						</li>
 					</ul>
 				</li>
 				<!---------------------------- Gestion des Projets End -------------------------------------->
+				<!---------------------------- Livraisons Begin  -------------------------------------------->
+                <li class="start <?php if($currentPage=="livraisons-group.php" 
+                or $currentPage=="livraisons-fournisseur.php"
+                or $currentPage=="livraisons-details.php"
+                ){echo "active ";} ?>">
+                    <a href="livraisons-group.php">
+                    <i class="icon-truck"></i> 
+                    <span class="title">Livraisons</span>
+                    </a>
+                </li>
+                <!---------------------------- Livraisons End    -------------------------------------------->
 				<!---------------------------- Charges Topographe Begin ------------------------------------->
 				<?php 
 					$gestionSocieteClass="";

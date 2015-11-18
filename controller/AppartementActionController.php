@@ -46,7 +46,7 @@
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "Erreur Ajout Projet : Vous devez remplir le champ <strong>Nom</strong>.";
+            $actionMessage = "Erreur Ajout Appartement : Vous devez remplir le champ <strong>Nom</strong>.";
             $typeMessage = "error";
         }
     }

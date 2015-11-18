@@ -28,6 +28,8 @@
 		$livraison = "Vide";
 		$fournisseur = "Vide";
 		$projet = "Vide";
+        $fournisseurs = $fournisseurManager->getFournisseurs();
+        $projets = $projetManager->getProjets();
 		if( isset($_GET['codeLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonByCode($_GET['codeLivraison']);
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
@@ -42,7 +44,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>ImmoERP - Management Application</title>
+	<title>AnnahdaERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -72,7 +74,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -85,19 +87,25 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des livraisons
+							Gestion des livraisons - Fournisseur : <strong><?= $fournisseur->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-truck"></i>
-								<a>Gestion des livraisons</a>
+								<a href="livraisons-group.php">Gestion des livraisons</a>
 								<i class="icon-angle-right"></i>
 							</li>
+							<li>
+                                <a href="livraisons-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
+                                    Livraisons de <strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong>
+                                </a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li><a>Détails de Livraison</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -106,93 +114,128 @@
 				<!-- END PAGE HEADER-->
 				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN ALERT MESSAGES -->	
-						<?php if(isset($_SESSION['livraison-detail-delete-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-detail-delete-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-detail-delete-success']);
-						 ?>				
-						<?php if(isset($_SESSION['livraison-detail-update-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-detail-update-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-detail-update-success']);
+						<!-- BEGIN ALERT MESSAGES -->
+						 <?php 
+						 if( isset($_SESSION['livraison-detail-action-message']) 
+                         and isset($_SESSION['livraison-detail-type-message']) ){ 
+						     $message = $_SESSION['livraison-detail-action-message'];
+                             $typeMessage = $_SESSION['livraison-detail-type-message'];
 						 ?>
-						 <?php if(isset($_SESSION['livraison-detail-update-error'])){ ?>
-							<div class="alert alert-error">
+							<div class="alert alert-<?= $typeMessage ?>">
 								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-detail-update-error'] ?>		
+								<?= $message ?>		
 							</div>
 						 <?php } 
-							unset($_SESSION['livraison-detail-update-error']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-detail-fill'])){ ?>
-							<div class="alert alert-info">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-detail-fill'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-detail-fill']);
+							unset($_SESSION['livraison-detail-action-message']);
+                            unset($_SESSION['livraison-detail-type-message']);
 						 ?>
 						 <!-- END  ALERT MESSAGES -->
 						<div class="portlet">
-							<div class="portlet-title">
-								<h4><?= $titreLivraison ?></h4>&nbsp;
-								<a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>" class="btn blue big">
-									<i class="icon-print"></i>&nbsp;Détails Livraison
-								</a>
-								<br><br>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
 							<!-- BEGIN PORTLET BODY -->
 							<div class="portlet-body">
 								<!-- BEGIN Livraison Form -->
 								<div class="row-fluid">
 									<div class="span3">
 									  <div class="control-group">
-										 <label class="control-label" for="projet"><strong>Projet</strong></label>
 										 <div class="controls">
-											<input class="m-wrap" value="<?= $projet->nom() ?>" disabled="disabled" />   
+											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+											    <strong>Projet : <?= $projet->nom() ?></strong>
+										    </a>   
 										 </div>
 									  </div>
 								   </div>
 								   <div class="span3">
 									  <div class="control-group">
-										 <label class="control-label" for="fournisseur"><strong>Fournisseur</strong></label>
 										 <div class="controls">
-											<input class="m-wrap" value="<?= $fournisseur->nom() ?>" disabled="disabled" />   
+										    <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+										        <strong>Fournisseur : <?= $fournisseur->nom() ?></strong>
+										    </a>   
 										 </div>
 									  </div>
 								   </div>
 								   <div class="span3">
 									  <div class="control-group">
-										 <label class="control-label" for="libelle"><strong>Libelle</strong></label>
 										 <div class="controls">
-											<input class="m-wrap" value="<?= $livraison->libelle() ?>" disabled="disabled" />   
+									       <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+									           <strong>N° BL : <?= $livraison->libelle() ?></strong>
+									       </a>
 										 </div>
 									  </div>
 								   </div>
 									<div class="span3">
 									  <div class="control-group">
-										 <label class="control-label" for="dateLivraison"><strong>Date de livraison</strong></label>
 										 <div class="controls">
-											<div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-												<input class="m-wrap m-ctrl-small date-picker" value="<?= $livraison->dateLivraison() ?>" disabled="disabled" />
-											 </div>
+											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+											    <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
+											</a>
 										 </div>
 									  </div>
 								   </div>
 								</div>
 							<!-- END Livraison Form -->
+							<!-- updateLivraison box begin-->
+                            <div id="updateLivraison" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h3>Modifier les informations de la livraison </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="update-livraison-form" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
+                                        <div class="control-group">
+                                            <label class="control-label">Fournisseur</label>
+                                            <div class="controls">
+                                                <select name="idFournisseur">
+                                                    <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
+                                                    <option disabled="disabled">------------</option>
+                                                    <?php foreach($fournisseurs as $fourn){ ?>
+                                                    <option value="<?= $fourn->id() ?>"><?= $fourn->nom() ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Projet</label>
+                                            <div class="controls">
+                                                <select name="idProjet">
+                                                    <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                    <option disabled="disabled">------------</option>
+                                                    <?php foreach($projets as $pro){ ?>
+                                                    <option value="<?= $pro->id() ?>"><?= $pro->nom() ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Date Livraison</label>
+                                            <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                <input name="dateLivraison" id="dateLivraison" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $livraison->dateLivraison() ?>" />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                             </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">N° BL</label>
+                                            <div class="controls">
+                                                <input required="required" id="libelle" type="text" name="libelle" value="<?= $livraison->libelle() ?>" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">  
+                                                <input type="hidden" name="action" value="update">
+                                                <input type="hidden" name="source" value="details-livraison">
+                                                <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>">
+                                                <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>">    
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- addLivraison box end -->
 							<!-- BEGIN Ajouter Article Link -->
+							<a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>" class="get-down btn blue pull-right">
+                                <i class="icon-print"></i>&nbsp;Détails Livraison
+                            </a>
 							<a class="btn green" href="#addArticle" data-toggle="modal" data-id="">
 								Ajouter un article <i class="icon-plus "></i>
 							</a>
@@ -204,7 +247,7 @@
 									<h3>Ajouter un artcile </h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal" action="controller/LivraisonDetailAddController.php" method="post">
+									<form id="add-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsActionController.php" method="post">
 										<!--div class="control-group">
 											<label class="control-label">Libelle</label>
 											<div class="controls">
@@ -220,17 +263,18 @@
 										<div class="control-group">
 											<label class="control-label">Prix Unitaire</label>
 											<div class="controls">
-												<input type="text" name="prixUnitaire" value="" />
+												<input required="required" type="text" id="prixUnitaire" name="prixUnitaire" value="" />
 											</div>	
 										</div>
 										<div class="control-group">
 											<label class="control-label">Quantité</label>
 											<div class="controls">
-												<input type="text" name="quantite" value="" />
+												<input required="required" type="text" id="quantite" name="quantite" value="" />
 											</div>	
 										</div>
 										<div class="control-group">
 											<div class="controls">	
+											    <input type="hidden" name="action" value="add" />
 												<input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>">
 												<input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>">
 												<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -289,14 +333,8 @@
 									<h3>Modifier les détails de livraison </h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal" action="controller/LivraisonDetailUpdateController.php" method="post">
-										<p>Êtes-vous sûr de vouloir modifier les détails de cette livraison ?</p>
-										<!--div class="control-group">
-											<label class="control-label" for="libelle">Libelle</label>
-											<div class="controls">
-												<input name="libelle" class="m-wrap" type="text" value="<?= $detail->libelle() ?>" />
-											</div>
-										</div-->
+									<form id="update-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsActionController.php" method="post">
+										<p>Êtes-vous sûr de vouloir modifier cet article ?</p>
 										<div class="control-group">
 											<label class="control-label" for="designation">Désignation</label>
 											<div class="controls">
@@ -306,16 +344,17 @@
 										<div class="control-group">
 											<label class="control-label" for="quantite">Quantité</label>
 											<div class="controls">
-												<input name="quantite" class="m-wrap" type="text" value="<?= $detail->quantite() ?>" />
+												<input required="required" id="quantite" name="quantite" class="m-wrap" type="text" value="<?= $detail->quantite() ?>" />
 											</div>
 										</div>
 										<div class="control-group">
 											<label class="control-label" for="prixUnitaire">Prix Unitaire</label>
 											<div class="controls">
-												<input name="prixUnitaire" class="m-wrap" type="text" value="<?= $detail->prixUnitaire() ?>" />
+												<input required="required" id="prixUnitaire" name="prixUnitaire" class="m-wrap" type="text" value="<?= $detail->prixUnitaire() ?>" />
 											</div>
 										</div>
 										<div class="control-group">
+										    <input type="hidden" name="action" value="update" />
 											<input type="hidden" name="idLivraisonDetail" value="<?= $detail->id() ?>" />
 											<input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
 											<div class="controls">	
@@ -331,13 +370,13 @@
 							<div id="deleteLivraisonDetail<?= $detail->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-									<h3>Supprimer List des produits</h3>
+									<h3>Supprimer Article</h3>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal loginFrm" action="controller/LivraisonDetailDeleteController.php" method="post">
-										<p>Êtes-vous sûr de vouloir supprimer cette article ?</p>
+									<form class="form-horizontal loginFrm" action="controller/LivraisonDetailsActionController.php" method="post">
+										<p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
 										<div class="control-group">
-											<label class="right-label"></label>
+										    <input type="hidden" name="action" value="delete" />
 											<input type="hidden" name="idLivraisonDetail" value="<?= $detail->id() ?>" />
 											<input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
 											<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -386,7 +425,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; AnnahdaERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -418,6 +457,34 @@
 			//App.setPage("table_editable");
 			App.init();
 		});
+		$("#add-detail-livraison-form").validate({
+            rules:{
+                quantite:{
+                    number: true,
+                    required:true
+                },
+                prixUnitaire:{
+                    number: true,
+                    required:true
+                }
+            },
+            errorClass: "error-class",
+            validClass: "alid-class"
+        });
+        $("#update-detail-livraison-form").validate({
+            rules:{
+                quantite:{
+                    number: true,
+                    required:true
+                },
+                prixUnitaire:{
+                    number: true,
+                    required:true
+                }
+            },
+            errorClass: "error-class",
+            validClass: "alid-class"
+        });
 	</script>
 </body>
 <!-- END BODY -->

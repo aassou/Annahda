@@ -158,7 +158,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -267,7 +267,7 @@
 								<h3>Ajouter une nouvelle livraison </h3>
 							</div>
 							<div class="modal-body">
-								<form class="form-horizontal" action="controller/Livraison2AddController.php?p=99" method="post">
+								<form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
 									<div class="control-group">
 										<label class="control-label">Fournisseur</label>
 										<div class="controls">
@@ -296,13 +296,14 @@
 		                                 </div>
 									</div>
 									<div class="control-group">
-										<label class="control-label">Libelle</label>
+										<label class="control-label">N° BL</label>
 										<div class="controls">
-											<input type="text" name="libelle" value="" />
+											<input required="required" id="libelle" type="text" name="libelle" value="" />
 										</div>
 									</div>
 									<div class="control-group">
 										<div class="controls">	
+										    <input type="hidden" name="action" value="add">    
 											<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
 											<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 										</div>
@@ -318,7 +319,7 @@
 								<h3>Ajouter un nouveau réglement </h3>
 							</div>
 							<div class="modal-body">
-								<form class="form-horizontal" action="controller/ReglementFournisseurAddController.php?p=99" method="post">
+								<form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurAddController.php?p=99" method="post">
 									<div class="control-group">
 										<label class="control-label">Fournisseur</label>
 										<div class="controls">
@@ -349,13 +350,13 @@
 									<div class="control-group">
 										<label class="control-label">Montant</label>
 										<div class="controls">
-											<input type="text" name="montant" value="" />
+											<input required="required" id="montant" type="number" name="montant" value="" />
 										</div>	
 									</div>
 									<div class="control-group">
 										<label class="control-label">Mode de paiement</label>
 										<div class="controls">
-											<select id="modePaiement" name="modePaiement" style="width: 150px" class="m-wrap">
+											<select id="modePaiement" name="modePaiement" style="width: 220px" class="m-wrap">
 												<option value="Especes">Especes</option>
 												<option value="Cheque">Cheque</option>
 												<option value="Versement">Versement</option>
@@ -364,12 +365,12 @@
 											</select>
 										</div>	
 									</div>
-									<div class="row-fluid" id="numeroCheque" style="display: none">
+									<div class="row-fluid">
                                     	<div class="span6">
                                           <div class="control-group">
-                                             <label class="control-label">N°Chèque</label>
+                                             <label class="control-label">Numéro Operation</label>
                                              <div class="controls">
-                                                <input type="text" name="numeroCheque" class="m-wrap">
+                                                <input type="text" required="required" id="numeroOperation" name="numeroCheque" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -401,101 +402,20 @@
 							</form>
 						</div>
 						<!-- BEGIN Terrain TABLE PORTLET-->
-						<?php if(isset($_SESSION['fournisseur-add-success'])){ ?>
-							<div class="alert alert-success">
+						
+						 <?php
+						 if( isset($_SESSION['livraison-action-message'])
+                         and isset($_SESSION['livraison-type-message']) ){ 
+                            $message = $_SESSION['livraison-action-message'];
+                            $typeMessage = $_SESSION['livraison-type-message'];    
+                         ?>
+							<div class="alert alert-<?= $typeMessage ?>">
 								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-add-success'] ?>		
+								<?= $message ?>		
 							</div>
 						 <?php } 
-							unset($_SESSION['fournisseur-add-success']);
-						 ?>
-						 <?php if(isset($_SESSION['fournisseur-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['fournisseur-add-error']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-add-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-add-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-add-success']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-update-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-update-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-update-success']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-update-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-update-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-update-error']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-add-error']);
-						 ?>
-						 <?php if(isset($_SESSION['reglement-add-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['reglement-add-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['reglement-add-success']);
-						 ?>
-						 <?php if(isset($_SESSION['reglement-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['reglement-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['reglement-add-error']);
-						 ?>
-						<?php if(isset($_SESSION['pieces-add-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['pieces-add-success']);
-						 ?>
-						<?php if(isset($_SESSION['pieces-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['pieces-add-error']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-delete-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-delete-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-delete-success']);
-						 ?>
-						 <?php if(isset($_SESSION['livraison-list-delete-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['livraison-list-delete-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['livraison-list-delete-success']);
+							unset($_SESSION['livraison-action-message']);
+                            unset($_SESSION['livraison-type-message']);
 						 ?>
 						<div class="portlet">
 							<div class="portlet-body">
@@ -503,7 +423,7 @@
 									<thead>
 										<tr>
 											<th>Fournisseur</th>
-											<th>BL</th>
+											<th>N° BL</th>
 											<th class="hidden-phone">Projet</th>
 											<th class="hidden-phone">Date Livraison</th>
 											<th class="hidden-phone">Nombre d'articles</th>
@@ -532,11 +452,8 @@
 												        	<a target="_blank" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>">
 												        		Détails de Livraison
 												        	</a>
-												        	<!--a href="livraison-fournisseur-list.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
-												        		Liste des livraisons
-												        	</a-->
 												        	<a target="_blank" href="fournisseurs-reglements.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
-												        		Réglement
+												        		Détails Réglements
 												        	</a>																
 												        	<a href="#updateLivraison<?= $livraison->id();?>" data-toggle="modal" data-id="<?= $livraison->id(); ?>">
 																Modifier
@@ -548,44 +465,15 @@
 												    </ul>
 												</div>
 											</td>
-											<td class="hidden-phone"><?= $livraison->libelle() ?></td>
-											<td class="hidden-phone"><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
-											<td class="hidden-phone"><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
-											<td class="hidden-phone">
-												<?php 
-													if($livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id())==0){
-														echo 1;
-													} 
-													else{
-														echo $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id());
-													}
-												?>
+											<td><?= $livraison->libelle() ?></td>
+											<td><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
+											<td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
+											<td>
+												<?= $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id()); ?>
 											</td>
-											<td class="hidden-phone">
-												<?php
-													if($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id())==0){
-														echo number_format($livraison->quantite()*$livraison->prixUnitaire(), 2, ',', ' ');
-													} 
-													else{
-														echo number_format($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' ');		
-													} 
-												?>
+											<td>
+												<?= number_format($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' '); ?>
 											</td>
-											<!--td class="hidden-phone">
-												<a href="#addPieces<?= $livraison->id() ?>" class="btn mini purple" data-toggle="modal" data-id="<?= $livraison->id() ?>"> 
-													Ajouter
-												</a>
-											</td>
-											<td class="hidden-phone">
-												<a href="livraison-pieces.php?idProjet=<?= $idProjet ?>&idLivraison=<?= $livraison->id() ?>" class="btn mini yellow" data-toggle="modal" data-id="<?= $livraison->id() ?>">
-													Gérer
-												</a>
-											</td>
-											<td class="hidden-phone">
-												<a href="#deleteLivraison<?= $livraison->id() ?>" data-toggle="modal" data-id="<?= $livraison->id() ?>">
-													Supprimer
-												</a>
-											</td-->
 										</tr>
 										<!-- add file box begin-->
 										<div id="addPieces<?= $livraison->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -617,8 +505,32 @@
 												<h3>Modifier les informations de la livraison </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/Livraison2UpdateController.php?p=99" method="post">
+												<form class="form-horizontal" action="controller/LivraisonActionController.php?p=99" method="post">
 													<p>Êtes-vous sûr de vouloir modifier la livraison <strong>N°<?= $livraison->id() ?></strong>  ?</p>
+													<div class="control-group">
+                                                        <label class="control-label">Fournisseur</label>
+                                                        <div class="controls">
+                                                            <select name="idFournisseur">
+                                                                <option value="<?= $livraison->idFournisseur() ?>"><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></option>
+                                                                <option disabled="disabled">-----------</option>
+                                                                <?php foreach($fournisseurs as $fournisseur){ ?>
+                                                                <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Projet</label>
+                                                        <div class="controls">
+                                                            <select name="idProjet">
+                                                                <option value="<?= $livraison->idProjet() ?>"><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></option>
+                                                                <option disabled="disabled">-----------</option>
+                                                                <?php foreach($projets as $projet){ ?>
+                                                                <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 													<div class="control-group">
 														<label class="control-label">Date Livraison</label>
 														<div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
@@ -627,38 +539,15 @@
 						                                 </div>
 													</div>
 													<div class="control-group">
-														<label class="control-label">Libelle</label>
+														<label class="control-label">N° BL</label>
 														<div class="controls">
 															<input type="text" name="libelle" value="<?= $livraison->libelle() ?>" />
 														</div>
 													</div>
-													<!--div class="control-group">
-														<label class="control-label">Désignation</label>
-														<div class="controls">
-															<input type="text" name="designation" value="<?= $livraison->designation() ?>" />
-														</div>
-													</div-->
-													<!--div class="control-group">
-														<label class="control-label">Quantité</label>
-														<div class="controls">
-															<input type="text" id="quantite" name="quantite" value="<?= $livraison->quantite() ?>" />
-														</div>
-													</div-->
-													<!--div class="control-group">
-														<label class="control-label">Prix unitaire</label>
-														<div class="controls">
-															<input type="text" id="prixUnitaire" name="prixUnitaire" value="<?= $livraison->prixUnitaire() ?>" />
-														</div>
-													</div-->
-													<!--div class="control-group">
-														<label class="control-label">Total</label>
-														<div class="controls">
-															<input type="text" id="total" name="total" value="<?= $livraison->quantite()*$livraison->prixUnitaire() ?>" />
-														</div>
-													</div-->
 													<div class="control-group">
-														<input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
 														<div class="controls">	
+														    <input type="hidden" name="action" value="update" />
+														    <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
 															<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
 															<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 														</div>
@@ -759,14 +648,29 @@
 			//App.setPage("table_editable");
 			App.init();
 		});
-		$('#modePaiement').on('change',function(){
-	        if( $(this).val()==="Cheque"){
-	        $("#numeroCheque").show()
-	        }
-	        else{
-	        $("#numeroCheque").hide()
-	        }
-	    });
+	    $("#addLivraisonForm").validate({
+	        rules:{
+	            libelle:{
+	                required:true
+	            }
+	        },
+            errorClass: "error-class",
+            validClass: "alid-class"
+        });
+        $("#addReglementForm").validate({
+            rules:{
+                montant:{
+                    number: true,
+                    required:true
+                },
+                numeroOperation:{
+                    number: true,
+                    required:true
+                }
+            },
+            errorClass: "error-class",
+            validClass: "alid-class"
+        });
 	</script>
 </body>
 <!-- END BODY -->

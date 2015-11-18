@@ -129,16 +129,20 @@
                                     </div>
                                     <?php
                                     $nom = "";
+                                    $nomArabe = "";
                                     $cin = "";
                                     $adresse = "";
+                                    $adresseArabe = "";
                                     $telephone1 = "";
                                     $telephone2 = "";
                                     $email = "";
                                     $idClient = "";
                                     if( isset($_SESSION['myFormData']) ){
                                         $nom = $_SESSION['myFormData']['nom'] ;
+                                        $nomArabe = $_SESSION['myFormData']['nomArabe'] ;
                                         $cin = $_SESSION['myFormData']['cin'] ;
                                         $adresse = $_SESSION['myFormData']['adresse'];
+                                        $adresseArabe = $_SESSION['myFormData']['adresseArabe'];
                                         $telephone1 = $_SESSION['myFormData']['telephone1'];
                                         $telephone2 = $_SESSION['myFormData']['telephone2'];
                                         $email = $_SESSION['myFormData']['email'];
@@ -146,7 +150,23 @@
                                     }
                                     ?>
                                     <div class="row-fluid">
-                                       <div class="span4">
+                                       <div class="span3">
+                                          <div class="control-group autocomplet_container">
+                                             <label class="control-label" for="nomArabe">الاسم</label>
+                                             <div class="controls">
+                                                <input required="required" type="text" id="nomClientArabe" name="nomArabe" value="<?= $nomArabe ?>" class="m-wrap span12">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="adresseArabe">العنوان</label>
+                                             <div class="controls">
+                                                <input type="text" id="adresseArabe" name="adresseArabe" value="<?= $adresseArabe ?>" class="m-wrap span12">
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
                                           <div class="control-group autocomplet_container">
                                              <label class="control-label" for="nom">Nom</label>
                                              <div class="controls">
@@ -155,7 +175,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span4">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="cin">CIN</label>
                                              <div class="controls">
@@ -163,7 +183,9 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span4">
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="adresse">Adresse</label>
                                              <div class="controls">
@@ -171,9 +193,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                    	<div class="span4">
+                                    	<div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="telephone1">Téléphone 1</label>
                                              <div class="controls">
@@ -181,7 +201,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                    	<div class="span4">
+                                    	<div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="telephone2">Téléphone 2</label>
                                              <div class="controls">
@@ -189,7 +209,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span4">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="email">Email</label>
                                              <div class="controls">
@@ -265,7 +285,7 @@
 			App.init();
 			$("#clientForm").validate({
 			     errorClass: "error-class",
-                 validClass: "alid-class"
+                 validClass: "valid-class"
 			});
 		});
 	</script>

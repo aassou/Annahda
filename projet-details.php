@@ -118,7 +118,7 @@
                                         <a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a>
                                     </div>
                                     <div class="portfolio-info">
-                                        <a href="projet-charges.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
+                                        <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
                                         <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width blue">Statistiques</a>
                                     </div>

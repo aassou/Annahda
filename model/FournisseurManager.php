@@ -10,9 +10,9 @@ class FournisseurManager{
     
     //CRUD operations
     public function add(Fournisseur $fournisseur){
-        $query = $this->_db->prepare('INSERT INTO t_fournisseur (nom, adresse, email, telephone1, 
-        telephone2, fax, dateCreation, code)
-        VALUES (:nom, :adresse, :email, :telephone1, :telephone2, :fax, :dateCreation, :code)') 
+        $query = $this->_db->prepare(
+        'INSERT INTO t_fournisseur (nom, adresse, email, telephone1, telephone2, fax, code, created, createdBy)
+        VALUES (:nom, :adresse, :email, :telephone1, :telephone2, :fax, :code, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $fournisseur->nom());
         $query->bindValue(':adresse', $fournisseur->adresse());
@@ -20,23 +20,27 @@ class FournisseurManager{
         $query->bindValue(':telephone1', $fournisseur->telephone1());
         $query->bindValue(':telephone2', $fournisseur->telephone2());
         $query->bindValue(':fax', $fournisseur->fax());
-        $query->bindValue(':dateCreation', $fournisseur->dateCreation());
 		$query->bindValue(':code', $fournisseur->code());
+        $query->bindValue(':created', $fournisseur->created());
+        $query->bindValue(':createdBy', $fournisseur->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(Fournisseur $fournisseur){
-        $query = $this->_db->prepare('UPDATE t_fournisseur SET nom=:nom, adresse=:adresse,
-        email=:email, telephone1=:telephone1, telephone2=:telephone2, fax=:fax 
+        $query = $this->_db->prepare(
+        'UPDATE t_fournisseur SET nom=:nom, adresse=:adresse, email=:email, telephone1=:telephone1,
+        telephone2=:telephone2, fax=:fax, updated=:updated, updatedBy=:updatedBy
         WHERE id=:id') or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $fournisseur->id());
         $query->bindValue(':nom', $fournisseur->nom());
         $query->bindValue(':adresse', $fournisseur->adresse());
         $query->bindValue(':email', $fournisseur->email());
         $query->bindValue(':telephone1', $fournisseur->telephone1());
         $query->bindValue(':telephone2', $fournisseur->telephone2());
         $query->bindValue(':fax', $fournisseur->fax());
-        $query->bindValue(':id', $fournisseur->id());
+        $query->bindValue(':updated', $fournisseur->updated());
+        $query->bindValue(':updatedBy', $fournisseur->updatedBy());
         $query->execute();
         $query->closeCursor();
     }

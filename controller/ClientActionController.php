@@ -58,8 +58,7 @@
         else if( empty($_POST['idClient']) ){
             //Case 1 :  if we tray to force the creation of an existing customer
             //we get an error message indicating that we do have a customer with that name 
-            if( !empty($_POST['nom']) and !empty($_POST['cin'])){
-                $nom = htmlentities($_POST['nom']);
+            if( !empty($_POST['cin'])){
                 $cin = htmlentities($_POST['cin']);
                 if( $clientManager->existsCIN($cin) ){
                     $actionMessage = "<strong>Erreur Création Client : </strong>Un client existe déjà avec ce CIN : <strong>".$cin."</strong>.";
@@ -70,7 +69,10 @@
                 //and the send its generated code to the contrats-add.php url   
                 else{
                     //input posts processing
+                    $nom = htmlentities($_POST['nom']);
+                    $nomArabe = htmlentities($_POST['nomArabe']);
                     $adresse = htmlentities($_POST['adresse']);
+                    $adresseArabe = htmlentities($_POST['adresseArabe']);
                     $telephone1 = htmlentities($_POST['telephone1']);
                     $telephone2 = htmlentities($_POST['telephone2']);
                     $email = htmlentities($_POST['email']);
@@ -79,7 +81,8 @@
                     $createdBy =  $_SESSION['userMerlaTrav']->login();
                     //object creation
                     $client = 
-                    new Client(array('nom' => $nom, 'cin' => $cin, 'adresse' => $adresse,
+                    new Client(array('nom' => $nom, 'nomArabe' => $nomArabe, 'cin' => $cin, 
+                    'adresse' => $adresse, 'adresseArabe' => $adresseArabe,
                     'telephone1' => $telephone1, 'telephone2' =>$telephone2, 'email' => $email, 
                     'code' => $codeClient, 'created' => $created, 'createdBy' => $createdBy));
                     //push object to db
@@ -102,8 +105,10 @@
         if(!empty($_POST['nom'])){
             $id = htmlentities($_POST['idClient']);
             $nom = htmlentities($_POST['nom']);
+            $nomArabe = htmlentities($_POST['nomArabe']);
             $cin = htmlentities($_POST['cin']);
             $adresse = htmlentities($_POST['adresse']);
+            $adresseArabe = htmlentities($_POST['adresseArabe']);
             $telephone1 = htmlentities($_POST['telephone1']);
             $telephone2 = htmlentities($_POST['telephone2']);
             $email = htmlentities($_POST['email']);
@@ -115,8 +120,8 @@
             //source input to which one of them you'll be redirected.
             $source = htmlentities($_POST['source']);
             $client = 
-            new Client(array('id' => $id, 'nom' => $nom, 'cin' => $cin, 
-            'adresse' => $adresse, 'telephone1' => $telephone1, 'telephone2' => $telephone2, 
+            new Client(array('id' => $id, 'nom' => $nom, 'nomArabe' => $nomArabe, 'cin' => $cin, 
+            'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 'telephone1' => $telephone1, 'telephone2' => $telephone2, 
             'email' => $email, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $clientManager->update($client);
             $actionMessage = "<strong>Opération Valide : </strong>Client Modifié(e) avec succès.";
