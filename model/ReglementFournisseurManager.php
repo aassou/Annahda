@@ -11,8 +11,8 @@ class ReglementFournisseurManager{
     //CRUD ReglementFournisseurs
     public function add(ReglementFournisseur $reglementFournisseur){
         $query = $this->_db->prepare('INSERT INTO t_reglement_fournisseur 
-        (dateReglement, montant, idProjet, idFournisseur, modePaiement, numeroCheque)
-        VALUES (:dateReglement, :montant, :idProjet, :idFournisseur, :modePaiement, :numeroCheque)') 
+        (dateReglement, montant, idProjet, idFournisseur, modePaiement, numeroCheque, created, createdBy)
+        VALUES (:dateReglement, :montant, :idProjet, :idFournisseur, :modePaiement, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateReglement', $reglementFournisseur->dateReglement());
         $query->bindValue(':montant', $reglementFournisseur->montant());
@@ -20,19 +20,26 @@ class ReglementFournisseurManager{
 		$query->bindValue(':idFournisseur', $reglementFournisseur->idFournisseur());
 		$query->bindValue(':modePaiement', $reglementFournisseur->modePaiement());
 		$query->bindValue(':numeroCheque', $reglementFournisseur->numeroCheque());
+        $query->bindValue(':created', $reglementFournisseur->created());
+        $query->bindValue(':createdBy', $reglementFournisseur->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(ReglementFournisseur $reglementFournisseur){
-        $query = $this->_db->prepare('UPDATE t_reglement_fournisseur SET dateReglement=:dateReglement, 
-        montant=:montant, idProjet=:idProjet, modePaiement=:modePaiement WHERE id=:id') 
+        $query = $this->_db->prepare(
+        'UPDATE t_reglement_fournisseur SET dateReglement=:dateReglement, idFournisseur=:idFournisseur,
+        idProjet=:idProjet, montant=:montant, modePaiement=:modePaiement, updated=:updated, 
+        updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $reglementFournisseur->id());
         $query->bindValue(':dateReglement', $reglementFournisseur->dateReglement());
         $query->bindValue(':montant', $reglementFournisseur->montant());
 		$query->bindValue(':modePaiement', $reglementFournisseur->modePaiement());
 		$query->bindValue(':idProjet', $reglementFournisseur->idProjet());
-        $query->bindValue(':id', $reglementFournisseur->id());
+        $query->bindValue(':idFournisseur', $reglementFournisseur->idFournisseur());
+        $query->bindValue(':updated', $reglementFournisseur->updated());
+        $query->bindValue(':updatedBy', $reglementFournisseur->updatedBy());
         $query->execute();
         $query->closeCursor();
     }

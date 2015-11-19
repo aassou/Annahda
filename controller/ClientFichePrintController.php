@@ -24,7 +24,7 @@
         $projet = $projetManager->getProjetById($contrat->idProjet());
 //property data
 $programme  = $projet->nom();
-$nomClient = $client->nom();
+$nomClient = $client->nomArabe();
 $adresse = $client->adresse();
 $cin = $client->cin();
 $telephone1 = $client->telephone1();
@@ -185,8 +185,9 @@ ob_start();
     
     require('../lib/html2pdf/html2pdf.class.php');
     try{
-        $pdf = new HTML2PDF('P', 'A4', 'fr');
+        $pdf = new HTML2PDF('P', 'A4', 'fr', 'UTF-8');
         $pdf->pdf->SetDisplayMode('fullpage');
+        //$pdf->pdf->setRTL(true);
         $pdf->writeHTML($content);
 		$fileName = "FicheClient-".$nomClient.'-'.$dateContrat.'.pdf';
        	$pdf->Output($fileName);

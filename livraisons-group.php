@@ -287,7 +287,7 @@
                                 <h3>Ajouter un nouveau réglement </h3>
                             </div>
                             <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurAddController.php?p=99" method="post">
+                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -318,7 +318,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Montant</label>
                                         <div class="controls">
-                                            <input required="required" id="montant" type="number" name="montant" value="" />
+                                            <input required="required" id="montant" type="text" name="montant" value="" />
                                         </div>  
                                     </div>
                                     <div class="control-group">
@@ -338,13 +338,15 @@
                                           <div class="control-group">
                                              <label class="control-label">Numéro Operation</label>
                                              <div class="controls">
-                                                <input type="text" required="required" id="numeroOperation" name="numeroCheque" class="m-wrap">
+                                                <input type="text" required="required" id="numeroOperation" name="numeroCheque">
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="control-group">
-                                        <div class="controls">  
+                                        <div class="controls">
+                                            <input type="hidden" name="action" value="add">
+                                            <input type="hidden" name="source" value="livraisons-group">  
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -361,7 +363,6 @@
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
-                        
                          <?php
                          if( isset($_SESSION['livraison-action-message'])
                          and isset($_SESSION['livraison-type-message']) ){ 
@@ -375,6 +376,20 @@
                          <?php } 
                             unset($_SESSION['livraison-action-message']);
                             unset($_SESSION['livraison-type-message']);
+                         ?>
+                         <?php
+                         if( isset($_SESSION['reglement-action-message'])
+                         and isset($_SESSION['reglement-type-message']) ){ 
+                            $message = $_SESSION['reglement-action-message'];
+                            $typeMessage = $_SESSION['reglement-type-message'];    
+                         ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php } 
+                            unset($_SESSION['reglement-action-message']);
+                            unset($_SESSION['reglement-type-message']);
                          ?>
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
@@ -422,10 +437,10 @@
                                                 <?= number_format($totalDetailsLivraisons, 2, ',', ' '); ?>
                                             </td>
                                             <td>
-                                                <?= number_format(0, 2, ',', ' '); ?>
+                                                <?= number_format($reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
                                             </td>
                                             <td>
-                                                <?= number_format(0, 2, ',', ' '); ?>
+                                                <?= number_format( $totalDetailsLivraisons-$reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
                                             </td>
                                         </tr>
                                         <!-- add file box begin-->
@@ -538,19 +553,19 @@
                                         echo $pagination;   
                                     }
                                     ?>
+                                    <tr>
+                                        <th></th>
+                                        <th><strong>Σ Total Livraisons</strong></th>
+                                        <th><strong>Σ Total Réglements</strong></th>
+                                        <th><strong>Σ Solde</strong></th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    </tr>
                                 </table>
-                                <table class="table table-striped table-bordered table-advance table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <td><strong>Total Livraisons</strong></td>
-                                            <td><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                            <td><strong>Total Réglements</strong></td>
-                                            <td><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                            <td><strong>Solde</strong></td>
-                                            <td><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>    
                             </div>
                         </div>
                         <!-- END Terrain TABLE PORTLET-->
@@ -630,7 +645,7 @@
                 }
             },
             errorClass: "error-class",
-            validClass: "alid-class"
+            validClass: "valid-class"
         });
     </script>
 </body>

@@ -303,7 +303,7 @@
                                 <h3>Nouveau réglement - <strong><?= $fournisseurManager->getFournisseurById($_GET['idFournisseur'])->nom() ?></strong></h3>
                             </div>
                             <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurAddController.php?p=99" method="post">
+                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -334,7 +334,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Montant</label>
                                         <div class="controls">
-                                            <input required="required" id="montant" type="number" name="montant" value="" />
+                                            <input required="required" id="montant" type="text" name="montant" value="" />
                                         </div>  
                                     </div>
                                     <div class="control-group">
@@ -354,13 +354,15 @@
                                           <div class="control-group">
                                              <label class="control-label">Numéro Operation</label>
                                              <div class="controls">
-                                                <input type="text" required="required" id="numeroOperation" name="numeroCheque" class="m-wrap">
+                                                <input type="text" required="required" id="numeroOperation" name="numeroCheque">
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="control-group">
-                                        <div class="controls">  
+                                        <div class="controls">
+                                            <input type="hidden" name="action" value="add">
+                                            <input type="hidden" name="source" value="livraisons-fournisseur">  
                                             <input type="hidden" name="idFournisseur" value="<?= $_GET['idFournisseur'] ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -397,6 +399,20 @@
                          <?php } 
                             unset($_SESSION['livraison-action-message']);
                             unset($_SESSION['livraison-type-message']);
+                         ?>
+                         <?php
+                         if( isset($_SESSION['reglement-action-message'])
+                         and isset($_SESSION['reglement-type-message']) ){ 
+                            $message = $_SESSION['reglement-action-message'];
+                            $typeMessage = $_SESSION['reglement-type-message'];    
+                         ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php } 
+                            unset($_SESSION['reglement-action-message']);
+                            unset($_SESSION['reglement-type-message']);
                          ?>
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
