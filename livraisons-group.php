@@ -65,7 +65,7 @@
         else {
             $livraisonNumber = $livraisonManager->getLivraisonNumber();
             if($livraisonNumber != 0){
-                $livraisonPerPage = 10;
+                /*$livraisonPerPage = 100;
                 $pageNumber = ceil($livraisonNumber/$livraisonPerPage);
                 $p = 1;
                 if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
@@ -77,12 +77,11 @@
                 $livraisonListDeleteLink = "&p=".$p;
                 $begin = ($p - 1) * $livraisonPerPage;
                 $pagination = paginate('livraisons2.php', '?p=', $pageNumber, $p);
-                $livraisons = $livraisonManager->getLivraisonsByLimit($begin, $livraisonPerPage);
-                //$livraisons = $livraisonManager->getLivraisonsByFournisseur();
+                $livraisons = $livraisonManager->getLivraisonsByLimit($begin, $livraisonPerPage);*/
+                $livraisons = $livraisonManager->getLivraisonsByGroup();
                 $titreLivraison ="Liste de toutes les livraisons";
                 $totalReglement = $reglementsFournisseurManager->getTotalReglement();
-                $totalLivraison = 
-                $livraisonManager->getTotalLivraisons() + $livraisonDetailManager->getTotalLivraison(); 
+                $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
                 $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php";
             }   
         }       
@@ -357,7 +356,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input class="m-wrap" name="fournisseur" id="fournisseur" type="text" placeholder="Fournisseur...">
+                                <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur...">
                                 </input>
                                 <a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
                             </div>
@@ -394,24 +393,25 @@
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <td><strong>Total Livraisons</strong></td>
-                                    <td><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                    <td><strong>Total Réglements</strong></td>
-                                    <td><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                    <td><strong>Solde</strong></td>
-                                    <td><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                    <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong>Σ Solde</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
                             </tbody>
                         </table>    
                         <div class="portlet livraisons">
                             <div class="portlet-body">
+                                <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Fournisseur</th>
-                                            <th>Total Livraisons</th>
-                                            <th>Total Réglements</th>
-                                            <th>Solde</th>
+                                            <th style="width: 40%">Fournisseur</th>
+                                            <th style="width: 20%">Total Livraisons</th>
+                                            <th style="width: 20%">Total Réglements</th>
+                                            <th style="width: 20%">Solde</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -427,7 +427,7 @@
                                                 $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
                                             }
                                         ?>      
-                                        <tr>
+                                        <tr class="livraisons">
                                             <td>
                                                 <a href="livraisons-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 200px" class="btn mini">
                                                     <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
@@ -549,9 +549,9 @@
                                         ?>
                                     </tbody>
                                     <?php
-                                    if($livraisonNumber != 0){
+                                    /*if($livraisonNumber != 0){
                                         echo $pagination;   
-                                    }
+                                    }*/
                                     ?>
                                     <tr>
                                         <th></th>
@@ -566,6 +566,7 @@
                                         <th><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     </tr>
                                 </table>
+                                </div><!-- END DIV SCROLLER -->
                             </div>
                         </div>
                         <!-- END Terrain TABLE PORTLET-->
@@ -615,9 +616,9 @@
             App.init();
         });
         $('.livraisons').show();
-        $('#fournisseur').keyup(function(){
+        $('#provider').keyup(function(){
            $('.livraisons').hide();
-           var txt = $('#fournisseur').val();
+           var txt = $('#provider').val();
            $('.livraisons').each(function(){
                if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
                    $(this).show();
@@ -631,7 +632,7 @@
                 }
             },
             errorClass: "error-class",
-            validClass: "alid-class"
+            validClass: "valid-class"
         });
         $("#addReglementForm").validate({
             rules:{

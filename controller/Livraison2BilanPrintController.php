@@ -63,12 +63,11 @@
 		else {
 			$livraisonNumber = $livraisonManager->getLivraisonNumber();
 			if($livraisonNumber != 0){
-				$livraisons = $livraisonManager->getLivraisons();
-				$titreLivraison ="Bilan de toutes les livraisons";
+				$titreLivraison ="Bilan des livraisons et réglements de tous les fournisseurs";
 				//$totalLivraison = $livraisonManager->getTotalLivraisons();
-				$totalLivraison = 
-				$livraisonManager->getTotalLivraisons() + $livraisonDetailManager->getTotalLivraison();
-				$totalReglement = $reglementsFournisseurManager->getTotalReglement();	
+				$livraisons = $livraisonManager->getLivraisonsByGroup();
+                $totalReglement = $reglementsFournisseurManager->getTotalReglement();
+                $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 	
 			}	
 		}		
 
@@ -96,90 +95,51 @@ ob_start();
 		}
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
-    <img src="../assets/img/logo_company.png" style="width: 110px" />
+    <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <h3><?= $titreLivraison ?></h3>
-    <p>Imprimé le <?= date('d/m/Y') ?> | <?= date('h:i') ?> </p>
+    <p>Imprimé le <?= date('d/m/Y - h:i') ?> </p>
+    <br>
     <table>
 		<tr>
-			<th style="width: 20%">Fournisseur</th>
-			<th style="width: 20%">Projet</th>
-			<th style="width: 20%">Date Livraison</th>
-			<th style="width: 20%">Nombre d'articles</th>
-			<th style="width: 20%">Total</th>
+			<th style="width: 25%">Fournisseur</th>
+			<th style="width: 25%">Total livraisons</th>
+			<th style="width: 25%">Total Réglements</th>
+			<th style="width: 25%">Solde</th>
 		</tr>
 		<?php
-		foreach($livraisons as $livraison){
+        foreach($livraisons as $livraison){
+            $livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($livraison->idFournisseur());
+            $totalDetailsLivraisons = 0;
+            foreach($livraisonsIds as $idl){
+                $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
+            }
 		?>		
 		<tr>
 			<td><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></td>
-			<td><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
-			<td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
-			<td>
-				<?php 
-				if($livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id())==0){
-					echo 1;
-				} 
-				else {
-					echo $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id());
-				}
-				?>
-			</td>
-			<td>
-				<?php
-				if($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id())==0){
-					echo number_format($livraison->quantite()*$livraison->prixUnitaire(), 2, ',', ' ');
-				} 
-				else{
-					echo number_format($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' ');	
-				} 
-				?>
-			</td>
+			<td><?= number_format($totalDetailsLivraisons, 2, ',', ' '); ?></td>
+            <td><?= number_format($reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?></td>
+            <td><?= number_format( $totalDetailsLivraisons-$reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?></td>
 		</tr>	
 		<?php
 		}//end of loop
 		?>
+		<tr>
+            <td style="width: 25%"></td>
+            <th style="width: 25%"><strong>Totaux Livraisons</strong></th>
+            <th style="width: 25%"><strong>Totaux Réglements</strong></th>
+            <th style="width: 25%"><strong>Total Soldes</strong></th>
+        </tr>
+        <tr>
+            <td style="width: 25%"></td>
+            <td style="width: 25%"><strong><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+            <td style="width: 25%"><strong><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+            <td style="width: 25%"><strong><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+        </tr>
 	</table>
-	<br />
-	<table>
-		<tr>
-			<th style="width: 60%"><strong>Total Livraisons</strong></th>
-			<td style="width: 40%">
-				<strong>
-					<a>
-						<?= number_format($totalLivraison, 2, ',', ' ') ?> 
-					</a>
-					&nbsp;DH
-				</strong>
-			</td>
-		</tr>
-		<tr>
-			<th style="width: 60%"><strong>Total Réglements</strong></th>
-			<td style="width: 40%">
-				<strong>
-					<a>
-						<?= number_format($totalReglement, 2, ',', ' ') ?> 
-					</a>
-					&nbsp;DH
-				</strong>
-			</td>
-		</tr>
-		<tr>
-			<th style="width: 60%"><strong>Solde</strong></th>
-			<td style="width: 40%">
-				<strong>
-					<a>
-						<?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?> 
-					</a>
-					&nbsp;DH
-				</strong>
-			</td>
-		</tr>
-	</table> 
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;">STE MERLA TRAV SARL : Au capital de 100 000,00 DH – Siège social Hay Al Matar En face de l'institution AR'RISSALA 2, Nador. 
-    	<br>Tèl 0536381458/ 0661668860 IF : 40451179   RC : 10999  Patente 56126681</p>
+    <p style="text-align: center;font-size: 9pt;"></p>
     </page_footer>
 </page>    
 <?php

@@ -60,6 +60,7 @@
 					or $currentPage=="fournisseurs-reglements.php"
 					or $currentPage=="appartement-detail.php"
 					or $currentPage=="locaux-detail.php"
+					or $currentPage=="projet-charges-grouped.php"
 					){
 						$gestionProjetClass = "active ";
 					}

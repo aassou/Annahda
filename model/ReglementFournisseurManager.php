@@ -144,7 +144,17 @@ class ReglementFournisseurManager{
         return $data['nombreReglements'];
 	}
 	
-	public function getReglementsNumberByIdFournisseur($idProjet, $idFournisseur){
+    public function getReglementsNumberByIdFournisseur($idFournisseur){
+        $query = $this->_db->prepare('SELECT count(id) AS nombreReglements 
+        FROM t_reglement_fournisseur WHERE idFournisseur=:idFournisseur');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['nombreReglements'];
+    }
+    
+	public function getReglementsNumberByIdFournisseurByIdProjet($idProjet, $idFournisseur){
         $query = $this->_db->prepare('SELECT count(id) AS nombreReglements 
         FROM t_reglement_fournisseur WHERE idProjet =:idProjet AND idFournisseur=:idFournisseur');
         $query->bindValue(':idProjet', $idProjet);
@@ -289,6 +299,40 @@ class ReglementFournisseurManager{
         FROM t_reglement_fournisseur WHERE idFournisseur =:idFournisseur AND idProjet=:idProjet');
         $query->bindValue(':idFournisseur', $idFournisseur);
 		$query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
+    /************************************************************************************************
+     *                                                                                              * 
+     *                     These new methods are created for AnnahdaProjet                          *
+     *                                                                                              *
+     ************************************************************************************************/
+     
+     public function getReglementFournisseurByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo){
+        $reglements = array();
+        $query = $this->_db->prepare('SELECT * FROM t_reglement_fournisseur WHERE idFournisseur=:idFournisseur
+        AND dateReglement BETWEEN :dateFrom AND :dateTo ORDER BY dateReglement DESC');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ReglementFournisseur($data);
+        }
+        $query->closeCursor();
+        return $reglements;
+    }
+     
+     public function sommeReglementFournisseursByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo){
+        $query = $this->_db->prepare(
+        'SELECT SUM(montant) AS total FROM t_reglement_fournisseur 
+        WHERE idFournisseur =:idFournisseur AND dateReglement BETWEEN :dateFrom AND :dateTo');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();

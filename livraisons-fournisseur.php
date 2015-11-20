@@ -187,63 +187,6 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- addFournisseur box begin-->
-                        <!--div id="addFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h3>Ajouter un nouveau fournisseur </h3>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
-                                    <div class="control-group">
-                                        <label class="control-label">Nom</label>
-                                        <div class="controls">
-                                            <input required="required" type="text" name="nom" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Adresse</label>
-                                        <div class="controls">
-                                            <input type="text" name="adresse" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Tél.1</label>
-                                        <div class="controls">
-                                            <input type="text" name="telephone1" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Tél.2</label>
-                                        <div class="controls">
-                                            <input type="text" name="telephone2" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Fax</label>
-                                        <div class="controls">
-                                            <input type="text" name="fax" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Email</label>
-                                        <div class="controls">
-                                            <input type="text" name="email" value="" />
-                                        </div>  
-                                    </div>
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="livraisons-fournisseur" />
-                                            <input type="hidden" name="idFournisseur" value="<?= $idFournisseur ?>" />  
-                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div-->
-                        <!-- addFournisseur box end -->
                         <!-- addLivraison box begin-->
                         <div id="addLivraison" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -375,16 +318,87 @@
                         <div class="row-fluid">
                             <form action="" method="get">
                                 <div class="input-box autocomplet_container">
-                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
+                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" placeholder="Projet" />
+                                    <!--input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
                                         <ul id="projetList"></ul>
-                                    </input>
+                                    </input-->
                                     <input name="idFournisseur" id="idFournisseur" type="hidden" />
                                     <input name="idProjet" id="idProjet" type="hidden" />
                                     <button type="submit" class="btn red"><i class="icon-search"></i></button>
-                                    <a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
+                                    <a href="#printBilanFournisseur" class="btn blue pull-right" data-toggle="modal">
+                                        <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                                    </a>
                                 </div>
                             </form>
                         </div>
+                        <!-- printCharge box begin-->
+                        <div id="printBilanFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3><i class="icon-print"></i>&nbsp;Bilan de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/BilanFournisseurPrintController.php" method="post" enctype="multipart/form-data">
+                                    <!--p><strong>Séléctionner les charges à imprimer</strong></p-->
+                                    <div class="control-group">
+                                      <label class="control-label">Imprimer</label>
+                                      <div class="controls">
+                                         <label class="radio">
+                                             <div class="radio" id="toutes">
+                                                 <span>
+                                                     <input type="radio" class="criteriaPrint" name="criteria" value="toutesLivraison" style="opacity: 0;">
+                                                 </span>
+                                             </div> Bilan complet
+                                         </label>
+                                         <label class="radio">
+                                             <div class="radio" id="date">
+                                                 <span class="checked">
+                                                     <input type="radio" class="criteriaPrint" name="criteria" value="parChoix" checked="" style="opacity: 0;">
+                                                 </span>
+                                             </div> Par Choix
+                                         </label>  
+                                      </div>
+                                   </div>
+                                   <div id="showChoice">
+                                        <div class="control-group">
+                                            <label class="control-label">Date</label>
+                                            <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                               <input style="width:100px" name="dateFrom" id="dateFrom" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                               &nbsp;-&nbsp;
+                                               <input style="width:100px" name="dateTo" id="dateTo" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label"></label>
+                                          <div class="controls">
+                                             <label class="checkbox">
+                                                 <div class="checkbox">
+                                                     <span>
+                                                         <input type="checkbox" name="livraisons" value="livraison" checked="checked" style="opacity: 0;">
+                                                     </span>Livraisons
+                                                 </div>
+                                             </label>
+                                             <label class="checkbox">
+                                                 <div class="checkbox">
+                                                     <span class="checked">
+                                                         <input type="checkbox" name="reglements" value="reglements" style="opacity: 0;">
+                                                     </span>Réglements
+                                                 </div> 
+                                             </label>  
+                                          </div>
+                                       </div>
+                                   </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input type="hidden" name="idFournisseur" value="<?= $idFournisseur ?>" />
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- printCharge box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
                         <?php
                          if( isset($_SESSION['livraison-action-message'])
@@ -417,17 +431,18 @@
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <td><strong>Total Livraisons</strong></td>
-                                    <td><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                    <td><strong>Total Réglements</strong></td>
-                                    <td><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                    <td><strong>Solde</strong></td>
-                                    <td><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                    <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong>Σ Solde</strong></th>
+                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="portlet">
+                        <div class="portlet livraisons">
                             <div class="portlet-body">
+                                <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
@@ -448,7 +463,7 @@
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
                                         ?>      
-                                        <tr>
+                                        <tr class="livraisons">
                                             <td>
                                                 <a style="width: 100px" class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>">
                                                     <?= $livraison->libelle() ?>
@@ -590,15 +605,16 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tbody>
                                         <tr>
-                                            <td><strong>Total Livraisons</strong></td>
-                                            <td><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                            <td><strong>Total Réglements</strong></td>
-                                            <td><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                            <td><strong>Solde</strong></td>
-                                            <td><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                            <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                            <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                            <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong>Σ Solde</strong></th>
+                                            <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         </tr>
                                     </tbody>
-                                </table>    
+                                </table>
+                                </div><!-- END DIV SCROLLER -->    
                             </div>
                         </div>
                         <!-- END Terrain TABLE PORTLET-->
@@ -627,6 +643,8 @@
     <script src="assets/js/jquery.blockui.js"></script>
     <script src="assets/js/jquery.cookie.js"></script>
     <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
+    <script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <!-- ie8 fixes -->
@@ -644,6 +662,24 @@
             // initiate layout and plugins
             //App.setPage("table_editable");
             App.init();
+        });
+        $('.livraisons').show();
+        $('#nomProjet').keyup(function(){
+           $('.livraisons').hide();
+           var txt = $('#nomProjet').val();
+           $('.livraisons').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
+        });
+        $('.criteriaPrint').on('change',function(){
+            if( $(this).val()==="toutesLivraison" ) {
+            $("#showChoice").hide()
+            }
+            else{
+            $("#showChoice").show()
+            }
         });
         $("#addLivraisonForm").validate({
             rules:{
@@ -666,7 +702,7 @@
                 }
             },
             errorClass: "error-class",
-            validClass: "alid-class"
+            validClass: "valid-class"
         });
     </script>
 </body>

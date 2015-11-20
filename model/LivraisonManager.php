@@ -55,6 +55,16 @@ class LivraisonManager{
         $query->closeCursor();
         return $livraisons;
 	}
+    
+    public function getLivraisonsByGroup(){
+        $livraisons = array();
+        $query = $this->_db->query('SELECT * FROM t_livraison GROUP BY idFournisseur ORDER BY id DESC');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = new Livraison($data);
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
 	
     /*public function getLivraisonsByIdFournisseur($idFournisseur){
         $livraisons = array();
@@ -378,4 +388,26 @@ class LivraisonManager{
         $query->closeCursor();
         return $livraisons;
 	}
+    
+    /************************************************************************************************
+     *                                                                                              * 
+     *                     These new methods are created for AnnahdaProjet                          *
+     *                                                                                              *
+     ************************************************************************************************/
+    
+    public function getLivraisonsByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo){
+        $livraisons = array();
+        $query = $this->_db->prepare('SELECT * FROM t_livraison WHERE 
+        idFournisseur=:idFournisseur AND dateLivraison BETWEEN :dateFrom AND :dateTo 
+        ORDER BY dateLivraison DESC');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = new Livraison($data);
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
 }

@@ -275,15 +275,12 @@
                             unset($_SESSION['charge-type-message']);
                          ?>
                         <table class="table table-striped table-bordered table-advance table-hover">
-                            <thead>
+                            <tbody>
                                 <tr>
-                                    <th style="width: 20%"><strong>Total des charges</strong></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"><a><strong><?= number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 50%"><strong>Total des charges</strong></th>
+                                    <th style="width: 50%"><a><strong><?= number_format($chargeManager->getTotalByIdProjet($idProjet), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                 </tr>
-                            </thead>
+                            </tbody>
                         </table>
                         <div class="portlet charges">
                             <div class="portlet-body">
