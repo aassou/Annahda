@@ -35,6 +35,10 @@
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
 			$projet = $projetManager->getProjetById($livraison->idProjet());
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
+            $totalLivraisonDetail = 
+            $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
+            $nombreArticle = 
+            $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id());
 		}
 ?>
 <!DOCTYPE html>
@@ -135,39 +139,39 @@
 							<div class="portlet-body">
 								<!-- BEGIN Livraison Form -->
 								<div class="row-fluid">
+								    <div class="span3">
+                                      <div class="control-group">
+                                         <div class="controls">
+                                           <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                               <strong>N° BL : <?= $livraison->libelle() ?></strong>
+                                           </a>
+                                         </div>
+                                      </div>
+                                   </div>
+                                   <div class="span3">
+                                      <div class="control-group">
+                                         <div class="controls">
+                                            <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                                <strong>Nombre Articles : <?= $nombreArticle ?></strong>
+                                            </a>   
+                                         </div>
+                                      </div>
+                                   </div>
+                                    <div class="span3">
+                                      <div class="control-group">
+                                         <div class="controls">
+                                            <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                                <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
+                                            </a>
+                                         </div>
+                                      </div>
+                                   </div>
 									<div class="span3">
 									  <div class="control-group">
 										 <div class="controls">
 											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
 											    <strong>Projet : <?= $projet->nom() ?></strong>
 										    </a>   
-										 </div>
-									  </div>
-								   </div>
-								   <div class="span3">
-									  <div class="control-group">
-										 <div class="controls">
-										    <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
-										        <strong>Fournisseur : <?= $fournisseur->nom() ?></strong>
-										    </a>   
-										 </div>
-									  </div>
-								   </div>
-								   <div class="span3">
-									  <div class="control-group">
-										 <div class="controls">
-									       <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
-									           <strong>N° BL : <?= $livraison->libelle() ?></strong>
-									       </a>
-										 </div>
-									  </div>
-								   </div>
-									<div class="span3">
-									  <div class="control-group">
-										 <div class="controls">
-											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
-											    <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
-											</a>
 										 </div>
 									  </div>
 								   </div>
@@ -234,7 +238,7 @@
                             <!-- addLivraison box end -->
 							<!-- BEGIN Ajouter Article Link -->
 							<a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>" class="get-down btn blue pull-right">
-                                <i class="icon-print"></i>&nbsp;Détails Livraison
+                                <i class="icon-print"></i>&nbsp;Bon de livraison
                             </a>
 							<a class="btn green" href="#addArticle" data-toggle="modal" data-id="">
 								Ajouter un article <i class="icon-plus "></i>
@@ -388,13 +392,25 @@
 							<!-- END delete LivraisonDetail BOX -->
 							<?php
 							}//end foreach
-							$totalLivraisonDetail = 
-							$livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
-							$nombreArticle = 
-							$livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id())
 							?>
+    							<tr>
+    							    <td></td>
+                                    <td></td>
+    							    <td></td>
+                                    <th><strong>Grand total</strong></th>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><strong><a><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?></a></strong></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
 							</table>
-							<table class="table table-striped table-bordered table-advance table-hover">
+							<!--table class="table table-striped table-bordered table-advance table-hover">
 								<thead>
 									<tr>
 										<th><strong>Nombre d'article de la livraison</strong></th>
@@ -406,7 +422,7 @@
 										<td><strong><a><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?></a>&nbsp;DH</strong></td>
 									</tr>	
 								</thead>
-							</table>
+							</table-->
 							<?php
 							}//end if
 							?>
