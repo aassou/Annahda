@@ -71,7 +71,7 @@
             $fournisseur = $fournisseurManager->getFournisseurById($idFournisseur);
             $livraisonNumber = $livraisonManager->getLivraisonsNumberByIdFournisseur($idFournisseur);
             if($livraisonNumber != 0){
-                $livraisonPerPage = 10;
+                $livraisonPerPage = 100;
                 $pageNumber = ceil($livraisonNumber/$livraisonPerPage);
                 $p = 1;
                 if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
