@@ -82,7 +82,7 @@
                 }
                 $livraisonListDeleteLink = "?idFournisseur=".$_GET['idFournisseur']."&p=".$p;
                 $begin = ($p - 1) * $livraisonPerPage;
-                $pagination = paginate('livraisons2.php?idFournisseur='.$_GET['idFournisseur'], '&p=', $pageNumber, $p);
+                $pagination = paginate('livraisons-fournisseur.php?idFournisseur='.$_GET['idFournisseur'], '&p=', $pageNumber, $p);
                 $livraisons = $livraisonManager->getLivraisonsByIdFournisseurByLimits($idFournisseur, $begin, $livraisonPerPage);
                 $titreLivraison ="Liste des livraisons du fournisseur <strong>".$fournisseurManager->getFournisseurById($idFournisseur)->nom()."</strong>";
                 //get the sum of livraisons details using livraisons ids (idFournisseur)
