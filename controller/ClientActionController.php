@@ -28,7 +28,6 @@
     //the action input precise which action the controller is going to prossed, 
     //add action, update action or delete action
     $action = htmlentities($_POST['action']);
-    $idProjet = htmlentities($_POST['idProjet']);
     //In this session variable we put all the POST, to get it in the contrats-add file
     //in case of error, and this help the user to do not put again what he filled out.
     $_SESSION['myFormData'] = $_POST;
@@ -41,6 +40,7 @@
     //process starts
     //Case 1 : CRUD Add Action 
     if($action == "add"){
+        $idProjet = htmlentities($_POST['idProjet']);
         $codeClient = "";
         $client = "";
         //if the client exists in the database, and we get its information from the clients-add.php file
@@ -129,8 +129,8 @@
             if( $source == "contrat" ){
                 $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
             }
-            else if( $source="clients.php" ){
-                $redirectLink = "Location:../clients.php?idProjet=".$idProjet;   
+            else if( $source="clients" ){
+                $redirectLink = "Location:../clients.php";   
             }
         }
         else{
@@ -140,16 +140,16 @@
                 $redirectLink = "Location:../contrat.php?codeContrat=".$codeClient;
             }
             else if( $source="clients" ){
-                $redirectLink = "Location:../clients.php?idProjet=".$idProjet;   
+                $redirectLink = "Location:../clients.php";   
             }
         }
     }
     else if($action=="delete"){
-        $idClient = $_POST['idClient'];
-        $clientManager->delete($idClient);
+        //$idClient = $_POST['idClient'];
+        //$clientManager->delete($idClient);
         $actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "";
+        $redirectLink = "Location:../clients.php";
     }
     
     $_SESSION['client-action-message'] = $actionMessage;

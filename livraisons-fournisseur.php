@@ -318,7 +318,7 @@
                         <div class="row-fluid">
                             <form action="" method="get">
                                 <div class="input-box autocomplet_container">
-                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" placeholder="Projet" />
+                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" placeholder="Recherche..." />
                                     <!--input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
                                         <ul id="projetList"></ul>
                                     </input-->
@@ -606,7 +606,7 @@
                                     <tbody>
                                         <tr>
                                             <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                            <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong><a id="totalLivraison"><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                             <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
                                             <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                             <th style="width: 15%"><strong>Σ Solde</strong></th>

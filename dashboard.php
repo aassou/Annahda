@@ -111,6 +111,19 @@
 								</div>
 							</div>
 							</a>
+							<a href="clients.php">
+                            <div class="tile bg-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-user"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Clients
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<a href="livraisons-group.php">
 							<div class="tile bg-blue">
 								<div class="corner"></div>
@@ -127,6 +140,19 @@
 								</div>
 							</div>
 							</a>
+							<a href="fournisseurs.php">
+                            <div class="tile bg-dark-red">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-group"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Fournisseurs
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<a href="compte-bancaire.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
@@ -171,14 +197,11 @@
 							<div class="tile bg-yellow">
 								<div class="corner"></div>
 								<div class="tile-body">
-									<i class="icon-user"></i>
+									<i class="icon-wrench"></i>
 								</div>
 								<div class="tile-object">
 									<div class="name">
-										Utilisateurs
-									</div>
-									<div class="number">
-										<?= $usersNumber ?>
+										Paramétrages
 									</div>
 								</div>
 							</div>

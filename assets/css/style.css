@@ -111,6 +111,20 @@ General backgrounds
   background-color: #555555 !important;
 }
 
+.bg-brown {
+  background-image: none !important;
+  background-color: #6a482d !important;
+}
+
+.bg-cyan {
+  background-image: none !important;
+  background-color: #00B38F !important;
+}
+
+.bg-dark-red {
+  background-image: none !important;
+  background-color: #731531 !important;
+}
 /***
 Apply fix for font awesome icons.
 ***/

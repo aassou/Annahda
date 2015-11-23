@@ -18,18 +18,7 @@
     	$fournisseursManager = new FournisseurManager($pdo);
 		$fournisseurNumber = $fournisseursManager->getFournisseurNumbers();
 		if($fournisseurNumber!=0){
-			$fournisseurPerPage = 10;
-	        $pageNumber = ceil($fournisseurNumber/$fournisseurPerPage);
-	        $p = 1;
-	        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-	            $p = $_GET['p'];
-	        }
-	        else{
-	            $p = 1;
-	        }
-	        $begin = ($p - 1) * $fournisseurPerPage;
-	        $pagination = paginate('fournisseurs.php', '?p=', $pageNumber, $p);
-			$fournisseurs = $fournisseursManager->getFournisseursByLimits($begin, $fournisseurPerPage);	 
+			$fournisseurs = $fournisseursManager->getFournisseurs();	 
 		}
 ?>
 <!DOCTYPE html>
@@ -68,7 +57,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -86,11 +75,11 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<i class="icon-truck"></i>
+								<i class="icon-group"></i>
 								<a>Gestion des fournisseurs</a>
 							</li>
 						</ul>
@@ -102,41 +91,98 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
-						<?php if(isset($_SESSION['fournisseur-delete-success'])){ ?>
-                         	<div class="alert alert-success">
+                        <div class="pull-right get-down">
+                            <a href="#addFournisseur" data-toggle="modal" class="btn blue">
+                                Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
+                            </a>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="input-box">
+                                <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..." />
+                            </div>
+                        </div>
+                        <!-- addFournisseur box begin-->
+                        <div id="addFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Ajouter un nouveau fournisseur </h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">Nom</label>
+                                        <div class="controls">
+                                            <input required="required" type="text" name="nom" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Adresse</label>
+                                        <div class="controls">
+                                            <input type="text" name="adresse" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Tél.1</label>
+                                        <div class="controls">
+                                            <input type="text" name="telephone1" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Tél.2</label>
+                                        <div class="controls">
+                                            <input type="text" name="telephone2" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Fax</label>
+                                        <div class="controls">
+                                            <input type="text" name="fax" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Email</label>
+                                        <div class="controls">
+                                            <input type="text" name="email" value="" />
+                                        </div>  
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">  
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="fournisseurs" />
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- addFournisseur box end -->
+                         <?php 
+                         if ( isset($_SESSION['fournisseur-action-message'])
+                         and isset($_SESSION['fournisseur-type-message']) ) {
+                             $message = $_SESSION['fournisseur-action-message'];
+                             $typeMessage = $_SESSION['fournisseur-type-message']; 
+                         ?>
+                         	<div class="alert alert-<?= $typeMessage ?>">
 								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-delete-success'] ?>		
+								<?= $message ?>		
 							</div>
                          <?php } 
-                         	unset($_SESSION['fournisseur-delete-success']);
+                         	unset($_SESSION['fournisseur-action-message']);
+                            unset($_SESSION['fournisseur-type-message']);
                          ?>
-                         <?php if(isset($_SESSION['fournisseur-update-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-update-success'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['fournisseur-update-success']);
-                         ?>
-						<div class="portlet" id="listFournisseurs">
-							<div class="portlet-title">
-								<h4>Les fournisseurs</h4>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
+						<div class="portlet providers" id="listFournisseurs">
 							<div class="portlet-body">
+							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
 								<table class="table table-striped table-bordered table-advance table-hover" id="sample_editable_1">
 									<thead>
 										<tr>
-											<th style="width:20%">Nom</th>
-											<th style="width:20%" class="hidden-phone">Adresse</th>
-											<th style="width:30%" class="hidden-phone">Date</th>
-											<th style="width:4%" class="hidden-phone">Tél1</th>
-											<th style="width:4%" class="hidden-phone">Tél2</th>
-											<th style="width:4%" class="hidden-phone">Fax</th>
-											<th style="width:18%" class="hidden-phone">Email</th>
+											<th style="width:25%">Nom</th>
+											<th style="width:30%">Adresse</th>
+											<th style="width:10%">Tél1</th>
+											<th style="width:10%">Tél2</th>
+											<th style="width:10%">Fax</th>
+											<th style="width:15%">Email</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -144,24 +190,15 @@
 										if($fournisseurNumber!=0){
 										foreach ($fournisseurs as $fournisseur) {
 										?>	
-										<tr>
+										<tr class="providers">
 											<td>
 												<div class="btn-group">
-												    <a style="width: 200px" class="btn mini black dropdown-toggle" href="#" data-toggle="dropdown">
+												    <a style="width: 200px" class="btn mini dark-red dropdown-toggle" href="#" data-toggle="dropdown">
 												    	<?= $fournisseur->nom()?> 
 												        <i class="icon-angle-down"></i>
 												    </a>
 												    <ul class="dropdown-menu">
 												        <li>
-												        	<a href="livraison-add.php?idFournisseur=<?= $fournisseur->id() ?>">
-												        		Nouvelle Livraison
-												        	</a>
-												        	<a href="livraison-fournisseur-list.php?idFournisseur=<?= $fournisseur->id() ?>">
-												        		Liste des livraisons
-												        	</a>
-												        	<a href="fournisseurs-reglements.php?idFournisseur=<?= $fournisseur->id() ?>">
-												        		Réglement
-												        	</a>
 												        	<a href="#update<?= $fournisseur->id();?>" data-toggle="modal" data-id="<?= $fournisseur->id(); ?>">
 																Modifier
 															</a>
@@ -173,7 +210,6 @@
 												</div>
 											</td>
 											<td class="hidden-phone"><?= $fournisseur->adresse()?></td>
-											<td class="hidden-phone"><?= date('d/m/Y', strtotime($fournisseur->dateCreation())) ?></td>
 											<td class="hidden-phone"><?= $fournisseur->telephone1() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->telephone2() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->fax() ?></td>
@@ -186,7 +222,7 @@
 												<h3>Modifier les informations du fournisseur </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal" action="controller/FournisseurUpdateController.php" method="post">
+												<form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir modifier les infos du fournisseur <strong><?= $fournisseur->nom() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="control-label">Nom</label>
@@ -226,6 +262,8 @@
 													</div>
 													<div class="control-group">
 														<input type="hidden" name="idFournisseur" value="<?= $fournisseur->id() ?>" />
+														<input type="hidden" name="action" value="update" />
+                                                        <input type="hidden" name="source" value="fournisseurs" />
 														<div class="controls">	
 															<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
 															<button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -242,11 +280,13 @@
 												<h3>Supprimer Fournisseur</h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/FournisseurDeleteController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/FournisseurActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir supprimer ce fournisseur <?= $fournisseur->nom() ?> ?</p>
 													<div class="control-group">
 														<label class="right-label"></label>
 														<input type="hidden" name="idFournisseur" value="<?= $fournisseur->id() ?>" />
+														<input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="source" value="fournisseurs" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
 														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 													</div>
@@ -257,107 +297,10 @@
 										<?php }
 										} ?>
 									</tbody>
-									<?php
-									if($fournisseurNumber != 0){
-										echo $pagination;	
-									}
-									?>
 								</table>
+								</div><!-- END DIV SCROLLER -->
 							</div>
 						</div>
-						<!-- END EXAMPLE TABLE PORTLET-->
-						 <?php if(isset($_SESSION['fournisseur-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-add-success'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['fournisseur-add-success']);
-                         ?>
-                         <?php if(isset($_SESSION['fournisseur-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['fournisseur-add-error'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['fournisseur-add-error']);
-                         ?>
-						<div class="tab-pane active" id="tab_1">
-                           <div class="portlet box blue">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-edit"></i>Ajouter un fournisseur</h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
-                                 <!-- BEGIN FORM-->
-                                 <form action="controller/FournisseurAddController.php" method="POST" class="horizontal-form">
-                                    <div class="row-fluid">
-                                       <div class="span4">
-                                          <div class="control-group autocomplet_container">
-                                             <label class="control-label" for="nom">Nom</label>
-                                             <div class="controls">
-                                                <input type="text" id="nomFournisseur" name="nom" class="m-wrap span12" onkeyup="autocompletFournisseur()">
-                                                <ul id="fournisseurList"></ul>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <!--/span-->
-                                       <div class="span4">
-                                          <div class="control-group">
-                                             <label class="control-label" for="adresse">Adresse</label>
-                                             <div class="controls">
-                                                <input type="text" id="adresse" name="adresse" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4">
-                                          <div class="control-group">
-                                             <label class="control-label" for="telephone1">Téléphone1</label>
-                                             <div class="controls">
-                                                <input type="text" id="telephone1" name="telephone1" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                    	<div class="span4">
-                                          <div class="control-group">
-                                             <label class="control-label" for="telephone2">Téléphone2</label>
-                                             <div class="controls">
-                                                <input type="text" id="telephone2" name="telephone2" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4">
-                                          <div class="control-group">
-                                             <label class="control-label" for="fax">Fax</label>
-                                             <div class="controls">
-                                                <input type="text" id="fax" name="fax" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <!--/span-->
-                                       <div class="span4">
-                                          <div class="control-group">
-                                             <label class="control-label" for="email">Email</label>
-                                             <div class="controls">
-                                                <input type="text" id="email" name="email" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="form-actions">
-                                       <button type="submit" class="btn blue">Enregistrer <i class="icon-save"></i></button>
-                                       <button type="reset" class="btn red">Annuler</button>
-                                    </div>
-                                 </form>
-                                 <!-- END FORM--> 
-                              </div>
-                           </div>
-                        </div>
 					</div>
 				</div>
 				<!-- END PAGE CONTENT -->
@@ -387,6 +330,8 @@
 	<script src="assets/js/excanvas.js"></script>
 	<script src="assets/js/respond.js"></script>
 	<![endif]-->	
+	<script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
@@ -398,6 +343,16 @@
 			//App.setPage("table_editable");
 			App.init();
 		});
+		$('.providers').show();
+        $('#provider').keyup(function(){
+           $('.providers').hide();
+           var txt = $('#provider').val();
+           $('.providers').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
+        });
 	</script>
 </body>
 <!-- END BODY -->
