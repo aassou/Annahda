@@ -47,7 +47,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="UTF-8" />
-	<title>AnnahdaERP - Management Application</title>
+	<title>ImmoERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -111,7 +111,7 @@
 								</div>
 							</div>
 							</a>
-							<a href="clients.php">
+							<a href="clients-list.php">
                             <div class="tile bg-cyan">
                                 <div class="corner"></div>
                                 <div class="tile-body">
@@ -455,7 +455,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; AnnahdaERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

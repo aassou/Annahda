@@ -24,6 +24,7 @@
 				or $currentPage=="fournisseurs-search.php"
 				or $currentPage=="fournisseurs.php"
 				or $currentPage=="clients.php"
+				or $currentPage=="clients-list.php"
 				or $currentPage=="employes-projet-search.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
@@ -62,6 +63,7 @@
 					or $currentPage=="appartement-detail.php"
 					or $currentPage=="locaux-detail.php"
 					or $currentPage=="projet-charges-grouped.php"
+					or $currentPage=="projet-charges-type.php"
 					){
 						$gestionProjetClass = "active ";
 					}

@@ -10,24 +10,33 @@ class OperationManager{
     
     //CRUD operations
     public function add(Operation $operation){
-        $query = $this->_db->prepare('INSERT INTO t_operation (date, montant, modePaiement, idContrat, numeroCheque)
-        VALUES (:date, :montant, :modePaiement,:idContrat, :numeroCheque)') 
+        $query = $this->_db->prepare(
+        'INSERT INTO t_operation (date, montant, modePaiement, idContrat, numeroCheque, created, createdBy)
+        VALUES (:date, :montant, :modePaiement,:idContrat, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':date', $operation->date());
         $query->bindValue(':montant', $operation->montant());
 		$query->bindValue(':modePaiement', $operation->modePaiement());
+        $query->bindValue(':numeroCheque', $operation->numeroCheque());
         $query->bindValue(':idContrat', $operation->idContrat());
-		$query->bindValue(':numeroCheque', $operation->numeroCheque());
+        $query->bindValue(':created', $operation->created());
+        $query->bindValue(':createdBy', $operation->createdBy());
         $query->execute();
         $query->closeCursor();
     }
     
     public function update(Operation $operation){
-        $query = $this->_db->prepare('UPDATE t_operation SET date=:date, montant=:montant WHERE id=:id') 
+        $query = $this->_db->prepare(
+        'UPDATE t_operation SET date=:date, montant=:montant, modePaiement=:modePaiement,
+        numeroCheque=:numeroCheque, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $operation->id());
         $query->bindValue(':date', $operation->date());
         $query->bindValue(':montant', $operation->montant());
-        $query->bindValue(':id', $operation->id());
+        $query->bindValue(':modePaiement', $operation->modePaiement());
+        $query->bindValue(':numeroCheque', $operation->numeroCheque());
+        $query->bindValue(':updated', $operation->updated());
+        $query->bindValue(':updatedBy', $operation->updatedBy());
         $query->execute();
         $query->closeCursor();
     }

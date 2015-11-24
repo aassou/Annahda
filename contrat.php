@@ -53,7 +53,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>AnnahdaERP - Management Application</title>
+	<title>ImmoERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -152,31 +152,35 @@
 	                    <div class="progress <?= $statusBar ?>">
     						<div class="bar" style="width: <?= $statistiquesResult ?>%;"><?= $statistiquesResult ?>%</div>
 						</div>
-		                 <?php if( isset($_SESSION['contrat-action-message']) 
-                                   and isset($_SESSION['contrat-type-message']) ){
-                                       $message = $_SESSION['contrat-action-message'];
-                                       $typeMessage = $_SESSION['contrat-type-message'];
+		                 <?php 
+		                 if( isset($_SESSION['contrat-action-message']) 
+                            and isset($_SESSION['contrat-type-message']) ) {
+                                $message = $_SESSION['contrat-action-message'];
+                                $typeMessage = $_SESSION['contrat-type-message'];
                          ?>
                             <div class="alert alert-<?= $typeMessage ?>">
                                 <button class="close" data-dismiss="alert"></button>
                                 <?= $message ?>     
                             </div>
-                         <?php } 
-                            unset($_SESSION['contrat-action-message']);
-                            unset($_SESSION['contrat-type-message']);
+                         <?php 
+                         } 
+                         unset($_SESSION['contrat-action-message']);
+                         unset($_SESSION['contrat-type-message']);
                          ?>
-                         <?php if( isset($_SESSION['client-action-message']) 
-                                   and isset($_SESSION['client-type-message']) ){
-                                       $message = $_SESSION['client-action-message'];
-                                       $typeMessage = $_SESSION['client-type-message'];
+                         <?php 
+                         if( isset($_SESSION['client-action-message']) 
+                         and isset($_SESSION['client-type-message']) ) {
+                            $message = $_SESSION['client-action-message'];
+                            $typeMessage = $_SESSION['client-type-message'];
                          ?>
                             <div class="alert alert-<?= $typeMessage ?>">
                                 <button class="close" data-dismiss="alert"></button>
                                 <?= $message ?>     
                             </div>
-                         <?php } 
-                            unset($_SESSION['client-action-message']);
-                            unset($_SESSION['client-type-message']);
+                         <?php 
+                         } 
+                         unset($_SESSION['client-action-message']);
+                         unset($_SESSION['client-type-message']);
                          ?>
                        <div class="span5">
 						<div class="portlet sale-summary">
@@ -299,16 +303,111 @@
 								</a-->
 						</div>
 					 </div>
-					 <h3>Détails des réglements</h3>
-					<hr>
-					<div class="portlet-body">
-							<table class="table table-striped table-bordered table-advance table-hover">
+					<!-- addReglement box begin-->
+                    <div id="addReglement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h3>Nouveau réglement </h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                <p>Êtes-vous sûr de vouloir ajouter un réglement pour le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
+                                <div class="control-group">
+                                     <label class="control-label" for="code">Date opération</label>
+                                     <div class="controls">
+                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                         </div>
+                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Montant</label>
+                                    <div class="controls">
+                                        <input type="text" required="required" id="montant" name="montant" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                     <label class="control-label" for="modePaiement">Mode de paiement</label>
+                                     <div class="controls">
+                                        <select name="modePaiement" id="modePaiement">
+                                            <option value="Especes">Espèces</option>
+                                            <option value="Cheque">Chèque</option>
+                                            <option value="Versement">Versement</option>
+                                            <option value="Virement">Virement</option>
+                                            <option value="Lettre de change">Lettre de change</option>
+                                            <option value="Remise">Remise</option>
+                                        </select>
+                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Numéro Opération</label>
+                                    <div class="controls">
+                                        <input type="text" required="required" name="numeroOperation" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <input type="hidden" name="action" value="add" />
+                                    <input type="hidden" name="source" value="contrat" />
+                                    <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
+                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                    <div class="controls">
+                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- addReglement box end -->
+					<div class="portlet box light-grey" id="detailsReglements">
+                        <div class="portlet-title">
+                            <h4>Détails des réglements client</h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <?php 
+                         if( isset($_SESSION['operation-action-message']) 
+                         and isset($_SESSION['operation-type-message']) ){
+                            $message = $_SESSION['operation-action-message'];
+                            $typeMessage = $_SESSION['operation-type-message'];
+                         ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php 
+                         } 
+                         unset($_SESSION['operation-action-message']);
+                         unset($_SESSION['operation-type-message']);
+                         ?>
+                                <div class="btn-group">
+                                    <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
+                                        Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>
+                                    </a>
+                                </div>
+                                <!--div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Print</a></li>
+                                        <li><a href="#">Save as PDF</a></li>
+                                        <li><a href="#">Export to Excel</a></li>
+                                    </ul>
+                                </div-->
+                            </div>
+                            <table class="table table-striped table-bordered table-hover" id="sample_1">
 								<thead>
 									<tr>
-										<th style="width: 25%">Date opération</th>
-										<th style="width: 25%">Montant</th>
-										<th style="width: 25%" class="hidden-phone">Quittance</th>
-										<th style="width: 25%" class="hidden-phone">Mode Paiement</th>
+									    <th style="width: 10%">Actions</th>
+										<th style="width: 20%">Date opération</th>
+										<th style="width: 20%">Mode Paiement</th>
+										<th style="width: 20%">Numéro Opération</th>
+										<th style="width: 20%">Montant</th>
+										<th style="width: 20%">Quittance</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -316,16 +415,101 @@
 									if($operationsNumber != 0){
 									foreach($operations as $operation){
 									?>		
-									<tr>
-										<td><a><?= date('d/m/Y', strtotime($operation->date())) ?></a></td>
+									<tr class="odd gradeX">
+									    <td>
+									        <a class="btn green mini" href="#updateOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-refresh"></i></a>
+									        <a class="btn red mini" href="#deleteOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-remove"></i></a>
+									    </td>
+										<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+										<td><?= $operation->modePaiement() ?></td>
+										<td><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
-										<td class="hidden-phone">
-											<a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operation->id() ?>"> 
-												<i class="m-icon-white icon-print"></i> Imprimer
-											</a>
-										</td>
-										<td class="hidden-phone"><?= $operation->modePaiement() ?></td>
+										<td><a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
 									</tr>	
+									<!-- update box begin-->
+                                    <div id="updateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Modifier Infos Opérations</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" action="controller/OperationActionController.php" method="post">
+                                                <p>Êtes-vous sûr de vouloir modifier les informations de cette opération ?</p>
+                                                <div class="control-group">
+                                                     <label class="control-label" for="code">Date opération</label>
+                                                     <div class="controls">
+                                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                            <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $operation->date('Y-m-d') ?>" />
+                                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Montant</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="montant" value="<?= $operation->montant() ?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                     <label class="control-label" for="modePaiement">Mode de paiement</label>
+                                                     <div class="controls">
+                                                        <div class="controls">
+                                                            <select name="modePaiement" id="modePaiement">
+                                                                <option value="<?= $operation->modePaiement() ?>"><?= $operation->modePaiement() ?></option>
+                                                                <option disabled="disabled">----------------</option>
+                                                                <option value="Especes">Espèces</option>
+                                                                <option value="Cheque">Chèque</option>
+                                                                <option value="Versement">Versement</option>
+                                                                <option value="Virement">Virement</option>
+                                                                <option value="Lettre de change">Lettre de change</option>
+                                                                <option value="Remise">Remise</option>
+                                                            </select>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Numéro Opération</label>
+                                                    <div class="controls">
+                                                        <input type="text" required="required" name="numeroOperation" value="<?= $operation->numeroCheque() ?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="update">
+                                                    <input type="hidden" name="source" value="contrat">
+                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                    <div class="controls">  
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- update box end --> 
+                                    <!-- delete box begin-->
+                                    <div id="deleteOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Supprimer Réglement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <p>Êtes-vous sûr de vouloir supprimer ce réglement ?</p>
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="delete">
+                                                    <input type="hidden" name="source" value="contrat">
+                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- delete box end --> 
 									<?php
 									}//end of loop
 									}//end of if
@@ -346,30 +530,18 @@
 										</td>
 										<td class="hidden-phone"><?= $contrat->modePaiement() ?></td>
 									</tr-->
-									<tr>
-										<td><strong>Somme Réglements</strong></td>
-										<td>
-											<strong>
-												<?= number_format($operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?>
-											</strong>		
-										</td>
-										<td class="hidden-phone">
-										</td>
-										<td class="hidden-phone"></td>
-									</tr>
-									<tr>
-										<td><strong>Reste</strong></td>
-										<td>
-											<strong>
-												<?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?>
-											</strong>		
-										</td>
-										<td class="hidden-phone">
-										</td>
-										<td class="hidden-phone"></td>
-									</tr>
 								</tbody>
 							</table>
+                            <table class="table table-striped table-bordered  table-hover">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%"><strong>Total des réglements</strong></th>
+                                    <th style="width: 25%"><a><strong><?= $operationManager->sommeOperations($contrat->id(), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 20%"><strong>Reste à payé</strong></th>
+                                    <th style="width: 25%"><a><strong><?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                </tr>
+                            </tbody>
+                        </table>
 						</div>
 						<br /><br />
 					 </div>
@@ -568,7 +740,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -597,7 +769,7 @@
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
-			//App.setPage("table_editable");
+			App.setPage("table_managed");
 			$('.hidenBlock').hide();
 			App.init();
 		});

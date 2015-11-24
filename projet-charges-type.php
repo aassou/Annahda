@@ -36,7 +36,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>AnnahdaERP - Management Application</title>
+    <title>ImmoERP - Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -157,6 +157,8 @@
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <input type="hidden" name="action" value="add" />    
+                                            <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />
+                                            <input type="hidden" name="source" value="projet-charges-type" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -182,7 +184,9 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-                                            <input type="hidden" name="action" value="add" />    
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />   
+                                            <input type="hidden" name="source" value="projet-charges-type" />     
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -192,10 +196,10 @@
                         </div>
                         <!-- addTypeCharge box end -->
                         <!--**************************** CHARGES BEGIN ****************************-->
-                        <div class="row-fluid">
+                        <div class="row-fluid get-down">
                             <div class="input-box autocomplet_container">
-                                <input class="m-wrap" name="designation" id="designation" type="text" placeholder="Désignation..." />
-                                <input class="m-wrap" name="societe" id="societe" type="text" placeholder="Société..." />
+                                <!--input class="m-wrap" name="designation" id="designation" type="text" placeholder="Désignation..." />
+                                <input class="m-wrap" name="societe" id="societe" type="text" placeholder="Société..." /-->
                                 <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
@@ -269,24 +273,44 @@
                             unset($_SESSION['charge-action-message']);
                             unset($_SESSION['charge-type-message']);
                          ?>
-                        <table class="table table-striped table-bordered table-advance table-hover">
-                            <thead>
+                        <table class="table table-striped table-bordered  table-hover">
+                            <tbody>
                                 <tr>
-                                    <th style="width: 20%"><strong>Total des charges</strong></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
-                                    <th style="width: 20%"></th>
+                                    <th style="width: 80%"><strong>Total des charges de <?= $typeCharge ?></strong></th>
                                     <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                 </tr>
-                            </thead>
+                            </tbody>
                         </table>
-                        <div class="portlet charges">
-                            <div class="portlet-body">
-                                <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-                                <table class="table table-striped table-bordered table-advance table-hover">
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste détaillé des charges de <?= $typeCharge ?></h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
+                        <div class="portlet-body">
+                            <!--div class="clearfix">
+                                <div class="btn-group">
+                                    <button id="sample_editable_1_new" class="btn green">
+                                    Add New <i class="icon-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Print</a></li>
+                                        <li><a href="#">Save as PDF</a></li>
+                                        <li><a href="#">Export to Excel</a></li>
+                                    </ul>
+                                </div>
+                            </div-->
+                            <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Type</th>
+                                            <th style="width: 10%"></th>
+                                            <th style="width: 10%">Type</th>
                                             <th style="width: 20%">Date Opération</th>
                                             <th style="width: 20%">Désignation</th>
                                             <th style="width: 20%">Société</th>
@@ -299,7 +323,12 @@
                                         ?>      
                                         <tr class="charges">
                                             <td>
-                                                <div class="btn-group">
+                                                <a class="btn mini green" title="Modifier" href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>"><i class="icon-refresh"></i></a>
+                                                <a class="btn mini red" title="Supprimer" href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>"><i class="icon-remove"></i></a>
+                                            </td>
+                                            <td>
+                                                <?= $charge->type() ?>
+                                                <!--div class="btn-group">
                                                     <a class="btn mini dropdown-toggle dropDownButton btn-fixed-width" href="#" data-toggle="dropdown">
                                                         <?= $charge->type() ?>             
                                                         <i class="icon-angle-down"></i>
@@ -314,7 +343,7 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                </div>
+                                                </div-->
                                             </td>
                                             <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
                                             <td class="hidden-phone"><?= $charge->designation() ?></td>
@@ -370,6 +399,8 @@
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                                         <input type="hidden" name="action" value="update" />
+                                                        <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />
+                                                        <input type="hidden" name="source" value="projet-charges-type" />
                                                         <div class="controls">  
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -393,6 +424,8 @@
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                                         <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />
+                                                        <input type="hidden" name="source" value="projet-charges-type" />
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
@@ -403,23 +436,33 @@
                                         <?php
                                         }//end of loop
                                         ?>
-                                        <tr>
+                                        <!--tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <th><strong>Total des charges</strong></th>
+                                            <td></td>
+                                            <td><strong>Total des charges</strong></td>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <th><strong><a><?= number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <td></td>
+                                            <td><strong><a><?= number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                        </tr-->
+                                    </tbody>
+                                </table>
+                                <table class="table table-striped table-bordered  table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 80%"><strong>Total des charges de <?= $typeCharge ?></strong></th>
+                                            <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                         </tr>
                                     </tbody>
                                 </table>
-                                </div><!-- END DIV SCROLLER --> 
+                                <!--/div--><!-- END DIV SCROLLER --> 
                             </div>
                         </div>
                         <!-- END Terrain TABLE PORTLET-->
@@ -435,7 +478,7 @@
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
-        2015 &copy; AnnahdaERP. Management Application.
+        2015 &copy; ImmoERP. Management Application.
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
@@ -466,7 +509,7 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            //App.setPage("table_editable");
+            App.setPage("table_managed");
             App.init();
         });
         $('.charges').show();

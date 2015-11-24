@@ -90,11 +90,6 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
                     <div class="span12">
-                        <!--div class="row-fluid">
-                            <div class="input-box">
-                                <input class="m-wrap" name="client" id="client" type="text" placeholder="Client..." />
-                            </div>
-                        </div-->
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                          <?php 
                          if ( isset($_SESSION['client-action-message'])
@@ -294,8 +289,6 @@
     <script src="assets/js/excanvas.js"></script>
     <script src="assets/js/respond.js"></script>
     <![endif]-->    
-    <script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
-    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
     <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
@@ -304,19 +297,10 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            App.setPage("table_editable");
+            App.setPage("table_managed");
             App.init();
         });
-        $('.clients').show();
-        $('#client').keyup(function(){
-           $('.clients').hide();
-           var txt = $('#client').val();
-           $('.clients').each(function(){
-               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
-                   $(this).show();
-               }
-            });
-        });
+        
     </script>
 </body>
 <!-- END BODY -->

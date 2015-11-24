@@ -29,7 +29,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>AnnahdaERP - Management Application</title>
+	<title>ImmoERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -213,7 +213,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="email">Email</label>
                                              <div class="controls">
-                                                <input type="text" id="email" name="email" value="<?= $email ?>" class="m-wrap span12">
+                                                <input type="email" id="email" name="email" value="<?= $email ?>" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
@@ -253,7 +253,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

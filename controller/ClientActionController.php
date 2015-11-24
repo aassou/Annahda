@@ -130,7 +130,7 @@
                 $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
             }
             else if( $source="clients" ){
-                $redirectLink = "Location:../clients.php";   
+                $redirectLink = "Location:../clients-list.php";   
             }
         }
         else{
@@ -149,7 +149,7 @@
         //$clientManager->delete($idClient);
         $actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../clients.php";
+        $redirectLink = "Location:../clients-list.php";
     }
     
     $_SESSION['client-action-message'] = $actionMessage;

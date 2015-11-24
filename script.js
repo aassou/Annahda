@@ -18,7 +18,7 @@ function autocompletClient() {
 	}
 }
 // set_item client : this function will be executed when we select an item
-function setItemClient(item1, item2, item3, item4, item5, item6, item7){
+function setItemClient(item1, item2, item3, item4, item5, item6, item7, item8, item9){
 	// change input value
 	$('#nomClient').val(item1);
 	$('#cin').val(item2);
@@ -27,6 +27,8 @@ function setItemClient(item1, item2, item3, item4, item5, item6, item7){
 	$('#adresse').val(item5);
 	$('#email').val(item6);
 	$('#idClient').val(item7);
+	$('#nomClientArabe').val(item8);
+	$('#adresseArabe').val(item9);
 	// hide proposition list
 	$('#clientList').hide();
 }

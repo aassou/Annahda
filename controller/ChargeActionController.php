@@ -26,7 +26,9 @@
     $chargeManager = new ChargeManager($pdo);
 	//Action Add Processing Begin
 	$idProjet = htmlentities($_POST['idProjet']);
-    	if($action == "add"){
+    //begin process: test the action
+    //Action Add Processing Begin
+    if($action == "add"){
         if( !empty($_POST['type']) ){
 			$type = htmlentities($_POST['type']);
 			$dateOperation = htmlentities($_POST['dateOperation']);
@@ -48,11 +50,11 @@
 			));
             //add it to db
             $chargeManager->add($charge);
-            $actionMessage = "Opération Valide : Charge Ajouté(e) avec succès.";  
+            $actionMessage = "<strong>Opération Valide</strong> : Charge Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "Erreur Ajout charge : Vous devez remplir le champ 'type'.";
+            $actionMessage = "<strong>Erreur Ajout Charge</strong> : Vous devez remplir le champ 'type'.";
             $typeMessage = "error";
         }
     }
@@ -79,11 +81,11 @@
 				'updatedBy' => $updatedBy
 			));
             $chargeManager->update($charge);
-            $actionMessage = "Opération Valide : Charge Modifié(e) avec succès.";
+            $actionMessage = "<strong>Opération Valide</strong> : Charge Modifié(e) avec succès.";
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "Erreur Modification Charge : Vous devez remplir le champ 'type'.";
+            $actionMessage = "<strong>Erreur Modification Charge</strong> : Vous devez remplir le champ 'type'.";
             $typeMessage = "error";
         }
     }
@@ -92,11 +94,16 @@
     else if($action == "delete"){
         $idCharge = htmlentities($_POST['idCharge']);
         $chargeManager->delete($idCharge);
-        $actionMessage = "Opération Valide : Charge supprimé(e) avec succès.";
+        $actionMessage = "<strong>Opération Valide</strong> : Charge supprimé(e) avec succès.";
         $typeMessage = "success";
     }
     //Action Delete Processing End
     $_SESSION['charge-action-message'] = $actionMessage;
     $_SESSION['charge-type-message'] = $typeMessage;
-    header('Location:../projet-charges.php?idProjet='.$idProjet);
+    $redirectLink = "Location:../projet-charges-grouped.php?idProjet=".$idProjet;
+    if( isset($_POST['typeCharge']) and isset($_POST['source']) and $_POST['source']=="projet-charges-type" ) {
+        $typeCharge = htmlentities($_POST['typeCharge']);
+        $redirectLink = "Location:../projet-charges-type.php?idProjet=".$idProjet."&type=".$typeCharge;
+    }
+    header($redirectLink);
 

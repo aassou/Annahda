@@ -91,7 +91,7 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN EXAMPLE TABLE PORTLET-->
-                        <div class="pull-right get-down">
+                        <!--div class="pull-right get-down">
                             <a href="#addFournisseur" data-toggle="modal" class="btn blue">
                                 Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
                             </a>
@@ -100,7 +100,7 @@
                             <div class="input-box">
                                 <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..." />
                             </div>
-                        </div>
+                        </div-->
                         <!-- addFournisseur box begin-->
                         <div id="addFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -130,7 +130,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Tél.2</label>
                                         <div class="controls">
-                                            <input type="text" name="telephone2" value="" />
+                                            <input type="tel" name="telephone2" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -142,7 +142,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Email</label>
                                         <div class="controls">
-                                            <input type="text" name="email" value="" />
+                                            <input type="email" name="email" value="" />
                                         </div>  
                                     </div>
                                     <div class="control-group">
@@ -171,13 +171,35 @@
                          	unset($_SESSION['fournisseur-action-message']);
                             unset($_SESSION['fournisseur-type-message']);
                          ?>
-						<div class="portlet providers" id="listFournisseurs">
-							<div class="portlet-body">
-							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-								<table class="table table-striped table-bordered table-advance table-hover" id="sample_editable_1">
+    						<div class="portlet box light-grey">
+                                <div class="portlet-title">
+                                    <h4>Liste des fournisseurs</h4>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="reload"></a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="clearfix">
+                                        <div class="btn-group">
+                                            <a href="#addFournisseur" data-toggle="modal" class="btn blue">
+                                            Nouveau Fournisseur <i class="icon-plus-sign"></i>
+                                            </a>
+                                        </div>
+                                        <!--div class="btn-group pull-right">
+                                            <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Print</a></li>
+                                                <li><a href="#">Save as PDF</a></li>
+                                                <li><a href="#">Export to Excel</a></li>
+                                            </ul>
+                                        </div-->
+                                    </div>
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
 									<thead>
 										<tr>
-											<th style="width:25%">Nom</th>
+										    <th style="width:5%"></th>
+											<th style="width:20%">Nom</th>
 											<th style="width:30%">Adresse</th>
 											<th style="width:10%">Tél1</th>
 											<th style="width:10%">Tél2</th>
@@ -190,30 +212,14 @@
 										if($fournisseurNumber!=0){
 										foreach ($fournisseurs as $fournisseur) {
 										?>	
-										<tr class="providers">
-											<td>
-												<div class="btn-group">
-												    <a style="width: 200px" class="btn mini dark-red dropdown-toggle" href="#" data-toggle="dropdown">
-												    	<?= $fournisseur->nom()?> 
-												        <i class="icon-angle-down"></i>
-												    </a>
-												    <ul class="dropdown-menu">
-												        <li>
-												        	<a href="#update<?= $fournisseur->id();?>" data-toggle="modal" data-id="<?= $fournisseur->id(); ?>">
-																Modifier
-															</a>
-															<a href="#delete<?= $fournisseur->id();?>" data-toggle="modal" data-id="<?= $fournisseur->id(); ?>">
-																Supprimer
-															</a>
-												        </li>
-												    </ul>
-												</div>
-											</td>
+										<tr class="odd gradeX">
+										    <td class="hidden-phone"><a class="btn green mini" href="#update<?= $fournisseur->id();?>" data-toggle="modal" data-id="<?= $fournisseur->id(); ?>"><i class="icon-refresh"></i></a></td>
+                                            <td><?= $fournisseur->nom() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->adresse()?></td>
 											<td class="hidden-phone"><?= $fournisseur->telephone1() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->telephone2() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->fax() ?></td>
-											<td class="hidden-phone"><?= $fournisseur->email() ?></td>
+											<td class="hidden-phone"><a target="_blank" href="mailto:<?= $fournisseur->email() ?>"><?= $fournisseur->email() ?></a></td>
 										</tr>
 										<!-- updateFournisseur box begin-->
 										<div id="update<?= $fournisseur->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -257,7 +263,7 @@
 													<div class="control-group">
 														<label class="control-label">Email</label>
 														<div class="controls">
-															<input type="text" name="email" value="<?= $fournisseur->email() ?>" />
+															<input type="email" name="email" value="<?= $fournisseur->email() ?>" />
 														</div>	
 													</div>
 													<div class="control-group">
@@ -340,7 +346,7 @@
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
-			//App.setPage("table_editable");
+			App.setPage("table_managed");
 			App.init();
 		});
 		$('.providers').show();

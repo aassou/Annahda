@@ -41,7 +41,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>AnnahdaERP - Management Application</title>
+	<title>ImmoERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -176,7 +176,7 @@
 						 <?php } 
 							unset($_SESSION['contrat-activation-error']);
 						 ?>
-						 <div class="row-fluid">
+						 <!--div class="row-fluid">
                             <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
                                 <i class="icon-print"></i>
                                  Version Imprimable
@@ -184,24 +184,46 @@
                             <div class="input-box">
                                 <input class="m-wrap" name="customer" id="customer" type="text" placeholder="Chercher un client..." />
                             </div>
-                        </div>
-						<div class="portlet contrats-list">
-							<div class="portlet-body">
-							    <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-								<table class="table table-striped table-bordered table-advance table-hover">
+                        </div-->
+						<div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste des contrats clients</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
+                                            <i class="icon-print"></i>
+                                             Version Imprimable
+                                        </a>
+                                    </div>
+                                    <!--div class="btn-group pull-right">
+                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Print</a></li>
+                                            <li><a href="#">Save as PDF</a></li>
+                                            <li><a href="#">Export to Excel</a></li>
+                                        </ul>
+                                    </div-->
+                                </div>
+							    <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
+								<table class="table table-striped table-bordered table-hover" id="sample_1">
 									<thead>
 										<tr>
-											<th style="width:10%">Client</th>
-											<th style="width:10%" class="hidden-phone">Type</th>
-											<th style="width:5%">Bien</th>
-											<th style="width:10%">Etage</th>
-											<th style="width:11%" class="hidden-phone">Prix</th>
+										    <th style="width:5%">Actions</th>
+											<th style="width:15%">Client</th>
+											<th style="width:15%" class="hidden-phone">Bien</th>
+											<th style="width:15%">Date Contrat</th>
+											<th style="width:10%" class="hidden-phone">Prix</th>
 											<th style="width:10%" class="hidden-phone">Réglements</th>
 											<th style="width:10%" class="hidden-phone">Reste</th>
-											<th style="width:8%">Paiements</th>
-											<th style="width:5%" class="hidden-phone">Status</th>
+											<th style="width:10%" class="hidden-phone">Status</th>
 											<?php if(isset($_SESSION['print-quittance'])){ ?>
-												<th>Quittance</th>
+											<th style="width:10%">Quittance</th>
 											<?php 
 											} ?>
 										</tr>
@@ -216,20 +238,20 @@
                                             $etage = "";
 											if($contrat->typeBien()=="appartement"){
 												$bien = $appartementManager->getAppartementById($contrat->idBien());
-												$typeBien = "Appart";
+												$typeBien = "Appartement";
                                                 $etage = "Etage ".$bien->niveau();
 											}
 											else{
 												$bien = $locauxManager->getLocauxById($contrat->idBien());
-												$typeBien = "Local.Com";
+												$typeBien = "Local commercial";
                                                 $etage = "";
 											}
 										?>		
-										<tr>
+										<tr class="odd gradeX">
 											<td>
 												<div class="btn-group">
-												    <a style="width: 200px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
-												    	<?= $clientManager->getClientById($contrat->idClient())->nom() ?> 
+												    <a class="btn black mini dropdown-toggle" href="#" data-toggle="dropdown">
+												    	Choisir 
 												        <i class="icon-angle-down"></i>
 												    </a>
 												    <ul class="dropdown-menu">
@@ -237,6 +259,9 @@
 												        	<a target="_blank" href="contrat.php?codeContrat=<?= $contrat->code() ?>">
 																Consulter Contrat
 															</a>
+															<a href="operations.php?idContrat=<?= $contrat->id() ?>&idProjet=<?= $idProjet ?>">
+                                                                Détails Réglements
+                                                            </a>
 												        	<a href="#addReglement<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
 												        		Nouveau réglement
 												        	</a>
@@ -265,17 +290,12 @@
 												    </ul>
 												</div>
 											</td>
-											<td class="hidden-phone"><?= $typeBien ?></td>
-											<td><?= $bien->nom() ?></td>
-											<td><?= $etage ?></td>
+											<td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
+											<td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
+											<td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
-											</td>
-											<td>
-												<a class="btn mini red" href="operations.php?idContrat=<?= $contrat->id() ?>&idProjet=<?= $idProjet ?>" data-toggle="modal" data-id="">
-													<i class="m-icon-white icon-folder-open"></i> Voir
-												</a>
 											</td>
 											<td class="hidden-phone">
 												<?php if($contrat->status()=="actif"){
@@ -287,14 +307,17 @@
 												echo $status;
 												?>	
 											</td>
-											<?php if(isset($_SESSION['print-quittance']) and $operationsNumber>=1){ ?>
+											<?php 
+											if(isset($_SESSION['print-quittance']) and $operationsNumber>=1){ ?>
 												<td>
 													<a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operationManager->getLastIdByIdContrat($contrat->id()) ?>"> 
 														<i class="m-icon-white icon-print"></i> Imprimer
 													</a>
 												</td>
 											<?php 
-											} ?>
+											}
+                                            unset($_SESSION['print-quittance']); 
+											?>
 										</tr>
 										<!-- desistement box begin-->
 										<div id="desisterContrat<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -323,7 +346,7 @@
 												<h3>Nouveau réglement </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/OperationAddController.php?p=99" method="post">
+												<form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir ajouter un réglement pour le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
 													<div class="control-group">
 			                                             <label class="control-label" for="code">Date opération</label>
@@ -333,11 +356,11 @@
 							                                    <span class="add-on"><i class="icon-calendar"></i></span>
 							                                 </div>
 			                                             </div>
-			                                          </div>
+			                                        </div>
 													<div class="control-group">
 														<label class="control-label">Montant</label>
 														<div class="controls">
-															<input type="text" id="montant" name="montant" />
+															<input type="text" required="required" id="montant" name="montant" />
 														</div>
 													</div>
 													<div class="control-group">
@@ -354,9 +377,17 @@
 																</select>
 															</div>
 			                                             </div>
-			                                          </div>
+			                                        </div>
+			                                        <div class="control-group">
+                                                        <label class="control-label">Numéro Opération</label>
+                                                        <div class="controls">
+                                                            <input type="text" required="required" name="numeroOperation" />
+                                                        </div>
+                                                    </div>
 													<div class="control-group">
 														<label class="right-label"></label>
+														<input type="hidden" name="action" value="add" />
+														<input type="hidden" name="source" value="contrats-list" />
 														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -437,7 +468,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; AnnahdaERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -455,12 +486,12 @@
     <!--[if lt IE 9]>
     <script src="assets/js/excanvas.js"></script>
     <script src="assets/js/respond.js"></script>
-    <![endif]-->    
+    <![endif]-->
+    <script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
     <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
-    <script src="assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
-    <script src="assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
 	<script src="assets/js/app.js"></script>
@@ -468,7 +499,7 @@
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
-			//App.setPage("table_editable");
+			App.setPage("table_managed");
 			App.init();
 		});
 		$('.contrats-list').show();
