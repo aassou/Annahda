@@ -78,7 +78,7 @@ ob_start();
 	}
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
-    <img src="../assets/img/logo_company.png" style="width: 110px" />
+    <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <br><br><br><br>
     <table>
         <tr>
@@ -164,8 +164,7 @@ ob_start();
     Dans la cas de litige, ou la société n’est pas parvenus à la réalisation du projet  le client a le droit de récupérer ses fonds  sans demander une indemnisation ou des intérêts et sans recours au tribunal.
     </p>
     <hr/>
-    <p style="text-align: center">STE MERLA TRAV SARL : Au capital de 100 000,00 DH – Siège social Hay Al Matar En face de l'institution AR'RISSALA 2, Nador. 
-    	<br>Tèl 0536381458/ 0661668860 IF : 40451179   RC : 10999  Patente 56126681</p>
+    <p style="text-align: center"></p>
     </page_footer>
 </page>    
 <?php
