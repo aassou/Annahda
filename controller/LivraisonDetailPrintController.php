@@ -101,7 +101,6 @@ ob_start();
             <td><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?></td>
         </tr>
 	</table>
-    <br><br>
     <page_footer>
     <hr/>
     <p style="text-align: center;font-size: 9pt;"></p>
