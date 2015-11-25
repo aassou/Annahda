@@ -22,7 +22,7 @@
 		$livraisonDetailNumber = 0;
 		$totalReglement = 0;
 		$totalLivraison = 0;
-		$titreLivraison ="Bon de livraison ";
+		$titreLivraison ="BL N° ";
 		$livraison = "Vide";
 		$fournisseur = "Vide";
 		$projet = "Vide";
