@@ -83,7 +83,8 @@
                 $livraisonListDeleteLink = "?idFournisseur=".$_GET['idFournisseur']."&p=".$p;
                 $begin = ($p - 1) * $livraisonPerPage;
                 $pagination = paginate('livraisons-fournisseur.php?idFournisseur='.$_GET['idFournisseur'], '&p=', $pageNumber, $p);
-                $livraisons = $livraisonManager->getLivraisonsByIdFournisseurByLimits($idFournisseur, $begin, $livraisonPerPage);
+                //$livraisons = $livraisonManager->getLivraisonsByIdFournisseurByLimits($idFournisseur, $begin, $livraisonPerPage);
+                $livraisons = $livraisonManager->getLivraisonsByIdFournisseur($idFournisseur);
                 $titreLivraison ="Liste des livraisons du fournisseur <strong>".$fournisseurManager->getFournisseurById($idFournisseur)->nom()."</strong>";
                 //get the sum of livraisons details using livraisons ids (idFournisseur)
                 $livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($idFournisseur);
@@ -106,7 +107,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>AnnahdaERP - Management Application</title>
+    <title>ImmoERP - Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -315,13 +316,13 @@
                             </div>
                         </div>
                         <!-- addReglement box end -->
-                        <div class="row-fluid">
+                        <!--div class="row-fluid">
                             <form action="" method="get">
                                 <div class="input-box autocomplet_container">
                                     <input class="m-wrap" name="projet" id="nomProjet" type="text" placeholder="Recherche..." />
-                                    <!--input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
+                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
                                         <ul id="projetList"></ul>
-                                    </input-->
+                                    </input>
                                     <input name="idFournisseur" id="idFournisseur" type="hidden" />
                                     <input name="idProjet" id="idProjet" type="hidden" />
                                     <button type="submit" class="btn red"><i class="icon-search"></i></button>
@@ -330,7 +331,7 @@
                                     </a>
                                 </div>
                             </form>
-                        </div>
+                        </div-->
                         <!-- printCharge box begin-->
                         <div id="printBilanFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -440,19 +441,40 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="portlet livraisons">
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Livraison de <?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
                             <div class="portlet-body">
-                                <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-                                <table class="table table-striped table-bordered table-advance table-hover">
+                                <div class="clearfix">
+                                    
+                                    <div class="btn-group">
+                                        <a href="#printBilanFournisseur" class="btn blue" data-toggle="modal">
+                                            <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                                        </a>
+                                    </div>
+                                    <!--div class="btn-group pull-right">
+                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Print</a></li>
+                                            <li><a href="#">Save as PDF</a></li>
+                                            <li><a href="#">Export to Excel</a></li>
+                                        </ul>
+                                    </div-->
+                                </div>
+                            <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <th style="width: 10%">Actions</th>
                                             <th style="width: 15%">N° BL</th>
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 15%">Date Livraison</th>
                                             <th style="width: 15%">Articles</th>
                                             <th style="width: 20%">Total</th>
-                                            <th style="width: 5%"></th>
-                                            <th style="width: 5%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -464,11 +486,18 @@
                                         foreach($livraisons as $livraison){
                                         ?>      
                                         <tr class="livraisons">
-                                            <td>
-                                                <a style="width: 100px" class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>">
-                                                    <?= $livraison->libelle() ?>
+                                            <td>                                                            
+                                                <a class="btn mini green" href="#updateLivraison<?= $livraison->id();?>" data-toggle="modal" data-id="<?= $livraison->id(); ?>" title="Modifier">
+                                                    <i class="icon-refresh"></i>
+                                                </a>
+                                                <a class="btn mini red" href="#deleteLivraison<?= $livraison->id() ?>" data-toggle="modal" data-id="<?= $livraison->id() ?>" title="Supprimer" >
+                                                    <i class="icon-remove"></i>
+                                                </a>
+                                                <a class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>" title="Voir Détail Livraison" >
+                                                    <i class="icon-eye-open"></i>
                                                 </a>
                                             </td>
+                                            <td><?= $livraison->libelle() ?></td>
                                             <td><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
                                             <td>
@@ -476,16 +505,6 @@
                                             </td>
                                             <td>
                                                 <?= number_format($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' '); ?>
-                                            </td>
-                                            <td>                                                            
-                                                <a class="btn mini green" href="#updateLivraison<?= $livraison->id();?>" data-toggle="modal" data-id="<?= $livraison->id(); ?>">
-                                                    <i class="icon-refresh"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a class="btn mini red" href="#deleteLivraison<?= $livraison->id() ?>" data-toggle="modal" data-id="<?= $livraison->id() ?>">
-                                                    <i class="icon-remove"></i>
-                                                </a>
                                             </td>
                                         </tr>
                                         <!-- add file box begin-->
@@ -597,9 +616,9 @@
                                         ?>
                                     </tbody>
                                     <?php
-                                    if($livraisonNumber != 0){
+                                    /*if($livraisonNumber != 0){
                                         echo $pagination;   
-                                    }
+                                    }*/
                                     ?>
                                 </table>
                                 <table class="table table-striped table-bordered table-advance table-hover">
@@ -629,7 +648,7 @@
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
-        2015 &copy; AnnahdaERP. Management Application.
+        2015 &copy; ImmoERP. Management Application.
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
@@ -660,7 +679,7 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            //App.setPage("table_editable");
+            App.setPage("table_managed");
             App.init();
         });
         $('.livraisons').show();

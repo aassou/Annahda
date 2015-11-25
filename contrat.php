@@ -370,20 +370,20 @@
                         <div class="portlet-body">
                             <div class="clearfix">
                                 <?php 
-                         if( isset($_SESSION['operation-action-message']) 
-                         and isset($_SESSION['operation-type-message']) ){
-                            $message = $_SESSION['operation-action-message'];
-                            $typeMessage = $_SESSION['operation-type-message'];
-                         ?>
-                            <div class="alert alert-<?= $typeMessage ?>">
-                                <button class="close" data-dismiss="alert"></button>
-                                <?= $message ?>     
-                            </div>
-                         <?php 
-                         } 
-                         unset($_SESSION['operation-action-message']);
-                         unset($_SESSION['operation-type-message']);
-                         ?>
+                                 if( isset($_SESSION['operation-action-message']) 
+                                 and isset($_SESSION['operation-type-message']) ){
+                                    $message = $_SESSION['operation-action-message'];
+                                    $typeMessage = $_SESSION['operation-type-message'];
+                                 ?>
+                                    <div class="alert alert-<?= $typeMessage ?>">
+                                        <button class="close" data-dismiss="alert"></button>
+                                        <?= $message ?>     
+                                    </div>
+                                 <?php 
+                                 } 
+                                 unset($_SESSION['operation-action-message']);
+                                 unset($_SESSION['operation-type-message']);
+                                ?>
                                 <div class="btn-group">
                                     <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
                                         Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>

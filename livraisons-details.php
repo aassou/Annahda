@@ -296,17 +296,24 @@
 							?>
 							<table class="table table-striped table-bordered table-hover">
 							<tr>
-								<th>Désignation</th>
-								<th>Quantité</th>
-								<th>Prix.Uni</th>
-								<th>Total</th>
-								<th>Modifier</th>
-								<th>Supprimer</th>
+							    <th style="width: 10%">Actions</th>
+								<th style="width: 20%">Désignation</th>
+								<th style="width: 20%">Quantité</th>
+								<th style="width: 20%">Prix.Uni</th>
+								<th style="width: 30%">Total</th>
 							</tr>
 							<?php
 							foreach($livraisonDetail as $detail){
 							?>
 							<tr>
+							    <td class="hidden-phone">
+                                    <a class="btn mini green" href="#updateLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">
+                                        <i class="icon-refresh "></i>
+                                    </a>
+                                    <a class="btn mini red" href="#deleteLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">
+                                        <i class="icon-remove "></i>
+                                    </a>
+                                </td>
 								<td>
 									<?= $detail->designation() ?>
 								</td>
@@ -318,16 +325,6 @@
 								</td>
 								<td>
 									<?= number_format($detail->prixUnitaire() * $detail->quantite(), '2', ',', ' ') ?>&nbsp;DH
-								</td>
-								<td class="hidden-phone">
-									<a class="btn mini green" href="#updateLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">
-										<i class="icon-refresh "></i>
-									</a>
-								</td>
-								<td class="hidden-phone">
-									<a class="btn mini red" href="#deleteLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">
-										<i class="icon-remove "></i>
-									</a>
 								</td>
 							</tr>
 							<!-- BEGIN  updateLivraisonDetail BOX -->
@@ -393,23 +390,15 @@
 							<?php
 							}//end foreach
 							?>
-    							<tr>
-    							    <td></td>
-                                    <td></td>
-    							    <td></td>
-                                    <th><strong>Grand total</strong></th>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><strong><a><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?></a></strong></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
 							</table>
+							<table class="table table-striped table-bordered table-advance table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th style="width: 70%"><strong>Grand Total</strong></th>
+                                        <th style="width: 30%"><strong><a><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    </tr>
+                                </tbody>
+                            </table>
 							<!--table class="table table-striped table-bordered table-advance table-hover">
 								<thead>
 									<tr>
@@ -499,7 +488,7 @@
                 }
             },
             errorClass: "error-class",
-            validClass: "alid-class"
+            validClass: "valid-class"
         });
 	</script>
 </body>

@@ -115,12 +115,12 @@
                                     <div class="portfolio-info">
                                         <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
                                         <a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width green">Listes Clients et Contrats</a>
-                                        <a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a>
+                                        <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
+                                        <!--a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a-->
                                     </div>
                                     <div class="portfolio-info">
-                                        <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
-                                        <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a>
-                                        <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width blue">Statistiques</a>
+                                        <!--a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a-->
+                                        <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Statistiques</a>
                                     </div>
                                     <!--div class="portfolio-info">
                                         <a class="btn brown arabic" href="contrats-travail.php?idProjet=<?= $projet->id() ?>" class="btn">تنظيم عقود العمل</a>
