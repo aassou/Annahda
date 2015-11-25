@@ -24,7 +24,7 @@
     $typeMessage = "";
     $redirectLink = "";
     //process begins
-    $fournisseurManager = new fournisseurManager($pdo);
+    $fournisseurManager = new FournisseurManager($pdo);
     $idFournisseur = htmlentities($_POST['idFournisseur']);
     if( $action == "add" ) {
         if( !empty($_POST['nom']) ) {
@@ -43,7 +43,7 @@
                 $createdBy = $_SESSION['userMerlaTrav']->login();
                 $created = date('Y-m-d h:i:s');
                 $fournisseur = 
-                new fournisseur(array('code' => $codeFournisseur, 'nom' => $nom, 'adresse' => $adresse, 
+                new Fournisseur(array('code' => $codeFournisseur, 'nom' => $nom, 'adresse' => $adresse, 
                 'telephone1' => $telephone1, 'telephone2' => $telephone2, 'fax' => $fax, 'email' => $email,   
                 'createdBy' => $createdBy, 'created' => $created));
                 $fournisseurManager->add($fournisseur);
@@ -73,7 +73,7 @@
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $fournisseur = 
-            new fournisseur(array('id' => $idFournisseur, 'nom' => $nom, 'adresse' => $adresse, 
+            new Fournisseur(array('id' => $idFournisseur, 'nom' => $nom, 'adresse' => $adresse, 
             'telephone1' => $telephone1, 'telephone2' => $telephone2, 'fax' => $fax, 'email' => $email,   
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $fournisseurManager->update($fournisseur);

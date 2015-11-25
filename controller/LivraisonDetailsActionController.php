@@ -36,7 +36,7 @@
             $created = date('Y-m-d h:i:s');
             //create object
             $livraisonDetail = 
-            new livraisonDetail(array('prixUnitaire' => $prixUnitaire, 'quantite' => $quantite,
+            new LivraisonDetail(array('prixUnitaire' => $prixUnitaire, 'quantite' => $quantite,
             'designation' => $designation, 'idLivraison' => $idLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonDetailManager->add($livraisonDetail);
@@ -59,7 +59,7 @@
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $livraisonDetail = 
-            new livraisonDetail(array('id' => $idLivraisonDetail, 'designation' => $designation,
+            new LivraisonDetail(array('id' => $idLivraisonDetail, 'designation' => $designation,
             'prixUnitaire' => $prixUnitaire, 'quantite' => $quantite, 'updatedBy' => $updatedBy,
             'updated' => $updated));
             $livraisonDetailManager->update($livraisonDetail);
