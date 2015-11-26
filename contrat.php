@@ -17,13 +17,29 @@
     	if( isset($_GET['idProjet']) ){
     	   $idProjet = $_GET['idProjet'];   
     	}
+        //destroy contrat-form-data session
+        if ( isset($_SESSION['contrat-form-data']) ) {
+            unset($_SESSION['contrat-form-data']);
+        }
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
 		$operationManager = new OperationManager($pdo);
+        $compteBancaireManager = new CompteBancaireManager($pdo);
+        $contratCasLibreManager = new ContratCasLibreManager($pdo);
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
+            $comptesBancaires = $compteBancaireManager->getCompteBancaires();
 			$contrat = $contratManager->getContratByCode($codeContrat);
+            $contratCasLibreNumber = 
+            $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
+            $contratCasLibreElements = "";
+            $contratCasLibreTitle = "";
+            if ( $contratCasLibreNumber > 0 ) {
+                $contratCasLibreTitle = "<h4>Informations Supplémentaires</h4>";
+                $contratCasLibreElements = 
+                $contratCasLibreManager->getContratCasLibresByCodeContrat($codeContrat);
+            }
 			$projet = $projetManager->getProjetById($contrat->idProjet());
 			$client = $clientManager->getClientById($contrat->idClient());
 			$sommeOperations = $operationManager->sommeOperations($contrat->id());
@@ -131,7 +147,10 @@
 						<?php if(isset($_GET['codeContrat']) and 
 						(bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 	                     //progress bar processing
-	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id())  +$contrat->avance() )/$contrat->prixVente())*100);
+	                     //contrat progress with avance : 
+	                     //$statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id())  +$contrat->avance() )/$contrat->prixVente())*100);
+	                     //contrat progress without avance : 
+	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id()) )/$contrat->prixVente())*100);
 						 $statusBar = "";
 						 if( $statistiquesResult>0 and $statistiquesResult<25 ){
 						 	$statusBar = "progress-danger";
@@ -250,6 +269,10 @@
 									<span class="sale-info">Superficie</span> 
 									<span class="sale-num"><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></span>
 								</li>
+								<li>
+                                    <span class="sale-info">Date création</span> 
+                                    <span class="sale-num"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></span>
+                                </li>
 								<?php if($contrat->typeBien()=="appartement"){ ?>
 								<li>
 									<span class="sale-info">Niveau</span> 
@@ -322,6 +345,15 @@
                                      </div>
                                 </div>
                                 <div class="control-group">
+                                     <label class="control-label" for="code">Date réglement</label>
+                                     <div class="controls">
+                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input name="dateReglement" id="dateReglement" class="m-wrap m-ctrl-small date-picker" type="text" value="" />
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                         </div>
+                                     </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Montant</label>
                                     <div class="controls">
                                         <input type="text" required="required" id="montant" name="montant" />
@@ -341,9 +373,29 @@
                                      </div>
                                 </div>
                                 <div class="control-group">
+                                    <label class="control-label">Compte Bancaire</label>
+                                    <div class="controls">
+                                        <select name="compteBancaire" id="compteBancaire">
+                                            <?php
+                                            foreach ($comptesBancaires as $compte) {
+                                            ?>
+                                                <option value="<?= $compte->numero() ?>"><?= $compte->numero() ?></option>
+                                            <?php  
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
                                     <label class="control-label">Numéro Opération</label>
                                     <div class="controls">
                                         <input type="text" required="required" name="numeroOperation" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Observation</label>
+                                    <div class="controls">
+                                        <textarea type="text" name="observation"></textarea>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -360,6 +412,46 @@
                         </div>
                     </div>
                     <!-- addReglement box end -->
+                    <div class="portlet box light-grey">
+                        <div class="portlet-title">
+                            <h4><?= $contratCasLibreTitle; ?></h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%">Actions</th>
+                                            <th style="width: 20%">Date</th>
+                                            <th style="width: 20%">Montant</th>
+                                            <th style="width: 50%">Obsérvation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ( $contratCasLibreElements as $element ) {
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <a href="" title="Modifier" class="btn mini green"><i class="icon-refresh"></i></a>
+                                                <a href="" title="Supprimer" class="btn mini red"><i class="icon-remove"></i></a>    
+                                            </td>
+                                            <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
+                                            <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
+                                            <td><?= $element->observation() ?></td>
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php?>  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>       
+                    </div>    
 					<div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Détails des réglements client</h4>
@@ -403,11 +495,14 @@
 								<thead>
 									<tr>
 									    <th style="width: 10%">Actions</th>
-										<th style="width: 20%">Date opération</th>
-										<th style="width: 20%">Mode Paiement</th>
-										<th style="width: 20%">Numéro Opération</th>
-										<th style="width: 20%">Montant</th>
-										<th style="width: 20%">Quittance</th>
+										<th style="width: 10%">Date.Opé</th>
+										<th style="width: 10%">Date.Rég</th>
+										<th style="width: 10%">ModePaiement</th>
+										<th style="width: 10%">Compte</th>
+										<th style="width: 10%">N° Opération</th>
+										<th style="width: 10%">Montant</th>
+										<th style="width: 20%">Observation</th>
+										<th style="width: 10%">Quittance</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -421,9 +516,12 @@
 									        <a class="btn red mini" href="#deleteOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-remove"></i></a>
 									    </td>
 										<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+										<td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
 										<td><?= $operation->modePaiement() ?></td>
+										<td><?= $operation->compteBancaire() ?></td>
 										<td><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
+										<td><?= $operation->observation() ?></td>
 										<td><a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
 									</tr>	
 									<!-- update box begin-->
@@ -440,6 +538,15 @@
                                                      <div class="controls">
                                                         <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                                             <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $operation->date('Y-m-d') ?>" />
+                                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                                         </div>
+                                                     </div>
+                                                </div>
+                                                <div class="control-group">
+                                                     <label class="control-label" for="code">Date réglement</label>
+                                                     <div class="controls">
+                                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                            <input name="dateReglement" id="dateReglement" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $operation->dateReglement() ?>" />
                                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                                          </div>
                                                      </div>
@@ -468,9 +575,31 @@
                                                      </div>
                                                 </div>
                                                 <div class="control-group">
+                                                    <label class="control-label">Compte Bancaire</label>
+                                                    <div class="controls">
+                                                        <select name="compteBancaire" id="compteBancaire">
+                                                            <option value="<?= $operation->compteBancaire() ?>"><?= $operation->compteBancaire() ?></option>
+                                                            <option disabled="disabled">----------------------</option>
+                                                            <?php
+                                                            foreach ($comptesBancaires as $compte) {
+                                                            ?>
+                                                                <option value="<?= $compte->numero() ?>"><?= $compte->numero() ?></option>
+                                                            <?php  
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
                                                     <label class="control-label">Numéro Opération</label>
                                                     <div class="controls">
                                                         <input type="text" required="required" name="numeroOperation" value="<?= $operation->numeroCheque() ?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Observation</label>
+                                                    <div class="controls">
+                                                        <textarea type="text" name="observation"><?= $operation->observation() ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">

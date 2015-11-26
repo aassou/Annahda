@@ -33,7 +33,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>AnnahdaERP - Management Application</title>
+	<title>ImmoERP - Management Application</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -267,7 +267,7 @@
                                           <div class="control-group">
                                              <label class="control-label">N° Opération</label>
                                              <div class="controls">
-                                                <input required="required" type="text" value="<?= $numeroOperation ?>" name="numeroCheque" class="m-wrap">
+                                                <input type="text" value="<?= $numeroOperation ?>" name="numeroCheque" class="m-wrap">
                                              </div>
                                           </div>
                                         </div>
@@ -280,6 +280,23 @@
                                           </div>
                                         </div>
                                     </div>
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                          <div class="control-group">
+                                            <label class="checkbox">
+                                            <input type="checkbox" id="show-cas-libre" name="show-cas-libre" value="show-cas-libre" />
+                                            Renseigner plus de détails
+                                            </label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- BEGIN CAS LIBRE DIV -->
+                                    <div id="cas-libre" style="display: none">
+                                        <h4><strong>Cas libre</strong> : Informations complémentaires</h4>
+                                        <hr>
+                                        <?php include('include/cas-libre.php'); ?>
+                                    </div>
+                                    <!-- END CAS LIBRE DIV -->
                                     <div class="form-actions">
                                         <input type="hidden" name="action" value="add">
                                     	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>">
@@ -317,7 +334,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; AnnahdaERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -350,6 +367,10 @@
 			//App.setPage("table_editable");
 			$('.hidenBlock').hide();
 			App.init();
+			//show-cas-libre
+			$('#show-cas-libre').change(function(){
+			    $("#cas-libre").toggle();
+			});
 		});
 		$(document).ready(function() {
 			$('.typeBien').change(function(){

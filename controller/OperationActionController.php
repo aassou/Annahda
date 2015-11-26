@@ -31,13 +31,16 @@
             $modePaiement = htmlentities($_POST['modePaiement']);
             $numeroOperation = htmlentities($_POST['numeroOperation']);
             $dateOperation = htmlentities($_POST['dateOperation']);
+            $dateReglement = htmlentities($_POST['dateReglement']);
+            $compteBancaire = htmlentities($_POST['compteBancaire']);
+            $observation = htmlentities($_POST['observation']);
             $idContrat = htmlentities($_POST['idContrat']);
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $operation = 
-            new Operation(array('date' => $dateOperation, 'montant' => $montant,
-            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 
-            'numeroCheque' => $numeroOperation,   
+            new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 
+            'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 
+            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
             'createdBy' => $createdBy, 'created' => $created));
             $operationManager->add($operation);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Ajouté avec succès.";
@@ -52,15 +55,19 @@
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
             $idOperation = htmlentities($_POST['idOperation']);
             $dateOperation = htmlentities($_POST['dateOperation']);
+            $dateReglement = htmlentities($_POST['dateReglement']);
+            $compteBancaire = htmlentities($_POST['compteBancaire']);
+            $observation = htmlentities($_POST['observation']);
             $montant = htmlentities($_POST['montant']);
             $modePaiement = htmlentities($_POST['modePaiement']);
             $numeroOperation = htmlentities($_POST['numeroOperation']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $operation = 
-            new Operation(array('id' => $idOperation, 'date' => $dateOperation, 'montant' => $montant,
-            'numeroCheque' => $numeroOperation, 'modePaiement' => $modePaiement,     
-            'updatedBy' => $updatedBy, 'updated' => $updated));
+            new Operation(array('id' => $idOperation, 'date' => $dateOperation,
+            'dateReglement' => $dateReglement, 'compteBancaire' => $compteBancaire, 
+            'observation' => $observation, 'montant' => $montant, 'numeroCheque' => $numeroOperation, 
+            'modePaiement' => $modePaiement, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $operationManager->update($operation);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Client Modifié avec succès.";
             $typeMessage = "success";

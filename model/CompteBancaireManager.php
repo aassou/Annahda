@@ -11,7 +11,7 @@ class CompteBancaireManager{
 
 	//BAISC CRUD OPERATIONS
 	public function add(CompteBancaire $CompteBancaire){
-    	$query = $this->_db->prepare(' INSERT INTO t_CompteBancaire (
+    	$query = $this->_db->prepare(' INSERT INTO t_comptebancaire (
 		numero, denomination, dateCreation, created, createdBy)
 		VALUES (:numero, :denomination, :dateCreation, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
@@ -25,7 +25,7 @@ class CompteBancaireManager{
 	}
 
 	public function update(CompteBancaire $CompteBancaire){
-    	$query = $this->_db->prepare('UPDATE t_CompteBancaire SET 
+    	$query = $this->_db->prepare('UPDATE t_comptebancaire SET 
 		numero=:numero, denomination=:denomination, dateCreation=:dateCreation, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
@@ -40,7 +40,7 @@ class CompteBancaireManager{
 	}
 
 	public function delete($id){
-    	$query = $this->_db->prepare(' DELETE FROM t_CompteBancaire
+    	$query = $this->_db->prepare(' DELETE FROM t_comptebancaire
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
@@ -49,7 +49,7 @@ class CompteBancaireManager{
 	}
 
 	public function getCompteBancaireById($id){
-    	$query = $this->_db->prepare(' SELECT * FROM t_CompteBancaire
+    	$query = $this->_db->prepare(' SELECT * FROM t_comptebancaire
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
@@ -71,7 +71,7 @@ class CompteBancaireManager{
 
 	public function getCompteBancairesByLimits($begin, $end){
 		$CompteBancaires = array();
-		$query = $this->_db->query('SELECT * FROM t_CompteBancaire
+		$query = $this->_db->query('SELECT * FROM t_comptebancaire
 		ORDER BY id DESC LIMIT '.$begin.', '.$end);
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$CompteBancaires[] = new CompteBancaire($data);
@@ -81,7 +81,7 @@ class CompteBancaireManager{
 	}
 
 	public function getLastId(){
-    	$query = $this->_db->query(' SELECT id AS last_id FROM t_CompteBancaire
+    	$query = $this->_db->query(' SELECT id AS last_id FROM t_comptebancaire
 		ORDER BY id DESC LIMIT 0, 1');
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$id = $data['last_id'];

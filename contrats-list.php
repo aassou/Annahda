@@ -19,9 +19,11 @@
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
+        $compteBancaireManager = new CompteBancaireManager($pdo);
 		$operationManager = new OperationManager($pdo);
 		$locauxManager = new LocauxManager($pdo);
 		$appartementManager = new AppartementManager($pdo);
+        $comptesBancaires = $compteBancaireManager->getCompteBancaires();
 		if(isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId()){
 			$idProjet = $_GET['idProjet'];
 			$projet = $projetManager->getProjetById($idProjet);
@@ -259,9 +261,6 @@
 												        	<a target="_blank" href="contrat.php?codeContrat=<?= $contrat->code() ?>">
 																Consulter Contrat
 															</a>
-															<a href="operations.php?idContrat=<?= $contrat->id() ?>&idProjet=<?= $idProjet ?>">
-                                                                Détails Réglements
-                                                            </a>
 												        	<a href="#addReglement<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
 												        		Nouveau réglement
 												        	</a>
@@ -347,7 +346,6 @@
 											</div>
 											<div class="modal-body">
 												<form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
-													<p>Êtes-vous sûr de vouloir ajouter un réglement pour le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
 													<div class="control-group">
 			                                             <label class="control-label" for="code">Date opération</label>
 			                                             <div class="controls">
@@ -357,6 +355,15 @@
 							                                 </div>
 			                                             </div>
 			                                        </div>
+			                                        <div class="control-group">
+                                                         <label class="control-label" for="code">Date réglement</label>
+                                                         <div class="controls">
+                                                            <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                                <input name="dateReglement" id="dateReglement" class="m-wrap m-ctrl-small date-picker" type="text" value="" />
+                                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                                             </div>
+                                                         </div>
+                                                    </div>
 													<div class="control-group">
 														<label class="control-label">Montant</label>
 														<div class="controls">
@@ -379,19 +386,40 @@
 			                                             </div>
 			                                        </div>
 			                                        <div class="control-group">
+                                                        <label class="control-label">Compte Bancaire</label>
+                                                        <div class="controls">
+                                                            <select name="compteBancaire" id="compteBancaire">
+                                                                <?php
+                                                                foreach ($comptesBancaires as $compte) {
+                                                                ?>
+                                                                    <option value="<?= $compte->numero() ?>"><?= $compte->numero() ?></option>
+                                                                <?php  
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+			                                        <div class="control-group">
                                                         <label class="control-label">Numéro Opération</label>
                                                         <div class="controls">
                                                             <input type="text" required="required" name="numeroOperation" />
                                                         </div>
                                                     </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Observation</label>
+                                                        <div class="controls">
+                                                            <textarea type="text" name="observation"></textarea>
+                                                        </div>
+                                                    </div>
 													<div class="control-group">
-														<label class="right-label"></label>
-														<input type="hidden" name="action" value="add" />
-														<input type="hidden" name="source" value="contrats-list" />
-														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
+													    <div class="controls">
+    														<input type="hidden" name="action" value="add" />
+    														<input type="hidden" name="source" value="contrats-list" />
+    														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+    														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+    														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+    														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
+														</div>
 													</div>
 												</form>
 											</div>

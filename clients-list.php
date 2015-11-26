@@ -213,7 +213,7 @@
                                                     <div class="control-group">
                                                         <input type="hidden" name="idClient" value="<?= $client->id() ?>" />
                                                         <input type="hidden" name="action" value="update" />
-                                                        <input type="hidden" name="source" value="clients" />
+                                                        <input type="hidden" name="source" value="clients-list" />
                                                         <div class="controls">  
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>

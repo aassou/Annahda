@@ -46,6 +46,7 @@
     //class manager
     $clientManager = new ClientManager($pdo);
     $contratManager = new ContratManager($pdo);
+    $contratCasLibreManager = new ContratCasLibreManager($pdo);
     //process starts
     //Case 1 : CRUD Add Action 
     if($action == "add"){
@@ -54,7 +55,7 @@
         if( !empty($_POST['typeBien']) and !empty($_POST['prixNegocie']) and !empty($_POST['numero'])
          and !empty($_POST['bien']) and !empty($_POST['dateCreation']) and !empty($_POST['avance'])
          and !empty($_POST['modePaiement']) and !empty($_POST['dureePaiement']) and !empty($_POST['nombreMois'])
-         and !empty($_POST['echeance']) and !empty($_POST['numeroCheque']) ){
+         and !empty($_POST['echeance']) ){
             if( !empty($_POST['prixNegocie']) ){
                 $prixNegocie = htmlentities($_POST['prixNegocie']);
                 $numero = htmlentities($_POST['numero']);
@@ -75,6 +76,36 @@
                 if( isset($_POST['numeroCheque']) ){
                     $numeroCheque = htmlentities($_POST['numeroCheque']);
                 }
+                //CAS LIBRE PROCESSING BEGIN
+                if ( isset($_POST['show-cas-libre']) ) {
+                    $dates = array();
+                    $montants = array();
+                    $observations = array();
+                    for ( $i=1; $i<7; $i++ ) {
+                        if ( isset($_POST['cas-libre-date'.$i]) ) {
+                            $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);   
+                        }
+                        if ( isset($_POST['cas-libre-montant'.$i]) ) {
+                            $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);   
+                        }
+                        if ( isset($_POST['cas-libre-observation'.$i]) ) {
+                            $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
+                        }
+                        $contratCasLibreManager->add(
+                            new ContratCasLibre(
+                                array(
+                                    'date' => $dates[$i], 
+                                    'montant' => $montants[$i], 
+                                    'observation' => $observations[$i],
+                                    'codeContrat' => $codeContrat,
+                                    'created' => $created,
+                                    'createdBy' => $createdBy
+                                )
+                            )
+                        );
+                    } 
+                }
+                //CAS LIBRE PROCESSING END
                 //create the contract object
                 $contrat = 
                 new Contrat(array('numero' => $numero, 'dateCreation' => $dateCreation, 'prixVente' => $prixNegocie, 
@@ -176,6 +207,9 @@
             $actionMessage = "<strong>Opération Valide : </strong>Contrat modifié(e) avec succès.";
             $typeMessage = "success";
             $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+            if ( isset($_POST['source']) and $_POST['source'] == "clients-list" ) {
+                $redirectLink = "Location:../clients-list.php";    
+            }
         }
         else{
             $actionMessage = "<strong>Erreur Modification Client : </strong>Vous devez remplir le champ <strong>&lt;Prix de vente&gt;</strong>.";
@@ -189,7 +223,7 @@
         //after the delete of our contract, we should change the property status to "Disponible"
         $actionMessage = "<strong>Opération Valide : </strong>Contrat Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "";
+        $redirectLink = "Location:../clients-list.php";
     }
     
     $_SESSION['contrat-action-message'] = $actionMessage;

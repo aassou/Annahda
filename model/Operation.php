@@ -3,6 +3,9 @@ class Operation{
     //attributes
     private $_id;
     private $_date;
+    private $_dateReglement;
+    private $_compteBancaire;
+    private $_observation;
     private $_montant;
 	private $_modePaiement;
     private $_idContrat;
@@ -36,6 +39,18 @@ class Operation{
     
     public function setDate($date){
         $this->_date = $date;
+    }
+    
+    public function setDateReglement($dateReglement){
+        $this->_dateReglement = $dateReglement;
+    }
+    
+    public function setCompteBancaire($compteBancaire){
+        $this->_compteBancaire = $compteBancaire;
+    }
+    
+    public function setObservation($observation){
+        $this->_observation = $observation;
     }
     
     public function setMontant($montant){
@@ -78,6 +93,18 @@ class Operation{
     
     public function date(){
         return $this->_date;
+    }
+    
+    public function dateReglement(){
+        return $this->_dateReglement;
+    }
+    
+    public function compteBancaire(){
+        return $this->_compteBancaire;
+    }
+    
+    public function observation(){
+        return $this->_observation;
     }
     
     public function montant(){

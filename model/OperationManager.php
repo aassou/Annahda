@@ -11,10 +11,13 @@ class OperationManager{
     //CRUD operations
     public function add(Operation $operation){
         $query = $this->_db->prepare(
-        'INSERT INTO t_operation (date, montant, modePaiement, idContrat, numeroCheque, created, createdBy)
-        VALUES (:date, :montant, :modePaiement,:idContrat, :numeroCheque, :created, :createdBy)') 
+        'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, montant, modePaiement, idContrat, numeroCheque, created, createdBy)
+        VALUES (:date, :dateReglement, :compteBancaire, :observation, :montant, :modePaiement,:idContrat, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':date', $operation->date());
+        $query->bindValue(':dateReglement', $operation->dateReglement());
+        $query->bindValue(':compteBancaire', $operation->compteBancaire());
+        $query->bindValue(':observation', $operation->observation());
         $query->bindValue(':montant', $operation->montant());
 		$query->bindValue(':modePaiement', $operation->modePaiement());
         $query->bindValue(':numeroCheque', $operation->numeroCheque());
@@ -27,11 +30,15 @@ class OperationManager{
     
     public function update(Operation $operation){
         $query = $this->_db->prepare(
-        'UPDATE t_operation SET date=:date, montant=:montant, modePaiement=:modePaiement,
+        'UPDATE t_operation SET date=:date, dateReglement=:dateReglement, compteBancaire=:compteBancaire,
+        montant=:montant, modePaiement=:modePaiement, observation=:observation, 
         numeroCheque=:numeroCheque, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $operation->id());
         $query->bindValue(':date', $operation->date());
+        $query->bindValue(':dateReglement', $operation->dateReglement());
+        $query->bindValue(':compteBancaire', $operation->compteBancaire());
+        $query->bindValue(':observation', $operation->observation());
         $query->bindValue(':montant', $operation->montant());
         $query->bindValue(':modePaiement', $operation->modePaiement());
         $query->bindValue(':numeroCheque', $operation->numeroCheque());
@@ -60,7 +67,7 @@ class OperationManager{
     
     public function getOperationsByIdContrat($idContrat){
         $operations = array();
-        $query = $this->_db->prepare('SELECT * FROM t_operation WHERE idContrat=:idContrat ORDER BY date DESC');
+        $query = $this->_db->prepare('SELECT * FROM t_operation WHERE idContrat=:idContrat ORDER BY id DESC');
         $query->bindValue(':idContrat', $idContrat);
         $query->execute();
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {

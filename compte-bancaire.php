@@ -25,7 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>AnnahdaERP- Management Application</title>
+    <title>ImmoERP- Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -153,9 +153,10 @@
                                 <table class="table table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Numéro compte</th>
-                                            <th>Dénomination</th>
-                                            <th>Date création</th>
+                                            <th style="width:25%">Actions</th>
+                                            <th style="width:25%">Numéro compte</th>
+                                            <th style="width:25%">Dénomination</th>
+                                            <th style="width:25%">Date création</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -163,26 +164,8 @@
                                         foreach($comptesBancaires as $compte){
                                         ?>      
                                         <tr>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a style="width: 100px" class="btn black mini dropdown-toggle" href="#" data-toggle="dropdown">
-                                                        <?= $compte->numero() ?> 
-                                                        <i class="icon-angle-down"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>                                                                
-                                                            <a href="#updateCompte<?= $compte->id();?>" data-toggle="modal" data-id="<?= $compte->id(); ?>">
-                                                                Modifier
-                                                            </a>
-                                                            <?php if($_SESSION['userMerlaTrav']->profil()=="su"){ ?>
-                                                            <a href="#deleteCompte<?= $compte->id() ?>" data-toggle="modal" data-id="<?= $compte->id() ?>">
-                                                                Supprimer
-                                                            </a>
-                                                            <?php } ?>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
+                                            <td><a class="btn green mini" href="#updateCompte<?= $compte->id();?>" data-toggle="modal" data-id="<?= $compte->id(); ?>"><i class="icon-refresh"></i></a></td>
+                                            <td><?= $compte->numero() ?></td>
                                             <td><?= $compte->denomination() ?></td>
                                             <td><?= date('d/m/Y', strtotime($compte->dateCreation())) ?></td>
                                         </tr>
@@ -264,7 +247,7 @@
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
-        2015 &copy; AnnahdaERP. Management Application.
+        2015 &copy; ImmoERP. Management Application.
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
