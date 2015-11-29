@@ -23,10 +23,10 @@
 	$contrat = $contratManager->getContratById($idContrat);
 	//change status of the old contrat Bien from reservé to non reservé
 	if( $contrat->typeBien()=="appartement" ){
-		$appartementManager->changeStatus($contrat->idBien(), "Non");
+		$appartementManager->changeStatus($contrat->idBien(), "Disponible");
 	}
 	else if( $contrat->typeBien()=="localCommercial" ){
-		$locauxManager->changeStatus($contrat->idBien(), "Non");
+		$locauxManager->changeStatus($contrat->idBien(), "Disponible");
 	}
 	$contratManager->desisterContrat($idContrat);
 	$_SESSION['contrat-desister-success'] = "<strong>Opération valide : </strong>Le contrat est désisté avec succès.";

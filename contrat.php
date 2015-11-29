@@ -27,10 +27,12 @@
 		$operationManager = new OperationManager($pdo);
         $compteBancaireManager = new CompteBancaireManager($pdo);
         $contratCasLibreManager = new ContratCasLibreManager($pdo);
+        $reglementPrevuManager = new ReglementPrevuManager($pdo);
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
             $comptesBancaires = $compteBancaireManager->getCompteBancaires();
 			$contrat = $contratManager->getContratByCode($codeContrat);
+            //ContratCasLibre Elements
             $contratCasLibreNumber = 
             $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
             $contratCasLibreElements = "";
@@ -40,6 +42,17 @@
                 $contratCasLibreElements = 
                 $contratCasLibreManager->getContratCasLibresByCodeContrat($codeContrat);
             }
+            //ReglementPrevu Elements
+            $reglementPrevuNumber = 
+            $reglementPrevuManager->getReglementNumberByCodeContrat($codeContrat);
+            $reglementPrevuElements = "";
+            $reglementPrevuTitle = "";
+            if ( $reglementPrevuNumber > 0 ) {
+                $reglementPrevuTitle = "<h4>Dates des réglements prévus</h4>";
+                $reglementPrevuElements =     
+                $reglementPrevuManager->getReglementPrevuByCodeContrat($codeContrat);
+            }
+            
 			$projet = $projetManager->getProjetById($contrat->idProjet());
 			$client = $clientManager->getClientById($contrat->idClient());
 			$sommeOperations = $operationManager->sommeOperations($contrat->id());
@@ -334,7 +347,6 @@
                         </div>
                         <div class="modal-body">
                             <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
-                                <p>Êtes-vous sûr de vouloir ajouter un réglement pour le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
                                 <div class="control-group">
                                      <label class="control-label" for="code">Date opération</label>
                                      <div class="controls">
@@ -412,7 +424,106 @@
                         </div>
                     </div>
                     <!-- addReglement box end -->
-                    <div class="portlet box light-grey">
+                    <!-- CONTRAT CAS LIBRE BEGIN -->
+                    <?php 
+                    if ( $reglementPrevuNumber > 0 ) { 
+                    ?>
+                    <div class="portlet box light-grey" id="reglementsPrevus">
+                        <div class="portlet-title">
+                            <h4><?= $reglementPrevuTitle; ?></h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 20%">Status du réglement</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach ( $reglementPrevuElements as $element ) {
+                                            $status = "";    
+                                            if($element->status()==0){
+                                                //comparing dates
+                                                $now = date('Y-m-d');
+                                                $now = new DateTime($now);
+                                                $now = $now->format('Ymd');
+                                                $datePrevu = $element->datePrevu();
+                                                $datePrevu = new DateTime($datePrevu);
+                                                $datePrevu = $datePrevu->format('Ymd');
+                                                if ( $datePrevu > $now ) {
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">En cours</a>';   
+                                                }
+                                                else if ( $datePrevu < $now ) {
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En cours</a>';
+                                                }
+                                            }
+                                            else if($element->status()==1){
+                                                $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                            }
+                                        ?>
+                                        <tr>
+                                            <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
+                                            <td><?= $status ?></td>
+                                        </tr>
+                                        <!-- updateStatusReglementPrevu box begin-->
+                                        <div id="updateStatusReglementPrevu<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier status</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir changer le status de la date prévu ?</p>
+                                                        <label class="control-label">Status</label>
+                                                        <div class="controls">
+                                                            <select name="status">
+                                                                <option value="<?= $element->status() ?>"><?php if($element->status()==0){echo 'En cours';}else{echo 'Réglé';} ?></option>
+                                                                <option disabled="disabled">-----------</option>
+                                                                <option value="0">En cours</option>
+                                                                <option value="1">Réglé</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus">
+                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                            <input type="hidden" name="idReglementPrevu" value="<?= $element->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateStatusReglementPrevu box end -->
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php?>  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>       
+                    </div>    
+                    <?php 
+                    } 
+                    ?>
+                    <!-- DATES REGLEMENTS PREVU END -->
+                    <!-- CONTRAT CAS LIBRE BEGIN -->
+                    <?php 
+                    if ( $contratCasLibreNumber > 0 ) { 
+                    ?>
+                    <div class="portlet box light-grey" id="contratCasLibre">
                         <div class="portlet-title">
                             <h4><?= $contratCasLibreTitle; ?></h4>
                             <div class="tools">
@@ -427,22 +538,145 @@
                                             <th style="width: 10%">Actions</th>
                                             <th style="width: 20%">Date</th>
                                             <th style="width: 20%">Montant</th>
-                                            <th style="width: 50%">Obsérvation</th>
+                                            <th style="width: 30%">Obsérvation</th>
+                                            <th style="width: 20%">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         foreach ( $contratCasLibreElements as $element ) {
+                                            $status = "";    
+                                            if($element->status()==0){
+                                                //comparing dates
+                                                $now = date('Y-m-d');
+                                                $now = new DateTime($now);
+                                                $now = $now->format('Ymd');
+                                                $dateCasLibre = $element->date();
+                                                $dateCasLibre = new DateTime($dateCasLibre);
+                                                $dateCasLibre = $dateCasLibre->format('Ymd');
+                                                if ( $dateCasLibre > $now ) {
+                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">En cours</a>';   
+                                                }
+                                                else if ( $dateCasLibre < $now ) {
+                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En cours</a>';
+                                                }
+                                            }
+                                            else if($element->status()==1){
+                                                $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td>
-                                                <a href="" title="Modifier" class="btn mini green"><i class="icon-refresh"></i></a>
-                                                <a href="" title="Supprimer" class="btn mini red"><i class="icon-remove"></i></a>    
+                                                <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" title="Supprimer" class="btn mini red">
+                                                    <i class="icon-remove"></i>
+                                                </a>
+                                                <a href="#updateContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" title="Modifier" class="btn mini green">
+                                                    <i class="icon-refresh"></i>
+                                                </a>
                                             </td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
                                             <td><?= $element->observation() ?></td>
+                                            <td><?= $status ?></td>
                                         </tr>
+                                        <!-- updateStatusContratCasLibre box begin-->
+                                        <div id="updateStatusContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier status</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir changer le status ?</p>
+                                                        <label class="control-label">Status</label>
+                                                        <div class="controls">
+                                                            <select name="status">
+                                                                <option value="<?= $element->status() ?>"><?php if($element->status()==0){echo 'En cours';}else{echo 'Réglé';} ?></option>
+                                                                <option disabled="disabled">-----------</option>
+                                                                <option value="0">En cours</option>
+                                                                <option value="1">Réglé</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus">
+                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                            <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateStatusContratCasLibre box end -->
+                                        <!-- updateContratCasLibre box begin-->
+                                        <div id="updateContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier Informations</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                                <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $element->date() ?>" />
+                                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="text" name="montant" class="m-wrap" value="<?= $element->montant() ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="text" name="observation" class="m-wrap" value="<?= $element->observation() ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus">
+                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                            <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateContratCasLibre box end -->
+                                        <!-- deleteContratCasLibre box begin-->
+                                        <div id="deleteContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Supprimer cette ligne</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                    <p>Êtes-vous sûr de vouloir supprimer cette ligne ?</p>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="delete">
+                                                        <input type="hidden" name="source" value="contrat">
+                                                        <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                        <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- deleteContratCasLibre box end -->
                                         <?php
                                         }
                                         ?>
@@ -452,6 +686,10 @@
                             </div>
                         </div>       
                     </div>    
+                    <?php 
+                    } 
+                    ?>
+                    <!-- CONTRAT CAS LIBRE END -->
 					<div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Détails des réglements client</h4>
@@ -935,6 +1173,12 @@
                 $('#echeance').val(echeance);
             });
 		});
+		function blinker() {
+            $('.blink_me').fadeOut(500);
+            $('.blink_me').fadeIn(500);
+        }
+        
+        setInterval(blinker, 1500);
 	</script>
 </body>
 <!-- END BODY -->

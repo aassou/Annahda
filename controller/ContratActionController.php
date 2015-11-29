@@ -47,6 +47,7 @@
     $clientManager = new ClientManager($pdo);
     $contratManager = new ContratManager($pdo);
     $contratCasLibreManager = new ContratCasLibreManager($pdo);
+    $reglementPrevuManager = new ReglementPrevuManager($pdo);
     //process starts
     //Case 1 : CRUD Add Action 
     if($action == "add"){
@@ -76,6 +77,24 @@
                 if( isset($_POST['numeroCheque']) ){
                     $numeroCheque = htmlentities($_POST['numeroCheque']);
                 }
+                //set the datePrevu for our object begin
+                $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
+                for ( $i=1; $i <= $condition; $i++ ) {
+                    $monthsNumber = "+".$nombreMois*$i." months";
+                    $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
+                    $reglementPrevuManager->add(
+                        new ReglementPrevu(
+                            array(
+                                'datePrevu' => $datePrevu,
+                                'codeContrat' => $codeContrat,
+                                'status' => 0,
+                                'created' => $created,
+                                'createdBy' =>$createdBy
+                            )
+                        )
+                    );
+                }
+                //set the datePrevu for our object begin
                 //CAS LIBRE PROCESSING BEGIN
                 if ( isset($_POST['show-cas-libre']) ) {
                     $dates = array();
@@ -97,6 +116,7 @@
                                     'date' => $dates[$i], 
                                     'montant' => $montants[$i], 
                                     'observation' => $observations[$i],
+                                    'status' => 0,
                                     'codeContrat' => $codeContrat,
                                     'created' => $created,
                                     'createdBy' => $createdBy
@@ -105,6 +125,7 @@
                         );
                     } 
                 }
+                //else we have to put here our datePrevu processing
                 //CAS LIBRE PROCESSING END
                 //create the contract object
                 $contrat = 

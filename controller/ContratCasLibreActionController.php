@@ -20,7 +20,9 @@
     //This var contains result message of CRUD action
     $actionMessage = "";
     $typeMessage = "";
-
+    
+    //Redirection link
+    $redirectLink = "";
     //Component Class Manager
 
     $contratCasLibreManager = new ContratCasLibreManager($pdo);
@@ -60,17 +62,15 @@
 			$date = htmlentities($_POST['date']);
 			$montant = htmlentities($_POST['montant']);
 			$observation = htmlentities($_POST['observation']);
-			$codeContrat = htmlentities($_POST['codeContrat']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$contratCasLibre = new ContratCasLibre(array(
-				'id' => $idContratCasLibre,
-				'date' => $date,
-				'montant' => $montant,
-				'observation' => $observation,
-				'codeContrat' => $codeContrat,
-				'updated' => $updated,
-            	'updatedBy' => $updatedBy
+			$contratCasLibre = new ContratCasLibre(array(
+	            'id' => $idContratCasLibre,
+	            'date' => $date,
+	            'montant' => $montant,
+	            'observation' => $observation,
+	            'updated' => $updated,
+	            'updatedBy' => $updatedBy
 			));
             $contratCasLibreManager->update($contratCasLibre);
             $actionMessage = "Opération Valide : ContratCasLibre Modifié(e) avec succès.";
@@ -80,7 +80,20 @@
             $actionMessage = "Erreur Modification ContratCasLibre : Vous devez remplir le champ 'date'.";
             $typeMessage = "error";
         }
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $idProjet = htmlentities($_POST['idProjet']);
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
     }
+    //Action UpdateStatus Processing Begin
+    else if ($action == "updateStatus"){
+        $idContratCasLibre = htmlentities($_POST['idContratCasLibre']);
+        $status = htmlentities($_POST['status']);
+        $contratCasLibreManager->updateStatus($idContratCasLibre, $status);
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $idProjet = htmlentities($_POST['idProjet']);
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
+    }
+    //Action UpdateStatus Processing End
     //Action Update Processing End
     //Action Delete Processing Begin
     else if($action == "delete"){
@@ -88,9 +101,12 @@
         $contratCasLibreManager->delete($idContratCasLibre);
         $actionMessage = "Opération Valide : ContratCasLibre supprimé(e) avec succès.";
         $typeMessage = "success";
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $idProjet = htmlentities($_POST['idProjet']);
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
     }
     //Action Delete Processing End
     $_SESSION['contratCasLibre-action-message'] = $actionMessage;
     $_SESSION['contratCasLibre-type-message'] = $typeMessage;
-    header('Location:../file-name-please.php');
+    header($redirectLink);
 

@@ -1,13 +1,11 @@
 <?php
-class ContratCasLibre{
+class ReglementPrevu{
 
 	//attributes
 	private $_id;
-	private $_date;
-	private $_montant;
-	private $_observation;
-    private $_status;
+	private $_datePrevu;
 	private $_codeContrat;
+	private $_status;
 	private $_created;
 	private $_createdBy;
 	private $_updated;
@@ -33,24 +31,16 @@ class ContratCasLibre{
 	public function setId($id){
     	$this->_id = $id;
     }
-	public function setDate($date){
-		$this->_date = $date;
+	public function setDatePrevu($datePrevu){
+		$this->_datePrevu = $datePrevu;
    	}
-
-	public function setMontant($montant){
-		$this->_montant = $montant;
-   	}
-
-	public function setObservation($observation){
-		$this->_observation = $observation;
-   	}
-    
-    public function setStatus($status){
-        $this->_status = $status;
-    }
 
 	public function setCodeContrat($codeContrat){
 		$this->_codeContrat = $codeContrat;
+   	}
+
+	public function setStatus($status){
+		$this->_status = $status;
    	}
 
 	public function setCreated($created){
@@ -73,24 +63,16 @@ class ContratCasLibre{
 	public function id(){
     	return $this->_id;
     }
-	public function date(){
-		return $this->_date;
+	public function datePrevu(){
+		return $this->_datePrevu;
    	}
-
-	public function montant(){
-		return $this->_montant;
-   	}
-
-	public function observation(){
-		return $this->_observation;
-   	}
-    
-    public function status(){
-        return $this->_status;
-    }
 
 	public function codeContrat(){
 		return $this->_codeContrat;
+   	}
+
+	public function status(){
+		return $this->_status;
    	}
 
 	public function created(){

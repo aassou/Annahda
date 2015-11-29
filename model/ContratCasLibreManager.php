@@ -12,12 +12,13 @@ class ContratCasLibreManager{
 	//BAISC CRUD OPERATIONS
 	public function add(ContratCasLibre $contratCasLibre){
     	$query = $this->_db->prepare(' INSERT INTO t_contratcaslibre (
-		date, montant, observation, codeContrat, created, createdBy)
-		VALUES (:date, :montant, :observation, :codeContrat, :created, :createdBy)')
+		date, montant, observation, status, codeContrat, created, createdBy)
+		VALUES (:date, :montant, :observation, :status, :codeContrat, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':date', $contratCasLibre->date());
 		$query->bindValue(':montant', $contratCasLibre->montant());
 		$query->bindValue(':observation', $contratCasLibre->observation());
+        $query->bindValue(':status', $contratCasLibre->status());
 		$query->bindValue(':codeContrat', $contratCasLibre->codeContrat());
 		$query->bindValue(':created', $contratCasLibre->created());
 		$query->bindValue(':createdBy', $contratCasLibre->createdBy());
@@ -27,19 +28,28 @@ class ContratCasLibreManager{
 
 	public function update(ContratCasLibre $contratCasLibre){
     	$query = $this->_db->prepare(' UPDATE t_contratcaslibre SET 
-		date=:date, montant=:montant, observation=:observation, codeContrat=:codeContrat, updated=:updated, updatedBy=:updatedBy
+		date=:date, montant=:montant, observation=:observation, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $contratCasLibre->id());
 		$query->bindValue(':date', $contratCasLibre->date());
 		$query->bindValue(':montant', $contratCasLibre->montant());
 		$query->bindValue(':observation', $contratCasLibre->observation());
-		$query->bindValue(':codeContrat', $contratCasLibre->codeContrat());
 		$query->bindValue(':updated', $contratCasLibre->updated());
 		$query->bindValue(':updatedBy', $contratCasLibre->updatedBy());
 		$query->execute();
 		$query->closeCursor();
 	}
+    
+    public function updateStatus($id, $status){
+        $query = $this->_db->prepare(
+        'UPDATE t_contratcaslibre SET status=:status WHERE id=:id')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $id);
+        $query->bindValue(':status', $status);
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function delete($id){
     	$query = $this->_db->prepare(' DELETE FROM t_contratcaslibre
@@ -105,6 +115,50 @@ class ContratCasLibreManager{
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
         return $data['number'];
+    }
+    
+    public function getReglementEnRetard(){
+        $reglements = array();
+        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        WHERE status=0 AND date < CURDATE() ORDER BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ContratCasLibre($data);
+        }
+        $query->closeCursor();
+        return $reglements;
+    }
+    
+    public function getReglementToday(){
+        $reglements = array();
+        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        WHERE status=0 AND date = CURDATE() ORDER BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ContratCasLibre($data);
+        }
+        $query->closeCursor();
+        return $reglements;
+    }
+    
+    public function getReglementWeek(){
+        $reglements = array();
+        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        WHERE status=0 AND ( date BETWEEN ADDDATE(CURDATE(), 1) AND ADDDATE(CURDATE(), 7) ) ORDER BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ContratCasLibre($data);
+        }
+        $query->closeCursor();
+        return $reglements;
+    }
+    
+    public function getReglementMonth(){
+        $reglements = array();
+        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        WHERE status=0 AND ( date BETWEEN ADDDATE(CURDATE(), 1) AND ADDDATE(CURDATE(), 31) ) ORDER BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ContratCasLibre($data);
+        }
+        $query->closeCursor();
+        return $reglements;
     }
 
 	public function getLastId(){
