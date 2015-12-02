@@ -120,10 +120,11 @@ class ContratManager{
     
     public function getIdClientByIdProjetByIdBienTypeBien($idProjet, $idBien, $typeBien){
         $query = $this->_db->prepare('SELECT idClient FROM t_contrat 
-        WHERE idProjet=:idProjet AND idBien=:idBien AND typeBien=:typeBien');
+        WHERE status=:status AND idProjet=:idProjet AND idBien=:idBien AND typeBien=:typeBien');
         $query->bindValue(':idProjet', $idProjet);
         $query->bindValue(':idBien', $idBien);
         $query->bindValue(':typeBien', $typeBien);
+        $query->bindValue(':status', 'actif');
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();

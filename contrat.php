@@ -13,7 +13,7 @@
 	include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if( isset($_SESSION['userMerlaTrav']) ) {
     	if( isset($_GET['idProjet']) ){
     	   $idProjet = $_GET['idProjet'];   
     	}
@@ -218,9 +218,15 @@
 						<div class="portlet sale-summary">
 							<div class="portlet-title">
 								<h4>Informations du client</h4>
+								<?php
+                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
 								<a href="#updateClient<?= $client->id() ?>" class="pull-right btn red hidden-phone" data-toggle="modal" data-id="<?= $client->id(); ?>">
 									Modifier <i class="icon-refresh icon-white"></i>
 								</a>
+								<?php
+                                }
+                                ?>
 								<br><br>	
 							</div>
 							<ul class="unstyled">
@@ -255,9 +261,15 @@
 						<div class="portlet sale-summary">
 							<div class="portlet-title">
 								<h4>Informations du contrat</h4>
+								<?php
+                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
 								<a href="#updateContrat<?= $contrat->id() ?>" class="pull-right btn red hidden-phone" data-toggle="modal" data-id="<?= $contrat->id(); ?>">
 									Modifier <i class="icon-refresh icon-white"></i>
 								</a>
+								<?php
+                                }
+                                ?>
 								<br><br>
 							</div>
 							<ul class="unstyled">
@@ -441,13 +453,16 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 20%">Echéance</th>
                                             <th style="width: 20%">Status du réglement</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $totalEcheance = 0;
                                         foreach ( $reglementPrevuElements as $element ) {
                                             $status = "";    
+                                            $totalEcheance += $contrat->echeance();
                                             if($element->status()==0){
                                                 //comparing dates
                                                 $now = date('Y-m-d');
@@ -457,10 +472,10 @@
                                                 $datePrevu = new DateTime($datePrevu);
                                                 $datePrevu = $datePrevu->format('Ymd');
                                                 if ( $datePrevu > $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">En cours</a>';   
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">Normal</a>';   
                                                 }
                                                 else if ( $datePrevu < $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En cours</a>';
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retards</a>';
                                                 }
                                             }
                                             else if($element->status()==1){
@@ -469,6 +484,7 @@
                                         ?>
                                         <tr>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
+                                            <td><?= $contrat->echeance() ?></td>
                                             <td><?= $status ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevu box begin-->
@@ -509,7 +525,16 @@
                                         <?php
                                         }
                                         ?>
-                                        <?php?>  
+                                        <tr>
+                                            <td></td>
+                                            <th>Total des échéances</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><?= number_format($totalEcheance, 2, ',', ' ') ?>&nbsp;DH</td>
+                                            <td></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -544,8 +569,10 @@
                                     </thead>
                                     <tbody>
                                         <?php
+                                        $totalMontantsCasLibre = 0;
                                         foreach ( $contratCasLibreElements as $element ) {
                                             $status = "";    
+                                            $totalMontantsCasLibre += $element->montant();
                                             if($element->status()==0){
                                                 //comparing dates
                                                 $now = date('Y-m-d');
@@ -555,10 +582,10 @@
                                                 $dateCasLibre = new DateTime($dateCasLibre);
                                                 $dateCasLibre = $dateCasLibre->format('Ymd');
                                                 if ( $dateCasLibre > $now ) {
-                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">En cours</a>';   
+                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini green">Normal</a>';   
                                                 }
                                                 else if ( $dateCasLibre < $now ) {
-                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En cours</a>';
+                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
                                                 }
                                             }
                                             else if($element->status()==1){
@@ -680,7 +707,20 @@
                                         <?php
                                         }
                                         ?>
-                                        <?php?>  
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <th>Total des montants</th>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <th><?= number_format($totalMontantsCasLibre, 2, ',', ' ') ?>&nbsp;DH</th>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>  
                                     </tbody>
                                 </table>
                             </div>
@@ -714,11 +754,17 @@
                                  unset($_SESSION['operation-action-message']);
                                  unset($_SESSION['operation-type-message']);
                                 ?>
+                                <?php
+                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
                                 <div class="btn-group">
                                     <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
                                         Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>
                                     </a>
                                 </div>
+                                <?php
+                                }
+                                ?>
                                 <!--div class="btn-group pull-right">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                     </button>
@@ -1185,9 +1231,9 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
 	header('Location:dashboard.php');
-}
+}*/
 else{
     header('Location:index.php');    
 }

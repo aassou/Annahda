@@ -4985,6 +4985,10 @@ div#fancy_print {
 	margin-bottom: 20px;
 }
 
+.medium-font {
+	font-size:16px
+}
+
 /* I use this class to mention a margin-bottom between some elements */
 .get-down{
 	margin-bottom: 10px;

@@ -111,7 +111,20 @@
 								</div>
 							</div>
 							</a>
-							<a href="clients-list.php">
+							<a href="contrat-status.php">
+                            <div class="tile bg-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-user"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        État Clients
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+							<!--a href="clients-list.php">
                             <div class="tile bg-cyan">
                                 <div class="corner"></div>
                                 <div class="tile-body">
@@ -123,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                            </a-->
 							<a href="livraisons-group.php">
 							<div class="tile bg-blue">
 								<div class="corner"></div>

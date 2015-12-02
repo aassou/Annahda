@@ -13,7 +13,7 @@
 	include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if( isset($_SESSION['userMerlaTrav']) ){
     	//les sources
 		$employeManager = new EmployeSocieteManager($pdo);
 		$projetManager = new ProjetManager($pdo);
@@ -414,9 +414,9 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
 	header('Location:dashboard.php');
-}
+}*/
 else{
     header('Location:index.php');    
 }

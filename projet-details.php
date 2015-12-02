@@ -13,7 +13,7 @@
     include ('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if( isset($_SESSION['userMerlaTrav']) ) {
         //les sources
         $idProjet = $_GET['idProjet'];
         $projetsManager = new ProjetManager($pdo);
@@ -26,7 +26,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>AnnahdaERP - Management Application</title>
+    <title>ImmoERP - Management Application</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -113,9 +113,15 @@
                                         <a href="locaux.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width purple">Les locaux commerciaux</a>
                                     </div>
                                     <div class="portfolio-info">
-                                        <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
-                                        <a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width green">Listes Clients et Contrats</a>
+                                        <?php
+                                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                        ?>
                                         <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
+                                        <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
+                                        <?php
+                                        }
+                                        ?>
+                                        <a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width green">Listes Clients et Contrats</a>
                                         <!--a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a-->
                                     </div>
                                     <div class="portfolio-info">
@@ -141,7 +147,7 @@
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <div class="footer">
-        2015 &copy; AnnahdaERP. Management Application.
+        2015 &copy; ImmoERP. Management Application.
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
@@ -175,9 +181,9 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
     header('Location:dashboard.php');
-}
+}*/
 else{
     header('Location:index.php');    
 }

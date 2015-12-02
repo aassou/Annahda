@@ -18,6 +18,7 @@
 				or $currentPage=="conges.php"
 				or $currentPage=="statistiques.php"
 				or $currentPage=="users.php"
+				or $currentPage=="tasks.php"
 				or $currentPage=="messages.php"
 				or $currentPage=="user-profil.php"
 				or $currentPage=="clients-search.php"

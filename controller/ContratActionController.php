@@ -49,7 +49,7 @@
     $contratCasLibreManager = new ContratCasLibreManager($pdo);
     $reglementPrevuManager = new ReglementPrevuManager($pdo);
     //process starts
-    //Case 1 : CRUD Add Action 
+    //Action Add Processing Begin
     if($action == "add"){
         $codeClient = $_POST['codeClient'];
         //post input validation
@@ -164,6 +164,8 @@
             $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
         }
     }
+    //Action Add Processing End
+    //Action Update Processing Begin
     else if($action == "update"){
         $idContrat = htmlentities($_POST['idContrat']);
         $codeContrat = htmlentities($_POST['codeContrat']);
@@ -182,7 +184,6 @@
             $updated = date('Y-m-d h:i:s');
             //create classes managers
             $locauxManager = new LocauxManager($pdo);
-            $contratManager = new ContratManager($pdo);
             $appartementManager = new AppartementManager($pdo);
             //create classes
             //this contrat object is used to test the type of a property based of 
@@ -238,6 +239,8 @@
             $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
         }
     }
+    //Action Update Processing End
+    //Action Delete Processing Begin
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];
         $contratManager->delete($idContrat);
@@ -246,7 +249,68 @@
         $typeMessage = "success";
         $redirectLink = "Location:../clients-list.php";
     }
-    
+    //Action Delete Processing End
+    //Action Desister Processing Begin
+    else if ( $action == "desister" ) {
+        $idContrat  = $_POST['idContrat'];
+        $contrat = $contratManager->getContratById($idContrat);
+        //Change status of the old contrat Bien from "Vendu" to "Disponible"
+        if( $contrat->typeBien()=="appartement" ){
+            $appartementManager = new AppartementManager($pdo);
+            $appartementManager->changeStatus($contrat->idBien(), "Disponible");
+        }
+        else if( $contrat->typeBien()=="localCommercial" ){
+            $locauxManager = new LocauxManager($pdo);
+            $locauxManager->changeStatus($contrat->idBien(), "Disponible");
+        }
+        $contratManager->desisterContrat($idContrat);
+        $actionMessage = "<strong>Opération valide : </strong>Le contrat est désisté avec succès.";
+        $typeMessage = "success";
+        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        if( isset($_POST["source"]) and $_POST["source"] == "search" ){
+            $redirectLink = 'Location:../clients-search.php';
+        }
+    }
+    //Action Desister Processing End
+    //Action Activer Processing Begin
+    else if ( $action == "activer" ) {
+        $idContrat  = $_POST['idContrat'];
+        //create classes
+        $contrat = $contratManager->getContratById($idContrat);
+        //test property type to decide which action to do
+        if( $contrat->typeBien() == "appartement" ){
+            $appartementManager = new AppartementManager($pdo);
+            if( $appartementManager->getAppartementById($contrat->idBien())->status() == "Disponible" ){
+                $appartementManager->changeStatus($contrat->idBien(), "Vendu");
+                $contratManager->activerContrat($idContrat);
+                $actionMessage = "<strong>Opération valide : </strong>Le contrat est activé avec succès.";
+                $typeMessage = "success";
+            }
+            else{
+                $actionMessage = "<strong>Erreur Activation Contrat : </strong>Le bien est déjà réservé par un autre client.";
+                $typeMessage = "error";
+            }
+        }
+        else if( $contrat->typeBien()=="localCommercial" ){
+            $locauxManager = new LocauxManager($pdo);
+            if( $locauxManager->getLocauxById($contrat->idBien())->status()=="Disponible" ){
+                $locauxManager->changeStatus($contrat->idBien(), "Vendu");
+                $contratManager->activerContrat($idContrat);
+                $actionMessage = "<strong>Opération valide : </strong>Le contrat est activé avec succès.";
+                $typeMessage = "success";
+            }
+            else{
+                $actionMessage = "<strong>Erreur Activation Contrat : </strong>Le bien est déjà réservé par un autre client.";
+                $typeMessage = "error";
+            }
+        }
+        //set the redirect link
+        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        if( isset($_POST["source"]) and $_POST["source"] == "search" ){
+            $redirectLink = 'Location:../clients-search.php';
+        }    
+    }
+    //Action Activer Processing End
     $_SESSION['contrat-action-message'] = $actionMessage;
     $_SESSION['contrat-type-message'] = $typeMessage;
     header($redirectLink);

@@ -10,12 +10,23 @@
 		<img src="assets/img/menu-toggler.png" alt="" />
 		</a>          
 		<!-- END RESPONSIVE MENU TOGGLER -->				
-		<!-- BEGIN TOP NAVIGATION MENU -->					
+		<!-- BEGIN TOP NAVIGATION MENU -->		
+		<?php
+		//In this section we will count the number of tasks assigned to the current session user
+		$taskManager = new TaskManager($pdo);
+        $taskNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
+		?>			
 		<ul class="nav pull-right">
 			<li class="dropdown" id="header_inbox_bar">
-				<a href="messages.php" class="dropdown-toggle">
-				<i class="icon-envelope-alt"></i>
-				<span class="badge">Messages</span>
+				<a href="tasks.php" class="dropdown-toggle">
+				<i class="icon-tasks"></i>  
+				<?php
+				if ( $taskNumber > 0 ) {
+				?>
+				<span class="badge"><?= $taskNumber ?></span>
+				<?php  
+                }
+                ?>
 				</a>
 			</li>
 			<!-- BEGIN USER LOGIN DROPDOWN -->

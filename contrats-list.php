@@ -13,7 +13,7 @@
 	include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if(isset($_SESSION['userMerlaTrav'])){
     	//les sources
     	$idProjet = 0;
     	$projetManager = new ProjetManager($pdo);
@@ -114,6 +114,20 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<!-- BEGIN Terrain TABLE PORTLET-->
+						<?php 
+						if( isset($_SESSION['contrat-action-message']) 
+                        and isset($_SESSION['contrat-type-message'])) {
+                            $message = $_SESSION['contrat-action-message'];
+                            $typeMessage = $_SESSION['contrat-type-message']; 
+						?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php } 
+                            unset($_SESSION['contrat-action-message']);
+                            unset($_SESSION['contrat-type-message']);
+                         ?>
 						<?php if(isset($_SESSION['operation-add-error'])){ ?>
 							<div class="alert alert-error">
 								<button class="close" data-dismiss="alert"></button>
@@ -261,16 +275,24 @@
 												        	<a target="_blank" href="contrat.php?codeContrat=<?= $contrat->code() ?>">
 																Consulter Contrat
 															</a>
+															<?php
+															if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+															?>
 												        	<a href="#addReglement<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
 												        		Nouveau réglement
 												        	</a>
+												        	<?php
+                                                            }
+                                                            ?>
 												        	<a target="_blank" href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Contrat
 												        	</a>
 												        	<a target="_blank" href="controller/ClientFichePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Fiche Client
 												        	</a>
-												        	<?php if($contrat->status()=="actif"){
+												        	<?php
+												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" ){ 
+												        	if( $contrat->status()=="actif" ){
 															?>
 															<a style="color:red" href="#desisterContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
 																Désister
@@ -283,7 +305,8 @@
 																Activer
 															</a>	
 															<?php	
-															}
+															}//if status actif or not
+                                                            }//if profil is admin
 															?>
 												        </li>
 												    </ul>
@@ -328,7 +351,8 @@
 												<form class="form-horizontal loginFrm" action="controller/ContratDesistementController.php" method="post">
 													<p>Êtes-vous sûr de vouloir désister le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
 													<div class="control-group">
-														<label class="right-label"></label>
+														<input type="hidden" name="action" value="desister" />
+                                                        <input type="hidden" name="source" value="contrats-list" />
 														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -432,10 +456,11 @@
 												<h3>Activer le contrat </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/ContratActivationController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir activer le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
 													<div class="control-group">
-														<label class="right-label"></label>
+														<input type="hidden" name="action" value="activer" />
+                                                        <input type="hidden" name="source" value="contrats-list" />
 														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -546,9 +571,9 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
 	header('Location:dashboard.php');
-}
+}*/
 else{
     header('Location:index.php');    
 }

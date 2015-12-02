@@ -13,7 +13,7 @@
     include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if ( isset($_SESSION['userMerlaTrav']) ) {
         //classManagers
         $projetManager = new ProjetManager($pdo);
         $fournisseurManager = new FournisseurManager($pdo);
@@ -178,9 +178,15 @@
                                 <!--a href="#addFournisseur" data-toggle="modal" class="btn blue">
                                     Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
                                 </a-->
+                                <?php
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
-                                    Ajouter Nouveau Régelement <i class="icon-plus-sign "></i>
+                                    Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
+                                <?php  
+                                }
+                                ?>
                             </div>
                             <div class="pull-right">
                                 <a href="#addLivraison" data-toggle="modal" class="btn green">
@@ -729,9 +735,9 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
     header('Location:dashboard.php');
-}
+}*/
 else{
     header('Location:index.php');    
 }
