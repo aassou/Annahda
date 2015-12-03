@@ -77,7 +77,7 @@
 							</li>
 							<li>
 								<i class="icon-wrench"></i>
-								<a>Paramètrages</a>
+								<a href="configuration.php">Paramètrages</a>
 								<i class="icon-angle-right"></i>
 							</li>
 							<li><a>Gestion des utilisateurs</a></li>

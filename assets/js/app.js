@@ -559,10 +559,10 @@ var App = function () {
 
         // handle the search query submit on enter press
         $('.sidebar-search input').keypress(function (e) {
-            if (e.which == 13) {
-                window.location.href = "extra_search.html";
+            /*if (e.which == 13) {
+                window.location.href = "controller/ClientActionController.php";
                 return false; //<---- Add this line
-            }
+            }$*/
         });
 
         // handle the search submit
@@ -570,12 +570,12 @@ var App = function () {
             if ($('.page-container').hasClass("sidebar-closed")) {
                 if ($('.sidebar-search').hasClass('open') == false) {
                     $('.sidebar-search').addClass("open");
-                } else {
-                    window.location.href = "extra_search.html";
-                }
-            } else {
-                window.location.href = "extra_search.html";
-            }
+                } /*else {
+                    window.location.href = "controller/ClientActionController.php";
+                }*/
+            } /*else {
+                window.location.href = "controller/ClientActionController.php";
+            }*/
         });
     }
 

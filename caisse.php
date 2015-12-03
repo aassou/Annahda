@@ -75,7 +75,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -93,12 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-bar-chart"></i>
-								<a>Gestion de la société</a>
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
@@ -111,7 +106,7 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<!-- BEGIN PAGE CONTENT-->
-				<div class="row-fluid">
+				<!--div class="row-fluid">
 					<div class="span12 responsive">
 						<div class="dashboard-stat purple">
 							<div class="visual hidden-phone">
@@ -128,12 +123,12 @@
 									Bilan de la caisse<br> (Les Entrées - Les Sorties)
 								</div>
 							</div>
-							<!--a class="more" href="#">
+							<a class="more" href="#">
 								Générer le rapport des transactions <i class="m-icon-swapright m-icon-white"></i>
-							</a-->						
+							</a>						
 						</div>
 					</div>
-				</div>
+				</div-->
 				<div class="row-fluid">
 					<div class="span12">
 						<div class="tab-pane active" id="tab_1">
@@ -377,7 +372,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

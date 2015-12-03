@@ -79,6 +79,11 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
+                                <i class="icon-wrench"></i>
+                                <a href="configuration.php">Paramètrages</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+							<li>
 								<i class="icon-group"></i>
 								<a>Gestion des fournisseurs</a>
 							</li>
@@ -318,7 +323,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>

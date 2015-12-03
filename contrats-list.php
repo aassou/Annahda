@@ -348,7 +348,7 @@
 												<h3>Désister le contrat </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/ContratDesistementController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir désister le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
 													<div class="control-group">
 														<input type="hidden" name="action" value="desister" />

@@ -85,13 +85,16 @@
     }
     
     //define the redirection url based on the source page
-    if ( isset($_POST['source']) and $_POST['source']=="contrat" ) {
+    if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
         $codeContrat = htmlentities($_POST['codeContrat']);
         $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."#detailsReglements";   
     }
-    else if ( isset($_POST['source']) and $_POST['source']=="contrats-list" ) {
+    else if ( isset($_POST['source']) and $_POST['source'] == "contrats-list" ) {
         $idProjet = htmlentities($_POST['idProjet']);
         $redirectLink = "Location:../contrats-list.php?idProjet=".$idProjet;
+    }
+    else if ( isset($_POST['source']) and $_POST['source'] == "clients-search" ) {
+    	$redirectLink = "Location:../clients-search.php";
     }
     $_SESSION['operation-action-message'] = $actionMessage;
     $_SESSION['operation-type-message'] = $typeMessage;

@@ -103,6 +103,14 @@
         $typeMessage = "success";
     }
     //Action Delete Processing End
+    //Action Delete List Of Tasks Processing Begin
+    else if($action == "deleteValideTasks"){
+        $user = htmlentities($_POST['user']);
+        $taskManager->deleteValideTasksByUser($user);
+        $actionMessage = "Opération Valide : Tâches Supprimées avec succès.";
+        $typeMessage = "success";
+    }
+    //Action Delete List Of Tasks Processing End
     $_SESSION['task-action-message'] = $actionMessage;
     $_SESSION['task-type-message'] = $typeMessage;
     header('Location:../tasks.php');

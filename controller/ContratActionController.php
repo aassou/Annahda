@@ -267,7 +267,7 @@
         $actionMessage = "<strong>Opération valide : </strong>Le contrat est désisté avec succès.";
         $typeMessage = "success";
         $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
-        if( isset($_POST["source"]) and $_POST["source"] == "search" ){
+        if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
             $redirectLink = 'Location:../clients-search.php';
         }
     }
@@ -306,7 +306,7 @@
         }
         //set the redirect link
         $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
-        if( isset($_POST["source"]) and $_POST["source"] == "search" ){
+        if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
             $redirectLink = 'Location:../clients-search.php';
         }    
     }

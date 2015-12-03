@@ -153,7 +153,7 @@
 								</div>
 							</div>
 							</a>
-							<a href="fournisseurs.php">
+							<!--a href="fournisseurs.php">
                             <div class="tile bg-dark-red">
                                 <div class="corner"></div>
                                 <div class="tile-body">
@@ -165,7 +165,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                            </a-->
 							<a href="compte-bancaire.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
@@ -206,7 +206,7 @@
 								</div>
 							</div>
 							</a>
-							<a href="users.php">
+							<a href="configuration.php">
 							<div class="tile bg-yellow">
 								<div class="corner"></div>
 								<div class="tile-body">

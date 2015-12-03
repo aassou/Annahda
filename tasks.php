@@ -106,9 +106,9 @@
                                 <div class="chat-form">
                                     <form action="controller/TaskActionController.php" method="POST">
                                         <div class="control-group">
-                                                <label class="control-label">Tâche pour</label>
+                                                <label class="control-label" for="user">Tâche pour</label>
                                                 <div class="controls">
-                                                    <select name="user">
+                                                    <select name="user" id="user">
                                                         <?php 
                                                         foreach ( $users as $user ) {
                                                             if ( $user->login() != $_SESSION['userMerlaTrav']->login() ) { 
@@ -147,6 +147,29 @@
                                         unset($_SESSION['task-type-message']);
                                      ?>
                                     <br>
+                                    <a href="#deleteValideTasks" data-toggle="modal" class="btn green get-down">
+                                        Effacer les tâches validées
+                                    </a>
+                                    <!-- DeleteValideTasks Box Begin -->
+                                    <div id="deleteValideTasks" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Effacer les tâches validées</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" action="controller/TaskActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <div class="controls">  
+                                                        <input type="hidden" name="action" value="deleteValideTasks" />
+                                                        <input type="hidden" name="user" value="<?= $_SESSION['userMerlaTrav']->login() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn green" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- DeleteValideTasks Box End -->
                                     <ul class="chats">
                                         <?php 
                                         foreach($myTasks as $task){

@@ -4,6 +4,19 @@
 <div class="page-sidebar nav-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->        	
 			<ul>
+			    <li>
+                    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                    <form class="sidebar-search" action="controller/ClientActionController.php" method="post">
+                        <div class="input-box">
+                            <a href="javascript:;" class="remove"></a>
+                            <input type="hidden" name="action" value="search">
+                            <input type="hidden" name="source" value="clients-search">
+                            <input type="text" name="clientName" placeholder="Chercher un client">             
+                            <input type="button" class="submit" value="">
+                        </div>
+                    </form>
+                    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                </li>
 				<li>
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 					<div class="sidebar-toggler hidden-phone"></div>
@@ -19,6 +32,7 @@
 				or $currentPage=="statistiques.php"
 				or $currentPage=="users.php"
 				or $currentPage=="tasks.php"
+				or $currentPage=="configuration.php"
 				or $currentPage=="messages.php"
 				or $currentPage=="user-profil.php"
 				or $currentPage=="clients-search.php"

@@ -60,6 +60,14 @@ class TaskManager{
 		$query->execute();
 		$query->closeCursor();
 	}
+    
+    public function deleteValideTasksByUser($user){
+        $query = $this->_db->prepare('DELETE FROM t_task WHERE user=:user AND status=1 ')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':user', $user);
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function getTaskById($id){
     	$query = $this->_db->prepare(' SELECT * FROM t_task

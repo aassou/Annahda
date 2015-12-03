@@ -291,6 +291,18 @@ class ContratManager{
         $query->closeCursor();
         return $contrats;
     }
+    
+    public function getContratsActifsByIdClient($idClient){
+        $contrats = array();    
+        $query = $this->_db->prepare('SELECT * FROM t_contrat WHERE status="actif" AND idClient =:id');
+        $query->bindValue(':id', $idClient);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
 	
 	public function getContratsByIdClientByIdProjet($idClient, $idProjet){
         $contrats = array();    

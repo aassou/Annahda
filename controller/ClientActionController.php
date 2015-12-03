@@ -1,11 +1,11 @@
 <?php
 /**
  * This is a Model class for the customer component
- * Created By : AASSOU Abdelilah
- * Date       : 03/11/2015
- * Github     : @aassou
- * email      : aassou.abdelilah@gmail.com
- * Description: This controller is used to create a new customer if it doesn't exist, or get it from 
+ * Created By  : AASSOU Abdelilah
+ * Date        : 03/11/2015
+ * Github      : @aassou
+ * email       : aassou.abdelilah@gmail.com
+ * Description : This controller is used to create a new customer if it doesn't exist, or get it from 
  *              the database if exists. If all goes nomrmal, this controller sends the customer 
  *              informations to the contract property url to finish the process.
  */
@@ -150,6 +150,13 @@
         $actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../clients-list.php";
+    }
+    else if($action=="search"){
+        $clientName = htmlentities($_POST['clientName']);
+        $_SESSION['searchClientResult'] = $clientManager->getClientBySearch($clientName, 1);
+        //$actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
+        //$typeMessage = "success";
+        $redirectLink = "Location:../clients-search.php";
     }
     
     $_SESSION['client-action-message'] = $actionMessage;
