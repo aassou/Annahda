@@ -4,6 +4,7 @@ class Livraison{
     private $_id;
     private $_libelle;
     private $_designation;
+    private $_type;
     private $_quantite;
     private $_prixUnitaire;
     private $_paye;
@@ -45,6 +46,10 @@ class Livraison{
     
     public function setDesignation($designation){
         $this->_designation = $designation;
+    }
+    
+    public function setType($type){
+        $this->_type = $type;
     }
     
     public function setQuantite($quantite){
@@ -110,6 +115,10 @@ class Livraison{
     
     public function designation(){
         return $this->_designation;
+    }
+    
+    public function type(){
+        return $this->_type;
     }
     
     public function quantite(){

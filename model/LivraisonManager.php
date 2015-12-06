@@ -10,11 +10,12 @@ class LivraisonManager{
     
     //CRUD operations
     public function add(Livraison $livraison){
-        $query = $this->_db->prepare('INSERT INTO t_livraison (dateLivraison, libelle, idFournisseur, idProjet, code)
-        VALUES (:dateLivraison, :libelle, :idFournisseur, :idProjet, :code)') 
+        $query = $this->_db->prepare('INSERT INTO t_livraison (dateLivraison, libelle, type, idFournisseur, idProjet, code)
+        VALUES (:dateLivraison, :libelle, :type, :idFournisseur, :idProjet, :code)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
+        $query->bindValue(':type', $livraison->type());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':idProjet', $livraison->idProjet());
 		$query->bindValue(':code', $livraison->code());
@@ -24,12 +25,13 @@ class LivraisonManager{
 
     public function update(Livraison $livraison){
         $query = $this->_db->prepare(
-        'UPDATE t_livraison SET dateLivraison=:dateLivraison, libelle=:libelle, idProjet=:idProjet,
-        idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
+        'UPDATE t_livraison SET dateLivraison=:dateLivraison, libelle=:libelle, type=:type,
+        idProjet=:idProjet, idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
         WHERE id=:id') or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $livraison->id());
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
+        $query->bindValue(':type', $livraison->type());
         $query->bindValue(':idProjet', $livraison->idProjet());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':updated', $livraison->updated());
@@ -59,6 +61,19 @@ class LivraisonManager{
     public function getLivraisonsByGroup(){
         $livraisons = array();
         $query = $this->_db->query('SELECT * FROM t_livraison GROUP BY idFournisseur ORDER BY id DESC');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = new Livraison($data);
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
+    
+    public function getLivraisonsByGroupByType($type){
+        $livraisons = array();
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_livraison WHERE type=:type GROUP BY idFournisseur ORDER BY id DESC');
+        $query->bindValue(':type', $type);
+        $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $livraisons[] = new Livraison($data);
         }

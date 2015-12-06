@@ -24,6 +24,8 @@
     $typeMessage = "";
     $redirectLink = "";
     //process begins
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $operationManager = new OperationManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
@@ -43,6 +45,16 @@
             'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
             'createdBy' => $createdBy, 'created' => $created));
             $operationManager->add($operation);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des paiements clients ",
+                'description' => "Ajouter un paiement client",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Ajouté avec succès.";
             $typeMessage = "success";
         }
@@ -69,6 +81,18 @@
             'observation' => $observation, 'montant' => $montant, 'numeroCheque' => $numeroOperation, 
             'modePaiement' => $modePaiement, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $operationManager->update($operation);
+            //add History data
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des paiements clients",
+                'description' => "Modifier un paiement client",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Client Modifié avec succès.";
             $typeMessage = "success";
         }
@@ -80,6 +104,18 @@
     else if($action=="delete"){
         $idOperation = $_POST['idOperation'];
         $operationManager->delete($idOperation);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des paiements clients",
+            'description' => "Supprimmer un paiement client",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Réglement Client Supprimé avec succès.";
         $typeMessage = "success";
     }

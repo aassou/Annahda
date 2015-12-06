@@ -24,6 +24,8 @@
     $typeMessage = "";
     $redirectLink = "";
     //process begins
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $reglementManager = new ReglementFournisseurManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) ) {
@@ -41,6 +43,16 @@
             'modePaiement' => $modePaiement, 'numeroCheque' => $numeroOperation, 
             'createdBy' => $createdBy, 'created' => $created));
             $reglementManager->add($reglement);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des réglements fournisseurs",
+                'description' => "Ajouter un réglement fournisseur",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Ajouté avec succès.";
             $typeMessage = "success";
         }
@@ -77,6 +89,18 @@
             'modePaiement' => $modePaiement, 'numeroCheque' => $numeroOperation, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $reglementManager->update($reglement);
+            //add History data
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des réglements fournisseurs",
+                'description' => "Modifier un réglement fournisseur",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Réglement Modifié avec succès.";
             $typeMessage = "success";
         }
@@ -89,6 +113,18 @@
     else if($action=="delete"){
         $idReglement = $_POST['idReglement'];
         $reglementManager->delete($idReglement);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des réglements fournisseurs",
+            'description' => "Supprimer un réglement fournisseur",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Réglement Supprimée avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../reglements.php";

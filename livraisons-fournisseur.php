@@ -223,6 +223,15 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Type Livraison</label>
+                                        <div class="controls">
+                                            <select name="type">
+                                                <option value="Finition">Finition</option>
+                                                <option value="Gros Oeuvres">Gros Oeuvres</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">Date Livraison</label>
                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                             <input name="dateLivraison" id="dateLivraison" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
@@ -566,6 +575,17 @@
                                                                 <?php foreach($projets as $projet){ ?>
                                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                                 <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Type Livraison</label>
+                                                        <div class="controls">
+                                                            <select name="type">
+                                                                <option value="<?= $livraison->type() ?>"><?= $livraison->type() ?></option>
+                                                                <option disabled="disabled">------------------</option>
+                                                                <option value="Finition">Finition</option>
+                                                                <option value="Gros Oeuvres">Gros Oeuvres</option>
                                                             </select>
                                                         </div>
                                                     </div>

@@ -20,6 +20,8 @@
     $actionMessage = "";
     $typeMessage = "";
     $appartementManager = new AppartementManager($pdo);
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
     
     if($action == "add"){
@@ -42,6 +44,16 @@
             'cave' => $cave, 'idProjet' => $idProjet, 'status' => $status, 'par' => $par,'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $appartementManager->add($appartement);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des appartements",
+                'description' => "Ajouter un appartement",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Appartement Ajouté avec succès.";  
             $typeMessage = "success";
         }
@@ -69,6 +81,18 @@
             'superficie' => $superficie, 'facade' => $facade, 'nombrePiece' => $nombrePiece, 
             'cave' => $cave, 'status' => $status, 'par' => $par, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $appartementManager->update($appartement);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des appartements",
+                'description' => "Modifier un appartement",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Appartement Modifié avec succès.";
             $typeMessage = "success";
         }
@@ -81,6 +105,18 @@
         $idAppartement = $_POST['idAppartement'];
         $status = htmlentities($_POST['status']);
         $appartementManager->changeStatus($idAppartement, $status);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification Status",
+            'target' => "Table des appartements",
+            'description' => "Changer le status de l'appartement",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Appartement Status Modifié avec succès.";
         $typeMessage = "success";
     }
@@ -88,12 +124,36 @@
         $idAppartement = $_POST['idAppartement'];
         $par = htmlentities($_POST['par']);
         $appartementManager->updatePar($par, $idAppartement);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification Client",
+            'target' => "Table des appartements",
+            'description' => "Modifier le client réservant l'appartement",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Appartement Réservation Modifiée avec succès.";
         $typeMessage = "success";
     }
     else if($action=="delete"){
         $idAppartement = $_POST['idAppartement'];
         $appartementManager->delete($idAppartement);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des appartements",
+            'description' => "Supprimer un appartement",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Appartement Supprimé avec succès.";
         $typeMessage = "success";
     }

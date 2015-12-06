@@ -24,8 +24,11 @@
     $typeMessage = "";
     $redirectLink = "";
     //process begins
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $livraisonDetailManager = new LivraisonDetailManager($pdo);
     $codeLivraison = htmlentities($_POST['codeLivraison']);
+    //Action Add Processing Begin
     if($action == "add"){
         if( !empty($_POST['prixUnitaire']) and !empty($_POST['quantite']) ){
             $designation = htmlentities($_POST['designation']);
@@ -40,6 +43,16 @@
             'designation' => $designation, 'idLivraison' => $idLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonDetailManager->add($livraisonDetail);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des détails livraisons",
+                'description' => "Ajouter un article à la livraison",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Article Ajouté avec succès.";  
             $typeMessage = "success";
             $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
@@ -50,6 +63,8 @@
             $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
         }
     }
+    //Action Add Processing End
+    //Action Update Processing Begin
     else if($action == "update"){
         if( !empty($_POST['prixUnitaire']) and !empty($_POST['quantite']) ){
             $idLivraisonDetail = htmlentities($_POST['idLivraisonDetail']);
@@ -63,6 +78,17 @@
             'prixUnitaire' => $prixUnitaire, 'quantite' => $quantite, 'updatedBy' => $updatedBy,
             'updated' => $updated));
             $livraisonDetailManager->update($livraisonDetail);
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des détails livraisons",
+                'description' => "Modifier un article de la livraison",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Article Modifié avec succès.";
             $typeMessage = "success";
         }
@@ -72,14 +98,27 @@
         }
         $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
     }
+    //Action Update Processing End
+    //Action Delete Processing Begin
     else if($action=="delete"){
         $idLivraisonDetail = htmlentities($_POST['idLivraisonDetail']);
         $livraisonDetailManager->delete($idLivraisonDetail);
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des détails livraisons",
+            'description' => "Supprimer un article de la livraison",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Article Supprimé avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
     }
-    
+    //Action Delete Processing End
     $_SESSION['livraison-detail-action-message'] = $actionMessage;
     $_SESSION['livraison-detail-type-message'] = $typeMessage;
     header($redirectLink);

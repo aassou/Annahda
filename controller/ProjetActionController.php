@@ -19,6 +19,8 @@
     //This var contains result message of CRUD action
     $actionMessage = "";
     $typeMessage = "";
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $projetManager = new ProjetManager($pdo);
     
     if($action == "add"){
@@ -37,6 +39,16 @@
             'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $projetManager->add($projet);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des projets",
+                'description' => "Ajouter un projet",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Projet Ajouté avec succès.";  
             $typeMessage = "success";
         }
@@ -60,6 +72,18 @@
             'superficie' => $superficie, 'adresse' => $adresse, 'description' => $description, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $projetManager->update($projet);
+            //add History data
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des projets",
+                'description' => "Modifier un projet",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Projet Modifié avec succès.";
             $typeMessage = "success";
         }

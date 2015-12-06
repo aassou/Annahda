@@ -23,7 +23,8 @@
     //link redirection
     $redirectLink = "";
     //Component Class Manager
-
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $reglementPrevuManager = new ReglementPrevuManager($pdo);
 	//Action Add Processing Begin
     	if($action == "add"){
@@ -43,6 +44,16 @@
 			));
             //add it to db
             $reglementPrevuManager->add($reglementPrevu);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des réglements prévus",
+                'description' => "Ajouter une liste de réglements prévus",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : ReglementPrevu Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -61,7 +72,7 @@
 			$status = htmlentities($_POST['status']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$reglementPrevu = new ReglementPrevu(array(
+            $reglementPrevu = new ReglementPrevu(array(
 				'id' => $idReglementPrevu,
 				'datePrevu' => $datePrevu,
 				'codeContrat' => $codeContrat,
@@ -70,6 +81,18 @@
             	'updatedBy' => $updatedBy
 			));
             $reglementPrevuManager->update($reglementPrevu);
+            //add History data
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des réglements prévus",
+                'description' => "Modifier un réglement prévu",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : ReglementPrevu Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -84,6 +107,18 @@
         $idReglementPrevu = htmlentities($_POST['idReglementPrevu']);
         $status = htmlentities($_POST['status']);
         $reglementPrevuManager->updateStatus($idReglementPrevu, $status);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification de status",
+            'target' => "Table des réglements prévus",
+            'description' => "Modifier les status d'un réglement prévu",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $codeContrat = htmlentities($_POST['codeContrat']);
         $idProjet = htmlentities($_POST['idProjet']);
         $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#reglementsPrevus';
@@ -93,6 +128,18 @@
     else if($action == "delete"){
         $idReglementPrevu = htmlentities($_POST['idReglementPrevu']);
         $reglementPrevuManager->delete($idReglementPrevu);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des Réglements Prévus",
+            'description' => "Supprimer un réglement prévu",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : ReglementPrevu supprimé(e) avec succès.";
         $typeMessage = "success";
     }

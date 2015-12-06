@@ -22,7 +22,8 @@
     $typeMessage = "";
 
     //Component Class Manager
-
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $taskManager = new TaskManager($pdo);
 	//Action Add Processing Begin
     	if($action == "add"){
@@ -42,6 +43,16 @@
 			));
             //add it to db
             $taskManager->add($task);
+            //add History data
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des tâches",
+                'description' => "Ajouter une nouvelle tâche",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Tâche Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -60,7 +71,7 @@
 			$status = htmlentities($_POST['status']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$task = new Task(array(
+            $task = new Task(array(
 				'id' => $idTask,
 				'user' => $user,
 				'content' => $content,
@@ -69,6 +80,18 @@
             	'updatedBy' => $updatedBy
 			));
             $taskManager->update($task);
+            //add History data
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des tâches",
+                'description' => "Modifier une tâche",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Tâche Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -91,6 +114,18 @@
             'updatedBy' => $updatedBy
         ));
         $taskManager->updateStatus($task);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification",
+            'target' => "Table des tâches",
+            'description' => "Modifier le status d'une tâche",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Tâche Status Modifié(e) avec succès.";
         $typeMessage = "success";
     }
@@ -99,6 +134,18 @@
     else if($action == "delete"){
         $idTask = htmlentities($_POST['idTask']);
         $taskManager->delete($idTask);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des tâches",
+            'description' => "Supprimer une tâche",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Tâche Supprimé(e) avec succès.";
         $typeMessage = "success";
     }
@@ -107,6 +154,18 @@
     else if($action == "deleteValideTasks"){
         $user = htmlentities($_POST['user']);
         $taskManager->deleteValideTasksByUser($user);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des tâches",
+            'description' => "Supprimer les tâches validées",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Tâches Supprimées avec succès.";
         $typeMessage = "success";
     }

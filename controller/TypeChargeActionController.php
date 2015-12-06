@@ -26,7 +26,7 @@
     $typeChargeManager = new TypeChargeManager($pdo);
 	//Action Add Processing Begin
 	$idProjet = htmlentities($_POST['idProjet']);
-    if($action == "add"){
+    if ( $action == "add" ) {
         if( !empty($_POST['nom']) ){
 			$nom = htmlentities($_POST['nom']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
@@ -86,5 +86,8 @@
         $typeCharge = htmlentities($_POST['typeCharge']);
         $redirectLink = "Location:../projet-charges-type.php?idProjet=".$idProjet."&type=".$typeCharge;
     }
+    else if( isset($_POST['source']) and $_POST['source'] == "type-charges" ) {
+        $redirectLink = "Location:../type-charges.php";
+    }
     header($redirectLink);
-
+    

@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="#">
+                            <a href="type-charges.php">
                             <div class="tile bg-cyan">
                                 <div class="corner"></div>
                                 <div class="tile-body">
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="#">
+                            <a href="history.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
                                     <i class="icon-calendar"></i>

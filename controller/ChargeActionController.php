@@ -22,8 +22,9 @@
     $typeMessage = "";
 
     //Component Class Manager
-
     $chargeManager = new ChargeManager($pdo);
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
 	//Action Add Processing Begin
 	$idProjet = htmlentities($_POST['idProjet']);
     //begin process: test the action
@@ -50,6 +51,16 @@
 			));
             //add it to db
             $chargeManager->add($charge);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des charges",
+                'description' => "Ajouter une charge",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Charge Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -81,6 +92,18 @@
 				'updatedBy' => $updatedBy
 			));
             $chargeManager->update($charge);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des charges",
+                'description' => "Modifier une charge",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Charge Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -94,6 +117,18 @@
     else if($action == "delete"){
         $idCharge = htmlentities($_POST['idCharge']);
         $chargeManager->delete($idCharge);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des charges",
+            'description' => "Supprimer une charge",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Charge supprimé(e) avec succès.";
         $typeMessage = "success";
     }

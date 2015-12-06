@@ -22,8 +22,9 @@
     $typeMessage = "";
 
     //Component Class Manager
-
     $CompteBancaireManager = new CompteBancaireManager($pdo);
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
 	//Action Add Processing Begin
     	if($action == "add"){
         if( !empty($_POST['numero']) ){
@@ -42,6 +43,16 @@
 			));
             //add it to db
             $CompteBancaireManager->add($CompteBancaire);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des comptes bancaires",
+                'description' => "Ajouter un compte bancaire",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : CompteBancaire Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -69,6 +80,18 @@
 				'updatedBy' => $updatedBy
 			));
             $CompteBancaireManager->update($CompteBancaire);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des comptes bancaires",
+                'description' => "Modifier un compte bancaire",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : CompteBancaire Modifié(e) avec succès.";
             $typeMessage = "success";
             echo print_r($CompteBancaire);
@@ -83,6 +106,18 @@
     else if($action == "delete"){
         $idCompteBancaire = htmlentities($_POST['idCompteBancaire']);
         $CompteBancaireManager->delete($idCompteBancaire);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des comptes bancaires",
+            'description' => "Supprimer un compte bancaire",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : CompteBancaire supprimée avec succès.";
         $typeMessage = "success";
     }

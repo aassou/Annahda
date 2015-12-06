@@ -33,6 +33,8 @@
 				or $currentPage=="users.php"
 				or $currentPage=="tasks.php"
 				or $currentPage=="configuration.php"
+				or $currentPage=="history.php"
+				or $currentPage=="type-charges.php"
 				or $currentPage=="messages.php"
 				or $currentPage=="user-profil.php"
 				or $currentPage=="clients-search.php"

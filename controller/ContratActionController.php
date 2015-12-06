@@ -48,6 +48,8 @@
     $contratManager = new ContratManager($pdo);
     $contratCasLibreManager = new ContratCasLibreManager($pdo);
     $reglementPrevuManager = new ReglementPrevuManager($pdo);
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     //process starts
     //Action Add Processing Begin
     if($action == "add"){
@@ -136,6 +138,16 @@
                 'numeroCheque' => $numeroCheque, 'created' => $created, 'createdBy' => $createdBy));
                 //adding the contract object to our database
                 $contratManager->add($contrat);
+                //add history data to db
+                $history = new History(array(
+                    'action' => "Ajout",
+                    'target' => "Table des contrats",
+                    'description' => "Ajouter un contrat",
+                    'created' => $created,
+                    'createdBy' => $createdBy
+                ));
+                //add it to db
+                $historyManager->add($history);
                 //in the next if elseif statement, we test the type of the property to change its status
                 //and its price
                 if($typeBien=="appartement"){
@@ -196,6 +208,18 @@
             'numeroCheque' => $numeroCheque, 'note' => $note, 'updated' => $updated, 'updatedBy' => $updatedBy));
             //begin processing
             $contratManager->update($newContrat);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des contrats",
+                'description' => "Modifier un contrat",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             //update client's note
             $notesClientManager = new NotesClientManager($pdo);
             $notesClient = new NotesClient(array('note' => $note, 'created' => date('Y-m-d'), 
@@ -244,6 +268,18 @@
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];
         $contratManager->delete($idContrat);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des contrats",
+            'description' => "Supprimer un contrat",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         //after the delete of our contract, we should change the property status to "Disponible"
         $actionMessage = "<strong>Opération Valide : </strong>Contrat Supprimé(e) avec succès.";
         $typeMessage = "success";
@@ -264,6 +300,18 @@
             $locauxManager->changeStatus($contrat->idBien(), "Disponible");
         }
         $contratManager->desisterContrat($idContrat);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Désistement",
+            'target' => "Table des contrats",
+            'description' => "Désister un contrat",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "<strong>Opération valide : </strong>Le contrat est désisté avec succès.";
         $typeMessage = "success";
         $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
@@ -283,6 +331,18 @@
             if( $appartementManager->getAppartementById($contrat->idBien())->status() == "Disponible" ){
                 $appartementManager->changeStatus($contrat->idBien(), "Vendu");
                 $contratManager->activerContrat($idContrat);
+                //add history data to db
+                $createdBy = $_SESSION['userMerlaTrav']->login();
+                $created = date('Y-m-d h:i:s');
+                $history = new History(array(
+                    'action' => "Activation",
+                    'target' => "Table des contrats",
+                    'description' => "Activer un contrat",
+                    'created' => $created,
+                    'createdBy' => $createdBy
+                ));
+                //add it to db
+                $historyManager->add($history);
                 $actionMessage = "<strong>Opération valide : </strong>Le contrat est activé avec succès.";
                 $typeMessage = "success";
             }
@@ -296,6 +356,18 @@
             if( $locauxManager->getLocauxById($contrat->idBien())->status()=="Disponible" ){
                 $locauxManager->changeStatus($contrat->idBien(), "Vendu");
                 $contratManager->activerContrat($idContrat);
+                //add history data to db
+                $createdBy = $_SESSION['userMerlaTrav']->login();
+                $created = date('Y-m-d h:i:s');
+                $history = new History(array(
+                    'action' => "Activation",
+                    'target' => "Table des contrats",
+                    'description' => "Activer un contrat",
+                    'created' => $created,
+                    'createdBy' => $createdBy
+                ));
+                //add it to db
+                $historyManager->add($history);
                 $actionMessage = "<strong>Opération valide : </strong>Le contrat est activé avec succès.";
                 $typeMessage = "success";
             }

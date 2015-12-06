@@ -37,6 +37,8 @@
     $redirectLink = "";
     //class manager
     $clientManager = new ClientManager($pdo);
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     //process starts
     //Case 1 : CRUD Add Action 
     if($action == "add"){
@@ -87,6 +89,16 @@
                     'code' => $codeClient, 'created' => $created, 'createdBy' => $createdBy));
                     //push object to db
                     $clientManager->add($client);
+                    //add history data to db
+                    $history = new History(array(
+                        'action' => "Ajout",
+                        'target' => "Table des clients",
+                        'description' => "Ajouter un client",
+                        'created' => $created,
+                        'createdBy' => $createdBy
+                    ));
+                    //add it to db
+                    $historyManager->add($history);
                     //result processes   
                     $actionMessage = "<strong>Opération Valide : </strong>Client Ajouté(e) avec succès.";
                     $typeMessage = "success";
@@ -124,6 +136,18 @@
             'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 'telephone1' => $telephone1, 'telephone2' => $telephone2, 
             'email' => $email, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $clientManager->update($client);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des clients",
+                'description' => "Modifier un client",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide : </strong>Client Modifié(e) avec succès.";
             $typeMessage = "success";
             if( $source == "contrat" ){
@@ -147,6 +171,18 @@
     else if($action=="delete"){
         //$idClient = $_POST['idClient'];
         //$clientManager->delete($idClient);
+        //add history data to db
+        /*$createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Activation",
+            'target' => "Table des contrats",
+            'description' => "Activer un contrat",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);*/
         $actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../clients-list.php";

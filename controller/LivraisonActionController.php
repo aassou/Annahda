@@ -24,23 +24,36 @@
     $typeMessage = "";
     $redirectLink = "";
     //process begins
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $livraisonManager = new LivraisonManager($pdo);
     $idFournisseur = htmlentities($_POST['idFournisseur']);
     if($action == "add"){
         if( !empty($_POST['libelle']) ){
             $idProjet = htmlentities($_POST['idProjet']);
             $libelle = htmlentities($_POST['libelle']);
+            $type = htmlentities($_POST['type']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $codeLivraison = uniqid().date('YmdHis');
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
             $livraison = 
-            new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
+            new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle, 'type' => $type,
             'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 'code' => $codeLivraison,
             'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table des livraisons",
+                'description' => "Ajouter une livraison",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
             $typeMessage = "success";
             $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
@@ -58,13 +71,26 @@
             $idFournisseur = htmlentities($_POST['idFournisseur']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $libelle = htmlentities($_POST['libelle']);
+            $type = htmlentities($_POST['type']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $livraison = 
             new Livraison(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 'updatedBy' => $updatedBy,
-            'updated' => $updated));
+            'type' => $type, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table des livraisons",
+                'description' => "Modifier une livraison",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Modifiée avec succès.";
             $typeMessage = "success";
         }
@@ -84,6 +110,18 @@
         $livraisonDetailManager = new LivraisonDetailManager($pdo);
         $idLivraison = $_POST['idLivraison'];
         $livraisonManager->delete($idLivraison);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table des livraisons, Table détails livraisons",
+            'description' => "Supprimer une livraison ainsi que ses détails",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         //After we delete our Livraison record from the database, we should remove all LivraisonDetails
         //records that corresponds to the idLivraison
         $livraisonDetailManager->deleteLivraison($idLivraison);

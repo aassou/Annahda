@@ -194,7 +194,7 @@
 								</div>
 							</div>
 							</a>
-							<a href="recherches.php">
+							<!--a href="recherches.php">
 							<div class="tile bg-red">
 								<div class="tile-body">
 									<i class="icon-search"></i>
@@ -205,9 +205,9 @@
 									</div>
 								</div>
 							</div>
-							</a>
+							</a-->
 							<a href="configuration.php">
-							<div class="tile bg-yellow">
+							<div class="tile bg-red">
 								<div class="corner"></div>
 								<div class="tile-body">
 									<i class="icon-wrench"></i>
