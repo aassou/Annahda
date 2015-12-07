@@ -806,7 +806,7 @@
 										<td><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
 										<td><?= $operation->observation() ?></td>
-										<td><a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
+										<td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
 									</tr>	
 									<!-- update box begin-->
                                     <div id="updateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

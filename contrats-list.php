@@ -272,7 +272,7 @@
 												    </a>
 												    <ul class="dropdown-menu">
 												        <li>
-												        	<a target="_blank" href="contrat.php?codeContrat=<?= $contrat->code() ?>">
+												        	<a href="contrat.php?codeContrat=<?= $contrat->code() ?>">
 																Consulter Contrat
 															</a>
 															<?php
@@ -284,7 +284,7 @@
 												        	<?php
                                                             }
                                                             ?>
-												        	<a target="_blank" href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>">
+												        	<a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Contrat
 												        	</a>
 												        	<a target="_blank" href="controller/ClientFichePrintController.php?idContrat=<?= $contrat->id() ?>">
