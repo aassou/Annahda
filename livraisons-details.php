@@ -176,7 +176,7 @@
 									  <div class="control-group">
 										 <div class="controls">
 											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
-											    <strong>Projet : <?= $projet->nom() ?></strong>
+											    <strong>Projet : <?= $projet ?></strong>
 										    </a>   
 										 </div>
 									  </div>
