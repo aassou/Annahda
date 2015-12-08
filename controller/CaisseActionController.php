@@ -20,9 +20,10 @@
     //This var contains result message of CRUD action
     $actionMessage = "";
     $typeMessage = "";
-
+    
     //Component Class Manager
-
+    //The History Component is used in all ActionControllers to mention a historical version of each action
+    $historyManager = new HistoryManager($pdo);
     $caisseManager = new CaisseManager($pdo);
 	//Action Add Processing Begin
     	if($action == "add"){
@@ -46,6 +47,16 @@
 			));
             //add it to db
             $caisseManager->add($caisse);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table de caisse",
+                'description' => "Ajouter une opération",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Caisse Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -66,7 +77,7 @@
 			$destination = htmlentities($_POST['destination']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$caisse = new Caisse(array(
+            $caisse = new Caisse(array(
 				'id' => $idCaisse,
 				'type' => $type,
 				'dateOperation' => $dateOperation,
@@ -77,6 +88,18 @@
             	'updatedBy' => $updatedBy
 			));
             $caisseManager->update($caisse);
+            //add history data to db
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table de caisse",
+                'description' => "Modifier une opération",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Caisse Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -90,6 +113,18 @@
     else if($action == "delete"){
         $idCaisse = htmlentities($_POST['idCaisse']);
         $caisseManager->delete($idCaisse);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table de caisse",
+            'description' => "Supprimer une opération",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Caisse supprimé(e) avec succès.";
         $typeMessage = "success";
     }
