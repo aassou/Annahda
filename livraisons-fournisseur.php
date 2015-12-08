@@ -499,6 +499,13 @@
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
+                                            $nomProjet = "Non mentionné";
+                                            if ( $livraison->idProjet() != 0 ) {
+                                                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                                            }
+                                            else {
+                                                $nomProjet = "Non mentionné";
+                                            }
                                         ?>      
                                         <tr class="livraisons">
                                             <td>                                                            
@@ -513,7 +520,7 @@
                                                 </a>
                                             </td>
                                             <td><?= $livraison->libelle() ?></td>
-                                            <td><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
+                                            <td><?= $nomProjet ?></td>
                                             <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
                                             <td>
                                                 <?= $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id()); ?>

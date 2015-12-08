@@ -19,6 +19,8 @@
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
 		$operationManager = new OperationManager($pdo);
+        $contratCasLibreManager = new ContratCasLibreManager($pdo);
+        $reglementPrevuManager = new ReglementPrevuManager($pdo);
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
 			$contrat = $contratManager->getContratByCode($codeContrat);
@@ -26,15 +28,18 @@
 			$client = $clientManager->getClientById($contrat->idClient());
 			$sommeOperations = $operationManager->sommeOperations($contrat->id());
 			$biens = "";
+            $typeBien = "";
 			$niveau = "";
 			if($contrat->typeBien()=="appartement"){
 				$appartementManager = new AppartementManager($pdo);
 				$biens = $appartementManager->getAppartementById($contrat->idBien());
+                $typeBien = "Appartement";
 				$niveau = $biens->niveau();
 			}
 			else if($contrat->typeBien()=="localCommercial"){
 				$locauxManager = new LocauxManager($pdo);
 				$biens = $locauxManager->getLocauxById($contrat->idBien());
+                $typeBien = "Local Commercial";
 			}
 			$operations = "";
 			//test the locaux object number: if exists get operations else do nothing
@@ -42,15 +47,45 @@
 			if($operationsNumber != 0){
 				$operations = $operationManager->getOperationsByIdContrat($contrat->id());	
 			}
+            //ContratCasLibre Elements
+            $contratCasLibreNumber = 
+            $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
+            $contratCasLibreElements = "";
+            $contratCasLibreTitle = "";
+            if ( $contratCasLibreNumber > 0 ) {
+                $contratCasLibreTitle = "Informations Supplémentaires";
+                $contratCasLibreElements = 
+                $contratCasLibreManager->getContratCasLibresByCodeContrat($codeContrat);
+            }
+            //ReglementPrevu Elements
+            $reglementPrevuNumber = 
+            $reglementPrevuManager->getReglementNumberByCodeContrat($codeContrat);
+            $reglementPrevuElements = "";
+            $reglementPrevuTitle = "";
+            if ( $reglementPrevuNumber > 0 ) {
+                $reglementPrevuTitle = "Dates des réglements prévus";
+                $reglementPrevuElements =     
+                $reglementPrevuManager->getReglementPrevuByCodeContrat($codeContrat);
+            }
 		}
 		
 ob_start();
 ?>
 <style type="text/css">
-	p, h1, h2, h4{
+	p, h2, h4{
         text-align: center;
         font-family : Arial;
         font-weight: 100;
+        margin-bottom: 0px;
+    }
+    h4{
+        font-weight : bold;
+    }
+    h1{
+        text-align: center;
+        font-family : Arial;
+        font-weight: bold;
+        font-size : 18px;
         margin-bottom: 0px;
     }
     h2{
@@ -72,13 +107,10 @@ ob_start();
 		text-decoration: none;
 	}
 </style>
-<page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
+<page backtop="10mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
-    <h1>Résumé du Contrat Client</h1>
-    <h2>Projet <?= $projet->nom() ?> </h2>
+    <h1>Résumé du Contrat Client - Projet : <?= $projet->nom() ?></h1>
     <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
-    <br><br>
-    <h3>Résumé du Contrat</h3>
     <hr>
     <div>
 		<table style="width: 100%">
@@ -89,86 +121,209 @@ ob_start();
 				<td></td>
 			</tr>
 			<tr>
-				<td style="width: 15%"><strong>Client</strong></td>
-				<td style="width: 25%"><a><strong><?= $client->nom() ?></strong></a></td>
-				<td style="width: 15%"><strong>Type</strong></td> 
-				<td style="width: 25%"><a><strong>
-				<?php 
-					if($contrat->typeBien()=="localCommercial"){
-						echo "Local commercial"; 
-					} 
-					else{
-						echo "Appartement";
-					} 
-				?>
-				</strong></a></td>
+				<td><strong>Client</strong></td>
+				<td><strong><?= $client->nom() ?></strong></td>
+				<td><strong>Type</strong></td> 
+				<td><strong><?= $typeBien ?></strong></td>
 			</tr>
 			<tr>
 				<td><strong>CIN</strong></td>
-				<td><a><strong><?= $client->cin() ?></strong></a></td>
+				<td><strong><?= $client->cin() ?></strong></td>
 				<td><strong>Nom du Bien</strong></td>
-				<td><a><strong><?= $biens->nom() ?></strong></a></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td><strong>Superficie</strong></td>
-				<td><a><strong><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></strong></a></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td></td>
-				<td><strong>Niveau</strong></td>
-				<td><a><strong><?= $niveau ?></strong></a></td>
+				<td><strong><?= $biens->nom() ?></strong></td>
 			</tr>
 			<tr>
 				<td><strong>Téléphone 1</strong></td>
-				<td><a><strong><?= $client->telephone1() ?></strong></a></td>
-				<td><strong>Prix de Vente</strong></td>
-				<td><a><strong><?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH</strong></a></td>
+                <td><strong><?= $client->telephone1() ?></strong></td>
+				<td><strong>Superficie</strong></td>
+				<td><strong><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></strong></td>
 			</tr>
 			<tr>
 				<td><strong>Téléphone 2</strong></td>
-				<td><a><strong><?= $client->telephone2() ?></strong></a></td>
+                <td><strong><?= $client->telephone2() ?></strong></td>
+				<td><strong>Etage</strong></td>
+				<td><strong><?= $niveau ?></strong></td>
+			</tr>
+			<tr>
+				<td><strong>Email</strong></td>
+                <td><strong><?= $client->email() ?></strong></td>
+				<td><strong>Prix de Vente</strong></td>
+				<td><strong><?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
+			</tr>
+			<tr>
+				<td><strong>Adresse</strong></td>
+                <td><strong><?= $client->adresse() ?></strong></td>
 				<?php
 				if($contrat->avance()!=0 or $contrat->avance()!='NULL' ){
 				?>
 				<td><strong>Avance</strong></td>
-				<td><a><strong><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</strong></a></td>
+				<td><strong><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 				<?php
 				}
 				?>
 			</tr>
 			<tr>
-				<td><strong>Adresse</strong></td>
-				<td><a><strong><?= $client->adresse() ?></strong></a></td>
+				<td></td>
+				<td></td>
 				<td><strong>Réglements</strong></td>
-				<td><a><strong><?= number_format($sommeOperations, 2, ',', ' ') ?></strong></a></td>
+				<td><strong><?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
 			<tr>
-				<td><strong>Email</strong></td>
-				<td><a><strong><?= $client->email() ?></strong></a></td>
+				<td></td>
+                <td></td>
 				<td><strong>Echeance</strong></td>
-				<td><a><strong><?= number_format($contrat->echeance(), 2, ',', ' ') ?></strong></a></td>
+				<td><strong><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
 		</table>
 	</div>
-	<h3>Détails des réglements</h3>
+	<br>
+	<!-- DATES REGLEMENTS PREVU BEGIN -->
+    <?php 
+    if ( $reglementPrevuNumber > 0 ) { 
+    ?>
     <div>
-		<table style="width:100%;">
+        <h4><?= $reglementPrevuTitle; ?></h4>
+        <br>
+        <table>
+            <tr>
+                <th style="width: 33%">Date Prévu de réglement</th>
+                <th style="width: 33%">Echéance</th>
+                <th style="width: 33%">Status du réglement</th>
+            </tr>
+            <?php
+            $totalEcheance = 0;
+            foreach ( $reglementPrevuElements as $element ) {
+                $status = "";    
+                $totalEcheance += $contrat->echeance();
+                if($element->status()==0){
+                    //comparing dates
+                    $now = date('Y-m-d');
+                    $now = new DateTime($now);
+                    $now = $now->format('Ymd');
+                    $datePrevu = $element->datePrevu();
+                    $datePrevu = new DateTime($datePrevu);
+                    $datePrevu = $datePrevu->format('Ymd');
+                    if ( $datePrevu > $now ) {
+                        $status = '<strong style="color:green">Normal</strong>';   
+                    }
+                    else if ( $datePrevu < $now ) {
+                        $status = '<strong style="color:red">En retards</strong>';
+                    }
+                }
+                else if($element->status()==1){
+                    $status = '<strong style="color:blue">Réglé</strong>';
+                }
+            ?>
+            <tr>
+                <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
+                <td><?= $contrat->echeance() ?></td>
+                <td><?= $status ?></td>
+            </tr>
+            <?php
+            }
+            ?>
+            <tr>
+                <td></td>
+                <th>Total des échéances</th>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><?= number_format($totalEcheance, 2, ',', ' ') ?>&nbsp;DH</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>    
+    <?php 
+    } 
+    ?>
+    <!-- DATES REGLEMENTS PREVU END -->
+    <br>
+    <!-- CONTRAT CAS LIBRE BEGIN -->
+    <?php 
+    if ( $contratCasLibreNumber > 0 ) { 
+    ?>
+    <div>
+        <h4><?= $contratCasLibreTitle; ?></h4>
+        <br>
+        <table>
+            <tr>
+                <th style="width: 20%">Date</th>
+                <th style="width: 20%">Montant</th>
+                <th style="width: 30%">Obsérvation</th>
+                <th style="width: 20%">Status</th>
+            </tr>
+            <?php
+            $totalMontantsCasLibre = 0;
+            foreach ( $contratCasLibreElements as $element ) {
+                $status = "";    
+                $totalMontantsCasLibre += $element->montant();
+                if($element->status()==0){
+                    //comparing dates
+                    $now = date('Y-m-d');
+                    $now = new DateTime($now);
+                    $now = $now->format('Ymd');
+                    $dateCasLibre = $element->date();
+                    $dateCasLibre = new DateTime($dateCasLibre);
+                    $dateCasLibre = $dateCasLibre->format('Ymd');
+                    if ( $dateCasLibre > $now ) {
+                        $status = '<strong style="color: green">Normal</strong>';   
+                    }
+                    else if ( $dateCasLibre < $now ) {
+                        $status = '<strong style="color:red">En retard</strong>';
+                    }
+                }
+                else if($element->status()==1){
+                    $status = '<strong style="color:blue">Réglé</strong>';
+                }
+            ?>
+            <tr>
+                <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
+                <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
+                <td><?= $element->observation() ?></td>
+                <td><?= $status ?></td>
+            </tr>
+            <?php
+            }
+            ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <th>Total des montants</th>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <th><?= number_format($totalMontantsCasLibre, 2, ',', ' ') ?>&nbsp;DH</th>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>    
+    <?php 
+    } 
+    ?>
+    <!-- CONTRAT CAS LIBRE END -->
+    <!-- REGLEMENTS PAYES BEGIN -->
+    <div>
+        <h4>Détails des réglements payés</h4>
+        <br>
+		<table>
 			<tr>
-				<th style="width: 30%; border: 1px solid black">Date opération</th>
-				<th style="width: 40%; border: 1px solid black">Montant</th>
-				<th style="width: 30%; border: 1px solid black">Mode Paiement</th>
+				<th style="width: 30%;">Date opération</th>
+				<th style="width: 40%;">Montant</th>
+				<th style="width: 30%;">Mode Paiement</th>
 			</tr>
 			<?php
 			if($operationsNumber != 0){
 			foreach($operations as $operation){
 			?>		
 			<tr>
-				<td style="border: 1px solid black"><a><?= date('d/m/Y', strtotime($operation->date())) ?></a></td>
-				<td style="border: 1px solid black"><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
-				<td style="border: 1px solid black"><?= $operation->modePaiement() ?></td>
+				<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+				<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
+				<td><?= $operation->modePaiement() ?></td>
 			</tr>	
 			<?php
 			}//end of loop
@@ -186,31 +341,24 @@ ob_start();
 				<td style="border: 1px solid black"><?= $contrat->modePaiement() ?></td>
 			</tr-->
 			<tr>
-				<td style="border: 1px solid black"><strong>Somme Réglements</strong></td>
-				<td style="border: 1px solid black">
-					<strong>
-						<?= number_format($operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?>
-					</strong>		
-				</td>
+				<td>Somme Réglements</td>
+				<td><?= number_format($operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?></td>
 				<td></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid black"><strong>Reste</strong></td>
-				<td style="border: 1px solid black">
-					<strong>
-						<?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?>
-					</strong>		
-				</td>
+				<td>Reste</td>
+				<td><?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ')." DH";?></td>
 				<td></td>
 			</tr>
 		</table>
 	</div>
+	<!-- REGLEMENTS PAYES BEGIN -->
     <br><br> 
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;">STE Annahda SARL : Au capital de 200 000,00 DH – siège social XXXXXXXXXX, Nador. 
-        <br>Tél XXXXX / XXXXX IF : XXXXX   RC : XXXXX  Patente XXXXX</p>
+    <p style="text-align: center;font-size: 9pt;">STE GROUPE ANNAHDA LIL IAAMAR SARL – Quartier Ouled Brahim N°B-1 en face Lycée Nador Jadid (Anaanaa), Nador. 
+        <br>Tél : 05 36 33 10 31 - Fax : 05 36 33 10 32 </p>
     </page_footer>
 </page>    
 <?php

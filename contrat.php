@@ -436,7 +436,7 @@
                         </div>
                     </div>
                     <!-- addReglement box end -->
-                    <!-- CONTRAT CAS LIBRE BEGIN -->
+                    <!-- DATES REGLEMENTS PREVU BEGIN -->
                     <?php 
                     if ( $reglementPrevuNumber > 0 ) { 
                     ?>

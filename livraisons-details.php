@@ -27,13 +27,19 @@
 		$titreLivraison ="Détail de la livraison";
 		$livraison = "Vide";
 		$fournisseur = "Vide";
-		$projet = "Vide";
+		$projet = "Non mentionné";
         $fournisseurs = $fournisseurManager->getFournisseurs();
         $projets = $projetManager->getProjets();
 		if( isset($_GET['codeLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonByCode($_GET['codeLivraison']);
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
-			$projet = $projetManager->getProjetById($livraison->idProjet());
+			if ( $livraison->idProjet() != 0 ) {
+			    $projet = $projetManager->getProjetById($livraison->idProjet());    
+			} 
+            else {
+                $projet = "Non mentionné";    
+            }
+            
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
             $totalLivraisonDetail = 
             $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());

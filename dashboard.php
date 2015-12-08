@@ -304,6 +304,14 @@
 											<ul class="feeds">
 												<?php
 												foreach($livraisonsWeek as $livraison){
+												    $projetName = "Non mentionné";
+												    if ( $livraison->idProjet() != 0 ) {
+												        $projetName = $projetManager->getProjetById($livraison->idProjet())->nom();    
+												    } 
+                                                    else {
+                                                        $projetName = "Non mentionné";
+                                                    }
+												    
 												?>
 												<li>
 													<div class="col1">
@@ -311,7 +319,7 @@
 															<div class="cont-col1">
 																<div class="desc">	
 																	<strong>Fournisseur</strong> : <?= $fournisseursManager->getFournisseurById($livraison->idFournisseur())->nom() ?><br>
-																	<strong>Projet</strong> : <?= $projetName = $projetManager->getProjetById($livraison->idProjet())->nom(); ?><br>
+																	<strong>Projet</strong> : <?= $projetName; ?><br>
 																	<a href="livraison.php?codeLivraison=<?= $livraison->code() ?>" target="_blank">
 																		<strong>Livraison</strong> : <?= $livraison->id() ?>
 																	</a><br>

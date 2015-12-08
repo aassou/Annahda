@@ -104,10 +104,10 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <th style="width: 20%">Cible</th>
                                             <th style="width: 20%">Action</th>
                                             <th style="width: 20%">Date de l'action</th>
                                             <th style="width: 20%">Réalisé par</th>
-                                            <th style="width: 20%">Cible</th>
                                             <th style="width: 20%">Description</th>
                                         </tr>
                                     </thead>
@@ -116,10 +116,10 @@
                                         foreach ( $histories as $history ) {
                                         ?>
                                         <tr>
+                                            <td><?= $history->target() ?></td>
                                             <td><?= $history->action() ?></td>
                                             <td><?= date('d/m/Y - h\hi\m', strtotime($history->created())) ?></td>
                                             <td><?= $history->createdBy() ?></td>
-                                            <td><?= $history->target() ?></td>
                                             <td><?= $history->description() ?></td>
                                         </tr>
                                         <?php

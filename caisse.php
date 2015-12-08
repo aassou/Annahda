@@ -15,28 +15,12 @@
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
     	//les sources
-		$employeManager = new EmployeSocieteManager($pdo);
 		$projetManager = new ProjetManager($pdo);
-		$caisseEntreesManager = new CaisseEntreesManager($pdo);
-		$caisseSortiesManager = new CaisseSortiesManager($pdo);
-		$projets = $projetManager->getProjets();
-		$employes = "";
-		//test the employeSociete object number: if exists get terrain else do nothing
-		$employeNumber = $employeManager->getEmployeSocieteNumber();
-		if($employeNumber!=0){
-			$employeSocietePerPage = 10;
-	        $pageNumber = ceil($employeNumber/$employeSocietePerPage);
-	        $p = 1;
-	        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-	            $p = $_GET['p'];
-	        }
-	        else{
-	            $p = 1;
-	        }
-	        $begin = ($p - 1) * $employeSocietePerPage;
-	        $pagination = paginate('employes-societe.php', '?p=', $pageNumber, $p);
-			$employesSociete = $employeManager->getEmployesSocieteByLimits($begin, $employeSocietePerPage);	
-	}
+        $caisseManager = new CaisseManager($pdo);
+        $caisseEntreesManager = new CaisseEntreesManager($pdo);
+        $caisseSortiesManager = new CaisseSortiesManager($pdo);
+		$projets = $projetManager->getProjets();	
+	    $caisses =$caisseManager->getCaisses();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -131,234 +115,218 @@
 				</div-->
 				<div class="row-fluid">
 					<div class="span12">
-						<div class="tab-pane active" id="tab_1">
-							<?php if(isset($_SESSION['entrees-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['entrees-add-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['entrees-add-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['entrees-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['entrees-add-error'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['entrees-add-error']);
-	                         ?>
-                           <div class="portlet box grey">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-signin"></i>Gestion des Entreés de la Caisse</h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
-                                 <!-- BEGIN FORM-->
-                                 <!-- BEGIN FORM Entrées Mohamed-->
-									<form action="controller/CaisseEntreesAddController.php" method="POST" class="horizontal-form">
-	                                 <div class="row-fluid">	
-	                                 	<div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="montant">Montant</label>
-                                             <div class="controls">
-                                                <input type="text" id="montant" name="montant" class="m-wrap span12" placeholder="">
-                                             </div>
-                                          </div>
-	                                 	</div>
-	                                 	<div class="span3">
-                                          <div class="control-group">
-                                          	<label class="control-label" for="designation">Désignation</label>
-                                             <div class="controls">
-                                                <input type="text" id="designation" name="designation" class="m-wrap span12" placeholder="">
-                                             </div>
-                                          </div>
-	                                 	</div>
-	                                 	<div class="span3 ">
-                                          <div class="control-group">
-                                          	<label class="control-label" for="dateOperation">Date opération</label>
-                                             <div class="controls">
-    											<div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-				                                    <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
-				                                    <span class="add-on"><i class="icon-calendar"></i></span>
-				                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-	                                 </div>
-	                                 <div class="row-fluid">
-	                                 	<div class="span3">
-	                                          <div class="control-group">
-	                                             <div class="controls">
-	                                                <input type="submit" class="m-wrap span12 btn black" value="OK +">
-	                                                <input type="hidden" name="utilisateur" value="<?= $_SESSION['userMerlaTrav']->login() ?>">
-	                                             </div>
-	                                          </div>
-	                                 	</div>
-	                                 </div>
-                                 </form>
-                                 <!-- END FORM Entrées Mohamed-->
-								<hr>
-								<div class="row-fluid hidden-phone">
-									<a class="btn blue big">
-										Les entrées = 
-										<?= 
-											number_format($caisseEntreesManager->getTotalCaisseEntrees(), 2, ',', ' ')
-											 
-										?>
-									</a>
-									<a class="btn yellow big pull-right" href="caisse-entrees.php">
-										Détails des entrées 
-										<i class="m-icon-big-swapright m-icon-white"></i>									
-									</a>
-								</div>
-								<div class="row-fluid hidden-desktop">
-									<div class="pull-left">
-										<a class="btn blue big">
-											Les entrées = 
-											<?= 
-												number_format($caisseEntreesManager->getTotalCaisseEntrees(), 2, ',', ' ')
-												 
-											?>
-										</a>
-									</div>
-									<br /><br /><br />
-									<div class="pull-left">
-										<a class="btn yellow big pull-right" href="caisse-entrees.php">
-											Détails des entrées 
-											<i class="m-icon-big-swapright m-icon-white"></i>									
-										</a>
-									</div>
-								</div>
-								<br>
-                              </div>
-                           </div>
-							<!-- END Charges TABLE PORTLET-->
-                                 <!-- END FORM--> 
-                              </div>
-						<div class="tab-pane active" id="tab_1">
-							<?php if(isset($_SESSION['sorties-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['sorties-add-success'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['sorties-add-success']);
-	                         ?>
-	                         <?php if(isset($_SESSION['sorties-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['sorties-add-error'] ?>		
-							</div>
-	                         <?php } 
-	                         	unset($_SESSION['sorties-add-error']);
-	                         ?>
-                           <div class="portlet box grey">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-signout"></i>Gestion des Sorties de la Caisse</h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
-                                 <!-- BEGIN FORM-->
-                                 <!-- BEGIN FORM Entrées Mohamed-->
-									<form action="controller/CaisseSortiesAddController.php" method="POST" class="horizontal-form">
-	                                 <div class="row-fluid">	
-	                                 	<div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="montant">Montant</label>
-                                             <div class="controls">
-                                                <input type="text" id="montant" name="montant" class="m-wrap span12" placeholder="">
-                                             </div>
-                                          </div>
-	                                 	</div>
-	                                 	<div class="span4">
-                                          <div class="control-group">
-                                          	<label class="control-label" for="designation">Désignation</label>
-                                             <div class="controls">
-                                                <input type="text" id="designation" name="designation" class="m-wrap span12" placeholder="">
-                                             </div>
-                                          </div>
-	                                 	</div>
-	                                 	<div class="span3">
-                                          <div class="control-group">
-                                          	<label class="control-label" for="dateOperation">Date opération</label>
-                                             <div class="controls">
-    											<div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-				                                    <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
-				                                    <span class="add-on"><i class="icon-calendar"></i></span>
-				                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-	                                 </div>
-	                                 <div class="row-fluid">
-	                                 	<div class="span4">
-	                                      <div class="control-group">
-	                                      	<label class="control-label" for="destination">Pour</label>
-	                                         <div class="controls">
-	                                         	<select style="width:200px" name="destination" style="width:200px" class="m-wrap">
-	                                         		<option value="Bureau">Bureau</option>
-	                                         		<?php
-	                                         		foreach($projets as $projet){
-	                                         		?>
-	                                         		<option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>	
-	                                         		<?php	
-	                                         		}
-	                                         		?>	
-	                                         	</select>		
-	                                         </div>
-	                                      </div>
-	                                 	</div>
-	                                 	<div class="span3">
-	                                          <div class="control-group">
-	                                          	 <label>&nbsp;</label>
-	                                             <div class="controls">
-	                                                <input type="submit" class="m-wrap span12 btn black" value="OK -">
-	                                                <input type="hidden" name="utilisateur" value="<?= $_SESSION['userMerlaTrav']->login() ?>">
-	                                             </div>
-	                                          </div>
-	                                 	</div>
-	                                 </div>
-                                 </form>
-                                 <!-- END FORM Entrées Mohamed-->
-                                 <hr>
-                                 <div class="row-fluid hidden-phone">
-	                                 <a class="btn green big">
-	                                 	Les sorties = 
-	                                 	<?= number_format($caisseSortiesManager->getTotalCaisseSorties(), 2, ',', ' ') ?>
-	                                 </a>
-	                                 <a class="btn yellow big pull-right" href="caisse-sorties.php">
-										Détails des sorties 
-										<i class="m-icon-big-swapright m-icon-white"></i>									
-									</a>
-								</div>
-								<div class="row-fluid hidden-desktop">
-									<div class="pull-left">
-	                                 <a class="btn green big">
-	                                 	Les sorties = 
-	                                 	<?= number_format($caisseSortiesManager->getTotalCaisseSorties(), 2, ',', ' ') ?>
-	                                 </a>
-	                                </div>
-	                                <br><br><br>
-	                                <div class="pull-left">
-	                                 <a class="btn yellow big" href="caisse-sorties.php">
-										Détails des sorties 
-										<i class="m-icon-big-swapright m-icon-white"></i>									
-									 </a>
-									</div>
-								</div>
-								<br>
-                              </div>
-                           </div>
-							<!-- END Charges TABLE PORTLET-->
-                                 <!-- END FORM--> 
-                              </div>
+						<?php 
+						if( isset($_SESSION['caisse-action-message'])
+                        and isset($_SESSION['caisse-type-message']) ){
+                            $message = $_SESSION['caisse-action-message']; 
+                            $typeMessage = $_SESSION['caisse-type-message'];
+                        ?>
+                     	<div class="alert alert-<?= $typeMessage ?>">
+							<button class="close" data-dismiss="alert"></button>
+							<?= $message ?>		
+						</div>
+                         <?php } 
+                         	unset($_SESSION['caisse-action-message']);
+                            unset($_SESSION['caisse-type-message']);
+                         ?>
+                        <!-- addCaisse box begin -->
+                        <div id="addCaisse" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <h3>Ajouter une opération à la caisse</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">Type Opération</label>
+                                        <div class="controls">
+                                            <select name="type">
+                                                <option value="Entree">Entree</option>
+                                                <option value="Sortie">Sortie</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Date Opération</label>
+                                        <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                         </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Montant</label>
+                                        <div class="controls">
+                                            <input required="required" id="montant" type="text" name="montant" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Destination</label>
+                                        <div class="controls">
+                                            <select name="destination">
+                                                <?php foreach($projets as $projet){ ?>
+                                                <option value="<?= $projet->nom() ?>"><?= $projet->nom() ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Designation</label>
+                                        <div class="controls">
+                                            <input required="required" id="designation" type="text" name="designation" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">  
+                                            <input type="hidden" name="action" value="add">    
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- addCaisse box end -->  
+                       <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste des contrats clients</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <a class="btn blue pull-right" href="#addCaisse" data-toggle="modal">
+                                            <i class="icon-plus-sign"></i>
+                                             Ajouter
+                                        </a>
+                                    </div>
+                                    <!--div class="btn-group pull-right">
+                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Print</a></li>
+                                            <li><a href="#">Save as PDF</a></li>
+                                            <li><a href="#">Export to Excel</a></li>
+                                        </ul>
+                                    </div-->
+                                </div>
+                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10%">Actions</th>
+                                            <th style="width:20%">Type</th>
+                                            <th style="width:15%">Date Opération</th>
+                                            <th style="width:10%">Montant</th>
+                                            <th style="width:20%">Destination</th>
+                                            <th style="width:25%">Designation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach($caisses as $caisse){
+                                        ?>      
+                                        <tr class="odd gradeX">
+                                            <td>
+                                                <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
+                                                <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
+                                            </td>
+                                            <td><?= $caisse->type() ?></td>
+                                            <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
+                                            <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+                                            <td><?= $caisse->destination() ?></td>
+                                            <td><?= $caisse->designation() ?></td>
+                                        </tr>
+                                        <!-- updateCaisse box begin -->
+                                        <div id="updateCaisse<?= $caisse->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <h3>Modifier une opération de caisse</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">Type Opération</label>
+                                                        <div class="controls">
+                                                            <select name="type">
+                                                                <option value="<?= $caisse->type() ?>"><?= $caisse->type() ?></option>
+                                                                <option disabled="disabled">-----------------</option>
+                                                                <option value="Entree">Entree</option>
+                                                                <option value="Sortie">Sortie</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Date Opération</label>
+                                                        <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                            <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $caisse->dateOperation() ?>" />
+                                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                                         </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Montant</label>
+                                                        <div class="controls">
+                                                            <input required="required" id="montant" type="text" name="montant" value="<?= $caisse->montant() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Destination</label>
+                                                        <div class="controls">
+                                                            <select name="destination">
+                                                                <option value="<?= $caisse->destination() ?>"><?= $caisse->destination() ?></option>
+                                                                <option disabled="disabled">-----------------</option>
+                                                                <?php foreach($projets as $projet){ ?>
+                                                                <option value="<?= $projet->nom() ?>"><?= $projet->nom() ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Designation</label>
+                                                        <div class="controls">
+                                                            <input required="required" id="designation" type="text" name="designation" value="<?= $caisse->designation() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">  
+                                                            <input type="hidden" name="action" value="update">
+                                                            <input type="hidden" name="idCaisse" value="<?= $caisse->id() ?>">    
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateCaisse box end -->  
+                                        <!-- delete box begin-->
+                                        <div id="deleteCaisse<?= $caisse->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Supprimer la ligne</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/CaisseActionController.php" method="post">
+                                                    <p>Êtes-vous sûr de vouloir supprimer cette ligne ?</p>
+                                                    <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="idCaisse" value="<?= $caisse->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- delete box end --> 
+                                        <?php
+                                        }//end of loop
+                                        ?>
+                                    </tbody>
+                                </table>
+                                </div><!-- END DIV SCROLLER -->
+                            </div>
                            </div>
                         </div>
 					</div>
@@ -400,7 +368,7 @@
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
-			//App.setPage("table_editable");
+			App.setPage("table_managed");
 			App.init();
 		});
 	</script>
