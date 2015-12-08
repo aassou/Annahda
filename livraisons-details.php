@@ -27,17 +27,20 @@
 		$titreLivraison ="Détail de la livraison";
 		$livraison = "Vide";
 		$fournisseur = "Vide";
-		$projet = "Non mentionné";
+		$nomProjet = "Non mentionné";
+        $idProjet = "";
         $fournisseurs = $fournisseurManager->getFournisseurs();
         $projets = $projetManager->getProjets();
 		if( isset($_GET['codeLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonByCode($_GET['codeLivraison']);
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
 			if ( $livraison->idProjet() != 0 ) {
-			    $projet = $projetManager->getProjetById($livraison->idProjet())->nom();    
+			    $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                $idProjet = $projetManager->getProjetById($livraison->idProjet())->id();    
 			} 
             else {
-                $projet = "Non mentionné";    
+                $nomProjet = "Non mentionné";
+                $idProjet = "";    
             }
             
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
@@ -176,7 +179,7 @@
 									  <div class="control-group">
 										 <div class="controls">
 											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
-											    <strong>Projet : <?= $projet ?></strong>
+											    <strong>Projet : <?= $nomProjet ?></strong>
 										    </a>   
 										 </div>
 									  </div>
@@ -207,7 +210,7 @@
                                             <label class="control-label">Projet</label>
                                             <div class="controls">
                                                 <select name="idProjet">
-                                                    <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                    <option value="<?= $idProjet ?>"><?= $nomProjet ?></option>
                                                     <option disabled="disabled">------------</option>
                                                     <?php foreach($projets as $pro){ ?>
                                                     <option value="<?= $pro->id() ?>"><?= $pro->nom() ?></option>
