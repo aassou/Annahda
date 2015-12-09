@@ -53,8 +53,7 @@ class CaisseManager{
 	}
 
 	public function getCaisseById($id){
-    	$query = $this->_db->prepare(' SELECT * FROM t_caisse
-		WHERE id=:id')
+    	$query = $this->_db->prepare(' SELECT * FROM t_caisse WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
 		$query->execute();		
@@ -62,17 +61,82 @@ class CaisseManager{
 		$query->closeCursor();
 		return new Caisse($data);
 	}
+    
+    public function getTotalCaisseByType($type){
+        $query = $this->_db->prepare("SELECT SUM(montant) as total FROM t_caisse WHERE type=:type")
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':type', $type);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
+    public function getTotalCaisseByTypeByDate($type, $dateFrom, $dateTo){
+        $query = $this->_db->prepare("SELECT SUM(montant) as total FROM t_caisse 
+        WHERE type=:type AND dateOperation BETWEEN :dateFrom AND :dateTo")
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':type', $type);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
 
 	public function getCaisses(){
 		$caisses = array();
-		$query = $this->_db->query('SELECT * FROM t_caisse ORDER BY id DESC');
+		$query = $this->_db->query('SELECT * FROM t_caisse ORDER BY type ASC, dateOperation DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$caisses[] = new Caisse($data);
 		}
 		$query->closeCursor();
 		return $caisses;
 	}
-
+    
+    //Show By Criteria
+    public function getCaissesByType($type){
+        $caisses = array();
+        $query = $this->_db->prepare('SELECT * FROM t_caisse WHERE type=:type ORDER BY dateOperation');
+        $query->bindValue(':type', $type);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
+    public function getCaissesByDates($dateFrom, $dateTo){
+        $caisses = array();
+        $query = $this->_db->prepare('SELECT * FROM t_caisse WHERE
+        dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
+    public function getCaissesByDatesByType($dateFrom, $dateTo, $type){
+        $caisses = array();
+        $query = $this->_db->prepare('SELECT * FROM t_caisse WHERE type=:type
+        AND dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->bindValue(':type', $type);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
 	public function getCaissesByLimits($begin, $end){
 		$caisses = array();
 		$query = $this->_db->query('SELECT * FROM t_caisse

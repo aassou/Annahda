@@ -57,11 +57,11 @@
             ));
             //add it to db
             $historyManager->add($history);
-            $actionMessage = "Opération Valide : Caisse Ajouté(e) avec succès.";  
+            $actionMessage = "<strong>Opération Valide</strong> : Opération Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "Erreur Ajout caisse : Vous devez remplir le champ 'type'.";
+            $actionMessage = "<strong>Erreur Ajout caisse</strong> : Vous devez remplir le champ <strong>Montant</strong>.";
             $typeMessage = "error";
         }
     }
@@ -69,7 +69,7 @@
     //Action Update Processing Begin
     else if($action == "update"){
         $idCaisse = htmlentities($_POST['idCaisse']);
-        if(!empty($_POST['type'])){
+        if(!empty($_POST['montant'])){
 			$type = htmlentities($_POST['type']);
 			$dateOperation = htmlentities($_POST['dateOperation']);
 			$montant = htmlentities($_POST['montant']);
@@ -100,11 +100,11 @@
             ));
             //add it to db
             $historyManager->add($history);
-            $actionMessage = "Opération Valide : Caisse Modifié(e) avec succès.";
+            $actionMessage = "<strong>Opération Valide</strong> : Opération Modifié(e) avec succès.";
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "Erreur Modification Caisse : Vous devez remplir le champ 'type'.";
+            $actionMessage = "<strong>Erreur Modification Caisse</strong> : Vous devez remplir le champ <strong>Montant</strong>.";
             $typeMessage = "error";
         }
     }
@@ -125,7 +125,7 @@
         ));
         //add it to db
         $historyManager->add($history);
-        $actionMessage = "Opération Valide : Caisse supprimé(e) avec succès.";
+        $actionMessage = "<strong>Opération Valide</strong> : Opération supprimé(e) avec succès.";
         $typeMessage = "success";
     }
     //Action Delete Processing End
