@@ -167,6 +167,7 @@
                                         <label class="control-label">Destination</label>
                                         <div class="controls">
                                             <select name="destination">
+                                                <option value="Bureau">Bureau</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->nom() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
