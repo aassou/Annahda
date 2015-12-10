@@ -118,7 +118,7 @@
                                         <tr>
                                             <td><?= $history->target() ?></td>
                                             <td><?= $history->action() ?></td>
-                                            <td><?= date('d/m/Y - h\hi\m', strtotime($history->created())) ?></td>
+                                            <td><?= date('d/m/Y - H\hi\m', strtotime($history->created())) ?></td>
                                             <td><?= $history->createdBy() ?></td>
                                             <td><?= $history->description() ?></td>
                                         </tr>
