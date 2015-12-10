@@ -61,8 +61,7 @@ class HistoryManager{
 
 	public function getHistorys(){
 		$historys = array();
-		$query = $this->_db->query(
-		'SELECT * FROM t_history ORDER BY created DESC LIMIT 0, 100');
+		$query = $this->_db->query('SELECT * FROM t_history ORDER BY id DESC LIMIT 0,100');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$historys[] = new History($data);
 		}
