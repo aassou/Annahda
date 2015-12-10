@@ -30,18 +30,11 @@
 				or $currentPage=="compte-bancaire.php"
 				or $currentPage=="conges.php"
 				or $currentPage=="statistiques.php"
-				or $currentPage=="users.php"
-				or $currentPage=="tasks.php"
-				or $currentPage=="configuration.php"
-				or $currentPage=="history.php"
-				or $currentPage=="type-charges.php"
 				or $currentPage=="messages.php"
 				or $currentPage=="user-profil.php"
 				or $currentPage=="clients-search.php"
 				or $currentPage=="fournisseurs-search.php"
-				or $currentPage=="fournisseurs.php"
 				or $currentPage=="clients.php"
-				or $currentPage=="clients-list.php"
 				or $currentPage=="employes-projet-search.php"
 				or $currentPage=="contrat-status.php"
 				){echo "active ";} ?>">
@@ -105,7 +98,7 @@
                     </a>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
-				<!---------------------------- Charges Topographe Begin ------------------------------------->
+				<!---------------------------- Caisse Begin ------------------------------------->
 				<?php 
 					$gestionSocieteClass="";
 					if($currentPage=="employes-societe.php"
@@ -136,7 +129,22 @@
 						</li>
 					</ul>
 				</li>
-				<!---------------------------- Charges Topographe End ------------------------------------->
+				<!---------------------------- Caisse End ------------------------------------->
+				<!---------------------------- Parametrage Begin  -------------------------------------------->
+                <li class="start <?php if($currentPage=="configuration.php" 
+                or $currentPage=="history.php"
+                or $currentPage=="clients-list.php"
+                or $currentPage=="employes-contrats.php"
+                or $currentPage=="users.php"
+                or $currentPage=="type-charges.php"
+                or $currentPage=="fournisseurs.php"
+                ){echo "active ";} ?>">
+                    <a href="configuration.php">
+                    <i class="icon-wrench"></i> 
+                    <span class="title">Paramètrages</span>
+                    </a>
+                </li>
+                <!---------------------------- Parametrage End    -------------------------------------------->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

@@ -125,7 +125,7 @@
                                         <!--a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a-->
                                     </div>
                                     <div class="portfolio-info">
-                                        <!--a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Gérer employés du projet</a-->
+                                        <a href="employes-projet.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Contrats employés</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Statistiques</a>
                                     </div>
                                     <!--div class="portfolio-info">

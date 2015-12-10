@@ -108,19 +108,19 @@
                                 </div>
                             </div>
                             </a>
-                            <!--a href="clients-list.php">
-                            <div class="tile bg-cyan">
+                            <a href="employes-contrats.php">
+                            <div class="tile bg-brown">
                                 <div class="corner"></div>
                                 <div class="tile-body">
-                                    <i class="icon-user"></i>
+                                    <i class="icon-legal"></i>
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Clients
+                                        Employés
                                     </div>
                                 </div>
                             </div>
-                            </a-->
+                            </a>
                             <a href="fournisseurs.php">
                             <div class="tile bg-blue">
                                 <div class="corner"></div>
