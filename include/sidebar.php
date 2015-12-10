@@ -75,6 +75,8 @@
 					or $currentPage=="locaux-detail.php"
 					or $currentPage=="projet-charges-grouped.php"
 					or $currentPage=="projet-charges-type.php"
+					or $currentPage=="projet-contrat-employe.php"
+					or $currentPage=="contrat-employe-detail.php"
 					){
 						$gestionProjetClass = "active ";
 					}
