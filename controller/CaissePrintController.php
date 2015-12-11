@@ -79,9 +79,10 @@ ob_start();
     <br>
     <table>
         <tr>
-            <th style="width: 20%">Type</th>
+            <!--th style="width: 20%">Type</th-->
             <th style="width: 20%">Date opération</th>
-            <th style="width: 20%">Montant</th>
+            <th style="width: 20%">Crédit</th>
+            <th style="width: 20%">Débit</th>
             <th style="width: 20%">Désignation</th>
             <th style="width: 20%">Destination</th>
         </tr>
@@ -89,22 +90,34 @@ ob_start();
         foreach($caisses as $caisse){
         ?>      
         <tr>
-            <td><strong><?= $caisse->type() ?></strong></td>
             <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
+            <?php
+            if ( $caisse->type() == "Entree" ) {
+            ?>
             <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+            <td></td>
+            <?php  
+            }
+            else {
+            ?>
+            <td></td>
+            <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+            <?php
+            }
+            ?>
             <td><?= $caisse->designation() ?></td>
             <td><?= $caisse->destination() ?></td>
         </tr>   
         <?php
         }//end of loop
         ?>
+    </table>
+    <table>
         <tr>
-            
-            <th></th>
-            <th>Total</th>
-            <td><strong><?= number_format($totalCaisse, 2, ' ', ',') ?>&nbsp;DH</strong></td>
-            <th></th>
-            <th></th>
+            <th style="width: 20%">Solde</th>
+            <td style="width: 40%"><strong><?= number_format($totalCaisse, 2, ' ', ',') ?>&nbsp;DH</strong></td>
+            <td style="width: 20%"></td>
+            <td style="width: 20%"></td>
         </tr>
     </table>
     <br><br>

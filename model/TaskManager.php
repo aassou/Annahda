@@ -102,6 +102,19 @@ class TaskManager{
         $query->closeCursor();
         return $tasks;
     }
+    
+    public function getTasksAffectedByMeToOther($createdBy){
+        $tasks = array();
+        $query = $this->_db->prepare('SELECT * FROM t_task WHERE createdBy=:createdBy
+        ORDER BY status');
+        $query->bindValue(':createdBy', $createdBy);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $tasks[] = new Task($data);
+        }
+        $query->closeCursor();
+        return $tasks;
+    }
 
 	public function getTasks(){
 		$tasks = array();

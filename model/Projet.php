@@ -11,6 +11,7 @@ class Projet{
     //attributes
     private $_id;
     private $_nom;
+    private $_titre;
     private $_adresse;
     private $_superficie;
     private $_description;
@@ -42,6 +43,10 @@ class Projet{
     
     public function setNom($nom){
         $this->_nom = $nom;
+    }
+    
+    public function setTitre($titre){
+        $this->_titre = $titre;
     }
     
     public function setAdresse($adresse){
@@ -84,6 +89,10 @@ class Projet{
     
     public function nom(){
         return $this->_nom;
+    }
+    
+    public function titre(){
+        return $this->_titre;
     }
     
     public function adresse(){

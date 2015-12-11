@@ -55,6 +55,8 @@
         <?php 
         include("include/top-menu.php"); 
         $myTasks = $taskManager->getTasksByUser($_SESSION['userMerlaTrav']->login());
+        $tasksAffectedByMeToOther = 
+        $taskManager->getTasksAffectedByMeToOther($_SESSION['userMerlaTrav']->login());
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
@@ -94,9 +96,49 @@
                 <!-- BEGIN PORTLET-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste des tâches</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                    <thead>
+                                        <tr>
+                                            <th style="width :10%">Affetcé pour</th>
+                                            <th style="width :20%">Date affectation</th>
+                                            <th style="width :60%">Tâche</th>
+                                            <th style="width :10%">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        foreach($tasksAffectedByMeToOther as $task){
+                                            if ( $task->status() == 0 ) {
+                                            $status = '<a class="btn mini red">En cours</a>';
+                                            }
+                                            else if ( $task->status() == 1 ) {
+                                                $status = '<a class="btn mini green">Validée</a>';
+                                            }
+                                        ?>
+                                        <tr class="odd gradeX">
+                                            <td><?= $task->user() ?></td>
+                                            <td><?= date('d/m/Y - H\hi\m', strtotime($task->created())) ?></td>
+                                            <td><?= $task->content() ?></td>
+                                            <td><?= $status ?></td>
+                                        </tr>     
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div class="portlet">
                             <div class="portlet-title line">
-                                <h4><i class="icon-tasks"></i>Tâches</h4>
+                                <h4><i class="icon-tasks"></i>Affecter des tâches</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a href="javascript:;" class="remove"></a>
@@ -298,7 +340,7 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            App.setPage("sliders");  // set current page
+            App.setPage("table_managed");  // set current page
             App.init();
         });
     </script>

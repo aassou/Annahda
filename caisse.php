@@ -297,11 +297,12 @@
                                     <thead>
                                         <tr>
                                             <th style="width:10%">Actions</th>
-                                            <th style="width:20%">Type</th>
                                             <th style="width:15%">Date Opération</th>
-                                            <th style="width:10%">Montant</th>
-                                            <th style="width:20%">Destination</th>
-                                            <th style="width:25%">Designation</th>
+                                            <!--th style="width:10%">Montant</th-->
+                                            <th style="width:10%">Crédit</th>
+                                            <th style="width:10%">Débit</th>
+                                            <th style="width:10%">Destination</th>
+                                            <th style="width:45%">Designation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -313,9 +314,22 @@
                                                 <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
                                                 <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
                                             </td>
-                                            <td><?= $caisse->type() ?></td>
+                                            <!--td><?= $caisse->type() ?></td-->
                                             <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
+                                            <?php
+                                            if ( $caisse->type() == "Entree" ) {
+                                            ?>
                                             <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+                                            <td></td>
+                                            <?php  
+                                            }
+                                            else {
+                                            ?>
+                                            <td></td>
+                                            <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+                                            <?php
+                                            }
+                                            ?>
                                             <td><?= $caisse->destination() ?></td>
                                             <td><?= $caisse->designation() ?></td>
                                         </tr>

@@ -37,6 +37,7 @@
 				or $currentPage=="clients.php"
 				or $currentPage=="employes-projet-search.php"
 				or $currentPage=="contrat-status.php"
+				or $currentPage=="tasks.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
 					<i class="icon-dashboard"></i> 

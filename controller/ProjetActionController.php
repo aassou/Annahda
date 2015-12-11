@@ -26,6 +26,7 @@
     if($action == "add"){
         if( !empty($_POST['nom']) ){
             $nom = htmlentities($_POST['nom']);
+            $titre = htmlentities($_POST['titre']);
             $budget = htmlentities($_POST['budget']);
             $superficie = htmlentities($_POST['superficie']);
             $adresse = htmlentities($_POST['adresse']);
@@ -34,8 +35,8 @@
             $created = date('Y-m-d h:i:s');
             //create object
             $projet = 
-            new Projet(array('nom' => $nom, 'superficie' => $superficie, 'budget' => $budget, 
-            'adresse' => $adresse, 'description' => $description,
+            new Projet(array('nom' => $nom, 'titre' => $titre, 'superficie' => $superficie, 
+            'budget' => $budget, 'adresse' => $adresse, 'description' => $description,
             'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $projetManager->add($projet);
@@ -61,6 +62,7 @@
         $idProjet = htmlentities($_POST['idProjet']);
         if(!empty($_POST['nom'])){
             $nom = htmlentities($_POST['nom']);
+            $titre = htmlentities($_POST['titre']);
             $budget = htmlentities($_POST['budget']);
             $superficie = htmlentities($_POST['superficie']);
             $adresse = htmlentities($_POST['adresse']);
@@ -68,7 +70,7 @@
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $projet = 
-            new Projet(array('id' => $idProjet, 'nom' => $nom, 'budget' => $budget, 
+            new Projet(array('id' => $idProjet, 'nom' => $nom, 'titre' => $titre, 'budget' => $budget, 
             'superficie' => $superficie, 'adresse' => $adresse, 'description' => $description, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $projetManager->update($projet);

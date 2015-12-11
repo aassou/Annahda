@@ -127,6 +127,12 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label">Titre</label>
+                                            <div class="controls">
+                                                <input type="text" name="titre" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <label class="control-label">Budget</label>
                                             <div class="controls">
                                                 <input type="text" name="budget" />
@@ -189,6 +195,12 @@
                                             <label class="control-label">Nom</label>
                                             <div class="controls">
                                                 <input type="text" name="nom" value="<?= $projet->nom() ?>"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Titre</label>
+                                            <div class="controls">
+                                                <input type="text" name="titre" value="<?= $projet->titre() ?>"/>
                                             </div>
                                         </div>
                                         <div class="control-group">

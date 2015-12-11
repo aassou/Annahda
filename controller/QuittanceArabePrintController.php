@@ -42,6 +42,23 @@
         $typeBien = "رقم المحل التجاري : ".$locaux->nom();
         
     }
+    $modePaiement = "";
+    if ( $operation->modePaiement() == "Especes" ) {
+        $modePaiement = "نقدا";    
+    } 
+    else if ( $operation->modePaiement() == "Virement" ) {
+        $modePaiement = "حوالة بنكية";    
+    }
+    else if ( $operation->modePaiement() == "Versement" ) {
+        $modePaiement = "حوالة بنكية";    
+    }
+    else if ( $operation->modePaiement() == "Cheque" ) {
+        $modePaiement = "شيك";
+    }
+    else {
+        $modePaiement = "رسالة تبديل";
+    }
+
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -109,7 +126,7 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.'الراشد(ة)و رقم ب .ت .و : '.'</strong>'.$client->cin();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'بواسطة : '.'</strong>';
+$htmlcontent = '<strong>'.'بواسطة : '.'</strong>'.$modePaiement;
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<strong>'.'من اجل حفظ الحق في ملكية الشقة ذات المراجع التالية : '.'</strong>';
@@ -124,7 +141,7 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.$niveau.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'الرسم العقاري الأم: '.'</strong>'.$projet->nom();
+$htmlcontent = '<strong>'.'الرسم العقاري الأم: '.'</strong>'.$projet->titre();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $pdf->Ln();
