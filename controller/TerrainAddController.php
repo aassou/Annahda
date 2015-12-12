@@ -48,7 +48,8 @@
         $createdBy = $_SESSION['userMerlaTrav']->login();
         $created = date('Y-m-d h:i:s');
         $terrain = new Terrain(array('vendeur' => $vendeur, 'prix' => $prix,'superficie' => $superficie, 
-        'fraisAchat' =>$fraisAchat, 'emplacement' => $emplacement, 'idProjet' => $idProjet));
+        'fraisAchat' =>$fraisAchat, 'emplacement' => $emplacement, 'idProjet' => $idProjet, 
+        'created' => $created, 'createdBy' => $createdBy));
         $terrainManager = new TerrainManager($pdo);
         $terrainManager->add($terrain);
         $_SESSION['terrain-add-success']="<strong>Opération valide : </strong>Le terrain est ajouté avec succès !";
