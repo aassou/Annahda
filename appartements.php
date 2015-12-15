@@ -518,10 +518,11 @@
 												<h3>Supprimer Appartement <strong><?= $appartement->nom() ?></strong> </h3>
 											</div>
 											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/AppartementDeleteController.php" method="post">
+												<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
 													<p>Êtes-vous sûr de vouloir supprimer cette appartement <strong><?= $appartement->nom() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label"></label>
+														<input type="hidden" name="action" value="delete" />
 														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
 														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
 														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
