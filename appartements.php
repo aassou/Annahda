@@ -234,13 +234,13 @@
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
-											<th style="width: 10%">Code</th>
-											<th style="width: 10%" class="hidden-phone">Niveau</th>
+											<th style="width: 5%">Code</th>
+											<th style="width: 5%">Niveau</th>
 											<th style="width: 15%">Prix&nbsp;DH</th>
 											<th style="width: 10%">Superficie</th>
-											<th style="width: 10%" class="hidden-phone">Façade</th>
-											<th style="width: 10%" class="hidden-phone">Nbr.Pièces</th>
-											<th style="width: 10%" class="hidden-phone">Cave</th>
+											<th style="width: 10%">Façade</th>
+											<th style="width: 20%">Nbr.Pièces</th>
+											<th style="width: 10%">Cave</th>
 											<th style="width: 10%">Status</th>
 											<th style="width: 15%"></th>
 										</tr>
