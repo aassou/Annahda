@@ -458,7 +458,28 @@
 												</form>
 											</div>
 										</div>
-										<!-- update box end -->	
+										<!-- update box end -->
+										<!-- delete box begin-->
+                                        <div id="deleteAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Supprimer Appartement <strong><?= $appartement->nom() ?></strong> </h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+                                                    <p>Êtes-vous sûr de vouloir supprimer ce local <strong><?= $locau->nom() ?></strong> ?</p>
+                                                    <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- delete box end --> 	
 										<?php
 										}//end of loop
 										}//end of if
@@ -476,96 +497,6 @@
 						<!-- END Terrain TABLE PORTLET-->
 					</div>
 				</div>
-				<!--div class="row-fluid">
-					<div class="span12">
-                           <div class="portlet box grey">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-edit"></i>Ajouter un nouveau local commercial pour le projet : <strong><?= $projet->nom() ?></strong></h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
-                                 <form action="controller/LocauxAddController.php" method="POST" class="horizontal-form">
-                                    <div class="row-fluid">
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="code">Code</label>
-                                             <div class="controls">
-                                                <input type="text" id="code" name="code" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="superficie">Supérficie</label>
-                                             <div class="controls">
-                                                <input type="text" id="superficie" name="superficie" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="facade">Façade</label>
-                                             <div class="controls">
-                                                <input type="text" id="facade" name="facade" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                    	<div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="prix">Prix</label>
-                                             <div class="controls">
-                                                <input type="text" id="prix" name="prix" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="status">Status</label>
-                                             <div class="controls">
-                                             	<select name="status" id="status" class="m-wrap">
-                                             		<option value="Non">Non réservé</option>
-                                             		<option value="Oui">Réservé</option>
-                                             	</select>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="emplacement">Mezzanine</label>
-                                             <div class="controls">
-                                             	<select name="mezzanine" class="m-wrap">
-                                             		<option value="Avec">Avec</option>
-                                             		<option value="Sans">Sans</option>
-                                             	</select>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid" id="par" style="display: none">
-                                    	<div class="span6">
-                                          <div class="control-group">
-                                             <label class="control-label">Réservé par </label>
-                                             <div class="controls">
-                                                <input type="text" name="par" class="m-wrap">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="form-actions">
-                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>" class="m-wrap span12">
-                                    	<button type="submit" class="btn black">Enregistrer <i class="icon-save"></i></button>
-                                    	<button type="reset" class="btn red">Annuler</button>
-                                    </div>
-                                 </form> 
-                              </div>
-                           </div>
-                        </div>
-					</div-->
 				</div>
 				<?php }
 				else{
