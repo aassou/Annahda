@@ -238,9 +238,9 @@
 											<th style="width: 5%">Niveau</th>
 											<th style="width: 15%">Prix&nbsp;DH</th>
 											<th style="width: 10%">Superficie</th>
-											<th style="width: 10%">Façade</th>
-											<th style="width: 20%">Nbr.Pièces</th>
-											<th style="width: 10%">Cave</th>
+											<th style="width: 5%">Façade</th>
+											<th style="width: 30%">Nbr.Pièces</th>
+											<th style="width: 5%">Cave</th>
 											<th style="width: 10%">Status</th>
 											<th style="width: 15%"></th>
 										</tr>
