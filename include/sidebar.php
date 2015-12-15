@@ -91,7 +91,41 @@
 				</li>
 				<!---------------------------- Gestion des Projets End -------------------------------------->
 				<!---------------------------- Livraisons Begin  -------------------------------------------->
-                <li class="start <?php if($currentPage=="livraisons-group.php" 
+				<?php 
+                    $gestionLivraisonClass="";
+                    if(
+                    $currentPage=="livraisons-group.php"
+                    or $currentPage=="livraisons-fournisseur.php"
+                    or $currentPage=="livraisons-details.php"
+                    or $currentPage=="livraisons-group-iaaza.php"
+                    or $currentPage=="livraisons-fournisseur-iaaza.php"
+                    or $currentPage=="livraisons-details-iaaza.php"
+                    ){
+                        $gestionLivraisonClass = "active ";
+                    } 
+                ?> 
+                <li class="<?= $gestionLivraisonClass; ?> has-sub ">
+                    <a href="javascript:;">
+                    <i class="icon-truck"></i> 
+                    <span class="title">Gestion des livraisons</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub">
+                        <li <?php if($currentPage=="livraisons-group.php"
+                                    or $currentPage=="livraisons-fournisseur.php"
+                                    or $currentPage=="livraisons-details.php"){
+                            ?> class="active" <?php } ?> >
+                            <a href="livraisons-group.php">Société Annahda</a>
+                        </li>
+                        <li <?php if($currentPage=="livraisons-group-iaaza.php"
+                                    or $currentPage=="livraisons-fournisseur-iaaza.php"
+                                    or $currentPage=="livraisons-details-iaaza.php"
+                                    ){?> class="active" <?php } ?> >
+                            <a href="livraisons-group-iaaza.php">Société Iaaza</a>
+                        </li>
+                    </ul>
+                </li>
+                <!--li class="start <?php if($currentPage=="livraisons-group.php" 
                 or $currentPage=="livraisons-fournisseur.php"
                 or $currentPage=="livraisons-details.php"
                 ){echo "active ";} ?>">
@@ -99,11 +133,19 @@
                     <i class="icon-truck"></i> 
                     <span class="title">Livraisons</span>
                     </a>
-                </li>
+                </li-->
                 <!---------------------------- Livraisons End    -------------------------------------------->
+                <!---------------------------- Caisse Begin ------------------------------------->
+                <li class="start <?php if($currentPage=="caisse.php"){echo "active ";} ?>">
+                    <a href="caisse.php">
+                    <i class="icon-money"></i> 
+                    <span class="title">Caisse</span>
+                    </a>
+                </li>
+                <!---------------------------- Caisse End ------------------------------------->
 				<!---------------------------- Caisse Begin ------------------------------------->
 				<?php 
-					$gestionSocieteClass="";
+					/*$gestionSocieteClass="";
 					if($currentPage=="employes-societe.php"
 					or $currentPage=="employe-societe-profile.php"
 					or $currentPage=="caisse.php"
@@ -111,9 +153,9 @@
 					or $currentPage=="caisse-sorties.php"
 					){
 						$gestionSocieteClass = "active ";
-					} 
+					}*/ 
 				?> 
-				<li class="<?= $gestionSocieteClass; ?> has-sub ">
+				<!--li class="<?= $gestionSocieteClass; ?> has-sub ">
 					<a href="javascript:;">
 					<i class="icon-bar-chart"></i> 
 					<span class="title">Gestion de la société</span>
@@ -125,13 +167,11 @@
 							<a href="employes-societe.php">Employés de la société</a>
 						</li>
 						<li <?php if($currentPage=="caisse.php"
-									or $currentPage=="caisse-entrees.php"
-									or $currentPage=="caisse-sorties.php" 
 									){?> class="active" <?php } ?> >
 							<a href="caisse.php">Gérer la caisse</a>
 						</li>
 					</ul>
-				</li>
+				</li-->
 				<!---------------------------- Caisse End ------------------------------------->
 				<!---------------------------- Parametrage Begin  -------------------------------------------->
                 <li class="start <?php if($currentPage=="configuration.php" 

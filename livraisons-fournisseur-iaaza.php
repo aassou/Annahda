@@ -17,8 +17,8 @@
         //classManagers
         $projetManager = new ProjetManager($pdo);
         $fournisseurManager = new FournisseurManager($pdo);
-        $livraisonManager = new LivraisonManager($pdo);
-        $livraisonDetailManager = new LivraisonDetailManager($pdo);
+        $livraisonManager = new LivraisonIaazaManager($pdo);
+        $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
         $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
         //classes and vars
         $idFournisseur = 0;
@@ -160,7 +160,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="livraisons-group.php">Gestion des livraisons</a>
+                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société Iaaza</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -201,7 +201,7 @@
                                 <h3>Nouvelle livraison - <strong><?= $fournisseurManager->getFournisseurById($_GET['idFournisseur'])->nom() ?></strong></h3>
                             </div>
                             <div class="modal-body">
-                                <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
+                                <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -506,7 +506,7 @@
                                                 <a class="btn mini red" href="#deleteLivraison<?= $livraison->id() ?>" data-toggle="modal" data-id="<?= $livraison->id() ?>" title="Supprimer" >
                                                     <i class="icon-remove"></i>
                                                 </a>
-                                                <a class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>" title="Voir Détail Livraison" >
+                                                <a class="btn mini" href="livraisons-details-iaaza.php?codeLivraison=<?= $livraison->code() ?>" title="Voir Détail Livraison" >
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                             </td>
@@ -550,7 +550,7 @@
                                                 <h3>Modifier les informations de la livraison </h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
+                                                <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
                                                     <p>Êtes-vous sûr de vouloir modifier la livraison <strong>N°<?= $livraison->id() ?></strong>  ?</p>
                                                     <div class="control-group">
                                                         <label class="control-label">Fournisseur</label>
@@ -609,7 +609,7 @@
                                                 <h3>Supprimer la livraison </h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/LivraisonActionController.php" method="post">
+                                                <form class="form-horizontal loginFrm" action="controller/LivraisonIaazaActionController.php" method="post">
                                                     <p>Êtes-vous sûr de vouloir supprimer la livraison <strong>N°<?= $livraison->id() ?></strong> ?</p>
                                                     <div class="control-group">
                                                         <label class="right-label"></label>

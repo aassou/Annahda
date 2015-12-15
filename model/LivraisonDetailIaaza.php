@@ -1,8 +1,7 @@
 <?php
-class LivraisonDetail{
+class LivraisonDetailIaaza{
     //attributes
     private $_id;
-    private $_type;
     private $_libelle;
     private $_designation;
     private $_quantite;
@@ -32,10 +31,6 @@ class LivraisonDetail{
     //setters
     public function setId($id){
         $this->_id = $id;
-    }
-    
-    public function setType($type){
-        $this->_type = $type;
     }
     
     public function setLibelle($libelle){
@@ -77,10 +72,6 @@ class LivraisonDetail{
     //getters
     public function id(){
         return $this->_id;
-    }
-    
-    public function type(){
-        return $this->_type;
     }
     
     public function libelle(){

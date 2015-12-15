@@ -111,19 +111,6 @@
 								</div>
 							</div>
 							</a>
-							<a href="contrat-status.php">
-                            <div class="tile bg-cyan">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-user"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        État Clients
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
 							<!--a href="clients-list.php">
                             <div class="tile bg-cyan">
                                 <div class="corner"></div>
@@ -137,7 +124,23 @@
                                 </div>
                             </div>
                             </a-->
-							<a href="livraisons-group.php">
+                            <a href="livraisons-group.php">
+                            <div class="tile bg-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-truck"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Livraisons Annahda
+                                    </div>
+                                    <!--div class="number">
+                                        <?php //$livraisonsNumber ?>
+                                    </div-->
+                                </div>
+                            </div>
+                            </a>
+							<a href="livraisons-group-iaaza.php">
 							<div class="tile bg-blue">
 								<div class="corner"></div>
 								<div class="tile-body">
@@ -145,7 +148,7 @@
 								</div>
 								<div class="tile-object">
 									<div class="name">
-										Livraisons
+										Livraisons Iaaza
 									</div>
 									<!--div class="number">
 										<?php //$livraisonsNumber ?>
@@ -153,6 +156,19 @@
 								</div>
 							</div>
 							</a>
+							<a href="contrat-status.php">
+                            <div class="tile bg-brown">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-user"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        État Clients
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<!--a href="fournisseurs.php">
                             <div class="tile bg-dark-red">
                                 <div class="corner"></div>

@@ -30,61 +30,14 @@
         $titreLivraison ="Liste de toutes les livraisons";
         $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php";
         $livraisonListDeleteLink = "";
-        if( isset($_GET['idFournisseur']) and 
-        $fournisseurManager->getOneFournisseurBySearch($_GET['idFournisseur']>=1)){
-            $fournisseur = $fournisseurManager->getOneFournisseurBySearch(htmlentities($_GET['idFournisseur']));
-            $livraisonNumber = $livraisonManager->getLivraisonsNumberByIdFournisseur($fournisseur);
-            if($livraisonNumber != 0){
-                $livraisonPerPage = 10;
-                $pageNumber = ceil($livraisonNumber/$livraisonPerPage);
-                $p = 1;
-                if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-                    $p = $_GET['p'];
-                }
-                else{
-                    $p = 1;
-                }
-                $livraisonListDeleteLink = "?idFournisseur=".$_GET['idFournisseur']."&p=".$p;
-                $begin = ($p - 1) * $livraisonPerPage;
-                $pagination = paginate('livraisons2.php?idFournisseur='.$_GET['idFournisseur'], '&p=', $pageNumber, $p);
-                $livraisons = $livraisonManager->getLivraisonsByIdFournisseurByLimits($fournisseur, $begin, $livraisonPerPage);
-                $titreLivraison ="Liste des livraisons du fournisseur <strong>".$fournisseurManager->getFournisseurById($fournisseur)->nom()."</strong>";
-                //get the sum of livraisons details using livraisons ids (idFournisseur)
-                $livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($fournisseur);
-                $sommeDetailsLivraisons = 0;
-                foreach($livraisonsIds as $idl){
-                    $sommeDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
-                }   
-                $totalReglement = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($fournisseur);
-                $totalLivraison = 
-                $livraisonManager->getTotalLivraisonsIdFournisseur($fournisseur)+
-                $sommeDetailsLivraisons;
-                $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?idFournisseur=".$fournisseur;
-            }
+        $livraisonNumber = $livraisonManager->getLivraisonNumber();
+        if($livraisonNumber != 0){
+            $livraisons = $livraisonManager->getLivraisonsByGroup();
+            $titreLivraison ="Société Annahda";
+            $totalReglement = $reglementsFournisseurManager->getTotalReglement();
+            $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
+            $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=1";
         }
-        else {
-            $livraisonNumber = $livraisonManager->getLivraisonNumber();
-            if($livraisonNumber != 0){
-                /*$livraisonPerPage = 100;
-                $pageNumber = ceil($livraisonNumber/$livraisonPerPage);
-                $p = 1;
-                if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-                    $p = $_GET['p'];
-                }
-                else{
-                    $p = 1;
-                }
-                $livraisonListDeleteLink = "&p=".$p;
-                $begin = ($p - 1) * $livraisonPerPage;
-                $pagination = paginate('livraisons2.php', '?p=', $pageNumber, $p);
-                $livraisons = $livraisonManager->getLivraisonsByLimit($begin, $livraisonPerPage);*/
-                $livraisons = $livraisonManager->getLivraisonsByGroup();
-                $titreLivraison ="Liste de toutes les livraisons";
-                $totalReglement = $reglementsFournisseurManager->getTotalReglement();
-                $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
-                $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php";
-            }   
-        }       
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -136,7 +89,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons
+                            Gestion des livraisons - <strong><?= $titreLivraison ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -146,7 +99,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a>Gestion des livraisons</a>
+                                <a>Gestion des livraisons <strong>Société Annahda</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -258,15 +211,6 @@
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Type Livraison</label>
-                                        <div class="controls">
-                                            <select name="type">
-                                                <option value="Finition">Finition</option>
-                                                <option value="Gros Oeuvres">Gros Oeuvres</option>
                                             </select>
                                         </div>
                                     </div>
@@ -538,26 +482,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <!-- updateLivraison box end -->            
-                                        <!-- delete box begin-->
-                                        <div id="deleteLivraison<?= $livraison->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Supprimer la livraison </h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/Livraison2DeleteController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir supprimer la livraison <strong>N°<?= $livraison->id() ?></strong> ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label"></label>
-                                                        <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- delete box end --> 
+                                        <!-- updateLivraison box end --> 
                                         <?php
                                         }//end of loop
                                         }//end of if

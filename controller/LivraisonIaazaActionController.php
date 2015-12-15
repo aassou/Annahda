@@ -26,7 +26,7 @@
     //process begins
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
-    $livraisonManager = new LivraisonManager($pdo);
+    $livraisonManager = new LivraisonIaazaManager($pdo);
     $idFournisseur = htmlentities($_POST['idFournisseur']);
     if($action == "add"){
         if( !empty($_POST['libelle']) ){
@@ -39,7 +39,7 @@
             $created = date('Y-m-d h:i:s');
             //create object
             $livraison = 
-            new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
+            new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
             'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 'code' => $codeLivraison,
             'createdBy' => $createdBy, 'created' => $created));
             //add it to db
@@ -56,12 +56,12 @@
             $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
         }
         else{
             $actionMessage = "<strong>Erreur Ajout Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
-            $redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;
+            $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
         }
     }
     else if($action == "update"){
@@ -75,7 +75,7 @@
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $livraison = 
-            new Livraison(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
+            new LivraisonIaaza(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
             'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
@@ -98,16 +98,16 @@
             $actionMessage = "<strong>Erreur Modification Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
         //this case treat the updated request comming from livraisons-details.php page,
         //not livraisons-fournisseur.php page
         if( isset($_POST['source']) and $_POST['source']=="details-livraison" ){
             $codeLivraison = $_POST['codeLivraison'];
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
         }
     }
     else if($action=="delete"){
-        $livraisonDetailManager = new LivraisonDetailManager($pdo);
+        $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
         $idLivraison = $_POST['idLivraison'];
         $livraisonManager->delete($idLivraison);
         //add history data to db
@@ -127,7 +127,7 @@
         $livraisonDetailManager->deleteLivraison($idLivraison);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
     }
     
     $_SESSION['livraison-action-message'] = $actionMessage;
