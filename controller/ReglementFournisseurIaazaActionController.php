@@ -26,7 +26,7 @@
     //process begins
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
-    $reglementManager = new ReglementFournisseurManager($pdo);
+    $reglementManager = new ReglementFournisseurIaazaManager($pdo);
     $fournisseurManager = new FournisseurManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) ) {
@@ -48,8 +48,8 @@
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
             $history = new History(array(
                 'action' => "Ajout",
-                'target' => "Table des réglements fournisseurs Annahda",
-                'description' => "Ajout du réglement, montant : ".$montant.", fournisseur : ".$nomFournisseur." - Société : Annahda",
+                'target' => "Table des réglements fournisseurs Iaaza",
+                'description' => "Ajout du réglement, montant : ".$montant.", fournisseur : ".$nomFournisseur." - Société : Iaaza",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -66,11 +66,11 @@
         $redirectLink = "Location:../reglements.php";
         if( isset($_POST['source']) ) {
             if( $_POST['source'] == 'livraisons-group' ) {
-                $redirectLink = "Location:../livraisons-group.php";   
+                $redirectLink = "Location:../livraisons-group-iaaza.php";   
             }
             else if( $_POST['source'] == 'livraisons-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;   
             }   
         }
     }
@@ -97,8 +97,8 @@
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
                 'action' => "Modification",
-                'target' => "Table des réglements fournisseurs Annahda",
-                'description' => "Modification du réglement, montant : ".$montant.", fournisseur : ".$nomFournisseur." - Société : Annahda",
+                'target' => "Table des réglements fournisseurs Iaaza",
+                'description' => "Modification du réglement, montant : ".$montant.", fournisseur : ".$nomFournisseur." - Société : Iaaza",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -123,8 +123,8 @@
         $created = date('Y-m-d h:i:s');
         $history = new History(array(
             'action' => "Suppression",
-            'target' => "Table des réglements fournisseurs Annahda",
-            'description' => "Suppression du réglement, montant : ".$reglement->montant().", fournisseur : ".$nomFournisseur." - Société : Annahda",
+            'target' => "Table des réglements fournisseurs Iaaza",
+            'description' => "Suppression du réglement, montant : ".$reglement->montant().", fournisseur : ".$nomFournisseur." - Société : Iaaza",
             'created' => $created,
             'createdBy' => $createdBy
         ));

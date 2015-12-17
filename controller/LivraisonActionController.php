@@ -27,6 +27,8 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $livraisonManager = new LivraisonManager($pdo);
+    $fournisseurManager = new FournisseurManager($pdo);
+    $projetManager = new ProjetManager($pdo);
     $idFournisseur = htmlentities($_POST['idFournisseur']);
     if($action == "add"){
         if( !empty($_POST['libelle']) ){
@@ -45,10 +47,12 @@
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
+            $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
+            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des livraisons",
-                'description' => "Ajouter une livraison",
+                'description' => "Ajout de la livraison, libelle : ".$libelle.", fournisseur : ".$nomFournisseur." - Projet : ".$nomProjet." - "."Société : Annahda",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -68,7 +72,6 @@
         if(!empty($_POST['libelle'])){
             $idProjet = htmlentities($_POST['idProjet']);
             $id = htmlentities($_POST['idLivraison']);
-            $idFournisseur = htmlentities($_POST['idFournisseur']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $libelle = htmlentities($_POST['libelle']);
             //$type = htmlentities($_POST['type']);
@@ -80,12 +83,14 @@
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
             //add history data to db
+            $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
+            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des livraisons",
-                'description' => "Modifier une livraison",
+                'description' => "Modification de la livraison, libelle : ".$libelle.", fournisseur : ".$nomFournisseur." - Projet : ".$nomProjet." - "."Société : Annahda",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -116,7 +121,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des livraisons, Table détails livraisons",
-            'description' => "Supprimer une livraison ainsi que ses détails",
+            'description' => "Suppression de la livraison ".$idLivraison." ainsi que ses détails"." - Société : Annahda",
             'created' => $created,
             'createdBy' => $createdBy
         ));

@@ -47,7 +47,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des détails livraisons",
-                'description' => "Ajouter un article à la livraison",
+                'description' => "Ajout d'un article à la livraison : ".$idLivraison." - Société : Annahda",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -83,7 +83,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des détails livraisons",
-                'description' => "Modifier un article de la livraison",
+                'description' => "Modification de l'article ".$idLivraisonDetail." - Société : Annahda",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -108,7 +108,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des détails livraisons",
-            'description' => "Supprimer un article de la livraison",
+            'description' => "Suppression de l'article ".$idLivraisonDetail." - Société : Annahda",
             'created' => $created,
             'createdBy' => $createdBy
         ));

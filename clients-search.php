@@ -67,7 +67,7 @@
     	</div>
     	<!-- END HEADER -->
     	<!-- BEGIN CONTAINER -->
-    	<div class="page-container row-fluid">
+    	<div class="page-container row-fluid sidebar-closed">
     		<!-- BEGIN SIDEBAR -->
     		<?php include("include/sidebar.php"); ?>
     		<!-- END SIDEBAR -->

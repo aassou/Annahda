@@ -93,7 +93,7 @@
                     $history = new History(array(
                         'action' => "Ajout",
                         'target' => "Table des clients",
-                        'description' => "Ajouter un client",
+                        'description' => "Ajout du client : ".$nom,
                         'created' => $created,
                         'createdBy' => $createdBy
                     ));
@@ -142,7 +142,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des clients",
-                'description' => "Modifier un client",
+                'description' => "Modifier le client : ".$nom,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));

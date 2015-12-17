@@ -51,7 +51,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table de caisse",
-                'description' => "Ajouter une opération",
+                'description' => "Ajout d'une opération de type : ".$type.", le ".$dateOperation.", d'un montant de : ".$montant."DH, en désignation : ".$designation,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -94,7 +94,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table de caisse",
-                'description' => "Modifier une opération",
+                'description' => "Modification de l'opération dont l'identifiant est : ".$idCaisse.", de type : ".$type.", le ".$dateOperation.", d'un montant de : ".$montant."DH, en désignation : ".$designation,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -112,6 +112,7 @@
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idCaisse = htmlentities($_POST['idCaisse']);
+        $caisse = $caisseManager->getCaisseById($idCaisse);
         $caisseManager->delete($idCaisse);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -119,7 +120,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table de caisse",
-            'description' => "Supprimer une opération",
+            'description' => "Suppression de l'opération dont l'identifiant est : ".$idCaisse.", de type : ".$caisse->type().", le ".$caisse->dateOperation().", d'un montant de : ".$montant."DH, en désignation : ".$caisse->designation(),
             'created' => $created,
             'createdBy' => $createdBy
         ));

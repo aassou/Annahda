@@ -19,7 +19,7 @@
         $fournisseurManager = new FournisseurManager($pdo);
         $livraisonManager = new LivraisonIaazaManager($pdo);
         $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
-        $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+        $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
         //classes and vars
         $idFournisseur = 0;
         $projets = $projetManager->getProjets();
@@ -253,7 +253,7 @@
                                 <h3>Nouveau réglement - <strong><?= $fournisseurManager->getFournisseurById($_GET['idFournisseur'])->nom() ?></strong></h3>
                             </div>
                             <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
+                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">

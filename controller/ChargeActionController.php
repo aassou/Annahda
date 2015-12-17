@@ -23,10 +23,12 @@
 
     //Component Class Manager
     $chargeManager = new ChargeManager($pdo);
+    $projetManager = new ProjetManager($pdo);
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
 	//Action Add Processing Begin
 	$idProjet = htmlentities($_POST['idProjet']);
+    $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //begin process: test the action
     //Action Add Processing Begin
     if($action == "add"){
@@ -55,7 +57,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des charges",
-                'description' => "Ajouter une charge",
+                'description' => "Ajout d'une charge de type : ".$type.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -98,7 +100,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des charges",
-                'description' => "Modifier une charge",
+                'description' => "Modification de la charge dont l'identifiant est : ".$idCharge." de type : ".$type.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -116,6 +118,7 @@
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idCharge = htmlentities($_POST['idCharge']);
+        $charge = $chargeManager->getChargeById($idCharge);
         $chargeManager->delete($idCharge);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -123,7 +126,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des charges",
-            'description' => "Supprimer une charge",
+            'description' => "Suppression de la charge dont l'identifiant est : ".$idCharge." de type : ".$charge->type().", le : ".$charge->dateOperation().", d'un montant de : ".$charge->montant().", dont la designation est : ".$charge->designation()." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));

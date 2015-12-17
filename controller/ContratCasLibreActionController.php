@@ -47,16 +47,6 @@
 			));
             //add it to db
             $contratCasLibreManager->add($contratCasLibre);
-            //add history data to db
-            $history = new History(array(
-                'action' => "Ajout",
-                'target' => "Table des cas libres (contratcaslibre)",
-                'description' => "Ajouter la liste des cas libres au contrat",
-                'created' => $created,
-                'createdBy' => $createdBy
-            ));
-            //add it to db
-            $historyManager->add($history);
             $actionMessage = "Opération Valide : ContratCasLibre Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -84,18 +74,6 @@
 	            'updatedBy' => $updatedBy
 			));
             $contratCasLibreManager->update($contratCasLibre);
-            //add history data to db
-            $createdBy = $_SESSION['userMerlaTrav']->login();
-            $created = date('Y-m-d h:i:s');
-            $history = new History(array(
-                'action' => "Ajout",
-                'target' => "Table des cas libres (contratcaslibre)",
-                'description' => "Modifier un cas libre contrat",
-                'created' => $created,
-                'createdBy' => $createdBy
-            ));
-            //add it to db
-            $historyManager->add($history);
             $actionMessage = "Opération Valide : ContratCasLibre Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -113,18 +91,6 @@
         $idContratCasLibre = htmlentities($_POST['idContratCasLibre']);
         $status = htmlentities($_POST['status']);
         $contratCasLibreManager->updateStatus($idContratCasLibre, $status);
-        //add history data to db
-        $createdBy = $_SESSION['userMerlaTrav']->login();
-        $created = date('Y-m-d h:i:s');
-        $history = new History(array(
-            'action' => "Modification Status",
-            'target' => "Table des cas libres (contratcaslibre)",
-            'description' => "Modifier le status d'un cas libre contrat",
-            'created' => $created,
-            'createdBy' => $createdBy
-        ));
-        //add it to db
-        $historyManager->add($history);
         $codeContrat = htmlentities($_POST['codeContrat']);
         $idProjet = htmlentities($_POST['idProjet']);
         $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
@@ -134,18 +100,6 @@
     else if($action == "delete"){
         $idContratCasLibre = htmlentities($_POST['idContratCasLibre']);
         $contratCasLibreManager->delete($idContratCasLibre);
-        //add history data to db
-        $createdBy = $_SESSION['userMerlaTrav']->login();
-        $created = date('Y-m-d h:i:s');
-        $history = new History(array(
-            'action' => "Suppression",
-            'target' => "Table des cas libres (contratcaslibre)",
-            'description' => "Supprimer un cas libre contrat",
-            'created' => $created,
-            'createdBy' => $createdBy
-        ));
-        //add it to db
-        $historyManager->add($history);
         $actionMessage = "Opération Valide : ContratCasLibre supprimé(e) avec succès.";
         $typeMessage = "success";
         $codeContrat = htmlentities($_POST['codeContrat']);

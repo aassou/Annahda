@@ -268,9 +268,15 @@
 												        	<a href="#updateAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
 																Modifier
 															</a>
+															<?php
+															if ( $appartement->status() != "Vendu" ) {
+															?>
 															<a href="#deleteAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
 																Supprimer
 															</a>
+															<?php  
+                                                            }
+                                                            ?>
 												        </li>
 												    </ul>
 												</div>

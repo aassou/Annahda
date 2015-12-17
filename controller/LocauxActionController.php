@@ -23,6 +23,7 @@
     $historyManager = new HistoryManager($pdo);
     $locauxManager = new LocauxManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
+    $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //Action Add Processing Begin
     if($action == "add"){
         if( !empty($_POST['code']) ){
@@ -46,7 +47,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des locaux commerciaux",
-                'description' => "Ajouter un local commercial",
+                'description' => "Ajout du local commercial : ".$code." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -85,7 +86,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des locaux commerciaux",
-                'description' => "Modifier un local commercial",
+                'description' => "Modification du local commercial : ".$code." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -104,6 +105,7 @@
     else if($action=="updateStatus"){
         $idLocaux = $_POST['idLocaux'];
         $status = htmlentities($_POST['status']);
+        $nomLocal = $locauxManager->getLocauxById($idLocaux)->nom();
         $locauxManager->changeStatus($idLocaux, $status);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -111,7 +113,7 @@
         $history = new History(array(
             'action' => "Modification Status",
             'target' => "Table des locaux commerciaux",
-            'description' => "Modifier le status d'un local commercial",
+            'description' => "Changement de status du local commercial ".$nomLocal." vers le status : ".$status." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -125,6 +127,7 @@
     else if($action=="updateClient"){
         $idLocaux = $_POST['idLocaux'];
         $par = htmlentities($_POST['par']);
+        $nomLocal = $locauxManager->getLocauxById($idLocaux)->nom();
         $locauxManager->updatePar($par, $idLocaux);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -132,7 +135,7 @@
         $history = new History(array(
             'action' => "Modification Client",
             'target' => "Table des locaux commerciaux",
-            'description' => "Modifier le client réservant du local commercial",
+            'description' => "Changement de réservation du local commercial ".$nomLocal." pour  : ".$par." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -145,6 +148,7 @@
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idLocaux = $_POST['idLocaux'];
+        $nomLocal = $locauxManager->getLocauxById($idLocaux)->nom();
         $locauxManager->delete($idLocaux);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -152,7 +156,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des locaux commerciaux",
-            'description' => "Supprimer un local commercial",
+            'description' => "Suppression du local commercial ".$nomLocal." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));

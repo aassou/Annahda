@@ -13,8 +13,10 @@
 		<!-- BEGIN TOP NAVIGATION MENU -->		
 		<?php
 		//In this section we will count the number of tasks assigned to the current session user
+		$bugManager = new BugManager($pdo);
 		$taskManager = new TaskManager($pdo);
         $taskNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
+        $bugNumber = $bugManager->getBugsNumber();
 		?>			
 		<ul class="nav pull-right">
 			<li class="dropdown" id="header_inbox_bar">
@@ -29,6 +31,18 @@
                 ?>
 				</a>
 			</li>
+			<li class="dropdown" id="header_inbox_bar">
+                <a href="bugs.php" class="dropdown-toggle">
+                <i class="icon-warning-sign"></i>  
+                <?php
+                if ( $bugNumber > 0 ) {
+                ?>
+                <span class="badge"><?= $bugNumber ?></span>
+                <?php  
+                }
+                ?>
+                </a>
+            </li>
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -47,7 +47,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des comptes bancaires",
-                'description' => "Ajouter un compte bancaire",
+                'description' => "Ajouter le compte bancaire numéro : ".$numero.", avec la dénomination : ".$denomination,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -86,7 +86,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des comptes bancaires",
-                'description' => "Modifier un compte bancaire",
+                'description' => "Modifier le compte bancaire numéro : ".$numero.", avec la dénomination : ".$denomination,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -105,6 +105,7 @@
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idCompteBancaire = htmlentities($_POST['idCompteBancaire']);
+        $compteBancaire = $CompteBancaireManager->getCaisseById($idCompteBancaire); 
         $CompteBancaireManager->delete($idCompteBancaire);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -112,7 +113,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des comptes bancaires",
-            'description' => "Supprimer un compte bancaire",
+            'description' => "Suppression du compte bancaire numéro : ".$compteBancaire->numero().", la dénomination : ".$compteBancaire->denomination(),
             'created' => $created,
             'createdBy' => $createdBy
         ));

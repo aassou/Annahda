@@ -19,7 +19,7 @@
         $fournisseurManager = new FournisseurManager($pdo);
         $livraisonManager = new LivraisonIaazaManager($pdo);
         $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
-        $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+        $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
         //classes and vars
         $projets = $projetManager->getProjets();
         $fournisseurs = $fournisseurManager->getFournisseurs();
@@ -177,7 +177,7 @@
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="livraisons-group" />
+                                            <input type="hidden" name="source" value="livraisons-group-iaaza" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -245,7 +245,7 @@
                                 <h3>Ajouter un nouveau réglement </h3>
                             </div>
                             <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
+                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">

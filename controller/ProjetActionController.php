@@ -44,7 +44,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des projets",
-                'description' => "Ajouter un projet",
+                'description' => "Ajout du projet : ".$nom,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -80,7 +80,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des projets",
-                'description' => "Modifier un projet",
+                'description' => "Modification du projet : ".$nom,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));

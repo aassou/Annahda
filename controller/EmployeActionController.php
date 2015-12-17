@@ -53,7 +53,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des employés",
-                'description' => "Ajouter un employé",
+                'description' => "Ajout de l'employé : ".$nom,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -96,7 +96,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des employés",
-                'description' => "Modifier un employé",
+                'description' => "Modification de l'employé : ".$nom,
                 'created' => $updated,
                 'createdBy' => $updatedBy
             ));
@@ -114,6 +114,7 @@
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idEmploye = htmlentities($_POST['idEmploye']);
+        $nomEmploye = $employeManager->getEmployeById($idEmploye)->nom();
         $employeManager->delete($idEmploye);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -121,7 +122,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des employés",
-            'description' => "Supprimer un employé",
+            'description' => "Suppression de l'employé : ".$nomEmploye,
             'created' => $created,
             'createdBy' => $createdBy
         ));

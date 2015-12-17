@@ -48,9 +48,11 @@
     $contratManager = new ContratManager($pdo);
     $contratCasLibreManager = new ContratCasLibreManager($pdo);
     $reglementPrevuManager = new ReglementPrevuManager($pdo);
+    $projetManager = new ProjetManager($pdo);
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     //process starts
+    $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //Action Add Processing Begin
     if($action == "add"){
         $codeClient = $_POST['codeClient'];
@@ -139,10 +141,11 @@
                 //adding the contract object to our database
                 $contratManager->add($contrat);
                 //add history data to db
+                $nomClient = $clientManager->getClientById($idClient);
                 $history = new History(array(
                     'action' => "Ajout",
                     'target' => "Table des contrats",
-                    'description' => "Ajouter un contrat",
+                    'description' => "Ajout du contrat numéro : ".$numero.", client : ".$nomClient.", ".$typeBien." : ".$idBien.", prix : ".$prixNegocie." - Projet : ".$nomProjet,
                     'created' => $created,
                     'createdBy' => $createdBy
                 ));
@@ -214,7 +217,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des contrats",
-                'description' => "Modifier un contrat",
+                'description' => "Modification du contrat dont l'identifiant est : ".$idContrat." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -267,14 +270,14 @@
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];
-        $contratManager->delete($idContrat);
+        //$contratManager->delete($idContrat);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
         $created = date('Y-m-d h:i:s');
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des contrats",
-            'description' => "Supprimer un contrat",
+            'description' => "Suppression du contrat dont l'identifiant est : ".$idContrat." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -306,7 +309,7 @@
         $history = new History(array(
             'action' => "Désistement",
             'target' => "Table des contrats",
-            'description' => "Désister un contrat",
+            'description' => "Désistement du contrat dont l'identifiant est : ".$idContrat." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -362,7 +365,7 @@
                 $history = new History(array(
                     'action' => "Activation",
                     'target' => "Table des contrats",
-                    'description' => "Activer un contrat",
+                    'description' => "Activation du contrat dont l'identifiant est : ".$idContrat." - Projet : ".$nomProjet,
                     'created' => $created,
                     'createdBy' => $createdBy
                 ));

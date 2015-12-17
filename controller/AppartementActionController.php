@@ -20,10 +20,11 @@
     $actionMessage = "";
     $typeMessage = "";
     $appartementManager = new AppartementManager($pdo);
+    $projetManager = new ProjetManager($pdo);
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
-    
+    $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     if($action == "add"){
         if( !empty($_POST['code']) ){
             $code = htmlentities($_POST['code']);
@@ -48,7 +49,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des appartements",
-                'description' => "Ajouter un appartement",
+                'description' => "Ajout de l'appartement : ".$code." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -87,7 +88,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des appartements",
-                'description' => "Modifier un appartement",
+                'description' => "Modification de l'appartement : ".$code." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -104,6 +105,7 @@
     else if($action=="updateStatus"){
         $idAppartement = $_POST['idAppartement'];
         $status = htmlentities($_POST['status']);
+        $nomAppartement = $appartementManager->getAppartementById($idAppartement)->nom();
         $appartementManager->changeStatus($idAppartement, $status);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -111,7 +113,7 @@
         $history = new History(array(
             'action' => "Modification Status",
             'target' => "Table des appartements",
-            'description' => "Changer le status de l'appartement",
+            'description' => "Changement de status de l'appartement ".$nomAppartement." vers le status : ".$status." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -123,6 +125,7 @@
     else if($action=="updateClient"){
         $idAppartement = $_POST['idAppartement'];
         $par = htmlentities($_POST['par']);
+        $nomAppartement = $appartementManager->getAppartementById($idAppartement)->nom();
         $appartementManager->updatePar($par, $idAppartement);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -130,7 +133,7 @@
         $history = new History(array(
             'action' => "Modification Client",
             'target' => "Table des appartements",
-            'description' => "Modifier le client réservant l'appartement",
+            'description' => "Changement de réservation de l'appartement ".$nomAppartement." pour  : ".$par." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -141,6 +144,7 @@
     }
     else if($action=="delete"){
         $idAppartement = $_POST['idAppartement'];
+        $nomAppartement = $appartementManager->getAppartementById($idAppartement)->nom();
         $appartementManager->delete($idAppartement);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -148,7 +152,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des appartements",
-            'description' => "Supprimer un appartement",
+            'description' => "Suppression de l'appartement ".$nomAppartement." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));

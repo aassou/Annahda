@@ -27,6 +27,8 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $operationManager = new OperationManager($pdo);
+    $projetManager = new ProjetManager($pdo);
+    $clientManager = new ClientManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
             $montant = htmlentities($_POST['montant']);
@@ -49,7 +51,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des paiements clients ",
-                'description' => "Ajouter un paiement client",
+                'description' => "Ajout d'un paiement client, pour le contrat : ".$idContrat.", montant : ".$montant,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -87,7 +89,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des paiements clients",
-                'description' => "Modifier un paiement client",
+                'description' => "Modification du paiement client, montant : ".$montant,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -110,7 +112,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des paiements clients",
-            'description' => "Supprimmer un paiement client",
+            'description' => "Suppression de paiement client",
             'created' => $created,
             'createdBy' => $createdBy
         ));

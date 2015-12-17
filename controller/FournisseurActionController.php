@@ -54,7 +54,7 @@
                 $history = new History(array(
                     'action' => "Ajout",
                     'target' => "Table des fournisseurs",
-                    'description' => "Ajouter un fournisseur",
+                    'description' => "Ajout du fournisseur : ".$nom,
                     'created' => $created,
                     'createdBy' => $createdBy
                 ));
@@ -72,6 +72,9 @@
         $redirectLink = "Location:../fournisseurs.php";
         if( isset($_POST['source']) and $_POST['source']=='livraisons-group' ) {
             $redirectLink = "Location:../livraisons-group.php";   
+        }
+        else if( isset($_POST['source']) and $_POST['source']=='livraisons-group-iaaza' ) {
+            $redirectLink = "Location:../livraisons-group-iaaza.php";   
         }
     }
     //Action Add Processing End
@@ -98,7 +101,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des fournisseurs",
-                'description' => "Modifier un fournisseur",
+                'description' => "Modification du fournisseur : ".$nom,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -117,6 +120,7 @@
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idFournisseur = $_POST['idFournisseur'];
+        $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
         $fournisseurManager->delete($idFournisseur);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();

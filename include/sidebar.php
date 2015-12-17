@@ -38,6 +38,7 @@
 				or $currentPage=="employes-projet-search.php"
 				or $currentPage=="contrat-status.php"
 				or $currentPage=="tasks.php"
+				or $currentPage=="bugs.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
 					<i class="icon-dashboard"></i> 
@@ -143,36 +144,6 @@
                     </a>
                 </li>
                 <!---------------------------- Caisse End ------------------------------------->
-				<!---------------------------- Caisse Begin ------------------------------------->
-				<?php 
-					/*$gestionSocieteClass="";
-					if($currentPage=="employes-societe.php"
-					or $currentPage=="employe-societe-profile.php"
-					or $currentPage=="caisse.php"
-					or $currentPage=="caisse-entrees.php"
-					or $currentPage=="caisse-sorties.php"
-					){
-						$gestionSocieteClass = "active ";
-					}*/ 
-				?> 
-				<!--li class="<?= $gestionSocieteClass; ?> has-sub ">
-					<a href="javascript:;">
-					<i class="icon-bar-chart"></i> 
-					<span class="title">Gestion de la société</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub">
-						<li <?php if($currentPage=="employes-societe.php"
-									or $currentPage=="employe-societe-profile.php"){?> class="active" <?php } ?> >
-							<a href="employes-societe.php">Employés de la société</a>
-						</li>
-						<li <?php if($currentPage=="caisse.php"
-									){?> class="active" <?php } ?> >
-							<a href="caisse.php">Gérer la caisse</a>
-						</li>
-					</ul>
-				</li-->
-				<!---------------------------- Caisse End ------------------------------------->
 				<!---------------------------- Parametrage Begin  -------------------------------------------->
                 <li class="start <?php if($currentPage=="configuration.php" 
                 or $currentPage=="history.php"
