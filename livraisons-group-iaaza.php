@@ -110,16 +110,9 @@
                     <div class="span12">
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
-                                <!--a href="livraison-add.php" class="btn icn-only blue"-->
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <?php
-                                }
-                                ?>
                                 <a href="#addFournisseur" data-toggle="modal" class="btn blue">
                                     Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
                                 </a>
