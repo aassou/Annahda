@@ -175,18 +175,9 @@
                     <div class="span12">
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
-                                <!--a href="#addFournisseur" data-toggle="modal" class="btn blue">
-                                    Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
-                                </a-->
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <?php  
-                                }
-                                ?>
                             </div>
                             <div class="pull-right">
                                 <a href="#addLivraison" data-toggle="modal" class="btn green">
