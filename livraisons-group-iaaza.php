@@ -30,12 +30,12 @@
         $titreLivraison ="";
         $hrefLivraisonBilanPrintController = "";
         $livraisonListDeleteLink = "";
+        $titreLivraison ="Société Iaaza";
         $livraisonNumber = $livraisonManager->getLivraisonNumber();
         if($livraisonNumber != 0){
             $livraisons = $livraisonManager->getLivraisonsByGroup();
-            $titreLivraison ="Société Iaaza";
             $totalReglement = $reglementsFournisseurManager->getTotalReglement();
-            $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
+            $totalLivraison = $livraisonDetailManager->getTotalLivraison();
             $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=2";
         }
 ?>
