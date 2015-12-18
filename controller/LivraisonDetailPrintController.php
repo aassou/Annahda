@@ -15,9 +15,21 @@
     if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
         $projetManager = new ProjetManager($pdo);
 		$fournisseurManager = new FournisseurManager($pdo);
-		$livraisonManager = new LivraisonManager($pdo);
-		$livraisonDetailManager = new LivraisonDetailManager($pdo);
-		$reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+        $livraisonManager = "";
+        $livraisonDetailManager = "";
+        $reglementsFournisseurManager = "";
+        //get societe value
+        $societe = $_GET['societe'];
+        if ( $societe == 1 ) {
+            $livraisonManager = new LivraisonManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);    
+        }
+        else if ( $societe == 2 ) {
+            $livraisonManager = new LivraisonIaazaManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
+        }
 		//classes and vars
 		$livraisonDetailNumber = 0;
 		$totalReglement = 0;

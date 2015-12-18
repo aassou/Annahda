@@ -36,7 +36,7 @@
             $titreLivraison ="Société Iaaza";
             $totalReglement = $reglementsFournisseurManager->getTotalReglement();
             $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
-            $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php";
+            $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=2";
         }
 ?>
 <!DOCTYPE html>

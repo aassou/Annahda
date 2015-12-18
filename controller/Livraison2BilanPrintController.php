@@ -15,61 +15,31 @@
     if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
         $projetManager = new ProjetManager($pdo);
 		$fournisseurManager = new FournisseurManager($pdo);
-		$livraisonManager = new LivraisonManager($pdo);
-		$livraisonDetailManager = new LivraisonDetailManager($pdo);
-		$reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
-		if( isset($_GET['idFournisseur']) and isset($_GET['idProjet']) and 
-		$fournisseurManager->getOneFournisseurBySearch($_GET['idFournisseur']>=1)){
-			$fournisseur = $fournisseurManager->getOneFournisseurBySearch(htmlentities($_GET['idFournisseur']));
-			$idProjet = $_GET['idProjet'];
-			$livraisonNumber = $livraisonManager->getLivraisonsNumberByIdFournisseurByProjet($fournisseur, $idProjet);
-			if($livraisonNumber != 0){
-				$livraisons = $livraisonManager->getLivraisonsByIdFournisseurByProjet($fournisseur, $idProjet);
-				$titreLivraison = "Bilan des livraisons du fournisseur <strong>"
-				.$fournisseurManager->getFournisseurById($fournisseur)->nom()."</strong> / Projet: <strong>"
-				.$projetManager->getProjetById($idProjet)->nom()."</strong>";	
-				//get the sum of livraisons details using livraisons ids (idProjet and idFournisseur)
-				$livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseurIdProjet($fournisseur, $idProjet);
-				$sommeDetailsLivraisons = 0;
-				foreach($livraisonsIds as $idl){
-					$sommeDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
-				}
-				$totalLivraison = 
-				$livraisonManager->getTotalLivraisonsIdFournisseurProjet($fournisseur, $idProjet) +
-				$sommeDetailsLivraisons;
-				$totalReglement = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseurByProjet($fournisseur, $idProjet);
-			}
-		}
-		else if( isset($_GET['idFournisseur']) and
-		$fournisseurManager->getOneFournisseurBySearch($_GET['idFournisseur']>=1)){
-			$fournisseur = $fournisseurManager->getOneFournisseurBySearch(htmlentities($_GET['idFournisseur']));
-			$livraisonNumber = $livraisonManager->getLivraisonsNumberByIdFournisseur($fournisseur);
-			if($livraisonNumber != 0){
-				$livraisons = $livraisonManager->getLivraisonsByIdFournisseur($fournisseur);
-				$titreLivraison ="Bilan des livraisons du fournisseur <strong>".$fournisseurManager->getFournisseurById($fournisseur)->nom()."</strong>";
-				//get the sum of livraisons details using livraisons ids (idFournisseur)
-				$livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($fournisseur);
-				$sommeDetailsLivraisons = 0;
-				foreach($livraisonsIds as $idl){
-					$sommeDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
-				}	
-				$totalReglement = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($fournisseur);
-				$totalLivraison = 
-				$livraisonManager->getTotalLivraisonsIdFournisseur($fournisseur)+
-				$sommeDetailsLivraisons;
-				$totalReglement = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($fournisseur);
-			}
-		}
-		else {
+		$societe = $_GET['societe'];
+		if ( $societe == 1 ) {
+		    $livraisonManager = new LivraisonManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
 			$livraisonNumber = $livraisonManager->getLivraisonNumber();
 			if($livraisonNumber != 0){
-				$titreLivraison ="Bilan des livraisons et réglements de tous les fournisseurs";
-				//$totalLivraison = $livraisonManager->getTotalLivraisons();
+				$titreLivraison ="Bilan des livraisons et réglements - Société Annahda";
 				$livraisons = $livraisonManager->getLivraisonsByGroup();
                 $totalReglement = $reglementsFournisseurManager->getTotalReglement();
                 $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 	
 			}	
-		}		
+		}
+        else if ( $societe == 2 ) {
+            $livraisonManager = new LivraisonIaazaManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
+            $livraisonNumber = $livraisonManager->getLivraisonNumber();
+            if($livraisonNumber != 0){
+                $titreLivraison ="Bilan des livraisons et réglements - Société Iaaza";
+                $livraisons = $livraisonManager->getLivraisonsByGroup();
+                $totalReglement = $reglementsFournisseurManager->getTotalReglement();
+                $totalLivraison = $livraisonDetailManager->getTotalLivraison();     
+            }   
+        }		
 
 ob_start();
 ?>

@@ -16,9 +16,25 @@
         //class manager
         $projetManager = new ProjetManager($pdo);
         $fournisseurManager = new FournisseurManager($pdo);
-        $livraisonManager = new LivraisonManager($pdo);
-        $livraisonDetailManager = new LivraisonDetailManager($pdo);
-        $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+        $livraisonManager = "";
+        $livraisonDetailManager = "";
+        $reglementsFournisseurManager = "";
+        $titreSociete = "";
+        
+        $societe = htmlentities($_POST['societe']);
+        
+        if ( $societe == 1 ) {
+            $livraisonManager = new LivraisonManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+            $titreSociete = "Société Annahda";
+        }
+        else if ( $societe == 2 ) {
+            $livraisonManager = new LivraisonIaazaManager($pdo);
+            $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
+            $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
+            $titreSociete = "Société Iaaza";
+        }
         //classes and vars
         $idFournisseur = $_POST['idFournisseur'];
         $fournisseur = $fournisseurManager->getFournisseurById($idFournisseur);
@@ -95,6 +111,7 @@ ob_start();
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
+    <h3><?= $titreSociete ?></h3>
     <h3><?= $titreLivraison ?></h3>
     <p>Imprimé le <?= date('d/m/Y - h:i') ?> </p>
     <br>

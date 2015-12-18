@@ -48,6 +48,7 @@
 				<!---------------------------- Dashboard End    -------------------------------------------->
 				<!---------------------------- Gestion des projets Begin ----------------------------------->
 				<?php 
+				if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) { 
 					$gestionProjetClass="";
 					if($currentPage=="projet-list.php"
 					or $currentPage=="projets.php"
@@ -90,6 +91,9 @@
 					<span class="arrow "></span>
 					</a>
 				</li>
+				<?php
+				}
+				?> 
 				<!---------------------------- Gestion des Projets End -------------------------------------->
 				<!---------------------------- Livraisons Begin  -------------------------------------------->
 				<?php 
@@ -112,12 +116,18 @@
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub">
+                        <?php
+                        if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
+                        ?>
                         <li <?php if($currentPage=="livraisons-group.php"
                                     or $currentPage=="livraisons-fournisseur.php"
                                     or $currentPage=="livraisons-details.php"){
                             ?> class="active" <?php } ?> >
                             <a href="livraisons-group.php">Société Annahda</a>
                         </li>
+                        <?php
+                        }
+                        ?>
                         <li <?php if($currentPage=="livraisons-group-iaaza.php"
                                     or $currentPage=="livraisons-fournisseur-iaaza.php"
                                     or $currentPage=="livraisons-details-iaaza.php"
@@ -126,15 +136,6 @@
                         </li>
                     </ul>
                 </li>
-                <!--li class="start <?php if($currentPage=="livraisons-group.php" 
-                or $currentPage=="livraisons-fournisseur.php"
-                or $currentPage=="livraisons-details.php"
-                ){echo "active ";} ?>">
-                    <a href="livraisons-group.php">
-                    <i class="icon-truck"></i> 
-                    <span class="title">Livraisons</span>
-                    </a>
-                </li-->
                 <!---------------------------- Livraisons End    -------------------------------------------->
                 <!---------------------------- Caisse Begin ------------------------------------->
                 <li class="start <?php if($currentPage=="caisse.php"){echo "active ";} ?>">
@@ -145,6 +146,9 @@
                 </li>
                 <!---------------------------- Caisse End ------------------------------------->
 				<!---------------------------- Parametrage Begin  -------------------------------------------->
+				<?php
+                if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
+                ?>
                 <li class="start <?php if($currentPage=="configuration.php" 
                 or $currentPage=="history.php"
                 or $currentPage=="clients-list.php"
@@ -158,6 +162,9 @@
                     <span class="title">Paramètrages</span>
                     </a>
                 </li>
+                <?php
+                }
+                ?>
                 <!---------------------------- Parametrage End    -------------------------------------------->
 			</ul>
 			<!-- END SIDEBAR MENU -->

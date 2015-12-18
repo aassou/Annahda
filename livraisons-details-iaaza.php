@@ -246,7 +246,7 @@
                             </div>
                             <!-- addLivraison box end -->
                             <!-- BEGIN Ajouter Article Link -->
-                            <a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>" class="get-down btn blue pull-right">
+                            <a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>&societe=2" class="get-down btn blue pull-right">
                                 <i class="icon-print"></i>&nbsp;Bon de livraison
                             </a>
                             <a class="btn green" href="#addArticle" data-toggle="modal" data-id="">

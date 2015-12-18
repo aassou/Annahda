@@ -12,7 +12,7 @@
     include('config.php');  
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav'])){
+    if ( isset($_SESSION['userMerlaTrav']) ) {
     	//classes managers
 		$usersManager = new UserManager($pdo);
 		$mailsManager = new MailManager($pdo);
@@ -92,10 +92,56 @@
 					</div>
 				</div>
 				<!--      BEGIN TILES      -->
+				<?php
+                if ( $_SESSION['userMerlaTrav']->profil() == "admin" || $_SESSION['userMerlaTrav']->profil() == "user" ) {
+                ?>
 				<div class="row-fluid">
 					<div class="span12">
 						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Raccourcis</h4>
 						<div class="tiles">
+						    <a href="caisse.php">
+                            <div class="tile bg-purple">
+                                <div class="tile-body">
+                                    <i class="icon-money"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        La Caisse
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="livraisons-group-iaaza.php">
+                            <div class="tile bg-blue">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-truck"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Livraisons Iaaza
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <?php
+                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            ?>
+                            <a href="livraisons-group.php">
+                            <div class="tile bg-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-truck"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Livraisons Annahda
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<a href="projets.php">
 							<div class="tile bg-green">
 								<div class="tile-body">
@@ -108,51 +154,6 @@
 									<div class="number">
 										<?= $projetNumber ?>
 									</div>
-								</div>
-							</div>
-							</a>
-							<!--a href="clients-list.php">
-                            <div class="tile bg-cyan">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-user"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Clients
-                                    </div>
-                                </div>
-                            </div>
-                            </a-->
-                            <a href="livraisons-group.php">
-                            <div class="tile bg-cyan">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-truck"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Livraisons Annahda
-                                    </div>
-                                    <!--div class="number">
-                                        <?php //$livraisonsNumber ?>
-                                    </div-->
-                                </div>
-                            </div>
-                            </a>
-							<a href="livraisons-group-iaaza.php">
-							<div class="tile bg-blue">
-								<div class="corner"></div>
-								<div class="tile-body">
-									<i class="icon-truck"></i>
-								</div>
-								<div class="tile-object">
-									<div class="name">
-										Livraisons Iaaza
-									</div>
-									<!--div class="number">
-										<?php //$livraisonsNumber ?>
-									</div-->
 								</div>
 							</div>
 							</a>
@@ -169,19 +170,6 @@
                                 </div>
                             </div>
                             </a>
-							<!--a href="fournisseurs.php">
-                            <div class="tile bg-dark-red">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-group"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Fournisseurs
-                                    </div>
-                                </div>
-                            </div>
-                            </a-->
 							<a href="compte-bancaire.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
@@ -196,32 +184,6 @@
                                 </div>
                             </div>
                             </a>
-							<a href="caisse.php">
-							<div class="tile bg-purple">
-								<div class="tile-body">
-									<i class="icon-money"></i>
-								</div>
-								<div class="tile-object">
-									<div class="name">
-										La Caisse
-									</div>
-									<div class="number">
-									</div>
-								</div>
-							</div>
-							</a>
-							<!--a href="recherches.php">
-							<div class="tile bg-red">
-								<div class="tile-body">
-									<i class="icon-search"></i>
-								</div>
-								<div class="tile-object">
-									<div class="name">
-										Rechercher
-									</div>
-								</div>
-							</div>
-							</a-->
 							<a href="configuration.php">
 							<div class="tile bg-red">
 								<div class="corner"></div>
@@ -235,11 +197,20 @@
 								</div>
 							</div>
 							</a>
+							<?php
+							}
+                            ?>
 						</div>
 					</div>
 				</div>
+				<?php
+                }
+                ?>
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
+				<?php
+                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
 					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
@@ -295,9 +266,15 @@
 						</a>
 					</div>	
 				</div>
+				<?php
+				}
+                ?>
 				<!-- END DASHBOARD STATS -->
 				<!-- BEGIN DASHBOARD FEEDS -->
 				<!-- ------------------------------------------------------ -->
+				<?php
+                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                ?>
 				<div class="row-fluid">
 				<div class="span12">
 					<!-- BEGIN PORTLET-->
@@ -481,6 +458,9 @@
 					<!-- END PORTLET-->
 				</div>
 				</div>
+				<?php
+                }
+                ?>
 				<!-- ------------------------------------------------------ -->
 				<!-- END DASHBOARD FEEDS -->
 				<!-- END PAGE HEADER-->
