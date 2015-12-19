@@ -125,7 +125,8 @@ class AppartementManager{
 
     public function getAppartementByIdProjet($idProjet){
         $appartements = array();
-        $query = $this->_db->prepare('SELECT * FROM t_appartement WHERE idProjet=:idProjet ORDER BY status ASC, niveau ASC')
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_appartement WHERE idProjet=:idProjet ORDER BY status ASC, niveau ASC, nom ASC')
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
