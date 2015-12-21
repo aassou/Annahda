@@ -18,12 +18,14 @@ class ProjetManager{
     //CRUD operations
     public function add(Projet $projet){
         $query = $this->_db->prepare(
-        'INSERT INTO t_projet (nom, titre, adresse, superficie, description, budget, createdBy, created)
-        VALUES (:nom, :titre, :adresse, :superficie, :description, :budget, :createdBy, :created)') 
+        'INSERT INTO t_projet (nom, nomArabe, titre, adresse, adresseArabe, superficie, description, budget, createdBy, created)
+        VALUES (:nom, :nomArabe, :titre, :adresse, :adresseArabe, :superficie, :description, :budget, :createdBy, :created)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $projet->nom());
+        $query->bindValue(':nomArabe', $projet->nomArabe());
         $query->bindValue(':titre', $projet->titre());
         $query->bindValue(':adresse', $projet->adresse());
+        $query->bindValue(':adresseArabe', $projet->adresseArabe());
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':budget', $projet->budget());
@@ -35,13 +37,16 @@ class ProjetManager{
     
     public function update(Projet $projet){
         $query = $this->_db->prepare(
-        'UPDATE t_projet SET nom=:nom, titre=:titre, adresse=:adresse, superficie=:superficie, description=:description, 
+        'UPDATE t_projet SET nom=:nom, nomArabe=:nomArabe, titre=:titre, adresse=:adresse, 
+        adresseArabe=:adresseArabe, superficie=:superficie, description=:description, 
         budget=:budget, updatedBy=:updatedBy, updated=:updated WHERE id=:id')
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $projet->id());
         $query->bindValue(':nom', $projet->nom());
+        $query->bindValue(':nomArabe', $projet->nomArabe());
         $query->bindValue(':titre', $projet->titre());
         $query->bindValue(':adresse', $projet->adresse());
+        $query->bindValue(':adresseArabe', $projet->adresseArabe());
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':budget', $projet->budget());

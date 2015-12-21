@@ -26,17 +26,19 @@
     if($action == "add"){
         if( !empty($_POST['nom']) ){
             $nom = htmlentities($_POST['nom']);
+            $nomArabe = htmlentities($_POST['nomArabe']);
             $titre = htmlentities($_POST['titre']);
             $budget = htmlentities($_POST['budget']);
             $superficie = htmlentities($_POST['superficie']);
             $adresse = htmlentities($_POST['adresse']);
+            $adresseArabe = htmlentities($_POST['adresseArabe']); 
             $description = htmlentities($_POST['description']);
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
             $projet = 
-            new Projet(array('nom' => $nom, 'titre' => $titre, 'superficie' => $superficie, 
-            'budget' => $budget, 'adresse' => $adresse, 'description' => $description,
+            new Projet(array('nom' => $nom, 'nomArabe' => $nomArabe, 'titre' => $titre, 'superficie' => $superficie, 
+            'budget' => $budget, 'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 'description' => $description,
             'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $projetManager->add($projet);
@@ -62,17 +64,19 @@
         $idProjet = htmlentities($_POST['idProjet']);
         if(!empty($_POST['nom'])){
             $nom = htmlentities($_POST['nom']);
+            $nomArabe = htmlentities($_POST['nomArabe']);
             $titre = htmlentities($_POST['titre']);
             $budget = htmlentities($_POST['budget']);
             $superficie = htmlentities($_POST['superficie']);
             $adresse = htmlentities($_POST['adresse']);
+            $adresseArabe = htmlentities($_POST['adresseArabe']);
             $description = htmlentities($_POST['description']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $projet = 
-            new Projet(array('id' => $idProjet, 'nom' => $nom, 'titre' => $titre, 'budget' => $budget, 
-            'superficie' => $superficie, 'adresse' => $adresse, 'description' => $description, 
-            'updatedBy' => $updatedBy, 'updated' => $updated));
+            new Projet(array('id' => $idProjet, 'nom' => $nom, 'nomArabe' => $nomArabe, 'titre' => $titre, 
+            'budget' => $budget, 'superficie' => $superficie, 'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 
+            'description' => $description, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $projetManager->update($projet);
             //add History data
             $createdBy = $_SESSION['userMerlaTrav']->login();

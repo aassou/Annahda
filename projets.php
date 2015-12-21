@@ -157,6 +157,18 @@
                                             </div>
                                         </div>
                                         <div class="control-group">
+                                            <label class="control-label">اسم المشروع</label>
+                                            <div class="controls">
+                                                <input type="text" name="nomArabe" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">عنوان المشروع</label>
+                                            <div class="controls">
+                                                <input type="text" name="adresseArabe" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
                                             <div class="controls">
                                                 <input type="hidden" name="action" value="add" />  
                                                 <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -225,6 +237,18 @@
                                             <label class="control-label">Description</label>
                                             <div class="controls">
                                                 <textarea type="text" name="description"><?= $projet->description() ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">اسم المشروع</label>
+                                            <div class="controls">
+                                                <input type="text" name="nomArabe" value="<?= $projet->nomArabe() ?>" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">عنوان المشروع</label>
+                                            <div class="controls">
+                                                <input type="text" name="adresseArabe" value="<?= $projet->adresseArabe() ?>" />
                                             </div>
                                         </div>
                                         <div class="control-group">

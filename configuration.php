@@ -80,6 +80,21 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="tiles">
+                            <a href="companies.php">
+                            <div class="tile bg-red">
+                                <div class="tile-body">
+                                    <i class="icon-sitemap"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Sociétés
+                                    </div>
+                                    <div class="number">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="users.php">
                             <div class="tile bg-green">
                                 <div class="tile-body">

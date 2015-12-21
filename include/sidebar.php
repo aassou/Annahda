@@ -156,6 +156,7 @@
                 or $currentPage=="users.php"
                 or $currentPage=="type-charges.php"
                 or $currentPage=="fournisseurs.php"
+                or $currentPage=="companies.php"
                 ){echo "active ";} ?>">
                     <a href="configuration.php">
                     <i class="icon-wrench"></i> 

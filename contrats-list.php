@@ -18,6 +18,7 @@
     	$idProjet = 0;
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
+        $companyManager = new CompanyManager($pdo);
 		$contratManager = new ContratManager($pdo);
         $compteBancaireManager = new CompteBancaireManager($pdo);
 		$operationManager = new OperationManager($pdo);
@@ -27,6 +28,7 @@
 		if(isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId()){
 			$idProjet = $_GET['idProjet'];
 			$projet = $projetManager->getProjetById($idProjet);
+            $companies = $companyManager->getCompanys();
 			if(isset($_POST['idClient']) and $_POST['idClient']>0){
 				$idClient = $_POST['idClient'];
 				$contrats = $contratManager->getContratsByIdClientByIdProjet($idClient, $idProjet);
@@ -128,79 +130,6 @@
                             unset($_SESSION['contrat-action-message']);
                             unset($_SESSION['contrat-type-message']);
                          ?>
-						<?php if(isset($_SESSION['operation-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['operation-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['operation-add-error']);
-						 ?>
-						 <?php if(isset($_SESSION['operation-add-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['operation-add-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['operation-add-success']);
-						 ?>
-						<?php if(isset($_SESSION['pieces-add-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['pieces-add-success']);
-						 ?>
-						<?php if(isset($_SESSION['pieces-add-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['pieces-add-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['pieces-add-error']);
-						 ?>
-						 <?php if(isset($_SESSION['contrat-delete-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-delete-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['contrat-delete-success']);
-						 ?>
-						 <?php if(isset($_SESSION['contrat-desister-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-desister-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['contrat-desister-success']);
-						 ?>
-						 <?php if(isset($_SESSION['contrat-activation-success'])){ ?>
-							<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-activation-success'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['contrat-activation-success']);
-						 ?>
-						 <?php if(isset($_SESSION['contrat-activation-error'])){ ?>
-							<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['contrat-activation-error'] ?>		
-							</div>
-						 <?php } 
-							unset($_SESSION['contrat-activation-error']);
-						 ?>
-						 <!--div class="row-fluid">
-                            <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
-                                <i class="icon-print"></i>
-                                 Version Imprimable
-                            </a>
-                            <div class="input-box">
-                                <input class="m-wrap" name="customer" id="customer" type="text" placeholder="Chercher un client..." />
-                            </div>
-                        </div-->
 						<div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Liste des contrats clients</h4>
@@ -284,9 +213,12 @@
 												        	<?php
                                                             }
                                                             ?>
-												        	<a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
+												        	<!--a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Contrat
-												        	</a>
+												        	</a-->
+												        	<a href="#printContratArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                                Imprimer Contrat
+                                                            </a>
 												        	<a target="_blank" href="controller/ClientFichePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Fiche Client
 												        	</a>
@@ -340,6 +272,67 @@
                                             unset($_SESSION['print-quittance']); 
 											?>
 										</tr>
+										<!-- printContratArabe box begin-->
+                                        <div id="printContratArabe<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Imprimer Contrat Client</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">الشركة</label>
+                                                        <div class="controls">
+                                                            <select name="nomSociete">
+                                                                <?php
+                                                                foreach ( $companies as $company ) {
+                                                                ?>
+                                                                <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">الواجهة</label>
+                                                        <div class="controls">
+                                                            <input type="text" required="required" id="facade" name="facade" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">وضعية الشقة/المحل التجاري</label>
+                                                        <div class="controls">
+                                                            <select name="etatBien">
+                                                                <option value="GrosOeuvre">الأشغال الأساسية للبناء</option>
+                                                                <option value="Finition">الأشغال النهائية للبناء</option>
+                                                            </select>    
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">المبلغ المدفوع مسبقا بالحروف</label>
+                                                        <div class="controls">
+                                                            <input type="text" required="required" id="avanceLettresArabe" name="avanceLettresArabe" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">مبلغ البيع بالحروف</label>
+                                                        <div class="controls">
+                                                            <input type="text" required="required" id="prixLettresArabe" name="prixLettresArabe" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="desister" />
+                                                        <input type="hidden" name="source" value="contrats-list" />
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- printContratArabe box end -->
 										<!-- desistement box begin-->
 										<div id="desisterContrat<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 											<div class="modal-header">

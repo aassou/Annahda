@@ -47,8 +47,7 @@ ob_start();
 	}
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
-    <img src="../assets/img/logo_company.png" style="width: 110px" />
-    <br><br><br><br><br>
+    <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <h1>Situation des Clients - <?= $projetManager->getProjetById($idProjet)->nom() ?></h1>
     <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
 	<table>
@@ -93,8 +92,7 @@ ob_start();
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;">STE MERLA TRAV SARL : Au capital de 100 000,00 DH – Siège social Hay Al Matar En face de l'institution AR'RISSALA 2, Nador. 
-    	<br>Tèl 0536381458/ 0661668860 IF : 40451179   RC : 10999  Patente 56126681</p>
+    <p style="text-align: center;font-size: 9pt;"></p>
     </page_footer>
 </page>    
 <?php

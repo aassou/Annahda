@@ -11,8 +11,10 @@ class Projet{
     //attributes
     private $_id;
     private $_nom;
+    private $_nomArabe;
     private $_titre;
     private $_adresse;
+    private $_adresseArabe;
     private $_superficie;
     private $_description;
     private $_budget;
@@ -45,12 +47,20 @@ class Projet{
         $this->_nom = $nom;
     }
     
+    public function setNomArabe($nomArabe){
+        $this->_nomArabe = $nomArabe;
+    }
+    
     public function setTitre($titre){
         $this->_titre = $titre;
     }
     
     public function setAdresse($adresse){
         $this->_adresse = $adresse;
+    }
+    
+    public function setAdresseArabe($adresseArabe){
+        $this->_adresseArabe = $adresseArabe;
     }
     
     public function setSuperficie($superficie){
@@ -91,12 +101,20 @@ class Projet{
         return $this->_nom;
     }
     
+    public function nomArabe(){
+        return $this->_nomArabe;
+    }
+    
     public function titre(){
         return $this->_titre;
     }
     
     public function adresse(){
         return $this->_adresse;
+    }
+    
+    public function adresseArabe(){
+        return $this->_adresseArabe;
     }
     
     public function superficie(){
