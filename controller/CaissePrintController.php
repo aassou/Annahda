@@ -15,11 +15,22 @@
     if( isset($_SESSION['userMerlaTrav']) ){
         //classes managers  
         $projetManager = new ProjetManager($pdo);
-        $caisseManager = new CaisseManager($pdo);
+        $caisseManager = "";
         $projets = $projetManager->getProjets();
+        $titre = "";
         $caisses = "";
         $titreDocument = "";
         $totalCaisse = 0;
+        $societe = htmlentities($_POST['societe']);
+        if ( $societe == 1 ) {
+            $caisseManager = new CaisseManager($pdo);
+            $titre = "Société Annahda";
+        }
+        else if ( $societe == 2 ) {
+            $caisseManager = new CaisseIaazaManager($pdo);
+            $titre = "Société Iaaza";
+        }
+        
         $criteria = htmlentities($_POST['criteria']);
         if( $criteria=="parDate" ) {
             $dateFrom = htmlentities($_POST['dateFrom']);
@@ -74,6 +85,7 @@ ob_start();
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
+    <h1><?= $titre ?></h1>
     <h1><?= $titreDocument ?></h1>
     <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
     <br>

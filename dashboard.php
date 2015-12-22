@@ -113,6 +113,9 @@
                                 </div>
                             </div>
                             </a>
+                            <?php
+                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            ?>
 						    <a href="caisse.php">
                             <div class="tile bg-purple">
                                 <div class="tile-body">
@@ -127,6 +130,9 @@
                                 </div>
                             </div>
                             </a>
+                            <?php
+                            }
+                            ?>
                             <a href="livraisons-group-iaaza.php">
                             <div class="tile bg-blue">
                                 <div class="corner"></div>

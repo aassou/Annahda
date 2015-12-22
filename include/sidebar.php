@@ -137,14 +137,39 @@
                     </ul>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
-                <!---------------------------- Caisse Begin ------------------------------------->
-                <li class="start <?php if($currentPage=="caisse.php"){echo "active ";} ?>">
-                    <a href="caisse.php">
+                <!---------------------------- Livraisons Begin  -------------------------------------------->
+                <?php 
+                    $gestionCaisseClass="";
+                    if(
+                    $currentPage=="caisse.php"
+                    or $currentPage=="caisse-iaaza.php"
+                    ){
+                        $gestionCaisseClass = "active ";
+                    } 
+                ?> 
+                <li class="<?= $gestionCaisseClass; ?> has-sub ">
+                    <a href="javascript:;">
                     <i class="icon-money"></i> 
-                    <span class="title">Caisse</span>
+                    <span class="title">Gestion des caisses</span>
+                    <span class="arrow "></span>
                     </a>
+                    <ul class="sub">
+                        <?php
+                        if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
+                        ?>
+                        <li <?php if($currentPage=="caisse.php"){
+                            ?> class="active" <?php } ?> >
+                            <a href="caisse.php">Caisse Société Annahda</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <li <?php if($currentPage=="caisse-iaaza.php"){?> class="active" <?php } ?> >
+                            <a href="caisse-iaaza.php">Caisse Société Iaaza</a>
+                        </li>
+                    </ul>
                 </li>
-                <!---------------------------- Caisse End ------------------------------------->
+                <!---------------------------- Caisse End    -------------------------------------------->
 				<!---------------------------- Parametrage Begin  -------------------------------------------->
 				<?php
                 if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {

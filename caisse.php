@@ -86,7 +86,7 @@
 							</li>
 							<li>
 								<i class="icon-money"></i>
-								<a>Gestion de la caisse</a>
+								<a>Gestion de la caisse - Société Annahda</a>
 							</li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -94,29 +94,6 @@
 				</div>
 				<!-- END PAGE HEADER-->
 				<!-- BEGIN PAGE CONTENT-->
-				<!--div class="row-fluid">
-					<div class="span12 responsive">
-						<div class="dashboard-stat purple">
-							<div class="visual hidden-phone">
-								<i class="icon-money"></i>
-							</div>
-							<div class="details">
-								<div class="number">
-									<?= 
-									number_format($caisseEntreesManager->getTotalCaisseEntrees()-$caisseSortiesManager->getTotalCaisseSorties(), 2, ',', ' ')
-									?>
-									DH
-								</div>
-								<div class="desc">									
-									Bilan de la caisse<br> (Les Entrées - Les Sorties)
-								</div>
-							</div>
-							<a class="more" href="#">
-								Générer le rapport des transactions <i class="m-icon-swapright m-icon-white"></i>
-							</a>						
-						</div>
-					</div>
-				</div-->
 				<div class="row-fluid">
 					<div class="span12">
 						<?php 
@@ -241,6 +218,7 @@
                                    </div>
                                     <div class="control-group">
                                         <div class="controls">
+                                            <input type="hidden" name="societe" value="1" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
