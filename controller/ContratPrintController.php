@@ -12,7 +12,7 @@
     include('../config.php');  
     //classes loading end
     session_start();
-    if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
+    if( isset($_SESSION['userMerlaTrav']) ){
         $clientManager = new ClientManager($pdo);
         $contratManager = new ContratManager($pdo);
         $projetManager = new ProjetManager($pdo);
