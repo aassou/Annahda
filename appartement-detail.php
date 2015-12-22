@@ -20,11 +20,12 @@
 		$appartement = "";
 		$idAppartement = 0;
 		$idProjet = $_GET['idProjet'];
+        $projet = $projetManager->getProjetById($idProjet);
 		if( isset($_GET['idAppartement']) and 
 		( $_GET['idAppartement']>0 and $_GET['idAppartement']<=$appartementManager->getLastId() ) ){
 			$idAppartement = htmlentities($_GET['idAppartement']);
 			$appartement = $appartementManager->getAppartementById($idAppartement);
-			$piecesManager = new PiecesAppartementManager($pdo);
+			$piecesManager = new AppartementPiecesManager($pdo);
 			$piecesNumber = $piecesManager->getPiecesAppartementNumberByIdAppartement($idAppartement);
 			if($piecesNumber != 0){
 				$piecesAppartement = $piecesManager->getPiecesAppartementByIdAppartement($idAppartement);
@@ -87,7 +88,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -104,20 +105,23 @@
 						</h3>
 						<ul class="breadcrumb">
 							<li>
-								<i class="icon-home"></i>
-								<a>Accueil</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-home"></i>
-								<a>Gestion des appartements</a>
-								<i class="icon-angle-right"></i>
-							</li>
+                                <i class="icon-home"></i>
+                                <a href="dashboard.php">Accueil</a> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <i class="icon-briefcase"></i>
+                                <a href="projets.php">Gestion des projets</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="appartements.php?idProjet=<?= $projet->id() ?>">Gestion des appartements</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
 							<li><a>Fiche de l'appartement</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -127,11 +131,6 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="appartements.php?idProjet=<?= $idProjet ?>" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des appartements</a>
-							</div>
-						</div>
 						<div class="tab-pane active" id="tab_1">
 							<?php if(isset($_SESSION['pieces-add-success'])){ ?>
                          	<div class="alert alert-success">

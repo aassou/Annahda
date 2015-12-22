@@ -141,7 +141,7 @@
                 //adding the contract object to our database
                 $contratManager->add($contrat);
                 //add history data to db
-                $nomClient = $clientManager->getClientById($idClient);
+                $nomClient = $clientManager->getClientById($idClient)->nom();
                 $history = new History(array(
                     'action' => "Ajout",
                     'target' => "Table des contrats",
