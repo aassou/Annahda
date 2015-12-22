@@ -72,15 +72,13 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-								<i class="icon-briefcase"></i>
-								<a>Gestion des utilisateurs</a>
-								<i class="icon-angle-right"></i>
+								<i class="icon-user"></i>
+								<a>Gestion de mon compte</a>
 							</li>
-							<li><a>Mon Compte</a></li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
