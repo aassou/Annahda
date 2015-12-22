@@ -280,6 +280,7 @@
                                                 <option value="Cheque">Cheque</option>
                                                 <option value="Versement">Versement</option>
                                                 <option value="Virement">Virement</option>
+                                                <option value="LetterDeChange">Lettre De Change</option>
                                                 <option value="Remise">Remise</option>
                                             </select>
                                         </div>  
