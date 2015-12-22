@@ -99,6 +99,20 @@
 					<div class="span12">
 						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Raccourcis</h4>
 						<div class="tiles">
+						    <a href="caisse-iaaza.php">
+                            <div class="tile bg-yellow">
+                                <div class="tile-body">
+                                    <i class="icon-money"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Caisse Iaaza
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 						    <a href="caisse.php">
                             <div class="tile bg-purple">
                                 <div class="tile-body">
@@ -106,7 +120,7 @@
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        La Caisse
+                                        Caisse Annahda
                                     </div>
                                     <div class="number">
                                     </div>
