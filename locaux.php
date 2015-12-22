@@ -460,10 +460,10 @@
 										</div>
 										<!-- update box end -->
 										<!-- delete box begin-->
-                                        <div id="deleteAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div id="deleteLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Supprimer Appartement <strong><?= $appartement->nom() ?></strong> </h3>
+                                                <h3>Supprimer Local Commercial <strong><?= $locau->nom() ?></strong> </h3>
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
