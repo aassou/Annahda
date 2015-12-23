@@ -176,21 +176,21 @@ ob_start();
     <h4>Détails des réglements</h4>
     <table>
         <tr>
-            <th style="width: 20%">N°Opération</th>
-            <th style="width: 20%">Date</th>
-            <th style="width: 20%">Mode Paiement</th>
-            <th style="width: 20%">Projet</th>
-            <th style="width: 20%">Montant</th>
+            <th>N°Opération</th>
+            <th>Date</th>
+            <th>Mode Paiement</th>
+            <th>Projet</th>
+            <th>Montant</th>
         </tr>
         <?php
         foreach($reglements as $reglement){
         ?>      
         <tr>
-            <td><?= $reglement->numeroCheque() ?></td>
-            <td><?= date('d/m/Y', strtotime($reglement->dateReglement())); ?></td>
-            <td><?= $reglement->modePaiement() ?></td>
-            <td><?= $projetManager->getProjetById($reglement->idProjet())->nom() ?></td>
-            <td><?= number_format( $reglement->montant(), 2, ',', ' '); ?></td>          
+            <td style="width: 20%"><?= $reglement->numeroCheque() ?></td>
+            <td style="width: 20%"><?= date('d/m/Y', strtotime($reglement->dateReglement())); ?></td>
+            <td style="width: 20%"><?= $reglement->modePaiement() ?></td>
+            <td style="width: 20%"><?= $projetManager->getProjetById($reglement->idProjet())->nom() ?></td>
+            <td style="width: 20%"><?= number_format( $reglement->montant(), 2, ',', ' '); ?></td>          
         </tr>   
         <?php
         }//end of loop

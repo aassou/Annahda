@@ -252,7 +252,7 @@
 								</li>
 								<li>
 									<span class="sale-info"><i class="icon-envelope"></i></span> 
-									<span class="sale-num"><?= $client->email() ?></span>
+									<span class="sale-num"><a href="mailto:<?= $client->email() ?>"><?= $client->email() ?></a></span>
 								</li>
 							</ul>
 						</div>
