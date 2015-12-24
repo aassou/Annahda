@@ -210,12 +210,19 @@
                                             <label class="control-label">Projet</label>
                                             <div class="controls">
                                                 <select name="idProjet">
+                                                    <option value="0">Non mentionnée</option>
                                                     <option value="<?= $idProjet ?>"><?= $nomProjet ?></option>
                                                     <option disabled="disabled">------------</option>
                                                     <?php foreach($projets as $pro){ ?>
                                                     <option value="<?= $pro->id() ?>"><?= $pro->nom() ?></option>
                                                     <?php } ?>
                                                 </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Désignation</label>
+                                            <div class="controls">
+                                                <input id="designation" type="text" name="designation" value="<?= $livraison->designation() ?>" />
                                             </div>
                                         </div>
                                         <div class="control-group">

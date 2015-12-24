@@ -81,53 +81,61 @@
                 if( isset($_POST['numeroCheque']) ){
                     $numeroCheque = htmlentities($_POST['numeroCheque']);
                 }
-                //set the datePrevu for our object begin
-                $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
-                for ( $i=1; $i <= $condition; $i++ ) {
-                    $monthsNumber = "+".$nombreMois*$i." months";
-                    $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
-                    $reglementPrevuManager->add(
-                        new ReglementPrevu(
-                            array(
-                                'datePrevu' => $datePrevu,
-                                'codeContrat' => $codeContrat,
-                                'status' => 0,
-                                'created' => $created,
-                                'createdBy' =>$createdBy
-                            )
-                        )
-                    );
-                }
-                //set the datePrevu for our object begin
+                //set the datePrevu for our object end
                 //CAS LIBRE PROCESSING BEGIN
                 if ( isset($_POST['show-cas-libre']) ) {
                     $dates = array();
                     $montants = array();
                     $observations = array();
                     for ( $i=1; $i<7; $i++ ) {
-                        if ( isset($_POST['cas-libre-date'.$i]) ) {
-                            $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);   
+                        if ( 
+                            ( isset($_POST['cas-libre-date'.$i]) and !empty($_POST['cas-libre-date'.$i]) ) 
+                            and isset($_POST['cas-libre-montant'.$i]) and !empty($_POST['cas-libre-montant'.$i]) ) {
+                            $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);
+                            $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);
+                            if ( isset($_POST['cas-libre-observation'.$i]) ) {
+                                $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
+                            }   
+                            $contratCasLibreManager->add(
+                                new ContratCasLibre(
+                                    array(
+                                        'date' => $dates[$i], 
+                                        'montant' => $montants[$i], 
+                                        'observation' => $observations[$i],
+                                        'status' => 0,
+                                        'codeContrat' => $codeContrat,
+                                        'created' => $created,
+                                        'createdBy' => $createdBy
+                                    )
+                                )
+                            );
                         }
-                        if ( isset($_POST['cas-libre-montant'.$i]) ) {
+                        /*if ( isset($_POST['cas-libre-montant'.$i]) ) {
                             $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);   
                         }
                         if ( isset($_POST['cas-libre-observation'.$i]) ) {
                             $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
-                        }
-                        $contratCasLibreManager->add(
-                            new ContratCasLibre(
+                        }*/
+                    } 
+                }
+                else {
+                    //set the datePrevu for our object begin
+                    $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
+                    for ( $i=1; $i <= $condition; $i++ ) {
+                        $monthsNumber = "+".$nombreMois*$i." months";
+                        $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
+                        $reglementPrevuManager->add(
+                            new ReglementPrevu(
                                 array(
-                                    'date' => $dates[$i], 
-                                    'montant' => $montants[$i], 
-                                    'observation' => $observations[$i],
-                                    'status' => 0,
+                                    'datePrevu' => $datePrevu,
                                     'codeContrat' => $codeContrat,
+                                    'status' => 0,
                                     'created' => $created,
-                                    'createdBy' => $createdBy
+                                    'createdBy' =>$createdBy
                                 )
                             )
                         );
-                    } 
+                    }
                 }
                 //else we have to put here our datePrevu processing
                 //CAS LIBRE PROCESSING END
@@ -211,9 +219,33 @@
             'numeroCheque' => $numeroCheque, 'note' => $note, 'updated' => $updated, 'updatedBy' => $updatedBy));
             //begin processing
             $contratManager->update($newContrat);
-            //add history data to db
+            //Update The ReglementsPrevus Table
+            //We should get the number of "ReglementPrevu" to begin our process
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
+            $reglementPrevuNumber  = $reglementPrevuManager->getReglementNumberByCodeContrat($codeContrat);
+            if ( $reglementPrevuNumber >= 1 ) {
+                $reglementPrevuManager->deleteByCodeContrat($codeContrat);
+                //set the datePrevu for our object begin
+                $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
+                for ( $i=1; $i <= $condition; $i++ ) {
+                    $monthsNumber = "+".$nombreMois*$i." months";
+                    $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
+                    $reglementPrevuManager->add(
+                        new ReglementPrevu(
+                            array(
+                                'datePrevu' => $datePrevu,
+                                'codeContrat' => $codeContrat,
+                                'status' => 0,
+                                'created' => $created,
+                                'createdBy' =>$createdBy
+                            )
+                        )
+                    );
+                }
+                //set the datePrevu for our object end
+            }
+            //add history data to db
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des contrats",

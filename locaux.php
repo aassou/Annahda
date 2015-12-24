@@ -118,8 +118,9 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
-						<div class="pull-right get-down">
-                            <a href="#addLocaux" class="btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
+						<div class="get-down">
+						    <input class="pull-left m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
+                            <a href="#addLocaux" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
                         </div>
                         <!-- addLocaux box begin-->
                         <div id="addLocaux" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -224,7 +225,7 @@
 										if($locauxNumber != 0){
 										foreach($locaux as $locau){
 										?>		
-										<tr>
+										<tr class="locaux">
 											<td>
 												<div class="btn-group">
 												    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
@@ -548,6 +549,16 @@
 			//App.setPage("table_editable");
 			App.init();
 		});
+		$('.locaux').show();
+        $('#criteria').keyup(function(){
+            $('.locaux').hide();
+           var txt = $('#criteria').val();
+           $('.locaux').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
+        });
 		$('#status').on('change',function(){
 	        if( $(this).val()!=="Disponible"){
 	        $("#par").show()

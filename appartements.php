@@ -250,7 +250,7 @@
 										if($appartementNumber != 0){
 										foreach($appartements as $appartement){
 										?>		
-										<tr>
+										<tr class="appartements">
 											<td>
 												<div class="btn-group">
 												    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">

@@ -110,7 +110,7 @@ ob_start();
 <page backtop="10mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <h1>Résumé du Contrat Client - Projet : <?= $projet->nom() ?></h1>
-    <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
+    <p>Imprimé le <?= date('d/m/Y') ?> | <?= date('h:i') ?> </p>
     <hr>
     <div>
 		<table style="width: 100%">
@@ -250,8 +250,8 @@ ob_start();
             <tr>
                 <th style="width: 20%">Date</th>
                 <th style="width: 20%">Montant</th>
-                <th style="width: 30%">Obsérvation</th>
-                <th style="width: 20%">Status</th>
+                <th style="width: 50%">Obsérvation</th>
+                <th style="width: 10%">Status</th>
             </tr>
             <?php
             $totalMontantsCasLibre = 0;
@@ -288,15 +288,8 @@ ob_start();
             ?>
             <tr>
                 <td></td>
-                <td></td>
-                <th>Total des montants</th>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
                 <th><?= number_format($totalMontantsCasLibre, 2, ',', ' ') ?>&nbsp;DH</th>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>

@@ -1037,31 +1037,31 @@
 							<div class="control-group">
 								<label class="control-label">Date Création</label>
 								<div class="controls">
-									<input type="text" name="dateCreation" value="<?= $contrat->dateCreation() ?>" />
+									<input type="text" required="required" name="dateCreation" value="<?= $contrat->dateCreation() ?>" />
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">Prix Vente</label>
 								<div class="controls">
-									<input type="text" id="prixVente" name="prixVente" value="<?= $contrat->prixVente() ?>" />
+									<input type="text" required="required" id="prixVente" name="prixVente" value="<?= $contrat->prixVente() ?>" />
 								</div>
 							</div>	
 							<div class="control-group">
 								<label class="control-label">Avance</label>
 								<div class="controls">
-									<input type="text" id="avance" name="avance" value="<?= $contrat->avance() ?>" />
+									<input type="text" required="required" id="avance" name="avance" value="<?= $contrat->avance() ?>" />
 								</div>
 							</div>
 							<div class="control-group">
                                 <label class="control-label">Durée de paiement</label>
                                 <div class="controls">
-                                    <input type="text" id="dureePaiement" name="dureePaiement" value="<?= $contrat->dureePaiement() ?>" />
+                                    <input type="text" required="required" id="dureePaiement" name="dureePaiement" value="<?= $contrat->dureePaiement() ?>" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Nombre Mois</label>
                                 <div class="controls">
-                                    <input type="text" id="nombreMois" name="nombreMois" value="<?= $contrat->nombreMois() ?>" />
+                                    <input type="text" required="required" id="nombreMois" name="nombreMois" value="<?= $contrat->nombreMois() ?>" />
                                 </div>
                             </div>
                             <div class="control-group">

@@ -22,6 +22,7 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $locauxManager = new LocauxManager($pdo);
+    $projetManager = new ProjetManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
     $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //Action Add Processing Begin

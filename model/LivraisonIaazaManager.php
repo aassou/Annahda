@@ -11,12 +11,12 @@ class LivraisonIaazaManager{
     //CRUD operations
     public function add(LivraisonIaaza $livraison){
         $query = $this->_db->prepare(
-        'INSERT INTO t_livraison_iaaza (dateLivraison, libelle, idFournisseur, idProjet, code)
-        VALUES (:dateLivraison, :libelle, :idFournisseur, :idProjet, :code)') 
+        'INSERT INTO t_livraison_iaaza (dateLivraison, libelle, designation, idFournisseur, idProjet, code)
+        VALUES (:dateLivraison, :libelle, :designation, :idFournisseur, :idProjet, :code)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
-        //$query->bindValue(':type', $livraison->type());
+        $query->bindValue(':designation', $livraison->designation());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':idProjet', $livraison->idProjet());
 		$query->bindValue(':code', $livraison->code());
@@ -26,13 +26,13 @@ class LivraisonIaazaManager{
 
     public function update(LivraisonIaaza $livraison){
         $query = $this->_db->prepare(
-        'UPDATE t_livraison_iaaza SET dateLivraison=:dateLivraison, libelle=:libelle,
+        'UPDATE t_livraison_iaaza SET dateLivraison=:dateLivraison, libelle=:libelle, designation=:designation,
         idProjet=:idProjet, idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
         WHERE id=:id') or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $livraison->id());
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
-        //$query->bindValue(':type', $livraison->type());
+        $query->bindValue(':designation', $livraison->designation());
         $query->bindValue(':idProjet', $livraison->idProjet());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':updated', $livraison->updated());

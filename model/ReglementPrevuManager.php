@@ -56,6 +56,14 @@ class ReglementPrevuManager{
 		$query->execute();
 		$query->closeCursor();
 	}
+    
+    public function deleteByCodeContrat($codeContrat){
+        $query = $this->_db->prepare('DELETE FROM t_reglementprevu WHERE codeContrat=:codeContrat')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':codeContrat', $codeContrat);
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function getReglementPrevuById($id){
     	$query = $this->_db->prepare(' SELECT * FROM t_reglementprevu

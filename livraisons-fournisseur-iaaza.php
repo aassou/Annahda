@@ -207,10 +207,17 @@
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Non mentionné</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Désignation</label>
+                                        <div class="controls">
+                                            <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -465,14 +472,15 @@
                                         </ul>
                                     </div-->
                                 </div>
-                            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%">Actions</th>
-                                            <th style="width: 15%">N° BL</th>
-                                            <th style="width: 20%">Projet</th>
+                                            <th style="width: 12%">Actions</th>
+                                            <th style="width: 13%">N° BL</th>
+                                            <th style="width: 15%">Projet</th>
+                                            <th style="width: 15%">Designation</th>
                                             <th style="width: 15%">Date Livraison</th>
-                                            <th style="width: 15%">Articles</th>
+                                            <th style="width: 10%">Articles</th>
                                             <th style="width: 20%">Total</th>
                                         </tr>
                                     </thead>
@@ -505,6 +513,7 @@
                                             </td>
                                             <td><?= $livraison->libelle() ?></td>
                                             <td><?= $nomProjet ?></td>
+                                            <td><?= $livraison->designation() ?></td>
                                             <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
                                             <td>
                                                 <?= $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id()); ?>
@@ -544,7 +553,6 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir modifier la livraison <strong>N°<?= $livraison->id() ?></strong>  ?</p>
                                                     <div class="control-group">
                                                         <label class="control-label">Fournisseur</label>
                                                         <div class="controls">
@@ -561,12 +569,19 @@
                                                         <label class="control-label">Projet</label>
                                                         <div class="controls">
                                                             <select name="idProjet">
-                                                                <option value="<?= $livraison->idProjet() ?>"><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></option>
+                                                                <option value="<?= $livraison->idProjet() ?>"><?= $nomProjet ?></option>
                                                                 <option disabled="disabled">-----------</option>
+                                                                <option value="0">Non mentionné</option>
                                                                 <?php foreach($projets as $projet){ ?>
                                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                                 <?php } ?>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                     <div class="control-group">
+                                                        <label class="control-label">Désignation</label>
+                                                        <div class="controls">
+                                                            <input id="designation" type="text" name="designation" value="<?= $livraison->designation() ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

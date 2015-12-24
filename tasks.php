@@ -107,9 +107,10 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <th style="width :10%">Actions</th>
                                             <th style="width :10%">Affetcé pour</th>
                                             <th style="width :20%">Date affectation</th>
-                                            <th style="width :60%">Tâche</th>
+                                            <th style="width :50%">Tâche</th>
                                             <th style="width :10%">Status</th>
                                         </tr>
                                     </thead>
@@ -117,17 +118,99 @@
                                         <?php
                                         foreach($tasksAffectedByMeToOther as $task){
                                             if ( $task->status() == 0 ) {
-                                            $status = '<a class="btn mini red">En cours</a>';
+                                                $status = '<a class="btn mini red">En cours</a>';
+                                                $statusName = "En cours";
                                             }
                                             else if ( $task->status() == 1 ) {
                                                 $status = '<a class="btn mini green">Validée</a>';
+                                                $statusName = "Validée";
                                             }
                                         ?>
                                         <tr class="odd gradeX">
+                                            <td>
+                                                <a href="#updateTask<?= $task->id() ?>" data-toggle="modal" data-id="<?= $task->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
+                                                <a href="#deleteTask<?= $task->id() ?>" data-toggle="modal" data-id="<?= $task->id() ?>" class="btn mini red"><i class="icon-remove"></i></a>
+                                            </td>
                                             <td><?= $task->user() ?></td>
                                             <td><?= date('d/m/Y - H\hi\m', strtotime($task->created())) ?></td>
                                             <td><?= $task->content() ?></td>
                                             <td><?= $status ?></td>
+                                            <!-- updateTask Box Begin -->
+                                            <div id="updateTask<?= $task->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h3>Effacer la tâche</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal" action="controller/TaskActionController.php" method="post">
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="user">Tâche pour</label>
+                                                            <div class="controls">
+                                                                <select name="user" id="user">
+                                                                    <option value="<?= $task->user() ?>"><?= $task->user() ?></option>
+                                                                    <option disabled="disabled">--------------</option>
+                                                                    <?php 
+                                                                    foreach ( $users as $user ) {
+                                                                        if ( $user->login() != $_SESSION['userMerlaTrav']->login() ) { 
+                                                                    ?>
+                                                                            <option value="<?= $user->login() ?>"><?= $user->login() ?></option>
+                                                                    <?php 
+                                                                        }//end if 
+                                                                    }//end foreach    
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="user">Détails tâche</label>
+                                                            <div class="controls">  
+                                                                <textarea name="content" /><?= $task->content() ?></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="user">Status</label>
+                                                            <div class="controls">
+                                                                <select name="status">
+                                                                    <option value="<?= $task->status() ?>"><?= $statusName ?></option>
+                                                                    <option disabled="disabled">--------------</option>
+                                                                    <option value="0">En cours</option>
+                                                                    <option value="1">Validée</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <div class="controls">  
+                                                                <input type="hidden" name="action" value="update" />
+                                                                <input type="hidden" name="idTask" value="<?= $task->id() ?>" />
+                                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- updateTask Box End -->
+                                            <!-- deleteTask Box Begin -->
+                                            <div id="deleteTask<?= $task->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h3>Effacer la tâche</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal" action="controller/TaskActionController.php" method="post">
+                                                        <p>Êtes-vous sûr de vouloir effacer cette tâche ?</p>
+                                                        <div class="control-group">
+                                                            <div class="controls">  
+                                                                <input type="hidden" name="action" value="delete" />
+                                                                <input type="hidden" name="idTask" value="<?= $task->id() ?>" />
+                                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- deleteTask Box End -->
                                         </tr>     
                                         <?php
                                         }
@@ -189,9 +272,9 @@
                                         unset($_SESSION['task-type-message']);
                                      ?>
                                     <br>
-                                    <a href="#deleteValideTasks" data-toggle="modal" class="btn green get-down">
+                                    <!--a href="#deleteValideTasks" data-toggle="modal" class="btn green get-down">
                                         Effacer les tâches validées
-                                    </a>
+                                    </a-->
                                     <!-- DeleteValideTasks Box Begin -->
                                     <div id="deleteValideTasks" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                         <div class="modal-header">
@@ -199,7 +282,7 @@
                                             <h3>Effacer les tâches validées</h3>
                                         </div>
                                         <div class="modal-body">
-                                            <form class="form-horizontal" action="controller/TaskActionController.php" method="post">
+                                            <form class="form-horizontal" action="" method="post">
                                                 <div class="control-group">
                                                     <div class="controls">  
                                                         <input type="hidden" name="action" value="deleteValideTasks" />

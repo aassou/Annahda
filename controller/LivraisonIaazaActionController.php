@@ -34,6 +34,7 @@
         if( !empty($_POST['libelle']) ){
             $idProjet = htmlentities($_POST['idProjet']);
             $libelle = htmlentities($_POST['libelle']);
+            $designation = htmlentities($_POST['designation']);
             //$type = htmlentities($_POST['type']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $codeLivraison = uniqid().date('YmdHis');
@@ -42,8 +43,8 @@
             //create object
             $livraison = 
             new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 'code' => $codeLivraison,
-            'createdBy' => $createdBy, 'created' => $created));
+            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
@@ -75,12 +76,13 @@
             $idFournisseur = htmlentities($_POST['idFournisseur']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $libelle = htmlentities($_POST['libelle']);
+            $designation = htmlentities($_POST['designation']);            
             //$type = htmlentities($_POST['type']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $livraison = 
             new LivraisonIaaza(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
             //add history data to db

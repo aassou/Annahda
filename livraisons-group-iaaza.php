@@ -190,7 +190,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
-                                            <select name="idFournisseur">
+                                            <select name="idFournisseur" required="required">
                                                 <?php foreach($fournisseurs as $fournisseur){ ?>
                                                 <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
                                                 <?php } ?>
@@ -201,10 +201,17 @@
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Non mentionné</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Désignation</label>
+                                        <div class="controls">
+                                            <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -374,6 +381,13 @@
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
+                                            $nomProjet = "Non mentionné";
+                                            if ( $livraison->idProjet() != 0 ) {
+                                                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                                            }
+                                            else {
+                                                $nomProjet = "Non mentionné";
+                                            }
                                             $livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($livraison->idFournisseur());
                                             $totalDetailsLivraisons = 0;
                                             foreach($livraisonsIds as $idl){
@@ -444,7 +458,7 @@
                                                         <label class="control-label">Projet</label>
                                                         <div class="controls">
                                                             <select name="idProjet">
-                                                                <option value="<?= $livraison->idProjet() ?>"><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></option>
+                                                                <option value="<?= $livraison->idProjet() ?>"><?= $nomProjet ?></option>
                                                                 <option disabled="disabled">-----------</option>
                                                                 <?php foreach($projets as $projet){ ?>
                                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
