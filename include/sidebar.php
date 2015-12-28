@@ -36,9 +36,11 @@
 				or $currentPage=="fournisseurs-search.php"
 				or $currentPage=="clients.php"
 				or $currentPage=="employes-projet-search.php"
-				or $currentPage=="contrat-status.php"
 				or $currentPage=="tasks.php"
 				or $currentPage=="bugs.php"
+				or $currentPage=="contrat-status.php"
+				or $currentPage=="operations-status.php"
+				or $currentPage=="status.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
 					<i class="icon-dashboard"></i> 
@@ -105,6 +107,8 @@
                     or $currentPage=="livraisons-group-iaaza.php"
                     or $currentPage=="livraisons-fournisseur-iaaza.php"
                     or $currentPage=="livraisons-details-iaaza.php"
+                    or $currentPage=="reglements-fournisseur.php"
+                    
                     ){
                         $gestionLivraisonClass = "active ";
                     } 
@@ -121,7 +125,9 @@
                         ?>
                         <li <?php if($currentPage=="livraisons-group.php"
                                     or $currentPage=="livraisons-fournisseur.php"
-                                    or $currentPage=="livraisons-details.php"){
+                                    or $currentPage=="livraisons-details.php"
+                                    or $currentPage=="reglements-fournisseur.php"
+                                    ){
                             ?> class="active" <?php } ?> >
                             <a href="livraisons-group.php">Société Annahda</a>
                         </li>

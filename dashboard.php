@@ -177,15 +177,15 @@
 								</div>
 							</div>
 							</a>
-							<a href="contrat-status.php">
+							<a href="status.php">
                             <div class="tile bg-brown">
                                 <div class="corner"></div>
                                 <div class="tile-body">
-                                    <i class="icon-user"></i>
+                                    <i class="icon-bar-chart"></i>
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        État Clients
+                                        Les états
                                     </div>
                                 </div>
                             </div>

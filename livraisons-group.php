@@ -257,9 +257,10 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Projet</label>
+                                        <label class="control-label">Désignation</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Plusieurs Projets</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
@@ -389,8 +390,14 @@
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
-                                                <a href="livraisons-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 200px" class="btn mini">
-                                                    <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
+                                                <div style="width: 200px">
+                                                    <a><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
+                                                </div>    
+                                                <a href="livraisons-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
+                                                    Livraisons
+                                                </a>
+                                                <a href="reglements-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn green mini">
+                                                    Réglements
                                                 </a>
                                             </td>
                                             <td>

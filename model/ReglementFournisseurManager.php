@@ -29,13 +29,14 @@ class ReglementFournisseurManager{
     public function update(ReglementFournisseur $reglementFournisseur){
         $query = $this->_db->prepare(
         'UPDATE t_reglement_fournisseur SET dateReglement=:dateReglement, idFournisseur=:idFournisseur,
-        idProjet=:idProjet, montant=:montant, modePaiement=:modePaiement, updated=:updated, 
+        idProjet=:idProjet, montant=:montant, modePaiement=:modePaiement, numeroCheque=:numeroCheque, updated=:updated, 
         updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $reglementFournisseur->id());
         $query->bindValue(':dateReglement', $reglementFournisseur->dateReglement());
         $query->bindValue(':montant', $reglementFournisseur->montant());
 		$query->bindValue(':modePaiement', $reglementFournisseur->modePaiement());
+        $query->bindValue(':numeroCheque', $reglementFournisseur->numeroCheque());
 		$query->bindValue(':idProjet', $reglementFournisseur->idProjet());
         $query->bindValue(':idFournisseur', $reglementFournisseur->idFournisseur());
         $query->bindValue(':updated', $reglementFournisseur->updated());

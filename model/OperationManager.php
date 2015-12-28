@@ -11,8 +11,8 @@ class OperationManager{
     //CRUD operations
     public function add(Operation $operation){
         $query = $this->_db->prepare(
-        'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, montant, modePaiement, idContrat, numeroCheque, created, createdBy)
-        VALUES (:date, :dateReglement, :compteBancaire, :observation, :montant, :modePaiement,:idContrat, :numeroCheque, :created, :createdBy)') 
+        'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, montant, modePaiement, idContrat, numeroCheque, status, created, createdBy)
+        VALUES (:date, :dateReglement, :compteBancaire, :observation, :montant, :modePaiement,:idContrat, :numeroCheque, :status, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':date', $operation->date());
         $query->bindValue(':dateReglement', $operation->dateReglement());
@@ -21,9 +21,37 @@ class OperationManager{
         $query->bindValue(':montant', $operation->montant());
 		$query->bindValue(':modePaiement', $operation->modePaiement());
         $query->bindValue(':numeroCheque', $operation->numeroCheque());
+        $query->bindValue(':status', $operation->status());
         $query->bindValue(':idContrat', $operation->idContrat());
         $query->bindValue(':created', $operation->created());
         $query->bindValue(':createdBy', $operation->createdBy());
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function validate($idOperation, $status){
+        $query = $this->_db->prepare('UPDATE t_operation SET status=:status WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idOperation);
+        $query->bindValue(':status', $status);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function cancel($idOperation, $status){
+        $query = $this->_db->prepare('UPDATE t_operation SET status=:status WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idOperation);
+        $query->bindValue(':status', $status);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function hide($idOperation, $status){
+        $query = $this->_db->prepare('UPDATE t_operation SET status=:status WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idOperation);
+        $query->bindValue(':status', $status);
         $query->execute();
         $query->closeCursor();
     }
@@ -63,6 +91,16 @@ class OperationManager{
         $query->bindValue(':id', $idOperation);
         $query->execute();
         $query->closeCursor();
+    }
+    
+    public function getOperations(){
+        $operations = array();
+        $query = $this->_db->query('SELECT * FROM t_operation WHERE status<>2 ORDER BY id DESC');
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $operations[] = new Operation($data);
+        }
+        $query->closeCursor();
+        return $operations;
     }
     
     public function getOperationsByIdContrat($idContrat){

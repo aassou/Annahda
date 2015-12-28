@@ -10,6 +10,7 @@ class Operation{
 	private $_modePaiement;
     private $_idContrat;
 	private $_numeroCheque;
+    private $_status;
     private $_created;
     private $_createdBy;
     private $_updated;
@@ -69,6 +70,10 @@ class Operation{
         $this->_numeroCheque = $numeroCheque;
     }
     
+    public function setStatus($status){
+        $this->_status = $status;
+    }
+    
     public function setCreated($created){
         $this->_created = $created;
     }
@@ -121,6 +126,10 @@ class Operation{
 	
 	public function numeroCheque(){
         return $this->_numeroCheque;
+    }
+    
+    public function status(){
+        return $this->_status;
     }
     
     public function created(){

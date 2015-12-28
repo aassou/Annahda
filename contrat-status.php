@@ -138,7 +138,13 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>État des contrats clients</a>
+                                <i class="icon-bar-chart"></i>
+                                <a href="status.php">Les états</a> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <i class="icon-group"></i>
+                                <a>États des contrats clients</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

@@ -38,11 +38,12 @@
             $dateReglement = htmlentities($_POST['dateReglement']);
             $compteBancaire = htmlentities($_POST['compteBancaire']);
             $observation = htmlentities($_POST['observation']);
+            $status = 0;
             $idContrat = htmlentities($_POST['idContrat']);
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $operation = 
-            new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 
+            new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
             'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 
             'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
             'createdBy' => $createdBy, 'created' => $created));
@@ -57,11 +58,11 @@
             ));
             //add it to db
             $historyManager->add($history);
-            $actionMessage = "<strong>Opération Valide</strong> : Réglement Ajouté avec succès.";
+            $actionMessage = "<strong>Opération Valide</strong> : Paiement Ajouté avec succès.";
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "<strong>Erreur Ajout Réglement Client</strong> : Vous devez remplir les champs <strong>Montant</strong> et <strong>Numéro Opération</strong>.";
+            $actionMessage = "<strong>Erreur Ajout Paiement Client</strong> : Vous devez remplir les champs <strong>Montant</strong> et <strong>Numéro Opération</strong>.";
             $typeMessage = "error";
         }
     }
@@ -95,13 +96,67 @@
             ));
             //add it to db
             $historyManager->add($history);
-            $actionMessage = "<strong>Opération Valide</strong> : Réglement Client Modifié avec succès.";
+            $actionMessage = "<strong>Opération Valide</strong> : Paiement Client Modifié avec succès.";
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "<strong>Erreur Modification Réglement Client</strong> : Vous devez remplir les champs <strong>Montant</strong> et <strong>Numéro Opération</strong>.";
+            $actionMessage = "<strong>Erreur Modification Paiement Client</strong> : Vous devez remplir les champs <strong>Montant</strong> et <strong>Numéro Opération</strong>.";
             $typeMessage = "error";
         }
+    }
+    else if($action=="validate"){
+        $idOperation = $_POST['idOperation'];
+        $operationManager->validate($idOperation, 1);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Validation",
+            'target' => "Table des paiements clients",
+            'description' => "Validation de paiement client",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "<strong>Opération Valide</strong> : Paiement client validé avec succès.";
+        $typeMessage = "success";
+    }
+    else if($action=="cancel"){
+        $idOperation = $_POST['idOperation'];
+        $operationManager->cancel($idOperation, 0);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Annulation",
+            'target' => "Table des paiements clients",
+            'description' => "Annulation de paiement client",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "<strong>Opération Valide</strong> : Paiement client annulé avec succès.";
+        $typeMessage = "success";
+    }
+    else if($action=="hide"){
+        $idOperation = $_POST['idOperation'];
+        $operationManager->hide($idOperation, 2);
+        //add History data
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Retirage",
+            'target' => "Table des paiements clients",
+            'description' => "Retirage de paiement client de la page des états des paiements",
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "<strong>Opération Valide</strong> : Paiement retiré  avec succès.";
+        $typeMessage = "success";
     }
     else if($action=="delete"){
         $idOperation = $_POST['idOperation'];
@@ -118,7 +173,7 @@
         ));
         //add it to db
         $historyManager->add($history);
-        $actionMessage = "<strong>Opération Valide</strong> : Réglement Client Supprimé avec succès.";
+        $actionMessage = "<strong>Opération Valide</strong> : Paiement Client Supprimé avec succès.";
         $typeMessage = "success";
     }
     
@@ -126,6 +181,9 @@
     if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
         $codeContrat = htmlentities($_POST['codeContrat']);
         $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."#detailsReglements";   
+    }
+    else if ( isset($_POST['source']) and $_POST['source'] == "operations-status" ) {
+        $redirectLink = "Location:../operations-status.php";
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "contrats-list" ) {
         $idProjet = htmlentities($_POST['idProjet']);
