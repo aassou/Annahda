@@ -401,7 +401,7 @@
                                                     <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
                                                 </a-->
                                                 <div style="width: 200px">
-                                                    <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" ><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
+                                                    <a><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
                                                 </div>    
                                                 <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
                                                     Livraisons
