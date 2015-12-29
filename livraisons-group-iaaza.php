@@ -257,9 +257,10 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Projet</label>
+                                        <label class="control-label">Désignation</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Plusieurs Projets</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
@@ -396,8 +397,17 @@
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
-                                                <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 200px" class="btn mini">
+                                                <!--a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 200px" class="btn mini">
                                                     <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
+                                                </a-->
+                                                <div style="width: 200px">
+                                                    <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" ><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
+                                                </div>    
+                                                <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
+                                                    Livraisons
+                                                </a>
+                                                <a href="reglements-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn green mini">
+                                                    Réglements
                                                 </a>
                                             </td>
                                             <td>
@@ -410,87 +420,6 @@
                                                 <?= number_format( $totalDetailsLivraisons-$reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
                                             </td>
                                         </tr>
-                                        <!-- add file box begin-->
-                                        <div id="addPieces<?= $livraison->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Ajouter des pièces pour cette livraison</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LivraisonPiecesAddController.php" method="post" enctype="multipart/form-data">
-                                                    <p>Êtes-vous sûr de vouloir ajouter des pièces pour cette livraison ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Nom Pièce</label>
-                                                        <input type="text" name="nom" />
-                                                        <label class="right-label">Lien</label>
-                                                        <input type="file" name="url" />
-                                                        <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
-                                                        <label class="right-label"></label>
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- add files box end -->
-                                        <!-- updateLivraison box begin-->
-                                        <div id="updateLivraison<?= $livraison->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Modifier les informations de la livraison </h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir modifier la livraison <strong>N°<?= $livraison->id() ?></strong>  ?</p>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Fournisseur</label>
-                                                        <div class="controls">
-                                                            <select name="idFournisseur">
-                                                                <option value="<?= $livraison->idFournisseur() ?>"><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></option>
-                                                                <option disabled="disabled">-----------</option>
-                                                                <?php foreach($fournisseurs as $fournisseur){ ?>
-                                                                <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Projet</label>
-                                                        <div class="controls">
-                                                            <select name="idProjet">
-                                                                <option value="<?= $livraison->idProjet() ?>"><?= $nomProjet ?></option>
-                                                                <option disabled="disabled">-----------</option>
-                                                                <?php foreach($projets as $projet){ ?>
-                                                                <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Date Livraison</label>
-                                                        <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                                            <input name="dateLivraison" id="dateLivraison" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $livraison->dateLivraison() ?>" />
-                                                            <span class="add-on"><i class="icon-calendar"></i></span>
-                                                         </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">N° BL</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="libelle" value="<?= $livraison->libelle() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <div class="controls">  
-                                                            <input type="hidden" name="action" value="update" />
-                                                            <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
-                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- updateLivraison box end --> 
                                         <?php
                                         }//end of loop
                                         }//end of if

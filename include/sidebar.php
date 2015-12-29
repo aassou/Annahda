@@ -108,6 +108,7 @@
                     or $currentPage=="livraisons-fournisseur-iaaza.php"
                     or $currentPage=="livraisons-details-iaaza.php"
                     or $currentPage=="reglements-fournisseur.php"
+                    or $currentPage=="reglements-fournisseur-iaaza.php"
                     
                     ){
                         $gestionLivraisonClass = "active ";
@@ -137,6 +138,7 @@
                         <li <?php if($currentPage=="livraisons-group-iaaza.php"
                                     or $currentPage=="livraisons-fournisseur-iaaza.php"
                                     or $currentPage=="livraisons-details-iaaza.php"
+                                    or $currentPage=="reglements-fournisseur-iaaza.php"
                                     ){?> class="active" <?php } ?> >
                             <a href="livraisons-group-iaaza.php">Société Iaaza</a>
                         </li>

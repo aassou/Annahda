@@ -142,13 +142,20 @@ ob_start();
             <th style="width: 20%">Total</th>
         </tr>
         <?php
-        foreach($livraisons as $livraison){
+        foreach( $livraisons as $livraison ) {
+            $nomProjet = "";
+            if ( $livraison->idProjet() == 0 ) {
+                $nomProjet = "Non mentionné";
+            }
+            else {
+                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+            }
         ?>      
         <tr>
             <td><?= $livraison->libelle() ?></td>
             <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())); ?></td>
             <td><?= $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id()) ?></td>
-            <td><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></td>
+            <td><?= $nomProjet ?></td>
             <td><?= number_format( $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' '); ?></td>
         </tr>   
         <?php
@@ -183,13 +190,20 @@ ob_start();
             <th>Montant</th>
         </tr>
         <?php
-        foreach($reglements as $reglement){
+        foreach( $reglements as $reglement ) {
+            $designation = "";
+            if ( $reglement->idProjet() == 0 ) {
+                $designation = "Plusieurs Projets";    
+            }
+            else {
+                $designation = $projetManager->getProjetById($reglement->idProjet())->nom();
+            }
         ?>      
         <tr>
             <td style="width: 20%"><?= $reglement->numeroCheque() ?></td>
             <td style="width: 20%"><?= date('d/m/Y', strtotime($reglement->dateReglement())); ?></td>
             <td style="width: 20%"><?= $reglement->modePaiement() ?></td>
-            <td style="width: 20%"><?= $projetManager->getProjetById($reglement->idProjet())->nom() ?></td>
+            <td style="width: 20%"><?= $designation ?></td>
             <td style="width: 20%"><?= number_format( $reglement->montant(), 2, ',', ' '); ?></td>          
         </tr>   
         <?php

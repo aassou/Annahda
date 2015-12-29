@@ -68,6 +68,10 @@
             if( $_POST['source'] == 'livraisons-group' ) {
                 $redirectLink = "Location:../livraisons-group-iaaza.php";   
             }
+            else if( $_POST['source'] == 'reglements-fournisseur' ) {
+                $idFournisseur = htmlentities($_POST['idFournisseur']);
+                $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;   
+            }
             else if( $_POST['source'] == 'livraisons-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
                 $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;   
@@ -76,8 +80,8 @@
     }
     else if($action == "update"){
         $idReglement = htmlentities($_POST['idReglement']);
+        $idFournisseur = htmlentities($_POST['idFournisseur']);
         if( !empty($_POST['montant']) ) {
-            $idFournisseur = htmlentities($_POST['idFournisseur']);
             $idProjet = htmlentities($_POST['idProjet']);
             $dateReglement = htmlentities($_POST['dateReglement']);
             $montant = htmlentities($_POST['montant']);
@@ -111,10 +115,11 @@
             $actionMessage = "<strong>Erreur Modification Réglement</strong> : Vous devez remplir les champs <strong>Montant</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../reglements.php";
+        $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
     }
     else if($action=="delete"){
         $idReglement = $_POST['idReglement'];
+        $idFournisseur = $_POST['idFournisseur'];
         $reglement = $reglementManager->getReglementFournisseurById($idReglement);
         $nomFournisseur = $fournisseurManager->getFournisseurById($reglement->idFournisseur())->nom();
         $reglementManager->delete($idReglement);
@@ -132,7 +137,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Réglement Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../reglements.php";
+        $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
     }
     
     $_SESSION['reglement-action-message'] = $actionMessage;
