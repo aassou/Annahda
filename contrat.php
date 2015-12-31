@@ -28,10 +28,13 @@
         $compteBancaireManager = new CompteBancaireManager($pdo);
         $contratCasLibreManager = new ContratCasLibreManager($pdo);
         $reglementPrevuManager = new ReglementPrevuManager($pdo);
+        $companieManager = new CompanyManager($pdo);
+        
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
             $comptesBancaires = $compteBancaireManager->getCompteBancaires();
 			$contrat = $contratManager->getContratByCode($codeContrat);
+            $companies = $companieManager->getCompanys();
             //ContratCasLibre Elements
             $contratCasLibreNumber = 
             $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
@@ -176,10 +179,73 @@
 						 }
 	                     ?>
 	                    <h3>Résumé du Contrat&nbsp;&nbsp;
-	                    	<a class="btn blue pull-right" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
+	                    	<a class="btn blue" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
+	                    	<a class="btn green pull-right" href="#printContratArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+	                    	<!--a class="btn green pull-right" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>"-->
+                                <i class="icon-print"></i>&nbsp;Imprimer Contrat
+                            </a>
 	                    </h3>
+	                    <!-- printContratArabe box begin-->
+                        <div id="printContratArabe<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Imprimer Contrat Client</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal loginFrm" action="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">الشركة</label>
+                                        <div class="controls">
+                                            <select name="nomSociete">
+                                                <?php
+                                                foreach ( $companies as $company ) {
+                                                ?>
+                                                <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">الواجهة</label>
+                                        <div class="controls">
+                                            <input type="text" required="required" id="facade" name="facade" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">وضعية الشقة/المحل التجاري</label>
+                                        <div class="controls">
+                                            <select name="etatBien">
+                                                <option value="GrosOeuvre">الأشغال الأساسية للبناء</option>
+                                                <option value="Finition">الأشغال النهائية للبناء</option>
+                                            </select>    
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">المبلغ المدفوع مسبقا بالحروف</label>
+                                        <div class="controls">
+                                            <input type="text" required="required" id="avanceLettresArabe" name="avanceLettresArabe" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">مبلغ البيع بالحروف</label>
+                                        <div class="controls">
+                                            <input type="text" required="required" id="prixLettresArabe" name="prixLettresArabe" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                        <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- printContratArabe box end -->
 	                    <h4 style="text-align: center">Avancement du contrat</h4>
 	                    <div class="progress <?= $statusBar ?>">
     						<div class="bar" style="width: <?= $statistiquesResult ?>%;"><?= $statistiquesResult ?>%</div>

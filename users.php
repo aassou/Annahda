@@ -166,6 +166,7 @@
                                              	<select name="profil" class="m-wrap">
                                              		<option value="user">Utilisateur</option>
                                              		<option value="admin">Administrateur</option>
+                                             		<option value="consultant">Consultant</option>
                                              	</select>   
                                              </div>
                                           </div>
@@ -247,20 +248,11 @@
 														<label class="right-label">Profil</label>
 														<div class="controls">
 			                                             	<select name="profil" class="m-wrap">
-			                                             		<?php 
-			                                             		$adminSelected = "";
-																$userSelected = "";
-			                                             		if($user->profil()=="admin"){
-			                                             			$adminSelected = "selected";
-																	$userSelected = "";	
-			                                             		}
-			                                             		if($user->profil()=="user"){
-			                                             			$adminSelected = "";
-																	$userSelected = "selected";
-			                                             		}
-			                                             		?>
-			                                             		<option <?= $userSelected ?> value="user">Simple utilisateur</option>
-			                                             		<option <?= $adminSelected ?> value="admin">Administrateur</option>
+			                                             		<option value="<?= $user->profil() ?>"><?= ucfirst($user->profil()) ?></option>
+			                                             		<option disabled="disabled">-----------------</option>
+			                                             		<option value="user">Utilisateur</option>
+			                                             		<option value="admin">Administrateur</option>
+                                                                <option value="consultant">Consultant</option>
 			                                             	</select>   
 			                                             </div>
 														<input type="hidden" name="idUser" value="<?= $user->id() ?>" />

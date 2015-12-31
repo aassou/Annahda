@@ -35,8 +35,8 @@ class TerrainManager{
 		$query->bindValue(':fraisAchat', $terrain->fraisAchat());
 		$query->bindValue(':superficie', $terrain->superficie());
 		$query->bindValue(':emplacement', $terrain->emplacement());
-        $query->bindValue(':updated', $appartement->updated());
-        $query->bindValue(':updatedBy', $appartement->updatedBy());
+        $query->bindValue(':updated', $terrain->updated());
+        $query->bindValue(':updatedBy', $terrain->updatedBy());
         $query->execute();
         $query->closeCursor();
 	}

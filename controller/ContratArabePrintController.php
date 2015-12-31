@@ -30,6 +30,7 @@
     $client = $clientManager->getClientById($contrat->idClient());
     $projet = $projetManager->getProjetById($contrat->idProjet());
 
+    $titreProjet = $projet->titre();
     $contratTitle = "";
     $bien = "";
     $typeBien = "";
@@ -131,7 +132,7 @@ $pdf->SetFont('aealarabiya', '', 14);
 $htmlcontent = '<strong>'.'الطرف الأول'.'</strong>'.' : '.$company->nomArabe().'، في شخص ممثلها القانوني, و الكائن مقرها الاجتماعي '.$company->adresseArabe().'.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'الطرف الثاني'.'</strong>'.': السيد(ة) ،'.$client->nomArabe().' '.'المغربي (ة)، الراشد(ة)، ، الحامل (ة)،  لرقم البطاقة الوطنية رقم'.$client->cin().' '.'،  العنوان و الموطن المختار و المحدد هو,';
+$htmlcontent = '<strong>'.'الطرف الثاني'.'</strong>'.': السيد(ة) ،'.$client->nomArabe().' '.'المغربي (ة)، الراشد(ة)، ، الحامل (ة)،  لرقم البطاقة الوطنية رقم'.$client->cin().' '.'،  العنوان و الموطن المختار و المحدد هو,'.$client->adresseArabe().'.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->SetFont('aealarabiya', '', 18);
 $pdf->Cell(0, 12, 'نص العقد',0,1,'C');
@@ -176,7 +177,7 @@ $pdf->Ln();
     $htmlcontent = '5.وضعية ال'.$typeBien.' وفق الاتفاق  : تسليم ال'.$typeBien.' في وضعية '.$etatBien.'.';
     $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
     //Detail 6:
-    $htmlcontent = '6.الرسم العقاري الأم : ';
+    $htmlcontent = '6.الرسم العقاري الأم : '.$titreProjet;
     $htmlcontent .= '</div>';
     $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();

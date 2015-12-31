@@ -149,7 +149,15 @@
                                         ?>
                                         <tr class="odd gradeX">
                                             <!--td><input type="checkbox" class="checkboxes" value="1" /></td-->
-                                            <td><a href="#update<?= $client->id() ?>" data-toggle="modal" data-id="<?= $client->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a></td>
+                                            <td>
+                                                <?php
+                                                if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
+                                                ?>
+                                                <a href="#update<?= $client->id() ?>" data-toggle="modal" data-id="<?= $client->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
+                                                <?php  
+                                                }
+                                                ?>
+                                            </td>    
                                             <td><?= $client->nom() ?></td>
                                             <td class="hidden-480"><?= $client->cin() ?></td>
                                             <td class="hidden-480"><?= $client->nomArabe() ?></td>

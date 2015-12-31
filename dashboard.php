@@ -93,7 +93,11 @@
 				</div>
 				<!--      BEGIN TILES      -->
 				<?php
-                if ( $_SESSION['userMerlaTrav']->profil() == "admin" || $_SESSION['userMerlaTrav']->profil() == "user" ) {
+                if ( 
+                    $_SESSION['userMerlaTrav']->profil() == "admin" 
+                    || $_SESSION['userMerlaTrav']->profil() == "user" 
+                    || $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                ) {
                 ?>
 				<div class="row-fluid">
 					<div class="span12">
@@ -114,7 +118,10 @@
                             </div>
                             </a>
                             <?php
-                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" 
+                                || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                            ) {
                             ?>
 						    <a href="caisse.php">
                             <div class="tile bg-purple">
@@ -147,7 +154,10 @@
                             </div>
                             </a>
                             <?php
-                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" 
+                                || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                            ) {
                             ?>
                             <a href="livraisons-group.php">
                             <div class="tile bg-cyan">
@@ -190,6 +200,14 @@
                                 </div>
                             </div>
                             </a>
+                            <?php
+                            }
+                            ?>
+                            <?php
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" 
+                            ) {
+                            ?>
 							<a href="compte-bancaire.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
@@ -229,7 +247,10 @@
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
 				<?php
-                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                if ( 
+                    $_SESSION['userMerlaTrav']->profil() == "admin" 
+                    || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                ) {
                 ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
@@ -293,7 +314,10 @@
 				<!-- BEGIN DASHBOARD FEEDS -->
 				<!-- ------------------------------------------------------ -->
 				<?php
-                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                if ( 
+                    $_SESSION['userMerlaTrav']->profil() == "admin" 
+                    || $_SESSION['userMerlaTrav']->profil() == "consultant"    
+                ) {
                 ?>
 				<div class="row-fluid">
 				<div class="span12">

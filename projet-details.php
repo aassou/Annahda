@@ -114,7 +114,10 @@
                                     </div>
                                     <div class="portfolio-info">
                                         <?php
-                                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                        if ( 
+                                            $_SESSION['userMerlaTrav']->profil()=="admin" 
+                                            || $_SESSION['userMerlaTrav']->profil()=="consultant" 
+                                        ) {
                                         ?>
                                         <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
                                         <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>

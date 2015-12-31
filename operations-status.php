@@ -153,17 +153,11 @@
                                  unset($_SESSION['operation-action-message']);
                                  unset($_SESSION['operation-type-message']);
                                 ?>
-                                <?php
-                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <!--div class="btn-group">
                                     <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
                                         Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>
                                     </a>
                                 </div-->
-                                <?php
-                                }
-                                ?>
                                 <!--div class="btn-group pull-right">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                     </button>
@@ -192,21 +186,29 @@
                                     <?php
                                     foreach($operations as $operation){
                                         $status = "";
-                                        $hide = "";
+                                        $action = "";
                                         if ( $operation->status() == 0 ) {
-                                            $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';
-                                            $hide = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';  
+                                            } 
+                                            else{
+                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
+                                            } 
                                         } 
                                         else if ( $operation->status() == 1 ) {
-                                            $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
-                                            $hide = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   
+                                            }
+                                            else {
+                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            }
                                         }
                                     ?>      
                                     <tr class="odd gradeX">
-                                        <td>
-                                            <!--a class="btn green mini" href="#hideOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-off"></i></a-->
-                                            <?= $hide ?>    
-                                        </td>
+                                        <td><?= $action ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
                                         <td><?= $operation->modePaiement() ?></td>

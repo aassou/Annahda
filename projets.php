@@ -13,7 +13,7 @@
     include ('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav'])){
+    if ( isset($_SESSION['userMerlaTrav']) ) {
         //les sources
         $projetsManager = new ProjetManager($pdo);
         $projetNumber = $projetsManager->getProjetsNumber();
@@ -105,12 +105,18 @@
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="tab-pane" id="tab_1_4">
                             <div class="row-fluid add-portfolio">
-                                <div class="pull-left">
+                                <div class="pull-left get-down">
                                     <span><?= $projetNumber ?> Projets en Total</span>
                                 </div>
+                                <?php
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
                                 <div class="pull-right">
                                     <a href="#addProjet" class="btn icn-only green" data-toggle="modal">Ajouter Nouveau Projet <i class="icon-plus-sign m-icon-white"></i></a>                                  
                                 </div>
+                                <?php  
+                                }
+                                ?>
                             </div>
                             <!-- addProjet box begin-->
                             <div id="addProjet" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -190,7 +196,13 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="projet-details.php?idProjet=<?= $projet->id() ?>">Gestion du projet</a></li>
+                                        <?php
+                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                        ?>
                                         <li><a href="#updateProjet<?= $projet->id() ?>" data-toggle="modal" data-id="<?= $projet->id(); ?>">Modifier</a></li>
+                                        <?php
+                                        }
+                                        ?>
                                     </ul>
                                 </div>
                             </div>

@@ -219,6 +219,15 @@
                                             else if($element->status()==1){
                                                 $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
                                             }*/
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementPrevuEnRetards'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini red blink_me">En retard</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -226,7 +235,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><a href="#updateStatusReglementPrevuEnRetards<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini red blink_me">En retard</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuEnRetards box begin-->
                                         <div id="updateStatusReglementPrevuEnRetards<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -287,6 +296,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementCasLibreEnRetards'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini red blink_me">En retard</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -294,7 +312,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
-                                            <td><a href="#updateStatusReglementCasLibreEnRetards<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini red blink_me">En retard</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreEnRetards box begin-->
                                         <div id="updateStatusReglementCasLibreEnRetards<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -370,6 +388,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementPrevuToday'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini purple blink_me">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini purple blink_me">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -377,7 +404,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><a href="#updateStatusReglementPrevuToday<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini purple blink_me">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -438,6 +465,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementCasLibreToday'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini purple blink_me">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini purple blink_me">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -445,7 +481,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
-                                            <td><a href="#updateStatusReglementCasLibreToday<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini purple blink_me">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreToday box begin-->
                                         <div id="updateStatusReglementCasLibreToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -521,6 +557,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementPrevuWeek'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini green">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini green">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -528,7 +573,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><a href="#updateStatusReglementPrevuWeek<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini green">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -589,6 +634,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementCasLibreWeek'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini green">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini green">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -596,7 +650,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
-                                            <td><a href="#updateStatusReglementCasLibreWeek<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini green">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreWeek box begin-->
                                         <div id="updateStatusReglementCasLibreWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -672,6 +726,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementPrevuMonth'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini blue">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -679,7 +742,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><a href="#updateStatusReglementPrevuMonth<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini blue">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -740,6 +803,15 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
+                                            //activate the update link only for admin's profil
+                                            $link = "";
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $link = '#updateStatusReglementCasLibreMonth'.$element->id();
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">En cours</a>';
+                                            }
+                                            else {
+                                                $link = '<a class="btn mini blue">En cours</a>';
+                                            }
                                         ?>
                                         <tr>
                                             <td><?= $client->nom() ?></td>
@@ -747,7 +819,7 @@
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
-                                            <td><a href="#updateStatusReglementCasLibreMonth<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini blue">En cours</a></td>
+                                            <td><?= $link ?></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreMonth box begin-->
                                         <div id="updateStatusReglementCasLibreMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

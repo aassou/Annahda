@@ -322,8 +322,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <input type="hidden" name="action" value="desister" />
-                                                        <input type="hidden" name="source" value="contrats-list" />
                                                         <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
