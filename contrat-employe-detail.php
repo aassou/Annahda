@@ -13,7 +13,8 @@
     include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if( isset($_SESSION['userMerlaTrav']) 
+    and ( $_SESSION['userMerlaTrav']->profil()=="admin" OR $_SESSION['userMerlaTrav']->profil()=="consultant" ) ){
         //les sources
         $idProjet = 0;
         $projetManager = new ProjetManager($pdo);
@@ -170,12 +171,18 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
+                                    <?php
+                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                    ?>
                                     <div class="btn-group pull-left">
                                         <a href="#addPaiement" data-toggle="modal" class="btn icn-only green">
                                             Nouveau Paiement 
                                             <i class="icon-plus-sign"></i>
                                         </a>
                                     </div>
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="btn-group pull-right">
                                         <a href="controller/ContratDetailsPrintController.php?idContratEmploye=<?= $contratEmploye->id() ?>&idProjet=<?= $projet->id() ?>" class="btn icn-only blue">
                                             <i class="icon-print"></i> 
@@ -225,12 +232,18 @@
                                                             <a target="_blank" href="controller/PaiementEmployePrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat
                                                             </a>
+                                                            <?php
+                                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                            ?>
                                                             <a href="#updateContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                                 Modifier
                                                             </a>
                                                             <a href="#deleteContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                                 Supprimer
                                                             </a>
+                                                            <?php
+                                                            }
+                                                            ?>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -409,9 +422,6 @@
 <!-- END BODY -->
 </html>
 <?php
-}
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-    header('Location:dashboard.php');
 }
 else{
     header('Location:index.php');    

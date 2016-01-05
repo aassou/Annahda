@@ -13,7 +13,8 @@
     include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil() == "admin" ){
+    if(isset($_SESSION['userMerlaTrav']) 
+    and ($_SESSION['userMerlaTrav']->profil() == "admin" OR $_SESSION['userMerlaTrav']->profil() == "consultant") ){
         //classManagers
         $projetManager = new ProjetManager($pdo);
         $chargeManager = new ChargeManager($pdo);
@@ -193,12 +194,18 @@
                                 <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
+                                <?php 
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
                                 <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
                                     Type Charge <i class="icon-plus-sign "></i>
                                 </a>
                                 <a href="#addCharge" data-toggle="modal" class="btn green pull-right stay-away">
                                     Nouvelle Charge <i class="icon-plus-sign "></i>
                                 </a>
+                                <?php 
+                                }
+                                ?>
                             </div>
                         </div>
                         <!-- printCharge box begin-->

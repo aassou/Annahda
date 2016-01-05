@@ -118,10 +118,16 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
+					    <?php
+                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                        ?>
 						<div class="get-down">
 						    <input class="pull-left m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
                             <a href="#addLocaux" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
                         </div>
+                        <?php
+                        }
+                        ?>
                         <!-- addLocaux box begin-->
                         <div id="addLocaux" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -232,6 +238,9 @@
 												    	<?= $locau->nom() ?> 
 												        <i class="icon-angle-down"></i>
 												    </a>
+												    <?php
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+												    ?>
 												    <ul class="dropdown-menu">
 												        <li>
 												        	<a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
@@ -248,6 +257,9 @@
 															</a>
 												        </li>
 												    </ul>
+												    <?php
+                                                    }    
+                                                    ?>
 												</div>
 											</td>
 											<td><?= $locau->superficie() ?></td>
@@ -259,16 +271,37 @@
 											</td>
 											<td>
 												<?php
-												if($locau->status()=="R&eacute;serv&eacute;"){ ?>
+												if($locau->status()=="R&eacute;serv&eacute;"){ 
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+												?>
 													<a class="btn mini red" href="#changeToDisponible<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Réservé
 													</a>
-												<?php } ?>
-												<?php if($locau->status()=="Disponible"){ ?>
+												<?php 
+                                                    }
+                                                    else{
+                                                ?>
+                                                    <a class="btn mini red" >Réservé</a>
+                                                <?php        
+                                                    }
+                                                } 
+                                                ?>
+												<?php 
+												if($locau->status()=="Disponible"){ 
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
+												?>
 													<a class="btn mini green" href="#changeToReserve<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Disponible
 													</a>
-												<?php } ?>
+												<?php 
+                                                    }
+                                                    else{
+                                                ?>
+                                                    <a class="btn mini green">Disponible</a>
+                                                <?php
+                                                    }
+                                                }         
+                                                ?>
 												<?php if($locau->status()=="Vendu"){ ?>
 													<a class="btn mini blue">Vendu</a>
 												<?php } ?>
@@ -276,11 +309,20 @@
 											<td>
 												<?php
 												if( $locau->status() == "R&eacute;serv&eacute;" ){
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
 												?>
 												<a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 													Pour : <?= $locau->par() ?>
 												</a>
 												<?php
+                                                    }
+                                                    else{
+                                                ?>
+                                                    <a>
+                                                        Pour : <?= $locau->par() ?>
+                                                    </a>    
+                                                <?php        
+                                                    }
 												}
                                                 elseif( $locau->status() == "Vendu" ){
                                                 ?>

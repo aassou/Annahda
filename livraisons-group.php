@@ -108,9 +108,13 @@
                 <!-- END PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <?php
+                        if ( 
+                            $_SESSION['userMerlaTrav']->profil() == "admin" 
+                            || $_SESSION['userMerlaTrav']->profil() == "user") {
+                        ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
-                                <!--a href="livraison-add.php" class="btn icn-only blue"-->
                                 <?php
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
@@ -130,6 +134,9 @@
                                 </a>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
                         <!-- addFournisseur box begin-->
                         <div id="addFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">

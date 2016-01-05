@@ -370,7 +370,13 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <th style="width: 10%">Actions</th>
+                                            <?php
+                                            }
+                                            ?>
                                             <th style="width: 15%">Montant</th>
                                             <th style="width: 20%">Désignation</th>
                                             <th style="width: 15%">Date Réglement</th>
@@ -393,6 +399,9 @@
                                             }
                                         ?>      
                                         <tr class="livraisons">
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td>                                                            
                                                 <a class="btn mini green" href="#updateReglement<?= $reglement->id();?>" data-toggle="modal" data-id="<?= $reglement->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>
@@ -401,6 +410,9 @@
                                                     <i class="icon-remove"></i>
                                                 </a>
                                             </td>
+                                            <?php
+                                            }
+                                            ?>
                                             <td><?= $reglement->montant() ?></td>
                                             <td><?= $destination ?></td>
                                             <td><?= date('d/m/Y', strtotime($reglement->dateReglement())) ?></td>

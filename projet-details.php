@@ -120,6 +120,12 @@
                                         ) {
                                         ?>
                                         <a href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                        ?>
                                         <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
                                         <?php
                                         }

@@ -173,20 +173,15 @@
                 <!-- END PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <?php
+                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" 
+                            || $_SESSION['userMerlaTrav']->profil() == "user") {
+                        ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
-                                <!--a href="#addFournisseur" data-toggle="modal" class="btn blue">
-                                    Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
-                                </a-->
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <?php  
-                                }
-                                ?>
                             </div>
                             <div class="pull-right">
                                 <a href="#addLivraison" data-toggle="modal" class="btn green">
@@ -194,6 +189,9 @@
                                 </a>
                             </div>
                         </div>
+                        <?php  
+                        }
+                        ?>
                         <!-- addLivraison box begin-->
                         <div id="addLivraison" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -502,13 +500,19 @@
                                             }
                                         ?>      
                                         <tr class="livraisons">
-                                            <td>                                                            
+                                            <td>                             
+                                                <?php
+                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                ?>                               
                                                 <a class="btn mini green" href="#updateLivraison<?= $livraison->id();?>" data-toggle="modal" data-id="<?= $livraison->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>
                                                 </a>
                                                 <a class="btn mini red" href="#deleteLivraison<?= $livraison->id() ?>" data-toggle="modal" data-id="<?= $livraison->id() ?>" title="Supprimer" >
                                                     <i class="icon-remove"></i>
                                                 </a>
+                                                <?php
+                                                }
+                                                ?>
                                                 <a class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>" title="Voir Détail Livraison" >
                                                     <i class="icon-eye-open"></i>
                                                 </a>

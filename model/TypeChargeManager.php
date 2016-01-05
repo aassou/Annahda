@@ -11,7 +11,7 @@ class TypeChargeManager{
 
 	//BAISC CRUD OPERATIONS
 	public function add(TypeCharge $typeCharge){
-    	$query = $this->_db->prepare(' INSERT INTO t_typeCharge (
+    	$query = $this->_db->prepare(' INSERT INTO t_typecharge (
 		nom, created, createdBy)
 		VALUES (:nom, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
@@ -23,7 +23,7 @@ class TypeChargeManager{
 	}
 
 	public function update(TypeCharge $typeCharge){
-    	$query = $this->_db->prepare(' UPDATE t_typeCharge SET 
+    	$query = $this->_db->prepare(' UPDATE t_typecharge SET 
 		nom=:nom, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
@@ -36,7 +36,7 @@ class TypeChargeManager{
 	}
 
 	public function delete($id){
-    	$query = $this->_db->prepare(' DELETE FROM t_typeCharge
+    	$query = $this->_db->prepare(' DELETE FROM t_typecharge
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
@@ -45,7 +45,7 @@ class TypeChargeManager{
 	}
 
 	public function getTypeChargeById($id){
-    	$query = $this->_db->prepare(' SELECT * FROM t_typeCharge
+    	$query = $this->_db->prepare(' SELECT * FROM t_typecharge
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
@@ -67,7 +67,7 @@ class TypeChargeManager{
 
 	public function getTypeChargesByLimits($begin, $end){
 		$typeCharges = array();
-		$query = $this->_db->query('SELECT * FROM t_typeCharge
+		$query = $this->_db->query('SELECT * FROM t_typecharge
 		ORDER BY id DESC LIMIT '.$begin.', '.$end);
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$typeCharges[] = new TypeCharge($data);
@@ -77,7 +77,7 @@ class TypeChargeManager{
 	}
 
 	public function getLastId(){
-    	$query = $this->_db->query(' SELECT id AS last_id FROM t_typeCharge
+    	$query = $this->_db->query(' SELECT id AS last_id FROM t_typecharge
 		ORDER BY id DESC LIMIT 0, 1');
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$id = $data['last_id'];

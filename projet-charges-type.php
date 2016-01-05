@@ -13,7 +13,8 @@
     include('lib/pagination.php');
     //classes loading end
     session_start();
-    if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
+    if( isset($_SESSION['userMerlaTrav']) 
+    and ( $_SESSION['userMerlaTrav']->profil() == "admin" OR $_SESSION['userMerlaTrav']->profil()=="consultant") ){
         //classManagers
         $projetManager = new ProjetManager($pdo);
         $chargeManager = new ChargeManager($pdo);
@@ -203,12 +204,18 @@
                                 <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
+                                <?php 
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
                                 <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
                                     Type Charge <i class="icon-plus-sign "></i>
                                 </a>
                                 <a href="#addCharge" data-toggle="modal" class="btn green pull-right stay-away">
                                     Nouvelle Charge <i class="icon-plus-sign "></i>
                                 </a>
+                                <?php 
+                                }
+                                ?>
                             </div>
                         </div>
                         <!-- printCharge box begin-->
@@ -309,7 +316,13 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
+                                            ?>
                                             <th style="width: 10%"></th>
+                                            <?php
+                                            } 
+                                            ?>
                                             <th style="width: 10%">Type</th>
                                             <th style="width: 20%">Date Opération</th>
                                             <th style="width: 20%">Désignation</th>
@@ -322,10 +335,16 @@
                                         foreach($charges as $charge){
                                         ?>      
                                         <tr class="charges">
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
+                                            ?>
                                             <td>
                                                 <a class="btn mini green" title="Modifier" href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>"><i class="icon-refresh"></i></a>
                                                 <a class="btn mini red" title="Supprimer" href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>"><i class="icon-remove"></i></a>
                                             </td>
+                                            <?php  
+                                            } 
+                                            ?>
                                             <td>
                                                 <?= $charge->type() ?>
                                                 <!--div class="btn-group">

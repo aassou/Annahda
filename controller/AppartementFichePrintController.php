@@ -12,7 +12,7 @@
     include('../config.php');  
     //classes loading end
     session_start();
-    if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
+    if( isset($_SESSION['userMerlaTrav']) ) {
         $clientManager = new ClientManager($pdo);
         $appartementManager = new AppartementManager($pdo);
 		$contratManager = new ContratManager($pdo);
@@ -21,9 +21,9 @@
 		if(isset($_GET['idAppartement']) and $_GET['idAppartement']>0 and $_GET['idAppartement']<=$appartementManager->getLastId()){
 			$idAppartement = $_GET['idAppartement'];
 			$appartement = $appartementManager->getAppartementById($idAppartement);
-	        $contrat = $contratManager->getContratByIdBien($appartement->id());
-	        $client = $clientManager->getClientById($contrat->idClient());
-	        $projet = $projetManager->getProjetById($contrat->idProjet());
+	        //$contrat = $contratManager->getContratByIdBien($appartement->id());
+	        //$client = $clientManager->getClientById($contrat->idClient());
+	        $projet = $projetManager->getProjetById($appartement->idProjet());
 			$piecesAppartementManager = new AppartementPiecesManager($pdo);
 			$pieces = $piecesAppartementManager->getPiecesAppartementByIdAppartement($idAppartement);
 			$piecesNumber = $piecesAppartementManager->getPiecesAppartementNumberByIdAppartement($idAppartement);
@@ -88,14 +88,14 @@ ob_start();
         </tr>
         <tr>
             <td><strong>Prix H.T </strong></td>
-            <td> : <?= $contrat->prixVente() ?>&nbsp;DH</td>
+            <td> : <?= $appartement->prix() ?>&nbsp;DH</td>
         </tr>
     </table>
     <br>
     <?php
     if($piecesNumber>0){
     ?>
-    <img src="<?= "http://www.merlatrav.esy.es/".$image ?>" style="width:100%">
+    <img src="<?= "http://www.immoapp.esy.es/".$image ?>" style="width:100%">
     <?php
     }
     ?>

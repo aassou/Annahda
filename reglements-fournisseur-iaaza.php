@@ -123,22 +123,22 @@
                 <!-- END PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <?php
+                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                        ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
                                 <!--a href="#addFournisseur" data-toggle="modal" class="btn blue">
                                     Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
                                 </a-->
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <?php  
-                                }
-                                ?>
                             </div>
                         </div>
+                        <?php  
+                        }
+                        ?>
                         <!-- addReglement box begin-->
                         <div id="addReglement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -370,7 +370,13 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <?php  
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <th style="width: 10%">Actions</th>
+                                            <?php  
+                                            }
+                                            ?>
                                             <th style="width: 15%">Montant</th>
                                             <th style="width: 20%">Désignation</th>
                                             <th style="width: 15%">Date Réglement</th>
@@ -393,6 +399,9 @@
                                             }
                                         ?>      
                                         <tr class="livraisons">
+                                            <?php  
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td>                                                            
                                                 <a class="btn mini green" href="#updateReglement<?= $reglement->id();?>" data-toggle="modal" data-id="<?= $reglement->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>
@@ -401,6 +410,9 @@
                                                     <i class="icon-remove"></i>
                                                 </a>
                                             </td>
+                                            <?php  
+                                            }
+                                            ?>
                                             <td><?= $reglement->montant() ?></td>
                                             <td><?= $destination ?></td>
                                             <td><?= date('d/m/Y', strtotime($reglement->dateReglement())) ?></td>

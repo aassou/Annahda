@@ -248,12 +248,18 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
+                                    <?php
+                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                    ?>
                                     <div class="btn-group pull-left">
                                         <a class="btn blue" href="#addCaisse" data-toggle="modal">
                                             <i class="icon-plus-sign"></i>
                                              Ajouter
                                         </a>
                                     </div>
+                                    <?php
+                                    }
+                                    ?>
                                     <div class="btn-group pull-right">
                                         <a class="btn green" href="#printCaisseBilan" data-toggle="modal">
                                             <i class="icon-print"></i>
@@ -274,7 +280,13 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <th style="width:10%">Actions</th>
+                                            <?php
+                                            }
+                                            ?>
                                             <th style="width:15%">Date Opération</th>
                                             <!--th style="width:10%">Montant</th-->
                                             <th style="width:10%">Crédit</th>
@@ -288,10 +300,16 @@
                                         foreach($caisses as $caisse){
                                         ?>      
                                         <tr class="odd gradeX">
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td>
                                                 <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
                                                 <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
                                             </td>
+                                            <?php
+                                            }
+                                            ?>
                                             <!--td><?= $caisse->type() ?></td-->
                                             <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
                                             <?php

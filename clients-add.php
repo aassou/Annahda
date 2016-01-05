@@ -294,7 +294,7 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
+else if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil() != "admin"){
 	header('Location:dashboard.php');
 }
 else{

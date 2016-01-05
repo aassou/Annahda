@@ -143,6 +143,12 @@
                             unset($_SESSION['livraison-detail-type-message']);
 						 ?>
 						 <!-- END  ALERT MESSAGES -->
+						<?php
+						$updateLink = "";
+                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            $updateLink = "#updateLivraison";    
+                        }
+                        ?>
 						<div class="portlet">
 							<!-- BEGIN PORTLET BODY -->
 							<div class="portlet-body">
@@ -151,7 +157,7 @@
 								    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                           <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
                                                <strong>N° BL : <?= $livraison->libelle() ?></strong>
                                            </a>
                                          </div>
@@ -160,7 +166,7 @@
                                    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
                                                 <strong>Nombre Articles : <?= $nombreArticle ?></strong>
                                             </a>   
                                          </div>
@@ -169,7 +175,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
                                                 <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
                                             </a>
                                          </div>
@@ -178,7 +184,7 @@
 									<div class="span3">
 									  <div class="control-group">
 										 <div class="controls">
-											<a class="btn" href="#updateLivraison" data-toggle="modal" style="width: 200px">
+											<a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
 											    <strong>Projet : <?= $nomProjet ?></strong>
 										    </a>   
 										 </div>
@@ -249,9 +255,15 @@
 							<a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>&societe=1" class="get-down btn blue pull-right">
                                 <i class="icon-print"></i>&nbsp;Bon de livraison
                             </a>
+                            <?php
+                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            ?>
 							<a class="btn green" href="#addArticle" data-toggle="modal" data-id="">
 								Ajouter un article <i class="icon-plus "></i>
 							</a>
+							<?php
+                            }
+                            ?>
 							<!-- END Ajouter Article Link -->
 							<!-- BEGIN addArticle Box -->
 							<div id="addArticle" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -305,7 +317,13 @@
 							?>
 							<table class="table table-striped table-bordered table-hover">
 							<tr>
+							    <?php
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
 							    <th style="width: 10%">Actions</th>
+							    <?php
+                                }
+                                ?>
 								<th style="width: 20%">Désignation</th>
 								<th style="width: 20%">Quantité</th>
 								<th style="width: 20%">Prix.Uni</th>
@@ -315,6 +333,9 @@
 							foreach($livraisonDetail as $detail){
 							?>
 							<tr>
+							    <?php
+                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                ?>
 							    <td class="hidden-phone">
                                     <a class="btn mini green" href="#updateLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">
                                         <i class="icon-refresh "></i>
@@ -323,6 +344,9 @@
                                         <i class="icon-remove "></i>
                                     </a>
                                 </td>
+                                <?php
+                                }
+                                ?>
 								<td>
 									<?= $detail->designation() ?>
 								</td>

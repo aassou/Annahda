@@ -236,6 +236,9 @@
                             </div>
                             <div class="portlet-body">
                                     <div class="clearfix">
+                                        <?php
+                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                        ?>
                                         <div class="btn-group pull-left">
                                             <a class="btn blue" href="#addEmploye" data-toggle="modal">
                                                 <i class="icon-plus-sign"></i>
@@ -248,6 +251,9 @@
                                                  Nouveau Contrat
                                             </a>
                                         </div>
+                                        <?php
+                                        }
+                                        ?>
                                         <!--div class="btn-group pull-right">
                                             <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                             </button>
@@ -265,7 +271,7 @@
                                                 <th style="width:15%">Employé</th>
                                                 <th style="width:10%">Date</th>
                                                 <th style="width:10%">Prix/Unité</th>
-                                                <th style="width:10%">Nombre Unités</th>
+                                                <th style="width:10%">Nbr.Unités</th>
                                                 <th style="width:15%">Total Paiements</th>
                                                 <th style="width:15%">Total à Payer</th>
                                                 <th style="width:15%">Reste</th>
@@ -277,12 +283,18 @@
                                             ?>
                                             <tr>
                                                 <td>
+                                                    <?php
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                    ?>
                                                     <a class="btn mini red" href="#deleteContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                         <i class="icon-remove"></i>
                                                     </a>
                                                     <a class="btn mini green" href="#updateContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                         <i class="icon-refresh"></i>
                                                     </a>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <a class="btn mini" href="contrat-employe-detail.php?idContratEmploye=<?= $contrat->id() ?>&idProjet=<?= $projet->id() ?>">
                                                         <i class="icon-eye-open"></i>
                                                     </a>

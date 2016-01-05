@@ -529,7 +529,7 @@
                                         foreach ( $reglementPrevuElements as $element ) {
                                             $status = "";    
                                             $totalEcheance += $contrat->echeance();
-                                            if($element->status()==0){
+                                            if ( $element->status() == 0 ) {
                                                 //comparing dates
                                                 $now = date('Y-m-d');
                                                 $now = new DateTime($now);
@@ -538,14 +538,29 @@
                                                 $datePrevu = new DateTime($datePrevu);
                                                 $datePrevu = $datePrevu->format('Ymd');
                                                 if ( $datePrevu > $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">Normal</a>';   
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">Normal</a>';    
+                                                    }
+                                                    else{
+                                                        $status = '<a class="btn mini">Normal</a>';
+                                                    }   
                                                 }
                                                 else if ( $datePrevu < $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retards</a>';
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retards</a>';
+                                                    }
+                                                    else {
+                                                        $status = '<a class="btn mini red blink_me">En retards</a>';
+                                                    }
                                                 }
                                             }
-                                            else if($element->status()==1){
-                                                $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                            else if( $element->status() == 1 ) {
+                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                                }
+                                                else {
+                                                    $status = '<a class="btn mini blue">Réglé</a>';
+                                                }    
                                             }
                                         ?>
                                         <tr>
@@ -626,7 +641,13 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <th style="width: 10%">Actions</th>
+                                            <?php
+                                            }
+                                            ?>
                                             <th style="width: 20%">Date</th>
                                             <th style="width: 20%">Montant</th>
                                             <th style="width: 30%">Obsérvation</th>
@@ -639,7 +660,7 @@
                                         foreach ( $contratCasLibreElements as $element ) {
                                             $status = "";    
                                             $totalMontantsCasLibre += $element->montant();
-                                            if($element->status()==0){
+                                            if ( $element->status() == 0 ) {
                                                 //comparing dates
                                                 $now = date('Y-m-d');
                                                 $now = new DateTime($now);
@@ -648,17 +669,35 @@
                                                 $dateCasLibre = new DateTime($dateCasLibre);
                                                 $dateCasLibre = $dateCasLibre->format('Ymd');
                                                 if ( $dateCasLibre > $now ) {
-                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini green">Normal</a>';   
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini green">Normal</a>';    
+                                                    }   
+                                                    else{
+                                                        $status = '<a class="btn mini green">Normal</a>';
+                                                    }
                                                 }
                                                 else if ( $dateCasLibre < $now ) {
-                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                                    }
+                                                    else {
+                                                        $status = '<a class="btn mini red blink_me">En retard</a>';
+                                                    }    
                                                 }
                                             }
-                                            else if($element->status()==1){
-                                                $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                            else if( $element->status() == 1 ) {
+                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                    $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                                }
+                                                else {
+                                                    $status = '<a class="btn mini blue">Réglé</a>';
+                                                }     
                                             }
                                         ?>
                                         <tr>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td>
                                                 <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" title="Supprimer" class="btn mini red">
                                                     <i class="icon-remove"></i>
@@ -667,6 +706,9 @@
                                                     <i class="icon-refresh"></i>
                                                 </a>
                                             </td>
+                                            <?php
+                                            }
+                                            ?>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
                                             <td><?= $element->observation() ?></td>
@@ -778,14 +820,27 @@
                                             <td></td>
                                             <th>Total des montants</th>
                                             <td></td>
+                                            <?php
+                                            //this is used to the style of table
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td></td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tr>
                                         <tr>
                                             <td></td>
                                             <td></td>
                                             <th><?= number_format($totalMontantsCasLibre, 2, ',', ' ') ?>&nbsp;DH</th>
                                             <td></td>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
                                             <td></td>
+                                            <?php
+                                            }
+                                            ?>
                                         </tr>  
                                     </tbody>
                                 </table>
@@ -844,7 +899,13 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
 								<thead>
 									<tr>
+									    <?php
+									    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+									    ?>
 									    <th style="width: 10%">Actions</th>
+									    <?php
+                                        }
+									    ?>
 										<th style="width: 10%">Date.Opé</th>
 										<th style="width: 10%">Date.Rég</th>
 										<th style="width: 10%">ModePaiement</th>
@@ -861,10 +922,16 @@
 									foreach($operations as $operation){
 									?>		
 									<tr class="odd gradeX">
+									    <?php
+                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                        ?>
 									    <td>
 									        <a class="btn green mini" href="#updateOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-refresh"></i></a>
 									        <a class="btn red mini" href="#deleteOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-remove"></i></a>
 									    </td>
+									    <?php
+                                        }
+                                        ?>
 										<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
 										<td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
 										<td><?= $operation->modePaiement() ?></td>
