@@ -107,6 +107,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="properties-status.php">
+                            <div class="tile bg-green">
+                                <div class="tile-body">
+                                    <i class="icon-home"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Etats Immobilier
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

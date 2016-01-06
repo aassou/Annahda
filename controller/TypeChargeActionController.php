@@ -28,19 +28,25 @@
 	$idProjet = htmlentities($_POST['idProjet']);
     if ( $action == "add" ) {
         if( !empty($_POST['nom']) ){
-			$nom = htmlentities($_POST['nom']);
-			$createdBy = $_SESSION['userMerlaTrav']->login();
-            $created = date('Y-m-d h:i:s');
-            //create object
-            $typeCharge = new TypeCharge(array(
-				'nom' => $nom,
-				'created' => $created,
-            	'createdBy' => $createdBy
-			));
-            //add it to db
-            $typeChargeManager->add($typeCharge);
-            $actionMessage = "Opération Valide : Type Charge Ajouté(e) avec succès.";  
-            $typeMessage = "success";
+            $nom = htmlentities($_POST['nom']);
+            if ( !$typeChargeManager->exists($nom) ){
+                $createdBy = $_SESSION['userMerlaTrav']->login();
+                $created = date('Y-m-d h:i:s');
+                //create object
+                $typeCharge = new TypeCharge(array(
+                    'nom' => $nom,
+                    'created' => $created,
+                    'createdBy' => $createdBy
+                ));
+                //add it to db
+                $typeChargeManager->add($typeCharge);
+                $actionMessage = "Opération Valide : Type Charge Ajouté(e) avec succès.";  
+                $typeMessage = "success";   
+            }
+            else{
+                $actionMessage = "Erreur Ajout Type Charge : Un type de charge existe déjà avec ce nom <strong>".$nom."</strong>.";
+                $typeMessage = "error";
+            }
         }
         else{
             $actionMessage = "Erreur Ajout Type Charge : Vous devez remplir le champ <strong>Nom Charge</strong>.";

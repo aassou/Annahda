@@ -174,8 +174,11 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <?php
-                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" 
-                            || $_SESSION['userMerlaTrav']->profil() == "user") {
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                $_SESSION['userMerlaTrav']->profil() == "user"
+                                ) {
                         ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
@@ -502,7 +505,10 @@
                                         <tr class="livraisons">
                                             <td>                             
                                                 <?php
-                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                if ( 
+                                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                                    ) {
                                                 ?>                               
                                                 <a class="btn mini green" href="#updateLivraison<?= $livraison->id();?>" data-toggle="modal" data-id="<?= $livraison->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>

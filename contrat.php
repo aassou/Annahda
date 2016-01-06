@@ -210,12 +210,6 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">الواجهة</label>
-                                        <div class="controls">
-                                            <input type="text" required="required" id="facade" name="facade" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
                                         <label class="control-label">وضعية الشقة/المحل التجاري</label>
                                         <div class="controls">
                                             <select name="etatBien">
@@ -225,15 +219,9 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">المبلغ المدفوع مسبقا بالحروف</label>
+                                        <label class="control-label">الواجهة</label>
                                         <div class="controls">
-                                            <input type="text" required="required" id="avanceLettresArabe" name="avanceLettresArabe" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">مبلغ البيع بالحروف</label>
-                                        <div class="controls">
-                                            <input type="text" required="required" id="prixLettresArabe" name="prixLettresArabe" />
+                                            <input type="text" required="required" id="facade" name="facade" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -912,14 +900,37 @@
 										<th style="width: 10%">Compte</th>
 										<th style="width: 10%">N° Opération</th>
 										<th style="width: 10%">Montant</th>
-										<th style="width: 20%">Observation</th>
+										<th style="width: 10%">Observation</th>
+										<th style="width: 10%">Status</th>
 										<th style="width: 10%">Quittance</th>
+										
 									</tr>
 								</thead>
 								<tbody>
 									<?php
 									if($operationsNumber != 0){
 									foreach($operations as $operation){
+									    $status = "";
+                                        $action = "";
+                                        if ( $operation->status() == 0 ) {
+                                            $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';  
+                                            } 
+                                            else{
+                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
+                                            } 
+                                        } 
+                                        else if ( $operation->status() == 1 ) {
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   
+                                            }
+                                            else {
+                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            }
+                                        } 
 									?>		
 									<tr class="odd gradeX">
 									    <?php
@@ -939,8 +950,49 @@
 										<td><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
 										<td><?= $operation->observation() ?></td>
+										<td><?= $status ?></td>
 										<td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
 									</tr>	
+									<!-- validateOperation box begin-->
+                                    <div id="validateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Valider Paiement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="validate">
+                                                    <input type="hidden" name="source" value="contrat">
+                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>">
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn blue" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- validateOperation box end -->
+                                    <!-- cancelOperation box begin-->
+                                    <div id="cancelOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Annuler Paiement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="cancel">
+                                                    <input type="hidden" name="source" value="contrat">
+                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>">
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- cancelOperation box end -->
 									<!-- update box begin-->
                                     <div id="updateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                         <div class="modal-header">
@@ -1223,12 +1275,24 @@
                                     <input type="text" name="numeroCheque" value="<?= $contrat->numeroCheque() ?>" />
                                 </div>
                             </div>
-							<div class="control-group">
-								<label class="control-label">Note Client</label>
-								<div class="controls">
-									<textarea name="note"><?= $contrat->note() ?></textarea>
-								</div>
-							</div>
+                            <div class="control-group">
+                                <label class="control-label">Note Client</label>
+                                <div class="controls">
+                                    <textarea name="note"><?= $contrat->note() ?></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">مبلغ البيع المتفق عليه</label>
+                                <div class="controls">
+                                    <input type="text" name="prixVenteArabe" value="<?= $contrat->prixVenteArabe() ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">التسبيق</label>
+                                <div class="controls">
+                                    <input type="text" name="avanceArabe" value="<?= $contrat->avanceArabe() ?>" />
+                                </div>
+                            </div>
 							<div class="control-group">
                              	<div class="alert alert-error">
 									<strong>Remarque</strong> : Ne toucher à cette zone sauf si vous voulez changer le bien.		

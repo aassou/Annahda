@@ -145,7 +145,10 @@
 						 <!-- END  ALERT MESSAGES -->
 						<?php
 						$updateLink = "";
-                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                        if ( 
+                            $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" 
+                            ) {
                             $updateLink = "#updateLivraison";    
                         }
                         ?>
@@ -256,7 +259,10 @@
                                 <i class="icon-print"></i>&nbsp;Bon de livraison
                             </a>
                             <?php
-                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                ) {
                             ?>
 							<a class="btn green" href="#addArticle" data-toggle="modal" data-id="">
 								Ajouter un article <i class="icon-plus "></i>
@@ -318,7 +324,10 @@
 							<table class="table table-striped table-bordered table-hover">
 							<tr>
 							    <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                if ( 
+                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "manager"
+                                    ) {
                                 ?>
 							    <th style="width: 10%">Actions</th>
 							    <?php
@@ -334,7 +343,10 @@
 							?>
 							<tr>
 							    <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                if ( 
+                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                    ) {
                                 ?>
 							    <td class="hidden-phone">
                                     <a class="btn mini green" href="#updateLivraisonDetail<?= $detail->id();?>" data-toggle="modal" data-id="<? $detail->id(); ?>">

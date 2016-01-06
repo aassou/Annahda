@@ -124,7 +124,10 @@
                                         }
                                         ?>
                                         <?php
-                                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                        if ( 
+                                            $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                            $_SESSION['userMerlaTrav']->profil()=="manager"
+                                            ) {
                                         ?>
                                         <a href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width red">Créer Clients et Contrats</a>
                                         <?php

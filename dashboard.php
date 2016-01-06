@@ -94,7 +94,8 @@
 				<!--      BEGIN TILES      -->
 				<?php
                 if ( 
-                    $_SESSION['userMerlaTrav']->profil() == "admin" 
+                    $_SESSION['userMerlaTrav']->profil() == "admin"
+                    || $_SESSION['userMerlaTrav']->profil() == "manager" 
                     || $_SESSION['userMerlaTrav']->profil() == "user" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant" 
                 ) {
@@ -121,6 +122,7 @@
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
                                 || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                                || $_SESSION['userMerlaTrav']->profil() == "manager"
                             ) {
                             ?>
 						    <a href="caisse.php">
@@ -157,6 +159,7 @@
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
                                 || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                                || $_SESSION['userMerlaTrav']->profil() == "manager"
                             ) {
                             ?>
                             <a href="livraisons-group.php">
@@ -250,6 +253,7 @@
                 if ( 
                     $_SESSION['userMerlaTrav']->profil() == "admin" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant"
+                    || $_SESSION['userMerlaTrav']->profil() == "manager"
                 ) {
                 ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
@@ -317,6 +321,7 @@
                 if ( 
                     $_SESSION['userMerlaTrav']->profil() == "admin" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant"    
+                    || $_SESSION['userMerlaTrav']->profil() == "manager"
                 ) {
                 ?>
 				<div class="row-fluid">

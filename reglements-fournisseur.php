@@ -123,22 +123,25 @@
                 <!-- END PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <?php
+                        if ( 
+                            $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" 
+                            ) {
+                        ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
                                 <!--a href="#addFournisseur" data-toggle="modal" class="btn blue">
                                     Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
                                 </a-->
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <?php  
-                                }
-                                ?>
                             </div>
                         </div>
+                        <?php  
+                        }
+                        ?>
                         <!-- addReglement box begin-->
                         <div id="addReglement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -371,7 +374,10 @@
                                     <thead>
                                         <tr>
                                             <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "manager"  
+                                                ) {
                                             ?>
                                             <th style="width: 10%">Actions</th>
                                             <?php
@@ -400,7 +406,10 @@
                                         ?>      
                                         <tr class="livraisons">
                                             <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "manager"  
+                                                ) {
                                             ?>
                                             <td>                                                            
                                                 <a class="btn mini green" href="#updateReglement<?= $reglement->id();?>" data-toggle="modal" data-id="<?= $reglement->id(); ?>" title="Modifier">

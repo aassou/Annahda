@@ -66,8 +66,8 @@
     else if ( $etatBien == "Finition" ) {
         $etatBien = "الأشغال النهائية للبناء";
     }
-    $avanceLettresArabe = htmlentities($_POST['avanceLettresArabe']);
-    $prixLettresArabe = htmlentities($_POST['prixLettresArabe']);
+    $avanceLettresArabe = $contrat->avanceArabe();
+    $prixLettresArabe = $contrat->prixVenteArabe();
     $idSociete = htmlentities($_POST['nomSociete']);
     $company = $companyManager->getCompanyById($idSociete);
 // create new PDF document

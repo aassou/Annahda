@@ -39,6 +39,7 @@
 				or $currentPage=="tasks.php"
 				or $currentPage=="bugs.php"
 				or $currentPage=="contrat-status.php"
+				or $currentPage=="properties-status.php"
 				or $currentPage=="operations-status.php"
 				or $currentPage=="status.php"
 				){echo "active ";} ?>">
@@ -50,7 +51,11 @@
 				<!---------------------------- Dashboard End    -------------------------------------------->
 				<!---------------------------- Gestion des projets Begin ----------------------------------->
 				<?php 
-				if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) { 
+				if ( 
+				    $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+				    $_SESSION['userMerlaTrav']->profil() == "manager" ||
+				    $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                    ) { 
 					$gestionProjetClass="";
 					if($currentPage=="projet-list.php"
 					or $currentPage=="projets.php"
@@ -122,7 +127,11 @@
                     </a>
                     <ul class="sub">
                         <?php
-                        if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
                         ?>
                         <li <?php if($currentPage=="livraisons-group.php"
                                     or $currentPage=="livraisons-fournisseur.php"
@@ -135,6 +144,13 @@
                         <?php
                         }
                         ?>
+                        <?php
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
+                        ?>
                         <li <?php if($currentPage=="livraisons-group-iaaza.php"
                                     or $currentPage=="livraisons-fournisseur-iaaza.php"
                                     or $currentPage=="livraisons-details-iaaza.php"
@@ -142,6 +158,9 @@
                                     ){?> class="active" <?php } ?> >
                             <a href="livraisons-group-iaaza.php">Société Iaaza</a>
                         </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
@@ -163,7 +182,11 @@
                     </a>
                     <ul class="sub">
                         <?php
-                        if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
                         ?>
                         <li <?php if($currentPage=="caisse.php"){
                             ?> class="active" <?php } ?> >
@@ -172,9 +195,19 @@
                         <?php
                         }
                         ?>
+                        <?php
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
+                        ?>
                         <li <?php if($currentPage=="caisse-iaaza.php"){?> class="active" <?php } ?> >
                             <a href="caisse-iaaza.php">Caisse Société Iaaza</a>
                         </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </li>
                 <!---------------------------- Caisse End    -------------------------------------------->

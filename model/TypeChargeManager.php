@@ -83,5 +83,12 @@ class TypeChargeManager{
 		$id = $data['last_id'];
 		return $id;
 	}
+    
+    public function exists($nomTypeCharge){
+        $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_typecharge WHERE REPLACE(nom, ' ', '') LIKE REPLACE(:nom, ' ', '') ");
+        $query->execute(array(':nom' => $nomTypeCharge));
+        //get result
+        return $query->fetchColumn();
+    }
 
 }

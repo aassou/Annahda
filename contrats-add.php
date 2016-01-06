@@ -140,7 +140,9 @@
                                     <?php
                                     $numero = "";
                                     $prixNegocie = "";
+                                    $prixNegocieArabe = "";
                                     $avance = "";
+                                    $avanceArabe = "";
                                     $dureePaiement = "";
                                     $nombreMois = "";
                                     $echeance = "";
@@ -149,7 +151,9 @@
                                     if( isset($_SESSION['contrat-form-data']) ){
                                         $numero = $_SESSION['contrat-form-data']['numero'] ;
                                         $prixNegocie = $_SESSION['contrat-form-data']['prixNegocie'] ;
+                                        $prixNegocieArabe = $_SESSION['contrat-form-data']['prixNegocieArabe'] ;
                                         $avance = $_SESSION['contrat-form-data']['avance'] ;
+                                        $avanceArabe = $_SESSION['contrat-form-data']['avanceArabe'] ;
                                         $dureePaiement = $_SESSION['contrat-form-data']['dureePaiement'] ;
                                         $nombreMois = $_SESSION['contrat-form-data']['nombreMois'] ;
                                         $echeance = $_SESSION['contrat-form-data']['echeance'] ;
@@ -279,6 +283,24 @@
                                              </div>
                                           </div>
                                         </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="prixNegocieArabe">مبلغ البيع المتفق عليه</label>
+                                             <div class="controls">
+                                                <input required="required" type="text" id="prixNegocieArabe" value="<?= $prixNegocieArabe ?>" name="prixNegocieArabe" class="m-wrap">
+                                             </div>
+                                          </div>
+                                       </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="avanceArabe">التسبيق</label>
+                                             <div class="controls">
+                                                <input required="required" type="text" id="avanceArabe" value="<?= $avanceArabe ?>" name="avanceArabe" class="m-wrap">
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
                                     <div class="row-fluid">
                                         <div class="span3">

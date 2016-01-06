@@ -30,6 +30,7 @@
     $projet = $projetManager->getProjetById($contrat->idProjet());
     $typeBien = "";
     $niveau = "";
+    
     if ( $contrat->typeBien() == "appartement" ) {
         $appartementManager = new AppartementManager($pdo);
         $appartement = $appartementManager->getAppartementById($contrat->idBien());
@@ -126,7 +127,7 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.'الراشد(ة)و رقم ب .ت .و : '.'</strong>'.$client->cin();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'بواسطة : '.'</strong>'.$modePaiement;
+$htmlcontent = '<strong>'.'بواسطة : '.'</strong>'.$modePaiement.' - ( رقم العملية : '.$operation->numeroCheque().')';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<strong>'.'من اجل حفظ الحق في ملكية الشقة ذات المراجع التالية : '.'</strong>';

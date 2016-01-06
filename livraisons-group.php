@@ -110,13 +110,18 @@
                     <div class="span12">
                         <?php
                         if ( 
-                            $_SESSION['userMerlaTrav']->profil() == "admin" 
-                            || $_SESSION['userMerlaTrav']->profil() == "user") {
+                            $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" ||  
+                            $_SESSION['userMerlaTrav']->profil() == "user"
+                            ) {
                         ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
                                 <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                if ( 
+                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                    ) {
                                 ?>
                                 <a href="#addReglement" data-toggle="modal" class="btn black">
                                     Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>

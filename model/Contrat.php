@@ -6,7 +6,9 @@ class Contrat{
 	private $_numero;
     private $_dateCreation;
     private $_prixVente;
+    private $_prixVenteArabe;
     private $_avance;
+    private $_avanceArabe;
 	private $_modePaiement;
 	private $_dureePaiement;
     private $_nombreMois;
@@ -57,8 +59,16 @@ class Contrat{
         $this->_prixVente = $prixVente;
     }
     
+    public function setPrixVenteArabe($prixVenteArabe){
+        $this->_prixVenteArabe = $prixVenteArabe;
+    }
+    
     public function setAvance($avance){
         $this->_avance = $avance;
+    }
+    
+    public function setAvanceArabe($avanceArabe){
+        $this->_avanceArabe = $avanceArabe;
     }
     
 	public function setModePaiement($modePaiement){
@@ -143,8 +153,16 @@ class Contrat{
         return $this->_prixVente;
     }
     
+    public function prixVenteArabe(){
+        return $this->_prixVenteArabe;
+    }
+    
     public function avance(){
         return $this->_avance;
+    }
+    
+    public function avanceArabe(){
+        return $this->_avanceArabe;
     }
     
 	public function modePaiement(){

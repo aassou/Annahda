@@ -171,13 +171,14 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">Action</th>
+                                        <th style="width: 10%">Actions</th>
+                                        <th style="width: 20%">Client</th>
                                         <th style="width: 10%">Date.Opé</th>
                                         <th style="width: 10%">Date.Rég</th>
-                                        <th style="width: 10%">ModePaiement</th>
-                                        <th style="width: 15%">Compte</th>
-                                        <th style="width: 10%">N° Opération</th>
-                                        <th style="width: 15%">Montant</th>
+                                        <th style="width: 10%">ModePaiment</th>
+                                        <th style="width: 10%">Compte</th>
+                                        <th style="width: 10%">N°.Opé</th>
+                                        <th style="width: 10%">Montant</th>
                                         <th style="width: 10%">Status</th>
                                         <!--th style="width: 10%">Quittance</th-->
                                     </tr>
@@ -187,6 +188,7 @@
                                     foreach($operations as $operation){
                                         $status = "";
                                         $action = "";
+                                        $nomClient = $contratManager->getClientNameByIdContract($operation->idContrat());
                                         if ( $operation->status() == 0 ) {
                                             $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
@@ -209,6 +211,7 @@
                                     ?>      
                                     <tr class="odd gradeX">
                                         <td><?= $action ?></td>
+                                        <td><?= $nomClient ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
                                         <td><?= $operation->modePaiement() ?></td>

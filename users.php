@@ -165,8 +165,9 @@
                                              <div class="controls">
                                              	<select name="profil" class="m-wrap">
                                              		<option value="user">Utilisateur</option>
-                                             		<option value="admin">Administrateur</option>
                                              		<option value="consultant">Consultant</option>
+                                             		<option value="manager">Manager</option>
+                                             		<option value="admin">Administrateur</option>
                                              	</select>   
                                              </div>
                                           </div>
@@ -251,8 +252,9 @@
 			                                             		<option value="<?= $user->profil() ?>"><?= ucfirst($user->profil()) ?></option>
 			                                             		<option disabled="disabled">-----------------</option>
 			                                             		<option value="user">Utilisateur</option>
+			                                             		<option value="consultant">Consultant</option>
+			                                             		<option value="manager">Manager</option>
 			                                             		<option value="admin">Administrateur</option>
-                                                                <option value="consultant">Consultant</option>
 			                                             	</select>   
 			                                             </div>
 														<input type="hidden" name="idUser" value="<?= $user->id() ?>" />

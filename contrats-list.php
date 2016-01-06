@@ -295,12 +295,6 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label">الواجهة</label>
-                                                        <div class="controls">
-                                                            <input type="text" required="required" id="facade" name="facade" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
                                                         <label class="control-label">وضعية الشقة/المحل التجاري</label>
                                                         <div class="controls">
                                                             <select name="etatBien">
@@ -310,15 +304,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label">المبلغ المدفوع مسبقا بالحروف</label>
+                                                        <label class="control-label">الواجهة</label>
                                                         <div class="controls">
-                                                            <input type="text" required="required" id="avanceLettresArabe" name="avanceLettresArabe" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">مبلغ البيع بالحروف</label>
-                                                        <div class="controls">
-                                                            <input type="text" required="required" id="prixLettresArabe" name="prixLettresArabe" />
+                                                            <input type="text" required="required" id="facade" name="facade" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

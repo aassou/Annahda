@@ -63,11 +63,13 @@
          and !empty($_POST['echeance']) ){
             if( !empty($_POST['prixNegocie']) ){
                 $prixNegocie = htmlentities($_POST['prixNegocie']);
+                $prixNegocieArabe = htmlentities($_POST['prixNegocieArabe']);
                 $numero = htmlentities($_POST['numero']);
                 $typeBien = htmlentities($_POST['typeBien']);
                 $idBien = htmlentities($_POST['bien']);
                 $dateCreation = htmlentities($_POST['dateCreation']);
                 $avance = htmlentities($_POST['avance']);
+                $avanceArabe = htmlentities($_POST['avanceArabe']);
                 $modePaiement = htmlentities($_POST['modePaiement']);
                 $dureePaiement = htmlentities($_POST['dureePaiement']);
                 $nombreMois = htmlentities($_POST['nombreMois']);
@@ -141,8 +143,9 @@
                 //CAS LIBRE PROCESSING END
                 //create the contract object
                 $contrat = 
-                new Contrat(array('numero' => $numero, 'dateCreation' => $dateCreation, 'prixVente' => $prixNegocie, 
-                'avance' => $avance, 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
+                new Contrat(array('numero' => $numero, 'dateCreation' => $dateCreation, 'prixVente' => $prixNegocie 
+                , 'prixVenteArabe' => $prixNegocieArabe,'avance' => $avance,'avanceArabe' => $avanceArabe,
+                 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
                 'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'idClient' => $idClient, 
                 'idProjet' => $idProjet, 'idBien' => $idBien, 'typeBien' => $typeBien, 'code' => $codeContrat, 
                 'numeroCheque' => $numeroCheque, 'created' => $created, 'createdBy' => $createdBy));
@@ -194,10 +197,12 @@
         $codeContrat = htmlentities($_POST['codeContrat']);
         if(!empty($_POST['prixVente'])){
             $prixVente = htmlentities($_POST['prixVente']);
+            $prixVenteArabe = htmlentities($_POST['prixVenteArabe']);
             $numero = htmlentities($_POST['numero']);
             $numeroCheque = htmlentities($_POST['numeroCheque']);
             $dateCreation = htmlentities($_POST['dateCreation']);
             $avance = htmlentities($_POST['avance']);
+            $avanceArabe = htmlentities($_POST['avanceArabe']);
             $modePaiement = htmlentities($_POST['modePaiement']);
             $dureePaiement = htmlentities($_POST['dureePaiement']);
             $nombreMois = htmlentities($_POST['nombreMois']);
@@ -214,9 +219,10 @@
             $contrat = $contratManager->getContratById($idContrat);
             $newContrat = 
             new Contrat(array('id' => $idContrat, 'numero' => $numero, 'dateCreation' => $dateCreation, 
-            'prixVente' => $prixVente, 'avance' => $avance, 'modePaiement' => $modePaiement, 
-            'nombreMois' => $nombreMois, 'dureePaiement' => $dureePaiement,'echeance' => $echeance, 
-            'numeroCheque' => $numeroCheque, 'note' => $note, 'updated' => $updated, 'updatedBy' => $updatedBy));
+            'prixVente' => $prixVente, 'avance' => $avance, 'prixVenteArabe' => $prixVenteArabe, 
+            'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement,'nombreMois' => $nombreMois, 
+            'dureePaiement' => $dureePaiement, 'echeance' => $echeance, 'numeroCheque' => $numeroCheque, 
+            'note' => $note, 'updated' => $updated, 'updatedBy' => $updatedBy));
             //begin processing
             $contratManager->update($newContrat);
             //Update The ReglementsPrevus Table

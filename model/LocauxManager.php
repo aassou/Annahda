@@ -96,6 +96,18 @@ class LocauxManager{
         $query->closeCursor();
         return $data['locauxNumber'];
     }
+    
+    public function getLocauxNonVendu(){
+        $locaux = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_locaux WHERE status<>'Vendu' ORDER BY status ASC, idProjet ASC")
+        or die(print_r($this->_db->errorInfo()));
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $locaux[] = new Locaux($data);
+        }
+        $query->closeCursor();
+        return $locaux;
+    }
 	
 	public function getLocauxReserveNumberByIdProjet($idProjet){
         $query = $this->_db->prepare('SELECT COUNT(*) AS locauxNumber FROM t_locaux 
