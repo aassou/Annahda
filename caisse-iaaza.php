@@ -247,7 +247,10 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <?php
-                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                    if ( 
+                                        $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                        $_SESSION['userMerlaTrav']->profil() == "user"
+                                        ) {
                                     ?>
                                     <div class="btn-group pull-left">
                                         <a class="btn blue" href="#addCaisse" data-toggle="modal">
@@ -279,7 +282,10 @@
                                     <thead>
                                         <tr>
                                             <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" || 
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
+                                                ) {
                                             ?>
                                             <th style="width:10%">Actions</th>
                                             <?php
@@ -299,7 +305,10 @@
                                         ?>      
                                         <tr class="odd gradeX">
                                             <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
+                                                ) {
                                             ?>
                                             <td>
                                                 <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
