@@ -1191,6 +1191,18 @@
 								</div>	
 							</div>
 							<div class="control-group">
+                                <label class="control-label">الاسم</label>
+                                <div class="controls">
+                                    <input type="text" name="nomArabe" value="<?= $client->nomArabe() ?>" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">العنوان</label>
+                                <div class="controls">
+                                    <input type="text" name="adresseArabe" value="<?= $client->adresseArabe() ?>" />
+                                </div>  
+                            </div>
+							<div class="control-group">
 							    <input type="hidden" name="action" value="update" />
 							    <input type="hidden" name="source" value="contrat" />
 								<input type="hidden" name="idClient" value="<?= $client->id() ?>" />
