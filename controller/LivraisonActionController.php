@@ -34,7 +34,7 @@
         if( !empty($_POST['libelle']) ){
             $idProjet = htmlentities($_POST['idProjet']);
             $libelle = htmlentities($_POST['libelle']);
-            //$type = htmlentities($_POST['type']);
+            $designation = htmlentities($_POST['designation']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $codeLivraison = uniqid().date('YmdHis');
             $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -42,8 +42,8 @@
             //create object
             $livraison = 
             new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 'code' => $codeLivraison,
-            'createdBy' => $createdBy, 'created' => $created));
+            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
@@ -74,12 +74,12 @@
             $id = htmlentities($_POST['idLivraison']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $libelle = htmlentities($_POST['libelle']);
-            //$type = htmlentities($_POST['type']);
+            $designation = htmlentities($_POST['designation']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $livraison = 
             new Livraison(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
             //add history data to db

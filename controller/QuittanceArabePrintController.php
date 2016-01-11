@@ -108,14 +108,14 @@ $pdf->AddPage('P', 'A5');
 // Restore RTL direction
 $pdf->setRTL(true);
 // set font
-$pdf->SetFont('aealarabiya', '', 18);
+$pdf->SetFont('aealarabiya', '', 14);
 // print newline
 // Arabic and English content
-$contratTitle = "التوصيل رقم";
-$pdf->Cell(0, 12, $contratTitle,0,1,'C');
+$contratTitle = "توصيل رقم : ".$operation->id().$operation->reference();
+$pdf->Cell(0, 10, $contratTitle,0,1,'C');
 $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 12);
-$htmlcontent = '<strong>'.'التاريخ : '.'</strong>'.date('d/m/Y');
+$htmlcontent = '<strong>'.'التاريخ : '.'</strong>'.date('d/m/Y', strtotime($operation->date()));
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<strong>'.'توصلنا بمبلغ قدره : '.'</strong>'.$operation->montant().' درهم';
@@ -164,6 +164,6 @@ $pdf->Ln();
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_018.pdf', 'I');
+$pdf->Output('Quittance.pdf', 'I');
 // END OF FILE
 //============================================================+

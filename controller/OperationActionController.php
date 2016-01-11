@@ -31,6 +31,7 @@
     $clientManager = new ClientManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
+            $reference = date('Ymdhis');
             $montant = htmlentities($_POST['montant']);
             $modePaiement = htmlentities($_POST['modePaiement']);
             $numeroOperation = htmlentities($_POST['numeroOperation']);
@@ -44,7 +45,7 @@
             $created = date('Y-m-d h:i:s');
             $operation = 
             new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
-            'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 
+            'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
             'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
             'createdBy' => $createdBy, 'created' => $created));
             $operationManager->add($operation);

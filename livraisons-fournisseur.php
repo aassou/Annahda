@@ -217,6 +217,7 @@
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Plusieurs Projets</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
@@ -234,6 +235,12 @@
                                         <label class="control-label">N° BL</label>
                                         <div class="controls">
                                             <input required="required" id="libelle" type="text" name="libelle" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Désignation</label>
+                                        <div class="controls">
+                                            <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -494,12 +501,12 @@
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
-                                            $nomProjet = "Non mentionné";
+                                            $nomProjet = "Plusieurs Projets";
                                             if ( $livraison->idProjet() != 0 ) {
                                                 $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
                                             }
                                             else {
-                                                $nomProjet = "Non mentionné";
+                                                $nomProjet = "Plusieurs Projets";
                                             }
                                         ?>      
                                         <tr class="livraisons">
@@ -581,8 +588,9 @@
                                                         <label class="control-label">Projet</label>
                                                         <div class="controls">
                                                             <select name="idProjet">
-                                                                <option value="<?= $livraison->idProjet() ?>"><?= $projetManager->getProjetById($livraison->idProjet())->nom() ?></option>
+                                                                <option value="<?= $livraison->idProjet() ?>"><?= $nomProjet ?></option>
                                                                 <option disabled="disabled">-----------</option>
+                                                                <option value="0">Plusieurs Projets</option>
                                                                 <?php foreach($projets as $projet){ ?>
                                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                                 <?php } ?>
@@ -600,6 +608,12 @@
                                                         <label class="control-label">N° BL</label>
                                                         <div class="controls">
                                                             <input required="required" type="text" name="libelle" value="<?= $livraison->libelle() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Désignation</label>
+                                                        <div class="controls">
+                                                            <input id="designation" type="text" name="designation" value="<?= $livraison->designation() ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

@@ -11,14 +11,17 @@ class OperationManager{
     //CRUD operations
     public function add(Operation $operation){
         $query = $this->_db->prepare(
-        'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, montant, modePaiement, idContrat, numeroCheque, status, created, createdBy)
-        VALUES (:date, :dateReglement, :compteBancaire, :observation, :montant, :modePaiement,:idContrat, :numeroCheque, :status, :created, :createdBy)') 
+        'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, reference, 
+        montant, modePaiement, idContrat, numeroCheque, status, created, createdBy)
+        VALUES (:date, :dateReglement, :compteBancaire, :observation, :reference, :montant,
+        :modePaiement,:idContrat, :numeroCheque, :status, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':date', $operation->date());
         $query->bindValue(':dateReglement', $operation->dateReglement());
         $query->bindValue(':compteBancaire', $operation->compteBancaire());
         $query->bindValue(':observation', $operation->observation());
         $query->bindValue(':montant', $operation->montant());
+        $query->bindValue(':reference', $operation->reference());
 		$query->bindValue(':modePaiement', $operation->modePaiement());
         $query->bindValue(':numeroCheque', $operation->numeroCheque());
         $query->bindValue(':status', $operation->status());

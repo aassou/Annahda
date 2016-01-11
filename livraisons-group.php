@@ -220,6 +220,7 @@
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
                                             <select name="idProjet">
+                                                <option value="0">Plusieurs Projets</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
@@ -237,6 +238,12 @@
                                         <label class="control-label">N° BL</label>
                                         <div class="controls">
                                             <input required="required" id="libelle" type="text" name="libelle" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Désignation</label>
+                                        <div class="controls">
+                                            <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">

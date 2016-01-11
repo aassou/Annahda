@@ -500,12 +500,12 @@
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
-                                            $nomProjet = "Non mentionné";
+                                            $nomProjet = "Plusieurs Projets";
                                             if ( $livraison->idProjet() != 0 ) {
                                                 $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
                                             }
                                             else {
-                                                $nomProjet = "Non mentionné";
+                                                $nomProjet = "Plusieurs Projets";
                                             }
                                         ?>      
                                         <tr class="livraisons">

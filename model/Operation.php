@@ -2,6 +2,7 @@
 class Operation{
     //attributes
     private $_id;
+    private $_reference;
     private $_date;
     private $_dateReglement;
     private $_compteBancaire;
@@ -36,6 +37,10 @@ class Operation{
     
     public function setId($id){
         $this->_id = $id;
+    } 
+    
+    public function setReference($reference){
+        $this->_reference = $reference;
     } 
     
     public function setDate($date){
@@ -94,6 +99,10 @@ class Operation{
     
     public function id(){
         return $this->_id;
+    }
+    
+    public function reference(){
+        return $this->_reference;
     }
     
     public function date(){
