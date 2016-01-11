@@ -338,7 +338,7 @@
 									<li class="active"><a href="#tab_1_1" data-toggle="tab">Les livraisons de la semaine</a></li>
 									<li><a href="#tab_1_2" data-toggle="tab">Les clients de la semaine</a></li>
 									<li><a href="#tab_1_3" data-toggle="tab">Notes des clients</a></li>
-									<li><a href="#tab_1_4" data-toggle="tab">Les messages d'aujourd'hui</a></li>
+									<!--li><a href="#tab_1_4" data-toggle="tab">Les messages d'aujourd'hui</a></li-->
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="tab_1_1">
@@ -362,15 +362,9 @@
 																<div class="desc">	
 																	<strong>Fournisseur</strong> : <?= $fournisseursManager->getFournisseurById($livraison->idFournisseur())->nom() ?><br>
 																	<strong>Projet</strong> : <?= $projetName; ?><br>
-																	<a href="livraison.php?codeLivraison=<?= $livraison->code() ?>" target="_blank">
+																	<a href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>" target="_blank">
 																		<strong>Livraison</strong> : <?= $livraison->id() ?>
-																	</a><br>
-																	<strong>Détails</strong> : <br>
-																	&nbsp;&nbsp;<a>Désignation</a> : <?= $livraison->designation(); ?><br>  
-																	&nbsp;&nbsp;<a>Quantité</a> : <?= $livraison->quantite(); ?><br>
-																	&nbsp;&nbsp;<a>Prix unitaire</a> : <?= $livraison->prixUnitaire(); ?><br>
-																	&nbsp;&nbsp;<a>Total</a> : <?= $livraison->prixUnitaire()*$livraison->quantite(); ?><br>
-																	<br>
+																	</a>
 																</div>
 															</div>
 														</div>
@@ -474,31 +468,31 @@
 											</ul>
 										</div>
 									</div>
-									<div class="tab-pane" id="tab_1_4">
+									<!--div class="tab-pane" id="tab_1_4">
 										<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 											<?php
-											foreach($mailsToday as $mail){
+											//foreach($mailsToday as $mail){
 											?>
 											<div class="row-fluid">
 												<div class="span6 user-info">
 													<img alt="" src="assets/img/avatar.png" />
 													<div class="details">
 														<div>
-															<a href="#"><?= $mail->sender() ?></a> 
+															<a href="#"><?php //echo $mail->sender() ?></a> 
 														</div>
 														<div>
-															<strong>Message : </strong><?= $mail->content() ?><br>
-															<strong>Envoyé Aujourd'hui à : </strong><?= date('h:i', strtotime($mail->created())) ?>
+															<strong>Message : </strong><?php //echo $mail->content() ?><br>
+															<strong>Envoyé Aujourd'hui à : </strong><?php //echo date('h:i', strtotime($mail->created())) ?>
 														</div>
 													</div>
 												</div>
 											</div>
 											<hr>
 											<?php
-											}
+											//}
 											?>
 										</div>
-									</div>
+									</div-->
 								</div>
 							</div>
 							<!--END TABS-->
