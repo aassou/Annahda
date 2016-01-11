@@ -62,6 +62,7 @@
          and !empty($_POST['modePaiement']) and !empty($_POST['dureePaiement']) and !empty($_POST['nombreMois'])
          and !empty($_POST['echeance']) ){
             if( !empty($_POST['prixNegocie']) ){
+                $reference = 'C'.date('Ymd-his');
                 $prixNegocie = htmlentities($_POST['prixNegocie']);
                 $prixNegocieArabe = htmlentities($_POST['prixNegocieArabe']);
                 $numero = htmlentities($_POST['numero']);
@@ -143,9 +144,10 @@
                 //CAS LIBRE PROCESSING END
                 //create the contract object
                 $contrat = 
-                new Contrat(array('numero' => $numero, 'dateCreation' => $dateCreation, 'prixVente' => $prixNegocie 
-                , 'prixVenteArabe' => $prixNegocieArabe,'avance' => $avance,'avanceArabe' => $avanceArabe,
-                 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
+                new Contrat(
+                array('reference' => $reference, 'numero' => $numero, 'dateCreation' => $dateCreation, 
+                'prixVente' => $prixNegocie, 'prixVenteArabe' => $prixNegocieArabe, 'avance' => $avance, 
+                'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
                 'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'idClient' => $idClient, 
                 'idProjet' => $idProjet, 'idBien' => $idBien, 'typeBien' => $typeBien, 'code' => $codeContrat, 
                 'numeroCheque' => $numeroCheque, 'created' => $created, 'createdBy' => $createdBy));

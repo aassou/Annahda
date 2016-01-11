@@ -3,6 +3,7 @@ class Contrat{
         
     //attributes
     private $_id;
+    private $_reference;
 	private $_numero;
     private $_dateCreation;
     private $_prixVente;
@@ -45,6 +46,10 @@ class Contrat{
     //setters
     public function setId($id){
         $this->_id = $id;
+    }
+    
+    public function setReference($reference){
+        $this->_reference = $reference;
     }
 	
 	public function setNumero($numero){
@@ -141,6 +146,10 @@ class Contrat{
         return $this->_id;
     }
 	
+    public function reference(){
+        return $this->_reference;
+    }
+    
 	public function numero(){
         return $this->_numero;
     }

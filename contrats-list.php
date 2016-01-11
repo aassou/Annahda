@@ -219,9 +219,6 @@
 												        	<a href="#printContratArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                                 Imprimer Contrat
                                                             </a>
-												        	<a target="_blank" href="controller/ClientFichePrintController.php?idContrat=<?= $contrat->id() ?>">
-												        		Imprimer Fiche Client
-												        	</a>
 												        	<?php
 												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" ){ 
 												        	if( $contrat->status()=="actif" ){

@@ -31,7 +31,7 @@
     $clientManager = new ClientManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
-            $reference = date('Ymdhis');
+            $reference = 'Q'.date('Ymd-his');
             $montant = htmlentities($_POST['montant']);
             $modePaiement = htmlentities($_POST['modePaiement']);
             $numeroOperation = htmlentities($_POST['numeroOperation']);

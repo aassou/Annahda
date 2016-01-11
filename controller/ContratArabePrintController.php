@@ -66,6 +66,10 @@
     else if ( $etatBien == "Finition" ) {
         $etatBien = "الأشغال النهائية للبناء";
     }
+    $contratReference = "";
+    if ( strlen($contrat->reference()) > 1 ) {
+        $contratReference = "رقم العقد : ".$contrat->reference().'-'.$contrat->id();   
+    }
     $avanceLettresArabe = $contrat->avanceArabe();
     $prixLettresArabe = $contrat->prixVenteArabe();
     $idSociete = htmlentities($_POST['nomSociete']);
@@ -124,6 +128,8 @@ $pdf->SetFont('aealarabiya', '', 18);
 // print newline
 $pdf->Ln();
 $pdf->Cell(0, 12, $contratTitle,0,1,'C');
+$pdf->SetFont('aealarabiya', '', 12);
+$pdf->Cell(0, 12, $contratReference,0,1,'C');
 $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 14);
 //$pdf->Ln();

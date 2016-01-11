@@ -111,7 +111,7 @@ $pdf->setRTL(true);
 $pdf->SetFont('aealarabiya', '', 14);
 // print newline
 // Arabic and English content
-$contratTitle = "توصيل رقم : ".$operation->id().$operation->reference();
+$contratTitle = "توصيل رقم : ".$operation->reference().'-'.$operation->id();
 $pdf->Cell(0, 10, $contratTitle,0,1,'C');
 $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 12);

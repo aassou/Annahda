@@ -11,13 +11,14 @@ class ContratManager{
     //CRUD operations
     public function add(Contrat $contrat){
         $query = $this->_db->prepare('
-        INSERT INTO t_contrat (numero, dateCreation, prixVente, prixVenteArabe, avance, avanceArabe, 
-        modePaiement, dureePaiement, nombreMois, echeance, note, idClient, idProjet,
-         idBien, typeBien, code, status, numeroCheque, created, createdBy)
-        VALUES (:numero, :dateCreation, :prixVente, , :prixVenteArabe, :avance,  :avanceArabe, :modePaiement, 
-        :dureePaiement, :nombreMois, :echeance, :note, :idClient, :idProjet, :idBien, 
-        :typeBien, :code, :status, :numeroCheque, :created, :createdBy)') 
+        INSERT INTO t_contrat (reference, numero, dateCreation, prixVente, prixVenteArabe, 
+        avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, 
+        idClient, idProjet, idBien, typeBien, code, status, numeroCheque, created, createdBy)
+        VALUES (:reference, :numero, :dateCreation, :prixVente, :prixVenteArabe, 
+        :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, 
+        :idClient, :idProjet, :idBien, :typeBien, :code, :status, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':reference', $contrat->reference());
         $query->bindValue(':numero', $contrat->numero());
         $query->bindValue(':dateCreation', $contrat->dateCreation());
         $query->bindValue(':prixVente', $contrat->prixVente());
