@@ -42,6 +42,8 @@
 				or $currentPage=="properties-status.php"
 				or $currentPage=="operations-status.php"
 				or $currentPage=="status.php"
+				or $currentPage=="charges-communs-type.php"
+				or $currentPage=="charges-communs-grouped.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
 					<i class="icon-dashboard"></i> 
@@ -221,6 +223,7 @@
                 or $currentPage=="employes-contrats.php"
                 or $currentPage=="users.php"
                 or $currentPage=="type-charges.php"
+                or $currentPage=="type-charges-communs.php"
                 or $currentPage=="fournisseurs.php"
                 or $currentPage=="companies.php"
                 ){echo "active ";} ?>">

@@ -123,6 +123,19 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="type-charges-communs.php">
+                            <div class="tile bg-dark-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-bar-chart"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Type Charges Communs
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="employes-contrats.php">
                             <div class="tile bg-brown">
                                 <div class="corner"></div>
@@ -161,6 +174,20 @@
                                 <div class="tile-object">
                                     <div class="name">
                                         Clients
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="compte-bancaire.php">
+                            <div class="tile bg-yellow">
+                                <div class="tile-body">
+                                    <i class="icon-credit-card"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Compte Bancaire
+                                    </div>
+                                    <div class="number">
                                     </div>
                                 </div>
                             </div>

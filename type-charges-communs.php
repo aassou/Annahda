@@ -14,7 +14,7 @@
     //classes loading end
     session_start();
     if ( isset($_SESSION['userMerlaTrav']) ) {
-        $typeChargesManager = new TypeChargeManager($pdo);
+        $typeChargesManager = new TypeChargeCommunManager($pdo);
         $typesCharges = $typeChargesManager->getTypeCharges();
 ?>
 <!DOCTYPE html>
@@ -67,7 +67,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des types des charges 
+                            Gestion des types des charges communs
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -81,7 +81,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>Types des charges</a>
+                                <a>Types des charges communs</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -114,7 +114,7 @@
                             <h3>Ajouter Nouveau Type Charge </h3>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/TypeChargeCommunActionController.php" method="post">
                                 <div class="control-group">
                                     <label class="control-label">Nom Type Charge</label>
                                     <div class="controls">
@@ -124,7 +124,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <input type="hidden" name="action" value="add" />
-                                        <input type="hidden" name="source" value="type-charges" />    
+                                        <input type="hidden" name="source" value="type-charges-communs" />    
                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                     </div>
@@ -173,7 +173,7 @@
                                                 <h3>Modifier Type Charge</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                                                <form class="form-horizontal" action="controller/TypeChargeCommunActionController.php" method="post">
                                                     <div class="control-group">
                                                         <label class="control-label">Nom Type Charge</label>
                                                         <div class="controls">
@@ -184,7 +184,7 @@
                                                         <div class="controls">
                                                             <input type="hidden" name="idTypeCharge" value="<?= $type->id() ?>">
                                                             <input type="hidden" name="action" value="update" />
-                                                            <input type="hidden" name="source" value="type-charges" />
+                                                            <input type="hidden" name="source" value="type-charges-communs" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>

@@ -77,6 +77,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
+                                <i class="icon-wrench"></i>
+                                <a href="configuration.php">Paramètrages</a> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
                             <li>
                                 <i class="icon-credit-card"></i>
                                 <a>Gestion des comptes bancaires</a>

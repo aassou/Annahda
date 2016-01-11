@@ -121,6 +121,11 @@ General backgrounds
   background-color: #00B38F !important;
 }
 
+.bg-dark-cyan {
+  background-image: none !important;
+  background-color: #035242 !important;
+}
+
 .bg-dark-red {
   background-image: none !important;
   background-color: #731531 !important;

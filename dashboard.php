@@ -211,14 +211,14 @@
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
                             ) {
                             ?>
-							<a href="compte-bancaire.php">
+							<a href="charges-communs-grouped.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
-                                    <i class="icon-credit-card"></i>
+                                    <i class="icon-signal"></i>
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Compte Bancaire
+                                        Charges communs
                                     </div>
                                     <div class="number">
                                     </div>
