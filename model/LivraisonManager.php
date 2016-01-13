@@ -426,4 +426,23 @@ class LivraisonManager{
         $query->closeCursor();
         return $livraisons;
     }
+    
+    public function getLivraisonsByFournisseurGroupByMonth($idFournisseur){
+        $livraisons = array();
+        $query = $this->_db->prepare(
+        'SELECT MONTH(dateLivraison) AS designation, 
+        YEAR(dateLivraison) AS dateLivraison, id
+        FROM t_livraison 
+        WHERE idFournisseur=:idFournisseur 
+        GROUP BY MONTH(dateLivraison)+'-'+YEAR(dateLivraison)');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $key = $data['id'];
+            $value = $data['designation'].'/'.$data['dateLivraison'];
+            $livraisons[] = $value;
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
 }

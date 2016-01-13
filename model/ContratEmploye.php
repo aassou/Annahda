@@ -6,6 +6,9 @@ class ContratEmploye{
 	private $_dateContrat;
     private $_prixUnitaire;
     private $_nombreUnites;
+    private $_unite;
+    private $_traveaux;
+    private $_traveauxArabe;
 	private $_total;
 	private $_employe;
 	private $_idProjet;
@@ -38,6 +41,18 @@ class ContratEmploye{
 
     public function setPrixUnitaire($prixUnitaire){
         $this->_prixUnitaire = $prixUnitaire;
+    }
+    
+    public function setUnite($unite){
+        $this->_unite = $unite;
+    }
+    
+    public function setTraveaux($traveaux){
+        $this->_traveaux = $traveaux;
+    }
+    
+    public function setTraveauxArabe($traveauxArabe){
+        $this->_traveauxArabe = $traveauxArabe;
     }
     
     public function setNombreUnites($nombreUnites){
@@ -74,6 +89,18 @@ class ContratEmploye{
 
     public function prixUnitaire(){
         return $this->_prixUnitaire;
+    }
+    
+    public function unite(){
+        return $this->_unite;
+    }
+    
+    public function traveaux(){
+        return $this->_traveaux;
+    }
+    
+    public function traveauxArabe(){
+        return $this->_traveauxArabe;
     }
     
     public function nombreUnites(){

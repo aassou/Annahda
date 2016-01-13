@@ -20,6 +20,9 @@
         $contratEmployeManager = new ContratEmployeManager($pdo);
         $contratDetaislManager = new ContratDetailsManager($pdo);
         $employesManager = new EmployeManager($pdo);
+        $companyManager = new CompanyManager($pdo);
+        ///
+        $companies = $companyManager->getCompanys();
         if(isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId()){
             $idProjet = $_GET['idProjet'];
             $projet = $projetManager->getProjetById($idProjet);
@@ -174,7 +177,7 @@
                                         <div class="controls">
                                             <select name="employe">
                                                 <?php foreach($employes as $employe){ ?>
-                                                <option value="<?= $employe->nom() ?>"><?= $employe->nom() ?></option>
+                                                <option value="<?= $employe->id() ?>"><?= $employe->nom() ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -189,9 +192,21 @@
                                          </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Traveaux</label>
+                                        <div class="controls">
+                                            <input type="text" name="traveaux" id="traveaux" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">Prix/Unité</label>
                                         <div class="controls">
-                                            <input type="text" name="prixUnitaire" id="prixUnitaire" value="" />
+                                            <input type="text" name="prixUnitaire" id="prixUnitaire" style="width:90px" />&nbsp;/&nbsp;
+                                            <select name="unite" style="width:100px">
+                                                <option value="m²">m²</option>
+                                                <option value="m lineaire">m lineaire</option>
+                                                <option value="appartement">appartement</option>
+                                                <option value="unite">unite</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -204,6 +219,12 @@
                                         <label class="control-label">Total</label>
                                         <div class="controls">
                                             <input type="text" name="total" id="total" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">نوع الأشغال</label>
+                                        <div class="controls">
+                                            <input type="text" name="traveauxArabe" id="traveauxArabe" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -267,14 +288,14 @@
                                     <table class="table table-striped table-bordered table-hover" id="sample_1">
                                         <thead>
                                             <tr>
-                                                <th style="width:10%">Action</th>
+                                                <th style="width:15%">Action</th>
                                                 <th style="width:15%">Employé</th>
                                                 <th style="width:10%">Date</th>
-                                                <th style="width:10%">Prix/Unité</th>
-                                                <th style="width:10%">Nbr.Unités</th>
+                                                <th style="width:15%">Prix / Unité</th>
+                                                <th style="width:10%">Nb.Unités</th>
                                                 <th style="width:15%">Total Paiements</th>
-                                                <th style="width:15%">Total à Payer</th>
-                                                <th style="width:15%">Reste</th>
+                                                <th style="width:10%">Total à Payer</th>
+                                                <th style="width:10%">Reste</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -298,15 +319,50 @@
                                                     <a class="btn mini" href="contrat-employe-detail.php?idContratEmploye=<?= $contrat->id() ?>&idProjet=<?= $projet->id() ?>">
                                                         <i class="icon-eye-open"></i>
                                                     </a>
+                                                    <a class="btn mini blue" href="#printContratEmployeArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" >
+                                                        <i class="icon-file"></i>
+                                                    </a>
                                                 </td>
-                                                <td><?= $contrat->employe() ?></td> 
+                                                <td><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></td> 
                                                 <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?></td>
-                                                <td><?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?></td>
+                                                <td><?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?></td>
                                                 <td><?= $contrat->nombreUnites() ?></td>
                                                 <td><?= number_format($contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total(), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total()-$contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>       
                                             </tr>      
+                                            <!-- printContratArabe box begin-->
+                                            <div id="printContratEmployeArabe<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h3>Imprimer Contrat Employé</h3>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal loginFrm" action="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" method="post">
+                                                        <div class="control-group">
+                                                            <label class="control-label">الشركة</label>
+                                                            <div class="controls">
+                                                                <select name="nomSociete">
+                                                                    <?php
+                                                                    foreach ( $companies as $company ) {
+                                                                    ?>
+                                                                    <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- printContratArabe box end -->
                                             <!-- updatePaiement box begin -->
                                             <div id="updateContrat<?= $contrat->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                                 <div class="modal-header">
@@ -319,10 +375,10 @@
                                                             <label class="control-label">Employé</label>
                                                             <div class="controls">
                                                                 <select name="employe">
-                                                                    <option value="<?= $contrat->employe() ?>"><?= $contrat->employe() ?></option>
+                                                                    <option value="<?= $contrat->employe() ?>"><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
                                                                     <?php foreach($employes as $employe){ ?>
-                                                                    <option value="<?= $employe->nom() ?>"><?= $employe->nom() ?></option>
+                                                                    <option value="<?= $employe->id() ?>"><?= $employe->nom() ?></option>
                                                                     <?php } ?>
                                                                 </select>
                                                             </div>
@@ -337,9 +393,23 @@
                                                              </div>
                                                         </div>
                                                         <div class="control-group">
+                                                            <label class="control-label">Traveaux</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="traveaux" id="traveaux" value="<?= $contrat->traveaux() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire" id="prixUnitaireUpdate" value="<?= $contrat->prixUnitaire() ?>" />
+                                                                <input type="text" name="prixUnitaire" id="prixUnitaire" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <select name="unite" style="width:100px">
+                                                                    <option value="<?= $contrat->unite() ?>"><?= $contrat->unite() ?></option>
+                                                                    <option disabled="disabled">-----------------</option>
+                                                                    <option value="m²">m²</option>
+                                                                    <option value="m lineaire">m lineaire</option>
+                                                                    <option value="appartement">appartement</option>
+                                                                    <option value="unite">unite</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
@@ -352,6 +422,12 @@
                                                             <label class="control-label">Total à payer</label>
                                                             <div class="controls">
                                                                 <input type="text" name="total" id="totalUpdate" value="<?= $contrat->total() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">نوع الأشغال</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="traveauxArabe" id="traveauxArabe" value="<?= $contrat->traveauxArabe() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">

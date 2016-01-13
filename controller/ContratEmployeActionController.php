@@ -29,6 +29,9 @@
 			$dateContrat = htmlentities($_POST['dateContrat']);
             $nombreUnites = htmlentities($_POST['nombreUnites']);
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
+            $unite = htmlentities($_POST['unite']);
+            $traveaux = htmlentities($_POST['traveaux']);
+            $traveauxArabe = htmlentities($_POST['traveauxArabe']);
 			$total = htmlentities($_POST['total']);
 			$employe = htmlentities($_POST['employe']);
 			$idProjet = htmlentities($_POST['idProjet']);
@@ -39,7 +42,10 @@
 				'dateContrat' => $dateContrat,
 				'nombreUnites' => $nombreUnites,
 				'prixUnitaire' => $prixUnitaire,
+				'unite' => $unite,
 				'total' => $total,
+				'traveaux' => $traveaux,
+				'traveauxArabe' => $traveauxArabe,
 				'employe' => $employe,
 				'idProjet' => $idProjet,
 				'created' => $created,
@@ -63,6 +69,9 @@
             $dateContrat = htmlentities($_POST['dateContrat']);
             $nombreUnites = htmlentities($_POST['nombreUnites']);
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
+            $unite = htmlentities($_POST['unite']);
+            $traveaux = htmlentities($_POST['traveaux']);
+            $traveauxArabe = htmlentities($_POST['traveauxArabe']);
             $total = htmlentities($_POST['total']);
             $employe = htmlentities($_POST['employe']);
             $contratEmploye = new ContratEmploye(array(
@@ -70,7 +79,10 @@
 				'dateContrat' => $dateContrat,
 				'nombreUnites' => $nombreUnites,
                 'prixUnitaire' => $prixUnitaire,
+                'unite' => $unite,
 				'total' => $total,
+				'traveaux' => $traveaux,
+                'traveauxArabe' => $traveauxArabe,
 				'employe' => $employe,
 				'idProjet' => $idProjet,
 			));
