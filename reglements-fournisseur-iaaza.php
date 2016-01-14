@@ -405,8 +405,11 @@
                                             }
                                         ?>      
                                         <tr class="livraisons">
-                                            <?php  
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                           <?php  
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
+                                                ) {
                                             ?>
                                             <td>                                                            
                                                 <a class="btn mini green" href="#updateReglement<?= $reglement->id();?>" data-toggle="modal" data-id="<?= $reglement->id(); ?>" title="Modifier">
