@@ -124,7 +124,10 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <?php
-                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                        if ( 
+                            $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "user"
+                         ) {
                         ?>
                         <div class="row-fluid add-portfolio">
                             <div class="pull-left">
@@ -371,7 +374,10 @@
                                     <thead>
                                         <tr>
                                             <?php  
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            if ( 
+                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
+                                                ) {
                                             ?>
                                             <th style="width: 10%">Actions</th>
                                             <?php  
