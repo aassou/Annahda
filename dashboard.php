@@ -313,7 +313,7 @@
 						</a>
 					</div>
 					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <a class="more" href="caisse.php">
+                        <a class="more" href="caisse-iaaza.php">
                         <div class="dashboard-stat yellow">
                             <div class="visual">
                                 <i class="icon-money"></i>
