@@ -24,10 +24,12 @@
 		$fournisseursManager = new FournisseurManager($pdo);
 		$caisseEntreesManager = new CaisseEntreesManager($pdo);
 		$caisseSortiesManager = new CaisseSortiesManager($pdo);
+        $caisseManager = new CaisseManager($pdo);
 		$operationsManager = new OperationManager($pdo);
         $compteBancaire = new CompteBancaireManager($pdo);
 		//classes and vars
 		//users number
+		$soleCaisse = $caisseManager->getTotalCaisseByType("Entree") - $caisseManager->getTotalCaisseByType("Sortie");
 		$projetNumber = ($projetManager->getProjetsNumber());
 		$usersNumber = $usersManager->getUsersNumber();
 		$fournisseurNumber = $fournisseursManager->getFournisseurNumbers();
@@ -303,7 +305,7 @@
 							</div>
 							<div class="details">
 								<div class="number">
-									<?= number_format($caisseEntreesManager->getTotalCaisseEntrees()-$caisseSortiesManager->getTotalCaisseSorties(), '2', ',', ' ') ?>
+									<?= number_format($soleCaisse, '2', ',', ' ') ?>
 								</div>
 								<div class="desc">DH en caisse</div>
 							</div>					
