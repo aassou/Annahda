@@ -22,14 +22,14 @@
 		$clientManager = new ClientManager($pdo);
 		$livraisonsManager = new LivraisonManager($pdo);
 		$fournisseursManager = new FournisseurManager($pdo);
-		$caisseEntreesManager = new CaisseEntreesManager($pdo);
-		$caisseSortiesManager = new CaisseSortiesManager($pdo);
         $caisseManager = new CaisseManager($pdo);
+        $caisseIaazaManager = new CaisseIaazaManager($pdo);
 		$operationsManager = new OperationManager($pdo);
         $compteBancaire = new CompteBancaireManager($pdo);
 		//classes and vars
 		//users number
-		$soleCaisse = $caisseManager->getTotalCaisseByType("Entree") - $caisseManager->getTotalCaisseByType("Sortie");
+		$soldeCaisseAnnahda = $caisseManager->getTotalCaisseByType("Entree") - $caisseManager->getTotalCaisseByType("Sortie");
+        $soldeCaisseIaaza = $caisseIaazaManager->getTotalCaisseByType("Entree") - $caisseIaazaManager->getTotalCaisseByType("Sortie");
 		$projetNumber = ($projetManager->getProjetsNumber());
 		$usersNumber = $usersManager->getUsersNumber();
 		$fournisseurNumber = $fournisseursManager->getFournisseurNumbers();
@@ -260,8 +260,8 @@
                 ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
-					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-						<div class="dashboard-stat yellow">
+					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
+						<div class="dashboard-stat red">
 							<div class="visual">
 								<i class="icon-signal"></i>
 							</div>
@@ -270,23 +270,23 @@
 									<?= $operationsNumberWeek ?>	
 								</div>
 								<div class="desc">									
-									Paiements Clients
+									Régl.Cli
 								</div>
 							</div>					
 						</div>
 					</div>
-					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
+					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
 						<div class="dashboard-stat green">
 							<div class="visual">
 								<i class="icon-shopping-cart"></i>
 							</div>
 							<div class="details">
 								<div class="number">+<?= $livraisonsNumberWeek ?></div>
-								<div class="desc">Livraisons</div>
+								<div class="desc">Livraisns</div>
 							</div>					
 						</div>
 					</div>
-					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
+					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
 						<div class="dashboard-stat blue">
 							<div class="visual">
 								<i class="icon-group"></i>
@@ -305,13 +305,28 @@
 							</div>
 							<div class="details">
 								<div class="number">
-									<?= number_format($soleCaisse, '2', ',', ' ') ?>
+									<?= number_format($soldeCaisseAnnahda, '2', ',', ' ') ?>
 								</div>
-								<div class="desc">DH en caisse</div>
+								<div class="desc">Caisse Annahda</div>
 							</div>					
 						</div>
 						</a>
-					</div>	
+					</div>
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
+                        <a class="more" href="caisse.php">
+                        <div class="dashboard-stat yellow">
+                            <div class="visual">
+                                <i class="icon-money"></i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                    <?= number_format($soldeCaisseIaaza, '2', ',', ' ') ?>
+                                </div>
+                                <div class="desc">Caisse Iaaza</div>
+                            </div>                  
+                        </div>
+                        </a>
+                    </div>	
 				</div>
 				<?php
 				}
