@@ -84,8 +84,8 @@ ob_start();
     <table>
         <tr>
             <th style="width:25%">Type</th>
-            <th style="width:10%">Date</th>
-            <th style="width:30%">Désignation</th>
+            <th style="width:15%">Date</th>
+            <th style="width:25%">Désignation</th>
             <th style="width:20%">Société</th>
             <th style="width:15%">Montant</th>
         </tr>
@@ -94,8 +94,8 @@ ob_start();
         ?>      
         <tr>
             <td style="width:25%"><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
-            <td style="width:10%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
-            <td style="width:30%"><?= $charge->designation() ?></td>
+            <td style="width:15%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
+            <td style="width:25%"><?= $charge->designation() ?></td>
             <td style="width:20%"><?= $charge->societe() ?></td>
             <td style="width:15%"><?= number_format($charge->montant(), 2, ' ', ',') ?>&nbsp;DH</td>
         </tr>   
@@ -104,17 +104,17 @@ ob_start();
         ?>
         <tr>
             <td style="width:25%"></td>
-            <td style="width:10%"></td>
-            <td style="width:30%"></td>
+            <td style="width:15%"></td>
+            <td style="width:25%"></td>
             <td style="width:20%"></td>
             <th style="width:15%">Total</th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><strong><?= $totalCharges ?>&nbsp;DH</strong></td>
+            <td style="width:25%"></td>
+            <td style="width:15%"></td>
+            <td style="width:25%"></td>
+            <td style="width:20%"></td>
+            <td style="width:15%"><strong><?= $totalCharges ?>&nbsp;DH</strong></td>
         </tr>
     </table>
     
