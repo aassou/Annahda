@@ -83,8 +83,8 @@ ob_start();
     <br>
     <table>
         <tr>
-            <th style="width:20%">Type</th>
-            <th style="width:15%">Date</th>
+            <th style="width:25%">Type</th>
+            <th style="width:10%">Date</th>
             <th style="width:30%">Désignation</th>
             <th style="width:20%">Société</th>
             <th style="width:15%">Montant</th>
@@ -93,8 +93,8 @@ ob_start();
         foreach($charges as $charge){
         ?>      
         <tr>
-            <td style="width:20%"><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
-            <td style="width:15%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
+            <td style="width:25%"><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
+            <td style="width:10%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
             <td style="width:30%"><?= $charge->designation() ?></td>
             <td style="width:20%"><?= $charge->societe() ?></td>
             <td style="width:15%"><?= number_format($charge->montant(), 2, ' ', ',') ?>&nbsp;DH</td>
@@ -103,8 +103,8 @@ ob_start();
         }//end of loop
         ?>
         <tr>
-            <td style="width:20%"></td>
-            <td style="width:15%"></td>
+            <td style="width:25%"></td>
+            <td style="width:10%"></td>
             <td style="width:30%"></td>
             <td style="width:20%"></td>
             <th style="width:15%">Total</th>
