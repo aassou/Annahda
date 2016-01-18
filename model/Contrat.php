@@ -21,6 +21,7 @@ class Contrat{
 	private $_typeBien;
 	private $_code;
 	private $_status;
+    private $_revendre;
 	private $_numeroCheque;
     private $_created;
     private $_createdBy;
@@ -118,6 +119,10 @@ class Contrat{
 	
 	public function setStatus($status){
         $this->_status = $status;
+    }
+    
+    public function setRevendre($revendre){
+        $this->_revendre = $revendre;
     }
 	
 	public function setNumeroCheque($numeroCheque){
@@ -218,6 +223,10 @@ class Contrat{
         return $this->_status;
     }
 	
+    public function revendre(){
+        return $this->_revendre;
+    }
+    
 	public function numeroCheque(){
         return $this->_numeroCheque;
     }

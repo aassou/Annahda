@@ -176,6 +176,7 @@
 									<tbody>
 										<?php
 										foreach($contrats as $contrat){
+										    $revendreTitle = "";
 											$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
 											$sommeOperations = $operationManager->sommeOperations($contrat->id());
 											$bien = "";
@@ -221,20 +222,37 @@
                                                             </a>
 												        	<?php
 												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" ){ 
-												        	if( $contrat->status()=="actif" ){
-															?>
-															<a style="color:red" href="#desisterContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
-																Désister
-															</a>
-															<?php 
-															}
-															else{
-															?>	
-															<a href="#activerContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
-																Activer
-															</a>	
-															<?php	
-															}//if status actif or not
+    												        	if( $contrat->status()=="actif" ){
+    															?>
+    															<a style="color:red" href="#desisterContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+    																Désister
+    															</a>
+    															<?php 
+    															}
+    															else{
+    															?>	
+    															<a href="#activerContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+    																Activer
+    															</a>	
+    															<?php	
+    															}//if status actif or not
+    															//Revendre processing
+    															if ( $contrat->revendre() == 0 ) {
+    															     $revendreTitle = "<strong>Revendre</strong>";
+    															?>
+                                                                <a style="color:red" href="#updateRevendre<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                                    Revendre
+                                                                </a>
+                                                                <?php 
+                                                                }    
+                                                                else if ( $contrat->revendre() == 1 ) {
+                                                                    $revendreTitle = "<strong>Annuler la Revente</strong>";
+                                                                ?>  
+                                                                <a style="color:red" href="#updateRevendre<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                                    Annuler Revente
+                                                                </a>    
+                                                                <?php    
+                                                                }
                                                             }//if profil is admin
 															?>
 												        </li>
@@ -316,6 +334,27 @@
                                             </div>
                                         </div>
                                         <!-- printContratArabe box end -->
+                                        <!-- revendre box begin-->
+                                        <div id="updateRevendre<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier le status "Revendre" du contrat </h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+                                                    <p>Êtes-vous sûr de vouloir <?= $revendreTitle ?> le contrat de <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> ?</p>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="revendre" />
+                                                        <input type="hidden" name="source" value="contrats-list" />
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- revendre box end -->
 										<!-- desistement box begin-->
 										<div id="desisterContrat<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 											<div class="modal-header">

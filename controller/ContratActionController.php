@@ -426,6 +426,37 @@
         }    
     }
     //Action Activer Processing End
+    //Action Update Revendre Processing Begin
+    else if ( $action == "revendre" ) {
+        $idContrat  = $_POST['idContrat'];
+        $contrat = $contratManager->getContratById($idContrat);
+        //Change status of the old contrat Bien from "Vendu" to "Disponible"
+        if( $contrat->revendre() == 0 ){
+            $contratManager->updateRevendre($idContrat, 1);
+        }
+        else if( $contrat->revendre() == 1 ){
+            $contratManager->updateRevendre($idContrat, 0);
+        }
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification Status Revendre",
+            'target' => "Table des contrats",
+            'description' => "Modification de status Revendement du contrat dont l'identifiant est : ".$idContrat." - Projet : ".$nomProjet,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "<strong>Opération valide : </strong>Le contrat est modifié avec succès.";
+        $typeMessage = "success";
+        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
+            $redirectLink = 'Location:../clients-search.php';
+        }
+    }
+    //Action Update Revendre Processing End
     $_SESSION['contrat-action-message'] = $actionMessage;
     $_SESSION['contrat-type-message'] = $typeMessage;
     header($redirectLink);

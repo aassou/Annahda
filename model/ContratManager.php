@@ -13,10 +13,10 @@ class ContratManager{
         $query = $this->_db->prepare('
         INSERT INTO t_contrat (reference, numero, dateCreation, prixVente, prixVenteArabe, 
         avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, 
-        idClient, idProjet, idBien, typeBien, code, status, numeroCheque, created, createdBy)
+        idClient, idProjet, idBien, typeBien, code, status, revendre, numeroCheque, created, createdBy)
         VALUES (:reference, :numero, :dateCreation, :prixVente, :prixVenteArabe, 
         :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, 
-        :idClient, :idProjet, :idBien, :typeBien, :code, :status, :numeroCheque, :created, :createdBy)') 
+        :idClient, :idProjet, :idBien, :typeBien, :code, :status, :revendre, :numeroCheque, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':reference', $contrat->reference());
         $query->bindValue(':numero', $contrat->numero());
@@ -36,6 +36,7 @@ class ContratManager{
 		$query->bindValue(':typeBien', $contrat->typeBien());
 		$query->bindValue(':code', $contrat->code());
 		$query->bindValue(':status', 'actif');
+        $query->bindValue(':status', 0);
 		$query->bindValue(':numeroCheque', $contrat->numeroCheque());
         $query->bindValue(':created', $contrat->created());
         $query->bindValue(':createdBy', $contrat->createdBy());
@@ -106,6 +107,15 @@ class ContratManager{
         $query->execute();
         $query->closeCursor();
 	}
+
+    public function updateRevendre($idContrat, $revendre){
+        $query = $this->_db->prepare('UPDATE t_contrat SET revendre=:revendre WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idContrat);
+        $query->bindValue(':revendre', $revendre);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function delete($idContrat){
 		$query = $this->_db->prepare('DELETE FROM t_contrat WHERE id=:idContrat')
@@ -364,5 +374,35 @@ class ContratManager{
         $data = $query->fetch(PDO::FETCH_ASSOC);
 		$query->closeCursor();
         return $data['total'];
+    }
+    //Status Revendre
+    public function getAppartementsRevendre() {
+        $contrats = array();    
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_contrat 
+        WHERE revendre=:revendre AND typeBien=:typeBien');
+        $query->bindValue(':revendre', 1);
+        $query->bindValue(':typeBien', 'appartement');
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
+    
+    public function getLocauxRevendre() {
+        $contrats = array();    
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_contrat 
+        WHERE revendre=:revendre AND typeBien=:typeBien');
+        $query->bindValue(':revendre', 1);
+        $query->bindValue(':typeBien', 'localCommercial');
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
     }
 }

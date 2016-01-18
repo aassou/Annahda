@@ -21,7 +21,9 @@
         $contratManager = new ContratManager($pdo);
         $clientManager = new ClientManager($pdo);
         $appartements = $appartementManager->getAppartementsNonVendu();
+        $appartementsRevendre = $contratManager->getAppartementsRevendre();
         $locaux = $locauxManager->getLocauxNonVendu();
+        $locauxRevendre = $contratManager->getLocauxRevendre();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -233,203 +235,62 @@
                                                 <?php        
                                                     }
                                                 }
-                                                else if( $appartement->status()=="Vendu" ){
-                                                ?>
-                                                    <a>
-                                                        Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>
-                                                    </a>
-                                                <?php    
-                                                }
                                                 ?>
                                             </td>
                                         </tr>
-                                        <!-- change to disponible box begin-->
-                                        <div id="###changeToDisponible<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le status vers "Disponible"</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
-                                                    <p>Êtes-vous sûr de vouloir changer le status de 
-                                                        <a class="btn mini red">Réservé</a> vers 
-                                                        <a class="btn mini green">Disponible</a> ?</p>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateStatus" />
-                                                        <input type="hidden" name="status" value="Disponible" />
-                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- change to disponible box end -->   
-                                        <!-- change to reserve box begin-->
-                                        <div id="###changeToReserve<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le status vers "Réservé"</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
-                                                    <p>Êtes-vous sûr de vouloir changer le status de 
-                                                        <a class="btn mini green">Disponible</a> vers 
-                                                        <a class="btn mini red">Réservé</a> ?</p>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateStatus" />
-                                                        <input type="hidden" name="status" value="Réservé" />
-                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- change to reserve box end -->  
-                                        <!-- add file box begin-->
-                                        <div id="###addPieces<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Ajouter des pièces pour cette appartement</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/AppartementActionController.php?p=1" method="post" enctype="multipart/form-data">
-                                                    <p>Êtes-vous sûr de vouloir ajouter des pièces pour cette appartement ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Nom Pièce</label>
-                                                        <input type="text" name="nom" />
-                                                        <label class="right-label">Lien</label>
-                                                        <input type="file" name="url" />
-                                                        <input type="hidden" name="action" value="addPieces" />
-                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- add files box end -->  
-                                        <!-- updateAppartement box begin-->
-                                        <div id="###updateAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Modifier Appartement</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir modifier <strong>Appartement : <?= $appartement->nom() ?>- Niveau : <?= $appartement->niveau() ?></strong></p>
-                                                    <div class="control-group">
-                                                        <div class="controls">
-                                                            <label class="control-label">Code</label>
-                                                            <input type="text" name="code" value="<?= $appartement->nom() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Supérficie</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="superficie" value="<?= $appartement->superficie() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Façade</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="facade" value="<?= $appartement->facade() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Nombre de pièces</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="nombrePiece" value="<?= $appartement->nombrePiece() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Prix</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="prix" value="<?= $appartement->prix() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="niveau">Niveau</label>
-                                                        <div class="controls">
-                                                            <select style="width:150px" name="niveau" class="m-wrap">
-                                                                <option value="<?= $appartement->niveau() ?>"><?= $appartement->niveau() ?></option>
-                                                                <option disabled="disabled">-----------------</option>
-                                                                <option value="RC">RC</option>
-                                                                <option value="Mezzanine">Mezzanine</option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="status">Status</label>
-                                                        <div class="controls">
-                                                            <select style="width:150px" name="status" id="status" class="m-wrap">
-                                                                <option value="<?= $appartement->status() ?>"><?= $appartement->status() ?></option>
-                                                                <option disabled="disabled">-----------------</option>
-                                                                <option value="Disponible">Disponible</option>
-                                                                <option value="Réservé">Réservé</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="cave">Cave</label>
-                                                        <div class="controls">
-                                                            <select style="width:150px" name="cave" class="m-wrap">
-                                                                <option value="<?= $appartement->cave() ?>"><?= $appartement->cave() ?></option>
-                                                                <option disabled="disabled">-----------------</option>
-                                                                <option value="Avec">Avec</option>
-                                                                <option value="Sans">Sans</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Réservé par </label>
-                                                        <div class="controls">
-                                                            <input type="text" name="par" class="m-wrap" value="<?= $appartement->par() ?>">
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <div class="controls">
-                                                            <input type="hidden" name="action" value="update" />  
-                                                            <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- updateAppartement box end -->
-                                        <!-- updateClient box begin -->
-                                        <div id="###updateClient<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le client <strong><?= $appartement->par() ?></strong> </h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $appartement->par() ?></strong> ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Réservé par</label>
-                                                        <input type="text" name="par" value="<?= $appartement->par() ?>" />
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateClient" />
-                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                        <!-- updateClient box end -->
+                                        <?php
+                                        }//end of loop
+                                        ?>
+                                        <?php
+                                        foreach($appartementsRevendre as $contrat){
+                                            $appartement = $appartementManager->getAppartementById($contrat->idBien());
+                                        ?>      
+                                        <tr class="appartements">
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                        <?= $appartement->nom() ?> 
+                                                        <i class="icon-angle-down"></i>
+                                                    </a>
+                                                    <?php
+                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                                    ?>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
+                                                                Fiche descriptif
+                                                            </a>
+                                                            <a href="#addPieces<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
+                                                                Ajouter Document
+                                                            </a>
+                                                            <a href="#updateAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
+                                                                Modifier
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </td>
+                                            <td class="hidden-phone"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
+                                            <td class="hidden-phone"><?= $appartement->niveau() ?></td>
+                                            <td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
+                                            <td><?= $appartement->superficie() ?> m<sup>2</sup></td>
+                                            <td class="hidden-phone"><?= $appartement->facade() ?></td>
+                                            <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
+                                            <td class="hidden-phone">
+                                                <?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
+                                                <?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
+                                            </td>
+                                            <td><a class="btn mini black">Revendre</a>
+                                            </td>
+                                            <td class="hidden-phone">
+                                                <a>
+                                                    Pour : <?= $clientManager->getClientById($contrat->idClient())->nom() ?>
+                                                </a>    
+                                            </td>
+                                        </tr>
                                         <?php
                                         }//end of loop
                                         ?>
@@ -547,179 +408,59 @@
                                                 <?php        
                                                     }
                                                 }
-                                                elseif( $locau->status() == "Vendu" ){
-                                                ?>
-                                                <a>
-                                                    Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $locau->id(), "localCommercial"))->nom() ?>
-                                                </a>
-                                                <?php
-                                                }
                                                 ?>
                                             </td>
                                         </tr>
-                                        <!-- updateClient box begin -->
-                                        <div id="###updateClient<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le client <strong><?= $locau->par() ?></strong> </h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $locau->par() ?></strong> ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Réservé par</label>
-                                                        <input type="text" name="par" value="<?= $locau->par() ?>" />
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateClient" />                                                      
-                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>  
-                                        <!-- updateClient box end -->
-                                        <!-- change to disponible box begin-->
-                                        <div id="###changeToDisponible<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le status vers "Disponible"</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir changer le status de 
-                                                        <a class="btn mini red">Réservé</a> vers 
-                                                        <a class="btn mini green">Disponible</a> ?</p>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateStatus" />
-                                                        <input type="hidden" name="status" value="Disponible" />
-                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- change to disponible box end -->   
-                                        <!-- change to reserve box begin-->
-                                        <div id="###changeToReserve<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Changer le status vers "Réservé"</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir changer le status de 
-                                                        <a class="btn mini green">Disponible</a> vers 
-                                                        <a class="btn mini red">Réservé</a> ?</p>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="updateStatus" />
-                                                        <input type="hidden" name="status" value="Réservé" />
-                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- change to reserve box end -->  
-                                        <!-- add file box begin-->
-                                        <div id="###addPieces<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Ajouter des pièces pour ce local</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LocauxPiecesAddController.php" method="post" enctype="multipart/form-data">
-                                                    <p>Êtes-vous sûr de vouloir ajouter des pièces pour ce local ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Nom Pièce</label>
-                                                        <input type="text" name="nom" />
-                                                        <label class="right-label">Lien</label>
-                                                        <input type="file" name="url" />
-                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-                                                        <label class="right-label"></label>
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- add files box end -->  
-                                        <!-- update box begin-->
-                                        <div id="###updateLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Modifier Infos Local commercial</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir modifier les informations du local <strong><?= $locau->nom() ?></strong> ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Code</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="code" value="<?= $locau->nom() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Superficie</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="superficie" value="<?= $locau->superficie() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Façade</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="facade" value="<?= $locau->facade() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Prix</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="prix" value="<?= $locau->prix() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Status</label>
-                                                        <div class="controls">
-                                                            <select name="status" class="m-wrap">
-                                                                <option value="<?= $locau->status() ?>"><?= $locau->status() ?></option>
-                                                                <option disabled="disabled">------------</option>
-                                                                <option value="Disponible">Disponible</option>
-                                                                <option value="Réservé">Réservé</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <div class="controls">
-                                                            <label class="right-label">Mezzanine</label>
-                                                            <select name="mezzanine" class="m-wrap">
-                                                                <option value="<?= $locau->mezzanine() ?>"><?= $locau->mezzanine() ?></option>
-                                                                <option disabled="disabled">------------</option>
-                                                                <option value="Sans">Sans</option>
-                                                                <option value="Avec">Avec</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="right-label">Réservé Par</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="par" value="<?= $locau->par() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="action" value="update" />
-                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-                                                        <div class="controls">  
-                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- update box end -->
+                                        <?php
+                                        }//end of loop
+                                        ?>
+                                        <?php
+                                        foreach($locauxRevendre as $contrat){
+                                            $locau = $locauxManager->getLocauxById($contrat->idBien());
+                                        ?>      
+                                        <tr class="locaux">
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                        <?= $locau->nom() ?> 
+                                                        <i class="icon-angle-down"></i>
+                                                    </a>
+                                                    <?php
+                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+                                                    ?>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
+                                                                Fiche descriptif
+                                                            </a>
+                                                            <a href="#addPieces<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
+                                                                Ajouter Document
+                                                            </a>
+                                                            <a href="#updateLocaux<?= $locau->id();?>" data-toggle="modal" data-id="<?= $locau->id(); ?>">
+                                                                Modifier
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <?php
+                                                    }    
+                                                    ?>
+                                                </div>
+                                            </td>
+                                            <td class="hidden-phone"><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
+                                            <td><?= $locau->superficie() ?></td>
+                                            <td class="hidden-phone"><?= $locau->facade() ?></td>
+                                            <td><?= number_format($locau->prix(), 2, ',', ' ') ?></td>
+                                            <td class="hidden-phone">
+                                                <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
+                                                <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
+                                            </td>
+                                            <td><a class="btn mini black">Revendre</a></td>
+                                            <td>
+                                                <a>
+                                                   Pour : <?= $clientManager->getClientById($contrat->idClient())->nom() ?>
+                                                </a>
+                                            </td>
+                                        </tr>
                                         <?php
                                         }//end of loop
                                         ?>
