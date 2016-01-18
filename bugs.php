@@ -148,7 +148,7 @@
                                             <th style="width :30%">Anomalie</th>
                                             <th style="width :35%">Lien</th>
                                             <th style="width :15%">Date</th>
-                                            <th style="width :10%">Ajouté par</th>
+                                            <th style="width :10%">Par</th>
                                             <th style="width :10%">Status</th>
                                         </tr>
                                     </thead>

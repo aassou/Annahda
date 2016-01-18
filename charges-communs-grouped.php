@@ -103,7 +103,7 @@
                                         <div class="controls">
                                             <select name="type">
                                                 <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -290,90 +290,11 @@
                                         <tr class="charges">
                                             <td>
                                                 <a class="btn mini btn-fixed-width btn-fixed-height" href="charges-communs-type.php?type=<?= $charge->type() ?>">
-                                                    Charges <?= $charge->type() ?> 
+                                                    Charges <?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?> 
                                                 </a>
                                             </td>
                                             <td class="hidden-phone"><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
-                                        </tr>
-                                        <!-- updateCharge box begin-->
-                                        <div id="updateCharge<?= $charge->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Modifier Info Charge </h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/ChargeCommunActionController.php" method="post">
-                                                    <div class="control-group">
-                                                        <label class="control-label">Type Charge</label>
-                                                        <div class="controls">
-                                                            <select name="type">
-                                                                <option value="<?= $charge->type() ?>"><?= $charge->type() ?></option>
-                                                                <option disabled="disabled">-------------</option>
-                                                                <?php foreach($typeCharges as $type){ ?>
-                                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
-                                                                <?php } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Date Opération</label>
-                                                        <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                                            <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $charge->dateOperation() ?>" />
-                                                            <span class="add-on"><i class="icon-calendar"></i></span>
-                                                         </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Montant</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="montant" value="<?= $charge->montant() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Désignation</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="designation" value="<?= $charge->designation() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Société</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="societe" value="<?= $charge->societe() ?>" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
-                                                        <input type="hidden" name="source" value="charges-communs-grouped" /> 
-                                                        <input type="hidden" name="action" value="update" />
-                                                        <div class="controls">  
-                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- updateCharge box end -->            
-                                        <!-- deleteCharge box begin-->
-                                        <div id="deleteCharge<?= $charge->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Supprimer la charge</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ChargeCommunActionController.php" method="post">
-                                                    <p>Êtes-vous sûr de vouloir supprimer cette charge <?= $charge->type() ?> ?</p>
-                                                    <div class="control-group">
-                                                        <label class="right-label"></label>
-                                                        <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
-                                                        <input type="hidden" name="source" value="charges-communs-grouped" /> 
-                                                        <input type="hidden" name="action" value="delete" />
-                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- deleteCharge box end -->    
+                                        </tr> 
                                         <?php
                                         }//end of loop
                                         ?>
