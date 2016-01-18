@@ -16,6 +16,7 @@
         //classes managers  
         $projetManager = new ProjetManager($pdo);
         $chargeManager = new ChargeManager($pdo);
+        $typeChargeManager = new TypeChargeManager($pdo);
         $idProjet = htmlentities($_POST['idProjet']);
         $projet = $projetManager->getProjetById($idProjet);
         $criteria = htmlentities($_POST['criteria']);
@@ -31,7 +32,7 @@
             else {
                 $charges = $chargeManager->getChargesByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type);
                 $totalCharges = number_format($chargeManager->getTotalByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type), 2, ',', ' ');
-                $titreDocument = "Liste des charges ".$type." entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));
+                $titreDocument = "Liste des charges ".$typeChargeManager->getTypeChargeById($type)->nom()." entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));
             }
         }
         else if ( $criteria=="toutesCharges" ) {
@@ -42,7 +43,7 @@
                 $type = htmlentities($_POST['typeCharge']);
                 $charges = $chargeManager->getChargesByIdProjetByType($idProjet, $type);
                 $totalCharges = number_format($chargeManager->getTotalByIdProjetByType($idProjet, $type), 2, ',', ' ');
-                $titreDocument = "Liste des charges de ".$type;
+                $titreDocument = "Liste des charges de ".$typeChargeManager->getTypeChargeById($type)->nom();
             }
         } 
 
@@ -83,16 +84,16 @@ ob_start();
     <table>
         <tr>
             <th style="width:20%">Type</th>
-            <th style="width:20%">Date Opération</th>
-            <th style="width:20%">Désignation</th>
+            <th style="width:15%">Date</th>
+            <th style="width:30%">Désignation</th>
             <th style="width:20%">Société</th>
-            <th style="width:20%">Montant</th>
+            <th style="width:15%">Montant</th>
         </tr>
         <?php
         foreach($charges as $charge){
         ?>      
         <tr>
-            <td><?= $charge->type() ?></td>
+            <td><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
             <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
             <td><?= $charge->designation() ?></td>
             <td><?= $charge->societe() ?></td>
@@ -103,10 +104,10 @@ ob_start();
         ?>
         <tr>
             <td style="width:20%"></td>
+            <td style="width:15%"></td>
+            <td style="width:30%"></td>
             <td style="width:20%"></td>
-            <td style="width:20%"></td>
-            <td style="width:20%"></td>
-            <th style="width:20%">Total</th>
+            <th style="width:15%">Total</th>
         </tr>
         <tr>
             <td></td>
