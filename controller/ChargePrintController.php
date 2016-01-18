@@ -93,11 +93,11 @@ ob_start();
         foreach($charges as $charge){
         ?>      
         <tr>
-            <td><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
-            <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
-            <td><?= $charge->designation() ?></td>
-            <td><?= $charge->societe() ?></td>
-            <td><?= number_format($charge->montant(), 2, ' ', ',') ?>&nbsp;DH</td>
+            <td style="width:20%"><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
+            <td style="width:15%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
+            <td style="width:30%"><?= $charge->designation() ?></td>
+            <td style="width:20%"><?= $charge->societe() ?></td>
+            <td style="width:15%"><?= number_format($charge->montant(), 2, ' ', ',') ?>&nbsp;DH</td>
         </tr>   
         <?php
         }//end of loop
