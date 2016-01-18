@@ -21,6 +21,7 @@
         $typeChargeManager = new TypeChargeManager($pdo);
         //
         $typeCharge = $_GET['type'];
+        $nomTypeCharge = $typeChargeManager->getTypeChargeById($typeCharge)->nom();
         if(isset($_GET['idProjet']) and 
         ($_GET['idProjet'] >=1 and $_GET['idProjet'] <= $projetManager->getLastId()) ){
             $idProjet = $_GET['idProjet'];
@@ -102,7 +103,7 @@
                                 <i class="icon-angle-right"></i> 
                             </li>
                             <li>
-                                <a>Détails des charges de <strong><?= $typeChargeManager->getTypeChargeById($typeCharge)->nom() ?></strong></a> 
+                                <a>Détails des charges de <strong><?= $nomTypeCharge ?></strong></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -283,14 +284,14 @@
                         <table class="table table-striped table-bordered  table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 80%"><strong>Total des charges de <?= $typeCharge ?></strong></th>
+                                    <th style="width: 80%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
                                     <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
-                                <h4>Liste détaillé des charges de <?= $typeCharge ?></h4>
+                                <h4>Liste détaillé des charges de <?= $nomTypeCharge ?></h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="reload"></a>
                                 </div>
@@ -458,7 +459,7 @@
                                 <table class="table table-striped table-bordered  table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="width: 80%"><strong>Total des charges de <?= $typeCharge ?></strong></th>
+                                            <th style="width: 80%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
                                             <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                         </tr>
                                     </tbody>
