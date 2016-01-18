@@ -4982,6 +4982,10 @@ div#fancy_print {
 	width: 200px;
 }
 
+.btn-fixed-width-big{
+	width: 300px;
+}
+
 .btn-fixed-height{
 	height: 15px;
 }

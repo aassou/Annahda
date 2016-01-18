@@ -90,7 +90,11 @@ class ChargeManager{
     
     public function getChargesByIdProjetByType($idProjet, $type){
         $charges = array();
-        $query = $this->_db->prepare('SELECT * FROM t_charge WHERE idProjet=:idProjet AND type=:type ORDER BY dateOperation');
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_charge 
+        WHERE idProjet=:idProjet 
+        AND type=:type 
+        ORDER BY dateOperation");
         $query->bindValue(':idProjet', $idProjet);
         $query->bindValue(':type', $type);
         $query->execute();

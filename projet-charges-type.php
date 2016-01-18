@@ -102,7 +102,7 @@
                                 <i class="icon-angle-right"></i> 
                             </li>
                             <li>
-                                <a>Détails des charges de <strong><?= $typeCharge ?></strong></a> 
+                                <a>Détails des charges de <strong><?= $typeChargeManager->getTypeChargeById($typeCharge)->nom() ?></strong></a> 
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -124,7 +124,7 @@
                                         <div class="controls">
                                             <select name="type">
                                                 <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -345,25 +345,7 @@
                                             <?php  
                                             } 
                                             ?>
-                                            <td>
-                                                <?= $charge->type() ?>
-                                                <!--div class="btn-group">
-                                                    <a class="btn mini dropdown-toggle dropDownButton btn-fixed-width" href="#" data-toggle="dropdown">
-                                                        <?= $charge->type() ?>             
-                                                        <i class="icon-angle-down"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>                                                                
-                                                            <a href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>">
-                                                                Modifier
-                                                            </a>
-                                                            <a href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>">
-                                                                Supprimer
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div-->
-                                            </td>
+                                            <td><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
                                             <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
                                             <td class="hidden-phone"><?= $charge->designation() ?></td>
                                             <td class="hidden-phone"><?= $charge->societe() ?></td>
@@ -384,7 +366,7 @@
                                                                 <option value="<?= $charge->type() ?>"><?= $charge->type() ?></option>
                                                                 <option disabled="disabled">-------------</option>
                                                                 <?php foreach($typeCharges as $type){ ?>
-                                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
                                                                 <?php } ?>
                                                             </select>
                                                         </div>
@@ -469,7 +451,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td><strong><a><?= number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                            <td><strong><a><?php //number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
                                         </tr-->
                                     </tbody>
                                 </table>

@@ -118,7 +118,7 @@
                                         <div class="controls">
                                             <select name="type">
                                                 <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -296,8 +296,8 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50%">Type</th>
-                                            <th style="width: 50%">Total</th>
+                                            <th style="width: 70%">Type</th>
+                                            <th style="width: 30%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -306,8 +306,8 @@
                                         ?>      
                                         <tr class="charges">
                                             <td>
-                                                <a class="btn mini btn-fixed-width btn-fixed-height" href="projet-charges-type.php?idProjet=<?= $idProjet ?>&type=<?= $charge->type() ?>">
-                                                    Charges <?= $charge->type() ?> 
+                                                <a class="btn mini btn-fixed-width-big btn-fixed-height" href="projet-charges-type.php?idProjet=<?= $idProjet ?>&type=<?= $charge->type() ?>">
+                                                    Charges <?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?> 
                                                 </a>
                                             </td>
                                             <td class="hidden-phone"><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
