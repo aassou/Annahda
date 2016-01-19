@@ -35,10 +35,7 @@
         //if($livraisonNumber != 0){
         $idFournisseur = $_GET['idFournisseur'];
         $livraisons = $livraisonManager->getLivraisonsByFournisseurGroupByMonth($idFournisseur);
-        $pdo = new PDO('mysql:host=localhost;dbname=annahda', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        $livs = $pdo->prepare('SELECT MONTH(dateLivraison) AS designation, YEAR(dateLivraison) AS dateLivraison, id FROM t_livraison WHERE idFournisseur = :idFournisseur GROUP BY MONTH(dateLivraison)+'-'+YEAR(dateLivraison)');
-        $livs->bindValue(':idFournisseur', $idFournisseur);
-        $livs->execute();
+        
         $totalReglement = $reglementsFournisseurManager->getTotalReglement();
         $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
         $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=1";
@@ -393,7 +390,7 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 40%">Mois/Année</th>
+                                            <th style="width: 40%">Mois / Année</th>
                                             <th style="width: 20%">Total Livraisons</th>
                                             <th style="width: 20%">Total Réglements</th>
                                             <th style="width: 20%">Solde</th>
@@ -406,19 +403,19 @@
                                         <?php
                                         //if($livraisonNumber != 0){
                                         //echo print_r($query);
-                                        //foreach($livraisons as $livraison){
-                                        while($data = $livs->fetch()){
-                                            //$livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($livraison->idFournisseur());
+                                        foreach($livraisons as $livraison){
+                                            $livraisonsIds = 
+                                            $livraisonManager->getLivraisonsByIdFournisseurByMonthYear($livraison->idFournisseur(), $livraison->dateLivraison());
                                             $totalDetailsLivraisons = 0;
-                                            //foreach($livraisonsIds as $idl){
-                                            //    $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
-                                            //}
+                                            foreach($livraisonsIds as $idl){
+                                                $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
+                                            }
                                             
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
                                                 <div style="width: 200px">
-                                                    <a><strong><?= $data['designation'] ?></strong></a>
+                                                    <a class="btn mini"><strong><?= date('m / Y', strtotime($livraison->dateLivraison())) ?></strong></a>
                                                 </div>
                                             </td>
                                             <td>

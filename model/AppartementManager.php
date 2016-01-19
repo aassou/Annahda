@@ -101,6 +101,16 @@ class AppartementManager{
         $query->closeCursor();
         return $data['appartementNumber'];
     }
+    
+    public function getTotalPrixAppartementsByIdProjet($idProjet){
+        $query = $this->_db->prepare('SELECT SUM(prix) AS prixTotal FROM t_appartement WHERE idProjet=:idProjet')
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['prixTotal'];
+    }
 	
 	public function getAppartementReserveNumberByIdProjet($idProjet){
         $query = $this->_db->prepare('SELECT COUNT(*) AS appartementNumber FROM t_appartement 

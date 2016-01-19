@@ -206,6 +206,21 @@ class ContratManager{
         return $ids;
     }
 
+    public function getContratActifIdsByIdProjet($idProjet){
+        $ids = array();
+        $query = $this->_db->prepare(
+        'SELECT id FROM t_contrat 
+        WHERE idProjet=:idProjet AND status="actif" ');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        //get result
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $ids[] = $data['id'];
+        }
+        $query->closeCursor();
+        return $ids;
+    }
+
     public function getIdClientByIdProject($idProject){
         $idsClient = array();
         $query = $this->_db->prepare('SELECT idClient FROM t_contrat WHERE idProjet=:idProjet');
@@ -237,6 +252,16 @@ class ContratManager{
         }
         $query->closeCursor();
         return $contrats;
+    }
+    
+    public function getTotalPrixVenteByIdProjet($idProjet){
+        $query = $this->_db->prepare(
+        'SELECT SUM(prixVente) AS total FROM t_contrat 
+        WHERE idProjet=:idProjet AND status="actif" ');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        return $data['total'];
     }
 	
 	public function getContratsByIdProjetOnly($idProjet){

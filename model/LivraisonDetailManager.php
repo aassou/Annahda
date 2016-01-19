@@ -104,6 +104,22 @@ class LivraisonDetailManager{
 		$query->closeCursor();
 		return $data['totalLivraison'];
 	}
+
+    public function getTotalLivraisonByIdLivraisonByDate($idLivraison, $date){
+        $query = $this->_db->prepare(
+        "SELECT SUM(prixUnitaire*quantite) AS totalLivraison 
+        FROM t_livraison_detail 
+        WHERE idLivraison=:idLivraison 
+        AND MONTH(:date)=MONTH(dateLivraison)
+        AND YEAR(:date)=YEAR(dateLivraison)")
+        or die(print_r($this->_db->errorInfo()));;
+        $query->bindValue(':idLivraison', $idLivraison);
+        $query->bindValue(':date', $date);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['totalLivraison'];
+    }
 		
     public function getLastId(){
         $query = $this->_db->query('SELECT id AS last_id FROM t_livraison ORDER BY id DESC LIMIT 0, 1');

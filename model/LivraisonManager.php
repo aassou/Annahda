@@ -345,6 +345,18 @@ class LivraisonManager{
         }
         return $ids;
 	}
+    
+    public function getLivraisonIdsByIdProjet($idProjet){
+        $ids = array();
+        $query = $this->_db->prepare(' SELECT id FROM t_livraison 
+        WHERE idProjet=:idProjet');
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $ids[] = $data['id'];
+        }
+        return $ids;
+    }
 	
 	public function getLivraisonIdsByIdFournisseurIdProjet($idFournisseur, $idProjet){
 		$ids = array();
@@ -427,20 +439,35 @@ class LivraisonManager{
         return $livraisons;
     }
     
+    public function getLivraisonsByIdFournisseurByMonthYear($idFournisseur, $date){
+        $idLivraisons = array();
+        $query = $this->_db->prepare(
+        'SELECT id FROM t_livraison 
+        WHERE idFournisseur=:idFournisseur 
+        AND MONTH(dateLivraison)=MONTH(:date) 
+        AND YEAR(dateLivraison)=YEAR(:date)
+        ORDER BY dateLivraison DESC');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':date', $date);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = $data['id'];
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
+    
     public function getLivraisonsByFournisseurGroupByMonth($idFournisseur){
         $livraisons = array();
         $query = $this->_db->prepare(
-        'SELECT MONTH(dateLivraison) AS designation, 
-        YEAR(dateLivraison) AS dateLivraison, id
-        FROM t_livraison 
+        "SELECT * FROM t_livraison 
         WHERE idFournisseur=:idFournisseur 
-        GROUP BY MONTH(dateLivraison)+'-'+YEAR(dateLivraison)');
+        GROUP BY MONTH(dateLivraison)+'-'+YEAR(dateLivraison)
+        ORDER BY dateLivraison DESC");
         $query->bindValue(':idFournisseur', $idFournisseur);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $key = $data['id'];
-            $value = $data['designation'].'/'.$data['dateLivraison'];
-            $livraisons[] = $value;
+            $livraisons[] = new Livraison($data);
         }
         $query->closeCursor();
         return $livraisons;

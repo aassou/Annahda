@@ -14,13 +14,16 @@
     session_start();
     if(isset($_SESSION['userMerlaTrav']) and (isset($_GET['idProjet']))){
     	//classes managers
+    	$appartementManager = new AppartementManager($pdo);
+        $locauxManager = new LocauxManager($pdo);
 		$usersManager = new UserManager($pdo);
-		$mailsManager = new MailManager($pdo);
-		$notesClientsManager = new NotesClientManager($pdo);
 		$projetManager = new ProjetManager($pdo);
 		$contratManager = new ContratManager($pdo);
 		$clientManager = new ClientManager($pdo);
+        $chargeManager = new ChargeManager($pdo);
+        $chargeCommunManager = new ChargeCommunManager($pdo);
 		$livraisonsManager = new LivraisonManager($pdo);
+        $livraisonDetailManager = new LivraisonDetailManager($pdo);
 		$fournisseursManager = new FournisseurManager($pdo);
 		$reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
 		$caisseEntreesManager = new CaisseEntreesManager($pdo);
@@ -29,29 +32,36 @@
 		//classes and vars
 		$idProjet = $_GET['idProjet'];
         $projet = $projetManager->getProjetById($idProjet);
-		//users number
-		$usersNumber = $usersManager->getUsersNumber();
-		$mailsNumberToday = $mailsManager->getMailsNumberToday();
-		$mailsToday = $mailsManager->getMailsToday();
-		$clientWeek = $clientManager->getClientsWeek();
-		$clientNumberWeek = $clientManager->getClientsNumberWeek();
-		$livraisonsWeek = $livraisonsManager->getLivraisonsWeek();
-		$livraisonsNumberWeek = $livraisonsManager->getLivraisonsNumberWeek();
-		$operationsNumberWeek = $operationsManager->getOperationNumberWeek();
+		//Container 1 : Statistiques
+		$chiffreAffaireTheorique = 
+		ceil(
+		  $appartementManager->getTotalPrixAppartementsByIdProjet($idProjet)
+          +
+          $locauxManager->getTotalPrixLocauxByIdProjet($idProjet)
+        );
+		
 		//get contacts ids and get sum of client operations
-		$idsContrats = $contratManager->getContratIdsByIdProjet($_GET['idProjet']);
+		$idsContrats = $contratManager->getContratActifIdsByIdProjet($idProjet);
 		$sommeOperationsClients = 0;
 		$sommePrixVente = 0;
 		foreach($idsContrats as $id){
 			$sommeOperationsClients += $operationsManager->sommeOperations($id);
 			$sommePrixVente += $contratManager->getContratById($id)->prixVente();
 		}
-		//$sommeApportsClients = ceil($contratManager->sommeAvanceByIdProjet($_GET['idProjet'])+$sommeOperationsClients);
-		$sommeApportsClients = ceil($sommeOperationsClients);
-		$sommeReglements = ceil($reglementsFournisseurManager->sommeReglementFournisseurByIdProjet($_GET['idProjet']));
-		$sommeLivraison = ceil($livraisonsManager->getTotalLivraisonsIdProjet($_GET['idProjet']));
-		$reliquat = $sommePrixVente - $sommeReglements; 
-		//$sommeReglements = 10;
+		$sommeApportsClients = ($sommeOperationsClients);
+		$reliquat = $sommePrixVente - $sommeOperationsClients; 
+        $sommeCharges = 
+        $chargeCommunManager->getTotal() + $chargeManager->getTotalByIdProjet($idProjet);
+        $sommeCharges = ceil($sommeCharges);
+		
+        //Container 2 : Statistiques
+        $sommeLivraisons = 0;
+        $idsLivraisons = $livraisonsManager->getLivraisonIdsByIdProjet($idProjet);
+        foreach ( $idsLivraisons as $id ) {
+            $sommeLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($id);
+        }
+        $sommeReglements = ceil($reglementsFournisseurManager->sommeReglementFournisseurByIdProjet($_GET['idProjet']));
+        $sommeLivraison = ceil($livraisonsManager->getTotalLivraisonsIdProjet($_GET['idProjet']));
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -132,13 +142,17 @@
 						<hr class="line">
 						<div id="container1" style="width:100%; height:400px;"></div>
 					</div>
+					<div class="span12">
+                        <hr class="line">
+                        <div id="container2" style="width:100%; height:400px;"></div>
+                    </div>
 				</div>
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
 				<!--h4><i class="icon-table"></i> Statistiques de la caisse</h4>
 				<hr class="line">
 				<div class="row-fluid">
-					<div id="container2" style="width:100%; height:400px;"></div>
+					<div id="container3" style="width:100%; height:400px;"></div>
 				</div-->
 				<!--h4><i class="icon-table"></i> Statistiques de la société</h4>
 				<hr class="line">
@@ -155,7 +169,7 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
-		2015 &copy; MerlaTravERP. Management Application.
+		2015 &copy; ImmoERP. Management Application.
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -213,8 +227,11 @@
 				chart: {
 					type: 'column'
 				},
+				exporting: {
+                    filename:'StatistiquesProjet-CA-Charges'
+                },   
 				title: {
-					text: 'Réglements Clients - Reliquat - Livraisons Fournisseurs - Réglements Fournisseurs'
+					text: 'Chiffre d\'affaires et charges'
 				},
 				xAxis: {
 					categories: ['Entrées-Sorties']
@@ -224,27 +241,84 @@
 						text: 'Montants en Millions de DH'
 					}
 				},
-				series: [{
+				series: [
+				{
+                    name: 'Valeur des biens avant vente',
+                    data: [<?= json_encode($chiffreAffaireTheorique) ?>]
+                },
+                {
+                    name: 'Valeur des biens vendus',
+                    data: [<?= json_encode($sommePrixVente) ?>]
+                },
+                {
+                    name: 'Les charges',
+                    data: [<?= json_encode($sommeCharges) ?>]
+                },
+                {
+                    name: 'CA estimé',
+                    data: [<?= json_encode($sommePrixVente - $sommeCharges) ?>]
+                },
+				{
 					name: 'Réglements Clients',
 					data: [<?= json_encode($sommeApportsClients) ?>]
 				}, 
 				{
 					name: 'Reliquat',
 					data: [<?= json_encode($reliquat) ?>]
-				}, 
-				{
-					name: 'Réglements Fournisseurs',
-					data: [<?= json_encode($sommeReglements) ?>]
-				}
-				,
-				{
-					name: 'Livraison Fournisseurs',
-					data: [<?= json_encode($sommeLivraison) ?>]
 				}
 				]
 			});
 		});
 	</script>
+	<script> 
+        $(function() {
+            Highcharts.setOptions({
+                credits: {
+                      enabled: false
+                },
+                lang: {
+                    downloadPDF: 'PDF',
+                    printChart: 'Imprimer Statistiques',
+                    downloadPNG: null,
+                    downloadJPEG: null,
+                    downloadSVG: null,
+                }
+            });
+            $('#container2').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                exporting: {
+                    filename:'StatistiquesLivraisonsReglementsFournisseurs'
+                },   
+                title: {
+                    text: 'Livraisons et réglements des fournisseurs'
+                },
+                xAxis: {
+                    categories: ['Entrées-Sorties']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Montants en Millions de DH'
+                    }
+                },
+                series: [
+                {
+                    name: 'Réglements Fournisseurs',
+                    data: [<?= json_encode($sommeReglements) ?>]
+                },
+                {
+                    name: 'Livraison Fournisseurs',
+                    data: [<?= json_encode($sommeLivraisons) ?>]
+                },
+                {
+                    name: 'Reliquat',
+                    data: [<?= json_encode($sommeLivraisons - $sommeReglements) ?>]
+                }
+                ]
+            });
+        });
+    </script>
 	<!--script>
 		$(function() {
 			Highcharts.setOptions({
@@ -256,7 +330,7 @@
 					downloadSVG: null
 				}	
 			});
-			$('#container2').highcharts({
+			$('#container3').highcharts({
 				chart: {
 					type: 'line'
 				},
