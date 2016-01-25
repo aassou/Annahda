@@ -490,129 +490,6 @@
                         </div>
                     </div>
                     <!-- addReglement box end -->
-                    <!-- DATES REGLEMENTS PREVU BEGIN -->
-                    <?php 
-                    if ( $reglementPrevuNumber > 0 ) { 
-                    ?>
-                    <div class="portlet box light-grey" id="reglementsPrevus">
-                        <div class="portlet-title">
-                            <h4><?= $reglementPrevuTitle; ?></h4>
-                            <div class="tools">
-                                <a href="javascript:;" class="reload"></a>
-                            </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="clearfix">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20%">Date Prévu de réglement</th>
-                                            <th style="width: 20%">Echéance</th>
-                                            <th style="width: 20%">Status du réglement</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $totalEcheance = 0;
-                                        foreach ( $reglementPrevuElements as $element ) {
-                                            $status = "";    
-                                            $totalEcheance += $contrat->echeance();
-                                            if ( $element->status() == 0 ) {
-                                                //comparing dates
-                                                $now = date('Y-m-d');
-                                                $now = new DateTime($now);
-                                                $now = $now->format('Ymd');
-                                                $datePrevu = $element->datePrevu();
-                                                $datePrevu = new DateTime($datePrevu);
-                                                $datePrevu = $datePrevu->format('Ymd');
-                                                if ( $datePrevu > $now ) {
-                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">Normal</a>';    
-                                                    }
-                                                    else{
-                                                        $status = '<a class="btn mini">Normal</a>';
-                                                    }   
-                                                }
-                                                else if ( $datePrevu < $now ) {
-                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retards</a>';
-                                                    }
-                                                    else {
-                                                        $status = '<a class="btn mini red blink_me">En retards</a>';
-                                                    }
-                                                }
-                                            }
-                                            else if( $element->status() == 1 ) {
-                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
-                                                }
-                                                else {
-                                                    $status = '<a class="btn mini blue">Réglé</a>';
-                                                }    
-                                            }
-                                        ?>
-                                        <tr>
-                                            <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><?= $contrat->echeance() ?></td>
-                                            <td><?= $status ?></td>
-                                        </tr>
-                                        <!-- updateStatusReglementPrevu box begin-->
-                                        <div id="updateStatusReglementPrevu<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                <h3>Modifier status</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
-                                                    <div class="control-group">
-                                                        <p>Êtes-vous sûr de vouloir changer le status de la date prévu ?</p>
-                                                        <label class="control-label">Status</label>
-                                                        <div class="controls">
-                                                            <select name="status">
-                                                                <option value="<?= $element->status() ?>"><?php if($element->status()==0){echo 'En cours';}else{echo 'Réglé';} ?></option>
-                                                                <option disabled="disabled">-----------</option>
-                                                                <option value="0">En cours</option>
-                                                                <option value="1">Réglé</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <div class="controls">    
-                                                            <input type="hidden" name="action" value="updateStatus">
-                                                            <input type="hidden" name="source" value="contrat">
-                                                            <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
-                                                            <input type="hidden" name="idReglementPrevu" value="<?= $element->id() ?>" />
-                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        <div class="controls">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- updateStatusReglementPrevu box end -->
-                                        <?php
-                                        }
-                                        ?>
-                                        <tr>
-                                            <td></td>
-                                            <th>Total des échéances</th>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td><?= number_format($totalEcheance, 2, ',', ' ') ?>&nbsp;DH</td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>       
-                    </div>    
-                    <?php 
-                    } 
-                    ?>
-                    <!-- DATES REGLEMENTS PREVU END -->
                     <!-- CONTRAT CAS LIBRE BEGIN -->
                     <?php 
                     if ( $contratCasLibreNumber > 0 ) { 
@@ -837,8 +714,161 @@
                     </div>    
                     <?php 
                     } 
+                    //We wanna add "Cas Libre" to this contract if it doesn't contain one
+                    else {
                     ?>
+                        <a class="btn red get-down" href="#addCasLibre" data-toggle="modal"><i class="icon-plus-sign"></i> Cas Libre</a>
+                    <?php
+                    } 
+                    ?>
+                    <!-- addCasLibre box begin-->
+                    <div id="addCasLibre" class="modal modal-big hide fade in" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="false" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h3>Ajouter un cas libre pour ce contrat </h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal" action="controller/ContratCasLibreActionController.php" method="post">
+                                <?php include('include/cas-libre-modal.php'); ?>
+                        </div>
+                        <div class="modal-footer">
+                                <div class="row-fluid">
+                                    <div class="control-group">
+                                        <input type="hidden" name="action" value="addCasLibre">
+                                        <input type="hidden" name="source" value="contrat">
+                                        <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>">
+                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- addCasLibre box end -->
                     <!-- CONTRAT CAS LIBRE END -->
+                    <!-- DATES REGLEMENTS PREVU BEGIN -->
+                    <?php 
+                    if ( $reglementPrevuNumber > 0 ) { 
+                    ?>
+                    <div class="portlet box light-grey" id="reglementsPrevus">
+                        <div class="portlet-title">
+                            <h4><?= $reglementPrevuTitle; ?></h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 20%">Echéance</th>
+                                            <th style="width: 20%">Status du réglement</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $totalEcheance = 0;
+                                        foreach ( $reglementPrevuElements as $element ) {
+                                            $status = "";    
+                                            $totalEcheance += $contrat->echeance();
+                                            if ( $element->status() == 0 ) {
+                                                //comparing dates
+                                                $now = date('Y-m-d');
+                                                $now = new DateTime($now);
+                                                $now = $now->format('Ymd');
+                                                $datePrevu = $element->datePrevu();
+                                                $datePrevu = new DateTime($datePrevu);
+                                                $datePrevu = $datePrevu->format('Ymd');
+                                                if ( $datePrevu > $now ) {
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">Normal</a>';    
+                                                    }
+                                                    else{
+                                                        $status = '<a class="btn mini">Normal</a>';
+                                                    }   
+                                                }
+                                                else if ( $datePrevu < $now ) {
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retards</a>';
+                                                    }
+                                                    else {
+                                                        $status = '<a class="btn mini red blink_me">En retards</a>';
+                                                    }
+                                                }
+                                            }
+                                            else if( $element->status() == 1 ) {
+                                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
+                                                }
+                                                else {
+                                                    $status = '<a class="btn mini blue">Réglé</a>';
+                                                }    
+                                            }
+                                        ?>
+                                        <tr>
+                                            <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
+                                            <td><?= $contrat->echeance() ?></td>
+                                            <td><?= $status ?></td>
+                                        </tr>
+                                        <!-- updateStatusReglementPrevu box begin-->
+                                        <div id="updateStatusReglementPrevu<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier status</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir changer le status de la date prévu ?</p>
+                                                        <label class="control-label">Status</label>
+                                                        <div class="controls">
+                                                            <select name="status">
+                                                                <option value="<?= $element->status() ?>"><?php if($element->status()==0){echo 'En cours';}else{echo 'Réglé';} ?></option>
+                                                                <option disabled="disabled">-----------</option>
+                                                                <option value="0">En cours</option>
+                                                                <option value="1">Réglé</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus">
+                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                            <input type="hidden" name="idReglementPrevu" value="<?= $element->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateStatusReglementPrevu box end -->
+                                        <?php
+                                        }
+                                        ?>
+                                        <tr>
+                                            <td></td>
+                                            <th>Total des échéances</th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><?= number_format($totalEcheance, 2, ',', ' ') ?>&nbsp;DH</td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>       
+                    </div>    
+                    <?php 
+                    } 
+                    ?>
+                    <!-- DATES REGLEMENTS PREVU END -->
 					<div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Détails des réglements client</h4>

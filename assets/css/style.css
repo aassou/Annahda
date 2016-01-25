@@ -5011,3 +5011,15 @@ div#fancy_print {
 .error-class {
     color: #FF0000;
 }
+
+
+body .modal-big {
+	/* new custom width */
+    width: 800px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -400px;
+}
+
+.cas-libre-padding{
+	padding-left: 30px;
+}

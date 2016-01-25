@@ -28,7 +28,7 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
 	//Action Add Processing Begin
-    	if($action == "add"){
+    if($action == "add"){
         if( !empty($_POST['date']) ){
 			$date = htmlentities($_POST['date']);
 			$montant = htmlentities($_POST['montant']);
@@ -56,6 +56,43 @@
         }
     }
     //Action Add Processing End
+    //Action addCasLibre Processing Begin
+    else if($action=="addCasLibre"){
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $dates = array();
+        $montants = array();
+        $observations = array();
+        for ( $i=1; $i<7; $i++ ) {
+            if ( 
+                ( isset($_POST['cas-libre-date'.$i]) and !empty($_POST['cas-libre-date'.$i]) ) 
+                and isset($_POST['cas-libre-montant'.$i]) and !empty($_POST['cas-libre-montant'.$i]) ) {
+                $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);
+                $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);
+                if ( isset($_POST['cas-libre-observation'.$i]) ) {
+                    $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
+                }   
+                $createdBy = $_SESSION['userMerlaTrav']->login();
+                $created = date('Y-m-d h:i:s');
+                $contratCasLibreManager->add(
+                    new ContratCasLibre(
+                        array(
+                            'date' => $dates[$i], 
+                            'montant' => $montants[$i], 
+                            'observation' => $observations[$i],
+                            'status' => 0,
+                            'codeContrat' => $codeContrat,
+                            'created' => $created,
+                            'createdBy' => $createdBy
+                        )
+                    )
+                );
+            }
+        } 
+        $actionMessage = "<strong>Opération Valide : </strong>Contrat Cas Libre ajouté avec succès.";
+        $typeMessage = "success";
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+    }
+    //Action addCasLibre Processing End
     //Action Update Processing Begin
     else if($action == "update"){
         $idContratCasLibre = htmlentities($_POST['idContratCasLibre']);
