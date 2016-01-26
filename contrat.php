@@ -491,6 +491,7 @@
                     </div>
                     <!-- addReglement box end -->
                     <!-- CONTRAT CAS LIBRE BEGIN -->
+                    <a class="btn red get-down" href="#addCasLibre" data-toggle="modal"><i class="icon-plus-sign"></i> Cas Libre</a>
                     <?php 
                     if ( $contratCasLibreNumber > 0 ) { 
                     ?>
@@ -564,10 +565,10 @@
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                             ?>
                                             <td>
-                                                <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" title="Supprimer" class="btn mini red">
+                                                <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini red">
                                                     <i class="icon-remove"></i>
                                                 </a>
-                                                <a href="#updateContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" title="Modifier" class="btn mini green">
+                                                <a href="#updateContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini green">
                                                     <i class="icon-refresh"></i>
                                                 </a>
                                             </td>

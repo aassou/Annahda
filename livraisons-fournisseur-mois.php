@@ -102,6 +102,10 @@
                             <li>
                                 <i class="icon-truck"></i>
                                 <a>Gestion des livraisons <strong>Société Annahda</strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a>Fournisseur <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -410,12 +414,16 @@
                                             foreach($livraisonsIds as $idl){
                                                 $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
                                             }
+                                            $mois = date('m', strtotime($livraison->dateLivraison()));
+                                            $annee = date('Y', strtotime($livraison->dateLivraison()));
                                             
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
                                                 <div style="width: 200px">
-                                                    <a class="btn mini"><strong><?= date('m / Y', strtotime($livraison->dateLivraison())) ?></strong></a>
+                                                    <a class="btn mini" href="livraisons-fournisseur-mois-list.php?idFournisseur=<?= $livraison->idFournisseur() ?>&mois=<?= $mois ?>&annee=<?= $annee ?>">
+                                                        <strong><?= date('m / Y', strtotime($livraison->dateLivraison())) ?></strong>
+                                                    </a>
                                                 </div>
                                             </td>
                                             <td>

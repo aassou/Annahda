@@ -151,6 +151,8 @@
                                             <input type="text" name="adresseArabe" value="" />
                                         </div>
                                     </div>
+                            </div>                                    
+                            <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -183,10 +185,19 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Date Contrat</label>
+                                        <label class="control-label">Date début</label>
                                         <div class="controls">
                                             <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                                 <input name="dateContrat" id="dateContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
+                                         </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Date fin</label>
+                                        <div class="controls">
+                                            <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                <input name="dateFinContrat" id="dateFinContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
                                                 <span class="add-on"><i class="icon-calendar"></i></span>
                                             </div>
                                          </div>
@@ -201,12 +212,19 @@
                                         <label class="control-label">Prix/Unité</label>
                                         <div class="controls">
                                             <input type="text" name="prixUnitaire" id="prixUnitaire" style="width:90px" />&nbsp;/&nbsp;
-                                            <select name="unite" style="width:100px">
+                                            <select id="unite" name="unite" style="width:100px">
                                                 <option value="m²">m²</option>
                                                 <option value="m lineaire">m lineaire</option>
                                                 <option value="appartement">appartement</option>
                                                 <option value="unite">unite</option>
                                             </select>
+                                            <input type="text" name="nomUnite" id="nomUnite" style="width:90px; display: none" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group" id="nomUniteArabe" style="display: none">
+                                        <label class="control-label">اسم الوحدة</label>
+                                        <div class="controls">
+                                            <input type="text" name="nomUniteArabe" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -227,6 +245,8 @@
                                             <input type="text" name="traveauxArabe" id="traveauxArabe" value="" />
                                         </div>
                                     </div>
+                            </div>
+                            <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -290,10 +310,10 @@
                                             <tr>
                                                 <th style="width:15%">Action</th>
                                                 <th style="width:15%">Employé</th>
-                                                <th style="width:10%">Date</th>
+                                                <th style="width:15%">Début - Fin</th>
                                                 <th style="width:15%">Prix / Unité</th>
-                                                <th style="width:10%">Nb.Unités</th>
-                                                <th style="width:15%">Total Paiements</th>
+                                                <th style="width:10%">Nbr.Unit</th>
+                                                <th style="width:10%">Total Payé</th>
                                                 <th style="width:10%">Total à Payer</th>
                                                 <th style="width:10%">Reste</th>
                                             </tr>
@@ -324,8 +344,8 @@
                                                     </a>
                                                 </td>
                                                 <td><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></td> 
-                                                <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?></td>
-                                                <td><?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?></td>
+                                                <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?> - <?= date('d/m/Y', strtotime($contrat->dateFinContrat()) ) ?></td>
+                                                <td><?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite() ?></td>
                                                 <td><?= $contrat->nombreUnites() ?></td>
                                                 <td><?= number_format($contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total(), 2, ',', ' ') ?></td>
@@ -338,7 +358,7 @@
                                                     <h3>Imprimer Contrat Employé</h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="form-horizontal loginFrm" action="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" method="post">
+                                                    <form class="form-horizontal" action="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" method="post">
                                                         <div class="control-group">
                                                             <label class="control-label">الشركة</label>
                                                             <div class="controls">
@@ -367,10 +387,10 @@
                                             <div id="updateContrat<?= $contrat->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                                    <h3>Modifier Contrat de  <?= $contrat->employe() ?></h3>
+                                                    <h3>Modifier Contrat de  <?= $employesManager->getEmployeById($contrat->employe())->nom() ?></h3>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="form-horizontal loginFrm" action="controller/ContratEmployeActionController.php" method="post">
+                                                    <form class="form-horizontal" action="controller/ContratEmployeActionController.php" method="post">
                                                         <div class="control-group">
                                                             <label class="control-label">Employé</label>
                                                             <div class="controls">
@@ -384,10 +404,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
-                                                            <label class="control-label">Date Opération</label>
+                                                            <label class="control-label">Date début</label>
                                                             <div class="controls">
                                                                 <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                                                     <input name="dateContrat" id="dateContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateContrat() ?>" />
+                                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                                </div>
+                                                             </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Date fin</label>
+                                                            <div class="controls">
+                                                                <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                                    <input name="dateFinContrat" id="dateFinContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateFinContrat() ?>" />
                                                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                                                 </div>
                                                              </div>
@@ -410,6 +439,7 @@
                                                                     <option value="appartement">appartement</option>
                                                                     <option value="unite">unite</option>
                                                                 </select>
+                                                                <input type="text" name="nomUnite" id="nomUnite" value="<?= $contrat->nomUnite() ?>" style="width:90px"  />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
@@ -430,6 +460,8 @@
                                                                 <input type="text" name="traveauxArabe" id="traveauxArabe" value="<?= $contrat->traveauxArabe() ?>" />
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                <div class="modal-footer">
                                                         <div class="control-group">
                                                             <input type="hidden" name="action" value="update" />
                                                             <input type="hidden" name="idContratEmploye" value="<?= $contrat->id() ?>" />
@@ -547,6 +579,16 @@
             var prixUnitaire = $('#prixUnitaireUpdate').val();
             var total = nombreUnites * prixUnitaire;
             $('#totalUpdate').val(total); 
+        });
+        $('#unite').on('change',function(){
+            if( $(this).val()==="unite"){
+                $("#nomUnite").show();
+                $("#nomUniteArabe").show()
+            }
+            else{
+                $("#nomUnite").hide();
+                $("#nomUniteArabe").hide();
+            }
         });
     </script>
 </body>

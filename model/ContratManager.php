@@ -36,7 +36,7 @@ class ContratManager{
 		$query->bindValue(':typeBien', $contrat->typeBien());
 		$query->bindValue(':code', $contrat->code());
 		$query->bindValue(':status', 'actif');
-        $query->bindValue(':status', 0);
+        $query->bindValue(':revendre', 0);
 		$query->bindValue(':numeroCheque', $contrat->numeroCheque());
         $query->bindValue(':created', $contrat->created());
         $query->bindValue(':createdBy', $contrat->createdBy());

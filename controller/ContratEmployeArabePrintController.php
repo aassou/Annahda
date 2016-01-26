@@ -136,7 +136,7 @@ $pdf->Ln();
 //Acte 4:
 $htmlcontent = '<strong>'.'البند الرابع&nbsp;:&nbsp;'.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$htmlcontent = 'اتفق الطرفان على أن تمتد فترة الأشغال المذكورة من تاريخ  '.$contrat->dateContrat().' إلى غاية ';
+$htmlcontent = 'اتفق الطرفان على أن تمتد فترة الأشغال المذكورة من تاريخ  '.$contrat->dateContrat().' إلى غاية '.$contrat->dateFinContrat();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = 'آو الجودة و المواصفات المحددة في هذا العقد فانه يؤدي تعويضا يقدر حسب الضرر الناجم عن تأخر إنجاز الأشغال المذكورة بعد 

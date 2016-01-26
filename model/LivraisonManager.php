@@ -472,4 +472,23 @@ class LivraisonManager{
         $query->closeCursor();
         return $livraisons;
     }
+
+    public function getLivraisonsByIdFournisseurByMoisByAnnee($idFournisseur, $mois, $annee){
+        $livraisons = array();
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_livraison 
+        WHERE idFournisseur=:idFournisseur 
+        AND MONTH(dateLivraison) = :mois
+        AND YEAR(dateLivraison) = :annee 
+        ORDER BY dateLivraison DESC');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':mois', $mois);
+        $query->bindValue(':annee', $annee);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = new Livraison($data);
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
 }

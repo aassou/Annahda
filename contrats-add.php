@@ -137,37 +137,13 @@
 											</div>
                                     	</div>
                                     </div>
-                                    <?php
-                                    $numero = "";
-                                    $prixNegocie = "";
-                                    $prixNegocieArabe = "";
-                                    $avance = "";
-                                    $avanceArabe = "";
-                                    $dureePaiement = "";
-                                    $nombreMois = "";
-                                    $echeance = "";
-                                    $numeroOperation ="";
-                                    $note = "";
-                                    if( isset($_SESSION['contrat-form-data']) ){
-                                        $numero = $_SESSION['contrat-form-data']['numero'] ;
-                                        $prixNegocie = $_SESSION['contrat-form-data']['prixNegocie'] ;
-                                        $prixNegocieArabe = $_SESSION['contrat-form-data']['prixNegocieArabe'] ;
-                                        $avance = $_SESSION['contrat-form-data']['avance'] ;
-                                        $avanceArabe = $_SESSION['contrat-form-data']['avanceArabe'] ;
-                                        $dureePaiement = $_SESSION['contrat-form-data']['dureePaiement'] ;
-                                        $nombreMois = $_SESSION['contrat-form-data']['nombreMois'] ;
-                                        $echeance = $_SESSION['contrat-form-data']['echeance'] ;
-                                        $numeroOperation = $_SESSION['contrat-form-data']['numeroCheque'] ;
-                                        $note = $_SESSION['contrat-form-data']['note'];
-                                    }
-                                    ?>
                                     <legend>Création du Contrat pour le Client : <strong><?= $client->nom() ?></strong></legend>
                                     <div class="row-fluid">
                                        <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="numero">Numéro du contrat</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="numero" name="numero" value="<?= $numero ?>" class="m-wrap">
+                                                <input required="required" type="text" id="numero" name="numero" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -212,7 +188,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="prixNegocie">Prix négocié</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="prixNegocie" value="<?= $prixNegocie ?>" name="prixNegocie" class="m-wrap">
+                                                <input required="required" type="text" id="prixNegocie" name="prixNegocie" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -220,7 +196,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="avance">Avance</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="avance" value="<?= $avance ?>" name="avance" class="m-wrap">
+                                                <input required="required" type="text" id="avance" name="avance" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -228,7 +204,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="dureePaiement">Durée de paiement</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="dureePaiement" value="<?= $dureePaiement ?>" name="dureePaiement" class="m-wrap">
+                                                <input required="required" type="text" id="dureePaiement" name="dureePaiement" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -236,7 +212,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="nombreMois">Nombre de mois</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="nombreMois" value="<?= $nombreMois ?>" name="nombreMois" class="m-wrap">
+                                                <input required="required" type="text" id="nombreMois" name="nombreMois" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -246,7 +222,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="echeance">Echéance</label>
                                              <div class="controls">
-                                             	<input required="required" type="text" id="echeance" value="<?= $echeance ?>" name="echeance" class="m-wrap">
+                                             	<input required="required" type="text" id="echeance" name="echeance" class="m-wrap">
                                              </div>
                                           </div>
                                         </div>
@@ -271,7 +247,7 @@
                                           <div class="control-group">
                                              <label class="control-label">N° Opération</label>
                                              <div class="controls">
-                                                <input type="text" value="<?= $numeroOperation ?>" name="numeroCheque" class="m-wrap">
+                                                <input type="text" name="numeroCheque" class="m-wrap">
                                              </div>
                                           </div>
                                         </div>
@@ -279,7 +255,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="note">Note client</label>
                                              <div class="controls">
-                                                <input type="text" id="note" name="note" value="<?= $note ?>" class="m-wrap" />
+                                                <input type="text" id="note" name="note" class="m-wrap" />
                                              </div>
                                           </div>
                                         </div>
@@ -289,7 +265,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="prixNegocieArabe">مبلغ البيع المتفق عليه</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="prixNegocieArabe" value="<?= $prixNegocieArabe ?>" name="prixNegocieArabe" class="m-wrap">
+                                                <input required="required" type="text" id="prixNegocieArabe" name="prixNegocieArabe" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>
@@ -297,7 +273,7 @@
                                           <div class="control-group">
                                              <label class="control-label" for="avanceArabe">التسبيق</label>
                                              <div class="controls">
-                                                <input required="required" type="text" id="avanceArabe" value="<?= $avanceArabe ?>" name="avanceArabe" class="m-wrap">
+                                                <input required="required" type="text" id="avanceArabe" name="avanceArabe" class="m-wrap">
                                              </div>
                                           </div>
                                        </div>

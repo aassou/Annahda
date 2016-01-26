@@ -24,12 +24,14 @@
     //Comonent Manager
     $contratEmployeManager = new ContratEmployeManager($pdo);
 	//Action Add Processing Begin
-    	if($action == "add"){
+    if($action == "add"){
         if( !empty($_POST['employe']) ){
 			$dateContrat = htmlentities($_POST['dateContrat']);
+            $dateFinContrat = htmlentities($_POST['dateFinContrat']);
             $nombreUnites = htmlentities($_POST['nombreUnites']);
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
+            $nomUnite = htmlentities($_POST['nomUnite']);
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
 			$total = htmlentities($_POST['total']);
@@ -40,9 +42,11 @@
             //create object
             $contratEmploye = new ContratEmploye(array(
 				'dateContrat' => $dateContrat,
+				'dateFinContrat' => $dateFinContrat,
 				'nombreUnites' => $nombreUnites,
 				'prixUnitaire' => $prixUnitaire,
 				'unite' => $unite,
+				'nomUnite' => $nomUnite,
 				'total' => $total,
 				'traveaux' => $traveaux,
 				'traveauxArabe' => $traveauxArabe,
@@ -67,9 +71,11 @@
         $idContratEmploye = htmlentities($_POST['idContratEmploye']);
         if(!empty($_POST['employe'])){
             $dateContrat = htmlentities($_POST['dateContrat']);
+            $dateFinContrat = htmlentities($_POST['dateFinContrat']);
             $nombreUnites = htmlentities($_POST['nombreUnites']);
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
+            $nomUnite = htmlentities($_POST['nomUnite']);
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
             $total = htmlentities($_POST['total']);
@@ -77,9 +83,11 @@
             $contratEmploye = new ContratEmploye(array(
 				'id' => $idContratEmploye,
 				'dateContrat' => $dateContrat,
+				'dateFinContrat' => $dateFinContrat,
 				'nombreUnites' => $nombreUnites,
                 'prixUnitaire' => $prixUnitaire,
                 'unite' => $unite,
+                'nomUnite' => $nomUnite,
 				'total' => $total,
 				'traveaux' => $traveaux,
                 'traveauxArabe' => $traveauxArabe,

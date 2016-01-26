@@ -116,7 +116,8 @@
                     or $currentPage=="livraisons-details-iaaza.php"
                     or $currentPage=="reglements-fournisseur.php"
                     or $currentPage=="reglements-fournisseur-iaaza.php"
-                    
+                    or $currentPage=="livraisons-fournisseur-mois-list.php"
+                    or $currentPage=="livraisons-fournisseur-mois.php"
                     ){
                         $gestionLivraisonClass = "active ";
                     } 
@@ -139,6 +140,8 @@
                                     or $currentPage=="livraisons-fournisseur.php"
                                     or $currentPage=="livraisons-details.php"
                                     or $currentPage=="reglements-fournisseur.php"
+                                    or $currentPage=="livraisons-fournisseur-mois.php"
+                                    or $currentPage=="livraisons-fournisseur-mois-list.php"
                                     ){
                             ?> class="active" <?php } ?> >
                             <a href="livraisons-group.php">Société Annahda</a>
@@ -166,7 +169,7 @@
                     </ul>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
-                <!---------------------------- Livraisons Begin  -------------------------------------------->
+                <!---------------------------- Caisse Begin  -------------------------------------------->
                 <?php 
                     $gestionCaisseClass="";
                     if(

@@ -12,14 +12,16 @@ class ContratEmployeManager{
 	//BAISC CRUD OPERATIONS
 	public function add(ContratEmploye $contratEmploye){
     	$query = $this->_db->prepare('
-    	INSERT INTO t_contratemploye (dateContrat, prixUnitaire, unite, traveaux, traveauxArabe, 
-    	nombreUnites, total, employe, idProjet, created, createdBy)
-		VALUES (:dateContrat, :prixUnitaire, :unite, :traveaux, :traveauxArabe, 
+    	INSERT INTO t_contratemploye (dateContrat, dateFinContrat, prixUnitaire, unite, nomUnite, traveaux, 
+    	traveauxArabe, nombreUnites, total, employe, idProjet, created, createdBy)
+		VALUES (:dateContrat, :dateFinContrat, :prixUnitaire, :unite, :nomUnite, :traveaux, :traveauxArabe, 
         :nombreUnites, :total, :employe, :idProjet, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':dateContrat', $contratEmploye->dateContrat());
+        $query->bindValue(':dateFinContrat', $contratEmploye->dateFinContrat());
         $query->bindValue(':prixUnitaire', $contratEmploye->prixUnitaire());
         $query->bindValue(':unite', $contratEmploye->unite());
+        $query->bindValue(':nomUnite', $contratEmploye->nomUnite());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
         $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
@@ -34,14 +36,17 @@ class ContratEmployeManager{
 
 	public function update(ContratEmploye $contratEmploye){
     	$query = $this->_db->prepare(
-    	'UPDATE t_contratemploye SET dateContrat=:dateContrat, nombreUnites=:nombreUnites, 
-    	prixUnitaire=:prixUnitaire, unite=:unite, traveaux=:traveaux, traveauxArabe=:traveauxArabe, 
-    	total=:total, employe=:employe, idProjet=:idProjet WHERE id=:id')
+    	'UPDATE t_contratemploye SET dateContrat=:dateContrat, dateFinContrat=:dateFinContrat, 
+    	nombreUnites=:nombreUnites, prixUnitaire=:prixUnitaire, unite=:unite, nomUnite=:nomUnite, 
+    	traveaux=:traveaux, traveauxArabe=:traveauxArabe, total=:total, employe=:employe, idProjet=:idProjet 
+    	WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $contratEmploye->id());
 		$query->bindValue(':dateContrat', $contratEmploye->dateContrat());
+        $query->bindValue(':dateFinContrat', $contratEmploye->dateFinContrat());
         $query->bindValue(':prixUnitaire', $contratEmploye->prixUnitaire());
         $query->bindValue(':unite', $contratEmploye->unite());
+        $query->bindValue(':nomUnite', $contratEmploye->nomUnite());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
         $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
