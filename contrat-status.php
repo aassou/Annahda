@@ -713,17 +713,20 @@
                                             $projetManager->getProjetById($contrat->idProjet());
                                             $bien = "";
                                             $typeBien = "";
+                                            $nomBien = "";
                                             //if the property is a "Local commercial" we don't need to mention niveau attribute
                                             $niveau = "";
                                             if($contrat->typeBien()=="appartement"){
                                                 $appartementManager = new AppartementManager($pdo);
                                                 $bien = $appartementManager->getAppartementById($contrat->idBien());
+                                                $nomBien = $bien->nom();
                                                 $niveau = $bien->niveau();
                                                 $typeBien = "Appartement";
                                             }
                                             else if($contrat->typeBien()=="localCommercial"){
                                                 $locauxManager = new LocauxManager($pdo);
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
+                                                $nomBien = $bien->nom();
                                                 $typeBien = "Local Commercial";
                                             }
                                             //activate the update link only for admin's profil
@@ -740,7 +743,7 @@
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
-                                            <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
+                                            <td><?= "Test Error"// $typeBien.' - '.$niveau.'e: '.$nomBien ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
                                         </tr>
