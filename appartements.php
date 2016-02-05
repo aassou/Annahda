@@ -240,9 +240,9 @@
 								<table class="table table-striped table-bordered table-advance table-hover">
 									<thead>
 										<tr>
-											<th style="width: 5%">Code</th>
+											<th style="width: 10%">Code</th>
 											<th style="width: 5%">Niveau</th>
-											<th style="width: 15%">Prix&nbsp;DH</th>
+											<!--th style="width: 15%">Prix&nbsp;DH</th-->
 											<th style="width: 10%">Superficie</th>
 											<th style="width: 5%">Façade</th>
 											<th style="width: 30%">Nbr.Pièces</th>
@@ -259,7 +259,7 @@
 										<tr class="appartements">
 											<td>
 												<div class="btn-group">
-												    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+												    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
 												    	<?= $appartement->nom() ?> 
 												        <i class="icon-angle-down"></i>
 												    </a>
@@ -294,7 +294,7 @@
 												</div>
 											</td>
 											<td class="hidden-phone"><?= $appartement->niveau() ?></td>
-											<td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
+											<!--td><a></a></td-->
 											<td><?= $appartement->superficie() ?> m<sup>2</sup></td>
 											<td class="hidden-phone"><?= $appartement->facade() ?></td>
 											<td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>

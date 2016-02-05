@@ -128,7 +128,7 @@
                                             <th style="width: 5%">Code</th>
                                             <th style="width: 10%">Projet</th>
                                             <th style="width: 5%">Niveau</th>
-                                            <th style="width: 10%">Prix&nbsp;DH</th>
+                                            <!--th style="width: 10%">Prix&nbsp;DH</th-->
                                             <th style="width: 10%">Superficie</th>
                                             <th style="width: 5%">Façade</th>
                                             <th style="width: 25%">Nbr.Pièces</th>
@@ -144,7 +144,7 @@
                                         <tr class="appartements">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
                                                         <?= $appartement->nom() ?> 
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -171,7 +171,7 @@
                                             </td>
                                             <td class="hidden-phone"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
                                             <td class="hidden-phone"><?= $appartement->niveau() ?></td>
-                                            <td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
+                                            <!--td><a></a></td-->
                                             <td><?= $appartement->superficie() ?> m<sup>2</sup></td>
                                             <td class="hidden-phone"><?= $appartement->facade() ?></td>
                                             <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
@@ -248,7 +248,7 @@
                                         <tr class="appartements">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
                                                         <?= $appartement->nom() ?> 
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -275,7 +275,7 @@
                                             </td>
                                             <td class="hidden-phone"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
                                             <td class="hidden-phone"><?= $appartement->niveau() ?></td>
-                                            <td><a><?= number_format($appartement->prix(), 2, ',', ' ') ?></a></td>
+                                            <!--td><a></a></td-->
                                             <td><?= $appartement->superficie() ?> m<sup>2</sup></td>
                                             <td class="hidden-phone"><?= $appartement->facade() ?></td>
                                             <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
@@ -310,7 +310,7 @@
                                             <th>Projet</th>
                                             <th>Superficie</th>
                                             <th>Façade</th>
-                                            <th>Prix</th>
+                                            <!--th>Prix</th-->
                                             <th>Mezzanine</th>
                                             <th>Status</th>
                                             <th></th>
@@ -323,7 +323,7 @@
                                         <tr class="locaux">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
                                                         <?= $locau->nom() ?> 
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -351,7 +351,7 @@
                                             <td class="hidden-phone"><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
                                             <td><?= $locau->superficie() ?></td>
                                             <td class="hidden-phone"><?= $locau->facade() ?></td>
-                                            <td><?= number_format($locau->prix(), 2, ',', ' ') ?></td>
+                                            <!--td></td-->
                                             <td class="hidden-phone">
                                                 <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
@@ -421,7 +421,7 @@
                                         <tr class="locaux">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
                                                         <?= $locau->nom() ?> 
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -449,7 +449,7 @@
                                             <td class="hidden-phone"><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
                                             <td><?= $locau->superficie() ?></td>
                                             <td class="hidden-phone"><?= $locau->facade() ?></td>
-                                            <td><?= number_format($locau->prix(), 2, ',', ' ') ?></td>
+                                            <!--td></td-->
                                             <td class="hidden-phone">
                                                 <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>

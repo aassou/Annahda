@@ -220,7 +220,7 @@
 											<th>Code</th>
 											<th>Superficie</th>
 											<th>Façade</th>
-											<th>Prix</th>
+											<!--th>Prix</th-->
 											<th>Mezzanine</th>
 											<th>Status</th>
 											<th></th>
@@ -234,7 +234,7 @@
 										<tr class="locaux">
 											<td>
 												<div class="btn-group">
-												    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" data-toggle="dropdown">
+												    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
 												    	<?= $locau->nom() ?> 
 												        <i class="icon-angle-down"></i>
 												    </a>
@@ -264,7 +264,7 @@
 											</td>
 											<td><?= $locau->superficie() ?></td>
 											<td class="hidden-phone"><?= $locau->facade() ?></td>
-											<td><?= number_format($locau->prix(), 2, ',', ' ') ?></td>
+											<!--td></td-->
 											<td class="hidden-phone">
 												<?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
 												<?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
