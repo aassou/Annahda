@@ -743,7 +743,7 @@
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
-                                            <td><?= "Test Error"// $typeBien.' - '.$niveau.'e: '.$nomBien ?></td>
+                                            <td><?= $typeBien.' - '.$niveau.'e: '.$nomBien ?></td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
                                         </tr>
