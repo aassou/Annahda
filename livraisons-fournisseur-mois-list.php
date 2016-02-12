@@ -166,7 +166,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>Livraisons de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></a>
+                                <a href="livraisons-fournisseur-mois.php?idFournisseur=<?= $idFournisseur ?>">Livraisons de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -229,7 +233,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Date Livraison</label>
                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                            <input name="dateLivraison" id="dateLivraison" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                            <input required="required" name="dateLivraison" id="dateLivraison" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
                                             <span class="add-on"><i class="icon-calendar"></i></span>
                                          </div>
                                     </div>
@@ -247,7 +251,10 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">  
-                                            <input type="hidden" name="action" value="add">    
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois-list" />
+                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />    
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -323,8 +330,10 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="hidden" name="source" value="livraisons-fournisseur">  
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois-list" />
+                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
                                             <input type="hidden" name="idFournisseur" value="<?= $_GET['idFournisseur'] ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -334,22 +343,6 @@
                             </div>
                         </div>
                         <!-- addReglement box end -->
-                        <!--div class="row-fluid">
-                            <form action="" method="get">
-                                <div class="input-box autocomplet_container">
-                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" placeholder="Recherche..." />
-                                    <input class="m-wrap" name="projet" id="nomProjet" type="text" onkeyup="autocompletProjet()" placeholder="Projet">
-                                        <ul id="projetList"></ul>
-                                    </input>
-                                    <input name="idFournisseur" id="idFournisseur" type="hidden" />
-                                    <input name="idProjet" id="idProjet" type="hidden" />
-                                    <button type="submit" class="btn red"><i class="icon-search"></i></button>
-                                    <a href="#printBilanFournisseur" class="btn blue pull-right" data-toggle="modal">
-                                        <i class="icon-print"></i>&nbsp;Imprimer Bilan
-                                    </a>
-                                </div>
-                            </form>
-                        </div-->
                         <!-- printCharge box begin-->
                         <div id="printBilanFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -448,18 +441,18 @@
                             unset($_SESSION['reglement-action-message']);
                             unset($_SESSION['reglement-type-message']);
                          ?>
-                        <table class="table table-striped table-bordered table-advance table-hover">
+                        <!--table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
                                     <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table-->
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Livraison de <?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></h4>
@@ -488,7 +481,7 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 10%">Actions</th>
+                                            <th style="width: 15%">Actions</th>
                                             <th style="width: 15%">N° BL</th>
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 15%">Date Livraison</th>
@@ -501,8 +494,10 @@
                                             <button type="submit" class="btn red">Supprimer les livraisons sélectionnées</button>
                                             <br-->                                          
                                         <?php
+                                        $grandTotal = 0;
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
+                                            $grandTotal += $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
                                             $nomProjet = "Plusieurs Projets";
                                             if ( $livraison->idProjet() != 0 ) {
                                                 $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
@@ -528,7 +523,7 @@
                                                 <?php
                                                 }
                                                 ?>
-                                                <a class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>" title="Voir Détail Livraison" >
+                                                <a class="btn mini" href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Livraison" >
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                             </td>
@@ -623,6 +618,9 @@
                                                             <input type="hidden" name="action" value="update" />
                                                             <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
                                                             <input type="hidden" name="idFournisseur" value="<?= $_GET['idFournisseur'] ?>" />
+                                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois-list" />
+                                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
@@ -645,6 +643,8 @@
                                                         <input type="hidden" name="action" value="delete" />
                                                         <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />
                                                         <input type="hidden" name="idFournisseur" value="<?= $_GET['idFournisseur'] ?>" />
+                                                        <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                                        <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
@@ -666,15 +666,24 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                            <th style="width: 15%"><strong><a id="totalLivraison"><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                            <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                            <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                            <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                            <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 65%"></th>
+                                            <th style="width: 15%">Grand Total</th>
+                                            <th style="width: 20%"><a><?= number_format($grandTotal, '2', ',', ' ') ?></a>&nbsp;DH</th>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table>    
+                                <!--table class="table table-striped table-bordered table-advance table-hover">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                            <th style="width: 15%"><strong><a id="totalLivraison"><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                            <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong>Σ Solde</strong></th>
+                                            <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        </tr>
+                                    </tbody>
+                                </table-->
                                 </div><!-- END DIV SCROLLER -->    
                             </div>
                         </div>

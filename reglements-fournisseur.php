@@ -334,18 +334,18 @@
                             unset($_SESSION['reglement-action-message']);
                             unset($_SESSION['reglement-type-message']);
                          ?>
-                        <table class="table table-striped table-bordered table-advance table-hover">
+                        <!--table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
                                     <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table-->
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Détails des réglements : <?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></h4>
@@ -540,18 +540,18 @@
                                     }*/
                                     ?>
                                 </table>
-                                <table class="table table-striped table-bordered table-advance table-hover">
+                                <!--table class="table table-striped table-bordered table-advance table-hover">
                                     <tbody>
                                         <tr>
                                             <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                            <th style="width: 15%"><strong><a id="totalLivraison"><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong><a id="totalLivraison"><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                             <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                            <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                             <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                            <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                            <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table-->
                                 </div><!-- END DIV SCROLLER -->    
                             </div>
                         </div>

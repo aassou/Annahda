@@ -8,6 +8,9 @@
 			$arrayVars[0] = "4";
 			$arrayVars[1] = "4";
 			$arrayVars[2] = "4";
+            $dateLivraison = new DateTime('2015-03-12');
+            print_r($dateLivraison);
+            echo date('m', strtotime('2015-03-12'));
 		?>
 		<div id="container" style="width:100%; height:400px;"></div>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>

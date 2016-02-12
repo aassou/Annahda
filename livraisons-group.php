@@ -248,7 +248,8 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">  
-                                            <input type="hidden" name="action" value="add">    
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="livraisons-group" />    
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -324,8 +325,8 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="hidden" name="source" value="livraisons-group">  
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="livraisons-group" />  
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -411,8 +412,9 @@
                                             <td>
                                                 <div style="width: 200px">
                                                     <a><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
-                                                </div>    
-                                                <a href="livraisons-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
+                                                </div>  
+                                                <!--a href="livraisons-fournisseur.php?idFournisseur=<?php //$livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini"-->
+                                                <a href="livraisons-fournisseur-mois.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
                                                     Livraisons
                                                 </a>
                                                 <a href="reglements-fournisseur.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn green mini">

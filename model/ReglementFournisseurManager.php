@@ -112,7 +112,23 @@ class ReglementFournisseurManager{
     public function sommeReglementFournisseursByIdFournisseur($idFournisseur){
         $query = $this->_db->prepare('SELECT sum(montant) AS somme 
         FROM t_reglement_fournisseur WHERE idFournisseur =:idFournisseur');
-        $query->bindValue('idFournisseur', $idFournisseur);
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['somme'];
+    }
+    
+    public function sommeReglementFournisseursByIdFournisseurByMonthByYear($idFournisseur, $month, $year){
+        $query = $this->_db->prepare(
+        'SELECT sum(montant) AS somme 
+        FROM t_reglement_fournisseur 
+        WHERE idFournisseur =:idFournisseur
+        AND MONTH(dateReglement)=:month
+        AND YEAR(dateReglement)=:year');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();

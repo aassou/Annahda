@@ -28,9 +28,16 @@
     $historyManager = new HistoryManager($pdo);
     $livraisonDetailManager = new LivraisonDetailManager($pdo);
     $codeLivraison = htmlentities($_POST['codeLivraison']);
+    $mois = htmlentities($_POST['mois']);
+    $annee = htmlentities($_POST['annee']);
     //Action Add Processing Begin
     if($action == "add"){
-        if( !empty($_POST['prixUnitaire']) and !empty($_POST['quantite']) ){
+        if( 
+            !empty($_POST['prixUnitaire']) and 
+            !empty($_POST['quantite']) and
+            filter_var($_POST['prixUnitaire'], FILTER_VALIDATE_FLOAT) and
+            filter_var($_POST['quantite'], FILTER_VALIDATE_FLOAT) 
+          ){
             $designation = htmlentities($_POST['designation']);
             $quantite = htmlentities($_POST['quantite']);
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
@@ -55,18 +62,22 @@
             $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Article Ajouté avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
-            $actionMessage = "<strong>Erreur Ajout Article</strong> : Vous devez remplir les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
+            $actionMessage = "<strong>Erreur Ajout Article</strong> : Vous devez vérifier les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
             $typeMessage = "error";
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
     }
     //Action Add Processing End
     //Action Update Processing Begin
     else if($action == "update"){
-        if( !empty($_POST['prixUnitaire']) and !empty($_POST['quantite']) ){
+        if( !empty($_POST['prixUnitaire']) and 
+            !empty($_POST['quantite']) and 
+            filter_var($_POST['prixUnitaire'], FILTER_VALIDATE_FLOAT) and
+            filter_var($_POST['quantite'], FILTER_VALIDATE_FLOAT) 
+        ){
             $idLivraisonDetail = htmlentities($_POST['idLivraisonDetail']);
             $designation = htmlentities($_POST['designation']);
             $quantite = htmlentities($_POST['quantite']);
@@ -93,10 +104,10 @@
             $typeMessage = "success";
         }
         else{
-            $actionMessage = "<strong>Erreur Modification Article</strong> : Vous devez remplir les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
+            $actionMessage = "<strong>Erreur Modification Article</strong> : Vous devez vérifier les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+        $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
     }
     //Action Update Processing End
     //Action Delete Processing Begin
@@ -116,7 +127,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Article Supprimé avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison;
+        $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
     }
     //Action Delete Processing End
     $_SESSION['livraison-detail-action-message'] = $actionMessage;

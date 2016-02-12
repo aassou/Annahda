@@ -434,7 +434,11 @@
                                 <div class="control-group">
                                     <label class="control-label">Montant</label>
                                     <div class="controls">
-                                        <input type="text" required="required" id="montant" name="montant" />
+                                        <input style="width:150px" type="text" required="required" id="montant" name="montant" />
+                                        <select name="currency" style="width:80px">
+                                            <option value="DH">DH</option>
+                                            <option value="Euro">Euro</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -508,11 +512,11 @@
                                     <thead>
                                         <tr>
                                             <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            //if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                             ?>
                                             <th style="width: 10%">Actions</th>
                                             <?php
-                                            }
+                                            //}
                                             ?>
                                             <th style="width: 20%">Date</th>
                                             <th style="width: 20%">Montant</th>
@@ -550,6 +554,14 @@
                                                         $status = '<a class="btn mini red blink_me">En retard</a>';
                                                     }    
                                                 }
+                                                else {
+                                                    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                        $status = '<a href="#updateStatusContratCasLibre'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini purple">En cours</a>';
+                                                    }
+                                                    else {
+                                                        $status = '<a class="btn mini purple">En retard</a>';
+                                                    }   
+                                                } 
                                             }
                                             else if( $element->status() == 1 ) {
                                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
@@ -560,27 +572,7 @@
                                                 }     
                                             }
                                         ?>
-                                        <tr>
-                                            <?php
-                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                            ?>
-                                            <td>
-                                                <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini red">
-                                                    <i class="icon-remove"></i>
-                                                </a>
-                                                <a href="#updateContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini green">
-                                                    <i class="icon-refresh"></i>
-                                                </a>
-                                            </td>
-                                            <?php
-                                            }
-                                            ?>
-                                            <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
-                                            <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
-                                            <td><?= $element->observation() ?></td>
-                                            <td><?= $status ?></td>
-                                        </tr>
-                                        <!-- updateStatusContratCasLibre box begin-->
+                                        <!-- updateStatusContratCasLibre box begin -->
                                         <div id="updateStatusContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -602,20 +594,20 @@
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    
-                                                            <input type="hidden" name="action" value="updateStatus">
-                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
                                                             <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
                                                             <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        <div class="controls">
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                         <!-- updateStatusContratCasLibre box end -->
-                                        <!-- updateContratCasLibre box begin-->
+                                        <!-- updateContratCasLibre box begin -->
                                         <div id="updateContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -633,30 +625,30 @@
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="text" name="montant" class="m-wrap" value="<?= $element->montant() ?>">
+                                                            <input type="text" name="montant" class="m-wrap" value="<?= $element->montant() ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">
-                                                            <input type="text" name="observation" class="m-wrap" value="<?= $element->observation() ?>">
+                                                            <input type="text" name="observation" class="m-wrap" value="<?= $element->observation() ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    
-                                                            <input type="hidden" name="action" value="updateStatus">
-                                                            <input type="hidden" name="source" value="contrat">
+                                                            <input type="hidden" name="action" value="update" />
+                                                            <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
                                                             <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
                                                             <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        <div class="controls">
+                                                        </div>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                         <!-- updateContratCasLibre box end -->
-                                        <!-- deleteContratCasLibre box begin-->
+                                        <!-- deleteContratCasLibre box begin -->
                                         <div id="deleteContratCasLibre<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -666,8 +658,8 @@
                                                 <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
                                                     <p>Êtes-vous sûr de vouloir supprimer cette ligne ?</p>
                                                     <div class="control-group">
-                                                        <input type="hidden" name="action" value="delete">
-                                                        <input type="hidden" name="source" value="contrat">
+                                                        <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="source" value="contrat" />
                                                         <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
                                                         <input type="hidden" name="idContratCasLibre" value="<?= $element->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
@@ -678,6 +670,26 @@
                                             </div>
                                         </div>
                                         <!-- deleteContratCasLibre box end -->
+                                        <tr>
+                                            <?php
+                                            //if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
+                                            <td>
+                                                <a href="#deleteContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini red">
+                                                    <i class="icon-remove"></i>
+                                                </a>
+                                                <a href="#updateContratCasLibre<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn mini green">
+                                                    <i class="icon-refresh"></i>
+                                                </a>
+                                            </td>
+                                            <?php
+                                            //}
+                                            ?>
+                                            <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
+                                            <td><?= number_format($element->montant(), 2, ' ', ',') ?></td>
+                                            <td><?= $element->observation() ?></td>
+                                            <td><?= $status ?></td>
+                                        </tr>
                                         <?php
                                         }
                                         ?>
@@ -716,11 +728,11 @@
                     <?php 
                     } 
                     //We wanna add "Cas Libre" to this contract if it doesn't contain one
-                    else {
+                    //else {
                     ?>
-                        <a class="btn red get-down" href="#addCasLibre" data-toggle="modal"><i class="icon-plus-sign"></i> Cas Libre</a>
+                        <!--a class="btn red get-down" href="#addCasLibre" data-toggle="modal"><i class="icon-plus-sign"></i> Cas Libre</a-->
                     <?php
-                    } 
+                    //} 
                     ?>
                     <!-- addCasLibre box begin-->
                     <div id="addCasLibre" class="modal modal-big hide fade in" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="false" >
@@ -895,7 +907,10 @@
                                  unset($_SESSION['operation-type-message']);
                                 ?>
                                 <?php
-                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                if( 
+                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                ) {
                                 ?>
                                 <div class="btn-group">
                                     <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
@@ -934,7 +949,6 @@
 										<th style="width: 10%">Observation</th>
 										<th style="width: 10%">Status</th>
 										<th style="width: 10%">Quittance</th>
-										
 									</tr>
 								</thead>
 								<tbody>

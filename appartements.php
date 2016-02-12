@@ -118,16 +118,16 @@
 				<?php if($idProjet!=0){ ?>
 				<div class="row-fluid"> 
 					<div class="span12">
-					    <?php
-                        if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
-                        ?>
 						<div class="get-down">
 						    <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
+						    <?php
+                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                            ?>
 							<a href="#addAppartement" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
+							<?php
+                            }
+                            ?>
 						</div>
-						<?php
-                        }
-                        ?>
 						<!-- addAppartement box begin-->
                         <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -293,7 +293,7 @@
                                                     ?>
 												</div>
 											</td>
-											<td class="hidden-phone"><?= $appartement->niveau() ?></td>
+											<td class="hidden-phone"><?= $appartement->niveau() ?>Et</td>
 											<!--td><a></a></td-->
 											<td><?= $appartement->superficie() ?> m<sup>2</sup></td>
 											<td class="hidden-phone"><?= $appartement->facade() ?></td>

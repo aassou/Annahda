@@ -12,7 +12,7 @@
     include('../config.php');  
     //classes loading end
     session_start();
-    if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
+    if( isset($_SESSION['userMerlaTrav']) ){
         //classes managers	
         $idProjet = 0;
     	$projetManager = new ProjetManager($pdo);
@@ -370,6 +370,6 @@ ob_start();
     }
 }
 else{
-    header("Location:index.php");
+    header("Location:../index.php");
 }
 ?>

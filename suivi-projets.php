@@ -255,7 +255,7 @@
                     data: [<?= json_encode($sommeCharges) ?>]
                 },
                 {
-                    name: 'CA estimé',
+                    name: 'Bénéfice',
                     data: [<?= json_encode($sommePrixVente - $sommeCharges) ?>]
                 },
 				{
@@ -263,7 +263,7 @@
 					data: [<?= json_encode($sommeApportsClients) ?>]
 				}, 
 				{
-					name: 'Reliquat',
+					name: 'Reliquat Réglements',
 					data: [<?= json_encode($reliquat) ?>]
 				}
 				]

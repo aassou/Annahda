@@ -68,9 +68,15 @@
             if( $_POST['source'] == 'livraisons-group' ) {
                 $redirectLink = "Location:../livraisons-group.php";   
             }
-            else if( $_POST['source'] == 'livraisons-fournisseur' ) {
+            else if( $_POST['source'] == 'livraisons-fournisseur-mois' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;   
+            }
+            else if ( $_POST['source'] == "livraisons-fournisseur-mois-list" ) {
+                $idFournisseur = htmlentities($_POST['idFournisseur']);
+                $mois = htmlentities($_POST['mois']);
+                $annee = htmlentities($_POST['annee']);
+                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
             }
             else if( $_POST['source'] == 'reglements-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);

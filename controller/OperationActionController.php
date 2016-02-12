@@ -11,6 +11,7 @@
     spl_autoload_register("classLoad"); 
     include('../config.php');  
     include('../lib/image-processing.php');
+    include('../lib/ForeignExchange.php');
     //classes loading end
     session_start();
     
@@ -32,13 +33,22 @@
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
             $reference = 'Q'.date('Ymd-his');
-            $montant = htmlentities($_POST['montant']);
+            $currency = $_POST['currency'];
+            if ( $currency == "DH" ) {
+                $montant = htmlentities($_POST['montant']);    
+                $observation = htmlentities($_POST['observation']);
+            }
+            else {
+                $fx = new ForeignExchange('EUR', 'MAD');
+                $montant = $fx->toForeign(htmlentities($_POST['montant']));
+                $observation = htmlentities($_POST['observation']).' - (Payé En Euro)';
+            }
+            //$montant = htmlentities($_POST['montant']);
             $modePaiement = htmlentities($_POST['modePaiement']);
             $numeroOperation = htmlentities($_POST['numeroOperation']);
             $dateOperation = htmlentities($_POST['dateOperation']);
             $dateReglement = htmlentities($_POST['dateReglement']);
             $compteBancaire = htmlentities($_POST['compteBancaire']);
-            $observation = htmlentities($_POST['observation']);
             $status = 0;
             $idContrat = htmlentities($_POST['idContrat']);
             $createdBy = $_SESSION['userMerlaTrav']->login();

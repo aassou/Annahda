@@ -101,11 +101,11 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a>Gestion des livraisons <strong>Société Annahda</strong></a>
+                                <a href="livraisons-group.php">Gestion des livraisons <strong>Société Annahda</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>Fournisseur <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></a>
+                                <a>Livraisons de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -135,9 +135,6 @@
                                 <?php
                                 }
                                 ?>
-                                <a href="#addFournisseur" data-toggle="modal" class="btn blue">
-                                    Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
-                                </a>
                             </div>
                             <div class="pull-right">
                                 <a href="#addLivraison" data-toggle="modal" class="btn green">
@@ -148,62 +145,6 @@
                         <?php
                         }
                         ?>
-                        <!-- addFournisseur box begin-->
-                        <div id="addFournisseur" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h3>Ajouter un nouveau fournisseur </h3>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
-                                    <div class="control-group">
-                                        <label class="control-label">Nom</label>
-                                        <div class="controls">
-                                            <input required="required" type="text" name="nom" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Adresse</label>
-                                        <div class="controls">
-                                            <input type="text" name="adresse" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Tél.1</label>
-                                        <div class="controls">
-                                            <input type="text" name="telephone1" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Tél.2</label>
-                                        <div class="controls">
-                                            <input type="text" name="telephone2" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Fax</label>
-                                        <div class="controls">
-                                            <input type="text" name="fax" value="" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Email</label>
-                                        <div class="controls">
-                                            <input type="text" name="email" value="" />
-                                        </div>  
-                                    </div>
-                                    <div class="control-group">
-                                        <div class="controls">  
-                                            <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="livraisons-group" />
-                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- addFournisseur box end -->
                         <!-- addLivraison box begin-->
                         <div id="addLivraison" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -216,9 +157,7 @@
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
                                             <select name="idFournisseur">
-                                                <?php foreach($fournisseurs as $fournisseur){ ?>
-                                                <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
-                                                <?php } ?>
+                                                <option value="<?= $idFournisseur ?>"><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -254,7 +193,9 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">  
-                                            <input type="hidden" name="action" value="add">    
+                                            <input type="hidden" name="action" value="add" />    
+                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois" />
+                                            <input type="hidden" name="idFournisseur" value="<?= $idFournisseur ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -275,9 +216,7 @@
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
                                             <select name="idFournisseur">
-                                                <?php foreach($fournisseurs as $fournisseur){ ?>
-                                                <option value="<?= $fournisseur->id() ?>"><?= $fournisseur->nom() ?></option>
-                                                <?php } ?>
+                                                <option value="<?= $idFournisseur ?>"><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -330,8 +269,9 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <input type="hidden" name="action" value="add">
-                                            <input type="hidden" name="source" value="livraisons-group">  
+                                            <input type="hidden" name="action" value="add" />
+                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois" />
+                                            <input type="hidden" name="idFournisseur" value="<?= $idFournisseur ?>" />  
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -376,18 +316,18 @@
                             unset($_SESSION['reglement-action-message']);
                             unset($_SESSION['reglement-type-message']);
                          ?>
-                        <table class="table table-striped table-bordered table-advance table-hover">
+                        <!--table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
                                     <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
                             </tbody>
-                        </table>    
+                        </table-->    
                         <div class="portlet livraisons">
                             <div class="portlet-body">
                                 <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
@@ -407,6 +347,8 @@
                                         <?php
                                         //if($livraisonNumber != 0){
                                         //echo print_r($query);
+                                        $grandTotalLivraisons = 0;
+                                        $grandTotalReglements = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($idFournisseur);
                                         foreach($livraisons as $livraison){
                                             $livraisonsIds = 
                                             $livraisonManager->getLivraisonsByIdFournisseurByMonthYear($livraison->idFournisseur(), $livraison->dateLivraison());
@@ -414,9 +356,10 @@
                                             foreach($livraisonsIds as $idl){
                                                 $totalDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($idl);
                                             }
+                                            $grandTotalLivraisons += $totalDetailsLivraisons;
                                             $mois = date('m', strtotime($livraison->dateLivraison()));
                                             $annee = date('Y', strtotime($livraison->dateLivraison()));
-                                            
+                                            $sommeReglements = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseurByMonthByYear($livraison->idFournisseur(), $mois, $annee);
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
@@ -430,10 +373,10 @@
                                                 <?= number_format($totalDetailsLivraisons, 2, ',', ' '); ?>
                                             </td>
                                             <td>
-                                                <?= number_format($reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
+                                                <?= number_format($sommeReglements, 2, ',', ' '); ?>
                                             </td>
                                             <td>
-                                                <?= number_format( $totalDetailsLivraisons-$reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
+                                                <?= number_format( $totalDetailsLivraisons - $sommeReglements, 2, ',', ' '); ?>
                                             </td>
                                         </tr>
                                         <?php
@@ -443,15 +386,15 @@
                                     </tbody>
                                     <tr>
                                         <th></th>
-                                        <th><strong>Σ Total Livraisons</strong></th>
-                                        <th><strong>Σ Total Réglements</strong></th>
-                                        <th><strong>Σ Solde</strong></th>
+                                        <th><strong>Grand Total Livraisons</strong></th>
+                                        <th><strong>Grand Total Réglements</strong></th>
+                                        <th><strong>Solde</strong></th>
                                     </tr>
                                     <tr>
                                         <th></th>
-                                        <th><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th><strong><a><?= number_format($grandTotalLivraisons, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th><strong><a><?= number_format($grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th><strong><a><?= number_format($totalLivraison - $grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     </tr>
                                 </table>
                                 </div><!-- END DIV SCROLLER -->
