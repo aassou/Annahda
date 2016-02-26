@@ -72,6 +72,22 @@ class CaisseIaazaManager{
         return $data['total'];
     }
     
+    public function getTotalCaisseByTypeByMonthYear($type, $month, $year) {
+        $query = $this->_db->prepare(
+        "SELECT SUM(montant) as total FROM t_caisse_iaaza 
+        WHERE type=:type 
+        AND MONTH(dateOperation)=:month 
+        AND YEAR(dateOperation)=:year")
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':type', $type);
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    } 
+    
     public function getTotalCaisseByTypeByDate($type, $dateFrom, $dateTo){
         $query = $this->_db->prepare("SELECT SUM(montant) as total FROM t_caisse_iaaza 
         WHERE type=:type AND dateOperation BETWEEN :dateFrom AND :dateTo")
@@ -154,6 +170,52 @@ class CaisseIaazaManager{
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $id = $data['last_id'];
         return $id;
+    }
+    
+    public function getCaissesGroupByMonth(){
+        $caisses = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_caisse_iaaza  
+        GROUP BY MONTH(dateOperation)+'-'+YEAR(dateOperation)
+        ORDER BY dateOperation DESC");
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
+    public function getCaissesByMonthYear($month, $year){
+        $caisses = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_caisse_iaaza  
+        WHERE MONTH(dateOperation) = :month
+        AND YEAR(dateOperation) = :year
+        ORDER BY dateOperation DESC");
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
+    public function getTotalCaissesByMonthYearByType($month, $year, $type){
+        $query = $this->_db->prepare(
+        "SELECT SUM(montant) AS total FROM t_caisse_iaaza  
+        WHERE MONTH(dateOperation) = :month
+        AND YEAR(dateOperation) = :year
+        AND type=:type
+        ORDER BY dateOperation DESC");
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->bindValue(':type', $type);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
     }
 
 }

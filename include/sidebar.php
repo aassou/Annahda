@@ -173,8 +173,12 @@
                 <?php 
                     $gestionCaisseClass="";
                     if(
-                    $currentPage=="caisse.php"
-                    or $currentPage=="caisse-iaaza.php"
+                    $currentPage=="caisse.php" or 
+                    $currentPage=="caisse-iaaza.php" or
+                    $currentPage=="caisse-group.php" or
+                    $currentPage=="caisse-mois-annee.php" or
+                    $currentPage=="caisse-group-iaaza.php" or
+                    $currentPage=="caisse-mois-annee-iaaza.php"
                     ){
                         $gestionCaisseClass = "active ";
                     } 
@@ -193,9 +197,9 @@
                             $_SESSION['userMerlaTrav']->profil() == "consultant" 
                             ) {
                         ?>
-                        <li <?php if($currentPage=="caisse.php"){
+                        <li <?php if($currentPage=="caisse-group.php"){
                             ?> class="active" <?php } ?> >
-                            <a href="caisse.php">Caisse Société Annahda</a>
+                            <a href="caisse-group.php">Caisse Société Annahda</a>
                         </li>
                         <?php
                         }
@@ -207,8 +211,8 @@
                             $_SESSION['userMerlaTrav']->profil() == "consultant" 
                             ) {
                         ?>
-                        <li <?php if($currentPage=="caisse-iaaza.php"){?> class="active" <?php } ?> >
-                            <a href="caisse-iaaza.php">Caisse Société Iaaza</a>
+                        <li <?php if($currentPage=="caisse-group-iaaza.php"){?> class="active" <?php } ?> >
+                            <a href="caisse-group-iaaza.php">Caisse Société Iaaza</a>
                         </li>
                         <?php
                         }

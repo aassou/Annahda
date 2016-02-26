@@ -132,5 +132,14 @@
     //Action Delete Processing End
     $_SESSION['caisse-action-message'] = $actionMessage;
     $_SESSION['caisse-type-message'] = $typeMessage;
-    header('Location:../caisse-iaaza.php');
+    $redirecktLink = 'Location:../caisse-iaaza.php';
+    if ( isset ($_POST['source']) and $_POST['source'] == "caisse-group-iaaza" ) {
+        $redirecktLink = "Location:../caisse-group-iaaza.php";
+    }
+    else if ( isset($_POST['source']) and $_POST['source'] == "caisse-mois-annee-iaaza" ) {
+        $mois = $_POST['mois'];
+        $annee = $_POST['annee'];
+        $redirecktLink = "Location:../caisse-mois-annee-iaaza.php?mois=".$mois."&annee=".$annee;
+    } 
+    header($redirecktLink);
 
