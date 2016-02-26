@@ -19,7 +19,7 @@
         $fournisseurManager = new FournisseurManager($pdo);
         $livraisonManager = new LivraisonIaazaManager($pdo);
         $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
-        $reglementsFournisseurManager = new ReglementFournisseurManager($pdo);
+        $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
         //classes and vars
         $livraisonDetailNumber = 0;
         $totalReglement = 0;
@@ -114,8 +114,14 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
+                                <a href="livraisons-fournisseur-mois-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
                                     Livraisons de <strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong>
+                                </a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>">
+                                    <strong><?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong>
                                 </a>
                                 <i class="icon-angle-right"></i>
                             </li>
@@ -249,10 +255,12 @@
                                         </div>
                                         <div class="control-group">
                                             <div class="controls">  
-                                                <input type="hidden" name="action" value="update">
-                                                <input type="hidden" name="source" value="details-livraison">
-                                                <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>">
-                                                <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>">    
+                                                <input type="hidden" name="action" value="update" />
+                                                <input type="hidden" name="source" value="details-livraison-iaaza" />
+                                                <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                                <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
+                                                <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
+                                                <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>" />    
                                                 <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
@@ -313,6 +321,8 @@
                                         <div class="control-group">
                                             <div class="controls">  
                                                 <input type="hidden" name="action" value="add" />
+                                                <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                                <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
                                                 <input type="hidden" name="idLivraison" value="<?= $livraison->id() ?>">
                                                 <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>">
                                                 <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -408,6 +418,8 @@
                                         </div>
                                         <div class="control-group">
                                             <input type="hidden" name="action" value="update" />
+                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
                                             <input type="hidden" name="idLivraisonDetail" value="<?= $detail->id() ?>" />
                                             <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
                                             <div class="controls">  
@@ -430,6 +442,8 @@
                                         <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
                                         <div class="control-group">
                                             <input type="hidden" name="action" value="delete" />
+                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
                                             <input type="hidden" name="idLivraisonDetail" value="<?= $detail->id() ?>" />
                                             <input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>

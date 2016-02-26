@@ -40,6 +40,9 @@
             $codeLivraison = uniqid().date('YmdHis');
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
+            //these next data are used to know the month and the year of a supply demand
+            $mois = date('m', strtotime($dateLivraison));
+            $annee = date('Y', strtotime($dateLivraison));
             //create object
             $livraison = 
             new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
@@ -61,15 +64,28 @@
             $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
             $actionMessage = "<strong>Erreur Ajout Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
-            $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+            //test the source of this request for the reason of exact redirection
+            if ( isset($_POST['source']) and $_POST['source'] == "livraisons-group-iaaza" ) {
+                $redirectLink = "Location:../livraisons-group-iaaza.php";    
+            }
+            else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-iaaza" ) {
+                $redirectLink = "Location:../livraisons-fournisseur-mois-iaaza.php?idFournisseur=".$idFournisseur;    
+            }
+            else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-list-iaaza" ) {
+                $mois = htmlentities($_POST['mois']);
+                $annee = htmlentities($_POST['annee']);
+                $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;    
+            }
         }
     }
     else if($action == "update"){
+        $mois = htmlentities($_POST['mois']);
+        $annee = htmlentities($_POST['annee']);
         if(!empty($_POST['libelle'])){
             $idProjet = htmlentities($_POST['idProjet']);
             $id = htmlentities($_POST['idLivraison']);
@@ -80,6 +96,9 @@
             //$type = htmlentities($_POST['type']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
+            //these next data are used to know the month and the year of a supply demand
+            $mois = date('m', strtotime($dateLivraison));
+            $annee = date('Y', strtotime($dateLivraison));
             $livraison = 
             new LivraisonIaaza(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
             'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
@@ -106,17 +125,21 @@
             $actionMessage = "<strong>Erreur Modification Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        //$redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         //this case treat the updated request comming from livraisons-details.php page,
         //not livraisons-fournisseur.php page
-        if( isset($_POST['source']) and $_POST['source']=="details-livraison" ){
+        if( isset($_POST['source']) and $_POST['source']=="details-livraison-iaaza" ){
             $codeLivraison = $_POST['codeLivraison'];
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
     }
     else if($action=="delete"){
         $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
         $idLivraison = $_POST['idLivraison'];
+        $mois = htmlentities($_POST['mois']);
+        $annee = htmlentities($_POST['annee']);
         $livraisonManager->delete($idLivraison);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -135,7 +158,8 @@
         $livraisonDetailManager->deleteLivraison($idLivraison);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        //$redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
     }
     
     $_SESSION['livraison-action-message'] = $actionMessage;

@@ -23,6 +23,7 @@
     	$idProjet = 0;
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
+        $companieManager = new CompanyManager($pdo);
         $projet = "";
 		if((isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId())
 		and (isset($_GET['codeClient']) and (bool)$clientManager->getCodeClient($_GET['codeClient']) )){
@@ -30,6 +31,7 @@
 			$codeClient = $_GET['codeClient'];
 			$projet = $projetManager->getProjetById($idProjet);
 			$client = $clientManager->getClientByCode($codeClient);
+            $companies = $companieManager->getCompanys();
 		}
 ?>
 <!DOCTYPE html>
@@ -283,6 +285,43 @@
                                              </div>
                                           </div>
                                        </div>
+                                       <div class="span3">
+                                          <div class="control-group">
+                                            <label class="control-label">الشركة</label>
+                                            <div class="controls">
+                                                <select name="societeArabe">
+                                                    <?php
+                                                    foreach ( $companies as $company ) {
+                                                    ?>
+                                                    <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                       </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
+                                           <div class="control-group">
+                                                <label class="control-label">وضعية الشقة/المحل التجاري</label>
+                                                <div class="controls">
+                                                    <select name="etatBienArabe">
+                                                        <option value="الأشغال الأساسية للبناء">الأشغال الأساسية للبناء</option>
+                                                        <option value="Finition">الأشغال النهائية للبناء</option>
+                                                    </select>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label">الواجهة</label>
+                                                <div class="controls">
+                                                    <input type="text" required="required" id="facadeArabe" name="facadeArabe" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row-fluid">
                                         <div class="span3">

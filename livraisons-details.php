@@ -436,7 +436,7 @@
 										<div class="control-group">
 										    <input type="hidden" name="action" value="delete" />
 										    <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
-                                                <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />
 											<input type="hidden" name="idLivraisonDetail" value="<?= $detail->id() ?>" />
 											<input type="hidden" name="codeLivraison" value="<?= $livraison->code() ?>" />
 											<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>

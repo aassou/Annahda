@@ -78,6 +78,9 @@
                 $note = htmlentities($_POST['note']);
                 $idClient = htmlentities($_POST['idClient']);
                 $codeContrat = uniqid().date('YmdHis');
+                $societeArabe = htmlentities($_POST['societeArabe']);
+                $etatBienArabe = htmlentities($_POST['etatBienArabe']);
+                $facadeArabe = htmlentities($_POST['facadeArabe']);
                 $created = date('Y-m-d h:i:s');
                 $createdBy = $_SESSION['userMerlaTrav']->login();
                 $numeroCheque = '0';
@@ -150,7 +153,8 @@
                 'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
                 'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'idClient' => $idClient, 
                 'idProjet' => $idProjet, 'idBien' => $idBien, 'typeBien' => $typeBien, 'code' => $codeContrat, 
-                'numeroCheque' => $numeroCheque, 'created' => $created, 'createdBy' => $createdBy));
+                'numeroCheque' => $numeroCheque, 'societeArabe' => $societeArabe, 'etatBienArabe' => $etatBienArabe ,
+                'facadeArabe' => $facadeArabe, 'created' => $created, 'createdBy' => $createdBy));
                 //adding the contract object to our database
                 $contratManager->add($contrat);
                 //add history data to db
@@ -187,7 +191,7 @@
             }
         }
         else{
-            $actionMessage = "<strong>Erreur Création Contrat : </strong>Tous les champs sont obligatoires.";
+            $actionMessage = "<strong>Erreur Création Contrat : </strong>Veuillez vérifier les champs saisies.";
             $typeMessage = "error";    
             $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
         }
@@ -210,6 +214,9 @@
             $nombreMois = htmlentities($_POST['nombreMois']);
             $echeance = htmlentities($_POST['echeance']);
             $note = htmlentities($_POST['note']);
+            $societeArabe = htmlentities($_POST['societeArabe']);
+            $etatBienArabe = htmlentities($_POST['etatBienArabe']);
+            $facadeArabe = htmlentities($_POST['facadeArabe']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             //create classes managers
@@ -224,7 +231,8 @@
             'prixVente' => $prixVente, 'avance' => $avance, 'prixVenteArabe' => $prixVenteArabe, 
             'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement,'nombreMois' => $nombreMois, 
             'dureePaiement' => $dureePaiement, 'echeance' => $echeance, 'numeroCheque' => $numeroCheque, 
-            'note' => $note, 'updated' => $updated, 'updatedBy' => $updatedBy));
+            'note' => $note, 'societeArabe' => $societeArabe, 'etatBienArabe' => $etatBienArabe, 
+            'facadeArabe' => $facadeArabe, 'updated' => $updated, 'updatedBy' => $updatedBy));
             //begin processing
             $contratManager->update($newContrat);
             //Update The ReglementsPrevus Table

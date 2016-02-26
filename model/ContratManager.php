@@ -13,10 +13,12 @@ class ContratManager{
         $query = $this->_db->prepare('
         INSERT INTO t_contrat (reference, numero, dateCreation, prixVente, prixVenteArabe, 
         avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, 
-        idClient, idProjet, idBien, typeBien, code, status, revendre, numeroCheque, created, createdBy)
+        idClient, idProjet, idBien, typeBien, code, status, revendre, numeroCheque, societeArabe, 
+        etatBienArabe, facadeArabe, created, createdBy)
         VALUES (:reference, :numero, :dateCreation, :prixVente, :prixVenteArabe, 
         :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, 
-        :idClient, :idProjet, :idBien, :typeBien, :code, :status, :revendre, :numeroCheque, :created, :createdBy)') 
+        :idClient, :idProjet, :idBien, :typeBien, :code, :status, :revendre, :numeroCheque, 
+        :societeArabe, :etatBienArabe, :facadeArabe, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':reference', $contrat->reference());
         $query->bindValue(':numero', $contrat->numero());
@@ -38,6 +40,9 @@ class ContratManager{
 		$query->bindValue(':status', 'actif');
         $query->bindValue(':revendre', 0);
 		$query->bindValue(':numeroCheque', $contrat->numeroCheque());
+        $query->bindValue(':societeArabe', $contrat->societeArabe());
+        $query->bindValue(':etatBienArabe', $contrat->etatBienArabe());
+        $query->bindValue(':facadeArabe', $contrat->facadeArabe());
         $query->bindValue(':created', $contrat->created());
         $query->bindValue(':createdBy', $contrat->createdBy());
         $query->execute();
@@ -50,6 +55,7 @@ class ContratManager{
         prixVente=:prixVente, prixVenteArabe=:prixVenteArabe, avance=:avance, avanceArabe=:avanceArabe, 
         modePaiement=:modePaiement, numeroCheque=:numeroCheque,
         nombreMois=:nombreMois, dureePaiement=:dureePaiement, echeance=:echeance,  
+        societeArabe=:societeArabe, etatBienArabe=:etatBienArabe, facadeArabe=:facadeArabe, 
         note=:note, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $contrat->id());
@@ -65,6 +71,9 @@ class ContratManager{
         $query->bindValue(':nombreMois', $contrat->nombreMois());
         $query->bindValue(':echeance', $contrat->echeance());
 		$query->bindValue(':note', $contrat->note());
+        $query->bindValue(':societeArabe', $contrat->societeArabe());
+        $query->bindValue(':etatBienArabe', $contrat->etatBienArabe());
+        $query->bindValue(':facadeArabe', $contrat->facadeArabe());
         $query->bindValue(':updated', $contrat->updated());
         $query->bindValue(':updatedBy', $contrat->updatedBy());
         $query->execute();

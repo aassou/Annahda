@@ -58,12 +58,12 @@
     }
     $superficie = $bien->superficie();
     $numero = $bien->nom();
-    $facade = htmlentities($_POST['facade']);
-    $etatBien = htmlentities($_POST['etatBien']);
-    if ( $etatBien == "GrosOeuvre" ) {
+    $facade = $contrat->facadeArabe();
+    $etatBien = "";
+    if ( $contrat->etatBienArabe() == "GrosOeuvre" ) {
         $etatBien = "الأشغال الأساسية للبناء";    
     } 
-    else if ( $etatBien == "Finition" ) {
+    else if ( $contrat->etatBienArabe() == "Finition" ) {
         $etatBien = "الأشغال النهائية للبناء";
     }
     $contratReference = "";
@@ -72,7 +72,7 @@
     }
     $avanceLettresArabe = $contrat->avanceArabe();
     $prixLettresArabe = $contrat->prixVenteArabe();
-    $idSociete = htmlentities($_POST['nomSociete']);
+    $idSociete = $contrat->societeArabe();
     $company = $companyManager->getCompanyById($idSociete);
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);

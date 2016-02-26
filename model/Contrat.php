@@ -23,6 +23,9 @@ class Contrat{
 	private $_status;
     private $_revendre;
 	private $_numeroCheque;
+    private $_societeArabe;
+    private $_etatBienArabe;
+    private $_facadeArabe;
     private $_created;
     private $_createdBy;
     private $_updated;
@@ -129,6 +132,18 @@ class Contrat{
         $this->_numeroCheque = $numeroCheque;
     }
     
+    public function setSocieteArabe($societeArabe){
+        $this->_societeArabe = $societeArabe;
+    }
+    
+    public function setEtatBienArabe($etatBienArabe){
+        $this->_etatBienArabe = $etatBienArabe;
+    }
+    
+    public function setFacadeArabe($facadeArabe){
+        $this->_facadeArabe = $facadeArabe;
+    }
+    
     public function setCreated($created){
         $this->_created = $created;
     }
@@ -229,6 +244,18 @@ class Contrat{
     
 	public function numeroCheque(){
         return $this->_numeroCheque;
+    }
+    
+    public function societeArabe(){
+        return $this->_societeArabe;
+    }
+    
+    public function etatBienArabe(){
+        return $this->_etatBienArabe;
+    }
+    
+    public function facadeArabe(){
+        return $this->_facadeArabe;
     }
     
     public function created(){
