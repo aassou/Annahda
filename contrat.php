@@ -389,10 +389,16 @@
                                     <label class="control-label">Montant</label>
                                     <div class="controls">
                                         <input style="width:150px" type="text" required="required" id="montant" name="montant" />
-                                        <select name="currency" style="width:80px">
+                                        <select id="currency" name="currency" style="width:80px">
                                             <option value="DH">DH</option>
                                             <option value="Euro">Euro</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="control-group" style="display: none" id="tauxDeChange">
+                                    <label class="control-label">Taux de change</label>
+                                    <div class="controls">
+                                        <input type="text" name="tauxDeChange" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -1428,6 +1434,14 @@
 	</script>
 	<script>
 		$(document).ready(function() {
+		    $('#currency').on('change',function(){
+                if( $(this).val()!=="DH"){
+                    $("#tauxDeChange").show()
+                }
+                else{
+                    $("#tauxDeChange").hide()
+                }
+            });
 			$('.typeBien').change(function(){
 				$('.hidenBlock').show();
 				var typeBien = $(this).val();

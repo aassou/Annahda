@@ -39,8 +39,9 @@
                 $observation = htmlentities($_POST['observation']);
             }
             else {
-                $fx = new ForeignExchange('EUR', 'MAD');
-                $montant = $fx->toForeign(htmlentities($_POST['montant']));
+                //$fx = new ForeignExchange('EUR', 'MAD');
+                //$montant = $fx->toForeign(htmlentities($_POST['montant']));
+                $montant = $_POST['montant'] * $_POST['tauxDeChange'];
                 $observation = htmlentities($_POST['observation']).' - (Payé En Euro)';
             }
             //$montant = htmlentities($_POST['montant']);
