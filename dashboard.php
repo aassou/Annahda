@@ -106,7 +106,7 @@
 					<div class="span12">
 						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Raccourcis</h4>
 						<div class="tiles">
-						    <a href="caisse-iaaza.php">
+						    <a href="caisse-group-iaaza.php">
                             <div class="tile bg-yellow">
                                 <div class="tile-body">
                                     <i class="icon-money"></i>
@@ -127,7 +127,7 @@
                                 || $_SESSION['userMerlaTrav']->profil() == "manager"
                             ) {
                             ?>
-						    <a href="caisse.php">
+						    <a href="caisse-group.php">
                             <div class="tile bg-purple">
                                 <div class="tile-body">
                                     <i class="icon-money"></i>
