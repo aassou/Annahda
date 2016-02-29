@@ -125,6 +125,7 @@
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
                                 || $_SESSION['userMerlaTrav']->profil() == "consultant"
                                 || $_SESSION['userMerlaTrav']->profil() == "manager"
+                                || $_SESSION['userMerlaTrav']->profil() == "user"
                             ) {
                             ?>
 						    <a href="caisse-group.php">
@@ -162,6 +163,7 @@
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
                                 || $_SESSION['userMerlaTrav']->profil() == "consultant"
                                 || $_SESSION['userMerlaTrav']->profil() == "manager"
+                                || $_SESSION['userMerlaTrav']->profil() == "user"
                             ) {
                             ?>
                             <a href="livraisons-group.php">
@@ -256,6 +258,7 @@
                     $_SESSION['userMerlaTrav']->profil() == "admin" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant"
                     || $_SESSION['userMerlaTrav']->profil() == "manager"
+                    || $_SESSION['userMerlaTrav']->profil() == "user"
                 ) {
                 ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
@@ -339,6 +342,7 @@
                     $_SESSION['userMerlaTrav']->profil() == "admin" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant"    
                     || $_SESSION['userMerlaTrav']->profil() == "manager"
+                    || $_SESSION['userMerlaTrav']->profil() == "user"
                 ) {
                 ?>
 				<div class="row-fluid">
