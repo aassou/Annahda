@@ -176,7 +176,7 @@ class CaisseManager{
         $caisses = array();
         $query = $this->_db->query(
         "SELECT * FROM t_caisse 
-        GROUP BY MONTH(dateOperation)+'-'+YEAR(dateOperation)
+        GROUP BY MONTH(dateOperation), YEAR(dateOperation)
         ORDER BY dateOperation DESC");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $caisses[] = new Caisse($data);

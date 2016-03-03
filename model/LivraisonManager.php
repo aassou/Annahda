@@ -462,7 +462,7 @@ class LivraisonManager{
         $query = $this->_db->prepare(
         "SELECT * FROM t_livraison 
         WHERE idFournisseur=:idFournisseur 
-        GROUP BY MONTH(dateLivraison)+'-'+YEAR(dateLivraison)
+        GROUP BY MONTH(dateLivraison), YEAR(dateLivraison)
         ORDER BY dateLivraison DESC");
         $query->bindValue(':idFournisseur', $idFournisseur);
         $query->execute();
