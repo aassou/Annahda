@@ -12,19 +12,24 @@ class ContratEmployeManager{
 	//BAISC CRUD OPERATIONS
 	public function add(ContratEmploye $contratEmploye){
     	$query = $this->_db->prepare('
-    	INSERT INTO t_contratemploye (dateContrat, dateFinContrat, prixUnitaire, unite, nomUnite, traveaux, 
-    	traveauxArabe, nombreUnites, total, employe, idProjet, created, createdBy)
-		VALUES (:dateContrat, :dateFinContrat, :prixUnitaire, :unite, :nomUnite, :traveaux, :traveauxArabe, 
-        :nombreUnites, :total, :employe, :idProjet, :created, :createdBy)')
+    	INSERT INTO t_contratemploye (dateContrat, dateFinContrat, prixUnitaire, unite, nomUnite, nombreUnites, 
+    	prixUnitaire2, unite2, nomUnite2, nombreUnites2, traveaux, traveauxArabe, total, employe, idProjet, created, createdBy)
+		VALUES (:dateContrat, :dateFinContrat, :prixUnitaire, :unite, :nomUnite, :nombreUnites, 
+		:prixUnitaire2, :unite2, :nomUnite2, :nombreUnites2, 
+        :traveaux, :traveauxArabe, :total, :employe, :idProjet, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':dateContrat', $contratEmploye->dateContrat());
         $query->bindValue(':dateFinContrat', $contratEmploye->dateFinContrat());
         $query->bindValue(':prixUnitaire', $contratEmploye->prixUnitaire());
         $query->bindValue(':unite', $contratEmploye->unite());
         $query->bindValue(':nomUnite', $contratEmploye->nomUnite());
+        $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
+        $query->bindValue(':prixUnitaire2', $contratEmploye->prixUnitaire2());
+        $query->bindValue(':unite2', $contratEmploye->unite2());
+        $query->bindValue(':nomUnite2', $contratEmploye->nomUnite2());
+        $query->bindValue(':nombreUnites2', $contratEmploye->nombreUnites2());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
-        $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
 		$query->bindValue(':total', $contratEmploye->total());
 		$query->bindValue(':employe', $contratEmploye->employe());
 		$query->bindValue(':idProjet', $contratEmploye->idProjet());
@@ -47,9 +52,13 @@ class ContratEmployeManager{
         $query->bindValue(':prixUnitaire', $contratEmploye->prixUnitaire());
         $query->bindValue(':unite', $contratEmploye->unite());
         $query->bindValue(':nomUnite', $contratEmploye->nomUnite());
+        $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
+        $query->bindValue(':prixUnitaire2', $contratEmploye->prixUnitaire2());
+        $query->bindValue(':unite2', $contratEmploye->unite2());
+        $query->bindValue(':nomUnite2', $contratEmploye->nomUnite2());
+        $query->bindValue(':nombreUnites2', $contratEmploye->nombreUnites2());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
-        $query->bindValue(':nombreUnites', $contratEmploye->nombreUnites());
 		$query->bindValue(':total', $contratEmploye->total());
 		$query->bindValue(':employe', $contratEmploye->employe());
 		$query->bindValue(':idProjet', $contratEmploye->idProjet());

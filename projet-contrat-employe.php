@@ -234,6 +234,54 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Ajouter une autre unité</label>
+                                        <div class="controls">
+                                            <label class="radio">
+                                                <div class="radio" id="oui">
+                                                    <span>
+                                                        <input type="radio" class="addUnite" name="addUnite" value="oui" style="opacity: 0;">
+                                                    </span>
+                                                </div> oui
+                                            </label>
+                                            <label class="radio">
+                                                <div class="radio" id="non">
+                                                    <span class="checked">
+                                                        <input type="radio" class="addUnite" name="addUnite" value="non" checked="" style="opacity: 0;">
+                                                    </span>
+                                                </div> non
+                                            </label>  
+                                        </div>
+                                    </div>
+                                    <!-- Debut secondUnite  -->
+                                    <div id="secondUnite" style="display: none">
+                                    <div class="control-group">
+                                        <label class="control-label">Prix/Unité</label>
+                                        <div class="controls">
+                                            <input type="text" name="prixUnitaire2" id="prixUnitaire2" value="0" style="width:90px" />&nbsp;/&nbsp;
+                                            <select id="unite2" name="unite2" style="width:100px">
+                                                <option value="m²">m²</option>
+                                                <option value="m lineaire">m lineaire</option>
+                                                <option value="appartement">appartement</option>
+                                                <option value="unite">unite</option>
+                                            </select>
+                                            <input type="text" name="nomUnite2" id="nomUnite2" style="width:90px; display: none" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group" id="nomUniteArabe2" style="display: none">
+                                        <label class="control-label">اسم الوحدة</label>
+                                        <div class="controls">
+                                            <input type="text" name="nomUniteArabe2" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre Unités</label>
+                                        <div class="controls">
+                                            <input type="text" name="nombreUnites2" id="nombreUnites2" value="0" />
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!-- Fin secondUnite -->
+                                    <div class="control-group">
                                         <label class="control-label">Total</label>
                                         <div class="controls">
                                             <input type="text" name="total" id="total" value="" />
@@ -345,8 +393,14 @@
                                                 </td>
                                                 <td><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></td> 
                                                 <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?> - <?= date('d/m/Y', strtotime($contrat->dateFinContrat()) ) ?></td>
-                                                <td><?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite() ?></td>
-                                                <td><?= $contrat->nombreUnites() ?></td>
+                                                <td>
+                                                    <?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite() ?><br/>
+                                                    <?= number_format($contrat->prixUnitaire2(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite2() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite2() ?>
+                                                </td>
+                                                <td>
+                                                    <?= $contrat->nombreUnites() ?><br/>
+                                                    <?= $contrat->nombreUnites2() ?>
+                                                </td>
                                                 <td><?= number_format($contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total(), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total()-$contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>       
@@ -430,7 +484,7 @@
                                                         <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire" id="prixUnitaire" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <input type="text" name="prixUnitaire" id="prixUnitaireUpdate" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
                                                                 <select name="unite" style="width:100px">
                                                                     <option value="<?= $contrat->unite() ?>"><?= $contrat->unite() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
@@ -446,6 +500,27 @@
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
                                                                 <input type="text" name="nombreUnites" id="nombreUnitesUpdate" value="<?= $contrat->nombreUnites() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Prix/Unité</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="prixUnitaire2" id="prixUnitaireUpdate2" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <select name="unite" style="width:100px">
+                                                                    <option value="<?= $contrat->unite2() ?>"><?= $contrat->unite2() ?></option>
+                                                                    <option disabled="disabled">-----------------</option>
+                                                                    <option value="m²">m²</option>
+                                                                    <option value="m lineaire">m lineaire</option>
+                                                                    <option value="appartement">appartement</option>
+                                                                    <option value="unite">unite</option>
+                                                                </select>
+                                                                <input type="text" name="nomUnite2" id="nomUnite2" value="<?= $contrat->nomUnite2() ?>" style="width:90px"  />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Nombre Unités</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="nombreUnites2" id="nombreUnitesUpdate2" value="<?= $contrat->nombreUnites2() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
@@ -558,6 +633,34 @@
             App.setPage("table_managed");
             App.init();
         });
+        $('#unite').on('change',function(){
+            if( $(this).val()==="unite"){
+                $("#nomUnite").show();
+                $("#nomUniteArabe").show()
+            }
+            else{
+                $("#nomUnite").hide();
+                $("#nomUniteArabe").hide();
+            }
+        });
+        $('#unite2').on('change',function(){
+            if( $(this).val()==="unite"){
+                $("#nomUnite2").show();
+                $("#nomUniteArabe2").show()
+            }
+            else{
+                $("#nomUnite2").hide();
+                $("#nomUniteArabe2").hide();
+            }
+        });
+        $('.addUnite').on('change',function(){
+            if( $(this).val()==="oui"){
+            $("#secondUnite").show()
+            }
+            else{
+            $("#secondUnite").hide()
+            }
+        }); 
         $('.clients').show();
         $('#nomClient').keyup(function(){
             $('.clients').hide();
@@ -568,27 +671,21 @@
                }
             });
         });
-        $('#nombreUnites, #prixUnitaire').change(function(){
+        $('#nombreUnites, #prixUnitaire, #nombreUnites2, #prixUnitaire2').change(function(){
             var nombreUnites = $('#nombreUnites').val();
             var prixUnitaire = $('#prixUnitaire').val();
-            var total = nombreUnites * prixUnitaire;
+            var nombreUnites2 = $('#nombreUnites2').val();
+            var prixUnitaire2 = $('#prixUnitaire2').val();
+            var total = (nombreUnites * prixUnitaire) + (nombreUnites2 * prixUnitaire2);
             $('#total').val(total); 
         });
-        $('#nombreUnitesUpdate, #prixUnitaireUpdate').change(function(){
+        $('#nombreUnitesUpdate, #prixUnitaireUpdate, #nombreUnitesUpdate2, #prixUnitaireUpdate2').change(function(){
             var nombreUnites = $('#nombreUnitesUpdate').val();
             var prixUnitaire = $('#prixUnitaireUpdate').val();
-            var total = nombreUnites * prixUnitaire;
+            var nombreUnites2 = $('#nombreUnitesUpdate2').val();
+            var prixUnitaire2 = $('#prixUnitaireUpdate2').val();
+            var total = (nombreUnites * prixUnitaire) + (nombreUnites2 * prixUnitaire2);
             $('#totalUpdate').val(total); 
-        });
-        $('#unite').on('change',function(){
-            if( $(this).val()==="unite"){
-                $("#nomUnite").show();
-                $("#nomUniteArabe").show()
-            }
-            else{
-                $("#nomUnite").hide();
-                $("#nomUniteArabe").hide();
-            }
         });
     </script>
 </body>

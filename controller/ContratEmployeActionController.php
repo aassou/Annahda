@@ -32,6 +32,12 @@
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
             $nomUnite = htmlentities($_POST['nomUnite']);
+            //if we want to set unite2 : begin
+            $nombreUnites2 = htmlentities($_POST['nombreUnites2']);
+            $prixUnitaire2 = htmlentities($_POST['prixUnitaire2']);
+            $unite2 = htmlentities($_POST['unite2']);
+            $nomUnite2 = htmlentities($_POST['nomUnite2']);
+            //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
 			$total = htmlentities($_POST['total']);
@@ -47,6 +53,10 @@
 				'prixUnitaire' => $prixUnitaire,
 				'unite' => $unite,
 				'nomUnite' => $nomUnite,
+				'nombreUnites2' => $nombreUnites2,
+                'prixUnitaire2' => $prixUnitaire2,
+                'unite2' => $unite2,
+                'nomUnite2' => $nomUnite2,
 				'total' => $total,
 				'traveaux' => $traveaux,
 				'traveauxArabe' => $traveauxArabe,
@@ -76,6 +86,12 @@
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
             $nomUnite = htmlentities($_POST['nomUnite']);
+            //if we want to set unite2 : begin
+            $nombreUnites2 = htmlentities($_POST['nombreUnites2']);
+            $prixUnitaire2 = htmlentities($_POST['prixUnitaire2']);
+            $unite2 = htmlentities($_POST['unite2']);
+            $nomUnite2 = htmlentities($_POST['nomUnite2']);
+            //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
             $total = htmlentities($_POST['total']);
@@ -88,6 +104,10 @@
                 'prixUnitaire' => $prixUnitaire,
                 'unite' => $unite,
                 'nomUnite' => $nomUnite,
+                'nombreUnites2' => $nombreUnites2,
+                'prixUnitaire2' => $prixUnitaire2,
+                'unite2' => $unite2,
+                'nomUnite2' => $nomUnite2,
 				'total' => $total,
 				'traveaux' => $traveaux,
                 'traveauxArabe' => $traveauxArabe,

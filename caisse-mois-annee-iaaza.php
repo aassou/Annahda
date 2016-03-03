@@ -293,7 +293,8 @@
                                             <?php
                                             if ( 
                                                 $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                                $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
                                                 ) {
                                             ?>
                                             <th style="width:10%">Actions</th>
@@ -316,7 +317,8 @@
                                             <?php
                                             if ( 
                                                 $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                                $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                                $_SESSION['userMerlaTrav']->profil() == "user"
                                                 ) {
                                             ?>
                                             <td>

@@ -9,6 +9,10 @@ class ContratEmploye{
     private $_nombreUnites;
     private $_unite;
     private $_nomUnite;
+    private $_prixUnitaire2;
+    private $_nombreUnites2;
+    private $_unite2;
+    private $_nomUnite2;
     private $_traveaux;
     private $_traveauxArabe;
 	private $_total;
@@ -44,7 +48,7 @@ class ContratEmploye{
     public function setDateFinContrat($dateFinContrat){
         $this->_dateFinContrat = $dateFinContrat;
     }
-
+    
     public function setPrixUnitaire($prixUnitaire){
         $this->_prixUnitaire = $prixUnitaire;
     }
@@ -57,16 +61,32 @@ class ContratEmploye{
         $this->_nomUnite = $nomUnite;
     }
     
+    public function setNombreUnites($nombreUnites){
+        $this->_nombreUnites = $nombreUnites;
+    }
+    
+    public function setPrixUnitaire2($prixUnitaire){
+        $this->_prixUnitaire2 = $prixUnitaire;
+    }
+    
+    public function setUnite2($unite){
+        $this->_unite2 = $unite;
+    }
+    
+    public function setNomUnite2($nomUnite){
+        $this->_nomUnite2 = $nomUnite;
+    }
+    
+    public function setNombreUnites2($nombreUnites){
+        $this->_nombreUnites2 = $nombreUnites;
+    }
+    
     public function setTraveaux($traveaux){
         $this->_traveaux = $traveaux;
     }
     
     public function setTraveauxArabe($traveauxArabe){
         $this->_traveauxArabe = $traveauxArabe;
-    }
-    
-    public function setNombreUnites($nombreUnites){
-        $this->_nombreUnites = $nombreUnites;
     }
     
 	public function setTotal($total){
@@ -114,16 +134,32 @@ class ContratEmploye{
         return $this->_nomUnite;
     }
     
+    public function nombreUnites(){
+        return $this->_nombreUnites;
+    }
+    
+    public function prixUnitaire2(){
+        return $this->_prixUnitaire2;
+    }
+    
+    public function unite2(){
+        return $this->_unite2;
+    }
+    
+    public function nomUnite2(){
+        return $this->_nomUnite2;
+    }
+    
+    public function nombreUnites2(){
+        return $this->_nombreUnites2;
+    }
+    
     public function traveaux(){
         return $this->_traveaux;
     }
     
     public function traveauxArabe(){
         return $this->_traveauxArabe;
-    }
-    
-    public function nombreUnites(){
-        return $this->_nombreUnites;
     }
 
 	public function total(){
