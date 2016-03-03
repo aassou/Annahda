@@ -113,66 +113,74 @@ ob_start();
     <p>Imprimé le <?= date('d/m/Y') ?> | <?= date('h:i') ?> </p>
     <hr>
     <div>
+        <table style="width: 100%">
+            <tr>
+                <td style="width:50%"><h4>Informations du client</h4></td>
+                <!--td style="width:25%"></td-->
+                <td style="width:50%"><h4>Informations du contrat</h4></td>
+                <!--td style="width:25%"></td-->
+            </tr>
+        </table>
 		<table style="width: 100%">
+			<!--tr>
+				<td style="width:25%"><h4>Informations du client</h4></td>
+				<td style="width:25%"></td>
+				<td style="width:25%"><h4>Informations du contrat</h4></td>
+				<td style="width:25%"></td>
+			</tr-->
 			<tr>
-				<td><h4>Informations du client</h4></td>
-				<td></td>
-				<td><h4>Informations du contrat</h4></td>
-				<td></td>
+				<td style="width:25%"><strong>Client</strong></td>
+				<td style="width:25%"><strong><?= $client->nom() ?></strong></td>
+				<td style="width:25%"><strong>Type</strong></td> 
+				<td style="width:25%"><strong><?= $typeBien ?></strong></td>
 			</tr>
 			<tr>
-				<td><strong>Client</strong></td>
-				<td><strong><?= $client->nom() ?></strong></td>
-				<td><strong>Type</strong></td> 
-				<td><strong><?= $typeBien ?></strong></td>
+				<td style="width:25%"><strong>CIN</strong></td>
+				<td style="width:25%"><strong><?= $client->cin() ?></strong></td>
+				<td style="width:25%"><strong>Nom du Bien</strong></td>
+				<td style="width:25%"><strong><?= $biens->nom() ?></strong></td>
 			</tr>
 			<tr>
-				<td><strong>CIN</strong></td>
-				<td><strong><?= $client->cin() ?></strong></td>
-				<td><strong>Nom du Bien</strong></td>
-				<td><strong><?= $biens->nom() ?></strong></td>
+				<td style="width:25%"><strong>Téléphone 1</strong></td>
+                <td style="width:25%"><strong><?= $client->telephone1() ?></strong></td>
+				<td style="width:25%"><strong>Superficie</strong></td>
+				<td style="width:25%"><strong><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></strong></td>
 			</tr>
 			<tr>
-				<td><strong>Téléphone 1</strong></td>
-                <td><strong><?= $client->telephone1() ?></strong></td>
-				<td><strong>Superficie</strong></td>
-				<td><strong><?= $biens->superficie() ?>&nbsp;m<sup>2</sup></strong></td>
+				<td style="width:25%"><strong>Téléphone 2</strong></td>
+                <td style="width:25%"><strong><?= $client->telephone2() ?></strong></td>
+				<td style="width:25%"><strong>Etage</strong></td>
+				<td style="width:25%"><strong><?= $niveau ?></strong></td>
 			</tr>
 			<tr>
-				<td><strong>Téléphone 2</strong></td>
-                <td><strong><?= $client->telephone2() ?></strong></td>
-				<td><strong>Etage</strong></td>
-				<td><strong><?= $niveau ?></strong></td>
+				<td style="width:25%"><strong>Email</strong></td>
+                <td style="width:25%"><strong><?= $client->email() ?></strong></td>
+				<td style="width:25%"><strong>Prix de Vente</strong></td>
+				<td style="width:25%"><strong><?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
 			<tr>
-				<td><strong>Email</strong></td>
-                <td><strong><?= $client->email() ?></strong></td>
-				<td><strong>Prix de Vente</strong></td>
-				<td><strong><?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
-			</tr>
-			<tr>
-				<td><strong>Adresse</strong></td>
-                <td><strong><?= $client->adresse() ?></strong></td>
+				<td style="width:25%"><strong>Adresse</strong></td>
+                <td style="width:25%"><strong><?= $client->adresse() ?></strong></td>
 				<?php
 				if($contrat->avance()!=0 or $contrat->avance()!='NULL' ){
 				?>
-				<td><strong>Avance</strong></td>
-				<td><strong><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
+				<td style="width:25%"><strong>Avance</strong></td>
+				<td style="width:25%"><strong><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 				<?php
 				}
 				?>
 			</tr>
 			<tr>
-				<td></td>
-				<td></td>
-				<td><strong>Réglements</strong></td>
-				<td><strong><?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+				<td style="width:25%"></td>
+				<td style="width:25%"></td>
+				<td style="width:25%"><strong>Réglements</strong></td>
+				<td style="width:25%"><strong><?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
 			<tr>
-				<td></td>
-                <td></td>
-				<td><strong>Echeance</strong></td>
-				<td><strong><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
+				<td style="width:25%"></td>
+                <td style="width:25%"></td>
+				<td style="width:25%"><strong>Echeance</strong></td>
+				<td style="width:25%"><strong><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
 		</table>
 	</div>
