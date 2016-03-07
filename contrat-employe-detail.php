@@ -229,8 +229,8 @@
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a target="_blank" href="controller/PaiementEmployePrintController.php?idContrat=<?= $contrat->id() ?>">
-                                                                Imprimer Contrat
+                                                            <a target="_blank" href="controller/QuittanceEmployePrintController.php?idContratDetail=<?= $contrat->id() ?>&idProjet=<?= $idProjet ?>">
+                                                                Imprimer Quittance
                                                             </a>
                                                             <?php
                                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {

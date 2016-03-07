@@ -182,7 +182,7 @@
 	                    	<a class="btn blue" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
-	                    	<a class="btn green pull-right" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+	                    	<a class="btn green pull-right" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
 	                    	<!--a class="btn green pull-right" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>"-->
                                 <i class="icon-print"></i>&nbsp;Imprimer Contrat
                             </a>

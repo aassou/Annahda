@@ -178,6 +178,19 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="operations-status-archive-group.php">
+                            <div class="tile bg-purple">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-money"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Archive des paiements
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="compte-bancaire.php">
                             <div class="tile bg-yellow">
                                 <div class="tile-body">

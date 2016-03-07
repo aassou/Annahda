@@ -217,7 +217,7 @@
 												        	<!--a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Contrat
 												        	</a-->
-												        	<a href="#printContratArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+												        	<a href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat
                                                             </a>
 												        	<?php
@@ -405,9 +405,19 @@
 													<div class="control-group">
 														<label class="control-label">Montant</label>
 														<div class="controls">
-															<input type="text" required="required" id="montant" name="montant" />
+															<input style="width:150px" type="text" required="required" id="montant" name="montant" />
+															<select class="currency" name="currency" style="width:80px">
+                                                                <option value="DH">DH</option>
+                                                                <option value="Euro">Euro</option>
+                                                            </select>
 														</div>
 													</div>
+													<div class="control-group" style="display: none" class="tauxDeChange">
+                                                        <label class="control-label">Taux de change</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="tauxDeChange" />
+                                                        </div>
+                                                    </div>
 													<div class="control-group">
 			                                             <label class="control-label" for="modePaiement">Mode de paiement</label>
 			                                             <div class="controls">
@@ -569,16 +579,14 @@
 			App.setPage("table_managed");
 			App.init();
 		});
-		$('.contrats-list').show();
-        $('#customer').keyup(function(){
-            $('.contrats-list').hide();
-           var txt = $('#customer').val();
-           $('.contrats-list').each(function(){
-               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
-                   $(this).show();
-               }
-            });
-        }); 
+		$('.currency').on('change',function(){
+            if( $(this).val()!=="DH"){
+                $('.tauxDeChange').show()
+            }
+            else{
+                $('.tauxDeChange').hide()
+            }
+        });
 	</script>
 </body>
 <!-- END BODY -->

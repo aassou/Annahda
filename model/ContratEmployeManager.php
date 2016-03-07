@@ -43,6 +43,7 @@ class ContratEmployeManager{
     	$query = $this->_db->prepare(
     	'UPDATE t_contratemploye SET dateContrat=:dateContrat, dateFinContrat=:dateFinContrat, 
     	nombreUnites=:nombreUnites, prixUnitaire=:prixUnitaire, unite=:unite, nomUnite=:nomUnite, 
+    	nombreUnites2=:nombreUnites2, prixUnitaire2=:prixUnitaire2, unite2=:unite2, nomUnite2=:nomUnite2, 
     	traveaux=:traveaux, traveauxArabe=:traveauxArabe, total=:total, employe=:employe, idProjet=:idProjet 
     	WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));

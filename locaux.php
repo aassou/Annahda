@@ -311,23 +311,23 @@
 												if( $locau->status() == "R&eacute;serv&eacute;" ){
 												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
 												?>
-												<a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-													Pour : <?= $locau->par() ?>
+												<a class="btn mini" title="<?= $locau->par() ?>" href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
+													Pour
 												</a>
 												<?php
                                                     }
                                                     else{
                                                 ?>
-                                                    <a>
-                                                        Pour : <?= $locau->par() ?>
+                                                    <a class="btn mini" title="<?= $locau->par() ?>">
+                                                        Pour
                                                     </a>    
                                                 <?php        
                                                     }
 												}
                                                 elseif( $locau->status() == "Vendu" ){
                                                 ?>
-                                                <a>
-                                                    Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $locau->id(), "localCommercial"))->nom() ?>
+                                                <a class="btn mini" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $locau->id(), "localCommercial"))->nom() ?>">
+                                                    Pour 
                                                 </a>
                                                 <?php
                                                 }

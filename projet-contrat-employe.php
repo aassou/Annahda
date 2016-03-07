@@ -461,7 +461,7 @@
                                                             <label class="control-label">Date début</label>
                                                             <div class="controls">
                                                                 <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                                                    <input name="dateContrat" id="dateContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateContrat() ?>" />
+                                                                    <input name="dateContrat" id="dateContratUpdate" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateContrat() ?>" />
                                                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                                                 </div>
                                                              </div>
@@ -470,7 +470,7 @@
                                                             <label class="control-label">Date fin</label>
                                                             <div class="controls">
                                                                 <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                                                    <input name="dateFinContrat" id="dateFinContrat" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateFinContrat() ?>" />
+                                                                    <input name="dateFinContrat" id="dateFinContratUpdate" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $contrat->dateFinContrat() ?>" />
                                                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                                                 </div>
                                                              </div>
@@ -478,13 +478,13 @@
                                                         <div class="control-group">
                                                             <label class="control-label">Traveaux</label>
                                                             <div class="controls">
-                                                                <input type="text" name="traveaux" id="traveaux" value="<?= $contrat->traveaux() ?>" />
+                                                                <input type="text" name="traveaux" value="<?= $contrat->traveaux() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire" id="prixUnitaireUpdate" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <input type="text" name="prixUnitaire" id="pu" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
                                                                 <select name="unite" style="width:100px">
                                                                     <option value="<?= $contrat->unite() ?>"><?= $contrat->unite() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
@@ -493,20 +493,20 @@
                                                                     <option value="appartement">appartement</option>
                                                                     <option value="unite">unite</option>
                                                                 </select>
-                                                                <input type="text" name="nomUnite" id="nomUnite" value="<?= $contrat->nomUnite() ?>" style="width:90px"  />
+                                                                <input type="text" name="nomUnite" id="nomUniteUpdate" value="<?= $contrat->nomUnite() ?>" style="width:90px"  />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
-                                                                <input type="text" name="nombreUnites" id="nombreUnitesUpdate" value="<?= $contrat->nombreUnites() ?>" />
+                                                                <input type="text" name="nombreUnites" id="nu" value="<?= $contrat->nombreUnites() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire2" id="prixUnitaireUpdate2" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
-                                                                <select name="unite" style="width:100px">
+                                                                <input type="text" name="prixUnitaire2" id="pu2" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <select name="unite2" style="width:100px">
                                                                     <option value="<?= $contrat->unite2() ?>"><?= $contrat->unite2() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
                                                                     <option value="m²">m²</option>
@@ -514,25 +514,25 @@
                                                                     <option value="appartement">appartement</option>
                                                                     <option value="unite">unite</option>
                                                                 </select>
-                                                                <input type="text" name="nomUnite2" id="nomUnite2" value="<?= $contrat->nomUnite2() ?>" style="width:90px"  />
+                                                                <input type="text" name="nomUnite2" id="nomUniteUpdate2" value="<?= $contrat->nomUnite2() ?>" style="width:90px"  />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
-                                                                <input type="text" name="nombreUnites2" id="nombreUnitesUpdate2" value="<?= $contrat->nombreUnites2() ?>" />
+                                                                <input type="text" name="nombreUnites2" id="nu2" value="<?= $contrat->nombreUnites2() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Total à payer</label>
                                                             <div class="controls">
-                                                                <input type="text" name="total" id="totalUpdate" value="<?= $contrat->total() ?>" />
+                                                                <input type="text" name="total" id="tu" value="<?= $contrat->total() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">نوع الأشغال</label>
                                                             <div class="controls">
-                                                                <input type="text" name="traveauxArabe" id="traveauxArabe" value="<?= $contrat->traveauxArabe() ?>" />
+                                                                <input type="text" name="traveauxArabe" value="<?= $contrat->traveauxArabe() ?>" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -633,6 +633,7 @@
             App.setPage("table_managed");
             App.init();
         });
+        
         $('#unite').on('change',function(){
             if( $(this).val()==="unite"){
                 $("#nomUnite").show();
@@ -643,6 +644,7 @@
                 $("#nomUniteArabe").hide();
             }
         });
+
         $('#unite2').on('change',function(){
             if( $(this).val()==="unite"){
                 $("#nomUnite2").show();
@@ -653,6 +655,7 @@
                 $("#nomUniteArabe2").hide();
             }
         });
+        
         $('.addUnite').on('change',function(){
             if( $(this).val()==="oui"){
             $("#secondUnite").show()
@@ -660,7 +663,8 @@
             else{
             $("#secondUnite").hide()
             }
-        }); 
+        });
+         
         $('.clients').show();
         $('#nomClient').keyup(function(){
             $('.clients').hide();
@@ -671,6 +675,7 @@
                }
             });
         });
+        
         $('#nombreUnites, #prixUnitaire, #nombreUnites2, #prixUnitaire2').change(function(){
             var nombreUnites = $('#nombreUnites').val();
             var prixUnitaire = $('#prixUnitaire').val();
@@ -679,13 +684,14 @@
             var total = (nombreUnites * prixUnitaire) + (nombreUnites2 * prixUnitaire2);
             $('#total').val(total); 
         });
-        $('#nombreUnitesUpdate, #prixUnitaireUpdate, #nombreUnitesUpdate2, #prixUnitaireUpdate2').change(function(){
-            var nombreUnites = $('#nombreUnitesUpdate').val();
-            var prixUnitaire = $('#prixUnitaireUpdate').val();
-            var nombreUnites2 = $('#nombreUnitesUpdate2').val();
-            var prixUnitaire2 = $('#prixUnitaireUpdate2').val();
-            var total = (nombreUnites * prixUnitaire) + (nombreUnites2 * prixUnitaire2);
-            $('#totalUpdate').val(total); 
+        
+        $('#nu, #pu, #nu2, #pu2').change(function(){
+            var nu = $('#nu').val();
+            var pu = $('#pu').val();
+            var nu2 = $('#nu2').val();
+            var pu2 = $('#pu2').val();
+            var tu = (nu * pu) + (nu2 * pu2);
+            $('#tu').val(tu); 
         });
     </script>
 </body>

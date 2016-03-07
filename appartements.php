@@ -352,23 +352,23 @@
 												if( $appartement->status()=="R&eacute;serv&eacute;" ){
 												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
 												?>
-												<a href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-													Pour : <?= $appartement->par() ?>
+												<a class="btn mini" title="<?= $appartement->par() ?>" href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
+													Pour
 												</a>
 												<?php
                                                     }
                                                     else{
                                                 ?>
-                                                <a>
-                                                    Pour : <?= $appartement->par() ?>
+                                                <a class="btn mini" title="<?= $appartement->par() ?>">
+                                                    Pour
                                                 </a>    
                                                 <?php        
                                                     }
 												}
                                                 else if( $appartement->status()=="Vendu" ){
                                                 ?>
-                                                    <a>
-                                                        Pour : <?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>
+                                                    <a class="btn mini" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>">
+                                                        Pour
                                                     </a>
                                                 <?php    
                                                 }

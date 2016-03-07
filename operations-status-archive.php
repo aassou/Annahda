@@ -27,31 +27,12 @@
         $operationManager = new OperationManager($pdo);
         $compteBancaireManager = new CompteBancaireManager($pdo);
         
-        /*$codeContrat = $_GET['codeContrat'];
-        $comptesBancaires = $compteBancaireManager->getCompteBancaires();
-        $contrat = $contratManager->getContratByCode($codeContrat);
-        
-        
-        $projet = $projetManager->getProjetById($contrat->idProjet());
-        $client = $clientManager->getClientById($contrat->idClient());
-        $sommeOperations = $operationManager->sommeOperations($contrat->id());
-        $biens = "";
-        $niveau = "";
-        if($contrat->typeBien()=="appartement"){
-            $appartementManager = new AppartementManager($pdo);
-            $biens = $appartementManager->getAppartementById($contrat->idBien());
-            $niveau = $biens->niveau();
-        }
-        else if($contrat->typeBien()=="localCommercial"){
-            $locauxManager = new LocauxManager($pdo);
-            $biens = $locauxManager->getLocauxById($contrat->idBien());
-        }*/
         $mois = $_GET['mois'];
         $annee = $_GET['annee'];
         $operations = "";
         //test the locaux object number: if exists get operations else do nothing
         //$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
-        $operations = $operationManager->getOpenOperationsByMonthYear($mois, $annee);
+        $operations = $operationManager->getOperationsByMonthYear($mois, $annee);
         /*if($operationsNumber != 0){
             $operations = $operationManager->getOperationsByIdContrat($contrat->id());  
         }*/
@@ -115,17 +96,16 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <i class="icon-bar-chart"></i>
-                                <a href="status.php">Les états</a>
+                                <i class="icon-wrench"></i>
+                                <a href="configuration.php">Paramètrages</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <i class="icon-money"></i>
-                                <a href="operations-status-group.php">Les états des paiements client</a>
+                                <a href="operations-status-archive-group.php">Archive des opérations des paiements clients</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a><strong><?= $mois."/".$annee ?></strong></a>
+                                <a>Archive de <strong><?= $mois."/".$annee ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -177,16 +157,16 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">Actions</th>
-                                        <th style="width: 10%">Client</th>
-                                        <th style="width: 10%">Projet</th>
+                                        <!--th style="width: 10%">Actions</th-->
+                                        <th style="width: 20%">Client</th>
+                                        <th style="width: 20%">Projet</th>
                                         <th style="width: 10%">Date.Opé</th>
                                         <th style="width: 10%">Date.Rég</th>
                                         <th style="width: 10%">ModePaiment</th>
                                         <th style="width: 10%">Compte</th>
                                         <th style="width: 10%">N°.Opé</th>
                                         <th style="width: 10%">Montant</th>
-                                        <th style="width: 10%">Status</th>
+                                        <!--th style="width: 10%">Status</th-->
                                         <!--th style="width: 10%">Quittance</th-->
                                     </tr>
                                 </thead>
@@ -220,7 +200,7 @@
                                         }
                                     ?>      
                                     <tr class="odd gradeX">
-                                        <td><?= $action ?></td>
+                                        <!--td><?php //$action ?></td-->
                                         <td><?= $nomClient ?></td>
                                         <td><?= $nomProjet ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
@@ -229,7 +209,7 @@
                                         <td><?= $operation->compteBancaire() ?></td>
                                         <td><?= $operation->numeroCheque() ?></td>
                                         <td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
-                                        <td><?= $status ?></td>
+                                        <!--td><?php //$status ?></td-->
                                         <!--td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td-->
                                     </tr>   
                                     <!-- validateOperation box begin-->
@@ -241,10 +221,8 @@
                                         <div class="modal-body">
                                             <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
                                                 <div class="control-group">
-                                                    <input type="hidden" name="action" value="validate" />
-                                                    <input type="hidden" name="source" value="operations-status" />
-                                                    <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                    <input type="hidden" name="annee" value="<?= $annee ?>" />
+                                                    <input type="hidden" name="action" value="validate">
+                                                    <input type="hidden" name="source" value="operations-status">
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn blue" aria-hidden="true">Oui</button>
@@ -262,10 +240,8 @@
                                         <div class="modal-body">
                                             <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
                                                 <div class="control-group">
-                                                    <input type="hidden" name="action" value="cancel" />
-                                                    <input type="hidden" name="source" value="operations-status" />
-                                                    <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                    <input type="hidden" name="annee" value="<?= $annee ?>" />
+                                                    <input type="hidden" name="action" value="cancel">
+                                                    <input type="hidden" name="source" value="operations-status">
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -283,10 +259,8 @@
                                         <div class="modal-body">
                                             <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
                                                 <div class="control-group">
-                                                    <input type="hidden" name="action" value="hide" />
-                                                    <input type="hidden" name="source" value="operations-status" />
-                                                    <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                    <input type="hidden" name="annee" value="<?= $annee ?>" />
+                                                    <input type="hidden" name="action" value="hide">
+                                                    <input type="hidden" name="source" value="operations-status">
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn green" aria-hidden="true">Oui</button>
@@ -305,9 +279,7 @@
                                             <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
                                                 <p>Êtes-vous sûr de vouloir supprimer ce réglement ?</p>
                                                 <div class="control-group">
-                                                    <input type="hidden" name="action" value="delete" />
-                                                    <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                    <input type="hidden" name="annee" value="<?= $annee ?>" />
+                                                    <input type="hidden" name="action" value="delete">
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>

@@ -195,7 +195,12 @@
         $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."#detailsReglements";   
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "operations-status" ) {
-        $redirectLink = "Location:../operations-status.php";
+        $mois = $_POST['mois'];
+        $annee = $_POST['annee'];
+        $redirectLink = "Location:../operations-status.php?mois=".$mois."&annee=".$annee;
+        if ($action == "hide") {
+            $redirectLink = "Location:../operations-status-group.php";
+        } 
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "contrats-list" ) {
         $idProjet = htmlentities($_POST['idProjet']);

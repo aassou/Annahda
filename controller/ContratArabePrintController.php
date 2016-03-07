@@ -54,7 +54,7 @@
         $bien = $locauxManager->getLocauxById($contrat->idBien());
         $typeBien = "محل تجاري";
         $contratTitle = "عقد حفظ الحق في ملكية محل تجاري";
-        $etage = "/";
+        $etage = "الطابق الأرضي";
     }
     $superficie = $bien->superficie();
     $numero = $bien->nom();
@@ -191,7 +191,7 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.'البند الرابع&nbsp;:&nbsp;'.'</strong>';
 $avance = $contrat->avance();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$htmlcontent = 'يؤدي الطرف الثاني للطرف الأول من أجل حفظ حقه في ملكية الشقة موضوع العقد مبلغ تسبيق حدد بالتراضي في '.$avance.' درهم ( '.$avanceLettresArabe.' درهم) ، مقابل توصيل مفصل كوسيلة وحيدة لإثبات الأداء، وذلك في أجل لا يتعدى خمسة ايام ابتدءا من تاريخ توقيع هذا العقد..';
+$htmlcontent = 'يؤدي الطرف الثاني للطرف الأول من أجل حفظ حقه في ملكية '.$typeBien.' موضوع العقد مبلغ تسبيق حدد بالتراضي في '.$avance.' درهم ( '.$avanceLettresArabe.' درهم) ، مقابل توصيل مفصل كوسيلة وحيدة لإثبات الأداء، وذلك في أجل لا يتعدى خمسة ايام ابتدءا من تاريخ توقيع هذا العقد..';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 //Acte 5:

@@ -19,13 +19,17 @@
         $contratEmployeManager = new ContratEmployeManager($pdo);
         $contratDetaislManager = new ContratDetailsManager($pdo);
         $employesManager = new EmployeManager($pdo);
-        if(isset($_GET['idContratEmploye']) and ($_GET['idContratEmploye'])>0 and $_GET['idContratEmploye']<=$contratEmployeManager->getLastId()){
+        $contratDetails = "";
+        if(isset($_GET['idContratDetail']) and ($_GET['idContratDetail'])>0 and $_GET['idContratDetail']<=$contratDetaislManager->getLastId()){
             $idProjet = $_GET['idProjet'];
-            $idContratEmploye = $_GET['idContratEmploye'];
+            $idContratDetail = $_GET['idContratDetail'];
             $projet = $projetManager->getProjetById($idProjet);
-            $contratEmploye = $contratEmployeManager->getContratEmployeById($idContratEmploye);
-            $contratDetails = $contratDetaislManager->getContratDetailsByIdContratEmploye($idContratEmploye);
-            $totalPaye = $contratDetaislManager->getContratDetailsTotalByIdContratEmploye($idContratEmploye);
+            //$contratEmploye = $contratEmployeManager->getContratEmployeById($idContratEmploye);
+            //$contratDetails = $contratDetaislManager->getContratDetailsByIdContratEmploye($idContratEmploye);
+            $contratDetails = $contratDetaislManager->getContratDetailsById($idContratDetail);
+            $contrat = $contratEmployeManager->getContratEmployeById($contratDetails->idContratEmploye());
+            $employe = $employesManager->getEmployeById($contrat->employe());
+            //$totalPaye = $contratDetaislManager->getContratDetailsTotalByIdContratEmploye($idContratEmploye);
         }
 
 ob_start();
@@ -53,47 +57,26 @@ ob_start();
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
-    <h1>Détails Contrat <?= $contratEmploye->employe() ?></h1>
-    <h3>Projet <?= ucfirst($projet->nom()) ?></h3>
+    <h3>Quittance pour <?= $employe->nom() ?> - <?= ucfirst($projet->nom()) ?> - <?= $contrat->traveaux() ?></h3>
     <p>Imprimé le <?= date('d/m/Y') ?> | <?= date('h:i') ?> </p>
     <br><br>
     <table>
         <tr>
-            <th style="width:20%">Date Opération</th>
-            <th style="width:20%">Numéro Chèque</th>
-            <th style="width:20%">Montant</th>
-            <th style="width:20%"></th>
-            <th style="width:20%"></th>
+            <th style="width:40%">Date Opération</th>
+            <th style="width:30%">Numéro Chèque</th>
+            <th style="width:30%">Montant</th>
         </tr>
         <?php
-        foreach($contratDetails as $contrat){
+        //foreach($contratDetails as $contrat){
         ?>      
         <tr>
-            <td><?= date('d/m/Y', strtotime($contrat->dateOperation()) ) ?></td>
-            <td><?= $contrat->numeroCheque() ?></td>
-            <td><?= number_format($contrat->montant(), 2, ',', ' ') ?></td>
-            <td></td>
-            <td></td>
+            <td style="width:40%"><?= date('d/m/Y', strtotime($contratDetails->dateOperation()) ) ?></td>
+            <td style="width:30%"><?= $contratDetails->numeroCheque() ?></td>
+            <td style="width:30%"><?= number_format($contratDetails->montant(), 2, ',', ' ') ?></td>
         </tr>  
         <?php
-        }//end of loop
+        //}//end of loop
         ?>
-    </table>
-    <table>
-        <tr>
-            <th style="width:20%"></th>
-            <th style="width:20%"></th>
-            <th style="width:20%">Total Payé</th>
-            <th style="width:20%">Total A Payer</th>
-            <th style="width:20%">Reste</th>
-        </tr>  
-        <tr>
-            <td></td>
-            <td></td>
-            <td><?= number_format($totalPaye, 2, ',', ' ') ?></td>
-            <td><?= number_format($contratEmploye->total(), 2, ',', ' ') ?></td>
-            <td><?= number_format($contratEmploye->total()-$totalPaye, 2, ',', ' ') ?></td>
-        </tr>
     </table>
     <br><br><br>
     <table>
@@ -101,13 +84,13 @@ ob_start();
             <th style="width:30%">Signature</th>
         </tr>  
         <tr>
-            <td style="height:100px"></td>
+            <td style="height:70px"></td>
         </tr>
     </table>
-    <br><br>
+    <br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;"> </p>
+    <p style="text-decoration : none; text-align: center;font-size: 9pt;">Groupe Annahda Lil Iaamar SARL</p>
     </page_footer>
 </page>    
 <?php
@@ -115,10 +98,10 @@ ob_start();
     
     require('../lib/html2pdf/html2pdf.class.php');
     try{
-        $pdf = new HTML2PDF('P', 'A4', 'fr');
+        $pdf = new HTML2PDF('L', 'A5', 'fr');
         $pdf->pdf->SetDisplayMode('fullpage');
         $pdf->writeHTML($content);
-        $fileName = "ContratDetails-".date('Ymdhi').'.pdf';
+        $fileName = "Quittance-Employe-".date('Ymdhi').'.pdf';
         $pdf->Output($fileName);
     }
     catch(HTML2PDF_exception $e){

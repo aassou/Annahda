@@ -41,6 +41,7 @@
 				or $currentPage=="contrat-status.php"
 				or $currentPage=="properties-status.php"
 				or $currentPage=="operations-status.php"
+				or $currentPage=="operations-status-group.php"
 				or $currentPage=="status.php"
 				or $currentPage=="charges-communs-type.php"
 				or $currentPage=="charges-communs-grouped.php"
@@ -233,6 +234,8 @@
                 or $currentPage=="type-charges-communs.php"
                 or $currentPage=="fournisseurs.php"
                 or $currentPage=="companies.php"
+                or $currentPage=="operations-status-archive-group.php"
+                or $currentPage=="operations-status-archive.php"
                 ){echo "active ";} ?>">
                     <a href="configuration.php">
                     <i class="icon-wrench"></i> 

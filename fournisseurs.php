@@ -370,9 +370,6 @@
 </html>
 <?php
 }
-else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-	header('Location:dashboard.php');
-}
 else{
     header('Location:index.php');    
 }
