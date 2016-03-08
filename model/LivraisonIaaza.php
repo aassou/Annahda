@@ -5,6 +5,7 @@ class LivraisonIaaza{
     private $_libelle;
     private $_designation;
     private $_type;
+    private $_status;
     private $_quantite;
     private $_prixUnitaire;
     private $_paye;
@@ -50,6 +51,10 @@ class LivraisonIaaza{
     
     public function setType($type){
         $this->_type = $type;
+    }
+    
+    public function setStatus($status){
+        $this->_status = $status;
     }
     
     public function setQuantite($quantite){
@@ -119,6 +124,10 @@ class LivraisonIaaza{
     
     public function type(){
         return $this->_type;
+    }
+    
+    public function status(){
+        return $this->_status;
     }
     
     public function quantite(){

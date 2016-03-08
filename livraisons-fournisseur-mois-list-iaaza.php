@@ -386,8 +386,15 @@
                                              <label class="checkbox">
                                                  <div class="checkbox">
                                                      <span>
-                                                         <input type="checkbox" name="livraisons" value="livraison" checked="checked" style="opacity: 0;">
-                                                     </span>Livraisons
+                                                         <input type="radio" name="livraisons" value="livraisonnonpaye" checked="checked" style="opacity: 0;">
+                                                     </span>Les BLs Non Payés
+                                                 </div>
+                                             </label>
+                                             <label class="checkbox">
+                                                 <div class="checkbox">
+                                                     <span>
+                                                         <input type="radio" name="livraisons" value="livraison" style="opacity: 0;">
+                                                     </span>Tous les BLs
                                                  </div>
                                              </label>
                                              <label class="checkbox">
@@ -412,6 +419,57 @@
                             </div>
                         </div>
                         <!-- printCharge box end -->
+                        <!-- updateStatusLivraison box begin-->
+                        <div id="updateStatusLivraison" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Modifier Status des BLs </h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                    <?php
+                                    foreach ( $livraisons as $livraison ) {
+                                    ?> 
+                                    <div class="control-group">
+                                       <label class="control-label"></label>
+                                        <div class="controls">
+                                          <label class="checkbox line">
+                                          <div class="checker" id="uniform-undefined">
+                                              <span class="">
+                                                  <input type="checkbox" name="bl[]" value="<?= $livraison->id() ?>" style="opacity: 0;">
+                                              </span>
+                                          </div>
+                                          <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?> | BL <?= $livraison->libelle() ?> | <?= ($livraison->status()==0)?"Payé":"Non payé"; ?>   
+                                          </label>
+                                       </div>   
+                                    </div>
+                                    <?php    
+                                    }
+                                    ?>
+                                    <div class="control-group">
+                                        <label class="control-label">Status</label>
+                                        <div class="controls">
+                                            <select name="status">
+                                                <option value="0">Non payé</option>
+                                                <option value="1">Payé</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">  
+                                            <input type="hidden" name="action" value="updateStatus" />
+                                            <input type="hidden" name="idFournisseur" value="<?= $_GET['idFournisseur'] ?>" />
+                                            <input type="hidden" name="source" value="livraisons-fournisseur-mois-list-iaaza" />
+                                            <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
+                                            <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- updateStatusLivraison box end -->       
                         <!-- BEGIN Terrain TABLE PORTLET-->
                         <?php
                          if( isset($_SESSION['livraison-action-message'])
@@ -462,10 +520,14 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    
-                                    <div class="btn-group">
-                                        <a href="#printBilanFournisseur" class="btn blue" data-toggle="modal">
+                                    <div class="btn-group pull-right">
+                                        <a href="#printBilanFournisseur" class="btn blue pull-right" data-toggle="modal">
                                             <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                                        </a>
+                                    </div>
+                                    <div class="btn-group pull-left">
+                                        <a href="#updateStatusLivraison" class="btn purple pull-left" data-toggle="modal">
+                                            <i class="icon-check"></i>&nbsp;Modifier Status BL
                                         </a>
                                     </div>
                                     <!--div class="btn-group pull-right">
@@ -486,7 +548,8 @@
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 15%">Date Livraison</th>
                                             <th style="width: 15%">Articles</th>
-                                            <th style="width: 20%">Total</th>
+                                            <th style="width: 10%">Total</th>
+                                            <th style="width: 10%">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -505,6 +568,10 @@
                                             else {
                                                 $nomProjet = "Plusieurs Projets";
                                             }
+                                            $status = '<a style="width:50px" class="btn mini red">Non Payé</a>';
+                                            if ( $livraison->status() != 0 ) {
+                                                $status = '<a style="width:50px" class="btn mini green">Payé</a>';
+                                            } 
                                         ?>      
                                         <tr class="livraisons">
                                             <td>                             
@@ -537,6 +604,7 @@
                                             <td>
                                                 <?= number_format($livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id()), 2, ',', ' '); ?>
                                             </td>
+                                            <td><?= $status ?></td>
                                         </tr>
                                         <!-- add file box begin-->
                                         <div id="addPieces<?= $livraison->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

@@ -34,6 +34,7 @@
         if( !empty($_POST['libelle']) ){
             $idProjet = htmlentities($_POST['idProjet']);
             $libelle = htmlentities($_POST['libelle']);
+            $status = 0;
             $designation = htmlentities($_POST['designation']);
             //$type = htmlentities($_POST['type']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
@@ -45,7 +46,7 @@
             $annee = date('Y', strtotime($dateLivraison));
             //create object
             $livraison = 
-            new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
+            new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle, 'status' => $status,
             'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
             'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
@@ -134,6 +135,32 @@
             //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
             $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
+    }
+    else if($action == "updateStatus"){
+        $mois = htmlentities($_POST['mois']);
+        $annee = htmlentities($_POST['annee']);
+        $status = htmlentities($_POST['status']);
+        if ( !empty($_POST['bl']) ) {
+            foreach ( $_POST['bl'] as $bl ) {
+                $livraisonManager->updateStatus($bl, $status);       
+            }
+        }
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification",
+            'target' => "Table des livraisons",
+            'description' => "Modification du status de la livraison, idLivraison : ".$idLivraison,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "<strong>Opération Valide</strong> : Livraison Status Modifiée avec succès.";
+        $typeMessage = "success";
+        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        
     }
     else if($action=="delete"){
         $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);

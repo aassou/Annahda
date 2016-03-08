@@ -119,6 +119,8 @@
                     or $currentPage=="reglements-fournisseur-iaaza.php"
                     or $currentPage=="livraisons-fournisseur-mois-list.php"
                     or $currentPage=="livraisons-fournisseur-mois.php"
+                    or $currentPage=="livraisons-fournisseur-mois-iaaza.php"
+                    or $currentPage=="livraisons-fournisseur-mois-list-iaaza.php"
                     ){
                         $gestionLivraisonClass = "active ";
                     } 

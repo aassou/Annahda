@@ -11,11 +11,12 @@ class LivraisonIaazaManager{
     //CRUD operations
     public function add(LivraisonIaaza $livraison){
         $query = $this->_db->prepare(
-        'INSERT INTO t_livraison_iaaza (dateLivraison, libelle, designation, idFournisseur, idProjet, code)
-        VALUES (:dateLivraison, :libelle, :designation, :idFournisseur, :idProjet, :code)') 
+        'INSERT INTO t_livraison_iaaza (dateLivraison, libelle, designation, status, idFournisseur, idProjet, code)
+        VALUES (:dateLivraison, :libelle, :designation, :status, :idFournisseur, :idProjet, :code)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
+        $query->bindValue(':status', $livraison->status());
         $query->bindValue(':designation', $livraison->designation());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':idProjet', $livraison->idProjet());
@@ -37,6 +38,16 @@ class LivraisonIaazaManager{
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':updated', $livraison->updated());
         $query->bindValue(':updatedBy', $livraison->updatedBy());
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function updateStatus($idLivraison, $status){
+        $query = $this->_db->prepare(
+        'UPDATE t_livraison_iaaza SET status=:status
+        WHERE id=:id') or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idLivraison);
+        $query->bindValue(':status', $status);
         $query->execute();
         $query->closeCursor();
     }
@@ -427,6 +438,25 @@ class LivraisonIaazaManager{
         return $livraisons;
     }
     
+    public function getLivraisonsNonPayeByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo){
+        $livraisons = array();
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_livraison_iaaza 
+        WHERE status=0
+        AND idFournisseur=:idFournisseur 
+        AND dateLivraison BETWEEN :dateFrom AND :dateTo 
+        ORDER BY dateLivraison DESC');
+        $query->bindValue(':idFournisseur', $idFournisseur);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $livraisons[] = new LivraisonIaaza($data);
+        }
+        $query->closeCursor();
+        return $livraisons;
+    }
+    
     public function getLivraisonsByFournisseurGroupByMonth($idFournisseur){
         $livraisons = array();
         $query = $this->_db->prepare(
@@ -474,7 +504,7 @@ class LivraisonIaazaManager{
         $query->bindValue(':annee', $annee);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $livraisons[] = new Livraison($data);
+            $livraisons[] = new LivraisonIaaza($data);
         }
         $query->closeCursor();
         return $livraisons;
