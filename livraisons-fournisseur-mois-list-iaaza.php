@@ -385,18 +385,23 @@
                                           <div class="controls">
                                              <label class="checkbox">
                                                  <div class="checkbox">
-                                                     <span>
-                                                         <input type="radio" name="livraisons" value="livraisonnonpaye" checked="checked" style="opacity: 0;">
+                                                     <span class="checked">
+                                                         <input type="radio" name="livraisons" value="0" checked="checked" style="opacity: 0;">
                                                      </span>Les BLs Non Payés
                                                  </div>
                                              </label>
                                              <label class="checkbox">
                                                  <div class="checkbox">
                                                      <span>
-                                                         <input type="radio" name="livraisons" value="livraison" style="opacity: 0;">
+                                                         <input type="radio" name="livraisons" value="1" style="opacity: 0;">
                                                      </span>Tous les BLs
                                                  </div>
                                              </label>
+                                          </div>
+                                       </div>
+                                       <div class="control-group">
+                                          <label class="control-label"></label>
+                                          <div class="controls">
                                              <label class="checkbox">
                                                  <div class="checkbox">
                                                      <span class="checked">

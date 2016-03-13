@@ -75,7 +75,7 @@
                 $reglementsFournisseurManager->getReglementFournisseurByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo);
                 $totalReglement = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo);
             }
-            if ( isset($_POST['livraisons']) ) {
+            if ( isset($_POST['livraisons']) and $_POST['livraisons'] == 1 ) {
                 $livraisons = 
                 $livraisonManager->getLivraisonsByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo);
                 $sommeDetailsLivraisons = 0;
@@ -84,6 +84,15 @@
                 }   
                 $totalLivraison = $sommeDetailsLivraisons;
             }
+            else if ( isset($_POST['livraisons']) and $_POST['livraisons'] == 0 ) {
+                $livraisons = 
+                $livraisonManager->getLivraisonsNonPayeByIdFournisseurByDates($idFournisseur, $dateFrom, $dateTo);
+                $sommeDetailsLivraisons = 0;
+                foreach($livraisons as $l){
+                    $sommeDetailsLivraisons += $livraisonDetailManager->getTotalLivraisonByIdLivraison($l->id());
+                }   
+                $totalLivraison = $sommeDetailsLivraisons;
+            } 
         }       
 
 ob_start();
