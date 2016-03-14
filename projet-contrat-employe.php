@@ -484,7 +484,7 @@
                                                         <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire" id="pu" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <input type="text" name="prixUnitaire" id="pu<?= $contrat->id() ?>" value="<?= $contrat->prixUnitaire() ?>" style="width:90px" />&nbsp;/&nbsp;
                                                                 <select name="unite" style="width:100px">
                                                                     <option value="<?= $contrat->unite() ?>"><?= $contrat->unite() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
@@ -499,13 +499,13 @@
                                                         <div class="control-group">
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
-                                                                <input type="text" name="nombreUnites" id="nu" value="<?= $contrat->nombreUnites() ?>" />
+                                                                <input type="text" name="nombreUnites" id="nu<?= $contrat->id() ?>" value="<?= $contrat->nombreUnites() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Prix/Unité</label>
                                                             <div class="controls">
-                                                                <input type="text" name="prixUnitaire2" id="pu2" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
+                                                                <input type="text" name="prixUnitaire2" id="pu2<?= $contrat->id() ?>" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
                                                                 <select name="unite2" style="width:100px">
                                                                     <option value="<?= $contrat->unite2() ?>"><?= $contrat->unite2() ?></option>
                                                                     <option disabled="disabled">-----------------</option>
@@ -520,13 +520,13 @@
                                                         <div class="control-group">
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
-                                                                <input type="text" name="nombreUnites2" id="nu2" value="<?= $contrat->nombreUnites2() ?>" />
+                                                                <input type="text" name="nombreUnites2" id="nu2<?= $contrat->id() ?>" value="<?= $contrat->nombreUnites2() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
                                                             <label class="control-label">Total à payer</label>
                                                             <div class="controls">
-                                                                <input type="text" name="total" id="tu" value="<?= $contrat->total() ?>" />
+                                                                <input type="text" name="total" id="tu<?= $contrat->id() ?>" value="<?= $contrat->total() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
@@ -569,6 +569,17 @@
                                                 </div>
                                             </div>
                                             <!-- delete box end -->
+                                            <script>
+                                            
+                                                $('#nu<?= $contrat->id() ?>, #pu<?= $contrat->id() ?>, #nu2<?= $contrat->id() ?>, #pu2<?= $contrat->id() ?>').change(function(){
+                                                    var nu = $('#nu<?= $contrat->id() ?>').val();
+                                                    var pu = $('#pu<?= $contrat->id() ?>').val();
+                                                    var nu2 = $('#nu2<?= $contrat->id() ?>').val();
+                                                    var pu2 = $('#pu2<?= $contrat->id() ?>').val();
+                                                    var tu = (nu * pu) + (nu2 * pu2);
+                                                    $('#tu<?= $contrat->id() ?>').val(tu); 
+                                                });
+                                            </script>
                                             <?php
                                             }
                                             ?>
@@ -683,15 +694,6 @@
             var prixUnitaire2 = $('#prixUnitaire2').val();
             var total = (nombreUnites * prixUnitaire) + (nombreUnites2 * prixUnitaire2);
             $('#total').val(total); 
-        });
-        
-        $('#nu, #pu, #nu2, #pu2').change(function(){
-            var nu = $('#nu').val();
-            var pu = $('#pu').val();
-            var nu2 = $('#nu2').val();
-            var pu2 = $('#pu2').val();
-            var tu = (nu * pu) + (nu2 * pu2);
-            $('#tu').val(tu); 
         });
     </script>
 </body>

@@ -15,10 +15,24 @@
 		//In this section we will count the number of tasks assigned to the current session user
 		$bugManager = new BugManager($pdo);
 		$taskManager = new TaskManager($pdo);
+        $alertManager = new AlertManager($pdo);
         $taskNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
         $bugNumber = $bugManager->getBugsNumber();
+        $alertNumber = $alertManager->getAlertsNumber();
 		?>			
 		<ul class="nav pull-right">
+		    <li class="dropdown" id="header_inbox_bar">
+                <a href="alert.php" class="dropdown-toggle">
+                <i class="icon-bullhorn"></i>  
+                <?php
+                if ( $alertNumber > 0 ) {
+                ?>
+                <span class="badge"><?= $alertNumber ?></span>
+                <?php  
+                }
+                ?>
+                </a>
+            </li>
 			<li class="dropdown" id="header_inbox_bar">
 				<a href="tasks.php" class="dropdown-toggle">
 				<i class="icon-tasks"></i>  
