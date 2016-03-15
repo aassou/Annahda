@@ -173,6 +173,57 @@
                     </ul>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
+                <!---------------------------- Commandes Begin  -------------------------------------------->
+                <?php 
+                    $gestionCommandeClass="";
+                    if(
+                    $currentPage=="commande-group.php"
+                    or $currentPage=="commande-group-iaaza.php"
+                    or $currentPage=="commande-details-iaaza.php"
+                    ){
+                        $gestionCommandeClass = "active ";
+                    } 
+                ?> 
+                <li class="<?= $gestionCommandeClass; ?> has-sub ">
+                    <a href="javascript:;">
+                    <i class="icon-shopping-cart"></i> 
+                    <span class="title">Gestion des commandes</span>
+                    <span class="arrow "></span>
+                    </a>
+                    <ul class="sub">
+                        <?php
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
+                        ?>
+                        <li <?php if($currentPage=="commande-group.php"
+                                    ){
+                            ?> class="active" <?php } ?> >
+                            <a href="commande-group.php">Société Annahda</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <?php
+                        if ( 
+                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
+                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
+                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                            ) {
+                        ?>
+                        <li <?php if($currentPage=="commande-group-iaaza.php"
+                                    or $currentPage=="commande-details-iaaza.php"
+                                    ){?> class="active" <?php } ?> >
+                            <a href="commande-group-iaaza.php">Société Iaaza</a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </li>
+                <!---------------------------- Commandes End    -------------------------------------------->
                 <!---------------------------- Caisse Begin  -------------------------------------------->
                 <?php 
                     $gestionCaisseClass="";

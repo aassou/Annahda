@@ -199,6 +199,19 @@
 								</div>
 							</div>
 							</a>
+							<a href="commande-group-iaaza.php">
+                            <div class="tile bg-red">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-shopping-cart"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Les commandes Iaaza
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 							<a href="status.php">
                             <div class="tile bg-brown">
                                 <div class="corner"></div>
@@ -235,7 +248,7 @@
                             </div>
                             </a>
 							<a href="configuration.php">
-							<div class="tile bg-red">
+							<div class="tile bg-dark-red">
 								<div class="corner"></div>
 								<div class="tile-body">
 									<i class="icon-wrench"></i>
