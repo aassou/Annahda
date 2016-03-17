@@ -239,7 +239,7 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- SendMail box begin-->
                                         <div id="sendMail<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
