@@ -173,8 +173,9 @@
                                             <th style="width: 10%">Projet</th>
                                             <th style="width: 20%">Bien</th>
                                             <th style="width: 10%">Montant</th>
-                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 10%">Date Prévu</th>
                                             <th style="width: 10%">Status</th>
+                                            <th style="width: 10%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -238,7 +239,34 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMail<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementPrevuEnRetards box begin-->
                                         <div id="updateStatusReglementPrevuEnRetards<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
