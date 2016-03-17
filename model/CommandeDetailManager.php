@@ -26,15 +26,16 @@ class CommandeDetailManager{
 	}
 
 	public function update(CommandeDetail $commandeDetail){
-    	$query = $this->_db->prepare(' UPDATE t_commandedetail SET 
-		reference=:reference, libelle=:libelle, quantite=:quantite, idCommande=:idCommande, updated=:updated, updatedBy=:updatedBy
+    	$query = $this->_db->prepare(
+    	'UPDATE t_commandedetail SET 
+		reference=:reference, libelle=:libelle, quantite=:quantite, 
+		updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $commandeDetail->id());
 		$query->bindValue(':reference', $commandeDetail->reference());
 		$query->bindValue(':libelle', $commandeDetail->libelle());
 		$query->bindValue(':quantite', $commandeDetail->quantite());
-		$query->bindValue(':idCommande', $commandeDetail->idCommande());
 		$query->bindValue(':updated', $commandeDetail->updated());
 		$query->bindValue(':updatedBy', $commandeDetail->updatedBy());
 		$query->execute();
@@ -49,6 +50,14 @@ class CommandeDetailManager{
 		$query->execute();
 		$query->closeCursor();
 	}
+    
+    public function deleteCommande($idCommande){
+        $query = $this->_db->prepare('DELETE FROM t_commandedetail WHERE idCommande=:idCommande')
+        or die(print_r($this->_db->errorInfo()));;
+        $query->bindValue(':idCommande', $idCommande);
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function getCommandeDetailById($id){
     	$query = $this->_db->prepare(' SELECT * FROM t_commandedetail

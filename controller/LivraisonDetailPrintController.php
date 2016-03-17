@@ -40,8 +40,11 @@
 		$projet = "Vide";
 		if( isset($_GET['idLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonById($_GET['idLivraison']);
+            $nomProjet = "Non mentionnée";
+            if ( $livraison->idProjet() != 0 ) {
+                $nomProjet = $projetManager->getProjetById($livraison->idProjet());   
+            }
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
-			$projet = $projetManager->getProjetById($livraison->idProjet());
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
 			$totalLivraisonDetail = 
 			$livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
@@ -78,7 +81,7 @@ ob_start();
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
-    <h3><?= $titreLivraison.$livraison->libelle()." - Fournisseur : ".$fournisseur->nom()." - Projet : ".$projet->nom() ?></h3>
+    <h3><?= $titreLivraison.$livraison->libelle()." - Fournisseur : ".$fournisseur->nom()." - Projet : ".$nomProjet ?></h3>
     <h4>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?> | Nombre d'articles : <?= $nombreArticle ?></h4>
     <p>Imprimé le <?= date('d/m/Y') ?> | <?= date('h:i') ?> </p>
     <table>

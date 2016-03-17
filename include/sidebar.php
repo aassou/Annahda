@@ -180,6 +180,7 @@
                     $currentPage=="commande-group.php"
                     or $currentPage=="commande-group-iaaza.php"
                     or $currentPage=="commande-details-iaaza.php"
+                    or $currentPage=="commande-mois-annee-iaaza.php"
                     ){
                         $gestionCommandeClass = "active ";
                     } 
@@ -215,6 +216,7 @@
                         ?>
                         <li <?php if($currentPage=="commande-group-iaaza.php"
                                     or $currentPage=="commande-details-iaaza.php"
+                                    or $currentPage=="commande-mois-annee-iaaza.php"
                                     ){?> class="active" <?php } ?> >
                             <a href="commande-group-iaaza.php">Société Iaaza</a>
                         </li>

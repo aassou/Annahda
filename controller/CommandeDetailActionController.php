@@ -71,7 +71,6 @@
 				'reference' => $reference,
 				'libelle' => $libelle,
 				'quantite' => $quantite,
-				'idCommande' => $idCommande,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));

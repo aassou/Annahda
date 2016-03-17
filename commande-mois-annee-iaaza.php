@@ -95,7 +95,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong></a>
+                                <strong><?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -226,7 +226,7 @@
                                                 $nomProjet = $projetManager->getProjetById($commande->idProjet())->nom();
                                             }
                                             else {
-                                                $nomProjet = "Plusieurs Projets";
+                                                $nomProjet = "Non mentionné";
                                             }
                                             $nomFournisseur = $fournisseurManager->getFournisseurById($commande->idFournisseur())->nom();
                                         ?>      
@@ -249,6 +249,9 @@
                                                 ?>
                                                 <a class="btn mini" href="commande-details-iaaza.php?codeCommande=<?= $commande->codeLivraison() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Commande" >
                                                     <i class="icon-eye-open"></i>
+                                                </a>
+                                                <a class="btn mini blue" href="controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" title="Imprimer Bon Commande" >
+                                                    <i class="icon-print"></i>
                                                 </a>
                                             </td>
                                             <td><?= $commande->numeroCommande() ?></td>
@@ -286,7 +289,7 @@
                                                             <select name="idProjet">
                                                                 <option value="<?= $commande->idProjet() ?>"><?= $nomProjet ?></option>
                                                                 <option disabled="disabled">-----------</option>
-                                                                <option value="0">Plusieurs Projets</option>
+                                                                <option value="0">Non mentionné</option>
                                                                 <?php foreach($projets as $projet){ ?>
                                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                                 <?php } ?>
@@ -316,6 +319,7 @@
                                                         <div class="controls">  
                                                             <input type="hidden" name="action" value="update" />
                                                             <input type="hidden" name="idCommande" value="<?= $commande->id() ?>" />
+                                                            <input type="hidden" name="codeCommande" value="<?= $commande->codeLivraison() ?>" />
                                                             <input type="hidden" name="source" value="commande-mois-annee-iaaza" />
                                                             <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
                                                             <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
@@ -334,12 +338,14 @@
                                                 <h3>Supprimer la commande </h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/LivraisonActionController.php" method="post">
+                                                <form class="form-horizontal loginFrm" action="controller/CommandeActionController.php" method="post">
                                                     <p>Êtes-vous sûr de vouloir supprimer la commande <strong>N°<?= $commande->numeroCommande() ?></strong> ?</p>
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
                                                         <input type="hidden" name="idCommande" value="<?= $commande->id() ?>" />
+                                                        <input type="hidden" name="codeCommande" value="<?= $commande->codeLivraison() ?>" />
+                                                        <input type="hidden" name="source" value="commande-mois-annee-iaaza" />
                                                         <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
                                                         <input type="hidden" name="annee" value="<?= $_GET['annee'] ?>" />  
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>

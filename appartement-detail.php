@@ -185,16 +185,16 @@
 												Imprimer Fiche
 											</a>
 										</li>
-										<li>
-											<a href="#updateAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
+										<!--li>
+											<a href="#updateAppartement<?php //$appartement->id();?>" data-toggle="modal" data-id="<?php //$appartement->id(); ?>">
 												Modifier Infos
 											</a>
-										</li>
-										<li>
-											<a href="#addPiece<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
+										</li-->
+										<!--li>
+											<a href="#addPiece<?php //$appartement->id();?>" data-toggle="modal" data-id="<?php //$appartement->id(); ?>">
 												Ajouter un document
 											</a>
-										</li>
+										</li-->
 									</ul>
 									<div class="span9">
 										<div class="row-fluid">

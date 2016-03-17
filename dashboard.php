@@ -94,17 +94,9 @@
 					</div>
 				</div>
 				<!--      BEGIN TILES      -->
-				<?php
-                if ( 
-                    $_SESSION['userMerlaTrav']->profil() == "admin"
-                    || $_SESSION['userMerlaTrav']->profil() == "manager" 
-                    || $_SESSION['userMerlaTrav']->profil() == "user" 
-                    || $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                ) {
-                ?>
 				<div class="row-fluid">
 					<div class="span12">
-						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Raccourcis</h4>
+						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Iaaza</h4>
 						<div class="tiles">
 						    <a href="caisse-group-iaaza.php">
                             <div class="tile bg-yellow">
@@ -113,43 +105,26 @@
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Caisse Iaaza
+                                        La caisse
                                     </div>
                                     <div class="number">
                                     </div>
                                 </div>
                             </div>
                             </a>
-                            <?php
-                            if ( 
-                                $_SESSION['userMerlaTrav']->profil() == "admin" 
-                                || $_SESSION['userMerlaTrav']->profil() == "consultant"
-                                || $_SESSION['userMerlaTrav']->profil() == "manager"
-                            ) {
-                            ?>
-						    <a href="caisse-group.php">
-                            <div class="tile bg-purple">
+                            <a href="commande-group-iaaza.php">
+                            <div class="tile bg-red">
+                                <div class="corner"></div>
                                 <div class="tile-body">
-                                    <i class="icon-money"></i>
+                                    <i class="icon-shopping-cart"></i>
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Caisse Annahda
-                                    </div>
-                                    <div class="number">
+                                        Les commandes
                                     </div>
                                 </div>
                             </div>
                             </a>
-                            <?php
-                            }
-                            if ( 
-                                $_SESSION['userMerlaTrav']->profil() == "admin" 
-                                || $_SESSION['userMerlaTrav']->profil() == "consultant"
-                                || $_SESSION['userMerlaTrav']->profil() == "manager"
-                                || $_SESSION['userMerlaTrav']->profil() == "user"
-                            ) {
-                            ?>
                             <a href="livraisons-group-iaaza.php">
                             <div class="tile bg-blue">
                                 <div class="corner"></div>
@@ -158,19 +133,40 @@
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Livraisons Iaaza
+                                        Les livraisons
                                     </div>
                                 </div>
                             </div>
                             </a>
-                            <?php
-                            }
-                            if ( 
-                                $_SESSION['userMerlaTrav']->profil() == "admin" 
-                                || $_SESSION['userMerlaTrav']->profil() == "consultant"
-                                || $_SESSION['userMerlaTrav']->profil() == "manager"
-                            ) {
-                            ?>
+                        </div><!--  Tiles Iaaza End -->
+                    </div>
+                </div>    
+                
+                <?php
+                if ( 
+                    $_SESSION['userMerlaTrav']->profil() == "admin"
+                    || $_SESSION['userMerlaTrav']->profil() == "manager" 
+                    || $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                ) {
+                ?>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Annahda</h4>
+                        <div class="tiles">
+						    <a href="caisse-group.php">
+                            <div class="tile bg-purple">
+                                <div class="tile-body">
+                                    <i class="icon-money"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        La caisse
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="livraisons-group.php">
                             <div class="tile bg-cyan">
                                 <div class="corner"></div>
@@ -179,7 +175,7 @@
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        Livraisons Annahda
+                                        Les livraisons
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +187,7 @@
 								</div>
 								<div class="tile-object">
 									<div class="name">
-										Projets
+										Les projets
 									</div>
 									<div class="number">
 										<?= $projetNumber ?>
@@ -199,19 +195,6 @@
 								</div>
 							</div>
 							</a>
-							<a href="commande-group-iaaza.php">
-                            <div class="tile bg-red">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-shopping-cart"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Les commandes Iaaza
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
 							<a href="status.php">
                             <div class="tile bg-brown">
                                 <div class="corner"></div>
@@ -225,9 +208,6 @@
                                 </div>
                             </div>
                             </a>
-                            <?php
-                            }
-                            ?>
                             <?php
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil() == "admin" 
@@ -266,18 +246,8 @@
 						</div>
 					</div>
 				</div>
-				<?php
-                }
-                ?>
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
-				<?php
-                if ( 
-                    $_SESSION['userMerlaTrav']->profil() == "admin" 
-                    || $_SESSION['userMerlaTrav']->profil() == "consultant"
-                    || $_SESSION['userMerlaTrav']->profil() == "manager"
-                ) {
-                ?>
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
 					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
@@ -348,19 +318,9 @@
                         </a>
                     </div>	
 				</div>
-				<?php
-				}
-                ?>
 				<!-- END DASHBOARD STATS -->
 				<!-- BEGIN DASHBOARD FEEDS -->
 				<!-- ------------------------------------------------------ -->
-				<?php
-                if ( 
-                    $_SESSION['userMerlaTrav']->profil() == "admin" 
-                    || $_SESSION['userMerlaTrav']->profil() == "consultant"    
-                    || $_SESSION['userMerlaTrav']->profil() == "manager"
-                ) {
-                ?>
 				<div class="row-fluid">
 				<div class="span12">
 					<!-- BEGIN PORTLET-->

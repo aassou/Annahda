@@ -213,9 +213,9 @@
                                             <label class="control-label">Projet</label>
                                             <div class="controls">
                                                 <select name="idProjet">
-                                                    <option value="0">Non mentionnée</option>
                                                     <option value="<?= $idProjet ?>"><?= $nomProjet ?></option>
                                                     <option disabled="disabled">------------</option>
+                                                    <option value="0">Non mentionnée</option>
                                                     <?php foreach($projets as $pro){ ?>
                                                     <option value="<?= $pro->id() ?>"><?= $pro->nom() ?></option>
                                                     <?php } ?>
@@ -258,7 +258,7 @@
                             </div>
                             <!-- addLivraison box end -->
                             <!-- BEGIN Ajouter Article Link -->
-                            <a target="_blank" href="controller/CommandeDetailPrintController.php?idLivraison=<?= $commande->id() ?>&societe=2" class="get-down btn blue pull-right">
+                            <a target="_blank" href="controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" class="get-down btn blue pull-right">
                                 <i class="icon-print"></i>&nbsp;Bon de Commande
                             </a>
                             <?php  
@@ -282,12 +282,6 @@
                                 </div>
                                 <div class="modal-body">
                                     <form id="add-detail-commande-form" class="form-horizontal" action="controller/CommandeDetailActionController.php" method="post">
-                                        <!--div class="control-group">
-                                            <label class="control-label">Libelle</label>
-                                            <div class="controls">
-                                                <input type="text" name="libelle" value="" />
-                                            </div>
-                                        </div-->
                                         <div class="control-group">
                                             <label class="control-label">Reference</label>
                                             <div class="controls">
@@ -377,7 +371,7 @@
                             <div id="updateCommandeDetail<?= $detail->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h3>Modifier les détails de commande </h3>
+                                    <h3>Modifier Article </h3>
                                 </div>
                                 <div class="modal-body">
                                     <form id="update-detail-commande-form" class="form-horizontal" action="controller/CommandeDetailActionController.php" method="post">

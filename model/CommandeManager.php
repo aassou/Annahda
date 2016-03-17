@@ -29,8 +29,11 @@ class CommandeManager{
 	}
 
 	public function update(Commande $commande){
-    	$query = $this->_db->prepare(' UPDATE t_commande SET 
-		idFournisseur=:idFournisseur, idProjet=:idProjet, dateCommande=:dateCommande, numeroCommande=:numeroCommande, designation=:designation, status=:status, codeLivraison=:codeLivraison, updated=:updated, updatedBy=:updatedBy
+    	$query = $this->_db->prepare(
+    	'UPDATE t_commande SET 
+		idFournisseur=:idFournisseur, idProjet=:idProjet, dateCommande=:dateCommande, 
+		numeroCommande=:numeroCommande, designation=:designation, updated=:updated, 
+		updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $commande->id());
@@ -39,8 +42,6 @@ class CommandeManager{
 		$query->bindValue(':dateCommande', $commande->dateCommande());
 		$query->bindValue(':numeroCommande', $commande->numeroCommande());
 		$query->bindValue(':designation', $commande->designation());
-		$query->bindValue(':status', $commande->status());
-		$query->bindValue(':codeLivraison', $commande->codeLivraison());
 		$query->bindValue(':updated', $commande->updated());
 		$query->bindValue(':updatedBy', $commande->updatedBy());
 		$query->execute();

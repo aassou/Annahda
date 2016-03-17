@@ -55,7 +55,7 @@ class AppartementPiecesManager{
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
-        return new PiecesAppartement($data);
+        return new AppartementPieces($data);
     }
 
 	public function getPiecesAppartementByIdAppartement($idAppartement){
@@ -65,7 +65,7 @@ class AppartementPiecesManager{
         $query->bindValue(':idAppartement', $idAppartement);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-        	$pieces[] = new PiecesAppartement($data);
+        	$pieces[] = new AppartementPieces($data);
         }
         $query->closeCursor();
         return $pieces;
@@ -79,7 +79,7 @@ class AppartementPiecesManager{
         $query->bindValue(':idAppartement', $idAppartement);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-        	$pieces = new PiecesAppartement($data);
+        	$pieces = new AppartementPieces($data);
         }
         $query->closeCursor();
         return $pieces;
