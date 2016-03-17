@@ -262,7 +262,7 @@
                                                 <h3>Envoyer Email</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/SendMailController.php" method="post">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
                                                     </div>
