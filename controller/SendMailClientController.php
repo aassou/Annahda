@@ -21,3 +21,8 @@ function classLoad ($myClass) {
     $headers = 'From: annahda@gmail.com' . "\r\n";
 
     mail("aassou.abdelilah@gmail.com", $subject, $message, $headers);
+    $actionMessage = "Opération Valide : Email envoyé avec succès.";
+    $typeMessage = "success";
+    $_SESSION['mail-action-message'] = $actionMessage;
+    $_SESSION['mail-type-message'] = $typeMessage;
+    header('Location:../contrat-status.php');

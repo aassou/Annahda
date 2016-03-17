@@ -155,6 +155,20 @@
                 <div class="row-fluid">
                     <div class="span12">
                     <!-- CONTRAT CAS LIBRE BEGIN -->
+                    <?php 
+                    if( isset($_SESSION['mail-action-message'])
+                    and isset($_SESSION['mail-type-message']) ){
+                        $message = $_SESSION['mail-action-message']; 
+                        $typeMessage = $_SESSION['mail-type-message'];
+                    ?>
+                    <div class="alert alert-<?= $typeMessage ?>">
+                        <button class="close" data-dismiss="alert"></button>
+                        <?= $message ?>     
+                    </div>
+                     <?php } 
+                        unset($_SESSION['mail-action-message']);
+                        unset($_SESSION['mail-type-message']);
+                     ?>
                     <div class="portlet box light-grey" id="reglementsPrevus">
                         <div class="portlet-title">
                             <h4>Situation des réglements des clients</h4>
