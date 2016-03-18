@@ -33,51 +33,6 @@
         $casLibreWeek = $contratCasLibreManager->getReglementWeek();
         $casLibreMonth = $contratCasLibreManager->getReglementMonth();
         
-            /*$codeContrat = $_GET['codeContrat'];
-            $comptesBancaires = $compteBancaireManager->getCompteBancaires();
-            $contrat = $contratManager->getContratByCode($codeContrat);
-            //ContratCasLibre Elements
-            $contratCasLibreNumber = 
-            $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
-            $contratCasLibreElements = "";
-            $contratCasLibreTitle = "";
-            if ( $contratCasLibreNumber > 0 ) {
-                $contratCasLibreTitle = "<h4>Informations Supplémentaires</h4>";
-                $contratCasLibreElements = 
-                $contratCasLibreManager->getContratCasLibresByCodeContrat($codeContrat);
-            }
-            //ReglementPrevu Elements
-            $reglementPrevuNumber = 
-            $reglementPrevuManager->getReglementNumberByCodeContrat($codeContrat);
-            $reglementPrevuElements = "";
-            $reglementPrevuTitle = "";
-            if ( $reglementPrevuNumber > 0 ) {
-                $reglementPrevuTitle = "<h4>Dates des réglements prévus</h4>";
-                $reglementPrevuElements =     
-                $reglementPrevuManager->getReglementPrevuByCodeContrat($codeContrat);
-            }
-            
-            $projet = $projetManager->getProjetById($contrat->idProjet());
-            $client = $clientManager->getClientById($contrat->idClient());
-            $sommeOperations = $operationManager->sommeOperations($contrat->id());
-            $biens = "";
-            $niveau = "";
-            if($contrat->typeBien()=="appartement"){
-                $appartementManager = new AppartementManager($pdo);
-                $biens = $appartementManager->getAppartementById($contrat->idBien());
-                $niveau = $biens->niveau();
-            }
-            else if($contrat->typeBien()=="localCommercial"){
-                $locauxManager = new LocauxManager($pdo);
-                $biens = $locauxManager->getLocauxById($contrat->idBien());
-            }
-            $operations = "";
-            //test the locaux object number: if exists get operations else do nothing
-            $operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
-            if($operationsNumber != 0){
-                $operations = $operationManager->getOperationsByIdContrat($contrat->id());  
-            }*/
-        
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -216,25 +171,6 @@
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
                                                 $typeBien = "Local Commercial";
                                             }
-                                            /*$status = "";    
-                                            if($element->status()==0){
-                                                //comparing dates
-                                                $now = date('Y-m-d');
-                                                $now = new DateTime($now);
-                                                $now = $now->format('Ymd');
-                                                $datePrevu = $element->datePrevu();
-                                                $datePrevu = new DateTime($datePrevu);
-                                                $datePrevu = $datePrevu->format('Ymd');
-                                                if ( $datePrevu > $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini">En cours</a>';   
-                                                }
-                                                else if ( $datePrevu < $now ) {
-                                                    $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En cours</a>';
-                                                }
-                                            }
-                                            else if($element->status()==1){
-                                                $status = '<a href="#updateStatusReglementPrevu'.$element->id().'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini blue">Réglé</a>';
-                                            }*/
                                             //activate the update link only for admin's profil
                                             $link = "";
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
@@ -253,10 +189,10 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailA<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- SendMail box begin-->
-                                        <div id="sendMail<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div id="sendMailA<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Envoyer Email</h3>
@@ -358,8 +294,34 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailB<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailB<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementCasLibreEnRetards box begin-->
                                         <div id="updateStatusReglementCasLibreEnRetards<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -454,8 +416,34 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailC<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailC<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -533,8 +521,34 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailD<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailD<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementCasLibreToday box begin-->
                                         <div id="updateStatusReglementCasLibreToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -629,8 +643,34 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailE<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailE<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -708,8 +748,34 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailF<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailF<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementCasLibreWeek box begin-->
                                         <div id="updateStatusReglementCasLibreWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -807,8 +873,34 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailG<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailG<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -886,8 +978,34 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
-                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
+                                            <td><a href="#sendMailH<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
+                                        <!-- SendMail box begin-->
+                                        <div id="sendMailH<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Envoyer Email</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
+                                                    <div class="control-group">
+                                                        <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="contrat" />
+                                                            <input type="hidden" name="email" value="<?= $client->email() ?>" />
+                                                            <input type="hidden" name="client" value="<?= $client->nom() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        <div class="controls">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SendMail box end -->
                                         <!-- updateStatusReglementCasLibreMonth box begin-->
                                         <div id="updateStatusReglementCasLibreMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
