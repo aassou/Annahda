@@ -358,6 +358,7 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreEnRetards box begin-->
                                         <div id="updateStatusReglementCasLibreEnRetards<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -406,8 +407,9 @@
                                             <th style="width: 10%">Projet</th>
                                             <th style="width: 20%">Bien</th>
                                             <th style="width: 10%">Montant</th>
-                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 10%">Date Prévu</th>
                                             <th style="width: 10%">Status</th>
+                                            <th style="width: 10%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -452,6 +454,7 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -530,6 +533,7 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreToday box begin-->
                                         <div id="updateStatusReglementCasLibreToday<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -578,8 +582,9 @@
                                             <th style="width: 10%">Projet</th>
                                             <th style="width: 20%">Bien</th>
                                             <th style="width: 10%">Montant</th>
-                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 10%">Date Prévu</th>
                                             <th style="width: 10%">Status</th>
+                                            <th style="width: 10%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -624,6 +629,7 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -702,6 +708,7 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreWeek box begin-->
                                         <div id="updateStatusReglementCasLibreWeek<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -750,8 +757,9 @@
                                             <th style="width: 10%">Projet</th>
                                             <th style="width: 20%">Bien</th>
                                             <th style="width: 10%">Montant</th>
-                                            <th style="width: 20%">Date Prévu de réglement</th>
+                                            <th style="width: 10%">Date Prévu</th>
                                             <th style="width: 10%">Status</th>
+                                            <th style="width: 10%">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -799,6 +807,7 @@
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevuToday box begin-->
                                         <div id="updateStatusReglementPrevuMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -877,6 +886,7 @@
                                             <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td><?= $link ?></td>
+                                            <td><a href="#sendMail<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
                                         </tr>
                                         <!-- updateStatusReglementCasLibreMonth box begin-->
                                         <div id="updateStatusReglementCasLibreMonth<?= $element->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
