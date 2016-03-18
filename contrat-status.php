@@ -313,7 +313,7 @@
                                                             <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="email" value="<?= $client->email() ?>" />
                                                             <input type="hidden" name="client" value="<?= $client->nom() ?>" />
-                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->date() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         <div class="controls">
@@ -540,7 +540,7 @@
                                                             <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="email" value="<?= $client->email() ?>" />
                                                             <input type="hidden" name="client" value="<?= $client->nom() ?>" />
-                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->date() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         <div class="controls">
@@ -767,7 +767,7 @@
                                                             <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="email" value="<?= $client->email() ?>" />
                                                             <input type="hidden" name="client" value="<?= $client->nom() ?>" />
-                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->date() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         <div class="controls">
@@ -997,7 +997,7 @@
                                                             <input type="hidden" name="source" value="contrat" />
                                                             <input type="hidden" name="email" value="<?= $client->email() ?>" />
                                                             <input type="hidden" name="client" value="<?= $client->nom() ?>" />
-                                                            <input type="hidden" name="datePaiement" value="<?= $element->datePrevu() ?>" />
+                                                            <input type="hidden" name="datePaiement" value="<?= $element->date() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         <div class="controls">
