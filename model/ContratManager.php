@@ -215,6 +215,17 @@ class ContratManager{
         return $ids;
     }
 
+    public function getContratActifIds(){
+        $ids = array();
+        $query = $this->_db->query(' SELECT id FROM t_contrat WHERE status="actif" ');
+        //get result
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $ids[] = $data['id'];
+        }
+        $query->closeCursor();
+        return $ids;
+    }
+    
     public function getContratActifIdsByIdProjet($idProjet){
         $ids = array();
         $query = $this->_db->prepare(

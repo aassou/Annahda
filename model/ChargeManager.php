@@ -168,6 +168,13 @@ class ChargeManager{
         return $data['total'];
     }
     
+    public function getTotal(){
+        $query = $this->_db->query('SELECT SUM(montant) as total FROM t_charge');
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
     public function getTotalByIdProjetByType($idProjet, $type){
         $query = $this->_db->prepare(
         'SELECT SUM(montant) as total FROM t_charge WHERE idProjet=:idProjet AND type=:type');

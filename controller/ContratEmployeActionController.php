@@ -94,7 +94,7 @@
             //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
-            $total = htmlentities($_POST['total']);
+            $total = ($nombreUnites * $prixUnitaire) + ($nombreUnites2 * $prixUnitaire2);//htmlentities($_POST['total']);
             $employe = htmlentities($_POST['employe']);
             $contratEmploye = new ContratEmploye(array(
 				'id' => $idContratEmploye,

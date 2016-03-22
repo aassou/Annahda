@@ -99,6 +99,13 @@ class ReglementFournisseurManager{
         return $data['total'];
     }
 	
+    public function sommeReglementFournisseur(){
+        $query = $this->_db->query(' SELECT SUM(montant) AS total FROM t_reglement_fournisseur ');
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
+    
     public function sommeReglementFournisseurByIdProjet($idProjet){
         $query = $this->_db->prepare('SELECT SUM(montant) AS total FROM t_reglement_fournisseur 
         WHERE idProjet=:idProjet');

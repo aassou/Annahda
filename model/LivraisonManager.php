@@ -346,6 +346,15 @@ class LivraisonManager{
         return $ids;
 	}
     
+    public function getLivraisonIds(){
+        $ids = array();
+        $query = $this->_db->query(' SELECT id FROM t_livraison');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $ids[] = $data['id'];
+        }
+        return $ids;
+    }
+    
     public function getLivraisonIdsByIdProjet($idProjet){
         $ids = array();
         $query = $this->_db->prepare(' SELECT id FROM t_livraison 

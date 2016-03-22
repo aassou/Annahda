@@ -196,10 +196,10 @@
 							</div>
 							</a>
 							<a href="status.php">
-                            <div class="tile bg-brown">
+                            <div class="tile bg-yellow">
                                 <div class="corner"></div>
                                 <div class="tile-body">
-                                    <i class="icon-bar-chart"></i>
+                                    <i class="icon-tasks"></i>
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
@@ -223,6 +223,19 @@
                                         Charges communs
                                     </div>
                                     <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="suivi-company.php">
+                            <div class="tile bg-brown">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-bar-chart"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Statistiques Globales
                                     </div>
                                 </div>
                             </div>
