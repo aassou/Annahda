@@ -205,7 +205,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="history.php">
+                            <a href="history-group.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
                                     <i class="icon-calendar"></i>
