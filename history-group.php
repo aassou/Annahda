@@ -1,5 +1,5 @@
 <?php
-    //classes loading begin
+//classes loading begin
     function classLoad ($myClass) {
         if(file_exists('model/'.$myClass.'.php')){
             include('model/'.$myClass.'.php');
@@ -13,11 +13,10 @@
     include('lib/pagination.php');
     //classes loading end
     session_start();
-    if ( isset($_SESSION['userMerlaTrav']) ) {
-        $mois = $_GET['mois'];
-        $annee = $_GET['annee'];
-        $historyManager = new HistoryManager($pdo);
-        $histories = $historyManager->getHistoryByMonthYear($mois, $annee)//getHistorys();
+    if( isset($_SESSION['userMerlaTrav']) ){
+        //les sources
+        $historyManager = new HistoryManager($pdo);    
+        $histories =$historyManager->getHistoryGroupByMonth();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -39,8 +38,8 @@
     <link href="assets/css/style_default.css" rel="stylesheet" id="style_color" />
     <link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
-    <link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="assets/chosen-bootstrap/chosen/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" href="assets/data-tables/DT_bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -69,7 +68,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Historique des actions de l'application 
+                            Historique des actions de l'application
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -83,11 +82,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="history-group.php">Historique des actions</a>
-                                <i class="icon-angle-right"></i>
-                            </li>
-                            <li>
-                                <a><strong><?= $mois."/".$annee ?></strong></a>
+                                <a>Historique des actions</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -97,46 +92,57 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
                     <div class="span12">
-                    <!-- CONTRAT CAS LIBRE BEGIN -->
-                    <div class="portlet box light-grey" id="history">
-                        <div class="portlet-title">
-                            <h4>Historique des actions</h4>
-                            <div class="tools">
-                                <a href="javascript:;" class="reload"></a>
+                       <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Historique des actions</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="portlet-body">
-                            <div class="clearfix">
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <!--div class="btn-group pull-right">
+                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Print</a></li>
+                                            <li><a href="#">Save as PDF</a></li>
+                                            <li><a href="#">Export to Excel</a></li>
+                                        </ul>
+                                    </div-->
+                                </div>
+                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Cible</th>
-                                            <th style="width: 20%">Action</th>
-                                            <th style="width: 20%">Date de l'action</th>
-                                            <th style="width: 20%">Réalisé par</th>
-                                            <th style="width: 20%">Description</th>
+                                            <th style="width:100%">Mois/Année</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        foreach ( $histories as $history ) {
-                                        ?>
-                                        <tr>
-                                            <td><?= $history->target() ?></td>
-                                            <td><?= $history->action() ?></td>
-                                            <td><?= date('d/m/Y - H\hi\m', strtotime($history->created())) ?></td>
-                                            <td><?= $history->createdBy() ?></td>
-                                            <td><?= $history->description() ?></td>
+                                        foreach($histories as $history){
+                                        ?>      
+                                        <tr class="odd gradeX">
+                                            <?php
+                                            $mois = date('m', strtotime($history->created()));
+                                            $annee = date('Y', strtotime($history->created()));
+                                            ?>
+                                            <td>
+                                                <a class="btn mini" href="history.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
+                                                    <strong><?= date('m/Y', strtotime($history->created())) ?></strong>
+                                                </a>
+                                            </td>
                                         </tr>
                                         <?php
-                                        }
+                                        }//end of loop
                                         ?>
                                     </tbody>
                                 </table>
+                                </div><!-- END DIV SCROLLER -->
                             </div>
-                        </div>       
+                           </div>
+                        </div>
                     </div>
-                   </div>
                 </div>
                 <!-- END PAGE CONTENT -->
             </div>
@@ -161,7 +167,6 @@
     <script src="assets/js/jquery.blockui.js"></script>
     <script src="assets/js/jquery.cookie.js"></script>
     <script src="assets/fancybox/source/jquery.fancybox.pack.js"></script>
-    <script src="assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>    
     <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <!-- ie8 fixes -->
@@ -176,16 +181,9 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            App.setPage("table_managed");
+            //App.setPage("table_managed");
             App.init();
         });
-    </script>
-    <script>
-        function blinker() {
-            $('.blink_me').fadeOut(500);
-            $('.blink_me').fadeIn(500);
-        }
-        setInterval(blinker, 1500);
     </script>
 </body>
 <!-- END BODY -->
@@ -198,5 +196,4 @@
 else{
     header('Location:index.php');    
 }
-
 ?>

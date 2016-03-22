@@ -101,5 +101,72 @@ class HistoryManager{
 		$id = $data['last_id'];
 		return $id;
 	}
+    
+    /**************************************************************************************************/
+    /***********                                 New Methods                                ***********/
+    /**************************************************************************************************/
+    
+    
+    public function getHistoryGroupByDay(){
+        $histories = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_history 
+        GROUP BY DAY(created), MONTH(created), YEAR(created)
+        ORDER BY created DESC");
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $histories[] = new History($data);
+        }
+        $query->closeCursor();
+        return $histories;
+    }
+    
+    public function getHistoryGroupByMonth(){
+        $histories = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_history 
+        GROUP BY MONTH(created), YEAR(created)
+        ORDER BY created DESC");
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $histories[] = new History($data);
+        }
+        $query->closeCursor();
+        return $histories;
+    }
+    
+    public function getHistoryByDayMonthYear($day, $month, $year){
+        $histories = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_history 
+        WHERE DAY(created) = :day 
+        AND MONTH(created) = :month
+        AND YEAR(created) = :year
+        ORDER BY created DESC");
+        $query->bindValue(':day', $day);
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $histories[] = new History($data);
+        }
+        $query->closeCursor();
+        return $histories;
+    }
+    
+    public function getHistoryByMonthYear($month, $year){
+        $histories = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_history 
+        WHERE MONTH(created) = :month
+        AND YEAR(created) = :year
+        ORDER BY created DESC");
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $histories[] = new History($data);
+        }
+        $query->closeCursor();
+        return $histories;
+    }
 
 }

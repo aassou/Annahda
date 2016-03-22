@@ -282,6 +282,7 @@
                 if ( $_SESSION["userMerlaTrav"]->profil() == "admin" ) {
                 ?>
                 <li class="start <?php if($currentPage=="configuration.php" 
+                or $currentPage=="history-group.php"
                 or $currentPage=="history.php"
                 or $currentPage=="clients-list.php"
                 or $currentPage=="employes-contrats.php"
