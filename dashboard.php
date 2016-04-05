@@ -227,6 +227,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="releve-bancaire.php">
+                            <div class="tile bg-blue">
+                                <div class="tile-body">
+                                    <i class="icon-envelope-alt"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Relevé Bancaire
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="suivi-company.php">
                             <div class="tile bg-brown">
                                 <div class="corner"></div>

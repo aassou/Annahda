@@ -47,6 +47,7 @@
 				or $currentPage=="suivi-company.php"
 				or $currentPage=="charges-communs-type.php"
 				or $currentPage=="charges-communs-grouped.php"
+				or $currentPage=="releve-bancaire.php"
 				){echo "active ";} ?>">
 					<a href="dashboard.php">
 					<i class="icon-dashboard"></i> 
