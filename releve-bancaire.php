@@ -180,8 +180,10 @@
                                                 }
                                                 ?>
                                             </td>    
-                                            <td><?= date('d/m/Y', strtotime($releve->dateOpe())) ?></td>
-                                            <td><?= date('d/m/Y', strtotime($releve->dateVal())) ?></td>
+                                            <!--td><?php //date('d/m/Y', strtotime($releve->dateOpe())) ?></td-->
+                                            <!--td><?php //date('d/m/Y', strtotime($releve->dateVal())) ?></td-->
+                                            <td><?= $releve->dateOpe() ?></td>
+                                            <td><?= $releve->dateVal() ?></td>
                                             <td><?= $releve->libelle() ?></td>
                                             <td><?= $releve->reference() ?></td>
                                             <td><?= number_format($releve->debit(), 2, ',', ' ' ) ?></td>

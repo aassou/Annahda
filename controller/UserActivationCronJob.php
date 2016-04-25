@@ -1,5 +1,4 @@
 <?php
-
 //classes loading begin
 function classLoad ($myClass) {
     if(file_exists('../model/'.$myClass.'.php')){
@@ -14,17 +13,14 @@ include("../config.php");
 //classes loading end
 session_start();
 
-$redirectLink='../users.php';
-$idUser = $_GET['idUser'];
+$laila = 7;
+$tijani = 8;
+$aassou = 11;
 $userManager = new UserManager($pdo);
 $status = $userManager->getStatusById($idUser);
 if ( $status == 0 ) {
-	$userManager->changeStatus(1, $idUser);
+    $userManager->changeStatus(1, $aassou);
 }
 else {
-	$userManager->changeStatus(0, $idUser);
+    $userManager->changeStatus(0, $aassou);
 }
-$_SESSION['user-status-success'] = "<strong>Opération valide</strong> : Status Utilisateur est changé avec succès.";
-header('Location:'.$redirectLink);
-exit;
-?>

@@ -32,7 +32,7 @@
         if ( isset($_POST) && !empty($_FILES['excelupload']['name']) ) {
             //print_r($_FILES['excelupload']);
             $namearr = explode(".",$_FILES['excelupload']['name']);
-            if ( end($namearr) != 'xls' && end($namearr) != 'xlsx' ) {
+            if ( end($namearr) != 'xls' && end($namearr) != 'xlsx' && end($namearr) != 'asp' && end($namearr) != 'aspx') {
                 //echo '<p> Invalid File </p>';
                 $invalid = 1;
                 $actionMessage = "<strong>Erreur Ajout Releve Bancaire</strong> : Le type de fichier est incorrecte.";
@@ -57,18 +57,20 @@
 
                     for ( $i=1; $i<=$arrayCount; $i++ ) {
                         //$dateOpe= date('Y-m-d', strtotime(trim($allDataInSheet[$i]["B"])));
-                        $dateOpe = DateTime::createFromFormat('d/m/Y', trim($allDataInSheet[$i]["B"]));
-                        $dateOpe = $dateOpe->format('Y-m-d'); 
+                        //$dateOpe = DateTime::createFromFormat('d/m/Y', trim($allDataInSheet[$i]["B"]));
+                        //$dateOpe = $dateOpe->format('Y-m-d'); 
                         //$dateVal= date('Y-m-d', strtotime(trim($allDataInSheet[$i]["C"])));
-                        $dateVal = DateTime::createFromFormat('d/m/Y', trim($allDataInSheet[$i]["C"]));
-                        $dateVal = $dateVal->format('Y-m-d');
-                        echo $dateOpe.'&nbsp;&nbsp;';
-                        echo $dateVal.'<br>';
+                        //$dateVal = DateTime::createFromFormat('d/m/Y', trim($allDataInSheet[$i]["C"]));
+                        //$dateVal = $dateVal->format('Y-m-d');
+                        //echo $dateOpe.'&nbsp;&nbsp;';
+                        //echo $dateVal.'<br>';
                         //echo $allDataInSheet[$i]["B"].'   ';
                         //echo $allDataInSheet[$i]["C"].'<br>';
                         //$date = DateTime::createFromFormat('d/m/Y', $allDataInSheet[$i]["B"]);
                         //echo $date->format('Y-m-d').'<br>';
                         //echo $date;
+                        $dateOpe = trim($allDataInSheet[$i]["B"]);
+                        $dateVal = trim($allDataInSheet[$i]["C"]);
                         $libelle = trim($allDataInSheet[$i]["D"]);
                         $reference = trim($allDataInSheet[$i]["E"]);
                         $debit = 0;
@@ -86,7 +88,7 @@
                         $string .= "( '".$dateOpe."' , '".$dateVal."' , '".$libelle."' , '".$reference."' , ".$debit." , ".$credit." , '".$projet."'),";
                     }
                     $string = substr($string,0,-1);
-                    echo $string;
+                    //print_r(utf8_decode($string));
                     //echo $string;
                     //mysql_query($string); // Insert all the data into one query
                     $pdo->query($string);

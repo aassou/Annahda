@@ -192,11 +192,11 @@ ob_start();
     <h4>Détails des réglements</h4>
     <table>
         <tr>
-            <th>N°Opération</th>
-            <th>Date</th>
-            <th>Mode Paiement</th>
-            <th>Projet</th>
-            <th>Montant</th>
+            <th style="width: 20%">N°Opération</th>
+            <th style="width: 20%">Date</th>
+            <th style="width: 20%">Mode Paiement</th>
+            <th style="width: 20%">Projet</th>
+            <th style="width: 20%">Montant</th>
         </tr>
         <?php
         foreach( $reglements as $reglement ) {
