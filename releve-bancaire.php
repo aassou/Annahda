@@ -83,7 +83,7 @@
                             </li>
                             <li>
                                 <i class="icon-envelope"></i>
-                                <a>Gestion des Relevés Bancaires</a>
+                                <a>Gestion des Relevés Bancaires <?= date('h:i'); ?></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
