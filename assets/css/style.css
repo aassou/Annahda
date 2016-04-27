@@ -5024,3 +5024,7 @@ body .modal-big {
 .cas-libre-padding{
 	padding-left: 30px;
 }
+
+.info-dropdown{
+	width: 350px;
+}

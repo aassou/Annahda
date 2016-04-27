@@ -275,6 +275,20 @@ class OperationManager{
         return $operations;
     }
     
+    public function getOperationsValideesGroupByMonth(){
+        $operations = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_operation 
+        WHERE status=1 OR status=2
+        GROUP BY MONTH(dateReglement), YEAR(dateReglement)
+        ORDER BY dateReglement DESC");
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $operations[] = new Operation($data);
+        }
+        $query->closeCursor();
+        return $operations;
+    }
+    
     public function getOpenOperationsByMonthYear($month, $year){
         $operationss = array();
         $query = $this->_db->prepare(
@@ -288,6 +302,45 @@ class OperationManager{
         $query->bindValue(':year', $year);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $operations[] = new Operation($data);
+        }
+        $query->closeCursor();
+        return $operations;
+    }
+    
+    public function getOperationsValideesByMonthYear($month, $year){
+        $operationss = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_operation 
+        WHERE 
+        (status=1 OR status=2)
+        AND MONTH(dateReglement) = :month
+        AND YEAR(dateReglement) = :year
+        ORDER BY dateReglement DESC");
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $operations[] = new Operation($data);
+        }
+        $query->closeCursor();
+        return $operations;
+    }
+    
+    public function getOperationsValidees(){
+        $operations = array();
+        $query = $this->_db->query('SELECT * FROM t_operation WHERE status=1 ORDER BY id DESC');
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $operations[] = new Operation($data);
+        }
+        $query->closeCursor();
+        return $operations;
+    }
+    
+    public function getOperationsNonValidees(){
+        $operations = array();
+        $query = $this->_db->query('SELECT * FROM t_operation WHERE status=0 ORDER BY id DESC');
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $operations[] = new Operation($data);
         }
         $query->closeCursor();

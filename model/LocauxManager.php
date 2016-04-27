@@ -69,6 +69,18 @@ class LocauxManager{
         $query->execute();
         $query->closeCursor();
     }
+    
+    //This method is used when a contract is reselled, so we need to mention the reselling price
+    //without touching the real price
+    public function updateMontantRevente($montantRevente, $idBien){
+        $query = $this->_db->prepare('
+        UPDATE t_locaux SET montantRevente=:montantRevente WHERE id=:idLocaux') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idLocaux', $idBien);
+        $query->bindValue(':montantRevente', $montantRevente);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function delete($idLocaux){
 		$query = $this->_db->prepare('DELETE FROM t_locaux WHERE id=:idLocaux')

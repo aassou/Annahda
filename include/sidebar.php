@@ -39,6 +39,7 @@
 				or $currentPage=="tasks.php"
 				or $currentPage=="bugs.php"
 				or $currentPage=="alert.php"
+				or $currentPage=="todo.php"
 				or $currentPage=="contrat-status.php"
 				or $currentPage=="properties-status.php"
 				or $currentPage=="operations-status.php"

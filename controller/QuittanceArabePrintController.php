@@ -57,7 +57,7 @@
         $modePaiement = "شيك";
     }
     else {
-        $modePaiement = "رسالة تبديل";
+        $modePaiement = "كمبيالة";
     }
 
 

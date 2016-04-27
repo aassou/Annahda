@@ -121,7 +121,10 @@
 						<div class="get-down">
 						    <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
 						    <?php
-                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                $_SESSION['userMerlaTrav']->profil()=="manager" 
+                            ) {
                             ?>
 							<a href="#addAppartement" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
 							<?php
@@ -264,7 +267,10 @@
 												        <i class="icon-angle-down"></i>
 												    </a>
 												    <?php
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                                    if ( 
+                                                        $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"    
+                                                    ) {
                                                     ?>
 												    <ul class="dropdown-menu">
 												        <li>
@@ -305,7 +311,10 @@
 											<td>
 												<?php
 												if ( $appartement->status()=="Disponible" ) {
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+                                                    if ( 
+                                                        $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"    
+                                                    ) {    
 												?>
 													<a class="btn mini green" href="#changeToReserve<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 														Disponible
@@ -323,7 +332,10 @@
                                                 ?>
 												<?php 
 												if ( $appartement->status()=="R&eacute;serv&eacute;" ) {
-												     if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {   
+												     if ( 
+												        $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"
+                                                     ) {   
 												?>
 													<a class="btn mini red" href="#changeToDisponible<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 														Réservé
@@ -350,7 +362,10 @@
 											<td class="hidden-phone">
 												<?php
 												if( $appartement->status()=="R&eacute;serv&eacute;" ){
-												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+												    if ( 
+												        $_SESSION['userMerlaTrav']->profil()=="admin" || 
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"    
+                                                    ) {
 												?>
 												<a class="btn mini" title="<?= $appartement->par() ?>" href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
 													Pour

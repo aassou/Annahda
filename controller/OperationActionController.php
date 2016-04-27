@@ -202,6 +202,9 @@
             $redirectLink = "Location:../operations-status-group.php";
         } 
     }
+    else if ( isset($_POST['source']) and $_POST['source'] == "operations-status-group" ) {
+        $redirectLink = "Location:../operations-status-group.php";
+    }
     else if ( isset($_POST['source']) and $_POST['source'] == "contrats-list" ) {
         $idProjet = htmlentities($_POST['idProjet']);
         $redirectLink = "Location:../contrats-list.php?idProjet=".$idProjet;

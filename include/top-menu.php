@@ -13,14 +13,30 @@
 		<!-- BEGIN TOP NAVIGATION MENU -->		
 		<?php
 		//In this section we will count the number of tasks assigned to the current session user
+		//classes managers
 		$bugManager = new BugManager($pdo);
 		$taskManager = new TaskManager($pdo);
         $alertManager = new AlertManager($pdo);
+        $todoManager = new TodoManager($pdo);
+        //obj and vars
         $taskNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
         $bugNumber = $bugManager->getBugsNumber();
         $alertNumber = $alertManager->getAlertsNumber();
+        $todoNumber = $todoManager->getTodosNumber();
 		?>			
 		<ul class="nav pull-right">
+		    <li class="dropdown" id="header_inbox_bar">
+                <a href="todo.php" class="dropdown-toggle">
+                <i class="icon-check"></i>  
+                <?php
+                if ( $todoNumber > 0 ) {
+                ?>
+                <span class="badge"><?= $todoNumber ?></span>
+                <?php  
+                }
+                ?>
+                </a>
+            </li>
 		    <li class="dropdown" id="header_inbox_bar">
                 <a href="alert.php" class="dropdown-toggle">
                 <i class="icon-bullhorn"></i>  

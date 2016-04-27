@@ -125,8 +125,9 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
+                                            <th style="width: 5%"></th>
                                             <th style="width: 5%">Code</th>
-                                            <th style="width: 10%">Projet</th>
+                                            <th style="width: 20%">Projet</th>
                                             <th style="width: 5%">Niveau</th>
                                             <!--th style="width: 10%">Prix&nbsp;DH</th-->
                                             <th style="width: 10%">Superficie</th>
@@ -134,7 +135,6 @@
                                             <th style="width: 25%">Nbr.Pièces</th>
                                             <th style="width: 5%">Cave</th>
                                             <th style="width: 10%">Status</th>
-                                            <th style="width: 15%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -142,6 +142,35 @@
                                         foreach($appartements as $appartement){
                                         ?>      
                                         <tr class="appartements">
+                                            <td class="hidden-phone">
+                                                <div class="btn-group">
+                                                    <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
+                                                    <ul class="dropdown-menu info-dropdown">
+                                                        <?php
+                                                        if( $appartement->status()=="R&eacute;serv&eacute;" ){
+                                                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                                        ?>
+                                                        <li>
+                                                            <a href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
+                                                                Pour : <strong><?= $appartement->par() ?></strong>
+                                                            </a>
+                                                        </li>
+                                                        <?php
+                                                            }
+                                                            else{
+                                                        ?>
+                                                        <li>
+                                                            <a>
+                                                                Pour : <strong><?= $appartement->par() ?></strong>
+                                                            </a>
+                                                        </li>    
+                                                        <?php        
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
@@ -217,26 +246,6 @@
                                                 } 
                                                 ?>
                                             </td>
-                                            <td class="hidden-phone">
-                                                <?php
-                                                if( $appartement->status()=="R&eacute;serv&eacute;" ){
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
-                                                ?>
-                                                <a href="#updateClient<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-                                                    Pour : <?= $appartement->par() ?>
-                                                </a>
-                                                <?php
-                                                    }
-                                                    else{
-                                                ?>
-                                                <a>
-                                                    Pour : <?= $appartement->par() ?>
-                                                </a>    
-                                                <?php        
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
                                         </tr>
                                         <?php
                                         }//end of loop
@@ -246,6 +255,23 @@
                                             $appartement = $appartementManager->getAppartementById($contrat->idBien());
                                         ?>      
                                         <tr class="appartements">
+                                            <td class="hidden-phone">
+                                                <div class="btn-group">
+                                                    <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
+                                                    <ul class="dropdown-menu info-dropdown">
+                                                        <li>
+                                                            <a>
+                                                                Pour : <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> 
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a>
+                                                                Montant de Revente : <strong><?= $appartement->montantRevente() ?> DH</strong> 
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>    
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
@@ -283,13 +309,7 @@
                                                 <?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
                                                 <?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
                                             </td>
-                                            <td><a class="btn mini black">Revendre</a>
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <a>
-                                                    Pour : <?= $clientManager->getClientById($contrat->idClient())->nom() ?>
-                                                </a>    
-                                            </td>
+                                            <td><a class="btn mini black">Revendre</a></td>
                                         </tr>
                                         <?php
                                         }//end of loop
@@ -306,14 +326,14 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Code</th>
-                                            <th>Projet</th>
-                                            <th>Superficie</th>
-                                            <th>Façade</th>
+                                            <th style="width:5%"></th>
+                                            <th style="width:15%">Code</th>
+                                            <th style="width:20%">Projet</th>
+                                            <th style="width:20%">Superficie</th>
+                                            <th style="width:20%">Façade</th>
                                             <!--th>Prix</th-->
-                                            <th>Mezzanine</th>
-                                            <th>Status</th>
-                                            <th></th>
+                                            <th style="width:5%">Mezzanine</th>
+                                            <th style="width:15%">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -323,7 +343,36 @@
                                         <tr class="locaux">
                                             <td>
                                                 <div class="btn-group">
-                                                    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
+                                                    <a class="btn black dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
+                                                    <ul class="dropdown-menu info-dropdown">
+                                                        <?php
+                                                        if( $locau->status() == "R&eacute;serv&eacute;" ){
+                                                            if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
+                                                        ?>
+                                                        <li>
+                                                            <a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
+                                                                Pour : <?= $locau->par() ?>
+                                                            </a>
+                                                        </li>
+                                                        <?php
+                                                            }
+                                                            else{
+                                                        ?>
+                                                            <li>
+                                                                <a>
+                                                                    Pour : <?= $locau->par() ?>
+                                                                </a>
+                                                            <li>    
+                                                        <?php        
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
                                                         <?= $locau->nom() ?> 
                                                         <i class="icon-angle-down"></i>
                                                     </a>
@@ -390,26 +439,6 @@
                                                 }         
                                                 ?>
                                             </td>
-                                            <td>
-                                                <?php
-                                                if( $locau->status() == "R&eacute;serv&eacute;" ){
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
-                                                ?>
-                                                <a href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-                                                    Pour : <?= $locau->par() ?>
-                                                </a>
-                                                <?php
-                                                    }
-                                                    else{
-                                                ?>
-                                                    <a>
-                                                        Pour : <?= $locau->par() ?>
-                                                    </a>    
-                                                <?php        
-                                                    }
-                                                }
-                                                ?>
-                                            </td>
                                         </tr>
                                         <?php
                                         }//end of loop
@@ -419,6 +448,23 @@
                                             $locau = $locauxManager->getLocauxById($contrat->idBien());
                                         ?>      
                                         <tr class="locaux">
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a class="btn mini green dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
+                                                    <ul class="dropdown-menu info-dropdown">
+                                                        <li>   
+                                                            <a>
+                                                                Pour : <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> 
+                                                            </a>
+                                                        </li>
+                                                        <li>   
+                                                            <a>
+                                                                Montant de Revente : <strong><?= number_format($locau->montantRevente(), 2, ',', ' ') ?> DH</strong> 
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>   
+                                            </td>
                                             <td>
                                                 <div class="btn-group">
                                                     <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
@@ -455,11 +501,6 @@
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
                                             </td>
                                             <td><a class="btn mini black">Revendre</a></td>
-                                            <td>
-                                                <a>
-                                                   Pour : <?= $clientManager->getClientById($contrat->idClient())->nom() ?>
-                                                </a>
-                                            </td>
                                         </tr>
                                         <?php
                                         }//end of loop
@@ -509,7 +550,7 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            //App.setPage("table_editable");
+            App.setPage("table_managed");
             App.init();
         });
         $('.appartements').show();

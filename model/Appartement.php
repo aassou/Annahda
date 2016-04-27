@@ -6,6 +6,7 @@ class Appartement{
 	private $_superficie;
 	private $_facade;
 	private $_prix;
+    private $_montantRevente;
 	private $_niveau;
 	private $_nombrePiece;
 	private $_cave;
@@ -52,6 +53,10 @@ class Appartement{
 	public function setPrix($prix){
 		$this->_prix = $prix;
 	}
+    
+    public function setMontantRevente($montantRevente){
+        $this->_montantRevente = $montantRevente;
+    }
 	
 	public function setNiveau($niveau){
 		$this->_niveau = $niveau;
@@ -113,6 +118,10 @@ class Appartement{
 	public function prix(){
 		return $this->_prix;
 	}
+    
+    public function montantRevente(){
+        return $this->_montantRevente;
+    }
 	
 	public function niveau(){
 		return $this->_niveau;

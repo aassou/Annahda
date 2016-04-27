@@ -177,6 +177,7 @@
 										<?php
 										foreach($contrats as $contrat){
 										    $revendreTitle = "";
+                                            $montantRevente = 0;
 											$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
 											$sommeOperations = $operationManager->sommeOperations($contrat->id());
 											$bien = "";
@@ -238,7 +239,7 @@
     															}//if status actif or not
     															//Revendre processing
     															if ( $contrat->revendre() == 0 ) {
-    															     $revendreTitle = "<strong>Revendre</strong>";
+    															    $revendreTitle = "<strong>Revendre</strong>";
     															?>
                                                                 <a style="color:red" href="#updateRevendre<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                                     Revendre
@@ -343,11 +344,25 @@
                                             <div class="modal-body">
                                                 <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
                                                     <p>Êtes-vous sûr de vouloir <?= $revendreTitle ?> le contrat de <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> ?</p>
+                                                    <?php
+                                                    if ( $contrat->revendre() == 0 ) {
+                                                    ?>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Montant Revente</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="montantRevente" />
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                     <div class="control-group">
                                                         <input type="hidden" name="action" value="revendre" />
                                                         <input type="hidden" name="source" value="contrats-list" />
                                                         <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <input type="hidden" name="idBien" value="<?= $contrat->idBien() ?>" />
+                                                        <input type="hidden" name="typeBien" value="<?= $contrat->typeBien() ?>" />
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>

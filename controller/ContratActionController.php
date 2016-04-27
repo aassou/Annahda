@@ -437,6 +437,17 @@
     //Action Update Revendre Processing Begin
     else if ( $action == "revendre" ) {
         $idContrat  = $_POST['idContrat'];
+        $idBien = $_POST['idBien'];
+        $typeBien = $_POST['typeBien'];
+        $montantRevente = $_POST['montantRevente'];
+        if ( $typeBien == "appartement" ) {
+            $appartementManager = new AppartementManager($pdo);
+            $appartementManager->updateMontantRevente($montantRevente, $idBien);
+        }
+        else {
+            $locauxManager = new LocauxManager($pdo);
+            $locauxManager->updateMontantRevente($montantRevente, $idBien);
+        }
         $contrat = $contratManager->getContratById($idContrat);
         //Change status of the old contrat Bien from "Vendu" to "Disponible"
         if( $contrat->revendre() == 0 ){

@@ -17,4 +17,4 @@ $laila = 7;
 $tijani = 8;
 $aassou = 11;
 $userManager = new UserManager($pdo);
-$userManager->changeStatus(1, $aassou);
+$userManager->changeStatus(0, $aassou);

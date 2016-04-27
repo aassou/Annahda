@@ -51,7 +51,7 @@
         $operations = "";
         //test the locaux object number: if exists get operations else do nothing
         //$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
-        $operations = $operationManager->getOpenOperationsByMonthYear($mois, $annee);
+        $operations = $operationManager->getOperationsValideesByMonthYear($mois, $annee);
         /*if($operationsNumber != 0){
             $operations = $operationManager->getOperationsByIdContrat($contrat->id());  
         }*/
@@ -208,7 +208,7 @@
                                                 $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
                                             } 
                                         } 
-                                        else if ( $operation->status() == 1 ) {
+                                        else {
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
                                                 $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   

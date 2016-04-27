@@ -14,9 +14,15 @@
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
-        //les sources
+        //classes
+        $projetManager = new ProjetManager($pdo);
+        $clientManager = new ClientManager($pdo);
+        $contratManager = new ContratManager($pdo);
         $operationManager = new OperationManager($pdo);
+        $compteBancaireManager = new CompteBancaireManager($pdo);
+        //objs
         $operations =$operationManager->getOpenOperationsGroupByMonth();
+        $operationsNonValidees = $operationManager->getOperationsNonValidees();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -93,9 +99,189 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <div class="portlet box light-grey" id="detailsReglements">
+                        <div class="portlet-title">
+                            <h4>Liste des paiements validés</h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="clearfix">
+                                <?php 
+                                 if( isset($_SESSION['operation-action-message']) 
+                                 and isset($_SESSION['operation-type-message']) ){
+                                    $message = $_SESSION['operation-action-message'];
+                                    $typeMessage = $_SESSION['operation-type-message'];
+                                 ?>
+                                    <div class="alert alert-<?= $typeMessage ?>">
+                                        <button class="close" data-dismiss="alert"></button>
+                                        <?= $message ?>     
+                                    </div>
+                                 <?php 
+                                 } 
+                                 unset($_SESSION['operation-action-message']);
+                                 unset($_SESSION['operation-type-message']);
+                                ?>
+                                <!--div class="btn-group">
+                                    <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
+                                        Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>
+                                    </a>
+                                </div-->
+                                <!--div class="btn-group pull-right">
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Print</a></li>
+                                        <li><a href="#">Save as PDF</a></li>
+                                        <li><a href="#">Export to Excel</a></li>
+                                    </ul>
+                                </div-->
+                            </div>
+                            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <thead>
+                                    <tr>
+                                        <th class="hidden" style="width: 0%">Actions</th>
+                                        <th style="width: 20%">Client</th>
+                                        <th style="width: 10%">Projet</th>
+                                        <th style="width: 10%">Date.Opé</th>
+                                        <th style="width: 10%">Date.Rég</th>
+                                        <th style="width: 10%">ModePaiment</th>
+                                        <th style="width: 10%">Compte</th>
+                                        <th style="width: 10%">N°.Opé</th>
+                                        <th style="width: 10%">Montant</th>
+                                        <th style="width: 10%">Status</th>
+                                        <!--th style="width: 10%">Quittance</th-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach($operationsNonValidees as $operation){
+                                        $status = "";
+                                        $action = "";
+                                        $idContrat = $operation->idContrat();
+                                        $contrat = $contratManager->getContratById($idContrat);
+                                        $nomProjet = $projetManager->getProjetById($contrat->idProjet())->nom();
+                                        $nomClient = $contratManager->getClientNameByIdContract($operation->idContrat());
+                                        if ( $operation->status() == 0 ) {
+                                            $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';  
+                                            } 
+                                            else{
+                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
+                                            } 
+                                        } 
+                                        else if ( $operation->status() == 1 ) {
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   
+                                            }
+                                            else {
+                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
+                                            }
+                                        }
+                                    ?>      
+                                    <tr class="odd gradeX">
+                                        <td class="hidden"><?= $action ?></td>
+                                        <td><?= $nomClient ?></td>
+                                        <td><?= $nomProjet ?></td>
+                                        <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+                                        <td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
+                                        <td><?= $operation->modePaiement() ?></td>
+                                        <td><?= $operation->compteBancaire() ?></td>
+                                        <td><?= $operation->numeroCheque() ?></td>
+                                        <td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
+                                        <td><?= $status ?></td>
+                                        <!--td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td-->
+                                    </tr>   
+                                    <!-- validateOperation box begin-->
+                                    <div id="validateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Valider Paiement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="validate" />
+                                                    <input type="hidden" name="source" value="operations-status-group" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn blue" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- validateOperation box end -->
+                                    <!-- cancelOperation box begin-->
+                                    <div id="cancelOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Annuler Paiement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="cancel" />
+                                                    <input type="hidden" name="source" value="operations-status" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- cancelOperation box end -->
+                                    <!-- hideOperation box begin-->
+                                    <div id="hideOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Retirer Paiement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="hide" />
+                                                    <input type="hidden" name="source" value="operations-status" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn green" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- hideOperation box end -->  
+                                    <!-- delete box begin-->
+                                    <div id="deleteOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Supprimer Réglement Client </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                                <p>Êtes-vous sûr de vouloir supprimer ce réglement ?</p>
+                                                <div class="control-group">
+                                                    <input type="hidden" name="action" value="delete" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- delete box end --> 
+                                    <?php
+                                    }//end of loop
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                     </div>
                        <div class="portlet box light-grey">
                             <div class="portlet-title">
-                                <h4>Les états des paiements clients</h4>
+                                <h4>Archive des paiements clients validés</h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="reload"></a>
                                 </div>
@@ -181,7 +367,7 @@
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins
-            //App.setPage("table_managed");
+            App.setPage("table_managed");
             App.init();
             $('.criteriaPrint').on('change',function(){
                 if( $(this).val()==="toutesCaisse"){

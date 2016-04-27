@@ -6,6 +6,7 @@ class Locaux{
 	private $_superficie;
 	private $_facade;
 	private $_prix;
+    private $_montantRevente;
 	private $_mezzanine;
 	private $_status;
 	private $_idProjet;
@@ -51,6 +52,10 @@ class Locaux{
 	public function setPrix($prix){
 		$this->_prix = $prix;
 	}
+    
+    public function setMontantRevente($montantRevente){
+        $this->_montantRevente = $montantRevente;
+    }
 	
 	public function setMezzanine($mezzanine){
 		$this->_mezzanine = $mezzanine;
@@ -104,6 +109,10 @@ class Locaux{
 	public function prix(){
 		return $this->_prix;
 	}
+    
+    public function montantRevente(){
+        return $this->_montantRevente;
+    }
 	
 	public function mezzanine(){
 		return $this->_mezzanine;

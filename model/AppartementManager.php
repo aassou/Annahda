@@ -74,6 +74,18 @@ class AppartementManager{
         $query->execute();
         $query->closeCursor();
     }
+    
+    //This method is used when a contract is reselled, so we need to mention the reselling price
+    //without touching the real price
+    public function updateMontantRevente($montantRevente, $idBien){
+        $query = $this->_db->prepare('
+        UPDATE t_appartement SET montantRevente=:montantRevente WHERE id=:idAppartement') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idAppartement', $idBien);
+        $query->bindValue(':montantRevente', $montantRevente);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function delete($idAppartement){
 		$query = $this->_db->prepare('DELETE FROM t_appartement WHERE id=:idAppartement')
