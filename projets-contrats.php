@@ -39,15 +39,17 @@
             $client = $clientManager->getClientById($contrat['idClient']);
             $typeBien = "";
             $bien = "";
+            $etage  = "";
             if ( $contrat['typeBien'] == "appartement" ) {
                 $typeBien = "Appartement";
                 $bien = $appartementManager->getAppartementById($contrat['idBien']);
+                $etage = "Etage : ".$bien->niveau();
             }
             else {
                 $typeBien = "Local.Com";
                 $bien = $locauxManager->getLocauxById($contrat['idBien']);
             }
-            $res = '<option value="'.$contrat['id'].'">'.$client->nom().' - '.$projet->nom().' - '.$typeBien.' : '.$bien->nom().'</option>';
+            $res = '<option value="'.$contrat['id'].'">'.$client->nom().' - '.$projet->nom().' - '.$typeBien.' : '.$bien->nom().' - '.$etage.'</option>';
             echo $res;
         }
     }
