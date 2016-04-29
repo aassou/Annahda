@@ -15,7 +15,17 @@
     if(isset($_SESSION['userMerlaTrav'])){
         //classes managers
         $releveBancaireManager = new ReleveBancaireManager($pdo);
+        $chargesCommunsManager = new ChargeCommunManager($pdo);
+        $typeChargeCommunManager = new TypeChargeCommunManager($pdo);
+        $typeChargeProjetManager = new TypeChargeManager($pdo);
+        $projetManager = new ProjetManager($pdo);
+        $compteBancaireManager = new CompteBancaireManager($pdo);
+        //obj and vars
+        $typeChargesCommuns = $typeChargeCommunManager->getTypeCharges();
+        $typeChargesProjets = $typeChargeProjetManager->getTypeCharges();
+        $projets = $projetManager->getProjets();
         $releveBancaires = $releveBancaireManager->getReleveBancaires();
+        $comptesBancaires = $compteBancaireManager->getCompteBancaires();
         $debit = $releveBancaireManager->getTotalDebit();
         $credit = $releveBancaireManager->getTotalCredit();
         $solde = $credit - $debit;
@@ -177,6 +187,19 @@
                                                     <a href="#update<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
                                                     <a href="#delete<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini red"><i class="icon-remove"></i></a>
                                                 <?php  
+                                                    //In this section we will process credit and debit element.
+                                                    //The debit element will be added for fournisseur component
+                                                    //The credit element will be added for client component
+                                                    if ( $releve->debit() > 0 ) {
+                                                ?>
+                                                        <a title="Opérations Fournisseurs" href="#processFournisseur<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini blue"><i class="icon-cogs"></i></a>
+                                                <?php
+                                                    }
+                                                    else if ( $releve->credit() > 0 ) {
+                                                ?>
+                                                        <a title="Opérations Client" href="#processClient<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini purple"><i class="icon-cogs"></i></a>
+                                                <?php        
+                                                    }
                                                 }
                                                 ?>
                                             </td>    
@@ -190,7 +213,7 @@
                                             <td><?= number_format($releve->credit(), 2, ',', ' ') ?></td>
                                             <td><?= $releve->projet() ?></td>
                                         </tr>
-                                        <!-- updateClient box begin-->
+                                        <!-- updateReleve box begin-->
                                         <div id="update<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -253,7 +276,160 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        <!-- updateFournisseur box end -->
+                                        <!-- updateReleve box end -->
+                                        <!-- processFournisseur box begin-->
+                                        <div id="processFournisseur<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Affecter opération débit au système</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="controller/ReleveBancaireActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">Destination</label>
+                                                        <div class="controls">
+                                                            <select name="destinations" class="destinations">
+                                                                <option value="ChargesCommuns">Charges communs</option>
+                                                                <option value="ChargesProjets">Charges Projets</option>
+                                                                <option value="Ignorer">Ignorer</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="chargesCommunsElements">
+                                                        <div class="control-group">
+                                                            <label class="control-label">Type Charge Commun</label>
+                                                            <div class="controls">
+                                                                <select name="typeChargesCommuns">
+                                                                    <?php foreach( $typeChargesCommuns as $type ) { ?>    
+                                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Société</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="societe" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="chargesProjetsElements" style="">
+                                                        <div class="control-group">
+                                                            <label class="control-label">Type Charge Projet</label>
+                                                            <div class="controls">
+                                                                <select name="typeChargesProjet">
+                                                                    <?php foreach( $typeChargesProjets as $type ) { ?>    
+                                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Projet</label>
+                                                            <div class="controls">
+                                                                <select name="projet">
+                                                                    <?php foreach( $projets as $projet ) { ?>    
+                                                                    <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Société</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="societe2" value="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="idReleveBancaire" value="<?= $releve->id() ?>" />
+                                                        <input type="hidden" name="montant" value="<?= $releve->debit() ?>" />
+                                                        <input type="hidden" name="dateOperation" value="<?= $releve->dateOpe() ?>" />
+                                                        <input type="hidden" name="designation" value="<?= $releve->libelle() ?>" />
+                                                        <input type="hidden" name="action" value="process-fournisseur" />
+                                                        <div class="controls">  
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- processFournisseur box end -->
+                                        <!-- processClient box begin-->
+                                        <div id="processClient<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Affecter opération crédit au système</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="controller/ReleveBancaireActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">Action</label>
+                                                        <div class="controls">
+                                                            <select name="projet-contrat" class="projet-contrat span12">
+                                                                <option value="Ignorer">Séléctionnez un projet ou Ignorer ?</option>
+                                                                <?php foreach( $projets as $projet ) { ?>    
+                                                                <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Contrat client</label>
+                                                        <div class="controls">
+                                                            <select name="contrat-client" class="contrat-client span12">
+                                                                <option value="">Séléctionnez un contrat ou Ignorer ?</option>
+                                                                <option value=""></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Compte Bancaire</label>
+                                                        <div class="controls">
+                                                            <select name="compte-bancaire" class="span12">
+                                                                <?php foreach( $comptesBancaires as $compte ) { ?>    
+                                                                <option value="<?= $compte->numero() ?>"><?= $compte->numero() ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Numéro Opération</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="numero-operation" class="span12" />
+                                                        </div>
+                                                    </div>
+                                                    <strong>Synthèse client</strong>
+                                                    <br />
+                                                    <div class="tab-pane ">
+                                                        <div class="controls controls-row">
+                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateOpé" />
+                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateRég" />
+                                                            <input disabled="disabled" class="span4 m-wrap input-bold-text" type="text" value="Montant" />
+                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Compte" />
+                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Chèque" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane synthese-client">
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="idReleveBancaire" value="<?= $releve->id() ?>" />
+                                                        <input type="hidden" name="montant" value="<?= $releve->credit() ?>" />
+                                                        <input type="hidden" name="dateOperation" value="<?= $releve->dateOpe() ?>" />
+                                                        <input type="hidden" name="dateReglement" value="<?= $releve->dateVal() ?>" />
+                                                        <input type="hidden" name="observation" value="<?= $releve->libelle() ?>" />
+                                                        <input type="hidden" name="reference" value="<?= $releve->reference() ?>" />
+                                                        <input type="hidden" name="action" value="process-client" />
+                                                        <div class="controls">  
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- processClient box end -->
                                         <!-- delete box begin-->
                                         <div id="delete<?= $releve->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -340,6 +516,53 @@
             App.setPage("table_managed");
             App.init();
         });
+        //processFournisseur begin
+        $(".chargesProjetsElements").hide();
+        $('.destinations').on('change',function(){
+            if ( $(this).val() === "ChargesCommuns" ) {
+                $(".chargesCommunsElements").show();
+                $(".chargesProjetsElements").hide();
+            }
+            else if ( $(this).val() === "ChargesProjets" ) {
+                $(".chargesProjetsElements").show();
+                $(".chargesCommunsElements").hide();
+            }
+            else {
+                $(".chargesCommunsElements").hide();
+                $(".chargesProjetsElements").hide();    
+            }
+            
+        }); 
+        //processFournisseur end
+        //processClient begin
+        $('.projet-contrat').change(function(){
+            var idProjet = $(this).val();
+            var data = 'idProjet='+idProjet;
+            $.ajax({
+                type: "POST",
+                url: "projets-contrats.php",
+                data: data,
+                cache: false,
+                success: function(html){
+                    $('.contrat-client').html(html);
+                }
+            });
+        });
+        //synthese client
+        $('.contrat-client').change(function(){
+            var idContrat = $(this).val();
+            var data = 'idContrat='+idContrat;
+            $.ajax({
+                type: "POST",
+                url: "synthese-client.php",
+                data: data,
+                cache: false,
+                success: function(html){
+                    $('.synthese-client').html(html);
+                }
+            });
+        });
+        //processClient end
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

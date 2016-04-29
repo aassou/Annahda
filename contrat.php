@@ -893,13 +893,7 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
 								<thead>
 									<tr>
-									    <?php
-									    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-									    ?>
-									    <th style="width: 10%">Actions</th>
-									    <?php
-                                        }
-									    ?>
+									    <th style="width: 20%">Actions</th>
 										<th style="width: 10%">Date.Opé</th>
 										<th style="width: 10%">Date.Rég</th>
 										<th style="width: 10%">ModePaiement</th>
@@ -908,7 +902,6 @@
 										<th style="width: 10%">Montant</th>
 										<th style="width: 10%">Observation</th>
 										<th style="width: 10%">Status</th>
-										<th style="width: 10%">Quittance</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -920,34 +913,35 @@
                                         if ( $operation->status() == 0 ) {
                                             $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';  
+                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'">Non validé</a>';  
                                             } 
                                             else{
-                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
+                                                $status = '<a class="btn red mini">Non validé</a>';
                                             } 
                                         } 
                                         else if ( $operation->status() == 1 ) {
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'">Validé</a>';
                                                 $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   
                                             }
                                             else {
-                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $status = '<a class="btn blue mini">Validé</a>';
                                                 $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
                                             }
                                         } 
 									?>		
 									<tr class="odd gradeX">
-									    <?php
-                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                        ?>
 									    <td>
-									        <a class="btn green mini" href="#updateOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-refresh"></i></a>
-									        <a class="btn red mini" href="#deleteOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-remove"></i></a>
-									    </td>
-									    <?php
-                                        }
-                                        ?>
+									        <a title="Imprimer Quittance" class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i></a>
+    									    <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                            ?>
+    									       <a title="Modifier Réglement" class="btn green mini" href="#updateOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-refresh"></i></a>
+    									       <a title="Supprimer Réglement" class="btn red mini" href="#deleteOperation<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>"><i class="icon-remove"></i></a>
+    									    <?php
+                                            }
+                                            ?>
+                                        </td>
 										<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
 										<td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
 										<td><?= $operation->modePaiement() ?></td>
@@ -956,7 +950,6 @@
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
 										<td><?= $operation->observation() ?></td>
 										<td><?= $status ?></td>
-										<td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td>
 									</tr>	
 									<!-- validateOperation box begin-->
                                     <div id="validateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

@@ -47,6 +47,17 @@ class ReleveBancaireManager{
 		$query->closeCursor();
 	}
 
+    public function hide($id){
+        $query = $this->_db->prepare(
+        'UPDATE t_relevebancaire
+        SET status = 1
+        WHERE id=:id')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $id);
+        $query->execute();
+        $query->closeCursor();
+    }
+
 	public function delete($id){
     	$query = $this->_db->prepare(' DELETE FROM t_relevebancaire
 		WHERE id=:id')
@@ -69,7 +80,7 @@ class ReleveBancaireManager{
 
 	public function getReleveBancaires(){
 		$releveBancaires = array();
-		$query = $this->_db->query('SELECT * FROM t_relevebancaire
+		$query = $this->_db->query('SELECT * FROM t_relevebancaire WHERE status=0
 		ORDER BY id DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$releveBancaires[] = new ReleveBancaire($data);

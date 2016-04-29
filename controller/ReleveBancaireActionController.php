@@ -138,7 +138,107 @@
         }
     }
     //Action Update Processing End
-    //Action Delete Processing Begin
+    //Action ProcessFournisseur Begin
+    else if ( $action == "process-fournisseur" ) {
+        $idReleveBancaire = $_POST['idReleveBancaire'];
+        $destinations =htmlentities($_POST['destinations']);
+        $societe = "";
+        $montant = htmlentities($_POST['montant']);
+        $dateOperation = htmlentities($_POST['dateOperation']);
+        $dateOperation = DateTime::createFromFormat('d/m/Y', trim($dateOperation));
+        $dateOperation = $dateOperation->format('Y-m-d'); 
+        $designation = htmlentities($_POST['designation']);
+        if ( $destinations == "ChargesCommuns" ) {
+            $chargeCommunManager = new ChargeCommunManager($pdo);
+            $societe = htmlentities($_POST['societe']);
+            $type = htmlentities($_POST['typeChargesCommuns']);
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            //create object
+            $charge = new ChargeCommun(array(
+                'type' => $type,
+                'dateOperation' => $dateOperation,
+                'montant' => $montant,
+                'societe' => $societe,
+                'designation' => $designation,
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $chargeCommunManager->add($charge);
+            $releveBancaireManager->hide($idReleveBancaire);
+        }
+        else if ( $destinations == "ChargesProjets" ) {
+            $chargeManager = new ChargeManager($pdo);
+            $societe = htmlentities($_POST['societe2']);
+            $type = htmlentities($_POST['typeChargesProjet']);
+            $projet = htmlentities($_POST['projet']);
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            //create object
+            $charge = new Charge(array(
+                'type' => $type,
+                'dateOperation' => $dateOperation,
+                'montant' => $montant,
+                'societe' => $societe,
+                'designation' => $designation,
+                'idProjet' => $projet,
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $chargeManager->add($charge);
+            $releveBancaireManager->hide($idReleveBancaire);
+        }
+        else if ( $destinations == "Ignorer" ) {
+            $releveBancaireManager->delete($idReleveBancaire);
+        }
+        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
+        $typeMessage = "success";
+    }
+    //Action ProcessFournisseur End
+    //Action ProcessClient Begin
+    else if ( $action == "process-client" ) {
+        $idReleveBancaire = $_POST['idReleveBancaire'];
+        //This variable projetContrat defines the actions choosed by the user : Ignorer || a Project
+        $projetContrat = htmlentities($_POST['projet-contrat']);
+        $montant = htmlentities($_POST['montant']);
+        $dateOperation = htmlentities($_POST['dateOperation']);
+        $dateReglement = htmlentities($_POST['dateReglement']);
+        $dateOperation = DateTime::createFromFormat('d/m/Y', trim($dateOperation));
+        $dateReglement = DateTime::createFromFormat('d/m/Y', trim($dateReglement));
+        $dateOperation = $dateOperation->format('Y-m-d'); 
+        $dateReglement = $dateReglement->format('Y-m-d'); 
+        $designation = htmlentities($_POST['designation']);
+        if ( $projetContrat == "Ignorer" ) {
+            $releveBancaireManager->delete($idReleveBancaire);
+        }
+        else{
+            $operationManager = new OperationManager($pdo);
+            //$reference = 'Q'.date('Ymd-his');
+            $reference = htmlentities($_POST['reference']);
+            $modePaiement = "Versement";
+            $numeroOperation = htmlentities($_POST['numero-operation']);
+            $compteBancaire = htmlentities($_POST['compte-bancaire']);
+            $status = 1;
+            //$observation ="Ce réglement client fait référence à la ligne : ".$idReleveBancaire." du relevé bancaire du compte bancaire : ".$compteBancaire;
+            $observation = htmlentities($_POST['observation']);
+            $idContrat = htmlentities($_POST['contrat-client']);
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $operation = 
+            new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
+            'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
+            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
+            'createdBy' => $createdBy, 'created' => $created));
+            $operationManager->add($operation);
+            $releveBancaireManager->hide($idReleveBancaire);
+        }
+        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
+        $typeMessage = "success";
+    }
+    //Action ProcessClient End
+    //Action Delete Processing Begin 
     else if($action == "delete"){
         $idReleveBancaire = htmlentities($_POST['idReleveBancaire']);
         $releveBancaireManager->delete($idReleveBancaire);

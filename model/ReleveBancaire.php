@@ -10,6 +10,7 @@ class ReleveBancaire{
 	private $_debit;
 	private $_credit;
 	private $_projet;
+    private $_status;
 	private $_created;
 	private $_createdBy;
 	private $_updated;
@@ -62,6 +63,10 @@ class ReleveBancaire{
 	public function setProjet($projet){
 		$this->_projet = $projet;
    	}
+    
+    public function setStatus($status){
+        $this->_status = $status;
+    }
 
 	public function setCreated($created){
         $this->_created = $created;
@@ -110,6 +115,10 @@ class ReleveBancaire{
 	public function projet(){
 		return $this->_projet;
    	}
+    
+    public function status(){
+        return $this->_status;
+    }
 
 	public function created(){
         return $this->_created;

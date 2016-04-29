@@ -5028,3 +5028,25 @@ body .modal-big {
 .info-dropdown{
 	width: 350px;
 }
+
+input[type="text"].input-bold-text{
+	font-size: 14px;
+	font-weight : bold;
+}
+
+input[type="text"].input-medium-text{
+	font-size: 14px;
+}
+
+input[type="text"].input-success-text{
+	font-size: 14px;
+	background-color: #dff0d8;
+}
+
+input[type="text"].input-error-text{
+	font-size: 14px;
+	background-color: #f2dede;
+}
+
+
+
