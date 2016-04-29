@@ -20,7 +20,7 @@
         $locauxManager = new LocauxManager($pdo);
         //begin processing
         $idProjet = htmlentities($_POST['idProjet']);
-        $requete = "SELECT * FROM t_contrat WHERE idProjet = '".$idProjet."'";
+        $requete = "SELECT * FROM t_contrat WHERE idProjet = '".$idProjet."' AND status='actif'";
         $projet = $projetManager->getProjetById($idProjet);
         // connexion à la base de données
         //try{
