@@ -54,7 +54,7 @@
         <!-- BEGIN TOP NAVIGATION BAR -->
         <?php 
         include("include/top-menu.php"); 
-        $todos = $todoManager->getTodos();
+        $todos = $todoManager->getTodosByUser($_SESSION['userMerlaTrav']->login());
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>

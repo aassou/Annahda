@@ -92,5 +92,30 @@ class TodoManager{
         $data = $query->fetch(PDO::FETCH_ASSOC);
         return $data['todoNumber'];
     }
+    
+    ////////////////////////////////////////////////////////////////////
+    
+    public function getTodosByUser($user){
+        $todos = array();
+        $query = $this->_db->prepare('SELECT * FROM t_todo WHERE createdBy=:user
+        ORDER BY id DESC');
+        $query->bindValue(':user', $user);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $todos[] = new Todo($data);
+        }
+        $query->closeCursor();
+        return $todos;
+    }
+    
+    public function getTodosNumberByUser($user){
+        $query = $this->_db->prepare(
+        'SELECT COUNT(*) AS todoNumber FROM t_todo 
+        WHERE status=0 AND createdBy=:user');
+        $query->bindValue(':user', $user);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        return $data['todoNumber'];
+    }
 
 }
