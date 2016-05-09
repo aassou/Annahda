@@ -118,20 +118,24 @@
                             unset($_SESSION['appartement-action-message']);
                             unset($_SESSION['appartement-type-message']);
                          ?>
-                        <h3>Liste des appartements</h3>
-                        <div class="portlet appartements">
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste des appartements</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
                             <div class="portlet-body">
-                                <div class="scroller" data-height="400px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-                                <table class="table table-striped table-bordered table-advance table-hover">
+                                <table class="table table-striped table-bordered table-hover" id="sample_2">
                                     <thead>
                                         <tr>
                                             <th style="width: 5%"></th>
                                             <th style="width: 5%">Code</th>
-                                            <th style="width: 20%">Projet</th>
+                                            <th style="width: 15%">Projet</th>
                                             <th style="width: 5%">Niveau</th>
                                             <!--th style="width: 10%">Prix&nbsp;DH</th-->
                                             <th style="width: 10%">Superficie</th>
-                                            <th style="width: 5%">Façade</th>
+                                            <th style="width: 10%">Façade</th>
                                             <th style="width: 25%">Nbr.Pièces</th>
                                             <th style="width: 5%">Cave</th>
                                             <th style="width: 10%">Status</th>
@@ -184,12 +188,6 @@
                                                         <li>
                                                             <a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
                                                                 Fiche descriptif
-                                                            </a>
-                                                            <a href="#addPieces<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-                                                                Ajouter Document
-                                                            </a>
-                                                            <a href="#updateAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
-                                                                Modifier
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -286,12 +284,6 @@
                                                             <a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
                                                                 Fiche descriptif
                                                             </a>
-                                                            <a href="#addPieces<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
-                                                                Ajouter Document
-                                                            </a>
-                                                            <a href="#updateAppartement<?= $appartement->id();?>" data-toggle="modal" data-id="<?= $appartement->id(); ?>">
-                                                                Modifier
-                                                            </a>
                                                         </li>
                                                     </ul>
                                                     <?php
@@ -317,13 +309,16 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        </div><!-- END DIV SCROLLER -->
-                        <h3>Liste des locaux commerciaux</h3>
-                        <div class="portlet">
+                        </div>*
+                        <div class="portlet box light-grey">
+                            <div class="portlet-title">
+                                <h4>Liste des locaux commerciaux</h4>
+                                <div class="tools">
+                                    <a href="javascript:;" class="reload"></a>
+                                </div>
+                            </div>
                             <div class="portlet-body">
-                                <div class="scroller" data-height="400px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
-                                <table class="table table-striped table-bordered table-advance table-hover">
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
                                             <th style="width:5%"></th>
@@ -331,7 +326,6 @@
                                             <th style="width:20%">Projet</th>
                                             <th style="width:20%">Superficie</th>
                                             <th style="width:20%">Façade</th>
-                                            <!--th>Prix</th-->
                                             <th style="width:5%">Mezzanine</th>
                                             <th style="width:15%">Status</th>
                                         </tr>
@@ -383,12 +377,6 @@
                                                         <li>
                                                             <a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
                                                                 Fiche descriptif
-                                                            </a>
-                                                            <a href="#addPieces<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-                                                                Ajouter Document
-                                                            </a>
-                                                            <a href="#updateLocaux<?= $locau->id();?>" data-toggle="modal" data-id="<?= $locau->id(); ?>">
-                                                                Modifier
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -479,12 +467,6 @@
                                                             <a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
                                                                 Fiche descriptif
                                                             </a>
-                                                            <a href="#addPieces<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
-                                                                Ajouter Document
-                                                            </a>
-                                                            <a href="#updateLocaux<?= $locau->id();?>" data-toggle="modal" data-id="<?= $locau->id(); ?>">
-                                                                Modifier
-                                                            </a>
                                                         </li>
                                                     </ul>
                                                     <?php
@@ -509,7 +491,6 @@
                                 </table>
                             </div>
                         </div>
-                        </div><!-- END DIV SCROLLER -->
                         <!-- END Terrain TABLE PORTLET-->
                     </div>
                 </div>
