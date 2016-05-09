@@ -364,7 +364,7 @@
                                                         <label class="control-label">Type Charge</label>
                                                         <div class="controls">
                                                             <select name="type">
-                                                                <option value="<?= $charge->type() ?>"><?= $charge->type() ?></option>
+                                                                <option value="<?= $charge->type() ?>"><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></option>
                                                                 <option disabled="disabled">-------------</option>
                                                                 <?php foreach($typeCharges as $type){ ?>
                                                                     <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>

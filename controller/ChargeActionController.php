@@ -23,6 +23,7 @@
 
     //Component Class Manager
     $chargeManager = new ChargeManager($pdo);
+    $typeChargeManager = new TypeChargeManager($pdo);
     $projetManager = new ProjetManager($pdo);
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
@@ -34,6 +35,7 @@
     if($action == "add"){
         if( !empty($_POST['type']) ){
 			$type = htmlentities($_POST['type']);
+            $typeCharge = $typeChargeManager->getTypeChargeById($type)->nom();
 			$dateOperation = htmlentities($_POST['dateOperation']);
 			$montant = htmlentities($_POST['montant']);
 			$societe = htmlentities($_POST['societe']);
@@ -57,7 +59,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des charges",
-                'description' => "Ajout d'une charge de type : ".$type.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
+                'description' => "Ajout d'une charge de type : ".$typeCharge.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -77,6 +79,7 @@
         $idCharge = htmlentities($_POST['idCharge']);
         if(!empty($_POST['type'])){
 			$type = htmlentities($_POST['type']);
+            $typeCharge = $typeChargeManager->getTypeChargeById($type)->nom();
 			$dateOperation = htmlentities($_POST['dateOperation']);
 			$montant = htmlentities($_POST['montant']);
 			$societe = htmlentities($_POST['societe']);
@@ -100,7 +103,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des charges",
-                'description' => "Modification de la charge dont l'identifiant est : ".$idCharge." de type : ".$type.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
+                'description' => "Modification de la charge dont l'identifiant est : ".$idCharge." de type : ".$typeCharge.", le : ".$dateOperation.", d'un montant de : ".$montant.", dont la designation est : ".$designation." - Projet : ".$nomProjet,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -119,6 +122,7 @@
     else if($action == "delete"){
         $idCharge = htmlentities($_POST['idCharge']);
         $charge = $chargeManager->getChargeById($idCharge);
+        $typeCharge = $typeChargeManager->getTypeChargeById($charge->type())->nom();
         $chargeManager->delete($idCharge);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -126,7 +130,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des charges",
-            'description' => "Suppression de la charge dont l'identifiant est : ".$idCharge." de type : ".$charge->type().", le : ".$charge->dateOperation().", d'un montant de : ".$charge->montant().", dont la designation est : ".$charge->designation()." - Projet : ".$nomProjet,
+            'description' => "Suppression de la charge dont l'identifiant est : ".$idCharge." de type : ".$typeCharge.", le : ".$charge->dateOperation().", d'un montant de : ".$charge->montant().", dont la designation est : ".$charge->designation()." - Projet : ".$nomProjet,
             'created' => $created,
             'createdBy' => $createdBy
         ));
