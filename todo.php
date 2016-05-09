@@ -106,7 +106,12 @@
                                 <div class="chat-form">
                                     <form action="controller/TodoActionController.php" method="POST">
                                         <div class="input-cont">   
-                                            <input class="m-wrap" type="text" name="todo" placeholder="Ajouter une tâche" />
+                                            <input style="width: 600px" class="span4 m-wrap" type="text" name="todo" placeholder="Ajouter une tâche" />
+                                            <select class="m-wrap" name="priority">
+                                                <option value="2">Urgente</option>
+                                                <option value="1">Moyenne</option>
+                                                <option value="0">Normale</option>
+                                            </select>    
                                         </div>
                                         <div class="btn-cont"> 
                                             <input type="hidden" name="action" value="add" />
@@ -124,10 +129,62 @@
                         <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
                         <?php
                         foreach($todos as $todo){
+                            $color = "";
+                            $priorityOption = "";
+                            if ( $todo->priority() == 2 ) {
+                                $color = "red";  
+                                $priorityOption = "Urgente";                              
+                            }
+                            else if ( $todo->priority() == 1 ) {
+                                $color = "yellow";
+                                $priorityOption = "Moyenne";                                
+                            }
+                            else if ( $todo->priority() == 0 ) {
+                                $color = "green";         
+                                $priorityOption = "Normale";                       
+                            }
                         ?>
-                        <a href="include/delete-task.php?idTask=<?= $todo->id() ?>" id="<?= $todo->id() ?>" class="btn mini red delete-checkbox">
-                            <i class="icon-remove"></i>
-                        </a>&nbsp;<?= $todo->todo() ?><br />    
+                        <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
+                        <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
+                        <?= $todo->todo() ?></a><br />
+                        <!-- updateTodo box begin-->
+                        <div id="updateTodo<?= $todo->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Modifier Todo </h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/TodoActionController.php" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label">Todo</label>
+                                        <div class="controls">
+                                            <input type="text" name="todo" value="<?= $todo->todo() ?>" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Priorité</label>
+                                        <div class="controls">
+                                            <select name="priority">
+                                                <option value="<?= $todo->priority() ?>"><?= $priorityOption ?></option>
+                                                <option disabled="disabled">-----------------</option>
+                                                <option value="2">Urgente</option>
+                                                <option value="1">Moyenne</option>
+                                                <option value="0">Normale</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="hidden" name="idTodo" value="<?= $todo->id() ?>" />
+                                        <input type="hidden" name="action" value="update" />
+                                        <div class="controls">  
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- updateTodo box end -->    
                         <?php 
                         }
                         ?>

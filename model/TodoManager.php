@@ -12,10 +12,11 @@ class TodoManager{
 	//BAISC CRUD OPERATIONS
 	public function add(Todo $todo){
     	$query = $this->_db->prepare(' INSERT INTO t_todo (
-		todo, status, created, createdBy)
-		VALUES (:todo, :status, :created, :createdBy)')
+		todo, priority, status, created, createdBy)
+		VALUES (:todo, :priority, :status, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':todo', $todo->todo());
+        $query->bindValue(':priority', $todo->priority());
 		$query->bindValue(':status', $todo->status());
 		$query->bindValue(':created', $todo->created());
 		$query->bindValue(':createdBy', $todo->createdBy());
@@ -25,17 +26,27 @@ class TodoManager{
 
 	public function update(Todo $todo){
     	$query = $this->_db->prepare(' UPDATE t_todo SET 
-		todo=:todo, status=:status, updated=:updated, updatedBy=:updatedBy
+		todo=:todo, status=:status, priority=:priority, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $todo->id());
 		$query->bindValue(':todo', $todo->todo());
+        $query->bindValue(':priority', $todo->priority());
 		$query->bindValue(':status', $todo->status());
 		$query->bindValue(':updated', $todo->updated());
 		$query->bindValue(':updatedBy', $todo->updatedBy());
 		$query->execute();
 		$query->closeCursor();
 	}
+
+    public function updatePriority(Todo $todo){
+        $query = $this->_db->prepare(' UPDATE t_todo SET priority=:priority WHERE id=:id')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $todo->id());
+        $query->bindValue(':priority', $todo->priority());
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function delete($id){
     	$query = $this->_db->prepare(' DELETE FROM t_todo
@@ -98,7 +109,7 @@ class TodoManager{
     public function getTodosByUser($user){
         $todos = array();
         $query = $this->_db->prepare('SELECT * FROM t_todo WHERE createdBy=:user
-        ORDER BY id DESC');
+        ORDER BY priority DESC, id DESC');
         $query->bindValue(':user', $user);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){

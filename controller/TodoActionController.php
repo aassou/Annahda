@@ -28,12 +28,14 @@
     if($action == "add"){
         if( !empty($_POST['todo']) ){
 			$todo = htmlentities($_POST['todo']);
+            $priority = htmlentities($_POST['priority']);
 			$status = 0;
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
             $todo = new Todo(array(
 				'todo' => $todo,
+				'priority' => $priority,
 				'status' => $status,
 				'created' => $created,
             	'createdBy' => $createdBy
@@ -54,12 +56,14 @@
         $idTodo = htmlentities($_POST['idTodo']);
         if(!empty($_POST['todo'])){
 			$todo = htmlentities($_POST['todo']);
+            $priority = htmlentities($_POST['priority']);
 			$status = htmlentities($_POST['status']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $todo = new Todo(array(
 				'id' => $idTodo,
 				'todo' => $todo,
+				'priority' => $priority,
 				'status' => $status,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
@@ -74,6 +78,15 @@
         }
     }
     //Action Update Processing End
+    //Action UpdatePriority Processing Begin
+    else if($action == "update-priority"){
+        $idTodo = htmlentities($_POST['idTodo']);
+        $priority = htmlentities($_POST['priority']);
+        $todoManager->updatePriority($idTodo);
+        $actionMessage = "Opération Valide : Todo Modifié avec succès.";
+        $typeMessage = "success";
+    }
+    //Action UpdatePriority Processing End
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idTodo = htmlentities($_POST['idTodo']);
