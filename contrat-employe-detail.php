@@ -26,6 +26,7 @@
             $idContratEmploye = $_GET['idContratEmploye'];
             $projet = $projetManager->getProjetById($idProjet);
             $contratEmploye = $contratEmployeManager->getContratEmployeById($idContratEmploye);
+            $employe = $employesManager->getEmployeById($contratEmploye->employe());
             $contratDetails = $contratDetaislManager->getContratDetailsByIdContratEmploye($idContratEmploye);
             $totalPaye = $contratDetaislManager->getContratDetailsTotalByIdContratEmploye($idContratEmploye);
 ?>
@@ -79,7 +80,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Détails Contrat - Employé : <strong><?= strtoupper($contratEmploye->employe()) ?></strong> - Projet : <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
+                            Détails Contrat - Employé : <strong><?= strtoupper($employe->nom()) ?></strong> - Projet : <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -101,7 +102,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>Détails Contrats Employés</a>
+                                <a>Détails Contrats Employés <strong><?= strtoupper($employe->nom()) ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -163,7 +164,7 @@
                          ?>
                         <div class="portlet box purple">
                             <div class="portlet-title">
-                                <h4>Détails Contrat</h4>
+                                <h4>Détails Contrat </h4>
                                 <div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a href="javascript:;" class="remove"></a>
