@@ -293,6 +293,20 @@
                                             <input type="text" name="traveauxArabe" id="traveauxArabe" value="" />
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">الشركة</label>
+                                        <div class="controls">
+                                            <select name="idSociete">
+                                                <?php
+                                                foreach ( $companies as $company ) {
+                                                ?>
+                                                <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                <?php
+                                                }
+                                                ?>
+                                            </select>  
+                                        </div>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                     <div class="control-group">
@@ -387,6 +401,9 @@
                                                     <a class="btn mini" href="contrat-employe-detail.php?idContratEmploye=<?= $contrat->id() ?>&idProjet=<?= $projet->id() ?>">
                                                         <i class="icon-eye-open"></i>
                                                     </a>
+                                                    <!--a class="btn mini blue" href="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?php echo $contrat->id() ?>" >
+                                                        <i class="icon-file"></i>
+                                                    </a-->
                                                     <a class="btn mini blue" href="#printContratEmployeArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" >
                                                         <i class="icon-file"></i>
                                                     </a>
@@ -545,6 +562,22 @@
                                                             <label class="control-label">نوع الأشغال</label>
                                                             <div class="controls">
                                                                 <input type="text" name="traveauxArabe" value="<?= $contrat->traveauxArabe() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">الشركة</label>
+                                                            <div class="controls">
+                                                                <select name="idSociete">
+                                                                    <option value="<?= $contrat->idSociete() ?>"><?= $companyManager->getCompanyById($contrat->idSociete())->nomArabe() ?></option>
+                                                                    <option disabled="disabled">-------------------------------</option>
+                                                                    <?php
+                                                                    foreach ( $companies as $company ) {
+                                                                    ?>
+                                                                    <option value="<?= $company->id() ?>"><?= $company->nomArabe() ?></option>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </select>  
                                                             </div>
                                                         </div>
                                                     </div>

@@ -19,6 +19,7 @@ class ContratEmploye{
     private $_traveauxArabe;
 	private $_total;
 	private $_employe;
+    private $_idSociete;
 	private $_idProjet;
 	private $_created;
 	private $_createdBy;
@@ -106,6 +107,10 @@ class ContratEmploye{
 	public function setEmploye($employe){
 		$this->_employe = $employe;
    	}
+    
+    public function setIdSociete($idSociete){
+        $this->_idSociete = $idSociete;
+    }
 
 	public function setIdProjet($idProjet){
 		$this->_idProjet = $idProjet;
@@ -187,6 +192,10 @@ class ContratEmploye{
 	public function employe(){
 		return $this->_employe;
    	}
+    
+    public function idSociete(){
+        return $this->_idSociete;
+    }
 
 	public function idProjet(){
 		return $this->_idProjet;

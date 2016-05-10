@@ -44,6 +44,7 @@
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
 			$total = htmlentities($_POST['total']);
 			$employe = htmlentities($_POST['employe']);
+            $idSociete = htmlentities($_POST['idSociete']);
 			$idProjet = htmlentities($_POST['idProjet']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
@@ -65,6 +66,7 @@
 				'traveaux' => $traveaux,
 				'traveauxArabe' => $traveauxArabe,
 				'employe' => $employe,
+				'idSociete' => $idSociete,
 				'idProjet' => $idProjet,
 				'created' => $created,
 				'createdBy' => $createdBy
@@ -102,6 +104,8 @@
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
             $total = ($nombreUnites * $prixUnitaire) + ($nombreUnites2 * $prixUnitaire2);//htmlentities($_POST['total']);
             $employe = htmlentities($_POST['employe']);
+            $idSociete = htmlentities($_POST['idSociete']);
+            //create object
             $contratEmploye = new ContratEmploye(array(
 				'id' => $idContratEmploye,
 				'dateContrat' => $dateContrat,
@@ -120,6 +124,7 @@
 				'traveaux' => $traveaux,
                 'traveauxArabe' => $traveauxArabe,
 				'employe' => $employe,
+				'idSociete' => $idSociete,
 				'idProjet' => $idProjet,
 			));
             $contratEmployeManager->update($contratEmploye);
