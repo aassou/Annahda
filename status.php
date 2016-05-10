@@ -121,6 +121,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="clients-synthese.php">
+                            <div class="tile bg-cyan">
+                                <div class="tile-body">
+                                    <i class="icon-search"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Synthèse clients
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
