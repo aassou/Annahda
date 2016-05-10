@@ -92,6 +92,32 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <!-- printHistory box begin-->
+                        <div id="printHistory" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h3>Imprimer l'historique des actions </h3>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" action="controller/HistoryPrintController.php" method="post" enctype="multipart/form-data">
+                                    <p><strong>Séléctionner vos dates </strong></p>
+                                    <div class="control-group" id="">
+                                        <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                           <input style="width:100px" name="dateBegin" id="dateBegin" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                           &nbsp;-&nbsp;
+                                           <input style="width:100px" name="dateEnd" id="dateEnd" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- printHistory box end -->
                        <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Historique des actions</h4>
@@ -101,6 +127,12 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
+                                    <div class="btn-group">
+                                        <a class="btn blue pull-right" href="#printHistory" data-toggle="modal">
+                                            <i class="icon-print"></i>
+                                             Version Imprimable
+                                        </a>
+                                    </div>
                                     <!--div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
