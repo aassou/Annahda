@@ -24,7 +24,7 @@
         $operationManager = new OperationManager($pdo);
         $locauxManager = new LocauxManager($pdo);
         $appartementManager = new AppartementManager($pdo);
-        //objs and vars
+        //objects and vars 
         $idClient = $_GET['idClient'];
         $comptesBancaires = $compteBancaireManager->getCompteBancaires();
         $companies = $companyManager->getCompanys();
