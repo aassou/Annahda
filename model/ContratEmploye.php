@@ -9,10 +9,12 @@ class ContratEmploye{
     private $_nombreUnites;
     private $_unite;
     private $_nomUnite;
+    private $_nomUniteArabe;
     private $_prixUnitaire2;
     private $_nombreUnites2;
     private $_unite2;
     private $_nomUnite2;
+    private $_nomUniteArabe2;
     private $_traveaux;
     private $_traveauxArabe;
 	private $_total;
@@ -61,6 +63,10 @@ class ContratEmploye{
         $this->_nomUnite = $nomUnite;
     }
     
+    public function setNomUniteArabe($nomUniteArabe){
+        $this->_nomUniteArabe = $nomUniteArabe;
+    }
+    
     public function setNombreUnites($nombreUnites){
         $this->_nombreUnites = $nombreUnites;
     }
@@ -75,6 +81,10 @@ class ContratEmploye{
     
     public function setNomUnite2($nomUnite){
         $this->_nomUnite2 = $nomUnite;
+    }
+    
+    public function setNomUniteArabe2($nomUniteArabe2){
+        $this->_nomUniteArabe2 = $nomUniteArabe2;
     }
     
     public function setNombreUnites2($nombreUnites){
@@ -134,6 +144,10 @@ class ContratEmploye{
         return $this->_nomUnite;
     }
     
+    public function nomUniteArabe(){
+        return $this->_nomUniteArabe;
+    }
+    
     public function nombreUnites(){
         return $this->_nombreUnites;
     }
@@ -148,6 +162,10 @@ class ContratEmploye{
     
     public function nomUnite2(){
         return $this->_nomUnite2;
+    }
+    
+    public function nomUniteArabe2(){
+        return $this->_nomUniteArabe2;
     }
     
     public function nombreUnites2(){

@@ -40,7 +40,21 @@
         $unite = "الشقة";
     }
     else if ( $contrat->unite() == "unite" ) {
-        $unite = "الوحدة";
+        $unite = $contrat->nomUniteArabe();
+    }
+    //choix unité 2 en arabe selon la valeur de l'unité
+    $unite2 = "";
+    if ( $contrat->unite2() == "m²" ) {
+        $unite2 = "المتر المربع";
+    } 
+    else if ( $contrat->unite2() == "m lineaire" ) {
+        $unite2 = "المتر الخطي";
+    }
+    else if ( $contrat->unite2() == "appartement" ) {
+        $unite2 = "الشقة";
+    }
+    else if ( $contrat->unite2() == "unite" ) {
+        $unite2 = $contrat->nomUniteArabe2();
     }
     $titreProjet = $projet->titre();
     $contratTitle = "تعاقد و اتفاق";
@@ -105,7 +119,7 @@ $pdf->SetFont('aealarabiya', '', 14);
 $htmlcontent = '<strong>'.'الطرف الأول'.'</strong>'.' : '.$company->nomArabe().'، في شخص ممثلها القانوني, و الكائن مقرها الاجتماعي '.$company->adresseArabe().'.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'الطرف الثاني'.'</strong>'.': السيد(ة) ،'.$employe->nomArabe().' '.'المغربي (ة)، الراشد(ة)، ، الحامل (ة)،  لرقم البطاقة الوطنية رقم'.$employe->cin().' '.'،  العنوان و الموطن المختار و المحدد هو,'.$employe->adresseArabe().'.';
+$htmlcontent = '<strong>'.'الطرف الثاني'.'</strong>'.': السيد(ة) ،'.$employe->nomArabe().' '.'المغربي (ة)، الراشد(ة) ، الحامل (ة)،  لرقم البطاقة الوطنية رقم'.$employe->cin().' '.'،  العنوان و الموطن المختار و المحدد هو,'.$employe->adresseArabe().'.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->SetFont('aealarabiya', '', 18);
 $pdf->Cell(0, 12, 'نص العقد و الاتفاق',0,1,'C');
@@ -130,13 +144,14 @@ $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'حدد الطرفان الأشغال المذكورة و التي سينجزها الطرف الثاني لفائدة الطرف  الأول فيما يلي : ';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = $contrat->traveauxArabe();
+$htmlcontent = '<ul><li>'.ceil($contrat->nombreUnites()).' '.$contrat->nomUniteArabe().' مقابل '.$contrat->prixUnitaire().' درهم  لكل '.$contrat->nomUniteArabe().'</li>';
+$htmlcontent .= '<li>'.ceil($contrat->nombreUnites2()).' '.$contrat->nomUniteArabe2().' مقابل '.$contrat->prixUnitaire2().' درهم  لكل '.$contrat->nomUniteArabe2().'</li></ul>';;
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 //Acte 4:
 $htmlcontent = '<strong>'.'البند الرابع&nbsp;:&nbsp;'.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$htmlcontent = 'اتفق الطرفان على أن تمتد فترة الأشغال المذكورة من تاريخ  '.$contrat->dateContrat().' إلى غاية '.$contrat->dateFinContrat();
+$htmlcontent = 'اتفق الطرفان على أن تمتد فترة الأشغال المذكورة من تاريخ  '.date('d/m/Y', strtotime($contrat->dateContrat())).' إلى غاية '.date('d/m/Y', strtotime($contrat->dateFinContrat()));
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = 'آو الجودة و المواصفات المحددة في هذا العقد فانه يؤدي تعويضا يقدر حسب الضرر الناجم عن تأخر إنجاز الأشغال المذكورة بعد 
@@ -150,7 +165,9 @@ $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'يستفيد الطرف الثاني مقابل أشغال  '.$contrat->traveauxArabe().' موضوع هذا التعاقد بمقابل مالي كالتالي:';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = $contrat->prixUnitaire().'درهم  مقابل '.$unite;
+$htmlcontent = '<ul><li>'.$contrat->prixUnitaire().' درهم  مقابل كل '.$unite.'</li>';
+$htmlcontent .= '<li>'.$contrat->prixUnitaire2().' درهم  مقابل كل '.$unite2.'</li>';
+$htmlcontent .= '<li>المجموع : '.(($contrat->nombreUnites()*$contrat->prixUnitaire())+($contrat->nombreUnites2()*$contrat->prixUnitaire2())).' درهم </li></ul>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = 'و سيتم أداء المبلغ الإجمالي لكلفة ألأشغال التي سيقوم بها الطرف الثاني عن طريق دفعات مالية.';

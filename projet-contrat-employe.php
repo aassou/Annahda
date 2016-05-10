@@ -497,13 +497,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
+                                                            <label class="control-label">اسم الوحدة</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="nomUniteArabe" id="" value="<?= $contrat->nomUniteArabe() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
                                                             <label class="control-label">Nombre Unités</label>
                                                             <div class="controls">
                                                                 <input type="text" name="nombreUnites" id="nu<?= $contrat->id() ?>" value="<?= $contrat->nombreUnites() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
-                                                            <label class="control-label">Prix/Unité</label>
+                                                            <label class="control-label">Prix/Unité 2</label>
                                                             <div class="controls">
                                                                 <input type="text" name="prixUnitaire2" id="pu2<?= $contrat->id() ?>" value="<?= $contrat->prixUnitaire2() ?>" style="width:90px" />&nbsp;/&nbsp;
                                                                 <select name="unite2" style="width:100px">
@@ -518,7 +524,13 @@
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
-                                                            <label class="control-label">Nombre Unités</label>
+                                                            <label class="control-label">2 اسم الوحدة</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="nomUniteArabe2" id="" value="<?= $contrat->nomUniteArabe2() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Nombre Unités 2</label>
                                                             <div class="controls">
                                                                 <input type="text" name="nombreUnites2" id="nu2<?= $contrat->id() ?>" value="<?= $contrat->nombreUnites2() ?>" />
                                                             </div>

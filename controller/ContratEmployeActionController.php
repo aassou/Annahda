@@ -32,11 +32,13 @@
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
             $nomUnite = htmlentities($_POST['nomUnite']);
+            $nomUniteArabe = htmlentities($_POST['nomUniteArabe']);
             //if we want to set unite2 : begin
             $nombreUnites2 = htmlentities($_POST['nombreUnites2']);
             $prixUnitaire2 = htmlentities($_POST['prixUnitaire2']);
             $unite2 = htmlentities($_POST['unite2']);
             $nomUnite2 = htmlentities($_POST['nomUnite2']);
+            $nomUniteArabe2 = htmlentities($_POST['nomUniteArabe']);
             //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
@@ -53,10 +55,12 @@
 				'prixUnitaire' => $prixUnitaire,
 				'unite' => $unite,
 				'nomUnite' => $nomUnite,
+				'nomUniteArabe' => $nomUniteArabe,
 				'nombreUnites2' => $nombreUnites2,
                 'prixUnitaire2' => $prixUnitaire2,
                 'unite2' => $unite2,
                 'nomUnite2' => $nomUnite2,
+                'nomUniteArabe2' => $nomUniteArabe2,
 				'total' => $total,
 				'traveaux' => $traveaux,
 				'traveauxArabe' => $traveauxArabe,
@@ -86,11 +90,13 @@
             $prixUnitaire = htmlentities($_POST['prixUnitaire']);
             $unite = htmlentities($_POST['unite']);
             $nomUnite = htmlentities($_POST['nomUnite']);
+            $nomUniteArabe = htmlentities($_POST['nomUniteArabe']);
             //if we want to set unite2 : begin
             $nombreUnites2 = htmlentities($_POST['nombreUnites2']);
             $prixUnitaire2 = htmlentities($_POST['prixUnitaire2']);
             $unite2 = htmlentities($_POST['unite2']);
             $nomUnite2 = htmlentities($_POST['nomUnite2']);
+            $nomUniteArabe2 = htmlentities($_POST['nomUniteArabe2']);
             //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
@@ -104,10 +110,12 @@
                 'prixUnitaire' => $prixUnitaire,
                 'unite' => $unite,
                 'nomUnite' => $nomUnite,
+                'nomUniteArabe' => $nomUniteArabe,
                 'nombreUnites2' => $nombreUnites2,
                 'prixUnitaire2' => $prixUnitaire2,
                 'unite2' => $unite2,
                 'nomUnite2' => $nomUnite2,
+                'nomUniteArabe2' => $nomUniteArabe2,
 				'total' => $total,
 				'traveaux' => $traveaux,
                 'traveauxArabe' => $traveauxArabe,
