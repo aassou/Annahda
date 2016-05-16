@@ -12,6 +12,7 @@ class Operation{
     private $_idContrat;
 	private $_numeroCheque;
     private $_status;
+    private $_url;
     private $_created;
     private $_createdBy;
     private $_updated;
@@ -79,6 +80,10 @@ class Operation{
         $this->_status = $status;
     }
     
+    public function setUrl($url){
+        $this->_url = $url;
+    }
+    
     public function setCreated($created){
         $this->_created = $created;
     }
@@ -139,6 +144,10 @@ class Operation{
     
     public function status(){
         return $this->_status;
+    }
+    
+    public function url(){
+        return $this->_url;
     }
     
     public function created(){

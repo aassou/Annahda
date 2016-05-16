@@ -54,10 +54,14 @@
             $idContrat = htmlentities($_POST['idContrat']);
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
+            $url = "";
+            if(file_exists($_FILES['urlCheque']['tmp_name']) || is_uploaded_file($_FILES['urlCheque']['tmp_name'])) {
+                $url = imageProcessing($_FILES['urlCheque'], '/pieces/pieces_reglements/');
+            }
             $operation = 
             new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
             'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
-            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
+            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation, 'url' => $url,  
             'createdBy' => $createdBy, 'created' => $created));
             $operationManager->add($operation);
             //add History data
@@ -78,6 +82,35 @@
             $typeMessage = "error";
         }
     }
+    else if ($action == "updatePiece") {
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $url = "";
+        $idOperation = htmlentities($_POST['idOperation']);
+        if(file_exists($_FILES['urlPiece']['tmp_name']) || is_uploaded_file($_FILES['urlPiece']['tmp_name'])) {
+            $url = imageProcessing($_FILES['urlPiece'], '/pieces/pieces_reglements/');
+            $operationManager = new OperationManager($pdo);
+            $operationManager->updatePiece($idOperation, $url);
+            $actionMessage = "<strong>Opération valide : </strong>La pièce de réglement est modifiée avec succès.";
+            $typeMessage = "success";
+            //add history data to db
+            $historyManager = new HistoryManager($pdo);
+            $createdBy = $_SESSION['userMerlaTrav']->login();
+            $created = date('Y-m-d h:i:s');
+            $history = new History(array(
+                'action' => "Modification Pièce réglement",
+                'target' => "Table des réglements clients",
+                'description' => "Modification de la pièce de régelement - Opération : ".$idOperation,
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
+        }
+        else{
+            $actionMessage = "<strong>Erreur Modification Copie Chèque : </strong>Vous devez séléctionner un fichier.";
+            $typeMessage = "error";
+        }
+    } 
     else if($action == "update"){
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
             $idOperation = htmlentities($_POST['idOperation']);

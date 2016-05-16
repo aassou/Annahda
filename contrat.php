@@ -366,7 +366,7 @@
                             <h3>Nouveau réglement </h3>
                         </div>
                         <div class="modal-body">
-                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
                                 <div class="control-group">
                                      <label class="control-label" for="code">Date opération</label>
                                      <div class="controls">
@@ -432,6 +432,12 @@
                                     <label class="control-label">Numéro Opération</label>
                                     <div class="controls">
                                         <input type="text" required="required" name="numeroOperation" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Pièce de réglement</label>
+                                    <div class="controls">
+                                        <input type="file" name="urlCheque" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -894,11 +900,12 @@
 								<thead>
 									<tr>
 									    <th style="width: 20%">Actions</th>
-										<th style="width: 10%">Date.Opé</th>
-										<th style="width: 10%">Date.Rég</th>
+									    <th style="width: 15%">Pieces</th>
+										<th style="width: 10%">Date.Opé/Rég</th>
+										<!--th style="width: 10%">Date.Rég</th-->
 										<th style="width: 10%">ModePaiement</th>
 										<th style="width: 10%">Compte</th>
-										<th style="width: 10%">N° Opération</th>
+										<th style="width: 5%">N° Opération</th>
 										<th style="width: 10%">Montant</th>
 										<th style="width: 10%">Observation</th>
 										<th style="width: 10%">Status</th>
@@ -942,15 +949,51 @@
                                             }
                                             ?>
                                         </td>
-										<td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
-										<td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
+                                        <td>
+                                            <a class="fancybox-button btn mini" data-rel="fancybox-button" title="Copie Pièce" href="<?= $operation->url() ?>">
+                                                <i class="icon-zoom-in"></i>    
+                                            </a>
+                                            <a title="Modifier Pièce" class="btn mini black" href="#updatePiece<?= $operation->id();?>" data-toggle="modal" data-id="<?= $operation->id(); ?>">
+                                                <i class=" icon-refresh"></i>   
+                                            </a>
+                                        </td>
+										<td><?= date('d/m/Y', strtotime($operation->date())).'-'.date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
+										
 										<td><?= $operation->modePaiement() ?></td>
 										<td><?= $operation->compteBancaire() ?></td>
 										<td><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
 										<td><?= $operation->observation() ?></td>
 										<td><?= $status ?></td>
-									</tr>	
+									</tr>
+									<!-- updatePiece box begin-->
+                                    <div id="updatePiece<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Modifier la pièce de réglement </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
+                                                <p>Êtes-vous sûr de vouloir modifier la pièce de réglement ?</p>
+                                                <div class="control-group">
+                                                    <label class="right-label"></label>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Pièce de réglement</label>
+                                                        <div class="controls">
+                                                            <input type="file" name="urlPiece" />
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="action" value="updatePiece" />
+                                                    <input type="hidden" name="source" value="contrat" />
+                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- updateCopiePiece box end -->      	
 									<!-- validateOperation box begin-->
                                     <div id="validateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                         <div class="modal-header">

@@ -12,9 +12,9 @@ class OperationManager{
     public function add(Operation $operation){
         $query = $this->_db->prepare(
         'INSERT INTO t_operation (date, dateReglement, compteBancaire, observation, reference, 
-        montant, modePaiement, idContrat, numeroCheque, status, created, createdBy)
+        montant, modePaiement, idContrat, numeroCheque, status, url, created, createdBy)
         VALUES (:date, :dateReglement, :compteBancaire, :observation, :reference, :montant,
-        :modePaiement,:idContrat, :numeroCheque, :status, :created, :createdBy)') 
+        :modePaiement,:idContrat, :numeroCheque, :status, :url, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':date', $operation->date());
         $query->bindValue(':dateReglement', $operation->dateReglement());
@@ -26,8 +26,18 @@ class OperationManager{
         $query->bindValue(':numeroCheque', $operation->numeroCheque());
         $query->bindValue(':status', $operation->status());
         $query->bindValue(':idContrat', $operation->idContrat());
+        $query->bindValue(':url', $operation->url());
         $query->bindValue(':created', $operation->created());
         $query->bindValue(':createdBy', $operation->createdBy());
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function updatePiece($idOperation, $url){
+        $query = $this->_db->prepare('UPDATE t_operation SET url=:url WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idOperation);
+        $query->bindValue(':url', $url);
         $query->execute();
         $query->closeCursor();
     }
