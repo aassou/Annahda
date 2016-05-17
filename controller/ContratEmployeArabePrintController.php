@@ -145,7 +145,10 @@ $htmlcontent = 'حدد الطرفان الأشغال المذكورة و الت�
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<ul><li>'.ceil($contrat->nombreUnites()).' '.$contrat->nomUniteArabe().' مقابل '.$contrat->prixUnitaire().' درهم  لكل '.$contrat->nomUniteArabe().'</li>';
-$htmlcontent .= '<li>'.ceil($contrat->nombreUnites2()).' '.$contrat->nomUniteArabe2().' مقابل '.$contrat->prixUnitaire2().' درهم  لكل '.$contrat->nomUniteArabe2().'</li></ul>';;
+if ( $contrat->prixUnitaire2() != 0 ) {
+    $htmlcontent .= '<li>'.ceil($contrat->nombreUnites2()).' '.$contrat->nomUniteArabe2().' مقابل '.$contrat->prixUnitaire2().' درهم  لكل '.$contrat->nomUniteArabe2().'</li>';    
+}
+$htmlcontent .= '</ul>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 //Acte 4:
@@ -166,7 +169,9 @@ $htmlcontent = 'يستفيد الطرف الثاني مقابل أشغال  '.$c
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<ul><li>'.$contrat->prixUnitaire().' درهم  مقابل كل '.$unite.'</li>';
-$htmlcontent .= '<li>'.$contrat->prixUnitaire2().' درهم  مقابل كل '.$unite2.'</li>';
+if ( $contrat->prixUnitaire2() != 0 ) {
+    $htmlcontent .= '<li>'.$contrat->prixUnitaire2().' درهم  مقابل كل '.$unite2.'</li>';       
+}
 $htmlcontent .= '<li>المجموع : '.(($contrat->nombreUnites()*$contrat->prixUnitaire())+($contrat->nombreUnites2()*$contrat->prixUnitaire2())).' درهم </li></ul>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
