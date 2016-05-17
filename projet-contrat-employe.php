@@ -340,7 +340,8 @@
                             <div class="portlet-body">
                                     <div class="clearfix">
                                         <?php
-                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                             $_SESSION['userMerlaTrav']->profil() == "manager") {
                                         ?>
                                         <div class="btn-group pull-left">
                                             <a class="btn blue" href="#addEmploye" data-toggle="modal">
