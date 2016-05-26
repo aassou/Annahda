@@ -107,7 +107,7 @@
             $historyManager->add($history);
         }
         else{
-            $actionMessage = "<strong>Erreur Modification Copie Chèque : </strong>Vous devez séléctionner un fichier.";
+            $actionMessage = "<strong>Erreur Modification Pièce de réglement : </strong>Vous devez séléctionner un fichier.";
             $typeMessage = "error";
         }
     } 
@@ -225,7 +225,8 @@
     //define the redirection url based on the source page
     if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
         $codeContrat = htmlentities($_POST['codeContrat']);
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."#detailsReglements";   
+        $idProjet = htmlentities($_POST['idProjet']);
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."&idProjet=".$idProjet."#detailsReglements";   
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "operations-status" ) {
         $mois = $_POST['mois'];

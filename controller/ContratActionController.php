@@ -75,7 +75,6 @@
                 $dureePaiement = htmlentities($_POST['dureePaiement']);
                 $nombreMois = htmlentities($_POST['nombreMois']);
                 $echeance = htmlentities($_POST['echeance']);
-                $note = htmlentities($_POST['note']);
                 $idClient = htmlentities($_POST['idClient']);
                 $codeContrat = uniqid().date('YmdHis');
                 $societeArabe = htmlentities($_POST['societeArabe']);
@@ -87,6 +86,16 @@
                 if( isset($_POST['numeroCheque']) ){
                     $numeroCheque = htmlentities($_POST['numeroCheque']);
                 }
+                //SET NOTE-CLIENT SECTION BEGIN
+                $note = "";
+                $noteImage = "";
+                if ( isset($_POST['show-note-client']) ) {
+                    $note = htmlentities($_POST['note']);
+                    if(file_exists($_FILES['note-client-image']['tmp_name']) || is_uploaded_file($_FILES['note-client-image']['tmp_name'])) {
+                        $noteImage = imageProcessing($_FILES['note-client-image'], '/pieces/pieces_notes_clients/');
+                    }
+                }
+                //SET NOTE-CLIENT SECTION END
                 //set the datePrevu for our object end
                 //CAS LIBRE PROCESSING BEGIN
                 if ( isset($_POST['show-cas-libre']) ) {
@@ -151,7 +160,7 @@
                 array('reference' => $reference, 'numero' => $numero, 'dateCreation' => $dateCreation, 
                 'prixVente' => $prixNegocie, 'prixVenteArabe' => $prixNegocieArabe, 'avance' => $avance, 
                 'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement, 'dureePaiement' => $dureePaiement, 
-                'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'idClient' => $idClient, 
+                'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'imageNote' => $noteImage, 'idClient' => $idClient, 
                 'idProjet' => $idProjet, 'idBien' => $idBien, 'typeBien' => $typeBien, 'code' => $codeContrat, 
                 'numeroCheque' => $numeroCheque, 'societeArabe' => $societeArabe, 'etatBienArabe' => $etatBienArabe ,
                 'facadeArabe' => $facadeArabe, 'created' => $created, 'createdBy' => $createdBy));
@@ -315,6 +324,27 @@
         }
     }
     //Action Update Processing End
+    //Action UpdateImageNote Processing Begin
+    else if ($action == "updateImageNote") {
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $imageNote = "";
+        $idContrat = htmlentities($_POST['idContrat']);
+        if(file_exists($_FILES['note-client-image']['tmp_name']) || is_uploaded_file($_FILES['note-client-image']['tmp_name'])) {
+            $imageNote = imageProcessing($_FILES['note-client-image'], '/pieces/pieces_notes_clients/');
+            $contratManager->updateImageNote($idContrat, $imageNote);
+            $actionMessage = "<strong>Opération valide : </strong>Image Note est modifiée avec succès.";
+            $typeMessage = "success";
+        }
+        else{
+            $actionMessage = "<strong>Erreur Modification Image Note : </strong>Vous devez séléctionner un fichier.";
+            $typeMessage = "error";
+        }
+        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."&idProjet=".$idProjet;
+        if ( isset($_POST['source']) and $_POST['source'] == "clients-modification" ) {
+            $redirectLink = "Location:../clients-modification.php";    
+        }
+    }
+    //Action UpdateImageNote Processing END 
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];

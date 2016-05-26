@@ -25,7 +25,7 @@
     $redirectLink = "";
     //process begins
     //The History Component is used in all ActionControllers to mention a historical version of each action
-    $historyManager = new HistoryManager($pdo);
+    //$historyManager = new HistoryManager($pdo);
     $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
     $codeLivraison = htmlentities($_POST['codeLivraison']);
     $mois = htmlentities($_POST['mois']);
@@ -46,7 +46,7 @@
             //add it to db
             $livraisonDetailManager->add($livraisonDetail);
             //add History data
-            $history = new History(array(
+            /*$history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des détails livraisons",
                 'description' => "Ajout d'un article à la livraison : ".$idLivraison." - Société : Iaaza",
@@ -54,7 +54,7 @@
                 'createdBy' => $createdBy
             ));
             //add it to db
-            $historyManager->add($history);
+            $historyManager->add($history);*/
             $actionMessage = "<strong>Opération Valide</strong> : Article Ajouté avec succès.";  
             $typeMessage = "success";
             //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
@@ -82,7 +82,7 @@
             'prixUnitaire' => $prixUnitaire, 'quantite' => $quantite, 'updatedBy' => $updatedBy,
             'updated' => $updated));
             $livraisonDetailManager->update($livraisonDetail);
-            $createdBy = $_SESSION['userMerlaTrav']->login();
+            /*$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
                 'action' => "Modification",
@@ -92,7 +92,7 @@
                 'createdBy' => $createdBy
             ));
             //add it to db
-            $historyManager->add($history);
+            $historyManager->add($history);*/
             $actionMessage = "<strong>Opération Valide</strong> : Article Modifié avec succès.";
             $typeMessage = "success";
         }
@@ -108,7 +108,7 @@
     else if($action=="delete"){
         $idLivraisonDetail = htmlentities($_POST['idLivraisonDetail']);
         $livraisonDetailManager->delete($idLivraisonDetail);
-        $createdBy = $_SESSION['userMerlaTrav']->login();
+        /*$createdBy = $_SESSION['userMerlaTrav']->login();
         $created = date('Y-m-d h:i:s');
         $history = new History(array(
             'action' => "Suppression",
@@ -118,7 +118,7 @@
             'createdBy' => $createdBy
         ));
         //add it to db
-        $historyManager->add($history);
+        $historyManager->add($history);*/
         $actionMessage = "<strong>Opération Valide</strong> : Article Supprimé avec succès.";
         $typeMessage = "success";
         //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;

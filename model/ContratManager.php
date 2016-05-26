@@ -12,11 +12,11 @@ class ContratManager{
     public function add(Contrat $contrat){
         $query = $this->_db->prepare('
         INSERT INTO t_contrat (reference, numero, dateCreation, prixVente, prixVenteArabe, 
-        avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, 
+        avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, imageNote, 
         idClient, idProjet, idBien, typeBien, code, status, revendre, numeroCheque, societeArabe, 
         etatBienArabe, facadeArabe, created, createdBy)
         VALUES (:reference, :numero, :dateCreation, :prixVente, :prixVenteArabe, 
-        :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, 
+        :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, :imageNote, 
         :idClient, :idProjet, :idBien, :typeBien, :code, :status, :revendre, :numeroCheque, 
         :societeArabe, :etatBienArabe, :facadeArabe, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
@@ -32,6 +32,7 @@ class ContratManager{
         $query->bindValue(':nombreMois', $contrat->nombreMois());
         $query->bindValue(':echeance', $contrat->echeance());
 		$query->bindValue(':note', $contrat->note());
+        $query->bindValue(':imageNote', $contrat->imageNote());
         $query->bindValue(':idClient', $contrat->idClient());
         $query->bindValue(':idProjet', $contrat->idProjet());
         $query->bindValue(':idBien', $contrat->idBien());
@@ -444,6 +445,27 @@ class ContratManager{
         $query->bindValue(':revendre', 1);
         $query->bindValue(':typeBien', 'localCommercial');
         $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    
+    public function updateImageNote($idContrat, $imageNote){
+        $query = $this->_db->prepare('UPDATE t_contrat SET imageNote=:imageNote WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idContrat);
+        $query->bindValue(':imageNote', $imageNote);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function getContratsToChange(){
+        $contrats = array();    
+        $query = $this->_db->query('SELECT * FROM t_contrat WHERE LENGTH(note)>=2 AND status="actif" ORDER BY dateCreation DESC');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $contrats[] = new Contrat($data);
         }

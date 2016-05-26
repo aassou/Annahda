@@ -72,9 +72,10 @@ class HistoryManager{
     public function getHistorysByDate($dateBegin, $dateEnd){
         $historys = array();
         $query = $this->_db->prepare(
-        'SELECT * FROM t_history WHERE created BETWEEN :dateBegin AND :dateEnd ORDER BY created DESC');
+        'SELECT * FROM t_history WHERE target NOT LIKE :target AND created BETWEEN :dateBegin AND :dateEnd ORDER BY created DESC');
         $query->bindValue(':dateBegin', $dateBegin);
         $query->bindValue(':dateEnd', $dateEnd);
+        $query->bindValue(':target', '%livraisons%');
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $historys[] = new History($data);

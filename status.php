@@ -135,6 +135,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="clients-modification.php">
+                            <div class="tile bg-grey">
+                                <div class="tile-body">
+                                    <i class="icon-pencil"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Modifications Clients
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -350,6 +350,23 @@
 										<?= number_format($contrat->prixVente()-($sommeOperations), 2, ',', ' ') ?>&nbsp;DH
 									</span>
 								</li>
+								<li>
+                                    <span class="sale-info">Note</span> 
+                                    <span class="sale-num">
+                                        <?= $contrat->note() ?>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="sale-info">Image Note</span> 
+                                    <span class="sale-num">
+                                        <a class="fancybox-button btn mini" data-rel="fancybox-button" title="Image Note" href="<?= $contrat->imageNote() ?>">
+                                            <i class="icon-zoom-in"></i>    
+                                        </a>
+                                        <a title="Modifier Image Note" class="btn mini black" href="#updateImageNote<?= $contrat->id();?>" data-toggle="modal" data-id="<?= $contrat->id(); ?>">
+                                            <i class=" icon-refresh"></i>   
+                                        </a>
+                                    </span>
+                                </li>
 							</ul>
 							<!--a href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>" class="btn big blue">
 									<i class="icon-print"></i> Contrat Client
@@ -359,6 +376,35 @@
 								</a-->
 						</div>
 					 </div>
+					 <!-- updateImageNote box begin-->
+                    <div id="updateImageNote<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h3>Modifier l'image de note client </h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post" enctype="multipart/form-data">
+                                <p>Êtes-vous sûr de vouloir modifier l'image de cette note ?</p>
+                                <div class="control-group">
+                                    <label class="right-label"></label>
+                                    <div class="control-group">
+                                        <label class="control-label">Image Note</label>
+                                        <div class="controls">
+                                            <input type="file" name="note-client-image" />
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="action" value="updateImageNote" />
+                                    <input type="hidden" name="source" value="contrat" />
+                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- updateImageNote box end -->       
 					<!-- addReglement box begin-->
                     <div id="addReglement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                         <div class="modal-header">
@@ -987,6 +1033,7 @@
                                                     <input type="hidden" name="source" value="contrat" />
                                                     <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                 </div>

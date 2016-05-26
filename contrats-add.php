@@ -132,7 +132,7 @@
                                   </div>
                                 <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ContratActionController.php" method="POST" id="contratForm" class="horizontal-form">
+                                 <form action="controller/ContratActionController.php" method="POST" id="contratForm" class="horizontal-form" enctype="multipart/form-data">
                                     <!--div class="row-fluid">
                                     	<div class="span12">
                                     		<img src="assets/img/form_wizard_client_contrat_2.png">
@@ -259,14 +259,6 @@
                                              </div>
                                           </div>
                                         </div>
-                                        <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="note">Note client</label>
-                                             <div class="controls">
-                                                <input type="text" id="note" name="note" class="m-wrap" />
-                                             </div>
-                                          </div>
-                                        </div>
                                     </div>
                                     <div class="row-fluid">
                                        <div class="span3">
@@ -323,6 +315,39 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr>
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                          <div class="control-group">
+                                            <label class="checkbox">
+                                            <input type="checkbox" id="show-note-client" name="show-note-client" value="show-note-client" />
+                                            Avec Modifications
+                                            </label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- BEGIN NOTE CLIENT DIV -->
+                                    <div class="row-fluid" id="note-client" style="display: none">
+                                        <h4><strong>Modifications Client</strong></h4>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Note client</label>
+                                             <div class="controls">
+                                                <textarea id="note" name="note" class="m-wrap"></textarea>
+                                             </div>
+                                          </div>
+                                        </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Image Note Client</label>
+                                             <div class="controls">
+                                                <input type="file" id="note-client-image" name="note-client-image" class="m-wrap" />
+                                             </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- END NOTE CLIENT DIV -->
+                                    <hr>
                                     <div class="row-fluid">
                                         <div class="span3">
                                           <div class="control-group">
@@ -414,6 +439,9 @@
 			$('#show-cas-libre').change(function(){
 			    $("#cas-libre").toggle();
 			});
+			$('#show-note-client').change(function(){
+                $("#note-client").toggle();
+            });
 		});
 		$(document).ready(function() {
 			$('.typeBien').change(function(){
