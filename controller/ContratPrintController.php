@@ -15,6 +15,7 @@
     if( isset($_SESSION['userMerlaTrav']) ){
         $clientManager = new ClientManager($pdo);
         $contratManager = new ContratManager($pdo);
+        $companyManager = new CompanyManager($pdo);
         $projetManager = new ProjetManager($pdo);
         $appartementManager = new AppartementManager($pdo);
 		$locauxManager = new LocauxManager($pdo);
@@ -39,6 +40,8 @@
 			$biens = $locauxManager->getLocauxById($contrat->idBien());
 			$typeBien = "Local commercial";
 		}
+        $idSociete = $contrat->societeArabe();
+        $company = $companyManager->getCompanyById($idSociete);
 //property data
 
 $programme  = $projet->nom();
@@ -76,95 +79,110 @@ ob_start();
 	    width:100%;
 	    border: solid 1px black;
 	}
+	.article{
+	    font-size:11pt;
+	    text-align: justify;
+	}
+	.article-title{
+        text-decoration: underline;
+    }
+	.specification{
+	    font-size:10.48pt;
+	}
+	 .specification-title{
+	     text-decoration: underline;
+	 }
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
-    <br><br><br><br>
-    <table>
-        <tr>
-            <td style="width:30%"><strong>Programme </strong></td>
-            <td style="width:70%"> : <?= $programme ?></td>
-        </tr>
-        <tr>
-            <td><strong>Type du bien </strong></td>
-            <td> : <?= $typeBien ?></td>
-        </tr>
-        <tr>
-            <td><strong>Nom du bien </strong></td>
-            <td> : <?= $biens->nom() ?></td>
-        </tr>
-        <tr>
-			<?php if($contrat->typeBien()=="appartement"){ ?>        	
-            <td><strong>Niveau du bien </strong></td>
-            <td> : <?= $biens->niveau() ?></td>
-            <?php } ?>
-        </tr>
-        <tr>
-            <td><strong>Superficie Approximative</strong></td>
-            <td> : <?= $superficie ?> m² <sub>(communiqué par l'architecte selon le plan de construction)</sub></td>
-        </tr>
-        <tr>
-            <td><strong>Prix H.T </strong></td>
-            <td> : <?= $prixHt ?>&nbsp;DH</td>
-        </tr>
-    </table>
-    <h2 style="font-size:20px; text-align: center; text-decoration: underline">Avis de réservation</h2>
+    <h2 style="font-size:20px; text-align: center; text-decoration: underline">Contrat de réservation d'un <?= $typeBien ?></h2>
     <br>
+    <p style="font-size: 12pt; text-align: justify">
+        <strong>PARTIE 1</strong> : Société <?= $company->nom() ?> 
+        dont le siège se trouve à quartier 313 OULED BRAHIM. MIZZANINE N°B1 Nador.
+    </p>
+    <p style="font-size: 12pt; text-align: justify">
+        <strong>PARTIE 2</strong> : Mlle/Mme/Mr <?= strtoupper($clientNom) ?>, Marocain, adulte, portant la CIN N° <?= $cin ?>,  
+        demeurant à <?= $adresse ?>.
+    </p>
+    <p style="font-size: 12pt; text-align: center; text-decoration: underline">
+        <strong>TEXTE DU CONTRAT</strong>
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 1</strong> : 
+        Les parties reconnaissent a se contracter et agir en conformité avec les règles juridiques, sans conquérir et de bonne foi.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 2</strong> : 
+        Les deux parties ont convenu que ce contrat n’est pas un contrat de vente définitif. Et n’approuve pas la propriété de du bien immobilier qu’après avoir payé la totalité du prix du bien immobilier par la première partie et la conclusion finale du contrat de vente définitif chez le Notaire et le respect des formalités et conditions prévues par la loi.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 3</strong> : 
+         La première partie reconnaît qu’il garde le droit de la deuxième partie dans l’acquisition d’un <?= ucfirst($typeBien) ?> dans le projet de logements nommé <?= $programme ?>, selon les spécifications suivantes : 
+    </p>
+    <ul class="specification"> 
+        <li><span class="specification-title">Supérifice approximative</span> : <?= $superficie ?>m<sup>2</sup>( superficie communiqué par l’architecte selon le plan de construction et la superficie utile sera déterminer ultérieurement par l’administration de la conservation foncière).</li>
+        <?php if( $typeBien == "appartement" ) { ?>
+        <li><span class="specification-title">Etage</span> : <?= $biens->niveau() ?></li>
+        <?php } ?>
+        <li><span class="specification-title">La vue</span> : <?= ucfirst($typeBien) ?> avec <?= $biens->facade() ?></li>
+        <li><span class="specification-title">N° <?= ucfirst($typeBien) ?></span> : <?= $biens->nom() ?></li>
+        <li><span class="specification-title">L’état de <?= ucfirst($typeBien) ?> conformément à l’accord</span> : <?= $contrat->etatBienArabe() ?></li>
+        <li><span class="specification-title">Titre mère de terrain </span> : <?= $projet->titre() ?></li>
+    </ul>
+    <p class="article">
+        <strong class="article-title">ARTICLE 4</strong> : 
+          La deuxième partie paye pour la première partie une avance de <?= number_format($contrat->avance(), 2, ',', ' ') ?> DH.
+          (), en contrepartie d’une quittance détaillée comme seul preuve de paiement,  et cela dans un délai ne dépasse pas 10 jours à compter de la date de signature de cette contrat. 
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 5</strong> : 
+          Les deux parties sont en accord du prix définitif de <?= ucfirst($typeBien) ?> soit : <?= number_format($contrat->prixVente(), 2, ',', ' ') ?> DH.
+          () payé par la deuxième partie en faveur de la première sous forme des échéances à compter de la date de première avance jusqu’au achèvement des travaux de la construction et la finition soit une échéance de 
+          <?= number_format($contrat->echeance(), 2, ',', ' ') ?> DH chaque <?= $contrat->nombreMois() ?> mois, à partir de la date de signature du présente acte. 
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 6</strong> : 
+        En cas retard de paiement des échéances fixé dans l’article 5, la première partie a le droit d’envoyer un écrit sous forme d’avertissement dans l’adresse fixée par la deuxième partie.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 7</strong> : 
+        La première partie détermine un délai maximum de 15 jours dans son écrit destiné à la deuxième partie à partir de la date de livraison. 
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 8</strong> : 
+        La deuxième partie approuve que l’adresse choisi par elle-même dans ce contrat représente ca vrai domicile, et qu’elle assume la responsabilité total en cas de retour du courir fixé dans l’article 7 pour quelque soit le motif.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 9</strong> : 
+        La première partie s’engage en cas d’expiration du délai de 15 jours fixé dans le courir destiné a la deuxième partie, de restituer le montant de l’avance ainsi que la somme des échéances payés par la deuxième partie sans aucun prélèvement, dommage au pénalité. Et cela après récupération de toute quittance de paiement délivré par la première partie. Cette dernière s’engage aussi de faire comme en cas de livraisons de l’appartement en état des gros ouvres après expiration du délai de 90 jours pour que la deuxième partie accompli les travaux de la finition du bien immobilier.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 10</strong> : 
+        Après expiration des délais fixés dans ce contrat, le bien immobilier sera à la disposition de la première partie.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 11</strong> : 
+        La deuxième partie n’a pas le droit de demander aucune indemnité amicalement ou judiciairement après expiration des délais fixés dans les articles 7 et 9, sauf la restitution des fonds déjà versé en profit de la première partie.  
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE 12</strong> : 
+        En cas de litige les deux parties sont d’accord de soumettre cette contrat aux dispositions du deuxième paragraphe de l’article 114 du droit des contrats et des obligations.
+    </p>
+    <p class="article">
+        <strong class="article-title">ARTICLE FINAL</strong> : 
+        Le présent acte est un contrat coutumier et s’engage les deux parties et conserve leur droits au moment de la signature et sans l’obligation de l’égaliser les signatures dans l’attente de rédiger l’acte de vente définitif sous les dispositions et les formalités fixé par la loi marocain.  
+    </p>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <strong>Nador, le <?= date('d/m/Y', strtotime($contrat->dateCreation())); ?></strong>
+    <br><br><br><br><br><br><br><br>
     <table border="0">
         <tr>
-            <td style="width:20%"><strong>Client</strong></td>
-            <td style="width:80%"> : <strong><em><?= $clientNom ?></em></strong></td>
-        </tr>
-        <tr>
-            <td><strong>CIN</strong></td>
-            <td> : <strong><em><?= $cin ?></em></strong></td>
-        </tr>
-        <tr>
-            <td><strong>Adresse</strong></td>
-            <td> : <strong><em><?= $adresse ?></em></strong></td>
-        </tr>
-        <tr>
-            <td><strong>Téléphone</strong></td>
-            <td> : <strong><em><?= $telephone ?></em></strong></td>
-        </tr>
-        <tr>
-            <td><strong>Email</strong></td>
-            <td> : <strong><em><?= $email ?></em></strong></td>
-        </tr>
-    </table>
-    <br><br><br>
-    <p style="font-size: 10.48pt; text-align: justify";><?= $contratTexte ?></p>
-    <br><br>
-    <table>
-        <tr>
-            <td style="width:100%; text-align: center"><?= $contratTexte2 ?></td>
-        </tr>
-    </table>
-    <br><br>
-    <p style="font-size: 10.48pt; text-align: justify"><?= $remarque ?></p>
-    <br><br>
-    <table>
-        <tr>
-            <td style="width:30%; text-align: center">Mode de paiement</td>
-        </tr>
-        <tr>
-            <td style="width:40%; text-align: center"><strong><?= $modePaiement; ?></strong></td>
-            <td style="width:60%; text-align: center"><strong>Nador, le <?= date('d/m/Y', strtotime($contrat->dateCreation())); ?></strong></td>
-        </tr>
-    </table>
-    <br><br>
-    <table border="0">
-        <tr>
-            <td style="width:70%;"><strong>EMARGEMENT CLIENT</strong></td>
-            <td style="width:30%;"><strong>EMARGEMENT SOCIETE</strong></td>
+            <td style="width:70%;"><strong>PARTIE 1</strong></td>
+            <td style="width:30%;"><strong>PARTIE 2</strong></td>
         </tr>
     </table>
     <page_footer>
-    <p><strong>N.B</strong> : Ce reçu est délivré sous réserve de l'encaissement du chèque. En cas de rejet pour quelque motif que ce soit, le présent reçu deviendra nul et non avenu.
-    Dans la cas de litige, ou la société n’est pas parvenus à la réalisation du projet  le client a le droit de récupérer ses fonds  sans demander une indemnisation ou des intérêts et sans recours au tribunal.
-    </p>
-    <hr/>
-    <p style="text-align: center"></p>
     </page_footer>
 </page>    
 <?php

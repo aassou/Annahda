@@ -209,8 +209,11 @@
 												        	<!--a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
 												        		Imprimer Contrat
 												        	</a-->
-												        	<a href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
-                                                                Imprimer Contrat
+												        	<a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
+                                                                Imprimer Contrat AR
+                                                            </a>
+                                                            <a target="_blank" href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>">
+                                                                Imprimer Contrat FR
                                                             </a>
 												        	<?php
 												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" ){ 
