@@ -25,7 +25,7 @@
 	        $client = $clientManager->getClientById($contrat->idClient());
 	        $projet = $projetManager->getProjetById($contrat->idProjet());
 			$piecesLocauxManager = new PiecesLocauxManager($pdo);
-			$piecesNumber = $piecesLocauxManager->getPiecesLocauxNumberByIdLocaux($local->id);
+			$piecesNumber = $piecesLocauxManager->getPiecesLocauxNumberByIdLocaux($local->id());
 			$pieces="";
 			if($piecesNumber>0){
 				$pieces = $piecesLocauxManager->getPiecesLocauxByIdLocaux($local->id());	

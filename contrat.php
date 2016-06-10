@@ -497,6 +497,7 @@
                                     <input type="hidden" name="source" value="contrat" />
                                     <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
                                     <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
                                     <div class="controls">
                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -834,7 +835,7 @@
                                         ?>
                                         <tr>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
-                                            <td><?= $contrat->echeance() ?></td>
+                                            <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?></td>
                                             <td><?= $status ?></td>
                                         </tr>
                                         <!-- updateStatusReglementPrevu box begin-->
@@ -951,7 +952,7 @@
 										<!--th style="width: 10%">Date.Rég</th-->
 										<th style="width: 10%">ModePaiement</th>
 										<th style="width: 10%">Compte</th>
-										<th style="width: 5%">N° Opération</th>
+										<th style="width: 5%">N°.Opér</th>
 										<th style="width: 10%">Montant</th>
 										<th style="width: 10%">Observation</th>
 										<th style="width: 10%">Status</th>

@@ -22,7 +22,7 @@
 	}
 	if(file_exists($_FILES['url']['tmp_name']) || is_uploaded_file($_FILES['url']['tmp_name'])) {
 		$url = imageProcessing($_FILES['url'], '/pieces/pieces_locaux/');
-		$nom = htmlentities($_POST['nom']);
+		$nom = "Fiche descriptif du local commercial";//htmlentities($_POST['nom']);
 		$pieceLocaux = new PiecesLocaux(array('nom'=>$nom, 'url'=>$url, 'idLocaux'=>$idLocaux));
 		$pieceLocauxManager = new PiecesLocauxManager($pdo);
 		$pieceLocauxManager->add($pieceLocaux);

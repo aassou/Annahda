@@ -7,11 +7,10 @@ for ( $i=1; $i<7; $i++ ) {
             <input name="cas-libre-date<?= $i ?>" id="cas-libre-date<?= $i ?>" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
             <span class="add-on"><i class="icon-calendar"></i></span>
          </div>
-        <input type="text" value="" name="cas-libre-montant<?= $i ?>" class="m-wrap" placeholder="Montant">
-        <input type="text" value="" name="cas-libre-observation<?= $i ?>" class="m-wrap" placeholder="Observation">
+        <input type="text" value="" name="cas-libre-montant<?= $i ?>" class="m-wrap" placeholder="Montant" />
+        <input type="text" value="" name="cas-libre-observation<?= $i ?>" class="m-wrap" placeholder="Observation" />
      </div>
 </div>
-
 <?php  
 }
 ?>

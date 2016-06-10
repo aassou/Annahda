@@ -20,6 +20,7 @@
 		$appartement = "";
 		$idLocaux = 0;
 		$idProjet = $_GET['idProjet'];
+        $projet = $projetManager->getProjetById($idProjet);
 		if( isset($_GET['idLocaux']) and 
 		( $_GET['idLocaux']>0 and $_GET['idLocaux']<=$locauxManager->getLastId() ) ){
 			$idLocaux = htmlentities($_GET['idLocaux']);
@@ -69,7 +70,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -86,21 +87,26 @@
 						</h3>
 						<ul class="breadcrumb">
 							<li>
-								<i class="icon-home"></i>
-								<a>Accueil</a> 
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
-								<i class="icon-angle-right"></i>
-							</li>
-							<li>
-								<i class="icon-home"></i>
-								<a>Gestion des locaux</a>
-								<i class="icon-angle-right"></i>
-							</li>
-							<li><a>Fiche du local commercial</a></li>
+                                <i class="icon-home"></i>
+                                <a href="dashboard.php">Accueil</a> 
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <i class="icon-briefcase"></i>
+                                <a href="projets.php">Gestion des projets</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="locaux.php?idProjet=<?= $idProjet ?>">Gestion des locaux commerciaux</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
+                                <a>Fiche descriptif</a>
+                            </li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>
@@ -109,11 +115,6 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
-						<div class="row-fluid add-portfolio">
-							<div class="pull-left">
-								<a href="locaux.php?idProjet=<?= $idProjet ?>" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des locaux commerciaux</a>
-							</div>
-						</div>
 						<div class="tab-pane active" id="tab_1">
 							<?php if(isset($_SESSION['pieces-add-success'])){ ?>
                          	<div class="alert alert-success">
@@ -166,11 +167,6 @@
 										<li>
 											<a href="controller/LocauxFichePrintController.php?idLocaux=<?= $locaux->id() ?>">
 												Imprimer Fiche
-											</a>
-										</li>
-										<li>
-											<a href="#updateLocaux<?= $locaux->id();?>" data-toggle="modal" data-id="<?= $locaux->id(); ?>">
-												Modifier Infos
 											</a>
 										</li>
 										<li>
@@ -297,8 +293,8 @@
 										<form class="form-horizontal" action="controller/LocauxPiecesAddController.php?p=2" method="post" enctype="multipart/form-data">
 											<p>Êtes-vous sûr de vouloir ajouter un document pour le local <strong><?= $locaux->nom() ?></strong> ?</p>
 											<div class="control-group">
-												<label class="right-label">Nom Pièce</label>
-												<input type="text" name="nom" />
+												<!--label class="right-label">Nom Pièce</label>
+												<input type="text" name="nom" /-->
 												<label class="right-label">Lien</label>
 												<input type="file" name="url" />
 												<input type="hidden" name="idLocaux" value="<?= $locaux->id() ?>" />

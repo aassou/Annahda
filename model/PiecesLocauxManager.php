@@ -9,8 +9,7 @@ class PiecesLocauxManager{
     //CRUD operations
     public function add(PiecesLocaux $piecesLocaux){
         $query = $this->_db->prepare(
-        'INSERT INTO t_pieces_locaux (nom, url, idLocaux)
-        VALUES (:nom, :url, :idLocaux)') 
+        'INSERT INTO t_pieces_locaux (nom, url, idLocaux) VALUES (:nom, :url, :idLocaux)') 
         or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':nom', $piecesLocaux->nom());
 		$query->bindValue(':url', $piecesLocaux->url());
