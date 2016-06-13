@@ -53,8 +53,8 @@
                     //print_r($allDataInSheet);
                     $arrayCount = count($allDataInSheet); // Total Number of rows in the uploaded EXCEL file
                     //echo $arrayCount;
-                    $string = "INSERT INTO t_relevebancaire (dateOpe, dateVal, libelle, reference, debit, credit, projet) VALUES ";
-
+                    $string = "INSERT INTO t_relevebancaire (dateOpe, dateVal, libelle, reference, debit, credit, projet, idCompteBancaire) VALUES ";
+                    $compteBancaire = htmlentities($_POST['idCompteBancaire']);
                     for ( $i=1; $i<=$arrayCount; $i++ ) {
                         //$dateOpe= date('Y-m-d', strtotime(trim($allDataInSheet[$i]["B"])));
                         //$dateOpe = DateTime::createFromFormat('d/m/Y', trim($allDataInSheet[$i]["B"]));
@@ -85,7 +85,7 @@
                         if ( strlen($allDataInSheet[$i]["H"]) > 0 ) {
                             $projet = addslashes(trim($allDataInSheet[$i]["H"]));    
                         }
-                        $string .= "( '".$dateOpe."' , '".$dateVal."' , '".$libelle."' , '".$reference."' , ".$debit." , ".$credit." , '".$projet."'),";
+                        $string .= "( '".$dateOpe."' , '".$dateVal."' , '".$libelle."' , '".$reference."' , ".$debit." , ".$credit." , '".$projet."' , '".$compteBancaire."'),";
                     }
                     $string = substr($string,0,-1);
                     //print_r(utf8_decode($string));
@@ -107,6 +107,7 @@
     else if($action == "update"){
         $idReleveBancaire = htmlentities($_POST['idReleveBancaire']);
         if(!empty($_POST['dateOpe'])){
+            $compteBancaire = htmlentities($_POST['idCompteBancaire']);
 			$dateOpe = htmlentities($_POST['dateOpe']);
 			$dateVal = htmlentities($_POST['dateVal']);
 			$libelle = htmlentities($_POST['libelle']);
@@ -125,6 +126,7 @@
 				'debit' => $debit,
 				'credit' => $credit,
 				'projet' => $projet,
+				'idcompteBancaire' => $compteBancaire,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));
@@ -243,6 +245,13 @@
         $idReleveBancaire = htmlentities($_POST['idReleveBancaire']);
         $releveBancaireManager->delete($idReleveBancaire);
         $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire supprimé(e) avec succès.";
+        $typeMessage = "success";
+    }
+    //Action Delete Processing End
+    //Action Delete Processing Begin 
+    else if($action == "deleteReleveActuel"){
+        $releveBancaireManager->deleteReleveActuel();
+        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire Actuel supprimé(e) avec succès.";
         $typeMessage = "success";
     }
     //Action Delete Processing End

@@ -12,8 +12,8 @@ class ReleveBancaireManager{
 	//BAISC CRUD OPERATIONS
 	public function add(ReleveBancaire $releveBancaire){
     	$query = $this->_db->prepare(' INSERT INTO t_relevebancaire (
-		dateOpe, dateVal, libelle, reference, debit, credit, projet, created, createdBy)
-		VALUES (:dateOpe, :dateVal, :libelle, :reference, :debit, :credit, :projet, :created, :createdBy)')
+		dateOpe, dateVal, libelle, reference, debit, credit, projet, idCompteBancaire, created, createdBy)
+		VALUES (:dateOpe, :dateVal, :libelle, :reference, :debit, :credit, :projet, :idCompteBancaire, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':dateOpe', $releveBancaire->dateOpe());
 		$query->bindValue(':dateVal', $releveBancaire->dateVal());
@@ -22,6 +22,7 @@ class ReleveBancaireManager{
 		$query->bindValue(':debit', $releveBancaire->debit());
 		$query->bindValue(':credit', $releveBancaire->credit());
 		$query->bindValue(':projet', $releveBancaire->projet());
+        $query->bindValue(':idCompteBancaire', $releveBancaire->idCompteBancaire());
 		$query->bindValue(':created', $releveBancaire->created());
 		$query->bindValue(':createdBy', $releveBancaire->createdBy());
 		$query->execute();
@@ -30,7 +31,8 @@ class ReleveBancaireManager{
 
 	public function update(ReleveBancaire $releveBancaire){
     	$query = $this->_db->prepare('UPDATE t_relevebancaire SET 
-		dateOpe=:dateOpe, dateVal=:dateVal, libelle=:libelle, reference=:reference, debit=:debit, credit=:credit, projet=:projet, updated=:updated, updatedBy=:updatedBy
+		dateOpe=:dateOpe, dateVal=:dateVal, libelle=:libelle, reference=:reference, debit=:debit, 
+		credit=:credit, projet=:projet, idCompteBancaire=:idCompteBancaire, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $releveBancaire->id());
@@ -41,6 +43,7 @@ class ReleveBancaireManager{
 		$query->bindValue(':debit', $releveBancaire->debit());
 		$query->bindValue(':credit', $releveBancaire->credit());
 		$query->bindValue(':projet', $releveBancaire->projet());
+        $query->bindValue(':idCompteBancaire', $releveBancaire->idCompteBancaire());
 		$query->bindValue(':updated', $releveBancaire->updated());
 		$query->bindValue(':updatedBy', $releveBancaire->updatedBy());
 		$query->execute();
@@ -58,6 +61,13 @@ class ReleveBancaireManager{
         $query->closeCursor();
     }
 
+	public function deleteReleveActuel(){
+        $query = $this->_db->query('DELETE FROM t_relevebancaire
+        WHERE status=0')
+        or die (print_r($this->_db->errorInfo()));
+        $query->closeCursor();
+    }
+	
 	public function delete($id){
     	$query = $this->_db->prepare(' DELETE FROM t_relevebancaire
 		WHERE id=:id')

@@ -127,15 +127,45 @@
                                 </div-->
                             </div>
                             <div class="portlet-body" id="chats">
-                                    <form action="controller/ReleveBancaireActionController.php" method="POST" enctype="multipart/form-data">
-                                        <div class="control-group">   
-                                            <input class="m-wrap" type="file" name="excelupload" />
-                                        </div>
-                                        <div class="btn-cont"> 
-                                            <input type="hidden" name="action" value="add" />
-                                            <button type="submit" class="btn blue icn-only"><i class="icon-save icon-white"></i>&nbsp;Enregistrer</button>
-                                        </div>
-                                    </form>
+                                <form action="controller/ReleveBancaireActionController.php" method="POST" enctype="multipart/form-data">
+                                    <div class="control-group">
+                                        <label class="control-label">Compte bancaire</label>
+                                        <div class="controls">
+                                            <select name="idCompteBancaire" class="m-wrap" >
+                                                <?php foreach($comptesBancaires as $compte){ ?>
+                                                <option value="<?= $compte->id() ?>"><?= $compte->numero() ?></option>
+                                                <?php } ?>    
+                                            </select>    
+                                         </div>
+                                    </div>
+                                    <div class="control-group">   
+                                        <input class="m-wrap" type="file" name="excelupload" />
+                                    </div>
+                                    <div class="btn-cont"> 
+                                        <input type="hidden" name="action" value="add" />
+                                        <button type="submit" class="btn blue icn-only"><i class="icon-save icon-white"></i>&nbsp;Enregistrer</button>
+                                    </div>
+                                </form>
+                                <a href="#deleteReleveActuel" data-toggle="modal" class="btn red pull-right get-down"><i class="icon-trash"></i>&nbsp;Supprimer le relevé actuel</a>
+                                <!-- deleteReleveActuel box begin-->
+                                <div id="deleteReleveActuel" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                        <h3>Supprimer Relevé Actuel</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal loginFrm" action="controller/ReleveBancaireActionController.php" method="post">
+                                            <p>Êtes-vous sûr de vouloir supprimer ce relevé actuel ?</p>
+                                            <div class="control-group">
+                                                <label class="right-label"></label>
+                                                <input type="hidden" name="action" value="deleteReleveActuel" />
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- deleteReleveActuel box end -->     
                             </div>
                         </div>
                     </div>
@@ -178,6 +208,7 @@
                                     <tbody>
                                         <?php
                                         foreach($releveBancaires as $releve){
+                                            $numeroCompte = $compteBancaireManager->getCompteBancaireById($releve->idCompteBancaire())->numero();
                                         ?>
                                         <tr class="odd gradeX">
                                             <td>
@@ -221,6 +252,18 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal" action="controller/ReleveBancaireActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">Compte bancaire</label>
+                                                        <div class="controls">
+                                                            <select name="idCompteBancaire" class="m-wrap" >
+                                                                <option value="<?= $releve->idCompteBancaire() ?>"><?= $numeroCompte ?></option>
+                                                                <option disabled="disabled">----------------------</option>
+                                                                <?php foreach($comptesBancaires as $compte){ ?>
+                                                                <option value="<?= $compte->id() ?>"><?= $compte->numero() ?></option>
+                                                                <?php } ?>    
+                                                            </select>    
+                                                         </div>
+                                                    </div>
                                                     <div class="control-group">
                                                         <label class="control-label">DateOpe</label>
                                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">

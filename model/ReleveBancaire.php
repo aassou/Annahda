@@ -10,6 +10,7 @@ class ReleveBancaire{
 	private $_debit;
 	private $_credit;
 	private $_projet;
+    private $_idCompteBancaire;
     private $_status;
 	private $_created;
 	private $_createdBy;
@@ -64,6 +65,10 @@ class ReleveBancaire{
 		$this->_projet = $projet;
    	}
     
+    public function setIdCompteBancaire($idCompteBancaire){
+        $this->_idCompteBancaire = $idCompteBancaire;
+    }
+    
     public function setStatus($status){
         $this->_status = $status;
     }
@@ -115,6 +120,10 @@ class ReleveBancaire{
 	public function projet(){
 		return $this->_projet;
    	}
+    
+    public function idCompteBancaire(){
+        return $this->_idCompteBancaire;
+    }
     
     public function status(){
         return $this->_status;
