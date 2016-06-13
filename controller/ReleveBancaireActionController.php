@@ -69,21 +69,21 @@
                         //$date = DateTime::createFromFormat('d/m/Y', $allDataInSheet[$i]["B"]);
                         //echo $date->format('Y-m-d').'<br>';
                         //echo $date;
-                        $dateOpe = trim($allDataInSheet[$i]["A"]);
-                        $dateVal = trim($allDataInSheet[$i]["B"]);
-                        $libelle = trim($allDataInSheet[$i]["C"]);
-                        $reference = trim($allDataInSheet[$i]["D"]);
+                        $dateOpe = trim($allDataInSheet[$i]["B"]);
+                        $dateVal = trim($allDataInSheet[$i]["C"]);
+                        $libelle = trim($allDataInSheet[$i]["D"]);
+                        $reference = trim($allDataInSheet[$i]["E"]);
                         $debit = 0;
                         $credit = 0;
                         $projet = "_";
-                        if ( strlen($allDataInSheet[$i]["E"]) > 0 ) {
-                            $debit = trim($allDataInSheet[$i]["E"]);    
-                        }
                         if ( strlen($allDataInSheet[$i]["F"]) > 0 ) {
-                            $credit = trim($allDataInSheet[$i]["F"]);    
+                            $debit = trim($allDataInSheet[$i]["F"]);    
                         }
                         if ( strlen($allDataInSheet[$i]["G"]) > 0 ) {
-                            $projet = trim($allDataInSheet[$i]["G"]);    
+                            $credit = trim($allDataInSheet[$i]["G"]);    
+                        }
+                        if ( strlen($allDataInSheet[$i]["H"]) > 0 ) {
+                            $projet = trim($allDataInSheet[$i]["H"]);    
                         }
                         $string .= "( '".$dateOpe."' , '".$dateVal."' , '".$libelle."' , '".$reference."' , ".$debit." , ".$credit." , '".$projet."'),";
                     }
@@ -248,5 +248,5 @@
     //Action Delete Processing End
     $_SESSION['releveBancaire-action-message'] = $actionMessage;
     $_SESSION['releveBancaire-type-message'] = $typeMessage;
-    header('Location:../releve-bancaire.php');
+    //header('Location:../releve-bancaire.php');
 
