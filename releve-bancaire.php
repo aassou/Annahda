@@ -238,7 +238,7 @@
                                                     <div class="control-group">
                                                         <label class="control-label">Libelle</label>
                                                         <div class="controls">
-                                                            <input type="text" name="libelle" value="<?= $releve->libelle() ?>" />
+                                                            <textarea class="textarea-width" rows="3" name="libelle"><?= $releve->libelle() ?></textarea>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

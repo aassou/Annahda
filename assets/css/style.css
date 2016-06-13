@@ -5048,5 +5048,7 @@ input[type="text"].input-error-text{
 	background-color: #f2dede;
 }
 
-
-
+/*AASSOU Modifications*/
+.textarea-width{
+	width: 300px;
+}
