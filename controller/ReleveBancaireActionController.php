@@ -240,6 +240,16 @@
         $typeMessage = "success";
     }
     //Action ProcessClient End
+    //Action SearchArchive Processing Begin 
+    else if($action == "search-archive"){
+        $idCompteBancaire = htmlentities($_POST['idCompteBancaire']);
+        $dateFrom = htmlentities($_POST['dateFrom']);
+        $dateTo = htmlentities($_POST['dateTo']);
+        $_SESSION['releve-bancaire-archive'] = $releveBancaireManager->getReleveBancairesArchiveBySearch($idCompteBancaire, $dateFrom, $dateTo);
+        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire supprimé(e) avec succès.";
+        $typeMessage = "success";
+    }
+    //Action SearchArchive Processing End
     //Action Delete Processing Begin 
     else if($action == "delete"){
         $idReleveBancaire = htmlentities($_POST['idReleveBancaire']);
@@ -248,14 +258,18 @@
         $typeMessage = "success";
     }
     //Action Delete Processing End
-    //Action Delete Processing Begin 
+    //Action DeleteReleveActuel Processing Begin 
     else if($action == "deleteReleveActuel"){
         $releveBancaireManager->deleteReleveActuel();
         $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire Actuel supprimé(e) avec succès.";
         $typeMessage = "success";
     }
-    //Action Delete Processing End
+    //Action DeleteReleveActuel Processing End
     $_SESSION['releveBancaire-action-message'] = $actionMessage;
     $_SESSION['releveBancaire-type-message'] = $typeMessage;
-    header('Location:../releve-bancaire.php');
+    $redirectLink = "Location:../releve-bancaire.php";
+    if ( isset($_POST['source']) and $_POST['source'] == "releve-bancaire-archive" ) {
+        $redirectLink = "Location:../releve-bancaire-archive.php";
+    }
+    header($redirectLink);
 

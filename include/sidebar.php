@@ -299,6 +299,7 @@
                 or $currentPage=="companies.php"
                 or $currentPage=="operations-status-archive-group.php"
                 or $currentPage=="operations-status-archive.php"
+                or $currentPage=="releve-bancaire-archive.php"
                 ){echo "active ";} ?>">
                     <a href="configuration.php">
                     <i class="icon-wrench"></i> 

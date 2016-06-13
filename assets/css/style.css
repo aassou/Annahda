@@ -131,6 +131,11 @@ General backgrounds
   background-color: #731531 !important;
 }
 
+.bg-dark-blue {
+  background-image: none !important;
+  background-color: #003366 !important;
+}
+
 /***
 Apply fix for font awesome icons.
 ***/

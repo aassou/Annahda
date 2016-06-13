@@ -98,6 +98,33 @@ class ReleveBancaireManager{
 		$query->closeCursor();
 		return $releveBancaires;
 	}
+    
+    public function getReleveBancairesArchive(){
+        $releveBancaires = array();
+        $query = $this->_db->query('SELECT * FROM t_relevebancaire ORDER BY id DESC LIMIT 0, 0');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $releveBancaires[] = new ReleveBancaire($data);
+        }
+        $query->closeCursor();
+        return $releveBancaires;
+    }
+    
+    public function getReleveBancairesArchiveBySearch($idCompteBancaire, $dateFrom, $dateTo){
+        $releveBancaires = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_relevebancaire WHERE idCompteBancaire=:idCompteBancaire 
+        AND ( STR_TO_DATE(dateOpe, '%d/%m/%Y') BETWEEN :dateFrom AND :dateTo ) 
+        ORDER BY id");
+        $query->bindValue(':idCompteBancaire', $idCompteBancaire);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $releveBancaires[] = new ReleveBancaire($data);
+        }
+        $query->closeCursor();
+        return $releveBancaires;
+    }
 
 	public function getReleveBancairesByLimits($begin, $end){
 		$releveBancaires = array();

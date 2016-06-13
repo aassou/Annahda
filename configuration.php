@@ -205,6 +205,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="releve-bancaire-archive.php">
+                            <div class="tile bg-dark-blue">
+                                <div class="tile-body">
+                                    <i class="icon-envelope"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Archive Relevés Bancaires
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                             <a href="history-group.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
