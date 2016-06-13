@@ -71,8 +71,8 @@
                         //echo $date;
                         $dateOpe = trim($allDataInSheet[$i]["B"]);
                         $dateVal = trim($allDataInSheet[$i]["C"]);
-                        $libelle = trim($allDataInSheet[$i]["D"]);
-                        $reference = trim($allDataInSheet[$i]["E"]);
+                        $libelle = addslashes(trim($allDataInSheet[$i]["D"]));
+                        $reference = addslashes(trim($allDataInSheet[$i]["E"]));
                         $debit = 0;
                         $credit = 0;
                         $projet = "_";
@@ -83,7 +83,7 @@
                             $credit = trim($allDataInSheet[$i]["G"]);    
                         }
                         if ( strlen($allDataInSheet[$i]["H"]) > 0 ) {
-                            $projet = trim($allDataInSheet[$i]["H"]);    
+                            $projet = addslashes(trim($allDataInSheet[$i]["H"]));    
                         }
                         $string .= "( '".$dateOpe."' , '".$dateVal."' , '".$libelle."' , '".$reference."' , ".$debit." , ".$credit." , '".$projet."'),";
                     }
