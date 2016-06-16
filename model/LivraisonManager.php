@@ -41,6 +41,16 @@ class LivraisonManager{
         $query->closeCursor();
     }
 	
+    public function updateStatus($idLivraison, $status){
+        $query = $this->_db->prepare(
+        'UPDATE t_livraison SET status=:status
+        WHERE id=:id') or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idLivraison);
+        $query->bindValue(':status', $status);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
 	public function delete($idLivraison){
 		$query = $this->_db->prepare('DELETE FROM t_livraison WHERE id=:idLivraison')
 		or die(print_r($this->_db->errorInfo()));;

@@ -444,7 +444,7 @@
                                                   <input type="checkbox" name="bl[]" value="<?= $livraison->id() ?>" style="opacity: 0;">
                                               </span>
                                           </div>
-                                          <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?> | BL <?= $livraison->libelle() ?> | <?= ($livraison->status()==0)?"Payé":"Non payé"; ?>   
+                                          <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?> | BL <?= $livraison->libelle() ?> | <?= ($livraison->status()==0)?"Non payé":"Payé"; ?>   
                                           </label>
                                        </div>   
                                     </div>
