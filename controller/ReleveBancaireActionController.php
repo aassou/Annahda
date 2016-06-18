@@ -89,7 +89,7 @@
                     }
                     $string = substr($string,0,-1);
                     //print_r(utf8_decode($string));
-                    //echo $string;
+                    echo $string;
                     //mysql_query($string); // Insert all the data into one query
                     $pdo->query($string);
                     $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire Ajouté(e) avec succès.";  
@@ -271,5 +271,5 @@
     if ( isset($_POST['source']) and $_POST['source'] == "releve-bancaire-archive" ) {
         $redirectLink = "Location:../releve-bancaire-archive.php";
     }
-    header($redirectLink);
+    //header($redirectLink);
 
