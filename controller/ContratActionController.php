@@ -102,7 +102,7 @@
                     $dates = array();
                     $montants = array();
                     $observations = array();
-                    for ( $i=1; $i<7; $i++ ) {
+                    for ( $i=1; $i<11; $i++ ) {
                         if ( 
                             ( isset($_POST['cas-libre-date'.$i]) and !empty($_POST['cas-libre-date'.$i]) ) 
                             and isset($_POST['cas-libre-montant'.$i]) and !empty($_POST['cas-libre-montant'.$i]) ) {

@@ -1,5 +1,5 @@
 <?php 
-for ( $i=1; $i<7; $i++ ) {
+for ( $i=1; $i<11; $i++ ) {
 ?>
 <div class="row-fluid">
     <div class="span4">
