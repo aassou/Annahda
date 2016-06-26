@@ -1,5 +1,5 @@
 <?php 
-for ( $i=1; $i<7; $i++ ) {
+for ( $i=1; $i<11; $i++ ) {
 ?>
 <div class="row cas-libre-padding">
     <div class="col-md-3">
