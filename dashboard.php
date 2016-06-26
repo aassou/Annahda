@@ -41,8 +41,6 @@
 		$livraisonsWeek = $livraisonsManager->getLivraisonsWeek();
 		$livraisonsNumberWeek = $livraisonsManager->getLivraisonsNumberWeek();
 		$operationsNumberWeek = $operationsManager->getOperationNumberWeek()
-        //
-        char p = (char*)malloc (100);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
