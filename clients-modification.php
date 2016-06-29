@@ -137,10 +137,11 @@
                                     <thead>
                                         <tr>
                                             <th style="width:20%">Actions</th>
-                                            <th style="width:20%">Client</th>
+                                            <th style="width:15%">Client</th>
+                                            <th style="width:10%">Projet</th>
                                             <th style="width:20%" class="hidden-phone">Bien</th>
                                             <th style="width:10%">Date Contrat</th>
-                                            <th style="width:30%" class="hidden-phone">Note</th>
+                                            <th style="width:25%" class="hidden-phone">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,6 +154,7 @@
                                             $bien = "";
                                             $typeBien = "";
                                             $etage = "";
+                                            $projet = $projetManager->getProjetById($contrat->idProjet());
                                             if($contrat->typeBien()=="appartement"){
                                                 $bien = $appartementManager->getAppartementById($contrat->idBien());
                                                 $typeBien = "Appartement";
@@ -180,6 +182,7 @@
                                                 </a>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= $contrat->note() ?></td>
