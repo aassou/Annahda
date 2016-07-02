@@ -144,6 +144,15 @@ class ReleveBancaireManager{
 		$id = $data['last_id'];
 		return $id;
 	}
+	
+	public function getLastRow(){
+	    $releveBancaires = array();
+        $query = $this->_db->query('SELECT * FROM t_relevebancaire ORDER BY id DESC LIMIT 0, 1');
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $releveBancaires[] = new ReleveBancaire($data);
+        $query->closeCursor();
+        return $releveBancaires;
+    }
     
     public function getTotalDebit(){
         $query = $this->_db->query("SELECT SUM(debit) AS totalDebit FROM t_relevebancaire");

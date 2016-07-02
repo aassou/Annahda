@@ -24,7 +24,8 @@
         $typeChargesCommuns = $typeChargeCommunManager->getTypeCharges();
         $typeChargesProjets = $typeChargeProjetManager->getTypeCharges();
         $projets = $projetManager->getProjets();
-        $releveBancaires = $releveBancaireManager->getReleveBancairesArchive();
+        $releveBancaires = $releveBancaireManager->getLastRow();
+        //print_r($releveBancaires);
         $comptesBancaires = $compteBancaireManager->getCompteBancaires();
         $debit = $releveBancaireManager->getTotalDebit();
         $credit = $releveBancaireManager->getTotalCredit();

@@ -428,19 +428,15 @@
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label">Compte Bancaire</label>
+                                                        <label class="control-label">Mode Paiement</label>
                                                         <div class="controls">
-                                                            <select name="compte-bancaire" class="span12">
-                                                                <?php foreach( $comptesBancaires as $compte ) { ?>    
-                                                                <option value="<?= $compte->numero() ?>"><?= $compte->numero() ?></option>
-                                                                <?php } ?>
+                                                            <select name="mode-paiement" class="span12">   
+                                                                <option value="Especes">Espèces</option>
+                                                                <option value="Cheque">Cheque</option>
+                                                                <option value="Versement">Versement</option>
+                                                                <option value="Virement">Virement</option>
+                                                                <option value="Lettre de change">Lettre de change</option>
                                                             </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label">Numéro Opération</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="numero-operation" class="span12" />
                                                         </div>
                                                     </div>
                                                     <strong>Synthèse client</strong>
@@ -459,6 +455,7 @@
                                                     <div class="control-group">
                                                         <input type="hidden" name="idReleveBancaire" value="<?= $releve->id() ?>" />
                                                         <input type="hidden" name="montant" value="<?= $releve->credit() ?>" />
+                                                        <input type="hidden" name="compte-bancaire" value="<?= $numeroCompte ?>" />
                                                         <input type="hidden" name="dateOperation" value="<?= $releve->dateOpe() ?>" />
                                                         <input type="hidden" name="dateReglement" value="<?= $releve->dateVal() ?>" />
                                                         <input type="hidden" name="observation" value="<?= $releve->libelle() ?>" />

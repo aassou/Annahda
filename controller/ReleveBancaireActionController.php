@@ -219,8 +219,8 @@
             $operationManager = new OperationManager($pdo);
             //$reference = 'Q'.date('Ymd-his');
             $reference = htmlentities($_POST['reference']);
-            $modePaiement = "Versement";
-            $numeroOperation = htmlentities($_POST['numero-operation']);
+            $modePaiement = htmlentities($_POST['mode-paiement']);
+            $numeroOperation = htmlentities($_POST['reference']);
             $compteBancaire = htmlentities($_POST['compte-bancaire']);
             $status = 1;
             //$observation ="Ce réglement client fait référence à la ligne : ".$idReleveBancaire." du relevé bancaire du compte bancaire : ".$compteBancaire;
