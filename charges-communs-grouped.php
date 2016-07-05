@@ -206,6 +206,25 @@
                                       <div class="controls">
                                          <label class="radio">
                                              <div class="radio" id="toutes">
+                                                 <span class="checked">
+                                                     <input type="radio" name="resume-detaile" value="resume" checked="checked" style="opacity: 0;">
+                                                 </span>
+                                             </div> Résumé
+                                         </label>
+                                         <label class="radio">
+                                             <div class="radio" id="date">
+                                                 <span>
+                                                     <input type="radio" name="resume-detaile" value="detaile" style="opacity: 0;">
+                                                 </span>
+                                             </div> Détailé
+                                         </label>  
+                                      </div>
+                                   </div>
+                                    <div class="control-group">
+                                      <label class="control-label">Imprimer</label>
+                                      <div class="controls">
+                                         <label class="radio">
+                                             <div class="radio" id="toutes">
                                                  <span>
                                                      <input type="radio" class="criteriaPrint" name="criteria" value="toutesCharges" style="opacity: 0;">
                                                  </span>
@@ -234,7 +253,7 @@
                                         <div class="controls">
                                             <select class="m-wrap" name="type">
                                                 <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->nom() ?>"><?= $type->nom() ?></option>
+                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -242,6 +261,7 @@
                                    </div>
                                     <div class="control-group">
                                         <div class="controls">
+                                            <input type="hidden" name="source" value="charges-communs-grouped" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>

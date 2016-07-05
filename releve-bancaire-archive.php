@@ -30,8 +30,10 @@
         $debit = $releveBancaireManager->getTotalDebit();
         $credit = $releveBancaireManager->getTotalCredit();
         $solde = $credit - $debit;
+        $_SESSION['releve-bancaire-archive-print'] = $releveBancaires;
         if ( isset($_SESSION['releve-bancaire-archive']) ) {
             $releveBancaires = $_SESSION['releve-bancaire-archive'];
+            $_SESSION['releve-bancaire-archive-print'] = $releveBancaires;    
             unset($_SESSION['releve-bancaire-archive']);
         }
 ?>
@@ -191,15 +193,16 @@
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Outils <i class="icon-angle-down"></i>
+                                    <div class="btn-group pull-right">
+                                        <a target="_blank" class="btn green" href="controller/ReleveBancaireArchiveController.php"><i class="icon-print"></i>&nbsp;Imprimer</a>
+                                        <!--button class="btn dropdown-toggle" data-toggle="dropdown">Outils <i class="icon-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">Print</a></li>
                                             <li><a href="#">Save as PDF</a></li>
                                             <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
+                                        </ul-->
+                                    </div>
                                 </div>
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>

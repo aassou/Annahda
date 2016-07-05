@@ -94,7 +94,24 @@ class ChargeCommunManager{
     public function getChargesByGroup(){
         $charges = array();
         $query = $this->_db->query(
-        'SELECT id, type, SUM(montant) AS montant FROM t_charge_commun GROUP BY type');
+        'SELECT id, type, dateOperation, SUM(montant) AS montant FROM t_charge_commun GROUP BY type');
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $charges[] = new ChargeCommun($data);
+        }
+        $query->closeCursor();
+        return $charges;
+    }
+
+    public function getChargesByDatesByGroup($dateFrom, $dateTo){
+        $charges = array();
+        $query = $this->_db->prepare(
+        'SELECT id, type, dateOperation, SUM(montant) AS montant 
+        FROM t_charge_commun 
+        WHERE dateOperation BETWEEN :dateFrom AND :dateTo
+        GROUP BY type');
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $charges[] = new ChargeCommun($data);

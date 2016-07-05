@@ -45,8 +45,7 @@ class TypeChargeCommunManager{
 	}
 
 	public function getTypeChargeById($id){
-    	$query = $this->_db->prepare(' SELECT * FROM t_typecharge_commun
-		WHERE id=:id')
+    	$query = $this->_db->prepare('SELECT * FROM t_typecharge_commun WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
 		$query->execute();		

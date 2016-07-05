@@ -17,6 +17,7 @@
         $chargeManager = new ChargeCommunManager($pdo);
         $typeChargeManager = new TypeChargeCommunManager($pdo);
         $criteria = htmlentities($_POST['criteria']);
+        $resumeDetail = ""; 
         if( $criteria=="parDate" ) {
             $dateFrom = htmlentities($_POST['dateFrom']);
             $dateTo = htmlentities($_POST['dateTo']); 
@@ -36,11 +37,17 @@
             $charges = $chargeManager->getCharges();
             $totalCharges = number_format($chargeManager->getTotal(), 2, ',', ' ');
             $titreDocument = "Liste de toutes les charges communs";   
-            if ( isset($_POST['typeCharge']) ) {
-                $type = htmlentities($_POST['typeCharge']);
+            if ( isset($_POST['type']) and (isset($_POST['source']) and $_POST['source'] == "charges-communs-type") ) {
+                $type = htmlentities($_POST['type']);
                 $charges = $chargeManager->getChargesByType($type);
                 $totalCharges = number_format($chargeManager->getTotalByType($type), 2, ',', ' ');
                 $titreDocument = "Liste des charges communs de ".$typeChargeManager->getTypeChargeById($type)->nom();
+            }
+            if ( isset($_POST['source']) and $_POST['source'] == "charges-communs-grouped" ) {
+                $resumeDetail = htmlentities($_POST['resume-detaile']);
+                if ( $resumeDetail == "resume" ) {
+                    $charges = $chargeManager->getChargesByGroup();    
+                }
             }
         } 
 
@@ -93,7 +100,7 @@ ob_start();
             <td style="width:15%"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
             <td style="width:25%"><?= $charge->designation() ?></td>
             <td style="width:20%"><?= $charge->societe() ?></td>
-            <td style="width:15%"><?= number_format($charge->montant(), 2, ' ', ',') ?>&nbsp;DH</td>
+            <td style="width:15%"><?= number_format($charge->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
         </tr>   
         <?php
         }//end of loop
