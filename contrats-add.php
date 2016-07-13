@@ -314,6 +314,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="span3">
+                                            <div class="control-group">
+                                                <label class="control-label">بنود أخرى</label>
+                                                <div class="controls">
+                                                    <textarea style="height:100px; width:500px" name="articlesArabes"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr>
                                     <div class="row-fluid">

@@ -80,6 +80,7 @@
                 $societeArabe = htmlentities($_POST['societeArabe']);
                 $etatBienArabe = htmlentities($_POST['etatBienArabe']);
                 $facadeArabe = htmlentities($_POST['facadeArabe']);
+                $articlesArabes = htmlentities($_POST['articlesArabes']);
                 $created = date('Y-m-d h:i:s');
                 $createdBy = $_SESSION['userMerlaTrav']->login();
                 $numeroCheque = '0';
@@ -163,7 +164,7 @@
                 'nombreMois' => $nombreMois, 'echeance' => $echeance, 'note' => $note, 'imageNote' => $noteImage, 'idClient' => $idClient, 
                 'idProjet' => $idProjet, 'idBien' => $idBien, 'typeBien' => $typeBien, 'code' => $codeContrat, 
                 'numeroCheque' => $numeroCheque, 'societeArabe' => $societeArabe, 'etatBienArabe' => $etatBienArabe ,
-                'facadeArabe' => $facadeArabe, 'created' => $created, 'createdBy' => $createdBy));
+                'facadeArabe' => $facadeArabe, 'articlesArabes' => $articlesArabes, 'created' => $created, 'createdBy' => $createdBy));
                 //adding the contract object to our database
                 $contratManager->add($contrat);
                 //add history data to db
@@ -226,6 +227,7 @@
             $societeArabe = htmlentities($_POST['societeArabe']);
             $etatBienArabe = htmlentities($_POST['etatBienArabe']);
             $facadeArabe = htmlentities($_POST['facadeArabe']);
+            $articlesArabes = htmlentities($_POST['articlesArabes']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             //create classes managers
@@ -241,7 +243,7 @@
             'avanceArabe' => $avanceArabe, 'modePaiement' => $modePaiement,'nombreMois' => $nombreMois, 
             'dureePaiement' => $dureePaiement, 'echeance' => $echeance, 'numeroCheque' => $numeroCheque, 
             'note' => $note, 'societeArabe' => $societeArabe, 'etatBienArabe' => $etatBienArabe, 
-            'facadeArabe' => $facadeArabe, 'updated' => $updated, 'updatedBy' => $updatedBy));
+            'facadeArabe' => $facadeArabe, 'articlesArabes' => $articlesArabes, 'updated' => $updated, 'updatedBy' => $updatedBy));
             //begin processing
             $contratManager->update($newContrat);
             //Update The ReglementsPrevus Table

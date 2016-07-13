@@ -27,6 +27,7 @@ class Contrat{
     private $_societeArabe;
     private $_etatBienArabe;
     private $_facadeArabe;
+    private $_articlesArabes;
     private $_created;
     private $_createdBy;
     private $_updated;
@@ -149,6 +150,10 @@ class Contrat{
         $this->_facadeArabe = $facadeArabe;
     }
     
+    public function setArticlesArabes($articlesArabes){
+        $this->_articlesArabes = $articlesArabes;
+    }
+    
     public function setCreated($created){
         $this->_created = $created;
     }
@@ -265,6 +270,10 @@ class Contrat{
     
     public function facadeArabe(){
         return $this->_facadeArabe;
+    }
+    
+    public function articlesArabes(){
+        return $this->_articlesArabes;
     }
     
     public function created(){

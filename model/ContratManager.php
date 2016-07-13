@@ -14,11 +14,11 @@ class ContratManager{
         INSERT INTO t_contrat (reference, numero, dateCreation, prixVente, prixVenteArabe, 
         avance, avanceArabe, modePaiement, dureePaiement, nombreMois, echeance, note, imageNote, 
         idClient, idProjet, idBien, typeBien, code, status, revendre, numeroCheque, societeArabe, 
-        etatBienArabe, facadeArabe, created, createdBy)
+        etatBienArabe, facadeArabe, articlesArabes, created, createdBy)
         VALUES (:reference, :numero, :dateCreation, :prixVente, :prixVenteArabe, 
         :avance, :avanceArabe, :modePaiement, :dureePaiement, :nombreMois, :echeance, :note, :imageNote, 
         :idClient, :idProjet, :idBien, :typeBien, :code, :status, :revendre, :numeroCheque, 
-        :societeArabe, :etatBienArabe, :facadeArabe, :created, :createdBy)') 
+        :societeArabe, :etatBienArabe, :facadeArabe, :articlesArabes, :created, :createdBy)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':reference', $contrat->reference());
         $query->bindValue(':numero', $contrat->numero());
@@ -44,6 +44,7 @@ class ContratManager{
         $query->bindValue(':societeArabe', $contrat->societeArabe());
         $query->bindValue(':etatBienArabe', $contrat->etatBienArabe());
         $query->bindValue(':facadeArabe', $contrat->facadeArabe());
+        $query->bindValue(':articlesArabes', $contrat->articlesArabes());
         $query->bindValue(':created', $contrat->created());
         $query->bindValue(':createdBy', $contrat->createdBy());
         $query->execute();
@@ -57,7 +58,7 @@ class ContratManager{
         modePaiement=:modePaiement, numeroCheque=:numeroCheque,
         nombreMois=:nombreMois, dureePaiement=:dureePaiement, echeance=:echeance,  
         societeArabe=:societeArabe, etatBienArabe=:etatBienArabe, facadeArabe=:facadeArabe, 
-        note=:note, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
+        articlesArabes=:articlesArabes, note=:note, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $contrat->id());
 		$query->bindValue(':numero', $contrat->numero());
@@ -75,6 +76,7 @@ class ContratManager{
         $query->bindValue(':societeArabe', $contrat->societeArabe());
         $query->bindValue(':etatBienArabe', $contrat->etatBienArabe());
         $query->bindValue(':facadeArabe', $contrat->facadeArabe());
+        $query->bindValue(':articlesArabes', $contrat->articlesArabes());
         $query->bindValue(':updated', $contrat->updated());
         $query->bindValue(':updatedBy', $contrat->updatedBy());
         $query->execute();
@@ -300,6 +302,18 @@ class ContratManager{
 	public function getContratsDesistesByIdProjet($idProjet, $begin, $end){
         $contrats = array();    
         $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='annulle' LIMIT ".$begin.", ".$end);
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
+    
+    public function getContratsActifsByIdProjet($idProjet){
+        $contrats = array();    
+        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='actif'");
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){

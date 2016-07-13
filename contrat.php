@@ -1425,6 +1425,12 @@
                                     <input type="text" required="required" id="facadeArabe" name="facadeArabe" value="<?= $contrat->facadeArabe() ?>" />
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label">بنود أخرى</label>
+                                <div class="controls">
+                                    <textarea name="articlesArabes"><?= $contrat->articlesArabes() ?></textarea>
+                                </div>
+                            </div>
 							<div class="control-group">
                              	<div class="alert alert-error">
 									<strong>Remarque</strong> : Ne toucher à cette zone sauf si vous voulez changer le bien.		

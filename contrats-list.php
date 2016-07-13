@@ -35,7 +35,7 @@
 				$contratNumber = -1;
 			}
 			else{
-		          $contrats = $contratManager->getContratsByIdProjetOnly($idProjet);	
+		          $contrats = $contratManager->getContratsActifsByIdProjet($idProjet);	
 			}		
 ?>
 <!DOCTYPE html>
