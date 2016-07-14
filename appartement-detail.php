@@ -11,6 +11,7 @@
     spl_autoload_register("classLoad"); 
     include('config.php');  
 	include('lib/pagination.php');
+    include('lib/image-processing.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
@@ -29,9 +30,16 @@
 			$piecesNumber = $piecesManager->getPiecesAppartementNumberByIdAppartement($idAppartement);
 			if($piecesNumber != 0){
 				$piecesAppartement = $piecesManager->getPiecesAppartementByIdAppartement($idAppartement);
-			}	
-		}
-		
+		}	
+	}
+    //	DROPBOX Process
+    $imageToDropBox = 0;
+    if (isset($_FILES['url'])){
+        if(file_exists($_FILES['url']['tmp_name']) || is_uploaded_file($_FILES['url']['tmp_name'])) {
+            $imageToDropBox = imageProcessingSimlpePath($_FILES['url'], 'pieces/dropbox/', $projet->nom().'-Etage'.$appartement->niveau().'-Code'.$appartement->nom().'-ID'.$idAppartement);
+            //echo $imageToDropBox;
+        }    
+    }	
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -233,6 +241,11 @@
 												</ul>
 											</div>
 											<!--end span8-->
+											<form action="" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="url" />
+                                                <input type="submit" value="Charger" />
+                                            </form>  
+                                            <a href="<?= $imageToDropBox ?>" class="dropbox-saver dropbox-dropin-btn dropbox-dropin-default"><span class="dropin-btn-status"></span>Enregistrer dans Dropbox</a>
 										</div>
 										<!--end row-fluid-->
 									</div>
@@ -354,7 +367,7 @@
 						</div>
 						<!--END TABS-->
 						<div class="portlet">
-							<div class="portlet-title">
+							<div class="portlet-title" id="container-dropbox">
 								<h4>Liste des documents</h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
@@ -362,6 +375,14 @@
 								</div>
 							</div>
 							<div class="portlet-body">
+							    <!--div id="container"></div-->
+                                <!--a target="_blank" id="link-dropbox"></a-->
+                                <div class="span3">
+                                    <div class="item" id="container-dropbox-links">
+                                        <!--a id="link-dropbox" class="fancybox-button fancybox"></a-->
+                                    </div>
+                                    <br><br>    
+                                </div>
 								<?php
 								if($piecesNumber != 0){
 								foreach($piecesAppartement as $pieces){
@@ -486,6 +507,40 @@
 		 }); // fancybox
 		}); //  ready
 	</script>
+	<script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="ii1kxxvro0fr484"></script>
+	<script>   
+	    var containerDropBoxLinks = document.getElementById('container-dropbox-links');
+	    function filesArray(element, index, array){
+	        var link = document.createElement('a');
+	        link.className = "fancybox-button fancybox";
+	        var divZoom = document.createElement('div');
+            divZoom.className = "zoom";
+            var img = document.createElement('img');
+            img.src = array[index].link;
+            img.style.height = "100px";
+            img.style.width = "200px";
+            var divZoomIcon = document.createElement('div');
+            divZoomIcon.className = "zoom-icon";
+            //append childs
+            divZoom.appendChild(img);
+            divZoom.appendChild(divZoomIcon);
+            link.appendChild(divZoom);
+            containerDropBoxLinks.appendChild(link); 
+	     }     
+         var button = Dropbox.createChooseButton({
+            success: function(files) {
+                files.forEach(filesArray);
+                //var containerDropBoxLinks = document.getElementById('container-dropbox-links');
+                //var linkTag = document.getElementById('link-dropbox');
+                //linkTag.href = files[0].link;
+                //linkTag.textContent = files[0].name;
+                //create div and img
+            },
+            multiselect: true,
+            linkType: 'direct'
+        });
+        document.getElementById('container-dropbox').appendChild(button);
+    </script>
 </body>
 <!-- END BODY -->
 </html>
