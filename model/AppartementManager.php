@@ -33,7 +33,7 @@ class AppartementManager{
 	public function update(Appartement $appartement){
 		$query = $this->_db->prepare('
 		UPDATE t_appartement SET nom=:nom, superficie=:superficie, prix=:prix, niveau=:niveau, facade=:facade, 
-		nombrePiece=:nombrePiece, cave=:cave, par=:par, updated=:updated,
+		nombrePiece=:nombrePiece, status=:status, cave=:cave, par=:par, updated=:updated,
 		updatedBy=:updatedBy WHERE id=:idAppartement') 
 		or die(print_r($this->_db->errorInfo()));
 		$query->bindValue(':idAppartement', $appartement->id());
@@ -44,7 +44,7 @@ class AppartementManager{
 		$query->bindValue(':niveau', $appartement->niveau());
 		$query->bindValue(':nombrePiece', $appartement->nombrePiece());
 		$query->bindValue(':cave', $appartement->cave());
-		//$query->bindValue(':status', $appartement->status());
+		$query->bindValue(':status', $appartement->status());
 		$query->bindValue(':par', $appartement->par());
         $query->bindValue(':updated', $appartement->updated());
         $query->bindValue(':updatedBy', $appartement->updatedBy());
