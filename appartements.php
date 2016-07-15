@@ -517,17 +517,17 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="control-group">
+                                                    <!--div class="control-group">
                                                         <label class="control-label" for="status">Status</label>
                                                         <div class="controls">
                                                             <select style="width:150px" name="status" id="status" class="m-wrap">
-                                                                <option value="<?= $appartement->status() ?>"><?= $appartement->status() ?></option>
+                                                                <option value="<?php //echo $appartement->status() ?>"><?php //echo $appartement->status() ?></option>
                                                                 <option disabled="disabled">-----------------</option>
                                                                 <option value="Disponible">Disponible</option>
                                                                 <option value="Réservé">Réservé</option>
                                                             </select>
                                                         </div>
-                                                    </div>
+                                                    </div-->
                                                     <div class="control-group">
                                                         <label class="control-label" for="cave">Cave</label>
                                                         <div class="controls">

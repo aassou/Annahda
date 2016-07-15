@@ -128,7 +128,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Résumé Contrat Client - Projet : <strong><?= $projet->nom() ?></strong> 
+							Résumé Contrat Client - Projet : <strong><?= $projet->nom() ?></strong>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
