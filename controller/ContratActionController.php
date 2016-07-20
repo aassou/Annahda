@@ -460,7 +460,7 @@
             }
         }
         //set the redirect link
-        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        $redirectLink = 'Location:../contrats-desistes-list.php?idProjet='.$idProjet;
         if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
             $redirectLink = 'Location:../clients-search.php';
         }    

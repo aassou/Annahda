@@ -84,6 +84,7 @@
 					or $currentPage=="contrats-add.php"
 					or $currentPage=="contrat.php"
 					or $currentPage=="contrats-list.php"
+					or $currentPage=="contrats-desistes-list.php"
 					or $currentPage=="contrat-details.php"
 					or $currentPage=="operations.php"
 					or $currentPage=="fournisseur-add.php"

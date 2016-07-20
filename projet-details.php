@@ -134,10 +134,10 @@
                                         }
                                         ?>
                                         <a href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width green">Listes Clients et Contrats</a>
-                                        <!--a href="livraisons-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Livraisons et Fournisseurs</a-->
                                     </div>
                                     <div class="portfolio-info">
-                                        <a href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Contrats employés</a>
+                                        <a href="contrats-desistes-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width yellow">Contrats Désistés</a>
+                                        <a href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width">Contrats employés</a>
                                         <a href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-cyan">Statistiques</a>
                                     </div>
                                     <!--div class="portfolio-info">

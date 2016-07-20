@@ -299,9 +299,9 @@ class ContratManager{
         return $contrats;
     }
 	
-	public function getContratsDesistesByIdProjet($idProjet, $begin, $end){
+	public function getContratsDesistesByIdProjet($idProjet){
         $contrats = array();    
-        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='annulle' LIMIT ".$begin.", ".$end);
+        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='annulle' ");
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
