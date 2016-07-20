@@ -350,7 +350,7 @@
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];
-        //$contratManager->delete($idContrat);
+        $contratManager->hide($idContrat);
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
         $created = date('Y-m-d h:i:s');
@@ -366,7 +366,7 @@
         //after the delete of our contract, we should change the property status to "Disponible"
         $actionMessage = "<strong>Opération Valide : </strong>Contrat Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../clients-list.php";
+        $redirectLink = "Location:../contrats-desistes-list.php?idProjet=".$idProjet;
     }
     //Action Delete Processing End
     //Action Desister Processing Begin

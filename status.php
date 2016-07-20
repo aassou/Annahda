@@ -149,6 +149,20 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="contrats-desistes.php">
+                            <div class="tile bg-red">
+                                <div class="tile-body">
+                                    <i class="icon-file"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Contrats Désistés
+                                    </div>
+                                    <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

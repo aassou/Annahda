@@ -14,8 +14,7 @@
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav'])){
-        //les sources
-        $idProjet = 0;
+        //class managers
         $projetManager = new ProjetManager($pdo);
         $clientManager = new ClientManager($pdo);
         $companyManager = new CompanyManager($pdo);
@@ -24,19 +23,9 @@
         $operationManager = new OperationManager($pdo);
         $locauxManager = new LocauxManager($pdo);
         $appartementManager = new AppartementManager($pdo);
+        //vars and objects
         $comptesBancaires = $compteBancaireManager->getCompteBancaires();
-        if(isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId()){
-            $idProjet = $_GET['idProjet'];
-            $projet = $projetManager->getProjetById($idProjet);
-            $companies = $companyManager->getCompanys();
-            if(isset($_POST['idClient']) and $_POST['idClient']>0){
-                $idClient = $_POST['idClient'];
-                $contrats = $contratManager->getContratsByIdClientByIdProjet($idClient, $idProjet);
-                $contratNumber = -1;
-            }
-            else{
-                  $contrats = $contratManager->getContratsDesistesByIdProjet($idProjet);  
-            }       
+        $contrats = $contratManager->getContratsDesistes();   
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -88,25 +77,22 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Liste des contrats désistés - Projet : <strong><?= $projet->nom() ?></strong>
+                            Liste de tous les contrats désistés
                         </h3>
                         <ul class="breadcrumb">
                             <li>
-                                <i class="icon-home"></i>
+                                <i class="icon-dashboard"></i>
                                 <a href="dashboard.php">Accueil</a> 
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <i class="icon-briefcase"></i>
-                                <a href="projets.php">Gestion des projets</a>
+                                <i class="icon-bar-chart"></i>
+                                <a href="status.php">Les états</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
-                                <i class="icon-angle-right"></i>
-                            </li>
-                            <li>
-                                <a>Liste des contrats désistés</a>
+                                <i class="icon-file"></i>
+                                <a>Liste de tous les contrats désistés</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -140,7 +126,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
+                                        <a class="btn blue pull-right" href="">
                                             <i class="icon-print"></i>
                                              Version Imprimable
                                         </a>
@@ -152,21 +138,18 @@
                                         <tr>
                                             <th style="width:5%">Actions</th>
                                             <th style="width:20%">Client</th>
+                                            <th style="width:15%">Projet</th>
                                             <th style="width:20%" class="hidden-phone">Bien</th>
                                             <th style="width:10%">Date Contrat</th>
                                             <th style="width:10%" class="hidden-phone">Prix</th>
                                             <th style="width:10%" class="hidden-phone">Réglements</th>
                                             <th style="width:10%" class="hidden-phone">Reste</th>
-                                            <th style="width:5%" class="hidden-phone">Status</th>
-                                            <?php if(isset($_SESSION['print-quittance'])){ ?>
-                                            <th style="width:10%">Quittance</th>
-                                            <?php 
-                                            } ?>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         foreach($contrats as $contrat){
+                                            $projet = $projetManager->getProjetById($contrat->idProjet());
                                             $revendreTitle = "";
                                             $montantRevente = 0;
                                             $operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
@@ -203,49 +186,17 @@
                                                             <a target="_blank" href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat FR
                                                             </a>
-                                                            <?php
-                                                            if( $_SESSION['userMerlaTrav']->profil() == "admin" ){
-                                                            ?>  
-                                                                <a href="#activerContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
-                                                                    Activer
-                                                                </a>
-                                                                <a class="dangerous-action" href="#deleteContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
-                                                                    Supprimer Contrat
-                                                                </a>  
-                                                            <?php
-                                                            }//if profil is admin
-                                                            ?>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
-                                            <td class="hidden-phone">
-                                                <?php if($contrat->status()=="actif"){
-                                                    $status = "<a class=\"btn mini green\">Actif</a>";  
-                                                }
-                                                else{
-                                                    $status = "<a class=\"btn mini black\">Désisté</a>";    
-                                                }
-                                                echo $status;
-                                                ?>  
-                                            </td>
-                                            <?php 
-                                            if(isset($_SESSION['print-quittance']) and $operationsNumber>=1){ ?>
-                                                <td>
-                                                    <a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operationManager->getLastIdByIdContrat($contrat->id()) ?>"> 
-                                                        <i class="m-icon-white icon-print"></i> Imprimer
-                                                    </a>
-                                                </td>
-                                            <?php 
-                                            }
-                                            unset($_SESSION['print-quittance']); 
-                                            ?>
                                         </tr>
                                         <!-- activation box begin-->
                                         <div id="activerContrat<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -260,7 +211,7 @@
                                                         <input type="hidden" name="action" value="activer" />
                                                         <input type="hidden" name="source" value="contrats-desistes-list" />
                                                         <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                         
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
@@ -282,7 +233,7 @@
                                                         <input type="hidden" name="action" value="delete" />
                                                         <input type="hidden" name="source" value="contrats-desistes-list" />
                                                         <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                         
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
@@ -301,17 +252,6 @@
                         <!-- END Terrain TABLE PORTLET-->
                     </div>
                 </div>
-                <?php 
-                }
-                else{
-                ?>
-                <div class="alert alert-error">
-                    <button class="close" data-dismiss="alert"></button>
-                    <strong>Erreur système : </strong>Ce projet n'existe pas sur votre système. Pour plus d'informations consulter votre administrateur.        
-                </div>
-                <?php
-                }
-                ?>
                 <!-- END PAGE CONTENT -->
             </div>
             <!-- END PAGE CONTAINER-->
@@ -369,9 +309,6 @@
 </html>
 <?php
 }
-/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-    header('Location:dashboard.php');
-}*/
 else{
     header('Location:index.php');    
 }

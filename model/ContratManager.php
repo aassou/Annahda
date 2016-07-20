@@ -129,6 +129,14 @@ class ContratManager{
         $query->closeCursor();
     }
 	
+    public function hide($idContrat){
+        $query = $this->_db->prepare("UPDATE t_contrat SET status='hidden' WHERE id=:idContrat")
+        or die(print_r($this->_db->errorInfo()));;
+        $query->bindValue(':idContrat', $idContrat);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
 	public function delete($idContrat){
 		$query = $this->_db->prepare('DELETE FROM t_contrat WHERE id=:idContrat')
 		or die(print_r($this->_db->errorInfo()));;
@@ -299,6 +307,17 @@ class ContratManager{
         return $contrats;
     }
 	
+    public function getContratsDesistes(){
+        $contrats = array();    
+        $query = $this->_db->query("SELECT * FROM t_contrat WHERE status='annulle' ");
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
+    
 	public function getContratsDesistesByIdProjet($idProjet){
         $contrats = array();    
         $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='annulle' ");

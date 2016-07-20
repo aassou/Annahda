@@ -5057,3 +5057,7 @@ input[type="text"].input-error-text{
 .textarea-width{
 	width: 300px;
 }
+
+.dangerous-action{
+	color: red;
+}
