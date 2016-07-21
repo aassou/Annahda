@@ -180,6 +180,9 @@
                                                             <a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank">
                                                                 Consulter Contrat
                                                             </a>
+                                                            <a target="_blank" href="controller/ContratDesistementPrintController.php?idContrat=<?= $contrat->id() ?>">
+                                                                Imprimer Acte de désistement AR&nbsp;
+                                                            </a>
                                                             <a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat AR
                                                             </a>
