@@ -225,6 +225,12 @@ $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'يعد هذا التعاقد و الاتفاق عرفيا و ملزما لطرفيه يحفظ حقوقهما في مواجهة بعضهما و مواجهة الغير بمجرد التوقيع عليه.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
+//Autres Actes
+//$htmlcontent = '<strong>'.'بنود أخرى&nbsp;:&nbsp;'.'</strong>';
+//$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+$htmlcontent = $contrat->articlesArabes();
+$pdf->WriteHTML($contrat->articlesArabes(), true, 0, true, 0);
+$pdf->Ln();
 //Acte 13:
 $htmlcontent = '<strong>'.'البند الأخير&nbsp;:&nbsp;'.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);

@@ -243,17 +243,18 @@ $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'اتفق الطرفان في حالة تماطل الطرف الثاني بعد توجيه الإخطار المنصوص عليه في البندين السادس و السابع و انصرام الأجل المحدد إخضاع هدا العقد لمقتضيات الفقرة الثانية من الفصل 114 من قانون الالتزامات و العقود.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
+//Autres Actes
+//$htmlcontent = '<strong>'.'بنود أخرى&nbsp;:&nbsp;'.'</strong>';
+//$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+$htmlcontent = $contrat->articlesArabes();
+$pdf->WriteHTML($contrat->articlesArabes(), true, 0, true, 0);
+$pdf->Ln();
 //Acte 13:
-$htmlcontent = '<strong>'.'البند الثالث عشر&nbsp;:&nbsp;'.'</strong>';
+$htmlcontent = '<strong>'.'البند الأخير&nbsp;:&nbsp;'.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'يعد هذا العقد عرفيا و ملزما لطرفيه فقط يحفظ حقوقهما في مواجهة بعضهما بمجرد التوقيع عليه دون تصحيح الإمضاء في انتظار إبرام عقد البيع النهائي وفق الشروط و الشكليات المحددة قانونا.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-//Autres Actes
-$htmlcontent = '<strong>'.'بنود أخرى&nbsp;:&nbsp;'.'</strong>';
-$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$htmlcontent = $contrat->articlesArabes();
-$pdf->WriteHTML($contrat->articlesArabes(), true, 0, true, 0);
 //Contrat Footer:
 $pdf->Ln();
 $pdf->Ln();

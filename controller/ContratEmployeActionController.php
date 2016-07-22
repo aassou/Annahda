@@ -43,6 +43,7 @@
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
 			$total = htmlentities($_POST['total']);
+            $articlesArabes = htmlentities($_POST['articlesArabes']);
 			$employe = htmlentities($_POST['employe']);
             $idSociete = htmlentities($_POST['idSociete']);
 			$idProjet = htmlentities($_POST['idProjet']);
@@ -65,6 +66,7 @@
 				'total' => $total,
 				'traveaux' => $traveaux,
 				'traveauxArabe' => $traveauxArabe,
+				'articlesArabes' => $articlesArabes,
 				'employe' => $employe,
 				'idSociete' => $idSociete,
 				'idProjet' => $idProjet,
@@ -102,6 +104,7 @@
             //if we want to set unite2 : end
             $traveaux = htmlentities($_POST['traveaux']);
             $traveauxArabe = htmlentities($_POST['traveauxArabe']);
+            $articlesArabes = htmlentities($_POST['articlesArabes']);
             $total = ($nombreUnites * $prixUnitaire) + ($nombreUnites2 * $prixUnitaire2);//htmlentities($_POST['total']);
             $employe = htmlentities($_POST['employe']);
             $idSociete = htmlentities($_POST['idSociete']);
@@ -123,6 +126,7 @@
 				'total' => $total,
 				'traveaux' => $traveaux,
                 'traveauxArabe' => $traveauxArabe,
+                'articlesArabes' => $articlesArabes,
 				'employe' => $employe,
 				'idSociete' => $idSociete,
 				'idProjet' => $idProjet,

@@ -13,10 +13,10 @@ class ContratEmployeManager{
 	public function add(ContratEmploye $contratEmploye){
     	$query = $this->_db->prepare('
     	INSERT INTO t_contratemploye (dateContrat, dateFinContrat, prixUnitaire, unite, nomUnite, nomUniteArabe, nombreUnites, 
-    	prixUnitaire2, unite2, nomUnite2, nomUniteArabe2, nombreUnites2, traveaux, traveauxArabe, total, employe, idSociete, idProjet, created, createdBy)
+    	prixUnitaire2, unite2, nomUnite2, nomUniteArabe2, nombreUnites2, traveaux, traveauxArabe, articlesArabes, total, employe, idSociete, idProjet, created, createdBy)
 		VALUES (:dateContrat, :dateFinContrat, :prixUnitaire, :unite, :nomUnite, :nomUniteArabe, :nombreUnites, 
 		:prixUnitaire2, :unite2, :nomUnite2, :nomUniteArabe2, :nombreUnites2, 
-        :traveaux, :traveauxArabe, :total, :employe, :idSociete, :idProjet, :created, :createdBy)')
+        :traveaux, :traveauxArabe, :articlesArabes, :total, :employe, :idSociete, :idProjet, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':dateContrat', $contratEmploye->dateContrat());
         $query->bindValue(':dateFinContrat', $contratEmploye->dateFinContrat());
@@ -32,6 +32,7 @@ class ContratEmployeManager{
         $query->bindValue(':nombreUnites2', $contratEmploye->nombreUnites2());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
+        $query->bindValue(':articlesArabes', $contratEmploye->articlesArabes());
 		$query->bindValue(':total', $contratEmploye->total());
 		$query->bindValue(':employe', $contratEmploye->employe());
         $query->bindValue(':idSociete', $contratEmploye->idSociete());
@@ -47,7 +48,7 @@ class ContratEmployeManager{
     	'UPDATE t_contratemploye SET dateContrat=:dateContrat, dateFinContrat=:dateFinContrat, 
     	nombreUnites=:nombreUnites, prixUnitaire=:prixUnitaire, unite=:unite, nomUnite=:nomUnite, nomUniteArabe=:nomUniteArabe, 
     	nombreUnites2=:nombreUnites2, prixUnitaire2=:prixUnitaire2, unite2=:unite2, nomUnite2=:nomUnite2, nomUniteArabe2=:nomUniteArabe2, 
-    	traveaux=:traveaux, traveauxArabe=:traveauxArabe, total=:total, employe=:employe, idSociete=:idSociete, idProjet=:idProjet 
+    	traveaux=:traveaux, traveauxArabe=:traveauxArabe, articlesArabes=:articlesArabes, total=:total, employe=:employe, idSociete=:idSociete, idProjet=:idProjet 
     	WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $contratEmploye->id());
@@ -65,6 +66,7 @@ class ContratEmployeManager{
         $query->bindValue(':nombreUnites2', $contratEmploye->nombreUnites2());
         $query->bindValue(':traveaux', $contratEmploye->traveaux());
         $query->bindValue(':traveauxArabe', $contratEmploye->traveauxArabe());
+        $query->bindValue(':articlesArabes', $contratEmploye->articlesArabes());
 		$query->bindValue(':total', $contratEmploye->total());
 		$query->bindValue(':employe', $contratEmploye->employe());
         $query->bindValue(':idSociete', $contratEmploye->idSociete());

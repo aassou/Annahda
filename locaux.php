@@ -124,6 +124,7 @@
 						<div class="get-down">
 						    <input class="pull-left m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
                             <a href="#addLocaux" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
+                            <a href="controller/LocauxListPrintController.php?idProjet=<?= $idProjet ?>" class="pull-right btn icn-only blue stay-away" data-toggle="modal"><i class="icon-print m-icon-white"></i> Version Imprimable</a>
                         </div>
                         <?php
                         }

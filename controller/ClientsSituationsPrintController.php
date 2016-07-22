@@ -53,7 +53,6 @@ ob_start();
 	<table>
 		<tr>
 			<th>Client</th>
-			<th>Type</th>
 			<th>Bien</th>
 			<th>Prix</th>
 			<th>Réglements</th>
@@ -66,19 +65,21 @@ ob_start();
 			$sommeOperations = $operationManager->sommeOperations($contrat->id());
 			$bien = "";
 			$typeBien = "";
+            $niveau = "";
 			if($contrat->typeBien()=="appartement"){
 				$bien = $appartementManager->getAppartementById($contrat->idBien());
 				$typeBien = "Appart";
+                $niveau = "Etage ".$bien->niveau()." - ";
 			}
 			else{
 				$bien = $locauxManager->getLocauxById($contrat->idBien());
 				$typeBien = "Local.Com";
+                $niveau = "";
 			}
 		?>		
 		<tr>
 			<td style="width: 25%"><a><?= $clientManager->getClientById($contrat->idClient())->nom() ?></a></td>
-			<td style="width: 15%"><?= $typeBien ?></td>
-			<td style="width: 15%"><?= $bien->nom() ?></td>
+			<td style="width: 30%"><?= $typeBien." - ".$niveau.$bien->nom() ?></td>
 			<td style="width: 15%"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 			<td style="width: 15%"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
 			<td style="width: 15%"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>

@@ -17,6 +17,7 @@ class ContratEmploye{
     private $_nomUniteArabe2;
     private $_traveaux;
     private $_traveauxArabe;
+    private $_articlesArabes;
 	private $_total;
 	private $_employe;
     private $_idSociete;
@@ -98,6 +99,10 @@ class ContratEmploye{
     
     public function setTraveauxArabe($traveauxArabe){
         $this->_traveauxArabe = $traveauxArabe;
+    }
+    
+    public function setArticlesArabes($articlesArabes){
+        $this->_articlesArabes = $articlesArabes;
     }
     
 	public function setTotal($total){
@@ -183,6 +188,10 @@ class ContratEmploye{
     
     public function traveauxArabe(){
         return $this->_traveauxArabe;
+    }
+    
+    public function articlesArabes(){
+        return $this->_articlesArabes;
     }
 
 	public function total(){

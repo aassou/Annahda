@@ -307,6 +307,12 @@
                                             </select>  
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label">بنود أخرى</label>
+                                        <div class="controls">
+                                            <textarea style="height:100px; width:300px" name="articlesArabes"></textarea>
+                                        </div>
+                                    </div>
                             </div>
                             <div class="modal-footer">
                                     <div class="control-group">
@@ -579,6 +585,12 @@
                                                                     }
                                                                     ?>
                                                                 </select>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">بنود أخرى</label>
+                                                            <div class="controls">
+                                                                <textarea style="height:100px; width:300px" name="articlesArabes"><?= $contrat->articlesArabes() ?></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
