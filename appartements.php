@@ -130,6 +130,7 @@
 							<?php
                             }
                             ?>
+                            <a href="controller/AppatementsListPrintController.php?idProjet=<?= $idProjet ?>" class="pull-right btn icn-only blue stay-away" data-toggle="modal"><i class="icon-print m-icon-white"></i> Version Imprimable</a>
 						</div>
 						<!-- addAppartement box begin-->
                         <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

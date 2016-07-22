@@ -1414,6 +1414,13 @@
                                 <label class="control-label">وضعية الشقة/المحل التجاري</label>
                                 <div class="controls">
                                     <select name="etatBienArabe">
+                                        <?php if ( $contrat->etatBienArabe()=="Finition" ) { ?>
+                                        <option value="Finition">الأشغال النهائية للبناء</option>    
+                                        <?php } ?>
+                                        <?php if ( $contrat->etatBienArabe()=="GrosOeuvre" ) { ?>
+                                        <option value="GrosOeuvre">الأشغال الأساسية للبناء</option>    
+                                        <?php } ?>
+                                        <option disabled="disabled">---------------------</option>
                                         <option value="GrosOeuvre">الأشغال الأساسية للبناء</option>
                                         <option value="Finition">الأشغال النهائية للبناء</option>
                                     </select>    

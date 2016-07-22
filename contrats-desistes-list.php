@@ -140,7 +140,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <a class="btn blue pull-right" href="controller/ClientsSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
+                                        <a class="btn blue pull-right" href="controller/ClientsDesistesSituationsPrintController.php?idProjet=<?= $projet->id() ?>">
                                             <i class="icon-print"></i>
                                              Version Imprimable
                                         </a>

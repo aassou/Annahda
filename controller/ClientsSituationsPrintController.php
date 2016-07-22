@@ -22,7 +22,7 @@
 		$appartementManager = new AppartementManager($pdo);
 		$locauxManager = new LocauxManager($pdo);
 		$contratNumber = $contratManager->getContratsNumberByIdProjet($idProjet);
-		$contrats = $contratManager->getContratsByIdProjetOnly($idProjet);
+		$contrats = $contratManager->getContratsActifsByIdProjet($idProjet);
 ob_start();
 ?>
 <style type="text/css">
