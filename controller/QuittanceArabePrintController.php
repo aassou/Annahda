@@ -142,12 +142,14 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.$niveau.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$htmlcontent = '<strong>'.'الرسم العقاري الأم: '.'</strong>'.$projet->titre();
+$htmlcontent = '<strong>'.'الرسم العقاري الأم: '.'</strong>';
+$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+$pdf->Ln();
+$htmlcontent = $projet->titre();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $htmlcontent = '<strong style="text-align : left">'.'توقيع الشركة : '.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$pdf->Ln();
 $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 10);
 $htmlcontent = '<strong>'.'ملاحظة : '.'</strong>'.'يعتبر هذا التوصيل ملغى في حالة عدم استخلاص مبلغ الشيك أو الكمبيالة التجارية أو عدم التوصل بمبلغ التحويل عن طريق البنك مهما كان
