@@ -145,11 +145,8 @@ $pdf->Ln();
 $htmlcontent = '<strong>'.'الرسم العقاري الأم: '.'</strong>'.$projet->titre();
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
-$pdf->Ln();
 $htmlcontent = '<strong style="text-align : left">'.'توقيع الشركة : '.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$pdf->Ln();
-$pdf->Ln();
 $pdf->Ln();
 $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 10);
@@ -158,7 +155,6 @@ $htmlcontent = '<strong>'.'ملاحظة : '.'</strong>'.'يعتبر هذا ال�
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $htmlcontent = 'يجب الاحتفاظ بأصل هذا التوصيل باعتباره الوسيلة الوحيدة المثبتة للأداء.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$pdf->Ln();
 
 // print newline
 // ---------------------------------------------------------
