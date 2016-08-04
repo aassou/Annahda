@@ -118,23 +118,23 @@ ob_start();
         foreach($caisses as $caisse){
         ?>      
         <tr>
-            <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
+            <td style="width: 15%"><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
             <?php
             if ( $caisse->type() == "Entree" ) {
             ?>
-            <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
-            <td></td>
+            <td style="width: 15%"><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+            <td style="width: 15%"></td>
             <?php  
             }
             else {
             ?>
-            <td></td>
-            <td><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
+            <td style="width: 15%"></td>
+            <td style="width: 15%"><?= number_format($caisse->montant(), 2, ',', ' ') ?></td>
             <?php
             }
             ?>
-            <td><?= $caisse->designation() ?></td>
-            <td><?= $caisse->destination() ?></td>
+            <td style="width: 35%"><?= $caisse->designation() ?></td>
+            <td style="width: 20%"><?= $caisse->destination() ?></td>
         </tr>   
         <?php
         }//end of loop
