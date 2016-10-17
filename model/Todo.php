@@ -6,6 +6,7 @@ class Todo{
 	private $_todo;
     private $_priority;
 	private $_status;
+    private $_date;
 	private $_created;
 	private $_createdBy;
 	private $_updated;
@@ -43,6 +44,10 @@ class Todo{
 	public function setStatus($status){
 		$this->_status = $status;
    	}
+    
+    public function setDate($date){
+        $this->_date = $date;
+    }
 
 	public function setCreated($created){
         $this->_created = $created;
@@ -76,6 +81,10 @@ class Todo{
 	public function status(){
 		return $this->_status;
    	}
+    
+    public function date(){
+        return $this->_date;
+    }
 
 	public function created(){
         return $this->_created;

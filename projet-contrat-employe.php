@@ -408,12 +408,12 @@
                                                     <a class="btn mini" href="contrat-employe-detail.php?idContratEmploye=<?= $contrat->id() ?>&idProjet=<?= $projet->id() ?>">
                                                         <i class="icon-eye-open"></i>
                                                     </a>
-                                                    <!--a class="btn mini blue" href="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?php echo $contrat->id() ?>" >
-                                                        <i class="icon-file"></i>
-                                                    </a-->
-                                                    <a class="btn mini blue" href="#printContratEmployeArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" >
+                                                    <a class="btn mini blue" href="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" >
                                                         <i class="icon-file"></i>
                                                     </a>
+                                                    <!--a class="btn mini blue" href="#printContratEmployeArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" >
+                                                        <i class="icon-file"></i>
+                                                    </a-->
                                                 </td>
                                                 <td><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></td> 
                                                 <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?> - <?= date('d/m/Y', strtotime($contrat->dateFinContrat()) ) ?></td>

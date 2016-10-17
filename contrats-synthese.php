@@ -102,7 +102,6 @@
                             <li>
                                 <i class="icon-copy"></i>
                                 <a>Liste des contrats de <strong><?= ucfirst($client->nom()) ?></strong></a>
-                                <i class="icon-angle-right"></i>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -133,8 +132,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width:5%">Actions</th>
-                                            <th style="width:20%">Client</th>
-                                            <th style="width:20%" class="hidden-phone">Bien</th>
+                                            <th style="width:15%">Client</th>
+                                            <th style="width:15%">Projet</th>
+                                            <th style="width:15%" class="hidden-phone">Bien</th>
                                             <th style="width:10%">Date Contrat</th>
                                             <th style="width:10%" class="hidden-phone">Prix</th>
                                             <th style="width:10%" class="hidden-phone">Réglements</th>
@@ -156,6 +156,7 @@
                                             $bien = "";
                                             $typeBien = "";
                                             $etage = "";
+                                            $projet = $projetManager->getProjetById($contrat->idProjet());
                                             if($contrat->typeBien()=="appartement"){
                                                 $bien = $appartementManager->getAppartementById($contrat->idBien());
                                                 $typeBien = "Appartement";
@@ -235,6 +236,7 @@
                                                 </div>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
+                                            <td><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>

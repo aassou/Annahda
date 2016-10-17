@@ -42,6 +42,7 @@
     <link href="assets/css/style_responsive.css" rel="stylesheet" />
     <link href="assets/css/style_default.css" rel="stylesheet" id="style_color" />
     <link rel="stylesheet" type="text/css" href="assets/chosen-bootstrap/chosen/chosen.css" />
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
     <link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
     <link rel="stylesheet" type="text/css" href="assets/gritter/css/jquery.gritter.css" />
     <link rel="shortcut icon" href="favicon.ico" />
@@ -94,32 +95,46 @@
                 <!-- BEGIN PORTLET-->
                 <div class="row-fluid">
                     <div class="span12">
-                        <div class="portlet">
-                            <div class="portlet-title line">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
                                 <h4><i class="icon-check"></i>Ajouter une tâche personnelle </h4>
                                 <!--div class="tools">
                                     <a href="javascript:;" class="collapse"></a>
                                     <a href="javascript:;" class="remove"></a>
                                 </div-->
                             </div>
-                            <div class="portlet-body" id="chats">
-                                <div class="chat-form">
-                                    <form action="controller/TodoActionController.php" method="POST">
-                                        <div class="input-cont">   
-                                            <input style="width: 600px" class="span4 m-wrap" type="text" name="todo" placeholder="Ajouter une tâche" />
-                                            <select class="m-wrap" name="priority">
-                                                <option value="2">Urgente</option>
-                                                <option value="1">Moyenne</option>
-                                                <option value="0">Normale</option>
-                                            </select>    
-                                        </div>
-                                        <div class="btn-cont"> 
-                                            <input type="hidden" name="action" value="add" />
-                                            <span class="arrow"></span>
-                                            <button type="submit" class="btn blue icn-only"><i class="icon-ok icon-white"></i></button>
+                            <div class="portlet-body form">
+                                <!--div class="chat-form"-->
+                                    <form action="controller/TodoActionController.php" method="POST" class="horizontal-form">
+                                        <div class="row-fluid">
+                                            <div class="span3">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="numero">Tâche</label>
+                                                    <div class="controls">
+                                                        <input required="required" type="text" id="todo" name="todo" class="m-wrap">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span3">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="numero">Date</label>
+                                                    <div class="controls">
+                                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                            <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="span3">
+                                                <label class="control-label" for="numero">&nbsp;</label>
+                                                <input type="hidden" name="action" value="add">
+                                                <input type="hidden" id="idProjet" name="idProjet" value="">
+                                                <button type="submit" class="btn blue">Terminer <i class="icon-ok m-icon-white"></i></button>
+                                            </div>
                                         </div>
                                     </form>
-                                </div>
+                                <!--/div-->
                             </div>
                         </div>
                     </div>
@@ -128,7 +143,8 @@
                     <div class="span12">
                         <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
                         <?php
-                        foreach($todos as $todo){
+                        foreach( $todos as $todo ) {
+                            if ( $todo->date() == date('Y-m-d') ) {
                             $color = "";
                             $priorityOption = "";
                             if ( $todo->priority() == 2 ) {
@@ -186,7 +202,8 @@
                         </div>
                         <!-- updateTodo box end -->    
                         <?php 
-                        }
+                        }//end if
+                        }//end foreach
                         ?>
                         <!-- END INLINE NOTIFICATIONS PORTLET-->
                     </div>
@@ -202,6 +219,7 @@
     <!-- BEGIN FOOTER -->
     <div class="footer">
         2015 &copy; ImmoERP. Management Application.
+        <?= print_r($todosToday) ?>
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
@@ -223,6 +241,9 @@
     <script src="assets/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="assets/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="assets/js/jquery.pulsate.min.js"></script>
+    <script type="text/javascript" src="assets/js/notify.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
     <!-- ie8 fixes -->
     <!--[if lt IE 9]>
     <script src="assets/js/excanvas.js"></script>
@@ -235,6 +256,14 @@
             App.setPage("table_managed");  // set current page
             App.init();
         });
+        var todosToday = <?= json_encode($todosToday); ?>;
+        //var todosToday = JSON.stringify(todosToday);
+        for (var key in todosToday) {
+            $.notify(
+              "Tâche : "+todosToday[key], 
+              { position:"bottom" }
+            );    
+        }
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

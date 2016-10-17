@@ -12,12 +12,13 @@ class TodoManager{
 	//BAISC CRUD OPERATIONS
 	public function add(Todo $todo){
     	$query = $this->_db->prepare(' INSERT INTO t_todo (
-		todo, priority, status, created, createdBy)
-		VALUES (:todo, :priority, :status, :created, :createdBy)')
+		todo, priority, status, date, created, createdBy)
+		VALUES (:todo, :priority, :status, :date, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':todo', $todo->todo());
         $query->bindValue(':priority', $todo->priority());
 		$query->bindValue(':status', $todo->status());
+        $query->bindValue(':date', $todo->date());
 		$query->bindValue(':created', $todo->created());
 		$query->bindValue(':createdBy', $todo->createdBy());
 		$query->execute();
@@ -44,6 +45,15 @@ class TodoManager{
         or die (print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $todo->id());
         $query->bindValue(':priority', $todo->priority());
+        $query->execute();
+        $query->closeCursor();
+    }
+    
+    public function updateDate($idTodo, $newDate){
+        $query = $this->_db->prepare(' UPDATE t_todo SET date=:date WHERE id=:id')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idTodo);
+        $query->bindValue(':date', $newDate);
         $query->execute();
         $query->closeCursor();
     }
@@ -78,6 +88,19 @@ class TodoManager{
 		$query->closeCursor();
 		return $todos;
 	}
+    
+    public function getTodosToday(){
+        $todos = array();
+        $query = $this->_db->query(
+        'SELECT todo FROM t_todo
+        WHERE date=CURDATE()
+        ORDER BY id DESC');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $todos[] = $data['todo'];
+        }
+        $query->closeCursor();
+        return $todos;
+    }
 
 	public function getTodosByLimits($begin, $end){
 		$todos = array();

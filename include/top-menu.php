@@ -23,6 +23,7 @@
         $bugNumber = $bugManager->getBugsNumber();
         $alertNumber = $alertManager->getAlertsNumber();
         $todoNumber = $todoManager->getTodosNumberByUser($_SESSION['userMerlaTrav']->login());
+        $todosToday = $todoManager->getTodosToday();
 		?>			
 		<ul class="nav pull-right">
 		    <li class="dropdown" id="header_inbox_bar">

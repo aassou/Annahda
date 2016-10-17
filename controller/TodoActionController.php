@@ -30,6 +30,7 @@
 			$todo = htmlentities($_POST['todo']);
             $priority = htmlentities($_POST['priority']);
 			$status = 0;
+            $date = htmlentities($_POST['date']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
@@ -37,6 +38,7 @@
 				'todo' => $todo,
 				'priority' => $priority,
 				'status' => $status,
+				'date' => $date,
 				'created' => $created,
             	'createdBy' => $createdBy
 			));

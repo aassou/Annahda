@@ -558,6 +558,7 @@
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
 	<script src="assets/jquery-knob/js/jquery.knob.js"></script>
+	<script type="text/javascript" src="assets/js/notify.js"></script>
 	<script src="assets/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
 	<script type="text/javascript" src="assets/gritter/js/jquery.gritter.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.pulsate.min.js"></script>
@@ -573,6 +574,14 @@
 			App.setPage("sliders");  // set current page
 			App.init();
 		});
+		var todosToday = <?= json_encode($todosToday); ?>;
+        //var todosToday = JSON.stringify(todosToday);
+        for (var key in todosToday) {
+            $.notify(
+              "Tâche : "+todosToday[key], 
+              { position:"bottom,right" }
+            );    
+        }
 	</script>
 	<!-- END JAVASCRIPTS -->
 </body>
