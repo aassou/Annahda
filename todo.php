@@ -13,6 +13,10 @@
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav'])){
+        $showTodos = 0;
+        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+            $showTodos = 1;    
+        }
         //classes managers
         $usersManager = new UserManager($pdo);
         $mailManager = new MailManager($pdo);
@@ -257,12 +261,15 @@
             App.init();
         });
         var todosToday = <?= json_encode($todosToday); ?>;
+        var showTodos = <?= $showTodos ?>;
         //var todosToday = JSON.stringify(todosToday);
-        for (var key in todosToday) {
-            $.notify(
-              "Tâche : "+todosToday[key], 
-              { position:"bottom" }
-            );    
+        if (showTodos == 1){
+            for (var key in todosToday) {
+                $.notify(
+                  "Tâche : "+todosToday[key], 
+                  { position:"bottom" }
+                );    
+            }    
         }
     </script>
     <!-- END JAVASCRIPTS -->
