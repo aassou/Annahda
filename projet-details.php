@@ -14,6 +14,10 @@
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ) {
+        $showTodos = 0;
+        if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+            $showTodos = 1;    
+        }    
         //les sources
         $idProjet = $_GET['idProjet'];
         $projetsManager = new ProjetManager($pdo);
@@ -177,6 +181,7 @@
     <script src="assets/js/excanvas.js"></script>
     <script src="assets/js/respond.js"></script>
     <![endif]-->    
+    <script type="text/javascript" src="assets/js/notify.js"></script>
     <script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
     <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
@@ -187,6 +192,25 @@
             //App.setPage("table_editable");
             App.init();
         });
+        var todosToday = <?= json_encode($todosToday); ?>;
+        var todosOld = <?= json_encode($todosOld) ?>;
+        var showTodos = <?= $showTodos ?>;
+        //var todosToday = JSON.stringify(todosToday);
+        if (showTodos == 1){
+            for (var key in todosOld) {
+                $.notify(
+                  "Tâche : "+todosOld[key], 
+                  { position:"bottom" }
+                );    
+            }   
+            for (var k in todosToday) {
+                $.notify(
+                  "Tâche : "+todosToday[k], 
+                  "info",
+                  { position:"bottom" }
+                );    
+            }         
+        }
     </script>
 </body>
 <!-- END BODY -->

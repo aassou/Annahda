@@ -101,6 +101,19 @@ class TodoManager{
         $query->closeCursor();
         return $todos;
     }
+    
+    public function getTodosOld(){
+        $todos = array();
+        $query = $this->_db->query(
+        'SELECT todo FROM t_todo
+        WHERE date<CURDATE()
+        ORDER BY id DESC');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $todos[] = $data['todo'];
+        }
+        $query->closeCursor();
+        return $todos;
+    }
 
 	public function getTodosByLimits($begin, $end){
 		$todos = array();
