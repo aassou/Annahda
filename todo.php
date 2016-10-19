@@ -148,10 +148,16 @@
                         <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
                         <?php
                         foreach( $todos as $todo ) {
-                            if ( $todo->date() == date('Y-m-d') ) {
                             $color = "";
                             $priorityOption = "";
-                            if ( $todo->priority() == 2 ) {
+                            if ( $todo->date() == date('Y-m-d') ) {
+                                $color = "blue";
+                                //$priorityOption = "";
+                            }
+                            else {
+                                $color = "red";
+                            }
+                            /*if ( $todo->priority() == 2 ) {
                                 $color = "red";  
                                 $priorityOption = "Urgente";                              
                             }
@@ -162,7 +168,7 @@
                             else if ( $todo->priority() == 0 ) {
                                 $color = "green";         
                                 $priorityOption = "Normale";                       
-                            }
+                            }*/
                         ?>
                         <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
                         <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
@@ -206,7 +212,7 @@
                         </div>
                         <!-- updateTodo box end -->    
                         <?php 
-                        }//end if
+                        //}//end if
                         }//end foreach
                         ?>
                         <!-- END INLINE NOTIFICATIONS PORTLET-->
@@ -260,17 +266,6 @@
             App.setPage("table_managed");  // set current page
             App.init();
         });
-        var todosToday = <?= json_encode($todosToday); ?>;
-        var showTodos = <?= $showTodos ?>;
-        //var todosToday = JSON.stringify(todosToday);
-        if (showTodos == 1){
-            for (var key in todosToday) {
-                $.notify(
-                  "Tâche : "+todosToday[key], 
-                  { position:"bottom" }
-                );    
-            }    
-        }
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

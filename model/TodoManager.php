@@ -94,6 +94,7 @@ class TodoManager{
         $query = $this->_db->query(
         'SELECT todo FROM t_todo
         WHERE date=CURDATE()
+        AND createdBy="admin"
         ORDER BY id DESC');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $todos[] = $data['todo'];
@@ -107,6 +108,7 @@ class TodoManager{
         $query = $this->_db->query(
         'SELECT todo FROM t_todo
         WHERE date<CURDATE()
+        AND createdBy="admin"
         ORDER BY id DESC');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $todos[] = $data['todo'];
@@ -145,7 +147,7 @@ class TodoManager{
     public function getTodosByUser($user){
         $todos = array();
         $query = $this->_db->prepare('SELECT * FROM t_todo WHERE createdBy=:user
-        ORDER BY priority DESC, id DESC');
+        ORDER BY date DESC');
         $query->bindValue(':user', $user);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
