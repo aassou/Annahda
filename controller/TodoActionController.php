@@ -89,6 +89,17 @@
         $typeMessage = "success";
     }
     //Action UpdatePriority Processing End
+    //Action UpdateDate Processing Begin
+    else if($action == "update-date"){
+        $idTodo = htmlentities($_POST['idTodo']);
+        $date = htmlentities($_POST['date']);
+        $updatedBy = $_SESSION['userMerlaTrav']->login();
+        $updated = date('Y-m-d h:i:s');
+        $todoManager->updateDate($idTodo, $date, $updated, $updatedBy);
+        $actionMessage = "Opération Valide : Todo Modifié avec succès.";
+        $typeMessage = "success";
+    }
+    //Action UpdateDate Processing End
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idTodo = htmlentities($_POST['idTodo']);

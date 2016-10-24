@@ -150,12 +150,15 @@
                         foreach( $todos as $todo ) {
                             $color = "";
                             $priorityOption = "";
-                            if ( $todo->date() == date('Y-m-d') ) {
-                                $color = "blue";
+                            if ( strlen($todo->updated()) > 1 ) {
+                                $color = "red";
                                 //$priorityOption = "";
                             }
-                            else {
-                                $color = "red";
+                            elseif ( (strlen($todo->updated() < 2)) and $todo->date() >= date('Y-m-d') ) {
+                                $color = "blue";
+                            }
+                            elseif ( (strlen($todo->updated() < 2) and $todo->date() < date('Y-m-d') ) ) {
+                                $color = "black";
                             }
                             /*if ( $todo->priority() == 2 ) {
                                 $color = "red";  
@@ -172,7 +175,7 @@
                         ?>
                         <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
                         <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
-                        <?= $todo->todo() ?></a><br />
+                        <?= $todo->todo()." | ".$todo->updated() ?></a><br />
                         <!-- updateTodo box begin-->
                         <div id="updateTodo<?= $todo->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
@@ -188,20 +191,17 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Priorité</label>
+                                        <label class="control-label">Date</label>
                                         <div class="controls">
-                                            <select name="priority">
-                                                <option value="<?= $todo->priority() ?>"><?= $priorityOption ?></option>
-                                                <option disabled="disabled">-----------------</option>
-                                                <option value="2">Urgente</option>
-                                                <option value="1">Moyenne</option>
-                                                <option value="0">Normale</option>
-                                            </select>
+                                            <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $todo->date() ?>" />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <input type="hidden" name="idTodo" value="<?= $todo->id() ?>" />
-                                        <input type="hidden" name="action" value="update" />
+                                        <input type="hidden" name="action" value="update-date" />
                                         <div class="controls">  
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>

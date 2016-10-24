@@ -24,6 +24,7 @@
         $alertNumber = $alertManager->getAlertsNumber();
         $todoNumber = $todoManager->getTodosNumberByUser($_SESSION['userMerlaTrav']->login());
         $todosToday = $todoManager->getTodosToday();
+        $todosTodayInformation = $todoManager->getTodosTodayInformation();
         $todosOld = $todoManager->getTodosOld();
 		?>			
 		<ul class="nav pull-right">

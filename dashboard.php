@@ -544,7 +544,6 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		2015 &copy; ImmoERP. Management Application.
-		<?= print_r($todosOld) ?>
 		<div class="span pull-right">
 			<span class="go-top"><i class="icon-angle-up"></i></span>
 		</div>
@@ -580,20 +579,20 @@
 			App.init();
 		});
 		var todosToday = <?= json_encode($todosToday); ?>;
-		var todosOld = <?= json_encode($todosOld) ?>;
+		var todosTodayInformation = <?= json_encode($todosTodayInformation); ?>;
         var showTodos = <?= $showTodos ?>;
-        //var todosToday = JSON.stringify(todosToday);
+        var color = "";
         if (showTodos == 1){
-            for (var key in todosOld) {
+            for (var k in todosToday, todosTodayInformation) {
+                if ( todosTodayInformation[k] === null ) {
+                    color = "info";
+                }
+                else {
+                    color = "error";
+                }
                 $.notify(
-                  "Tâche : "+todosOld[key], 
-                  { position:"bottom" }
-                );    
-            }   
-            for (var k in todosToday) {
-                $.notify(
-                  "Tâche : "+todosToday[k], 
-                  "info",
+                  "Tâche : "+todosToday[k],
+                  color,
                   { position:"bottom" }
                 );    
             }         

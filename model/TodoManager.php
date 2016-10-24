@@ -49,11 +49,16 @@ class TodoManager{
         $query->closeCursor();
     }
     
-    public function updateDate($idTodo, $newDate){
-        $query = $this->_db->prepare(' UPDATE t_todo SET date=:date WHERE id=:id')
+    public function updateDate($idTodo, $newDate, $updated, $updatedBy){
+        $query = $this->_db->prepare('
+        UPDATE t_todo SET date=:date,
+        updated=:updated, updatedBy=:updatedBy 
+        WHERE id=:id')
         or die (print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $idTodo);
         $query->bindValue(':date', $newDate);
+        $query->bindValue(':updated', $updated);
+        $query->bindValue(':updatedBy', $updatedBy);
         $query->execute();
         $query->closeCursor();
     }
@@ -98,6 +103,20 @@ class TodoManager{
         ORDER BY id DESC');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $todos[] = $data['todo'];
+        }
+        $query->closeCursor();
+        return $todos;
+    }
+    
+    public function getTodosTodayInformation(){
+        $todos = array();
+        $query = $this->_db->query(
+        'SELECT updated FROM t_todo
+        WHERE date=CURDATE()
+        AND createdBy="admin"
+        ORDER BY id DESC');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $todos[] = $data['updated'];
         }
         $query->closeCursor();
         return $todos;
