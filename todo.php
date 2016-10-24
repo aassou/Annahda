@@ -78,7 +78,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des tâches personnelles
+                            Gestion des tâches personnelles ddddddd
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -229,7 +229,6 @@
     <!-- BEGIN FOOTER -->
     <div class="footer">
         2015 &copy; ImmoERP. Management Application.
-        <?= print_r($todosToday) ?>
         <div class="span pull-right">
             <span class="go-top"><i class="icon-angle-up"></i></span>
         </div>
