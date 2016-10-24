@@ -175,7 +175,7 @@
                         ?>
                         <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
                         <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
-                        <?= $todo->todo()." | ".$todo->updated() ?></a><br />
+                        <?= $todo->todo() ?></a><br />
                         <!-- updateTodo box begin-->
                         <div id="updateTodo<?= $todo->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                             <div class="modal-header">
