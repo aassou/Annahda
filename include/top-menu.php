@@ -29,6 +29,12 @@
 		?>			
 		<ul class="nav pull-right">
 		    <li class="dropdown" id="header_inbox_bar">
+                <a href="collaboration.php" class="dropdown-toggle">
+                <i class="icon-edit"></i>
+                <span class="badge"></span>
+                </a>
+            </li>
+		    <li class="dropdown" id="header_inbox_bar">
                 <a href="todo.php" class="dropdown-toggle">
                 <i class="icon-check"></i>  
                 <?php
