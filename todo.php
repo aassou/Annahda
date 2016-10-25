@@ -146,71 +146,68 @@
                 <div class="row-fluid">
                     <div class="span12">
                         <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
+                        <button id="showAllTodosButton" class="get-down">Afficher tous</button>
+                        <br>
                         <?php
                         foreach( $todos as $todo ) {
                             $color = "";
                             $priorityOption = "";
-                            if ( strlen($todo->updated()) > 1 ) {
-                                $color = "red";
-                                //$priorityOption = "";
-                            }
-                            elseif ( (strlen($todo->updated() < 2)) and $todo->date() >= date('Y-m-d') ) {
+                            $style = "";
+                            //test tasks date to show them in different colors
+                            if ( $todo->date() >= date('Y-m-d') ) {
                                 $color = "blue";
                             }
-                            elseif ( (strlen($todo->updated() < 2) and $todo->date() < date('Y-m-d') ) ) {
-                                $color = "black";
+                            elseif ( $todo->date() < date('Y-m-d') )  {
+                                $color = "red";
                             }
-                            /*if ( $todo->priority() == 2 ) {
-                                $color = "red";  
-                                $priorityOption = "Urgente";                              
+                            //
+                            if ( $todo->date() == date('Y-m-d') ) {
+                                $style = '';
                             }
-                            else if ( $todo->priority() == 1 ) {
-                                $color = "yellow";
-                                $priorityOption = "Moyenne";                                
+                            else {
+                                $style = 'style="display : none;"';
                             }
-                            else if ( $todo->priority() == 0 ) {
-                                $color = "green";         
-                                $priorityOption = "Normale";                       
-                            }*/
                         ?>
-                        <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
-                        <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
-                        <?= $todo->todo() ?></a><br />
-                        <!-- updateTodo box begin-->
-                        <div id="updateTodo<?= $todo->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                <h3>Modifier Todo </h3>
-                            </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/TodoActionController.php" method="post">
-                                    <div class="control-group">
-                                        <label class="control-label">Todo</label>
-                                        <div class="controls">
-                                            <input type="text" name="todo" value="<?= $todo->todo() ?>" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Date</label>
-                                        <div class="controls">
-                                            <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
-                                                <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $todo->date() ?>" />
-                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                        <div class="showAllTodos" <?= $style ?> >
+                            <a href="include/delete-task.php?idTask=<?= $todo->id() ?>"><i class="icon-remove"></i></a>
+                            <a href="#updateTodo<?= $todo->id() ?>" data-toggle="modal" data-id="<?= $todo->id() ?>" class="btn <?= $color ?> get-down delete-checkbox">
+                            <?= $todo->todo() ?></a><br />
+                            <!-- updateTodo box begin-->
+                            <div id="updateTodo<?= $todo->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h3>Modifier Todo </h3>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form-horizontal" action="controller/TodoActionController.php" method="post">
+                                        <div class="control-group">
+                                            <label class="control-label">Todo</label>
+                                            <div class="controls">
+                                                <input type="text" name="todo" value="<?= $todo->todo() ?>" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="hidden" name="idTodo" value="<?= $todo->id() ?>" />
-                                        <input type="hidden" name="action" value="update-date" />
-                                        <div class="controls">  
-                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                        <div class="control-group">
+                                            <label class="control-label">Date</label>
+                                            <div class="controls">
+                                                <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                    <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $todo->date() ?>" />
+                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                        <div class="control-group">
+                                            <input type="hidden" name="idTodo" value="<?= $todo->id() ?>" />
+                                            <input type="hidden" name="action" value="update-date" />
+                                            <div class="controls">  
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <!-- updateTodo box end -->    
+                        <!-- updateTodo box end -->
+                        </div>    
                         <?php 
                         //}//end if
                         }//end foreach
@@ -264,6 +261,11 @@
             // initiate layout and plugins
             App.setPage("table_managed");  // set current page
             App.init();
+        });
+        $(document).ready(function() {
+            $('#showAllTodosButton').on('click', function() {
+                $(".showAllTodos").toggle("show");
+            });
         });
     </script>
     <!-- END JAVASCRIPTS -->
