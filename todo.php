@@ -88,7 +88,7 @@
                             </li>
                             <li>
                                 <i class="icon-check"></i>
-                                <a>Liste des tâches personnelles</a>
+                                <a>Liste des tâches personnelles.</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
