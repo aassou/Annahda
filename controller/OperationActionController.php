@@ -52,6 +52,8 @@
             $compteBancaire = htmlentities($_POST['compteBancaire']);
             $status = 0;
             $idContrat = htmlentities($_POST['idContrat']);
+            $idClient = htmlentities($_POST['idClient']);
+            $client = $clientManager->getClientById($idClient);
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $url = "";
@@ -68,7 +70,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des paiements clients ",
-                'description' => "Ajout d'un paiement client, pour le contrat : ".$idContrat.", montant : ".$montant,
+                'description' => "Ajout d'un paiement client, pour ".ucfirst($client->nom())." N° Contrat : ".$idContrat.", montant : ".$montant,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -129,13 +131,15 @@
             'observation' => $observation, 'montant' => $montant, 'numeroCheque' => $numeroOperation, 
             'modePaiement' => $modePaiement, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $operationManager->update($operation);
+            $idClient = htmlentities($_POST['idClient']);
+            $client = $clientManager->getClientById($idClient);
             //add History data
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des paiements clients",
-                'description' => "Modification du paiement client, montant : ".$montant,
+                'description' => "Modification paiement du client ".ucfirst($client->nom()).",  montant : ".$montant,
                 'created' => $created,
                 'createdBy' => $createdBy
             ));

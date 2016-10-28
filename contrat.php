@@ -497,6 +497,7 @@
                                     <input type="hidden" name="source" value="contrat" />
                                     <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
                                     <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                    <input type="hidden" name="idClient" value="<?= $contrat->idClient() ?>" />
                                     <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
                                     <div class="controls">
                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -1166,6 +1167,7 @@
                                                     <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
                                                     <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
                                                     <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                    <input type="hidden" name="idClient" value="<?= $contrat->idClient() ?>" />
                                                     <div class="controls">  
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>

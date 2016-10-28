@@ -185,7 +185,7 @@
                                             <!--td><input type="checkbox" class="checkboxes" value="1" /></td-->
                                             <td style="width:10%">
                                                 <a href="#update<?= $idea->id() ?>" data-toggle="modal" data-id="<?= $idea->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
-                                                <a href="#delete<?= $idea->id() ?>" data-toggle="modal" data-id="<?= $idea->id() ?>" class="btn mini red"><i class="icon-remove"></i></a>
+                                                <!--a href="#delete<?php //$idea->id() ?>" data-toggle="modal" data-id="<?php //$idea->id() ?>" class="btn mini red"><i class="icon-remove"></i></a-->
                                             </td>    
                                             <td style="width:20%"><?= $idea->titre() ?></td>
                                             <td style="width:50%"><?= $idea->description() ?></td>
