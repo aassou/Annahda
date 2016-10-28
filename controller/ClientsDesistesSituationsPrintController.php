@@ -12,7 +12,8 @@
     include('../config.php');  
     //classes loading end
     session_start();
-    if( isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin" ){
+    if( isset($_SESSION['userMerlaTrav']) and 
+    ($_SESSION['userMerlaTrav']->profil()=="admin") or ($_SESSION['userMerlaTrav']->profil()=="manager")){
         //classes managers  
         $idProjet = $_GET['idProjet'];
         $projetManager = new ProjetManager($pdo);
