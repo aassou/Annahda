@@ -151,6 +151,7 @@
                     $_SESSION['userMerlaTrav']->profil() == "admin"
                     || $_SESSION['userMerlaTrav']->profil() == "manager" 
                     || $_SESSION['userMerlaTrav']->profil() == "consultant" 
+                    || $_SESSION['userMerlaTrav']->profil() == "user"
                 ) {
                 ?>
                 <div class="row-fluid">

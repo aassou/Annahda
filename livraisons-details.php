@@ -153,7 +153,8 @@
 						$updateLink = "";
                         if ( 
                             $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                            $_SESSION['userMerlaTrav']->profil() == "manager" 
+                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                            $_SESSION['userMerlaTrav']->profil() == "user"
                             ) {
                             $updateLink = "#updateLivraison";    
                         }
@@ -166,7 +167,7 @@
 								    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                <strong>N° BL : <?= $livraison->libelle() ?></strong>
                                            </a>
                                          </div>
@@ -175,7 +176,7 @@
                                    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Nombre Articles : <?= $nombreArticle ?></strong>
                                             </a>   
                                          </div>
@@ -184,7 +185,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
                                             </a>
                                          </div>
@@ -193,7 +194,7 @@
 									<div class="span3">
 									  <div class="control-group">
 										 <div class="controls">
-											<a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+											<a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
 											    <strong>Projet : <?= $nomProjet ?></strong>
 										    </a>   
 										 </div>
@@ -269,7 +270,8 @@
                             <?php
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                $_SESSION['userMerlaTrav']->profil() == "user"
                                 ) {
                             ?>
 							<a class="btn green" href="#addArticle" data-toggle="modal" data-id="">
@@ -336,7 +338,8 @@
 							    <?php
                                 if ( 
                                     $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                    $_SESSION['userMerlaTrav']->profil() == "manager"
+                                    $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "user"
                                     ) {
                                 ?>
 							    <th style="width: 10%">Actions</th>
@@ -355,7 +358,8 @@
 							    <?php
                                 if ( 
                                     $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                    $_SESSION['userMerlaTrav']->profil() == "manager" ||
+                                    $_SESSION['userMerlaTrav']->profil() == "user"
                                     ) {
                                 ?>
 							    <td class="hidden-phone">
