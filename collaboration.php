@@ -144,6 +144,8 @@
                                             <div class="span3">
                                                 <label class="control-label">&nbsp;</label>
                                                 <input type="hidden" name="action" value="add">
+                                                <input type="hidden" name="status" value="X">
+                                                <input type="hidden" name="duree" value="Non définie">
                                                 <button type="submit" class="btn black">Enregistrer <i class="icon-save m-icon-white"></i></button>
                                             </div>
                                         </div>
@@ -169,12 +171,15 @@
                                             <!--th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th-->
                                             <th style="width:10%">Actions</th>
                                             <th style="width:20%">Titre</th>
-                                            <th style="width:70%">Description</th>
+                                            <th style="width:50%">Description</th>
+                                            <th style="width:10%">Durée</th>
+                                            <th style="width:10%">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         foreach($ideas as $idea){
+                                            $status = $idea->status()=="V"?"green":"red";
                                         ?>
                                         <tr class="odd gradeX">
                                             <!--td><input type="checkbox" class="checkboxes" value="1" /></td-->
@@ -183,7 +188,9 @@
                                                 <a href="#delete<?= $idea->id() ?>" data-toggle="modal" data-id="<?= $idea->id() ?>" class="btn mini red"><i class="icon-remove"></i></a>
                                             </td>    
                                             <td style="width:20%"><?= $idea->titre() ?></td>
-                                            <td style="width:70%"><?= $idea->description() ?></td>
+                                            <td style="width:50%"><?= $idea->description() ?></td>
+                                            <td style="width:10%"><?= $idea->duree() ?></td>
+                                            <td style="width:10%"><a class="btn <?= $status ?>"><?= $idea->status() ?></a></td>
                                         </tr>
                                         <!-- update box begin-->
                                         <div id="update<?= $idea->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -204,6 +211,23 @@
                                                         <label class="control-label">Description</label>
                                                         <div class="controls">
                                                             <textarea rows="5" style="width: 400px" name="description"><?= $idea->description() ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="duree">Durée</label>
+                                                        <div class="controls">
+                                                            <input type="text" id="duree" name="duree" class="m-wrap" value="<?= $idea->duree() ?>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="status">Status</label>
+                                                        <div class="controls">
+                                                            <select name="status">
+                                                                <option value="<?= $idea->status() ?>"><?= $idea->status() ?></option>
+                                                                <option disabled="disabled">-------------</option>
+                                                                <option value="V">V</option>
+                                                                <option value="X">X</option>
+                                                            </select>   
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

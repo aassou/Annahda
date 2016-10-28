@@ -5,6 +5,8 @@ class Collaboration{
 	private $_id;
 	private $_titre;
 	private $_description;
+    private $_status;
+    private $_duree;
 	private $_created;
 	private $_createdBy;
 	private $_updated;
@@ -37,6 +39,14 @@ class Collaboration{
 	public function setDescription($description){
 		$this->_description = $description;
    	}
+    
+    public function setStatus($status){
+        $this->_status = $status;
+    }
+    
+    public function setDuree($duree){
+        $this->_duree = $duree;
+    }
 
 	public function setCreated($created){
         $this->_created = $created;
@@ -65,6 +75,14 @@ class Collaboration{
 	public function description(){
 		return $this->_description;
    	}
+    
+    public function status(){
+        return $this->_status;
+    }
+    
+    public function duree(){
+        return $this->_duree;
+    }
 
 	public function created(){
         return $this->_created;

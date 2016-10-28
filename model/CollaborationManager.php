@@ -12,11 +12,13 @@ class CollaborationManager{
 	//BAISC CRUD OPERATIONS
 	public function add(Collaboration $collaboration){
     	$query = $this->_db->prepare(' INSERT INTO t_collaboration (
-		titre, description, created, createdBy)
-		VALUES (:titre, :description, :created, :createdBy)')
+		titre, description, status, duree, created, createdBy)
+		VALUES (:titre, :description, :status, :duree, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':titre', $collaboration->titre());
 		$query->bindValue(':description', $collaboration->description());
+        $query->bindValue(':status', $collaboration->status());
+        $query->bindValue(':duree', $collaboration->duree());
 		$query->bindValue(':created', $collaboration->created());
 		$query->bindValue(':createdBy', $collaboration->createdBy());
 		$query->execute();
@@ -24,13 +26,17 @@ class CollaborationManager{
 	}
 
 	public function update(Collaboration $collaboration){
-    	$query = $this->_db->prepare(' UPDATE t_collaboration SET 
-		titre=:titre, description=:description, updated=:updated, updatedBy=:updatedBy
+    	$query = $this->_db->prepare(
+    	'UPDATE t_collaboration SET 
+		titre=:titre, description=:description, status=:status, 
+		duree=:duree, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $collaboration->id());
 		$query->bindValue(':titre', $collaboration->titre());
 		$query->bindValue(':description', $collaboration->description());
+        $query->bindValue(':status', $collaboration->status());
+        $query->bindValue(':duree', $collaboration->duree());
 		$query->bindValue(':updated', $collaboration->updated());
 		$query->bindValue(':updatedBy', $collaboration->updatedBy());
 		$query->execute();

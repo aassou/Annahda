@@ -29,12 +29,16 @@
         if( !empty($_POST['titre']) ){
 			$titre = htmlentities($_POST['titre']);
 			$description = htmlentities($_POST['description']);
+            $status = htmlentities($_POST['status']);
+            $duree = htmlentities($_POST['duree']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
             $collaboration = new Collaboration(array(
 				'titre' => $titre,
 				'description' => $description,
+				'status' => $status,
+				'duree' => $duree,
 				'created' => $created,
             	'createdBy' => $createdBy
 			));
@@ -55,12 +59,16 @@
         if(!empty($_POST['titre'])){
 			$titre = htmlentities($_POST['titre']);
 			$description = htmlentities($_POST['description']);
+            $status = htmlentities($_POST['status']);
+            $duree = htmlentities($_POST['duree']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$collaboration = new Collaboration(array(
+            $collaboration = new Collaboration(array(
 				'id' => $idCollaboration,
 				'titre' => $titre,
 				'description' => $description,
+				'status' => $status,
+				'duree' => $duree,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));
