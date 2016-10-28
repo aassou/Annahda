@@ -38,6 +38,7 @@
     <link href="assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/data-tables/DT_bootstrap.css" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/style_responsive.css" rel="stylesheet" />
     <link href="assets/css/style_default.css" rel="stylesheet" id="style_color" />
@@ -100,11 +101,10 @@
                             <div class="portlet-title">
                                 <h4>Liste des tâches</h4>
                                 <div class="tools">
-                                    <a href="javascript:;" class="reload"></a>
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <table class="table table-striped table-bordered table-hover" id="sample_2">
                                     <thead>
                                         <tr>
                                             <th style="width :10%">Actions</th>
@@ -414,6 +414,8 @@
     <script src="assets/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="assets/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="assets/js/jquery.pulsate.min.js"></script>
+    <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
     <!-- ie8 fixes -->
     <!--[if lt IE 9]>
     <script src="assets/js/excanvas.js"></script>
