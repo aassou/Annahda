@@ -155,6 +155,29 @@
                 }
                 //else we have to put here our datePrevu processing
                 //CAS LIBRE PROCESSING END
+                //COMMISSION PROCESSING BEGIN
+                if ( isset($_POST['show-commission']) ) {
+                    $commissionnaire = htmlentities($_POST['commissionnaire']);
+                    $montant = htmlentities($_POST['montant']);
+                    $titre = htmlentities($_POST['titre']);
+                    $etat = htmlentities($_POST['etat']);
+                    //load class manager
+                    $commissionManager = new CommissionManager($pdo);
+                    //save the commission
+                    $commission = 
+                        new Commission(
+                            array('titre' => $titre, 
+                                'commissionnaire' => $commissionnaire,
+                                'montant' => $montant, 
+                                'date' => $dateCreation,
+                                'etat' => $etat,
+                                'codeContrat' => $codeContrat,
+                                'created' => $created,
+                                'createdBy' => $createdBy
+                            ));
+                    $commissionManager->add($commission);
+                }
+                //COMMISSION PROCESSING END
                 //create the contract object
                 $contrat = 
                 new Contrat(
@@ -197,7 +220,7 @@
                 $notesClientManager->add($notesClient);
                 $actionMessage = "<strong>Opération valide : </strong>Contrat Client ajouté(e) avec succès.";
                 $typeMessage = "success";
-                $redirectLink = 'Location:../contrat.php?codeContrat='.$codeContrat."&idProjet=".$idProjet;
+                $redirectLink = 'Location:../contrat.php?codeContrat='.$codeContrat;
             }
         }
         else{

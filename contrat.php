@@ -21,6 +21,7 @@
         if ( isset($_SESSION['contrat-form-data']) ) {
             unset($_SESSION['contrat-form-data']);
         }
+        //class managers
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
@@ -29,12 +30,14 @@
         $contratCasLibreManager = new ContratCasLibreManager($pdo);
         $reglementPrevuManager = new ReglementPrevuManager($pdo);
         $companieManager = new CompanyManager($pdo);
-        
+        $commissionManager = new CommissionManager($pdo);
+        //process begin
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
             $comptesBancaires = $compteBancaireManager->getCompteBancaires();
 			$contrat = $contratManager->getContratByCode($codeContrat);
             $companies = $companieManager->getCompanys();
+            $commissions = $commissionManager->getCommissionsByCodeContrat($codeContrat);
             //ContratCasLibre Elements
             $contratCasLibreNumber = 
             $contratCasLibreManager->getContratCasLibreNumberByCodeContrat($codeContrat);
@@ -1203,22 +1206,6 @@
 									}//end of loop
 									}//end of if
 									?>
-									<!--tr>
-										<td><a><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></a></td>											
-										<?php
-										if($contrat->avance()!=0 or $contrat->avance()!='NULL' ){
-										?> 
-											<td><?= number_format($contrat->avance(), 2, ',', ' ')." DH";?></td>
-										<?php
-										}
-										?>
-										<td class="hidden-phone">
-											<a class="btn mini blue" href="controller/QuittanceAvancePrintController.php?idContrat=<?= $contrat->id() ?>"> 
-												<i class="m-icon-white icon-print"></i> Imprimer
-											</a>
-										</td>
-										<td class="hidden-phone"><?= $contrat->modePaiement() ?></td>
-									</tr-->
 								</tbody>
 							</table>
                             <table class="table table-striped table-bordered  table-hover">
@@ -1234,6 +1221,146 @@
 						</div>
 						<br /><br />
 					 </div>
+					 <!-- COMMSSIONS BEGIN -->
+					 <?php 
+                     if( isset($_SESSION['commission-action-message']) 
+                     and isset($_SESSION['commission-type-message']) ){
+                        $message = $_SESSION['commission-action-message'];
+                        $typeMessage = $_SESSION['commission-type-message'];
+                     ?>
+                        <div class="alert alert-<?= $typeMessage ?>">
+                            <button class="close" data-dismiss="alert"></button>
+                            <?= $message ?>     
+                        </div>
+                     <?php 
+                     } 
+                     unset($_SESSION['commission-action-message']);
+                     unset($_SESSION['commission-type-message']);
+                    ?>
+					 <div class="portlet box light-grey" id="commissions">
+                        <div class="portlet-title">
+                            <h4>Détails commissions</h4>
+                            <div class="tools">
+                                <a href="javascript:;" class="reload"></a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <thead>
+                                    <tr>
+                                        <th>Actions</th>
+                                        <th>Commissionnaire</th>
+                                        <th>Description</th>
+                                        <th>Montant</th>
+                                        <th>Date</th>
+                                        <th>état</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    foreach($commissions as $commission){
+                                        $etatButton = "red";
+                                        if ( $commission->etat() == "V" ) {
+                                            $etatButton = "green";
+                                        } 
+                                    ?>
+                                    <tr class="odd gradeX">
+                                        <td>
+                                            <?php
+                                            if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
+                                            ?>
+                                            <a href="#update<?= $commission->id() ?>" data-toggle="modal" data-id="<?= $commission->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
+                                            <?php  
+                                            }
+                                            ?>
+                                        </td>    
+                                        <td><?= $commission->commissionnaire() ?></td>
+                                        <td><?= $commission->titre() ?></td>
+                                        <td><?= $commission->montant() ?></td>
+                                        <td><?= $commission->date() ?></td>
+                                        <td><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
+                                    </tr>
+                                    <!-- updateCommission box begin-->
+                                    <div id="update<?= $commission->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Modifier les informations de Commission </h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" action="controller/CommissionActionController.php" method="post">
+                                                <div class="control-group">
+                                                    <label class="control-label">Commissionnaire</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="commissionnaire" value="<?= $commission->commissionnaire() ?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Description</label>
+                                                    <div class="controls">
+                                                        <textarea name="titre"><?= $commission->titre() ?></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">Montant</label>
+                                                    <div class="controls">
+                                                        <input type="text" name="montant" value="<?= $commission->montant() ?>" />
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label">état</label>
+                                                    <div class="controls">
+                                                        <select name="etat" value="<?= $commission->etat() ?>" />
+                                                            <option value="<?= $commission->etat() ?>"><?= $commission->etat() ?></option>
+                                                            <option disabled="disabled">-------------------</option>
+                                                            <option value="V">V</option>
+                                                            <option value="X">X</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                    <input type="hidden" name="codeContrat" value="<?= $commission->codeContrat() ?>" />
+                                                    <input type="hidden" name="idCommission" value="<?= $commission->id() ?>" />
+                                                    <input type="hidden" name="action" value="update" />
+                                                    <input type="hidden" name="source" value="contrat" />
+                                                    <div class="controls">  
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- updateCommission box end -->
+                                    <!-- delete box begin-->
+                                    <div id="delete<?= $commission->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            <h3>Supprimer Client</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal loginFrm" action="controller/CommssionActionController.php" method="post">
+                                                <p>Êtes-vous sûr de vouloir supprimer la commission de <?= $commission->commissionnaire() ?> ?</p>
+                                                <div class="control-group">
+                                                    <label class="right-label"></label>
+                                                    <input type="hidden" name="idCommission" value="<?= $commission->id() ?>" />
+                                                    <input type="hidden" name="codeContrat" value="<?= $commission->codeContrat() ?>" />
+                                                    <input type="hidden" name="action" value="delete" />
+                                                    <input type="hidden" name="source" value="contrat" />
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- delete box end -->     
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+					 <!-- COMMSSIONS END -->
 				   </div>
 				</div>
 				<!-- updateClient box begin-->

@@ -373,6 +373,56 @@
                                         <?php include('include/cas-libre.php'); ?>
                                     </div>
                                     <!-- END CAS LIBRE DIV -->
+                                    <hr>
+                                    <div class="row-fluid">
+                                        <div class="span3">
+                                          <div class="control-group">
+                                            <label class="checkbox">
+                                            <input type="checkbox" id="show-commission" name="show-commission" value="show-commission" />
+                                            Avec Commission
+                                            </label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- BEGIN COMMSSION DIV -->
+                                    <div class="row-fluid" id="commission" style="display: none">
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Commissionnaire</label>
+                                             <div class="controls">
+                                                <input type="text" id="commissionnaire" name="commissionnaire" class="m-wrap" />
+                                             </div>
+                                          </div>
+                                        </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Montant</label>
+                                             <div class="controls">
+                                                <input type="text" id="montant" name="montant" class="m-wrap">
+                                             </div>
+                                          </div>
+                                        </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">Description</label>
+                                             <div class="controls">
+                                                <textarea id="titre" name="titre" class="m-wrap"></textarea>
+                                             </div>
+                                          </div>
+                                        </div>
+                                        <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="note">état</label>
+                                             <div class="controls">
+                                                <select id="etat" name="etat" class="m-wrap">
+                                                    <option value="V">V</option>
+                                                    <option value="X">X</option>    
+                                                </select>
+                                             </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    <!-- END COMMISSION DIV -->
                                     <div class="form-actions">
                                         <input type="hidden" name="action" value="add">
                                     	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>">
@@ -449,6 +499,9 @@
 			});
 			$('#show-note-client').change(function(){
                 $("#note-client").toggle();
+            });
+            $('#show-commission').change(function(){
+                $("#commission").toggle();
             });
 		});
 		$(document).ready(function() {

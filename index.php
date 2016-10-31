@@ -75,9 +75,6 @@
       <div class="form-actions">
         <input type="submit" class="btn green pull-right" value="Se connecter">            
       </div>
-      <div class="forget-password">
-        <h4><a href="signup.php" class="" id="forget-password">Créer un nouveau compte</a></h4>
-      </div>
     </form>
     <!-- END LOGIN FORM -->
   </div>
