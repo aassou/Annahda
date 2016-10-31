@@ -80,6 +80,11 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
+                                <i class="icon-bar-chart"></i>
+                                <a href="status.php">Les états</a>
+                                <i class="icon-angle-right"></i>
+                            </li>
+                            <li>
                                 <i class="icon-thumbs-up"></i>
                                 <a>Gestion des commissions</a>
                             </li>

@@ -259,19 +259,6 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="commissions.php">
-                            <div class="tile bg-dark-blue">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-thumbs-up"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Commissions
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
 							<a href="configuration.php">
 							<div class="tile bg-dark-red">
 								<div class="corner"></div>
