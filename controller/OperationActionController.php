@@ -30,6 +30,7 @@
     $operationManager = new OperationManager($pdo);
     $projetManager = new ProjetManager($pdo);
     $clientManager = new ClientManager($pdo);
+    $contratManager = new ContratManager($pdo);
     if( $action == "add" ) {
         if( !empty($_POST['montant']) and !empty($_POST['numeroOperation']) ) {
             $reference = 'Q'.date('Ymd-his');
@@ -66,11 +67,15 @@
             'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation, 'url' => $url,  
             'createdBy' => $createdBy, 'created' => $created));
             $operationManager->add($operation);
+            //get contrat details
+            $contrat = $contratManager->getContratById($idContrat);
+            $projet = $projetManager->getProjetById($contrat->idProjet());
+            $nomProjet = $projet->nom();
             //add History data
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des paiements clients ",
-                'description' => "Ajout d'un paiement client, pour ".ucfirst($client->nom())." N° Contrat : ".$idContrat.", montant : ".$montant,
+                'description' => "Ajout d'une opération paiement client, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -132,14 +137,18 @@
             'modePaiement' => $modePaiement, 'updatedBy' => $updatedBy, 'updated' => $updated));
             $operationManager->update($operation);
             $idClient = htmlentities($_POST['idClient']);
+            $idContrat = htmlentities($_POST['idContrat']);
             $client = $clientManager->getClientById($idClient);
+            $contrat = $contratManager->getContratById($idContrat);
+            $projet = $projetManager->getProjetById($contrat->idProjet());
+            $nomProjet = $projet->nom();
             //add History data
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table des paiements clients",
-                'description' => "Modification paiement du client ".ucfirst($client->nom()).",  montant : ".$montant,
+                'description' => "Modification d'une opération paiement client, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -155,6 +164,16 @@
     }
     else if($action=="validate"){
         $idOperation = $_POST['idOperation'];
+        $operation = $operationManager->getOperationById($idOperation);
+        $contrat = $contratManager->getContratById($operation->idContrat());
+        $client = $clientManager->getClientById($contrat->idClient());
+        $projet = $projetManager->getProjetById($contrat->idProjet());
+        $nomProjet = $projet->nom();
+        $montant = $operation->montant();
+        $observation = $operation->observation();
+        $compteBancaire = $operation->compteBancaire();
+        $modePaiement = $operation->modePaiement();
+        $numeroOperation = $operation->numeroCheque();
         $operationManager->validate($idOperation, 1);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -162,7 +181,7 @@
         $history = new History(array(
             'action' => "Validation",
             'target' => "Table des paiements clients",
-            'description' => "Validation de paiement client",
+            'description' => "Validation d'une opération paiement client, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -173,6 +192,16 @@
     }
     else if($action=="cancel"){
         $idOperation = $_POST['idOperation'];
+        $operation = $operationManager->getOperationById($idOperation);
+        $contrat = $contratManager->getContratById($operation->idContrat());
+        $client = $clientManager->getClientById($contrat->idClient());
+        $projet = $projetManager->getProjetById($contrat->idProjet());
+        $nomProjet = $projet->nom();
+        $montant = $operation->montant();
+        $observation = $operation->observation();
+        $compteBancaire = $operation->compteBancaire();
+        $modePaiement = $operation->modePaiement();
+        $numeroOperation = $operation->numeroCheque();
         $operationManager->cancel($idOperation, 0);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -180,7 +209,7 @@
         $history = new History(array(
             'action' => "Annulation",
             'target' => "Table des paiements clients",
-            'description' => "Annulation de paiement client",
+            'description' => "Annulation d'une opération paiement client, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -191,6 +220,16 @@
     }
     else if($action=="hide"){
         $idOperation = $_POST['idOperation'];
+        $operation = $operationManager->getOperationById($idOperation);
+        $contrat = $contratManager->getContratById($operation->idContrat());
+        $client = $clientManager->getClientById($contrat->idClient());
+        $projet = $projetManager->getProjetById($contrat->idProjet());
+        $nomProjet = $projet->nom();
+        $montant = $operation->montant();
+        $observation = $operation->observation();
+        $compteBancaire = $operation->compteBancaire();
+        $modePaiement = $operation->modePaiement();
+        $numeroOperation = $operation->numeroCheque();
         $operationManager->hide($idOperation, 2);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -198,7 +237,7 @@
         $history = new History(array(
             'action' => "Retirage",
             'target' => "Table des paiements clients",
-            'description' => "Retirage de paiement client de la page des états des paiements",
+            'description' => "Retirage d'une opération paiement client de la page des états des paiements, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -209,6 +248,16 @@
     }
     else if($action=="delete"){
         $idOperation = $_POST['idOperation'];
+        $operation = $operationManager->getOperationById($idOperation);
+        $contrat = $contratManager->getContratById($operation->idContrat());
+        $client = $clientManager->getClientById($contrat->idClient());
+        $projet = $projetManager->getProjetById($contrat->idProjet());
+        $nomProjet = $projet->nom();
+        $montant = $operation->montant();
+        $observation = $operation->observation();
+        $compteBancaire = $operation->compteBancaire();
+        $modePaiement = $operation->modePaiement();
+        $numeroOperation = $operation->numeroCheque();
         $operationManager->delete($idOperation);
         //add History data
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -216,7 +265,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table des paiements clients",
-            'description' => "Suppression de paiement client",
+            'description' => "Suppression d'une opération paiement client, pour ".ucfirst($client->nom())." d'un montant de $montant - N° Contrat : $idContrat - Projet : $nomProjet - N° Opération : $numeroOperation - Mode Paiement : $modePaiement - Compte Bancaire : $compteBancaire - Obersvation : $observation",
             'created' => $created,
             'createdBy' => $createdBy
         ));
