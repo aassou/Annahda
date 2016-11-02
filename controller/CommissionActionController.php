@@ -56,6 +56,13 @@
             $actionMessage = "Erreur Ajout commission : Vous devez remplir le champ 'titre'.";
             $typeMessage = "error";
         }
+        //test request url to set response url
+        if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
+            $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat#commissions";
+        }
+        else {
+            $redirectLink = "Location:../commissions.php";
+        }
     }
     //Action Add Processing End
     //Action Update Processing Begin
@@ -85,9 +92,10 @@
             $actionMessage = "Erreur Modification Commission : Vous devez remplir le champ 'titre'.";
             $typeMessage = "error";
         }
+        //test request url to set response url
         if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
             $idProjet = htmlentities($_POST['idProjet']);
-            $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat&idProjet=$idProjet#commissions";
+            $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat#commissions";
         }
         else {
             $redirectLink = "Location:../commissions.php";
@@ -102,7 +110,11 @@
         $typeMessage = "success";
     }
     //Action Delete Processing End
+    
+    //set session informations
     $_SESSION['commission-action-message'] = $actionMessage;
     $_SESSION['commission-type-message'] = $typeMessage;
+    
+    //set redirection link
     header($redirectLink);
 

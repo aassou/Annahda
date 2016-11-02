@@ -1222,6 +1222,66 @@
 						<br /><br />
 					 </div>
 					 <!-- COMMSSIONS BEGIN -->
+					 <!-- addReglement box begin-->
+                    <div id="addCommission" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h3>Ajouter Commission</h3>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal loginFrm" action="controller/CommissionActionController.php" method="post" enctype="multipart/form-data">
+                                <div class="control-group">
+                                     <label class="control-label" for="code">Date</label>
+                                     <div class="controls">
+                                        <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                            <input name="date" id="date" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                         </div>
+                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Commissionnaire</label>
+                                    <div class="controls">
+                                        <input type="text" required="required" name="commissionnaire" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Description</label>
+                                    <div class="controls">
+                                        <textarea type="text" name="titre"></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Montant</label>
+                                    <div class="controls">
+                                        <input type="text" required="required" id="montant" name="montant" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">état</label>
+                                    <div class="controls">
+                                        <select name="etat">
+                                            <option value="V">V</option>
+                                            <option value="X">X</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <input type="hidden" name="action" value="add" />
+                                    <input type="hidden" name="source" value="contrat" />
+                                    <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
+                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                    <input type="hidden" name="idClient" value="<?= $contrat->idClient() ?>" />
+                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                    <div class="controls">
+                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- addReglement box end -->
 					 <?php 
                      if( isset($_SESSION['commission-action-message']) 
                      and isset($_SESSION['commission-type-message']) ){
@@ -1245,6 +1305,20 @@
                             </div>
                         </div>
                         <div class="portlet-body">
+                            <?php
+                            if( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                            ) {
+                            ?>
+                            <div class="btn-group">
+                                <a class="btn blue pull-right" href="#addCommission" data-toggle="modal">
+                                    Ajouter Commission&nbsp;<i class="icon-plus-sign"></i>
+                                </a>
+                            </div>
+                            <?php
+                            }
+                            ?>
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
@@ -1277,7 +1351,7 @@
                                         <td><?= $commission->commissionnaire() ?></td>
                                         <td><?= $commission->titre() ?></td>
                                         <td><?= $commission->montant() ?></td>
-                                        <td><?= $commission->date() ?></td>
+                                        <td><?= date('d/m/Y', strtotime($commission->date())) ?></td>
                                         <td><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
                                     </tr>
                                     <!-- updateCommission box begin-->
