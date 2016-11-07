@@ -105,7 +105,7 @@ class CaisseIaazaManager{
         $query = $this->_db->prepare(
         "SELECT SUM(montant) as total FROM t_caisse_iaaza 
         WHERE type=:type 
-        AND destination=:destination
+        AND destination LIKE %:destination%
         AND dateOperation BETWEEN :dateFrom AND :dateTo")
         or die (print_r($this->_db->errorInfo()));
         $query->bindValue(':type', $type);
@@ -159,7 +159,7 @@ class CaisseIaazaManager{
         $caisses = array();
         $query = $this->_db->prepare(
         'SELECT * FROM t_caisse_iaaza WHERE
-        destination=:destination AND
+        destination LIKE %:destination% AND
         dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
         $query->bindValue(':dateFrom', $dateFrom);
         $query->bindValue(':dateTo', $dateTo);
