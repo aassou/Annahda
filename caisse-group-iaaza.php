@@ -217,7 +217,7 @@
                                    </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <input type="hidden" name="societe" value="2 />
+                                            <input type="hidden" name="societe" value="2" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
