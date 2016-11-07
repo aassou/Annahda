@@ -119,7 +119,6 @@ ob_start();
     <h1><?= $titre ?></h1>
     <h1><?= $titreDocument ?></h1>
     <h2>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </h2>
-    <?= $debugging ?>
     <br>
     <table>
         <tr>
