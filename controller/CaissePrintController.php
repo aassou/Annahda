@@ -56,16 +56,16 @@
             else if ( $type != "Toutes" && $destination == "Tout" ) {
                 $caisses = $caisseManager->getCaissesByDatesByType($dateFrom, $dateTo, $type);
                 $titreDocument = "Liste des opérations d'".$type." entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo));
-                $totalCaisse = 
-                //$caisseManager->getTotalCaisseByType($type, $dateFrom, $dateTo);
+                $totalCaisse =
                 $caisseManager->getTotalCaisseByTypeByDate($type, $dateFrom, $dateTo);
+                //$caisseManager->getTotalCaisseByType($type, $dateFrom, $dateTo);
             }
             else if ( $type != "Toutes" && $destination != "Tout" ) {
                 $caisses = $caisseManager->getCaissesByDatesByTypeByDestination($dateFrom, $dateTo, $type, $destination);
                 $titreDocument = "Liste des opérations d'".$type." entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo))." - (".$destination.")";
-                $totalCaisse = 
-                //$caisseManager->getTotalCaisseByType($type, $dateFrom, $dateTo);
+                $totalCaisse =
                 $caisseManager->getTotalCaisseByTypeByDateByDestination($type, $dateFrom, $dateTo, $destination);
+                //$caisseManager->getTotalCaisseByType($type, $dateFrom, $dateTo);
             }
         }
         else if ( $criteria=="toutesCaisse" ) {
