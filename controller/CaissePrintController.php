@@ -53,7 +53,7 @@
                 $caisses = $caisseManager->getCaissesByDatesByDestination($dateFrom, $dateTo, $destination);
                 $titreDocument = "Liste des opérations entre : ".date('d/m/Y', strtotime($dateFrom)).' - '.date('d/m/Y', strtotime($dateTo))." - (Destination : ".$destination.")";
                 $totalCaisse = 
-                $caisseManager->getTotalCaisseByTypeByDateByDestination('Entree', $dateFrom, $dateTo, $destination) - $caisseManager->getTotalCaisseByTypeByDate('Sortie', $dateFrom, $dateTo, $destination);
+                $caisseManager->getTotalCaisseByTypeByDateByDestination('Entree', $dateFrom, $dateTo, $destination) - $caisseManager->getTotalCaisseByTypeByDateByDestination('Sortie', $dateFrom, $dateTo, $destination);
                 $debugging = "2";   
             }
             else if ( $type != "Toutes" && $destination == "Tout" ) {
