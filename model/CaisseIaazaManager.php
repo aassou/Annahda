@@ -138,6 +138,23 @@ class CaisseIaazaManager{
         return $caisses;
     }
     
+    public function getCaissesByDatesByDestination($dateFrom, $dateTo, $destination){
+        $caisses = array();
+        $query = $this->_db->prepare(
+        'SELECT * FROM t_caisse_iaaza WHERE
+        destination=:destination AND
+        dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->bindValue(':destination', $destination);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $caisses[] = new Caisse($data);
+        }
+        $query->closeCursor();
+        return $caisses;
+    }
+    
     public function getCaissesByDatesByType($dateFrom, $dateTo, $type){
         $caisses = array();
         $query = $this->_db->prepare('SELECT * FROM t_caisse_iaaza WHERE type=:type
