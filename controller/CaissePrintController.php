@@ -37,6 +37,9 @@
             $dateTo = htmlentities($_POST['dateTo']); 
             $type = htmlentities($_POST['type']);
             $destination = htmlentities($_POST['destination']);
+            if ( $societe == 2 ) {
+                $destination = "Tout";
+            }
             //We test here on type of criteria if it is IN/OR or All the entries
             if( $type == "Toutes" && $destination == "Tout" ) {
                 $caisses = $caisseManager->getCaissesByDates($dateFrom, $dateTo);
