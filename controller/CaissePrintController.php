@@ -85,6 +85,7 @@ ob_start();
     p, h1{
         text-align: center;
         text-decoration: underline;
+        font-size: 16px;
     }
     table {
             border-collapse: collapse;
@@ -146,7 +147,8 @@ ob_start();
     <table>
         <tr>
             <th style="width: 15%">Solde</th>
-            <td style="width: 85%; text-align: center"><strong><?= number_format($totalCaisse, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+            <td style="width: 30%; text-align: center"><strong><?= number_format($totalCaisse, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+            <th style="width: 65%"></th>
         </tr>
     </table>
     <br><br>
