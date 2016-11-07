@@ -148,7 +148,7 @@ ob_start();
         <tr>
             <th style="width: 15%">Solde</th>
             <td style="width: 30%; text-align: center"><strong><?= number_format($totalCaisse, 2, ',', ' ') ?>&nbsp;DH</strong></td>
-            <th style="width: 65%"></th>
+            <th style="width: 55%"></th>
         </tr>
     </table>
     <br><br>
