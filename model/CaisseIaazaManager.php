@@ -103,7 +103,7 @@ class CaisseIaazaManager{
 
     public function getCaisses(){
         $caisses = array();
-        $query = $this->_db->query('SELECT * FROM t_caisse_iaaza ORDER BY type ASC, dateOperation DESC');
+        $query = $this->_db->query('SELECT * FROM t_caisse_iaaza ORDER BY dateOperation DESC');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $caisses[] = new Caisse($data);
         }
@@ -114,7 +114,7 @@ class CaisseIaazaManager{
     //Show By Criteria
     public function getCaissesByType($type){
         $caisses = array();
-        $query = $this->_db->prepare('SELECT * FROM t_caisse_iaaza WHERE type=:type ORDER BY dateOperation');
+        $query = $this->_db->prepare('SELECT * FROM t_caisse_iaaza WHERE type=:type ORDER BY dateOperation DESC');
         $query->bindValue(':type', $type);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
@@ -155,8 +155,8 @@ class CaisseIaazaManager{
     
     public function getCaissesByLimits($begin, $end){
         $caisses = array();
-        $query = $this->_db->query('SELECT * FROM t_caisse_iaaza
-        ORDER BY id DESC LIMIT '.$begin.', '.$end);
+        $query = $this->_db->query("SELECT * FROM t_caisse_iaaza
+        ORDER BY id DESC LIMIT $begin, $end ORDER BY dateOperation DESC");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $caisses[] = new Caisse($data);
         }
