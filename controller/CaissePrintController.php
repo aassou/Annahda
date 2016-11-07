@@ -87,6 +87,11 @@ ob_start();
         text-decoration: underline;
         font-size: 16px;
     }
+    h2{
+        text-align: center;
+        text-decoration: underline;
+        font-size: 11px;
+    }
     table {
             border-collapse: collapse;
             width:100%;
@@ -107,7 +112,7 @@ ob_start();
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <h1><?= $titre ?></h1>
     <h1><?= $titreDocument ?></h1>
-    <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
+    <h2>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </h2>
     <br>
     <table>
         <tr>
