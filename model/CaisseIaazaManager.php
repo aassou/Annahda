@@ -100,6 +100,23 @@ class CaisseIaazaManager{
         $query->closeCursor();
         return $data['total'];
     }
+    
+    public function getTotalCaisseByTypeByDateByDestination($type, $dateFrom, $dateTo, $destination){
+        $query = $this->_db->prepare(
+        "SELECT SUM(montant) as total FROM t_caisse_iaaza 
+        WHERE type=:type 
+        AND destination=:destination
+        AND dateOperation BETWEEN :dateFrom AND :dateTo")
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':type', $type);
+        $query->bindValue(':dateFrom', $dateFrom);
+        $query->bindValue(':dateTo', $dateTo);
+        $query->bindValue(':destination', $destination);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['total'];
+    }
 
     public function getCaisses(){
         $caisses = array();
