@@ -431,7 +431,7 @@ class ContratManager{
     }
 
     public function getContratActifByCode($code){
-        $query = $this->_db->prepare('SELECT * FROM t_contrat WHERE code=:code and status="actif"');
+        $query = $this->_db->prepare('SELECT * FROM t_contrat WHERE code=:code and status="actif" ');
         $query->bindValue(':code', $code);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);

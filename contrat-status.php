@@ -152,6 +152,8 @@
                                         foreach ( $reglementsPrevusEnRetards as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -252,11 +254,14 @@
                                         <!-- updateStatusReglementPrevuEnRetards box end -->
                                         <?php
                                         }
+                                        }
                                         ?>
                                         <?php
                                         foreach ( $casLibreEnRetards as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -357,6 +362,7 @@
                                         <!-- updateStatusReglementCasLibreEnRetards box end -->
                                         <?php
                                         }
+                                        }
                                         ?>    
                                     </tbody>
                                 </table>
@@ -379,6 +385,8 @@
                                         foreach ( $reglementsPrevusToday as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -479,11 +487,14 @@
                                         <!-- updateStatusReglementPrevuToday box end -->
                                         <?php
                                         }
+                                        }
                                         ?>  
                                         <?php
                                         foreach ( $casLibreToday as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -584,6 +595,7 @@
                                         <!-- updateStatusReglementCasLibreToday box end -->
                                         <?php
                                         }
+                                        }
                                         ?>
                                     </tbody>
                                 </table>
@@ -606,6 +618,8 @@
                                         foreach ( $reglementsPrevusWeek as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -706,11 +720,14 @@
                                         <!-- updateStatusReglementPrevuWeek box end -->
                                         <?php
                                         }
+                                        }
                                         ?>  
                                         <?php
                                         foreach ( $casLibreWeek as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -811,6 +828,7 @@
                                         <!-- updateStatusReglementCasLibreWeek box end -->
                                         <?php
                                         }
+                                        }
                                         ?>
                                     </tbody>
                                 </table>
@@ -833,6 +851,8 @@
                                         foreach ( $reglementsPrevusMonth as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -935,6 +955,7 @@
                                         </div>
                                         <!-- updateStatusReglementPrevuMonth box end -->
                                         <?php
+                                        }
                                         }
                                         ?>  
                                         <?php
