@@ -187,7 +187,7 @@
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
-                                            <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
+                                            <td><?= $typeBien.' - '.$niveau.'e: ' ?></td>
                                             <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
