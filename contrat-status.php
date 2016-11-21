@@ -134,7 +134,7 @@
                         <div class="portlet-body">
                             <div class="clearfix">
                                 <strong>Liste des réglements en retards</strong>
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover" id="sample_2">
                                     <thead>
                                         <tr>
                                             <th style="width: 20%">Client</th>
