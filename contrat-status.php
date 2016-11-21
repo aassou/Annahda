@@ -941,6 +941,8 @@
                                         foreach ( $casLibreMonth as $element ) {
                                             $contrat = 
                                             $contratManager->getContratActifByCode($element->codeContrat());
+                                            //process done only if the status is actif
+                                            if ( $contrat->status() == "actif" ){
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -1040,6 +1042,7 @@
                                         </div>
                                         <!-- updateStatusReglementCasLibreMonth box end -->
                                         <?php
+                                        }
                                         }
                                         ?>
                                     </tbody>
