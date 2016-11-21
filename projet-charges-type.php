@@ -256,7 +256,7 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <input type="hidden" name="typeCharge" value="<?= $typeCharge ?>" />
+                                            <input type="hidden" name="type" value="<?= $typeCharge ?>" />
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>

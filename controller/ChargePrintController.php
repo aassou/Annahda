@@ -117,7 +117,6 @@ ob_start();
             <td style="width:15%"><strong><?= $totalCharges ?>&nbsp;DH</strong></td>
         </tr>
     </table>
-    
     <br><br>
     <page_footer>
     <hr/>
