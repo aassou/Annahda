@@ -445,9 +445,10 @@
                                                         <div class="controls controls-row">
                                                             <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateOpé" />
                                                             <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateRég" />
-                                                            <input disabled="disabled" class="span4 m-wrap input-bold-text" type="text" value="Montant" />
+                                                            <input disabled="disabled" class="span3 m-wrap input-bold-text" type="text" value="Montant" />
                                                             <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Compte" />
                                                             <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Chèque" />
+                                                            <input disabled="disabled" class="span1 m-wrap input-bold-text" type="text" value="V" />
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane synthese-client">
@@ -461,6 +462,7 @@
                                                         <input type="hidden" name="observation" value="<?= $releve->libelle() ?>" />
                                                         <input type="hidden" name="reference" value="<?= $releve->reference() ?>" />
                                                         <input type="hidden" name="action" value="process-client" />
+                                                        <input type="hidden" name="idOperation" id="idOperation" value="" />
                                                         <div class="controls">  
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -603,6 +605,10 @@
             });
         });
         //processClient end
+        function assignIdOperation(){
+            var idOperation = $(this).val();
+            ('#idOperation').val(idOperation);
+        }
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

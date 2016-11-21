@@ -429,6 +429,15 @@ class ContratManager{
         $query->closeCursor();
         return new Contrat($data);
     }
+
+    public function getContratActifByCode($code){
+        $query = $this->_db->prepare('SELECT * FROM t_contrat WHERE code=:code and status="actif"');
+        $query->bindValue(':code', $code);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return new Contrat($data);
+    }
     
     public function getLastId(){
         $query = $this->_db->query('SELECT id AS last_id FROM t_contrat ORDER BY id DESC LIMIT 0, 1');

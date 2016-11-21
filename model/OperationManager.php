@@ -89,6 +89,27 @@ class OperationManager{
         $query->closeCursor();
     }
 
+    public function updateByReleveActionController(Operation $operation){
+        $query = $this->_db->prepare(
+        'UPDATE t_operation SET date=:date, dateReglement=:dateReglement, compteBancaire=:compteBancaire,
+        montant=:montant, modePaiement=:modePaiement, observation=:observation, 
+        numeroCheque=:numeroCheque, status=:status, updated=:updated, updatedBy=:updatedBy WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $operation->id());
+        $query->bindValue(':date', $operation->date());
+        $query->bindValue(':dateReglement', $operation->dateReglement());
+        $query->bindValue(':compteBancaire', $operation->compteBancaire());
+        $query->bindValue(':observation', $operation->observation());
+        $query->bindValue(':montant', $operation->montant());
+        $query->bindValue(':modePaiement', $operation->modePaiement());
+        $query->bindValue(':numeroCheque', $operation->numeroCheque());
+        $query->bindValue(':status', $operation->status());
+        $query->bindValue(':updated', $operation->updated());
+        $query->bindValue(':updatedBy', $operation->updatedBy());
+        $query->execute();
+        $query->closeCursor();
+    }
+
 	public function updateNumeroCheque($numeroCheque, $idOperation){
         $query = $this->_db->prepare('UPDATE t_operation SET numeroCheque=:numeroCheque WHERE id=:id') 
         or die(print_r($this->_db->errorInfo()));

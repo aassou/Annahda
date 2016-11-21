@@ -211,9 +211,11 @@
         $dateReglement = DateTime::createFromFormat('d/m/Y', trim($dateReglement));
         $dateOperation = $dateOperation->format('Y-m-d'); 
         $dateReglement = $dateReglement->format('Y-m-d'); 
-        $designation = htmlentities($_POST['designation']);
+        //$designation = htmlentities($_POST['designation']);
         if ( $projetContrat == "Ignorer" ) {
             $releveBancaireManager->delete($idReleveBancaire);
+            $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
+            $typeMessage = "success";
         }
         else{
             $operationManager = new OperationManager($pdo);
@@ -226,18 +228,28 @@
             //$observation ="Ce réglement client fait référence à la ligne : ".$idReleveBancaire." du relevé bancaire du compte bancaire : ".$compteBancaire;
             $observation = htmlentities($_POST['observation']);
             $idContrat = htmlentities($_POST['contrat-client']);
-            $createdBy = $_SESSION['userMerlaTrav']->login();
-            $created = date('Y-m-d h:i:s');
-            $operation = 
-            new Operation(array('date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
-            'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
-            'modePaiement'=>$modePaiement, 'idContrat' => $idContrat, 'numeroCheque' => $numeroOperation,   
-            'createdBy' => $createdBy, 'created' => $created));
-            $operationManager->add($operation);
-            $releveBancaireManager->hide($idReleveBancaire);
+            $updatedBy = $_SESSION['userMerlaTrav']->login();
+            $updated = date('Y-m-d h:i:s');
+            //echo $_POST['idOperation'];
+            if ( isset($_POST['idOperation']) ) {
+                $idOperation = $_POST['idOperation'];
+                $operation = 
+                new Operation(array('id' => $idOperation, 'date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
+                'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
+                'modePaiement'=>$modePaiement, 'numeroCheque' => $numeroOperation,   
+                'updatedBy' => $updatedBy, 'updated' => $updated));
+                print_r($operation);
+                //$operationManager->add($operation);
+                $operationManager->updateByReleveActionController($operation);
+                $releveBancaireManager->hide($idReleveBancaire);
+                $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
+                $typeMessage = "success";
+            }
+            else {
+                $actionMessage = "<strong>Erreur Opération</strong> : Vous devez choisir l'opération à mettre à jours.";
+                $typeMessage = "error";
+            }
         }
-        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
-        $typeMessage = "success";
     }
     //Action ProcessClient End
     //Action SearchArchive Processing Begin 
@@ -271,5 +283,5 @@
     if ( isset($_POST['source']) and $_POST['source'] == "releve-bancaire-archive" ) {
         $redirectLink = "Location:../releve-bancaire-archive.php";
     }
-    header($redirectLink);
+    //header($redirectLink);
 

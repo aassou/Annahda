@@ -950,15 +950,15 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
 								<thead>
 									<tr>
-									    <th style="width: 20%">Actions</th>
-									    <th style="width: 15%">Pieces</th>
+									    <th style="width: 15%">Actions</th>
+									    <th style="width: 10%">Pieces</th>
 										<th style="width: 10%">Date.Opé/Rég</th>
 										<!--th style="width: 10%">Date.Rég</th-->
 										<th style="width: 10%">ModePaiement</th>
 										<th style="width: 10%">Compte</th>
-										<th style="width: 5%">N°.Opér</th>
+										<th style="width: 10%">N°.Opér</th>
 										<th style="width: 10%">Montant</th>
-										<th style="width: 10%">Observation</th>
+										<th style="width: 15%">Observation</th>
 										<th style="width: 10%">Status</th>
 									</tr>
 								</thead>
