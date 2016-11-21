@@ -55,6 +55,7 @@ ob_start();
         font-family : Arial;
         font-weight: 100;
         margin-bottom: 0px;
+        font-size: 12px;
     }
     h2{
         font-size: 20px;
