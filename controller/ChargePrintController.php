@@ -75,7 +75,7 @@ ob_start();
             background-color: grey;
         }
 </style>
-<page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
+<page backtop="5mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
     <h1><?= $titreDocument ?> </h1>
     <h2>Projet <?= $projet->nom() ?> </h2>
