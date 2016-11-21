@@ -378,7 +378,7 @@
                                         <?php
                                         foreach ( $reglementsPrevusToday as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -483,7 +483,7 @@
                                         <?php
                                         foreach ( $casLibreToday as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -605,7 +605,7 @@
                                         <?php
                                         foreach ( $reglementsPrevusWeek as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -710,7 +710,7 @@
                                         <?php
                                         foreach ( $casLibreWeek as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -832,7 +832,7 @@
                                         <?php
                                         foreach ( $reglementsPrevusMonth as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
@@ -940,7 +940,7 @@
                                         <?php
                                         foreach ( $casLibreMonth as $element ) {
                                             $contrat = 
-                                            $contratManager->getContratByCode($element->codeContrat());
+                                            $contratManager->getContratActifByCode($element->codeContrat());
                                             $client = 
                                             $clientManager->getClientById($contrat->idClient());
                                             $projet = 
