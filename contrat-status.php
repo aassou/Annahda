@@ -124,6 +124,7 @@
                         unset($_SESSION['mail-action-message']);
                         unset($_SESSION['mail-type-message']);
                      ?>
+                    <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Rechercher" />
                     <div class="portlet box light-grey" id="reglementsPrevus">
                         <div class="portlet-title">
                             <h4>Situation des réglements des clients</h4>
@@ -134,7 +135,7 @@
                         <div class="portlet-body">
                             <div class="clearfix">
                                 <strong>Liste des réglements en retards</strong>
-                                <table class="table table-striped table-bordered table-hover" id="sample_2">
+                                <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th style="width: 20%">Client</th>
@@ -183,7 +184,7 @@
                                                 $link = '<a class="btn mini red blink_me">En retard</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -291,7 +292,7 @@
                                                 $link = '<a class="btn mini red blink_me">En retard</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -416,7 +417,7 @@
                                                 $link = '<a class="btn mini purple blink_me">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -524,7 +525,7 @@
                                                 $link = '<a class="btn mini purple blink_me">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -649,7 +650,7 @@
                                                 $link = '<a class="btn mini green">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -757,7 +758,7 @@
                                                 $link = '<a class="btn mini green">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -885,7 +886,7 @@
                                                 $link = '<a class="btn mini blue">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -993,7 +994,7 @@
                                                 $link = '<a class="btn mini blue">En cours</a>';
                                             }
                                         ?>
-                                        <tr>
+                                        <tr class="reglements">
                                             <td><?= $client->nom() ?></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
@@ -1117,6 +1118,16 @@
             App.setPage("table_managed");
             $('.hidenBlock').hide();
             App.init();
+        });
+        $('.reglements').show();
+        $('#criteria').keyup(function(){
+            $('.reglements').hide();
+           var txt = $('#criteria').val();
+           $('.reglements').each(function(){
+               if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                   $(this).show();
+               }
+            });
         });
     </script>
 </body>
