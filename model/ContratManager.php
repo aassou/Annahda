@@ -91,6 +91,15 @@ class ContratManager{
         $query->execute();
         $query->closeCursor();
     }
+
+    public function updateObservationClient($idContrat, $observation){
+        $query = $this->_db->prepare('UPDATE t_contrat SET observationClient=:observationClient WHERE id=:id') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idContrat);
+        $query->bindValue(':observationClient', $observation);
+        $query->execute();
+        $query->closeCursor();
+    }
 	
 	public function desisterContrat($idContrat){
 		$query = $this->_db->prepare('UPDATE t_contrat SET status=:status WHERE id=:id') 

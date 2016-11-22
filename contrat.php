@@ -238,6 +238,15 @@
 								<?php
                                 }
                                 ?>
+                                <?php
+                                if( $_SESSION['userMerlaTrav']->profil() == "admin" || $_SESSION['userMerlaTrav']->profil() == "manager" ) {
+                                ?>
+                                <a href="#addObservation" class="pull-right stay-away btn black hidden-phone" data-toggle="modal">
+                                    <i class="icon-plus icon-white"></i> Observation
+                                </a>
+                                <?php
+                                }
+                                ?>
 								<br><br>	
 							</div>
 							<ul class="unstyled">
@@ -265,6 +274,10 @@
 									<span class="sale-info"><i class="icon-envelope"></i></span> 
 									<span class="sale-num"><a href="mailto:<?= $client->email() ?>"><?= $client->email() ?></a></span>
 								</li>
+								<li>
+                                    <span class="sale-info">Observation</span> 
+                                    <span class="sale-num"><?= $contrat->observationClient() ?></span>
+                                </li>
 							</ul>
 						</div>
 					 </div>
@@ -1437,6 +1450,34 @@
 					 <!-- COMMSSIONS END -->
 				   </div>
 				</div>
+				<!-- addObservation box begin-->
+                <div id="addObservation" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3>Observation Client</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" action="controller/ContratActionController.php" method="post">
+                            <div class="control-group">
+                                <label class="control-label">Observation</label>
+                                <div class="controls">
+                                    <textarea rows="5" name="observation"><?= $contrat->observationClient() ?></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <input type="hidden" name="action" value="updateObservation" />
+                                <input type="hidden" name="source" value="contrat" />
+                                <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                <div class="controls">  
+                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- addObservation box end -->
 				<!-- updateClient box begin-->
 				<div id="updateClient<?= $client->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 					<div class="modal-header">

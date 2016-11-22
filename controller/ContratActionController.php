@@ -369,7 +369,19 @@
             $redirectLink = "Location:../clients-modification.php";    
         }
     }
-    //Action UpdateImageNote Processing END 
+    //Action UpdateImageNote Processing END
+    //Action UpdateObservation Processing Begin
+    else if($action=="updateObservation"){
+        $idContrat = htmlentities($_POST['idContrat']);
+        $codeContrat = htmlentities($_POST['codeContrat']);
+        $observation = htmlentities($_POST['observation']);
+        $contratManager->updateObservationClient($idContrat, $observation);
+        //after the delete of our contract, we should change the property status to "Disponible"
+        $actionMessage = "<strong>Opération Valide : </strong>Observation ajouté(e) avec succès.";
+        $typeMessage = "success";
+        $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat";
+    }
+    //Action UpdateObservation Processing End 
     //Action Delete Processing Begin
     else if($action=="delete"){
         $idContrat = $_POST['idContrat'];

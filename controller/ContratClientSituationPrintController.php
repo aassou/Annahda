@@ -171,8 +171,8 @@ ob_start();
 				?>
 			</tr>
 			<tr>
-				<td style="width:25%"></td>
-				<td style="width:25%"></td>
+				<td style="width:25%"><strong>Observation</strong></td>
+				<td style="width:25%"><strong><?= $contrat->observationClient() ?></strong></td>
 				<td style="width:25%"><strong>Réglements</strong></td>
 				<td style="width:25%"><strong><?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>

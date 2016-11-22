@@ -15,6 +15,7 @@ class Contrat{
     private $_nombreMois;
     private $_echeance;
     private $_note;
+    private $_observationClient;
     private $_imageNote;
     private $_idClient;
     private $_idProjet;
@@ -100,6 +101,10 @@ class Contrat{
     
     public function setNote($note){
         $this->_note = $note;
+    }
+    
+    public function setObservationClient($observationClient){
+        $this->_observationClient = $observationClient;
     }
     
     public function setImageNote($imageNote){
@@ -222,6 +227,10 @@ class Contrat{
     
     public function note(){
         return $this->_note;
+    }
+    
+    public function observationClient(){
+        return $this->_observationClient;
     }
     
     public function imageNote(){
