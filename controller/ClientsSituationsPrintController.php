@@ -58,6 +58,7 @@ ob_start();
 			<th>Prix</th>
 			<th>Réglements</th>
 			<th>Reste</th>
+			<th>Observation</th>
 		</tr>
 		<?php
 		if($contratNumber != 0){
@@ -80,10 +81,11 @@ ob_start();
 		?>		
 		<tr>
 			<td style="width: 25%"><a><?= $clientManager->getClientById($contrat->idClient())->nom() ?></a></td>
-			<td style="width: 30%"><?= $typeBien." - ".$niveau.$bien->nom() ?></td>
+			<td style="width: 20%"><?= $typeBien." - ".$niveau.$bien->nom() ?></td>
 			<td style="width: 15%"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 			<td style="width: 15%"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
 			<td style="width: 15%"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
+			<td style="width: 10%"><?= $contrat->observationClient() ?></td>
 		</tr>
 	<?php
 		}//end of loop
