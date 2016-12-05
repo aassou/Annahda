@@ -79,6 +79,11 @@
 			if($operationsNumber != 0){
 				$operations = $operationManager->getOperationsByIdContrat($contrat->id());	
 			}
+            //disabled is used to block other profiles than admin to update some fields
+            $readonly = '';
+            if ( $_SESSION['userMerlaTrav']->profil() == "manager" ) {
+                $readonly = ' readonly="readonly" ';    
+            }
 		}
 ?>
 <!DOCTYPE html>
@@ -230,7 +235,8 @@
 							<div class="portlet-title">
 								<h4>Informations du client</h4>
 								<?php
-                                if( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
+                                if( $_SESSION['userMerlaTrav']->profil() == "admin" 
+                                    or $_SESSION['userMerlaTrav']->profil() == "manager") {
                                 ?>
 								<a href="#updateClient<?= $client->id() ?>" class="pull-right btn red hidden-phone" data-toggle="modal" data-id="<?= $client->id(); ?>">
 									Modifier <i class="icon-refresh icon-white"></i>
@@ -1486,23 +1492,22 @@
 					</div>
 					<div class="modal-body">
 						<form class="form-horizontal" action="controller/ClientActionController.php" method="post">
-							<p>Êtes-vous sûr de vouloir modifier les infos du client <strong><?= $client->nom() ?></strong> ?</p>
 							<div class="control-group">
 								<label class="control-label">Nom</label>
 								<div class="controls">
-									<input type="text" name="nom" value="<?= $client->nom() ?>" />
+									<input type="text" name="nom" value="<?= $client->nom() ?>" <?= $readonly ?> />
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label">CIN</label>
 								<div class="controls">
-									<input type="text" name="cin" value="<?= $client->cin() ?>" />
+									<input type="text" name="cin" value="<?= $client->cin() ?>" <?= $readonly ?> />
 								</div>
 							</div>	
 							<div class="control-group">
 								<label class="control-label">Adresse</label>
 								<div class="controls">
-									<input type="text" name="adresse" value="<?= $client->adresse() ?>" />
+									<input type="text" name="adresse" value="<?= $client->adresse() ?>" <?= $readonly ?> />
 								</div>
 							</div>
 							<div class="control-group">
@@ -1526,13 +1531,13 @@
 							<div class="control-group">
                                 <label class="control-label">الاسم</label>
                                 <div class="controls">
-                                    <input type="text" name="nomArabe" value="<?= $client->nomArabe() ?>" />
+                                    <input type="text" name="nomArabe" value="<?= $client->nomArabe() ?>" <?= $readonly ?> />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">العنوان</label>
                                 <div class="controls">
-                                    <input type="text" name="adresseArabe" value="<?= $client->adresseArabe() ?>" />
+                                    <input type="text" name="adresseArabe" value="<?= $client->adresseArabe() ?>" <?= $readonly ?> />
                                 </div>  
                             </div>
 							<div class="control-group">

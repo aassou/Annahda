@@ -275,6 +275,19 @@
 							<?php
 							}
                             ?>
+                            <a href="annuaire.php">
+                            <div class="tile bg-dark-cyan">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-phone-sign"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Annuaire
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 						</div>
 					</div>
 				</div>

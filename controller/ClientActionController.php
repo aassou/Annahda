@@ -114,6 +114,11 @@
         }
     }
     else if($action == "update"){
+        //This input is used to specify the redirect link. Because you can launch the update of a client
+        //from one of these 2 url : contrat.php or client-list.php, so you have to specify based on the
+        //source input to which one of them you'll be redirected.
+        $source = htmlentities($_POST['source']);
+        $codeContrat = htmlentities($_POST['codeContrat']);
         if(!empty($_POST['nom'])){
             $id = htmlentities($_POST['idClient']);
             $nom = htmlentities($_POST['nom']);
@@ -126,11 +131,6 @@
             $email = htmlentities($_POST['email']);
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            $codeContrat = htmlentities($_POST['codeContrat']);
-            //This input is used to specify the redirect link. Because you can launch the update of a client
-            //from one of these 2 url : contrat.php or client-list.php, so you have to specify based on the
-            //source input to which one of them you'll be redirected.
-            $source = htmlentities($_POST['source']);
             $client = 
             new Client(array('id' => $id, 'nom' => $nom, 'nomArabe' => $nomArabe, 'cin' => $cin, 
             'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 'telephone1' => $telephone1, 'telephone2' => $telephone2, 
@@ -163,7 +163,7 @@
             if( $source == "contrat" ){
                 $redirectLink = "Location:../contrat.php?codeContrat=".$codeClient;
             }
-            else if( $source="clients" ){
+            else if( $source == "clients" ){
                 $redirectLink = "Location:../clients.php";   
             }
         }
