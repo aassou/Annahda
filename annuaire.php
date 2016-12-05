@@ -167,6 +167,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <tbody>
                                         <tr>
+                                            <th style="background-color:grey">Actions</th>
                                             <th style="background-color:grey">Nom</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -174,15 +175,56 @@
                                         foreach($annuaires as $annuaire){
                                         ?>
                                         <tr class="odd gradeX annuaire">
+                                            <td><a class="btn mini green" href="#updateAnnuaire<?= $annuaire->id() ?>" data-toggle="modal" data-id="<?= $annuaire->id() ?>"><i class="icon-refresh"></i></a></td>
                                             <td><?= $annuaire->nom().": ".$annuaire->description() ?></td>
                                             <td><?= $annuaire->telephone1() ?></td>
                                         </tr>     
+                                        <!-- updateAnnuaire box begin -->
+                                        <div id="updateAnnuaire<?= $annuaire->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier numéro</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" action="controller/AnnuaireActionController.php" method="post">
+                                                    <div class="control-group">
+                                                        <label class="control-label">Nom</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="nom" value="<?= $annuaire->nom() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Téléphone</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="telephone1" value="<?= $annuaire->telephone1() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Description</label>
+                                                        <div class="controls">
+                                                            <textarea name="description"><?= $annuaire->description() ?></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="update" />
+                                                        <input type="hidden" name="source" value="annuaire" />
+                                                        <input type="hidden" name="idAnnuaire" value="<?= $annuaire->id() ?>" />
+                                                        <div class="controls">  
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- updateAnnuaire box end -->
                                         <?php
                                         }
                                         ?>
                                     </tbody>
                                     <tbody>
                                         <tr>
+                                            <th style="background-color:grey"></th>
                                             <th style="background-color:grey">Liste des Fournisseurs</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -190,8 +232,9 @@
                                         foreach($fournisseurs as $fournisseur){
                                         ?>
                                         <tr class="odd gradeX annuaire">
-                                            <td><?= $fournisseur->nom() ?></td>
-                                            <td class="hidden-480"><?= $fournisseur->telephone1() ?></td>
+                                            <td style="width:10%"></td>
+                                            <td style="width:50%"><?= $fournisseur->nom() ?></td>
+                                            <td style="width:40%"><?= $fournisseur->telephone1() ?></td>
                                         </tr>     
                                         <?php
                                         }
@@ -199,6 +242,7 @@
                                     </tbody>
                                     <tbody>
                                         <tr>
+                                            <th style="background-color:grey"></th>
                                             <th style="background-color:grey">Liste des Employé</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -206,6 +250,7 @@
                                         foreach($employes as $employe){
                                         ?>
                                         <tr class="odd gradeX annuaire">
+                                            <td></td>
                                             <td><?= $employe->nom() ?></td>
                                             <td class="hidden-480"><?= $employe->telephone() ?></td>
                                         </tr>     

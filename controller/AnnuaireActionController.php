@@ -63,7 +63,7 @@
 			$telephone2 = htmlentities($_POST['telephone2']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$annuaire = new Annuaire(array(
+            $annuaire = new Annuaire(array(
 				'id' => $idAnnuaire,
 				'nom' => $nom,
 				'description' => $description,
