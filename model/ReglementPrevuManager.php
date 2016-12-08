@@ -133,10 +133,14 @@ class ReglementPrevuManager{
         return $reglementsPrevus;
     }
     
+    //in order to run the query a little bit faster and to not make things complicated,
+    //I've used a dirty thing in this function, I used the field updated to get the number of
+    //echeances to know the total amount of money should be payed by clients !!!
     public function getReglementPrevuEnRetardGrouped(){
         $reglementsPrevus = array();
         $query = $this->_db->query(
-        'SELECT * FROM t_reglementprevu 
+        'SELECT id, datePrevu, codeContrat, status, created, createdBy, COUNT(id) as updated, updatedBy 
+        FROM t_reglementprevu 
         WHERE status=0 AND datePrevu < CURDATE() 
         GROUP BY codeContrat');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){

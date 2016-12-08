@@ -189,7 +189,7 @@
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
+                                            <td><?= number_format($contrat->echeance()*$element->updated(), 2, ',', ' ') ?>DH</td>
                                             <td><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td><?= $link ?></td>
                                             <td><a href="#sendMailA<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
