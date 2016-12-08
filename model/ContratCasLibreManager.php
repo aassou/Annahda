@@ -117,6 +117,16 @@ class ContratCasLibreManager{
         return $data['number'];
     }
     
+    public function getReglementEnRetardNumber(){
+        $query = $this->_db->query(
+        'SELECT COUNT(id) AS number FROM t_contratcaslibre 
+        WHERE status=0 AND date < CURDATE()
+        ORDER BY id DESC LIMIT 0, 1');
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $number = $data['number'];
+        return $number;
+    }
+    
     public function getReglementEnRetard(){
         $reglements = array();
         $query = $this->_db->query('SELECT * FROM t_contratcaslibre 

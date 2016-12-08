@@ -32,7 +32,10 @@
         $casLibreToday = $contratCasLibreManager->getReglementToday();
         $casLibreWeek = $contratCasLibreManager->getReglementWeek();
         $casLibreMonth = $contratCasLibreManager->getReglementMonth();
-        
+        //nombre des payments en retard
+        $numberPaiementsEnRetard = 
+            $contratCasLibreManager->getReglementEnRetardNumber() + 
+            $reglementPrevuManager->getReglementPrevuEnRetardNumber();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -134,10 +137,10 @@
                         </div>
                         <div class="portlet-body">
                             <div class="clearfix">
-                                <strong>Liste des réglements en retards</strong>
+                                <strong>Liste des réglements en retards : <?= $numberPaiementsEnRetard ?> Paiements en retards</strong>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
-                                        <tr>
+                                        <>
                                             <th style="width: 20%">Client</th>
                                             <th style="width: 10%">Téléphone</th>
                                             <th style="width: 10%">Projet</th>
