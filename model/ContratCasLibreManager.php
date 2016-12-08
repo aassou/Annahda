@@ -128,6 +128,17 @@ class ContratCasLibreManager{
         return $reglements;
     }
     
+    public function getReglementEnRetardGrouped(){
+        $reglements = array();
+        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        WHERE status=0 AND date < CURDATE() GROUP BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglements[] = new ContratCasLibre($data);
+        }
+        $query->closeCursor();
+        return $reglements;
+    }
+    
     public function getReglementToday(){
         $reglements = array();
         $query = $this->_db->query('SELECT * FROM t_contratcaslibre 

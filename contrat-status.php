@@ -28,7 +28,7 @@
         $reglementsPrevusWeek = $reglementPrevuManager->getReglementPrevuWeek();
         $reglementsPrevusMonth = $reglementPrevuManager->getReglementPrevuMonth();
         //casLibre dates
-        $casLibreEnRetards = $contratCasLibreManager->getReglementEnRetard();
+        $casLibreEnRetards = $contratCasLibreManager->getReglementEnRetardGrouped();
         $casLibreToday = $contratCasLibreManager->getReglementToday();
         $casLibreWeek = $contratCasLibreManager->getReglementWeek();
         $casLibreMonth = $contratCasLibreManager->getReglementMonth();
