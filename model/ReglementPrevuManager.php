@@ -133,6 +133,28 @@ class ReglementPrevuManager{
         return $reglementsPrevus;
     }
     
+    public function getReglementPrevuEnRetardGrouped(){
+        $reglementsPrevus = array();
+        $query = $this->_db->query('SELECT * FROM t_reglementprevu 
+        WHERE status=0 AND datePrevu < CURDATE() GROUP BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglementsPrevus[] = new ReglementPrevu($data);
+        }
+        $query->closeCursor();
+        return $reglementsPrevus;
+    }
+    
+    public function getReglementPrevuEnRetard(){
+        $reglementsPrevus = array();
+        $query = $this->_db->query('SELECT * FROM t_reglementprevu 
+        WHERE status=0 AND datePrevu < CURDATE() ORDER BY codeContrat');
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $reglementsPrevus[] = new ReglementPrevu($data);
+        }
+        $query->closeCursor();
+        return $reglementsPrevus;
+    }
+    
     public function getReglementPrevuToday(){
         $reglementsPrevus = array();
         $query = $this->_db->query('SELECT * FROM t_reglementprevu 

@@ -23,7 +23,7 @@
         $contratCasLibreManager = new ContratCasLibreManager($pdo);
         $reglementPrevuManager = new ReglementPrevuManager($pdo);
         //reglements prevus
-        $reglementsPrevusEnRetards = $reglementPrevuManager->getReglementPrevuEnRetard();
+        $reglementsPrevusEnRetards = $reglementPrevuManager->getReglementPrevuEnRetardGrouped();
         $reglementsPrevusToday = $reglementPrevuManager->getReglementPrevuToday();
         $reglementsPrevusWeek = $reglementPrevuManager->getReglementPrevuWeek();
         $reglementsPrevusMonth = $reglementPrevuManager->getReglementPrevuMonth();
