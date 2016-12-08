@@ -135,8 +135,10 @@ class ReglementPrevuManager{
     
     public function getReglementPrevuEnRetardGrouped(){
         $reglementsPrevus = array();
-        $query = $this->_db->query('SELECT * FROM t_reglementprevu 
-        WHERE status=0 AND datePrevu < CURDATE() GROUP BY codeContrat');
+        $query = $this->_db->query(
+        'SELECT * FROM t_reglementprevu 
+        WHERE status=0 AND datePrevu < CURDATE() 
+        GROUP BY codeContrat');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $reglementsPrevus[] = new ReglementPrevu($data);
         }
