@@ -125,7 +125,7 @@ class ReglementPrevuManager{
     public function getReglementPrevuEnRetardNumber(){
         $query = $this->_db->query(
         'SELECT COUNT(id) AS number FROM t_reglementprevu 
-        WHERE status=0 AND date < CURDATE()
+        WHERE status=0 AND datePrevu < CURDATE()
         ORDER BY id DESC LIMIT 0, 1');
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $number = $data['number'];
