@@ -421,7 +421,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
@@ -529,7 +529,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
@@ -654,7 +654,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
@@ -762,7 +762,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
@@ -890,7 +890,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$nomBien ?></td>
@@ -930,7 +930,7 @@
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier status</h3>
-                                            </div>
+                                            </div>b
                                             <div class="modal-body">
                                                 <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
                                                     <div class="control-group">
@@ -998,7 +998,7 @@
                                             }
                                         ?>
                                         <tr class="reglements">
-                                            <td><?= $client->nom() ?></td>
+                                            <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
