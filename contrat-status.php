@@ -140,7 +140,7 @@
                                 <strong>Liste des réglements en retards : <?= $numberPaiementsEnRetard ?> Paiements en retards</strong>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
-                                        <>
+                                        <tr>
                                             <th style="width: 20%">Client</th>
                                             <th style="width: 10%">Téléphone</th>
                                             <th style="width: 10%">Projet</th>
