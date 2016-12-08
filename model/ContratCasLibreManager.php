@@ -130,7 +130,10 @@ class ContratCasLibreManager{
     
     public function getReglementEnRetardGrouped(){
         $reglements = array();
-        $query = $this->_db->query('SELECT * FROM t_contratcaslibre 
+        $query = $this->_db->query(
+        'SELECT id, date, SUM(montant) as montant, observation, status, 
+        codeContrat, created, createdBy, updated, updatedBy 
+        FROM t_contratcaslibre 
         WHERE status=0 AND date < CURDATE() GROUP BY codeContrat');
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $reglements[] = new ContratCasLibre($data);
