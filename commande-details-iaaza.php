@@ -154,7 +154,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                <strong>N° Commande : <?= $commande->numeroCommande() ?></strong>
                                            </a>
                                          </div>
@@ -163,7 +163,7 @@
                                    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Nombre Articles : <?= $nombreArticle ?></strong>
                                             </a>   
                                          </div>
@@ -172,7 +172,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Date Commande : <?= date('d/m/Y', strtotime($commande->dateCommande())) ?></strong>
                                             </a>
                                          </div>
@@ -181,7 +181,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Projet : <?= $nomProjet ?></strong>
                                             </a>   
                                          </div>
