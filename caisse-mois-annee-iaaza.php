@@ -301,7 +301,7 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "user"
                                                 ) {
                                             ?>
-                                            <th style="width:10%">Actions</th>
+                                            <th class="hidden-phone" style="width:10%">Actions</th>
                                             <?php
                                             }
                                             ?>
