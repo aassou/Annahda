@@ -306,7 +306,6 @@
                                             }
                                             ?>
                                             <th style="width:10%">DateOp</th>
-                                            <!--th style="width:10%">Montant</th-->
                                             <th style="width:10%">Crédit</th>
                                             <th style="width:10%">Débit</th>
                                             <th style="width:10%">Destination</th>
@@ -325,14 +324,13 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "user"
                                                 ) {
                                             ?>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
                                                 <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
                                             </td>
                                             <?php
                                             }
                                             ?>
-                                            <!--td><?= $caisse->type() ?></td-->
                                             <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
                                             <?php
                                             if ( $caisse->type() == "Entree" ) {
