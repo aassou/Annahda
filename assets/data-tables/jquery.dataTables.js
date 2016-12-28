@@ -9481,7 +9481,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Rechercher : ",
+			"sSearch": "Recherche",
 		
 		
 			/**
