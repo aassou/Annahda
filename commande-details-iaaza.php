@@ -260,7 +260,7 @@
                             </div>
                             <!-- addLivraison box end -->
                             <!-- BEGIN Ajouter Article Link -->
-                            <a target="_blank" href="controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" class="get-down btn blue pull-right">
+                            <a href="controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" class="get-down btn blue pull-right">
                                 <i class="icon-print"></i>&nbsp;Bon de Commande
                             </a>
                             <?php  
