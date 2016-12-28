@@ -110,8 +110,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Nouvelle Commande</h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addCommandeForm" class="form-horizontal" action="controller/CommandeActionController.php" method="post">
+                            <form id="addCommandeForm" class="form-horizontal" action="controller/CommandeActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -152,6 +152,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -162,8 +164,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addLivraison box end -->
                         
