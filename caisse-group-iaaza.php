@@ -114,8 +114,8 @@
                                 <h3>Ajouter une opération à la caisse</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             </div>
-                            <div class="modal-body">
-                                <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseIaazaActionController.php" method="post">
+                            <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Opération</label>
                                         <div class="controls">
@@ -155,6 +155,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -163,8 +165,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>    
+                            </form>
                         </div>
                         <!-- addCaisse box end -->  
                         <!-- printBilanCaisse box begin -->
@@ -173,8 +175,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Bilan de la Caisse </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les opérations de caisse à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -215,6 +217,8 @@
                                         </div>
                                     </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="societe" value="2" />
@@ -222,8 +226,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printBilanCaisse box end -->
                        <table class="table table-striped table-bordered table-advance table-hover">
