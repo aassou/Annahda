@@ -309,7 +309,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>*
+                        </div>
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Liste des locaux commerciaux</h4>

@@ -256,7 +256,7 @@
 												</div>
 											</td>
 											<td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
-											<td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
+											<td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage.': '.round($bien->superficie()).'&nbsp;m<sup>2</sup>' ?></td>
 											<td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
