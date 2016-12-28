@@ -241,10 +241,10 @@
                        <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 15%"><strong>Total des entrées</strong></th>
-                                    <th style="width: 18%"><a><strong><?= number_format($totalEntrees, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
-                                    <th style="width: 15%"><strong>Total des sorties</strong></th>
-                                    <th style="width: 18%"><a><strong><?= number_format($totalSorties, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Total des entrées</strong></th>
+                                    <th class="hidden-phone" style="width: 18%"><a><strong><?= number_format($totalEntrees, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Total des sorties</strong></th>
+                                    <th class="hidden-phone" style="width: 18%"><a><strong><?= number_format($totalSorties, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                     <th style="width: 15%"><strong>Solde de caisse</strong></th>
                                     <th style="width: 19%"><a><strong><?= number_format($totalCaisse, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                 </tr>
