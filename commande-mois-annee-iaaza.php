@@ -213,11 +213,11 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 15%">Actions</th>
-                                            <th style="width: 15%">N° Commande</th>
+                                            <th style="width: 15%">N°Cmnd</th>
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 20%">Fournisseur</th>
-                                            <th style="width: 15%">Date commande</th>
-                                            <th style="width: 15%">Articles</th>
+                                            <th class="hidden-phone" style="width: 15%">DateComnd</th>
+                                            <th class="hidden-phone" style="width: 15%">Articles</th>
                                         </tr>
                                     </thead>
                                     <tbody>                                      
@@ -240,10 +240,10 @@
                                                     $_SESSION['userMerlaTrav']->profil() == "manager" 
                                                     ) {
                                                 ?>                               
-                                                <a class="btn mini green" href="#updateCommande<?= $commande->id();?>" data-toggle="modal" data-id="<?= $commande->id(); ?>" title="Modifier">
+                                                <a class="btn mini green hidden-phone" href="#updateCommande<?= $commande->id();?>" data-toggle="modal" data-id="<?= $commande->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>
                                                 </a>
-                                                <a class="btn mini red" href="#deleteCommande<?= $commande->id() ?>" data-toggle="modal" data-id="<?= $commande->id() ?>" title="Supprimer" >
+                                                <a class="btn mini red hidden-phone" href="#deleteCommande<?= $commande->id() ?>" data-toggle="modal" data-id="<?= $commande->id() ?>" title="Supprimer" >
                                                     <i class="icon-remove"></i>
                                                 </a>
                                                 <?php
