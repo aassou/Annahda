@@ -259,8 +259,8 @@
                                             <td><?= $commande->numeroCommande() ?></td>
                                             <td><?= $nomProjet ?></td>
                                             <td><?= $nomFournisseur ?></td>
-                                            <td><?= date('d/m/Y', strtotime($commande->dateCommande())) ?></td>
-                                            <td>
+                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($commande->dateCommande())) ?></td>
+                                            <td class="hidden-phone">
                                                 <?= $commandeDetailManager->getNombreArticleCommandeByIdCommande($commande->id()); ?>
                                             </td>
                                         </tr>
