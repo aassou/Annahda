@@ -213,10 +213,10 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 15%">Actions</th>
-                                            <th style="width: 15%">N°Cmnd</th>
+                                            <th style="width: 15%">N°CMD</th>
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 20%">Fournisseur</th>
-                                            <th class="hidden-phone" style="width: 15%">DateComnd</th>
+                                            <th class="hidden-phone" style="width: 15%">DateCMD</th>
                                             <th class="hidden-phone" style="width: 15%">Articles</th>
                                         </tr>
                                     </thead>
