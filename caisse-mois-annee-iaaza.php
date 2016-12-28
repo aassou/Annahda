@@ -305,12 +305,12 @@
                                             <?php
                                             }
                                             ?>
-                                            <th style="width:15%">Date Opération</th>
+                                            <th style="width:10%">DateOp</th>
                                             <!--th style="width:10%">Montant</th-->
                                             <th style="width:10%">Crédit</th>
                                             <th style="width:10%">Débit</th>
                                             <th style="width:10%">Destination</th>
-                                            <th class="hidden-phone" style="width:45%">Designation</th>
+                                            <th class="hidden-phone" style="width:50%">Designation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
