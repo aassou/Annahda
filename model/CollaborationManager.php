@@ -73,6 +73,19 @@ class CollaborationManager{
 		$query->closeCursor();
 		return $collaborations;
 	}
+    
+    public function getCollaborationsNonValidees(){
+        $collaborations = array();
+        $query = $this->_db->query(
+        "SELECT * FROM t_collaboration
+        WHERE status='X'
+        ORDER BY id DESC");
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $collaborations[] = new Collaboration($data);
+        }
+        $query->closeCursor();
+        return $collaborations;
+    }
 
 	public function getCollaborationsByLimits($begin, $end){
 		$collaborations = array();

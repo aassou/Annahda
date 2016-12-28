@@ -25,7 +25,8 @@
         //users number
         $users = $usersManager->getUsers();
         //$mails = $mailManager->getMails();
-        $ideas = $collaborationManager->getCollaborations();
+        //$ideas = $collaborationManager->getCollaborations();
+        $ideas = $collaborationManager->getCollaborationsNonValidees();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
