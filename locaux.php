@@ -263,7 +263,7 @@
                                                     ?>
 												</div>
 											</td>
-											<td><?= $locau->superficie() ?></td>
+											<td><?= $locau->superficie() ?>m<sup>2</sup></td>
 											<td class="hidden-phone"><?= $locau->facade() ?></td>
 											<!--td></td-->
 											<td class="hidden-phone">
