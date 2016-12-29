@@ -323,9 +323,9 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 30%">Mois / Année</th>
-                                            <th style="width: 20%">Livraisons</th>
-                                            <th class="hidden-phone" style="width: 20%">Réglements</th>
+                                            <th style="width: 10%">Mois / Année</th>
+                                            <th style="width: 30%">Livraisons</th>
+                                            <th class="hidden-phone" style="width: 30%">Réglements</th>
                                             <th class="hidden-phone" style="width: 30%">Solde</th>
                                         </tr>
                                     </thead>
