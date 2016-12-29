@@ -567,7 +567,7 @@
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                             </td>
-                                            <td><?= $livraison->libelle() ?></td>
+                                            <td><a href="livraisons-details.php?codeLivraison=<?= $livraison->code() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>"><?= $livraison->libelle() ?></a></td>
                                             <td><?= $nomProjet ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
                                             <td class="hidden-phone">
