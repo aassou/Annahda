@@ -409,17 +409,13 @@
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
-                                                <!--a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 200px" class="btn mini">
-                                                    <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
-                                                </a-->
-                                                <div style="width: 200px">
+                                                <div style="width: 150px">
                                                     <a><strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong></a>
                                                 </div>    
-                                                <!--a href="livraisons-fournisseur-iaaza.php?idFournisseur=<?php //$livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini"-->
-                                                <a href="livraisons-fournisseur-mois-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn blue mini">
+                                                <a href="livraisons-fournisseur-mois-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 75px" class="btn blue mini">
                                                     Livraisons
                                                 </a>
-                                                <a href="reglements-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 100px" class="btn green mini">
+                                                <a href="reglements-fournisseur-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>" style="width: 75px" class="btn green mini">
                                                     Réglements
                                                 </a>
                                             </td>
@@ -438,11 +434,6 @@
                                         }//end of if
                                         ?>
                                     </tbody>
-                                    <?php
-                                    /*if($livraisonNumber != 0){
-                                        echo $pagination;   
-                                    }*/
-                                    ?>
                                     <tr>
                                         <th class="hidden-phone"></th>
                                         <th><strong>Σ Total Livraisons</strong></th>
