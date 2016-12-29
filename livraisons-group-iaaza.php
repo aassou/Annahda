@@ -381,10 +381,10 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 40%">Fournisseur</th>
+                                            <th style="width: 30%">Fournisseur</th>
                                             <th style="width: 20%">Total Livraisons</th>
                                             <th style="width: 20%">Total Réglements</th>
-                                            <th class="hidden-phone" style="width: 20%">Solde</th>
+                                            <th class="hidden-phone" style="width: 40%">Solde</th>
                                         </tr>
                                     </thead>
                                     <tbody>
