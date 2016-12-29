@@ -265,7 +265,7 @@
                         ?>
                         <li <?php if($currentPage=="caisse-group.php"){
                             ?> class="active" <?php } ?> >
-                            <a href="caisse-group.php">Caisse Sté Annahda</a>
+                            <a href="caisse-group.php">Société Annahda</a>
                         </li>
                         <?php
                         }
@@ -278,7 +278,7 @@
                             ) {
                         ?>
                         <li <?php if($currentPage=="caisse-group-iaaza.php"){?> class="active" <?php } ?> >
-                            <a href="caisse-group-iaaza.php">Caisse Sté Iaaza</a>
+                            <a href="caisse-group-iaaza.php">Société Iaaza</a>
                         </li>
                         <?php
                         }
