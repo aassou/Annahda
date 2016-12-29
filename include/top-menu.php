@@ -86,11 +86,10 @@
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				<img alt="" src="assets/img/avatar_small.png" />
-				<span class="username"><?= $_SESSION['userMerlaTrav']->login(); ?></span>
 				<i class="icon-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="user-profil.php"><i class="icon-user"></i> Mon Compte</a></li>
+					<li><a href="user-profil.php"><i class="icon-user"></i><?= $_SESSION['userMerlaTrav']->login(); ?></a></li>
 					<li class="divider"></li>
 					<li><a href="logout.php"><i class="icon-key"></i> Se déconnecter</a></li>
 				</ul>
