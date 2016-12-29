@@ -114,22 +114,18 @@
                             $_SESSION['userMerlaTrav']->profil() == "user") {
                         ?>
                         <div class="row-fluid get-down">
-                            <div class="pull-left">
-                                <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width">
+                                <a href="#addReglement" data-toggle="modal" class="btn black" style="width:259px">
                                     Nouveau Réglement <i class="icon-plus-sign"></i>
                                 </a>
-                                <a href="#addFournisseur" data-toggle="modal" class="btn blue btn-fixed-width">
+                                <a href="#addFournisseur" data-toggle="modal" class="btn blue stay-away" style="width:259px">
                                     Nouveau Fournisseur <i class="icon-plus-sign"></i>
                                 </a>
-                                <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width hidden-desktop hidden-tablet">
+                                <a href="#addLivraison" data-toggle="modal" class="btn green stay-away" style="width:259px">
                                     Nouvelle Livraison <i class="icon-plus-sign"></i>
                                 </a>
-                            </div>
-                            <div class="pull-right hidden-phone">
-                                <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width">
-                                    Nouvelle Livraison <i class="icon-plus-sign"></i>
+                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown stay-away" style="width:259px">
+                                    <i class="icon-print"></i>&nbsp;Imprimer Bilan
                                 </a>
-                            </div>
                         </div>
                         <?php
                         }
@@ -335,9 +331,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur...">
-                                </input>
-                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
+                                <input style="width:98.9%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
