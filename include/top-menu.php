@@ -90,7 +90,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="user-profil.php"><i class="icon-user"></i>&nbsp;<?= $_SESSION['userMerlaTrav']->login(); ?></a></li>
 					<li class="divider"></li>
-					<li><a href="logout.php"><i class="icon-key"></i>&nbsp;Se déconnecter</a></li>
+					<li><a href="logout.php"><i class="icon-key"></i>&nbsp;Déconnexion</a></li>
 				</ul>
 			</li>
 			<!-- END USER LOGIN DROPDOWN -->
