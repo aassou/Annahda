@@ -89,7 +89,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons - <strong><?= $titreLivraison ?></strong>
+                            Gestion des livraisons <strong><?= $titreLivraison ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -382,8 +382,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 30%">Fournisseur</th>
-                                            <th style="width: 20%">Total Livraisons</th>
-                                            <th style="width: 20%">Total Réglements</th>
+                                            <th style="width: 20%">Livraisons</th>
+                                            <th style="width: 20%">Réglements</th>
                                             <th class="hidden-phone" style="width: 40%">Solde</th>
                                         </tr>
                                     </thead>
