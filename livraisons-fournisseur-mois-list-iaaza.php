@@ -531,9 +531,9 @@
                                     <thead>
                                         <tr>
                                             <th class="hidden-phone" style="width: 15%">Actions</th>
-                                            <th style="width: 15%">N° BL</th>
+                                            <th style="width: 15%">BL</th>
                                             <th style="width: 20%">Projet</th>
-                                            <th style="width: 15%">Date Livraison</th>
+                                            <th class="hidden-phone" style="width: 15%">Date Livraison</th>
                                             <th class="hidden-phone" style="width: 15%">Articles</th>
                                             <th style="width: 10%">Total</th>
                                             <th style="width: 10%">Status</th>
@@ -581,8 +581,8 @@
                                             </td>
                                             <td><a href="livraisons-details-iaaza.php?codeLivraison=<?= $livraison->code() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>"><?= $livraison->libelle() ?></a></td>
                                             <td><?= $nomProjet ?></td>
-                                            <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
-                                            <td>
+                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
+                                            <td class="hidden-phone">
                                                 <?= $livraisonDetailManager->getNombreArticleLivraisonByIdLivraison($livraison->id()); ?>
                                             </td>
                                             <td>
