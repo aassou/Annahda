@@ -152,7 +152,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons - Fournisseur : <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong>
+                            Gestion des livraisons Fournisseur : <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -186,17 +186,13 @@
                                 $_SESSION['userMerlaTrav']->profil() == "user"
                                 ) {
                         ?>
-                        <div class="row-fluid add-portfolio">
-                            <div class="pull-left">
-                                <a href="#addReglement" data-toggle="modal" class="btn black">
-                                    Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
-                                </a>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#addLivraison" data-toggle="modal" class="btn green">
-                                    Ajouter Nouvelle Livraison <i class="icon-plus-sign "></i>
-                                </a>
-                            </div>
+                        <div class="row-fluid get-down">
+                            <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width-big" style="margin-top:5px">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement
+                            </a>
+                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big" style="margin-top:5px">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
+                            </a>
                         </div>
                         <?php  
                         }
@@ -207,8 +203,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Nouvelle livraison - <strong><?= $fournisseurManager->getFournisseurById($_GET['idFournisseur'])->nom() ?></strong></h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                            <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -249,6 +245,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -259,8 +257,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addLivraison box end -->
                         <!-- addReglement box begin-->
@@ -269,8 +267,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Nouveau réglement - <strong><?= $fournisseurManager->getFournisseurById($_GET['idFournisseur'])->nom() ?></strong></h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
+                            <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -328,6 +326,8 @@
                                           </div>
                                        </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -339,8 +339,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addReglement box end -->
                         <!-- printCharge box begin-->
@@ -349,9 +349,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3><i class="icon-print"></i>&nbsp;Bilan de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong></h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/BilanFournisseurPrintController.php" method="post" enctype="multipart/form-data">
-                                    <!--p><strong>Séléctionner les charges à imprimer</strong></p-->
+                            <form class="form-horizontal" action="controller/BilanFournisseurPrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
                                       <div class="controls">
@@ -412,6 +411,8 @@
                                           </div>
                                        </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idFournisseur" value="<?= $idFournisseur ?>" />
@@ -420,8 +421,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printCharge box end -->
                         <!-- updateStatusLivraison box begin-->
@@ -430,8 +431,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Modifier Status des BLs </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <?php
                                     foreach ( $livraisons as $livraison ) {
                                     ?> 
@@ -460,6 +461,8 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="updateStatus" />
@@ -470,9 +473,9 @@
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </div> 
+                                </div>
+                            </form>
                         </div>
                         <!-- updateStatusLivraison box end -->       
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -504,18 +507,6 @@
                             unset($_SESSION['reglement-action-message']);
                             unset($_SESSION['reglement-type-message']);
                          ?>
-                        <!--table class="table table-striped table-bordered table-advance table-hover">
-                            <tbody>
-                                <tr>
-                                    <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                </tr>
-                            </tbody>
-                        </table-->
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Livraison de <?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></h4>
@@ -535,32 +526,20 @@
                                             <i class="icon-check"></i>&nbsp;Modifier Status BL
                                         </a>
                                     </div>
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
                                 </div>
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 15%">Actions</th>
+                                            <th class="hidden-phone" style="width: 15%">Actions</th>
                                             <th style="width: 15%">N° BL</th>
                                             <th style="width: 20%">Projet</th>
                                             <th style="width: 15%">Date Livraison</th>
-                                            <th style="width: 15%">Articles</th>
+                                            <th class="hidden-phone" style="width: 15%">Articles</th>
                                             <th style="width: 10%">Total</th>
                                             <th style="width: 10%">Status</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!--form action="LivraisonListDeleteController.php<?= $livraisonListDeleteLink ?>" method="post">
-                                            <button type="submit" class="btn red">Supprimer les livraisons sélectionnées</button>
-                                            <br-->                                          
+                                    <tbody>                                        
                                         <?php
                                         $grandTotal = 0;
                                         if($livraisonNumber != 0){
@@ -579,7 +558,7 @@
                                             } 
                                         ?>      
                                         <tr class="livraisons">
-                                            <td>                             
+                                            <td class="hidden-phone">                             
                                                 <?php
                                                 if ( 
                                                     $_SESSION['userMerlaTrav']->profil() == "admin" ||
@@ -600,7 +579,7 @@
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                             </td>
-                                            <td><?= $livraison->libelle() ?></td>
+                                            <td><a href="livraisons-details-iaaza.php?codeLivraison=<?= $livraison->code() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>"><?= $livraison->libelle() ?></a></td>
                                             <td><?= $nomProjet ?></td>
                                             <td><?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></td>
                                             <td>
