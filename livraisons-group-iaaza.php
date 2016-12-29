@@ -116,15 +116,18 @@
                         <div class="row-fluid get-down">
                             <div class="pull-left">
                                 <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width">
-                                    Nouveau Réglement <i class="icon-plus-sign "></i>
+                                    Nouveau Réglement <i class="icon-plus-sign"></i>
                                 </a>
                                 <a href="#addFournisseur" data-toggle="modal" class="btn blue btn-fixed-width">
-                                    Nouveau Fournisseur <i class="icon-plus-sign "></i>
+                                    Nouveau Fournisseur <i class="icon-plus-sign"></i>
+                                </a>
+                                <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width hidden-desktop hidden-tablet">
+                                    Nouvelle Livraison <i class="icon-plus-sign"></i>
                                 </a>
                             </div>
-                            <div class="pull-right">
+                            <div class="pull-right hidden-phone">
                                 <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width">
-                                    Nouvelle Livraison <i class="icon-plus-sign "></i>
+                                    Nouvelle Livraison <i class="icon-plus-sign"></i>
                                 </a>
                             </div>
                         </div>
