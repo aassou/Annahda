@@ -393,8 +393,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 30%">Fournisseur</th>
-                                            <th style="width: 20%">Total Livraisons</th>
-                                            <th style="width: 20%">Total Réglements</th>
+                                            <th style="width: 20%">Livraisons</th>
+                                            <th style="width: 20%">Réglements</th>
                                             <th class="hidden-phone" style="width: 30%">Solde</th>
                                         </tr>
                                     </thead>
