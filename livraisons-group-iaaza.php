@@ -114,16 +114,16 @@
                             $_SESSION['userMerlaTrav']->profil() == "user") {
                         ?>
                         <div class="row-fluid get-down">
-                                <a href="#addReglement" data-toggle="modal" class="btn black" style="width:259px">
+                                <a href="#addReglement" data-toggle="modal" class="btn black" style="width:266px; margin-top:5px">
                                     Nouveau Réglement <i class="icon-plus-sign"></i>
                                 </a>
-                                <a href="#addFournisseur" data-toggle="modal" class="btn blue stay-away" style="width:259px">
+                                <a href="#addFournisseur" data-toggle="modal" class="btn blue" style="width:266px; margin-top:5px">
                                     Nouveau Fournisseur <i class="icon-plus-sign"></i>
                                 </a>
-                                <a href="#addLivraison" data-toggle="modal" class="btn green stay-away" style="width:259px">
+                                <a href="#addLivraison" data-toggle="modal" class="btn green" style="width:266px; margin-top:5px">
                                     Nouvelle Livraison <i class="icon-plus-sign"></i>
                                 </a>
-                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown stay-away" style="width:259px">
+                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown" style="width:267px; margin-top:5px">
                                     <i class="icon-print"></i>&nbsp;Imprimer Bilan
                                 </a>
                         </div>
