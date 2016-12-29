@@ -91,7 +91,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons - <strong><?= $titreLivraison ?></strong>
+                            Gestion des livraisons <strong><?= $titreLivraison ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -121,26 +121,25 @@
                             $_SESSION['userMerlaTrav']->profil() == "user"
                             ) {
                         ?>
-                        <div class="row-fluid add-portfolio">
-                            <div class="pull-left">
-                                <?php
-                                if ( 
-                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
-                                    ) {
-                                ?>
-                                <a href="#addReglement" data-toggle="modal" class="btn black">
-                                    Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
-                                </a>
-                                <?php
-                                }
-                                ?>
-                            </div>
-                            <div class="pull-right">
-                                <a href="#addLivraison" data-toggle="modal" class="btn green">
-                                    Ajouter Nouvelle Livraison <i class="icon-plus-sign "></i>
-                                </a>
-                            </div>
+                        <div class="row-fluid get-down">
+                            <?php
+                            if ( 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                ) {
+                            ?>
+                            <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width-big stay-away" style="margin-top:5px;">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement
+                            </a>
+                            <?php
+                            }
+                            ?>
+                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big stay-away" style="margin-top:5px;">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
+                            </a>
+                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue btn-fixed-width-big stay-away" style="margin-top:5px;">
+                                <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                            </a>
                         </div>
                         <?php
                         }
@@ -151,8 +150,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter une nouvelle livraison </h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
+                            <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
+                                <div class="modal-body"
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -191,6 +190,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />    
@@ -200,8 +201,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addLivraison box end -->
                         <!-- addReglement box begin-->
@@ -210,8 +211,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau réglement </h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
+                            <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -267,6 +268,8 @@
                                           </div>
                                        </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -276,15 +279,13 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur...">
-                                </input>
-                                <a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
+                                <input style="width:98%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -316,37 +317,20 @@
                             unset($_SESSION['reglement-action-message']);
                             unset($_SESSION['reglement-type-message']);
                          ?>
-                        <!--table class="table table-striped table-bordered table-advance table-hover">
-                            <tbody>
-                                <tr>
-                                    <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                    <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                </tr>
-                            </tbody>
-                        </table-->    
                         <div class="portlet livraisons">
                             <div class="portlet-body">
                                 <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 40%">Mois / Année</th>
-                                            <th style="width: 20%">Total Livraisons</th>
-                                            <th style="width: 20%">Total Réglements</th>
-                                            <th style="width: 20%">Solde</th>
+                                            <th style="width: 30%">Mois / Année</th>
+                                            <th style="width: 20%">Livraisons</th>
+                                            <th class="hidden-phone" style="width: 20%">Réglements</th>
+                                            <th class="hidden-phone" style="width: 30%">Solde</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!--form action="LivraisonListDeleteController.php<?= $livraisonListDeleteLink ?>" method="post">
-                                            <button type="submit" class="btn red">Supprimer les livraisons sélectionnées</button>
-                                            <br-->                                          
+                                    <tbody>                                       
                                         <?php
-                                        //if($livraisonNumber != 0){
-                                        //echo print_r($query);
                                         $grandTotalLivraisons = 0;
                                         $grandTotalReglements = $reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($idFournisseur);
                                         foreach($livraisons as $livraison){
@@ -372,10 +356,10 @@
                                             <td>
                                                 <?= number_format($totalDetailsLivraisons, 2, ',', ' '); ?>
                                             </td>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?= number_format($sommeReglements, 2, ',', ' '); ?>
                                             </td>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?= number_format( $totalDetailsLivraisons - $sommeReglements, 2, ',', ' '); ?>
                                             </td>
                                         </tr>
@@ -386,15 +370,15 @@
                                     </tbody>
                                     <tr>
                                         <th></th>
-                                        <th><strong>Grand Total Livraisons</strong></th>
-                                        <th><strong>Grand Total Réglements</strong></th>
-                                        <th><strong>Solde</strong></th>
+                                        <th><strong>Total Livraisons</strong></th>
+                                        <th class="hidden-phone"><strong>Total Réglements</strong></th>
+                                        <th class="hidden-phone"><strong>Solde</strong></th>
                                     </tr>
                                     <tr>
                                         <th></th>
                                         <th><strong><a><?= number_format($grandTotalLivraisons, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th><strong><a><?= number_format($grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th><strong><a><?= number_format($totalLivraison - $grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th class="hidden-phone"><strong><a><?= number_format($grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th class="hidden-phone"><strong><a><?= number_format($totalLivraison - $grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     </tr>
                                 </table>
                                 </div><!-- END DIV SCROLLER -->
