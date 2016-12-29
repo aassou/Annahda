@@ -719,24 +719,12 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="width: 65%"></th>
+                                            <th class="hidden-phone" style="width: 65%"></th>
                                             <th style="width: 15%">Grand Total</th>
                                             <th style="width: 20%"><a><?= number_format($grandTotal, '2', ',', ' ') ?></a>&nbsp;DH</th>
                                         </tr>
                                     </tbody>
                                 </table>    
-                                <!--table class="table table-striped table-bordered table-advance table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                            <th style="width: 15%"><strong><a id="totalLivraison"><?php //number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                            <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                            <th style="width: 15%"><strong><a><?php //number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                            <th style="width: 15%"><strong>Σ Solde</strong></th>
-                                            <th style="width: 15%"><strong><a><?php //number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        </tr>
-                                    </tbody>
-                                </table-->
                                 </div><!-- END DIV SCROLLER -->    
                             </div>
                         </div>
