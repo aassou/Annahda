@@ -128,16 +128,18 @@
                                 $_SESSION['userMerlaTrav']->profil() == "manager" 
                                 ) {
                             ?>
-                            <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width-big">
+                            <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width-big stay-away" style="margin-top:5px">
                                 <i class="icon-plus-sign "></i>&nbsp;Nouveau Réglement
                             </a>
                             <?php
                             }
                             ?>
-                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big">
+                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big stay-away" style="margin-top:5px">
                                 <i class="icon-plus-sign "></i>&nbsp;Nouvelle Livraison
                             </a>
-                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue btn-fixed-width-big"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
+                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue btn-fixed-width-big stay-away" style="margin-top:5px">
+                                <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                            </a>
                         </div>
                         <?php
                         }
@@ -283,7 +285,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input style="width:98.7%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
+                                <input style="width:98%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -368,8 +370,8 @@
                                     </tbody>
                                     <tr>
                                         <th></th>
-                                        <th><strong>Grand Total Livraisons</strong></th>
-                                        <th class="hidden-phone"><strong>Grand Total Réglements</strong></th>
+                                        <th><strong>Total Livraisons</strong></th>
+                                        <th class="hidden-phone"><strong>Total Réglements</strong></th>
                                         <th class="hidden-phone"><strong>Solde</strong></th>
                                     </tr>
                                     <tr>
