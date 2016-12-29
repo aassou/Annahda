@@ -186,7 +186,7 @@
                                 $_SESSION['userMerlaTrav']->profil() == "user"
                                 ) {
                         ?>
-                        <div class="row-fluid add-portfolio">
+                        <div class="row-fluid get-down">
                             <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width-big" style="margin-top:5px">
                                 <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement
                             </a>
