@@ -115,13 +115,13 @@
                         ?>
                         <div class="row-fluid get-down">
                                 <a href="#addReglement" data-toggle="modal" class="btn black" style="width:266px; margin-top:5px">
-                                    Nouveau Réglement <i class="icon-plus-sign"></i>
+                                    <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement 
                                 </a>
                                 <a href="#addFournisseur" data-toggle="modal" class="btn blue" style="width:266px; margin-top:5px">
-                                    Nouveau Fournisseur <i class="icon-plus-sign"></i>
+                                    <i class="icon-plus-sign"></i>&nbsp;Nouveau Fournisseur
                                 </a>
                                 <a href="#addLivraison" data-toggle="modal" class="btn green" style="width:266px; margin-top:5px">
-                                    Nouvelle Livraison <i class="icon-plus-sign"></i>
+                                    <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
                                 </a>
                                 <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown" style="width:267px; margin-top:5px">
                                     <i class="icon-print"></i>&nbsp;Imprimer Bilan
@@ -331,7 +331,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input style="width:98.9%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
+                                <input style="width:98.7%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -384,7 +384,7 @@
                                             <th style="width: 40%">Fournisseur</th>
                                             <th style="width: 20%">Total Livraisons</th>
                                             <th style="width: 20%">Total Réglements</th>
-                                            <th style="width: 20%">Solde</th>
+                                            <th class="hidden-phone" style="width: 20%">Solde</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -429,7 +429,7 @@
                                             <td>
                                                 <?= number_format($reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
                                             </td>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?= number_format( $totalDetailsLivraisons-$reglementsFournisseurManager->sommeReglementFournisseursByIdFournisseur($livraison->idFournisseur()), 2, ',', ' '); ?>
                                             </td>
                                         </tr>
@@ -444,16 +444,16 @@
                                     }*/
                                     ?>
                                     <tr>
-                                        <th></th>
+                                        <th class="hidden-phone"></th>
                                         <th><strong>Σ Total Livraisons</strong></th>
                                         <th><strong>Σ Total Réglements</strong></th>
-                                        <th><strong>Σ Solde</strong></th>
+                                        <th class="hidden-phone"><strong>Σ Solde</strong></th>
                                     </tr>
                                     <tr>
-                                        <th></th>
+                                        <th class="hidden-phone"></th>
                                         <th><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         <th><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th class="hidden-phone"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     </tr>
                                 </table>
                                 </div><!-- END DIV SCROLLER -->
