@@ -596,9 +596,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Ajouter des pièces pour cette livraison</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LivraisonPiecesAddController.php" method="post" enctype="multipart/form-data">
+                                            <form class="form-horizontal" action="controller/LivraisonPiecesAddController.php" method="post" enctype="multipart/form-data">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir ajouter des pièces pour cette livraison ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label">Nom Pièce</label>
                                                         <input type="text" name="nom" />
@@ -609,8 +611,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- add files box end -->
                                         <!-- updateLivraison box begin-->
@@ -619,8 +621,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier les informations de la livraison </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                            <form class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir modifier la livraison <strong>N°<?= $livraison->id() ?></strong>  ?</p>
                                                     <div class="control-group">
                                                         <label class="control-label">Fournisseur</label>
@@ -666,6 +668,8 @@
                                                             <input id="designation" type="text" name="designation" value="<?= $livraison->designation() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">  
                                                             <input type="hidden" name="action" value="update" />
@@ -678,8 +682,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateLivraison box end -->            
                                         <!-- delete box begin-->
@@ -688,9 +692,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer la livraison </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/LivraisonIaazaActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/LivraisonIaazaActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer la livraison <strong>N°<?= $livraison->id() ?></strong> ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
@@ -701,8 +707,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- delete box end --> 
                                         <?php
@@ -710,11 +716,6 @@
                                         }//end of if
                                         ?>
                                     </tbody>
-                                    <?php
-                                    /*if($livraisonNumber != 0){
-                                        echo $pagination;   
-                                    }*/
-                                    ?>
                                 </table>
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <tbody>
