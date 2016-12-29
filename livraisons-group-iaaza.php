@@ -114,18 +114,18 @@
                             $_SESSION['userMerlaTrav']->profil() == "user") {
                         ?>
                         <div class="row-fluid get-down">
-                                <a href="#addReglement" data-toggle="modal" class="btn black" style="width:266px; margin-top:5px">
-                                    <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement 
-                                </a>
-                                <a href="#addFournisseur" data-toggle="modal" class="btn blue" style="width:266px; margin-top:5px">
-                                    <i class="icon-plus-sign"></i>&nbsp;Nouveau Fournisseur
-                                </a>
-                                <a href="#addLivraison" data-toggle="modal" class="btn green" style="width:266px; margin-top:5px">
-                                    <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
-                                </a>
-                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown" style="width:267px; margin-top:5px">
-                                    <i class="icon-print"></i>&nbsp;Imprimer Bilan
-                                </a>
+                            <a href="#addReglement" data-toggle="modal" class="btn black" style="width:266px; margin-top:5px">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouveau Réglement 
+                            </a>
+                            <a href="#addFournisseur" data-toggle="modal" class="btn blue" style="width:266px; margin-top:5px">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouveau Fournisseur
+                            </a>
+                            <a href="#addLivraison" data-toggle="modal" class="btn green" style="width:266px; margin-top:5px">
+                                <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
+                            </a>
+                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn brown" style="width:267px; margin-top:5px">
+                                <i class="icon-print"></i>&nbsp;Imprimer Bilan
+                            </a>
                         </div>
                         <?php
                         }
@@ -366,9 +366,9 @@
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Livraisons</strong></th>
                                     <th class="hidden-phone" style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Réglements</strong></th>
                                     <th class="hidden-phone" style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Solde</strong></th>
                                     <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
@@ -384,7 +384,7 @@
                                             <th style="width: 30%">Fournisseur</th>
                                             <th style="width: 20%">Livraisons</th>
                                             <th style="width: 20%">Réglements</th>
-                                            <th class="hidden-phone" style="width: 40%">Solde</th>
+                                            <th class="hidden-phone" style="width: 30%">Solde</th>
                                         </tr>
                                     </thead>
                                     <tbody>
