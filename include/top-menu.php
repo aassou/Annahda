@@ -85,7 +85,7 @@
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				<i class="icon-angle-down"></i>
+				<i class="icon-user"></i>
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="user-profil.php"><i class="icon-user"></i><?= $_SESSION['userMerlaTrav']->login(); ?></a></li>
