@@ -88,7 +88,7 @@
 				<i class="icon-user"></i>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="user-profil.php"><i class="icon-user"></i>&nbsp;<?= $_SESSION['userMerlaTrav']->login(); ?></a></li>
+					<li><a href="user-profil.php"><i class="icon-user"></i>&nbsp;<?= ucfirst($_SESSION['userMerlaTrav']->login()); ?></a></li>
 					<li class="divider"></li>
 					<li><a href="logout.php"><i class="icon-key"></i>&nbsp;Déconnexion</a></li>
 				</ul>
