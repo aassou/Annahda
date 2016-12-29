@@ -151,7 +151,7 @@
                                 <h3>Ajouter une nouvelle livraison </h3>
                             </div>
                             <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonActionController.php" method="post">
-                                <div class="modal-body"
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
