@@ -435,13 +435,13 @@
                                         ?>
                                     </tbody>
                                     <tr>
-                                        <th class="hidden-phone"></th>
-                                        <th><strong>Σ Total Livraisons</strong></th>
-                                        <th><strong>Σ Total Réglements</strong></th>
+                                        <th></th>
+                                        <th><strong>Σ Livraisons</strong></th>
+                                        <th><strong>Σ Réglements</strong></th>
                                         <th class="hidden-phone"><strong>Σ Solde</strong></th>
                                     </tr>
                                     <tr>
-                                        <th class="hidden-phone"></th>
+                                        <th></th>
                                         <th><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         <th><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         <th class="hidden-phone"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
