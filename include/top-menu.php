@@ -85,7 +85,6 @@
 			<!-- BEGIN USER LOGIN DROPDOWN -->
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				<img alt="" src="assets/img/avatar_small.png" />
 				<i class="icon-angle-down"></i>
 				</a>
 				<ul class="dropdown-menu">
