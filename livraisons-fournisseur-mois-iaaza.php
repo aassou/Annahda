@@ -347,7 +347,7 @@
                                         ?>      
                                         <tr class="livraisons">
                                             <td>
-                                                <div style="width: 200px">
+                                                <div style="width: 150px">
                                                     <a class="btn mini" href="livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=<?= $livraison->idFournisseur() ?>&mois=<?= $mois ?>&annee=<?= $annee ?>">
                                                         <strong><?= date('m / Y', strtotime($livraison->dateLivraison())) ?></strong>
                                                     </a>
