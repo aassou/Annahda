@@ -134,10 +134,10 @@
                             <?php
                             }
                             ?>
-                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big stay-away" style="margin-top:5px;">
+                            <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width-big" style="margin-top:5px;">
                                 <i class="icon-plus-sign"></i>&nbsp;Nouvelle Livraison
                             </a>
-                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue btn-fixed-width-big stay-away" style="margin-top:5px;">
+                            <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue btn-fixed-width-big" style="margin-top:5px;">
                                 <i class="icon-print"></i>&nbsp;Imprimer Bilan
                             </a>
                         </div>
