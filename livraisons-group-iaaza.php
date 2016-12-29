@@ -113,18 +113,18 @@
                             $_SESSION['userMerlaTrav']->profil() == "admin" ||
                             $_SESSION['userMerlaTrav']->profil() == "user") {
                         ?>
-                        <div class="row-fluid add-portfolio">
+                        <div class="row-fluid get-down">
                             <div class="pull-left">
-                                <a href="#addReglement" data-toggle="modal" class="btn black">
-                                    Ajouter Nouveau Réglement <i class="icon-plus-sign "></i>
+                                <a href="#addReglement" data-toggle="modal" class="btn black btn-fixed-width">
+                                    Nouveau Réglement <i class="icon-plus-sign "></i>
                                 </a>
-                                <a href="#addFournisseur" data-toggle="modal" class="btn blue">
-                                    Ajouter Nouveau Fournisseur <i class="icon-plus-sign "></i>
+                                <a href="#addFournisseur" data-toggle="modal" class="btn blue btn-fixed-width">
+                                    Nouveau Fournisseur <i class="icon-plus-sign "></i>
                                 </a>
                             </div>
                             <div class="pull-right">
-                                <a href="#addLivraison" data-toggle="modal" class="btn green">
-                                    Ajouter Nouvelle Livraison <i class="icon-plus-sign "></i>
+                                <a href="#addLivraison" data-toggle="modal" class="btn green btn-fixed-width">
+                                    Nouvelle Livraison <i class="icon-plus-sign "></i>
                                 </a>
                             </div>
                         </div>
@@ -137,8 +137,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau fournisseur </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/FournisseurActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom</label>
                                         <div class="controls">
@@ -175,6 +175,8 @@
                                             <input type="text" name="email" value="" />
                                         </div>  
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -183,8 +185,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addFournisseur box end -->
                         <!-- addLivraison box begin-->
@@ -193,8 +195,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter une nouvelle livraison </h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                            <form id="addLivraisonForm" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -235,6 +237,8 @@
                                             <input required="required" id="libelle" type="text" name="libelle" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />    
@@ -243,8 +247,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addLivraison box end -->
                         <!-- addReglement box begin-->
@@ -253,8 +257,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau réglement </h3>
                             </div>
-                            <div class="modal-body">
-                                <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
+                            <form id="addReglementForm" class="form-horizontal" action="controller/ReglementFournisseurIaazaActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Fournisseur</label>
                                         <div class="controls">
@@ -312,6 +316,8 @@
                                           </div>
                                        </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -320,15 +326,15 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
                                 <input class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur...">
                                 </input>
-                                <a target="_blank" href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
+                                <a href="<?= $hrefLivraisonBilanPrintController ?>" class="btn blue pull-right"><i class="icon-print"></i>&nbsp;Imprimer Bilan</a>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -363,10 +369,10 @@
                         <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 15%"><strong>Σ Total Livraisons</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                    <th style="width: 15%"><strong>Σ Total Réglements</strong></th>
-                                    <th style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Total Livraisons</strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong><a><?= number_format($totalLivraison, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Σ Total Réglements</strong></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong><a><?= number_format($totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     <th style="width: 15%"><strong>Σ Solde</strong></th>
                                     <th style="width: 15%"><strong><a><?= number_format($totalLivraison-$totalReglement, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                 </tr>
