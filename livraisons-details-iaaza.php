@@ -100,7 +100,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons - Fournisseur : <strong><?= $fournisseur->nom() ?></strong> 
+                            Gestion des livraisons Fournisseur : <strong><?= $fournisseur->nom() ?></strong> 
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -166,7 +166,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                           <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                <strong>N° BL : <?= $livraison->libelle() ?></strong>
                                            </a>
                                          </div>
@@ -175,7 +175,7 @@
                                    <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Nombre Articles : <?= $nombreArticle ?></strong>
                                             </a>   
                                          </div>
@@ -184,7 +184,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Date Livraison : <?= date('d/m/Y', strtotime($livraison->dateLivraison())) ?></strong>
                                             </a>
                                          </div>
@@ -193,7 +193,7 @@
                                     <div class="span3">
                                       <div class="control-group">
                                          <div class="controls">
-                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 200px">
+                                            <a class="btn" href="<?= $updateLink ?>" data-toggle="modal" style="width: 245px">
                                                 <strong>Projet : <?= $nomProjet ?></strong>
                                             </a>   
                                          </div>
@@ -207,8 +207,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Modifier les informations de la livraison </h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form id="update-livraison-form" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                <form id="update-livraison-form" class="form-horizontal" action="controller/LivraisonIaazaActionController.php" method="post">
+                                    <div class="modal-body">
                                         <div class="control-group">
                                             <label class="control-label">Fournisseur</label>
                                             <div class="controls">
@@ -253,6 +253,8 @@
                                                 <input required="required" id="libelle" type="text" name="libelle" value="<?= $livraison->libelle() ?>" />
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <div class="controls">  
                                                 <input type="hidden" name="action" value="update" />
@@ -265,12 +267,12 @@
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- addLivraison box end -->
                             <!-- BEGIN Ajouter Article Link -->
-                            <a target="_blank" href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>&societe=2" class="get-down btn blue pull-right">
+                            <a href="controller/LivraisonDetailPrintController.php?idLivraison=<?= $livraison->id() ?>&societe=2" class="get-down btn blue pull-right">
                                 <i class="icon-print"></i>&nbsp;Bon de livraison
                             </a>
                             <?php  
@@ -292,14 +294,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Ajouter un artcile </h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form id="add-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
-                                        <!--div class="control-group">
-                                            <label class="control-label">Libelle</label>
-                                            <div class="controls">
-                                                <input type="text" name="libelle" value="" />
-                                            </div>
-                                        </div-->
+                                <form id="add-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
+                                    <div class="modal-body">
                                         <div class="control-group">
                                             <label class="control-label">Désignation</label>
                                             <div class="controls">
@@ -318,6 +314,8 @@
                                                 <input required="required" type="text" id="quantite" name="quantite" value="" />
                                             </div>  
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <div class="controls">  
                                                 <input type="hidden" name="action" value="add" />
@@ -329,8 +327,8 @@
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- END addArticle BOX -->
                             <br><br>
@@ -346,7 +344,7 @@
                                     $_SESSION['userMerlaTrav']->profil() == "user" 
                                     ) {
                                 ?>
-                                <th style="width: 10%">Actions</th>
+                                <th class="hidden-phone" style="width: 10%">Actions</th>
                                 <?php  
                                 }
                                 ?>
@@ -395,8 +393,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Modifier les détails de livraison </h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form id="update-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
+                                <form id="update-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
+                                    <div class="modal-body">
                                         <p>Êtes-vous sûr de vouloir modifier cet article ?</p>
                                         <div class="control-group">
                                             <label class="control-label" for="designation">Désignation</label>
@@ -416,6 +414,8 @@
                                                 <input required="required" id="prixUnitaire" name="prixUnitaire" class="m-wrap" type="text" value="<?= $detail->prixUnitaire() ?>" />
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <input type="hidden" name="action" value="update" />
                                             <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
@@ -427,8 +427,8 @@
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- END  update LivraisonDetail   BOX -->
                             <!-- BEGIN  delete LivraisonDetail BOX -->
@@ -437,8 +437,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Supprimer Article</h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal loginFrm" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
+                                <form class="form-horizontal loginFrm" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
+                                    <div class="modal-body">
                                         <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
                                         <div class="control-group">
                                             <input type="hidden" name="action" value="delete" />
@@ -449,8 +449,10 @@
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
+                                </form>
                             </div>
                             <!-- END delete LivraisonDetail BOX -->
                             <?php
@@ -465,19 +467,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <!--table class="table table-striped table-bordered table-advance table-hover">
-                                <thead>
-                                    <tr>
-                                        <th><strong>Nombre d'article de la livraison</strong></th>
-                                        <td><strong><a><?= $nombreArticle ?></a></strong></td>
-                                    </tr>
-                                <thead>
-                                    <tr>
-                                        <th><strong>Total de la livraison</strong></th>
-                                        <td><strong><a><?= number_format($totalLivraisonDetail, 2, ',', ' ') ?></a>&nbsp;DH</strong></td>
-                                    </tr>   
-                                </thead>
-                            </table-->
                             <?php
                             }//end if
                             ?>
