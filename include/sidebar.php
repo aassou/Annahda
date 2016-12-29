@@ -108,7 +108,7 @@
 				<li class="<?= $gestionProjetClass; ?>" >
 					<a href="projets.php">
 					<i class="icon-briefcase"></i> 
-					<span class="title">Gestion des projets</span>
+					<span class="title">Gestion Projets</span>
 					</a>
 				</li>
 				<?php
@@ -138,7 +138,7 @@
                 <li class="<?= $gestionLivraisonClass; ?> has-sub ">
                     <a href="javascript:;">
                     <i class="icon-truck"></i> 
-                    <span class="title">Gestion des livraisons</span>
+                    <span class="title">Gestion Livraisons</span>
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub">
@@ -197,7 +197,7 @@
                 <li class="<?= $gestionCommandeClass; ?> has-sub ">
                     <a href="javascript:;">
                     <i class="icon-shopping-cart"></i> 
-                    <span class="title">Gestion des commandes</span>
+                    <span class="title">Gestion Commandes</span>
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub">
@@ -252,7 +252,7 @@
                 <li class="<?= $gestionCaisseClass; ?> has-sub ">
                     <a href="javascript:;">
                     <i class="icon-money"></i> 
-                    <span class="title">Gestion des caisses</span>
+                    <span class="title">Gestion Caisses</span>
                     <span class="arrow "></span>
                     </a>
                     <ul class="sub">
@@ -265,7 +265,7 @@
                         ?>
                         <li <?php if($currentPage=="caisse-group.php"){
                             ?> class="active" <?php } ?> >
-                            <a href="caisse-group.php">Caisse Société Annahda</a>
+                            <a href="caisse-group.php">Caisse Sté Annahda</a>
                         </li>
                         <?php
                         }
@@ -278,7 +278,7 @@
                             ) {
                         ?>
                         <li <?php if($currentPage=="caisse-group-iaaza.php"){?> class="active" <?php } ?> >
-                            <a href="caisse-group-iaaza.php">Caisse Société Iaaza</a>
+                            <a href="caisse-group-iaaza.php">Caisse Sté Iaaza</a>
                         </li>
                         <?php
                         }
