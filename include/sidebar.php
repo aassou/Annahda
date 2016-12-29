@@ -109,7 +109,6 @@
 					<a href="projets.php">
 					<i class="icon-briefcase"></i> 
 					<span class="title">Gestion des projets</span>
-					<span class="arrow "></span>
 					</a>
 				</li>
 				<?php
