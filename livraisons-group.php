@@ -342,7 +342,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input style="width:98.7%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
+                                <input style="width:98%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->

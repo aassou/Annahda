@@ -331,7 +331,7 @@
                         <!-- addReglement box end -->
                         <div class="row-fluid">
                             <div class="input-box">
-                                <input style="width:98.7%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
+                                <input style="width:98%" class="m-wrap" name="provider" id="provider" type="text" placeholder="Fournisseur..."></input>
                             </div>
                         </div>
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -387,10 +387,7 @@
                                             <th class="hidden-phone" style="width: 30%">Solde</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <!--form action="LivraisonListDeleteController.php<?= $livraisonListDeleteLink ?>" method="post">
-                                            <button type="submit" class="btn red">Supprimer les livraisons sélectionnées</button>
-                                            <br-->                                          
+                                    <tbody>                                    
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
