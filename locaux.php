@@ -225,7 +225,7 @@
 										<tr class="locaux">
 											<td>
 												<div class="btn-group">
-												    <a style="width: 100px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
+												    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($locau->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
 												    	<?= $locau->nom() ?> 
 												        <i class="icon-angle-down"></i>
 												    </a>
