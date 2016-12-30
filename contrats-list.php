@@ -160,7 +160,7 @@
 											<th style="width:10%" class="hidden-phone">Observation</th>
 											<th style="width:5%" class="hidden-phone">Status</th>
 											<?php if(isset($_SESSION['print-quittance'])){ ?>
-											<th style="width:10%">Quittance</th>
+											<th style="width:10%" class="hidden-phone">Quittance</th>
 											<?php 
 											} ?>
 										</tr>
@@ -257,7 +257,7 @@
 											</td>
 											<td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
 											<td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage.': '.round($bien->superficie()).'&nbsp;m<sup>2</sup>' ?></td>
-											<td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
+											<td><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
 											<td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
@@ -274,7 +274,7 @@
 											</td>
 											<?php 
 											if(isset($_SESSION['print-quittance']) and $operationsNumber>=1){ ?>
-												<td>
+												<td class="hidden-phone">
 													<a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operationManager->getLastIdByIdContrat($contrat->id()) ?>"> 
 														<i class="m-icon-white icon-print"></i> Imprimer
 													</a>
@@ -290,8 +290,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Imprimer Contrat Client</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <label class="control-label">الشركة</label>
                                                         <div class="controls">
@@ -321,14 +321,16 @@
                                                             <input type="text" required="required" id="facade" name="facade" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- printContratArabe box end -->
                                         <!-- revendre box begin-->
@@ -337,8 +339,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier le status "Revendre" du contrat </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir <?= $revendreTitle ?> le contrat de <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> ?</p>
                                                     <?php
                                                     if ( $contrat->revendre() == 0 ) {
@@ -352,6 +354,8 @@
                                                     <?php
                                                     }
                                                     ?>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="action" value="revendre" />
                                                         <input type="hidden" name="source" value="contrats-list" />
@@ -362,8 +366,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- revendre box end -->
 										<!-- desistement box begin-->
@@ -372,19 +376,21 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Désister le contrat </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+											    <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir désister le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
-													<div class="control-group">
-														<input type="hidden" name="action" value="desister" />
+												</div>
+												<div class="modal-footer">
+												    <div class="control-group">
+                                                        <input type="hidden" name="action" value="desister" />
                                                         <input type="hidden" name="source" value="contrats-list" />
-														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											    </div>
+											</form>
 										</div>
 										<!-- desistement box end -->
 										<!-- addReglement box begin-->
@@ -393,8 +399,8 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Nouveau réglement </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+											    <div class="modal-body">
 													<div class="control-group">
 			                                             <label class="control-label" for="code">Date opération</label>
 			                                             <div class="controls">
@@ -470,19 +476,21 @@
                                                             <textarea type="text" name="observation"></textarea>
                                                         </div>
                                                     </div>
-													<div class="control-group">
-													    <div class="controls">
-    														<input type="hidden" name="action" value="add" />
-    														<input type="hidden" name="source" value="contrats-list" />
-    														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-    														<input type="hidden" name="idClient" value="<?= $contrat->idClient() ?>" />
-    														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-    														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-    														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-														</div>
-													</div>
-												</form>
-											</div>
+												</div>
+												<div class="modal-footer">
+												    <div class="control-group">
+                                                        <div class="controls">
+                                                            <input type="hidden" name="action" value="add" />
+                                                            <input type="hidden" name="source" value="contrats-list" />
+                                                            <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                            <input type="hidden" name="idClient" value="<?= $contrat->idClient() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+											    </div>
+											</form>
 										</div>
 										<!-- addReglement box end -->
 										<!-- activation box begin-->
@@ -491,19 +499,21 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Activer le contrat </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post">
+											    <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir activer le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
-													<div class="control-group">
-														<input type="hidden" name="action" value="activer" />
+												</div>
+												<div class="modal-footer">
+												    <div class="control-group">
+                                                        <input type="hidden" name="action" value="activer" />
                                                         <input type="hidden" name="source" value="contrats-list" />
-														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											    </div>
+											</form>
 										</div>
 										<!-- activation box end -->	
 										<!-- delete box begin-->
@@ -512,18 +522,20 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Supprimer le contrat </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/ContratDeleteController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/ContratDeleteController.php" method="post">
+											    <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir supprimer le contrat <strong>N°<?= $contrat->id() ?></strong> ?</p>
-													<div class="control-group">
-														<label class="right-label"></label>
-														<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												</div>
+												<div class="modal-footer">
+												    <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											    </div>
+											</form>
 										</div>
 										<!-- delete box end -->	
 										<?php
