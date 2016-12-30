@@ -105,7 +105,7 @@
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="tab-pane" id="tab_1_4">
                             <div class="row-fluid portfolio-block" id="<?= $projet->id() ?>">
-                                <div class="span1 portfolio-text" style="width:100px">
+                                <div class="span1 portfolio-text" style="width:200px">
                                     <div class="portfolio-text-info">
                                         <a class="btn big blue"><?= $projet->nom() ?></a>
                                     </div>
