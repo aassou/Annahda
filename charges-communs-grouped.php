@@ -96,8 +96,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter une nouvelle charge commun</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargeCommunActionController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargeCommunActionController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Charge</label>
                                         <div class="controls">
@@ -133,6 +133,8 @@
                                             <input type="text" name="societe" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -141,8 +143,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addCharge box end -->
                         <!-- addTypeCharge box begin-->
@@ -151,14 +153,16 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouveau Type Charge </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/TypeChargeCommunActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/TypeChargeCommunActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom Type Charge</label>
                                         <div class="controls">
                                             <input type="text" name="nom" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />  
@@ -167,30 +171,30 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addTypeCharge box end -->
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
-                                <input class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
-                                <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
+                                <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <?php 
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
-                                <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
+                                <a style="margin-top:5px;" href="#addTypeCharge" data-toggle="modal" class="btn blue btn-fixed-width-big">
                                     Type Charge <i class="icon-plus-sign "></i>
                                 </a>
-                                <a href="#addCharge" data-toggle="modal" class="btn green pull-right stay-away">
+                                <a style="margin-top:5px;" href="#addCharge" data-toggle="modal" class="btn green btn-fixed-width-big">
                                     Nouvelle Charge <i class="icon-plus-sign "></i>
                                 </a>
                                 <?php 
                                 }
                                 ?>
                             </div>
+                            <input style="margin-top:5px; width:98%" class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
                         </div>
                         <!-- printCharge box begin-->
                         <div id="printCharges" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -198,8 +202,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Liste des Charges </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargeCommunPrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargeCommunPrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les charges à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -259,6 +263,8 @@
                                         </div>
                                     </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="source" value="charges-communs-grouped" />
@@ -266,8 +272,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printCharge box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -299,8 +305,8 @@
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 50%">Type</th>
-                                            <th style="width: 50%">Total</th>
+                                            <th style="width: 70%">Type</th>
+                                            <th style="width: 30%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
