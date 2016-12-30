@@ -78,7 +78,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des terrains - Projet : <?= $projet->nom() ?>
+							Gestion des terrains Projet : <strong><?= $projet->nom() ?></strong>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -109,7 +109,7 @@
 					    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
 					    ?>
 					    <div class="pull-right get-down">
-                            <a href="#addTerrain" class="btn icn-only green" data-toggle="modal">Ajouter Nouveau Terrain</a>
+                            <a href="#addTerrain" class="btn icn-only green" data-toggle="modal"><i class="icon-plus-sign"></i>&nbsp;Nouveau Terrain</a>
                         </div>
                         <?php
                         }
@@ -120,8 +120,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouveau Terrain</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/TerrainActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/TerrainActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Vendeur</label>
                                         <div class="controls">
@@ -152,6 +152,8 @@
                                             <input type="text" name="emplacement" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />  
@@ -160,8 +162,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addTerrain box end -->
 					</div>
@@ -238,22 +240,23 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Ajouter des pièces pour ce terrain</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/TerrainPiecesAddController.php" method="post" enctype="multipart/form-data">
-													<p>Êtes-vous sûr de vouloir ajouter des pièces pour ce terrain terrain ?</p>
-													<div class="control-group">
-														<label class="right-label">Nom Pièce</label>
-														<input type="text" name="nom" />
-														<label class="right-label">Lien</label>
-														<input type="file" name="url" />
-														<input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<label class="right-label"></label>
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+											<form class="form-horizontal" action="controller/TerrainPiecesAddController.php" method="post" enctype="multipart/form-data">
+											     <div class="modal-body">
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <label class="right-label">Nom Pièce</label>
+                                                        <input type="text" name="nom" />
+                                                        <label class="right-label">Lien</label>
+                                                        <input type="file" name="url" />
+                                                        <input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <label class="right-label"></label>
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- add files box end -->	
 										<!-- update box begin-->
@@ -262,9 +265,8 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Modifier Infos Terrain</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/TerrainActionController.php" method="post">
-													<p>Êtes-vous sûr de vouloir modifier les informations du terrain ?</p>
+											<form class="form-horizontal" action="controller/TerrainActionController.php" method="post">
+											     <div class="modal-body">
 													<div class="control-group">
 														<label class="right-label">Vendeur</label>
 														<input type="text" name="vendeur" value="<?= $terrain->vendeur() ?>" />
@@ -276,15 +278,19 @@
 														<input type="text" name="superficie" value="<?= $terrain->superficie() ?>" />
 														<label class="right-label">Emplacement</label>
 														<input type="text" name="emplacement" value="<?= $terrain->emplacement() ?>" />
-														<label class="right-label"></label>
-														<input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
+													</div>
+										          </div>
+										     <div class="modal-footer">
+										         <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                                         <input type="hidden" name="action" value="update" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											 </div>
+											</form>
 										</div>
 										<!-- update box end -->	
 										<!-- delete box begin-->
@@ -293,19 +299,21 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Supprimer Terrain</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/TerrainActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/TerrainActionController.php" method="post">
+											 <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir supprimer le terrain <strong><?= $terrain->emplacement() ?></strong> ?</p>
-													<div class="control-group">
-														<label class="right-label"></label>
-														<input type="hidden" name="action" value="delete" />
-														<input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												</div>	
+    											<div class="modal-footer">	
+    											    <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="idTerrain" value="<?= $terrain->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+    											</div>
+											</form>
 										</div>
 										<!-- delete box end -->	
 										<?php

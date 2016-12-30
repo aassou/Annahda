@@ -126,11 +126,11 @@
                                 $_SESSION['userMerlaTrav']->profil()=="manager" 
                             ) {
                             ?>
-							<a href="#addAppartement" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouvel Appartement <i class="icon-plus-sign m-icon-white"></i></a>
+							<a style="margin-top:5px;" href="#addAppartement" class="btn btn-fixed-width-big green stay-away" data-toggle="modal"><i class="icon-plus-sign m-icon-white"></i>&nbsp;Nouvel Appartement</a>
 							<?php
                             }
                             ?>
-                            <a href="controller/AppatementsListPrintController.php?idProjet=<?= $idProjet ?>" class="pull-right btn icn-only blue stay-away" data-toggle="modal"><i class="icon-print m-icon-white"></i> Version Imprimable</a>
+                            <a style="margin-top:5px;" href="controller/AppatementsListPrintController.php?idProjet=<?= $idProjet ?>" class="btn btn-fixed-width-big blue stay-away" data-toggle="modal"><i class="icon-print m-icon-white"></i> Version Imprimable</a>
 						</div>
 						<!-- addAppartement box begin-->
                         <div id="addAppartement" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -138,8 +138,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouvel Appartement</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Code</label>
                                         <div class="controls">
@@ -210,6 +210,8 @@
                                             <input type="text" name="par" class="m-wrap">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />  
@@ -218,8 +220,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addAppartement box end -->
 						<!-- BEGIN Terrain TABLE PORTLET-->
@@ -245,12 +247,11 @@
 									<thead>
 										<tr>
 											<th style="width: 10%">Code</th>
-											<th style="width: 5%">Niveau</th>
-											<!--th style="width: 15%">Prix&nbsp;DH</th-->
+											<th class="hidden-phone" style="width: 5%">Niveau</th>
 											<th style="width: 10%">Superficie</th>
-											<th style="width: 5%">Façade</th>
-											<th style="width: 30%">Nbr.Pièces</th>
-											<th style="width: 5%">Cave</th>
+											<th class="hidden-phone" style="width: 5%">Façade</th>
+											<th class="hidden-phone" style="width: 30%">Nbr.Pièces</th>
+											<th class="hidden-phone" style="width: 5%">Cave</th>
 											<th style="width: 10%">Status</th>
 											<th style="width: 15%"></th>
 										</tr>
@@ -301,7 +302,6 @@
 												</div>
 											</td>
 											<td class="hidden-phone"><?= $appartement->niveau() ?>Et</td>
-											<!--td><a></a></td-->
 											<td><?= $appartement->superficie() ?> m<sup>2</sup></td>
 											<td class="hidden-phone"><?= $appartement->facade() ?></td>
 											<td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
@@ -360,7 +360,7 @@
                                                 } 
                                                 ?>
 											</td>
-											<td class="hidden-phone">
+											<td>
 												<?php
 												if( $appartement->status()=="R&eacute;serv&eacute;" ){
 												    if ( 
@@ -397,21 +397,23 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le status vers "Disponible"</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
+											<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini red">Réservé</a> vers 
 														<a class="btn mini green">Disponible</a> ?</p>
-													<div class="control-group">
-													    <input type="hidden" name="action" value="updateStatus" />
-														<input type="hidden" name="status" value="Disponible" />
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateStatus" />
+                                                        <input type="hidden" name="status" value="Disponible" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- change to disponible box end -->	
 										<!-- change to reserve box begin-->
@@ -420,21 +422,23 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le status vers "Réservé"</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
+											<form class="form-horizontal" action="controller/AppartementActionController.php" method="post" enctype="multipart/form-data">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini green">Disponible</a> vers 
 														<a class="btn mini red">Réservé</a> ?</p>
-													<div class="control-group">
-													    <input type="hidden" name="action" value="updateStatus" />
-														<input type="hidden" name="status" value="Réservé" />
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateStatus" />
+                                                        <input type="hidden" name="status" value="Réservé" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+									       </form>
 										</div>
 										<!-- change to reserve box end -->	
 										<!-- add file box begin-->
@@ -443,22 +447,25 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Ajouter des pièces pour cette appartement</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/AppartementActionController.php?p=1" method="post" enctype="multipart/form-data">
-													<p>Êtes-vous sûr de vouloir ajouter des pièces pour cette appartement ?</p>
+											<form class="form-horizontal" action="controller/AppartementActionController.php?p=1" method="post" enctype="multipart/form-data">
+											     <div class="modal-body">
 													<div class="control-group">
 														<label class="right-label">Nom Pièce</label>
 														<input type="text" name="nom" />
 														<label class="right-label">Lien</label>
 														<input type="file" name="url" />
-														<input type="hidden" name="action" value="addPieces" />
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="addPieces" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- add files box end -->	
 										<!-- updateAppartement box begin-->
@@ -467,8 +474,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier Appartement</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                                            <form class="form-horizontal" action="controller/AppartementActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir modifier <strong>Appartement : <?= $appartement->nom() ?>- Niveau : <?= $appartement->niveau() ?></strong></p>
                                                     <div class="control-group">
                                                         <div class="controls">
@@ -552,6 +559,8 @@
                                                             <input type="text" name="par" class="m-wrap" value="<?= $appartement->par() ?>">
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">
                                                             <input type="hidden" name="action" value="update" />  
@@ -561,8 +570,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateAppartement box end -->
 										<!-- updateClient box begin -->
@@ -571,22 +580,24 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le client <strong><?= $appartement->par() ?></strong> </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $appartement->par() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Réservé par</label>
 														<input type="text" name="par" value="<?= $appartement->par() ?>" />
 													</div>
-													<div class="control-group">
-														<input type="hidden" name="action" value="updateClient" />
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateClient" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>	
 										<!-- updateClient box end -->
 										<!-- delete box begin-->
@@ -595,19 +606,21 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Supprimer Appartement <strong><?= $appartement->nom() ?></strong> </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir supprimer cette appartement <strong><?= $appartement->nom() ?></strong> ?</p>
-													<div class="control-group">
-														<label class="right-label"></label>
-														<input type="hidden" name="action" value="delete" />
-														<input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <label class="right-label"></label>
+                                                        <input type="hidden" name="action" value="delete" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- delete box end -->	
 										<?php
@@ -615,11 +628,6 @@
 										}//end of if
 										?>
 									</tbody>
-									<?php
-									/*if($appartementNumber != 0){
-										echo $pagination;	
-									}*/
-									?>
 								</table>
 							</div>
 						</div>
@@ -627,124 +635,6 @@
 						<!-- END Terrain TABLE PORTLET-->
 					</div>
 				</div>
-				<!--div class="row-fluid">
-					<div class="span12">
-						<div class="tab-pane active" id="tab_1">
-                           <div class="portlet box blue">
-                              <div class="portlet-title">
-                                 <h4><i class="icon-edit"></i>Ajouter un nouvel appartement pour le projet : <strong><?= $projet->nom() ?></strong></h4>
-                                 <div class="tools">
-                                    <a href="javascript:;" class="collapse"></a>
-                                    <a href="javascript:;" class="remove"></a>
-                                 </div>
-                              </div>
-                              <div class="portlet-body form">
-                                 <form action="controller/AppartementAddController.php" method="POST" class="horizontal-form">
-                                    <div class="row-fluid">
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="code">Code</label>
-                                             <div class="controls">
-                                                <input type="text" id="code" name="code" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="superficie">Supérficie</label>
-                                             <div class="controls">
-                                                <input type="text" id="superficie" name="superficie" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="facade">Façade</label>
-                                             <div class="controls">
-                                                <input type="text" id="facade" name="facade" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="nombrePiece">Nombre Pièces</label>
-                                             <div class="controls">
-                                                <input type="text" id="nombrePiece" name="nombrePiece" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                    	<div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="prix">Prix</label>
-                                             <div class="controls">
-                                                <input type="text" id="prix" name="prix" class="m-wrap span12">
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="niveau">Niveau</label>
-                                             <div class="controls">
-                                             	<select style="width:150px" name="niveau" class="m-wrap">
-                                             		<option value="RC">RC</option>
-                                             		<option value="Mezzanine">Mezzanine</option>
-                                             		<option value="1">1</option>
-                                             		<option value="2">2</option>
-                                             		<option value="3">3</option>
-                                             		<option value="4">4</option>
-                                             		<option value="5">5</option>
-                                             		<option value="6">6</option>
-                                             		<option value="7">7</option>
-                                             	</select>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="status">Status</label>
-                                             <div class="controls">
-                                             	<select style="width:150px" name="status" id="status" class="m-wrap">
-                                             		<option value="Non">Disponible</option>
-                                             		<option value="Oui">Réservé</option>
-                                             	</select>
-                                             </div>
-                                          </div>
-                                       </div>
-                                       <div class="span3">
-                                          <div class="control-group">
-                                             <label class="control-label" for="cave">Cave</label>
-                                             <div class="controls">
-                                             	<select style="width:150px" name="cave" class="m-wrap">
-                                             		<option value="Avec">Avec</option>
-                                             		<option value="Sans">Sans</option>
-                                             	</select>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="row-fluid" id="par" style="display: none">
-                                    	<div class="span6">
-                                          <div class="control-group">
-                                             <label class="control-label">Réservé par </label>
-                                             <div class="controls">
-                                                <input type="text" name="par" class="m-wrap">
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div class="form-actions">
-                                    	<input type="hidden" id="idProjet" name="idProjet" value="<?= $idProjet ?>" class="m-wrap span12">
-                                    	<button type="submit" class="btn blue">Enregistrer <i class="icon-save"></i></button>
-                                    	<button type="reset" class="btn red">Annuler</button>
-                                    </div>
-                                 </form> 
-                              </div>
-                           </div>
-                        </div>
-					</div>
-				</div-->
 				<?php }
 				else{
 				?>
