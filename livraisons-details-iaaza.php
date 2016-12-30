@@ -395,7 +395,6 @@
                                 </div>
                                 <form id="update-detail-livraison-form" class="form-horizontal" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
                                     <div class="modal-body">
-                                        <p>Êtes-vous sûr de vouloir modifier cet article ?</p>
                                         <div class="control-group">
                                             <label class="control-label" for="designation">Désignation</label>
                                             <div class="controls">
