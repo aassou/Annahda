@@ -315,13 +315,11 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <div class="control-group">
-                                        <div class="controls">  
+                                    <div class="control-group"> 
                                             <input type="hidden" name="action" value="add" />
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                        </div>
                                     </div>
                                 </div>
                             </form>
