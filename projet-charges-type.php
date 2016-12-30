@@ -80,7 +80,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Détails des charges - Projet : <strong><?= $projet->nom() ?></strong>
+                            Détails des charges Projet : <strong><?= $projet->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -118,8 +118,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter une nouvelle charge </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargeActionController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargeActionController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Charge</label>
                                         <div class="controls">
@@ -155,6 +155,8 @@
                                             <input type="text" name="societe" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -165,8 +167,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addCharge box end -->
                         <!-- addTypeCharge box begin-->
@@ -175,14 +177,16 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouveau Type Charge </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom Type Charge</label>
                                         <div class="controls">
                                             <input type="text" name="nom" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -193,26 +197,24 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addTypeCharge box end -->
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid get-down">
                             <div class="input-box autocomplet_container">
-                                <!--input class="m-wrap" name="designation" id="designation" type="text" placeholder="Désignation..." />
-                                <input class="m-wrap" name="societe" id="societe" type="text" placeholder="Société..." /-->
-                                <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
+                                <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <?php 
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
-                                <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
-                                    Type Charge <i class="icon-plus-sign "></i>
+                                <a style="margin-top:5px;" href="#addTypeCharge" data-toggle="modal" class="btn blue btn-fixed-width-big">
+                                    <i class="icon-plus-sign"></i>&nbsp;Type Charge
                                 </a>
-                                <a href="#addCharge" data-toggle="modal" class="btn green pull-right stay-away">
-                                    Nouvelle Charge <i class="icon-plus-sign "></i>
+                                <a style="margin-top:5px;" href="#addCharge" data-toggle="modal" class="btn green btn-fixed-width-big">
+                                    <i class="icon-plus-sign"></i>&nbsp;Nouvelle Charge
                                 </a>
                                 <?php 
                                 }
@@ -225,8 +227,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Liste des Charges </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargePrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les charges à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -254,6 +256,8 @@
                                            <input style="width:100px" name="dateTo" id="dateTo" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="type" value="<?= $typeCharge ?>" />
@@ -262,8 +266,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printCharge box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -297,38 +301,21 @@
                                 </div>
                             </div>
                         <div class="portlet-body">
-                            <!--div class="clearfix">
-                                <div class="btn-group">
-                                    <button id="sample_editable_1_new" class="btn green">
-                                    Add New <i class="icon-plus"></i>
-                                    </button>
-                                </div>
-                                <div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Print</a></li>
-                                        <li><a href="#">Save as PDF</a></li>
-                                        <li><a href="#">Export to Excel</a></li>
-                                    </ul>
-                                </div>
-                            </div-->
-                            <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
                                             <?php
                                             if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
                                             ?>
-                                            <th style="width: 10%"></th>
+                                            <th class="hidden-phone" style="width: 10%">Actions</th>
                                             <?php
                                             } 
                                             ?>
                                             <th style="width: 10%">Type</th>
-                                            <th style="width: 20%">Date Opération</th>
+                                            <th class="hidden-phone" style="width: 10%">DateOp</th>
                                             <th style="width: 20%">Désignation</th>
-                                            <th style="width: 20%">Société</th>
-                                            <th style="width: 20%">Montant</th>
+                                            <th class="hidden-phone" style="width: 20%">Société</th>
+                                            <th style="width: 30%">Montant</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -339,7 +326,7 @@
                                             <?php
                                             if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
                                             ?>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <a class="btn mini green" title="Modifier" href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>"><i class="icon-refresh"></i></a>
                                                 <a class="btn mini red" title="Supprimer" href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>"><i class="icon-remove"></i></a>
                                             </td>
@@ -347,10 +334,10 @@
                                             } 
                                             ?>
                                             <td><?= $typeChargeManager->getTypeChargeById($charge->type())->nom() ?></td>
-                                            <td><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
-                                            <td class="hidden-phone"><?= $charge->designation() ?></td>
+                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
+                                            <td><?= $charge->designation() ?></td>
                                             <td class="hidden-phone"><?= $charge->societe() ?></td>
-                                            <td class="hidden-phone"><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
+                                            <td><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
                                         </tr>
                                         <!-- updateCharge box begin-->
                                         <div id="updateCharge<?= $charge->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -358,8 +345,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier Info Charge </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/ChargeActionController.php" method="post">
+                                            <form class="form-horizontal" action="controller/ChargeActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <label class="control-label">Type Charge</label>
                                                         <div class="controls">
@@ -397,6 +384,8 @@
                                                             <input type="text" name="societe" value="<?= $charge->societe() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -408,8 +397,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateCharge box end -->            
                                         <!-- deleteCharge box begin-->
@@ -418,9 +407,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer la charge</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ChargeActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ChargeActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer cette charge <?= $charge->type() ?> ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
@@ -431,36 +422,20 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- deleteCharge box end -->    
                                         <?php
                                         }//end of loop
                                         ?>
-                                        <!--tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><strong>Total des charges</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><strong><a><?php //number_format($chargeManager->getTotalByIdProjetByType($idProjet, $charge->type()), 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
-                                        </tr-->
                                     </tbody>
                                 </table>
                                 <table class="table table-striped table-bordered  table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="width: 80%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
-                                            <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
+                                            <th style="width: 70%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
+                                            <th style="width: 30%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                         </tr>
                                     </tbody>
                                 </table>
