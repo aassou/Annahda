@@ -349,7 +349,7 @@
                                 }
                                 ?>
                                 <th style="width: 20%">Désignation</th>
-                                <th style="width: 20%">Quantité</th>
+                                <th style="width: 20%">Qté</th>
                                 <th style="width: 20%">Prix.Uni</th>
                                 <th style="width: 30%">Total</th>
                             </tr>
