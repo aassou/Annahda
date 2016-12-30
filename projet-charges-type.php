@@ -288,8 +288,8 @@
                         <table class="table table-striped table-bordered  table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 80%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
-                                    <th style="width: 20%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 70%"><strong>Total des charges de <?= $nomTypeCharge ?></strong></th>
+                                    <th style="width: 30%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                 </tr>
                             </tbody>
                         </table>
