@@ -162,7 +162,7 @@
                                         </a>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <input style="width:100px;" class="m-wrap" type="text" id="criteria" placeholder="Chercher.."/>
+                                        <input style="width:200px;" class="m-wrap" type="text" id="criteria" placeholder="Chercher.."/>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered table-hover">
