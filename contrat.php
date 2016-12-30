@@ -962,7 +962,7 @@
 									    <th class="hidden-phone" style="width: 15%">Actions</th>
 									    <th class="hidden-phone" style="width: 10%">Pieces</th>
 										<th style="width: 10%">Date.Opé/Rég</th>
-										<th style="width: 10%">ModePaiement</th>
+										<th class="hidden-phone" style="width: 10%">ModePaiement</th>
 										<th class="hidden-phone" style="width: 10%">Compte</th>
 										<th class="hidden-phone" style="width: 10%">N°Opér</th>
 										<th style="width: 10%">Montant</th>
@@ -1017,7 +1017,7 @@
                                             </a>
                                         </td>
 										<td><?= date('d/m/Y', strtotime($operation->date())).'-'.date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
-										<td><?= $operation->modePaiement() ?></td>
+										<td class="hidden-phone"><?= $operation->modePaiement() ?></td>
 										<td class="hidden-phone"><?= $operation->compteBancaire() ?></td>
 										<td class="hidden-phone"><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
@@ -1233,10 +1233,10 @@
                             <table class="table table-striped table-bordered  table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 30%"><strong>Total des réglements</strong></th>
-                                    <th style="width: 25%"><a><strong><?= $operationManager->sommeOperations($contrat->id(), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
-                                    <th style="width: 20%"><strong>Reste à payé</strong></th>
-                                    <th style="width: 25%"><a><strong><?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 20%"><strong>Σ Réglements</strong></th>
+                                    <th style="width: 30%"><a><strong><?= $operationManager->sommeOperations($contrat->id(), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th style="width: 20%"><strong>Reste</strong></th>
+                                    <th style="width: 30%"><a><strong><?= number_format($contrat->prixVente()-$operationManager->sommeOperations($contrat->id()), 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                 </tr>
                             </tbody>
                         </table>
