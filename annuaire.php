@@ -158,12 +158,11 @@
                                 <div class="clearfix">
                                     <div class="btn-group pull-left">
                                         <a class="btn green" href="#addAnnuaire" data-toggle="modal">
-                                            <i class="icon-phone-sign"></i>
-                                             Ajouter Numéro
+                                            <i class="icon-plus-sign"></i>Téléphone
                                         </a>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <input class="m-wrap" type="text" id="criteria" placeholder="Chercher par Nom ou par Tél"/>
+                                        <input class="m-wrap" type="text" id="criteria" placeholder="Chercher.."/>
                                     </div>
                                 </div>
                                 <table class="table table-striped table-bordered table-hover">
