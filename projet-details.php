@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="span11" style="overflow:hidden;">
                                     <div class="portfolio-info">
-                                        <a style="margin-top:5px" href="terrain.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big black">Terrain</a>
+                                        <a style="margin-top:5px" href="terrain.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big black stay-away">Terrain</a>
                                         <a style="margin-top:5px" href="appartements.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big brown stay-away">Appartements</a>
                                         <a style="margin-top:5px" href="locaux.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big purple stay-away">Les locaux commerciaux</a>
                                     </div>
@@ -123,7 +123,7 @@
                                             || $_SESSION['userMerlaTrav']->profil()=="consultant" 
                                         ) {
                                         ?>
-                                        <a style="margin-top:5px" href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-red">Charges du Projet</a>
+                                        <a style="margin-top:5px" href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-red stay-away">Charges du Projet</a>
                                         <?php
                                         }
                                         ?>
@@ -140,7 +140,7 @@
                                         <a style="margin-top:5px" href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big green stay-away">Listes Clients et Contrats</a>
                                     </div>
                                     <div class="portfolio-info">
-                                        <a style="margin-top:5px" href="contrats-desistes-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big yellow">Contrats Désistés</a>
+                                        <a style="margin-top:5px" href="contrats-desistes-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big yellow stay-away">Contrats Désistés</a>
                                         <a style="margin-top:5px" href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big stay-away">Contrats employés</a>
                                         <a style="margin-top:5px" href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-cyan stay-away">Statistiques</a>
                                     </div>
