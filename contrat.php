@@ -136,7 +136,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Résumé Contrat Client - Projet : <strong><?= $projet->nom() ?></strong>
+							Résumé Contrat Client Projet : <strong><?= $projet->nom() ?></strong>
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -170,10 +170,6 @@
 					<div class="span12">
 						<?php if(isset($_GET['codeContrat']) and 
 						(bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
-	                     //progress bar processing
-	                     //contrat progress with avance : 
-	                     //$statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id())  +$contrat->avance() )/$contrat->prixVente())*100);
-	                     //contrat progress without avance : 
 	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id()) )/$contrat->prixVente())*100);
 						 $statusBar = "";
 						 if( $statistiquesResult>0 and $statistiquesResult<25 ){
@@ -187,11 +183,10 @@
 						 }
 	                     ?>
 	                    <h3>Résumé du Contrat&nbsp;&nbsp;
-	                    	<a class="btn blue" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
+	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width-big stay-away" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
-	                    	<a class="btn green pull-right" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
-	                    	<!--a class="btn green pull-right" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>"-->
+	                    	<a style="margin-top:5px;" class="btn green btn-fixed-width-big stay-away" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
                                 <i class="icon-print"></i>&nbsp;Imprimer Contrat
                             </a>
 	                    </h3>
@@ -390,12 +385,6 @@
                                     </span>
                                 </li>
 							</ul>
-							<!--a href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>" class="btn big blue">
-									<i class="icon-print"></i> Contrat Client
-								</a>
-							<a href="controller/QuittanceAvancePrintController.php?idContrat=<?= $contrat->id() ?>" class="btn big black">
-									<i class="icon-print"></i> Quittance Avance
-								</a-->
 						</div>
 					 </div>
 					 <!-- updateImageNote box begin-->
@@ -404,8 +393,8 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h3>Modifier l'image de note client </h3>
                         </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal loginFrm" action="controller/ContratActionController.php" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
                                 <p>Êtes-vous sûr de vouloir modifier l'image de cette note ?</p>
                                 <div class="control-group">
                                     <label class="right-label"></label>
@@ -415,16 +404,22 @@
                                             <input type="file" name="note-client-image" />
                                         </div>
                                     </div>
-                                    <input type="hidden" name="action" value="updateImageNote" />
-                                    <input type="hidden" name="source" value="contrat" />
-                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
-                                    <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
-                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <input type="hidden" name="action" value="updateImageNote" />
+                                        <input type="hidden" name="source" value="contrat" />
+                                        <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                        <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- updateImageNote box end -->       
 					<!-- addReglement box begin-->
@@ -433,8 +428,8 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h3>Nouveau réglement </h3>
                         </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
                                 <div class="control-group">
                                      <label class="control-label" for="code">Date opération</label>
                                      <div class="controls">
@@ -514,6 +509,8 @@
                                         <textarea type="text" name="observation"></textarea>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
                                 <div class="control-group">
                                     <input type="hidden" name="action" value="add" />
                                     <input type="hidden" name="source" value="contrat" />
@@ -526,8 +523,8 @@
                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- addReglement box end -->
                     <!-- CONTRAT CAS LIBRE BEGIN -->
@@ -547,13 +544,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <?php
-                                            //if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                            ?>
                                             <th style="width: 10%">Actions</th>
-                                            <?php
-                                            //}
-                                            ?>
                                             <th style="width: 20%">Date</th>
                                             <th style="width: 20%">Montant</th>
                                             <th style="width: 30%">Obsérvation</th>
@@ -614,8 +605,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier status</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir changer le status ?</p>
                                                         <label class="control-label">Status</label>
@@ -628,6 +619,8 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus" />
@@ -639,8 +632,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateStatusContratCasLibre box end -->
                                         <!-- updateContratCasLibre box begin -->
@@ -649,8 +642,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier Informations</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <div class="controls">
                                                             <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
@@ -669,6 +662,8 @@
                                                             <input type="text" name="observation" class="m-wrap" value="<?= $element->observation() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="update" />
@@ -680,8 +675,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateContratCasLibre box end -->
                                         <!-- deleteContratCasLibre box begin -->
@@ -690,9 +685,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer cette ligne</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratCasLibreActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer cette ligne ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="action" value="delete" />
                                                         <input type="hidden" name="source" value="contrat" />
@@ -702,8 +699,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- deleteContratCasLibre box end -->
                                         <tr>
@@ -776,11 +773,11 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h3>Ajouter un cas libre pour ce contrat </h3>
                         </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal" action="controller/ContratCasLibreActionController.php" method="post">
+                        <form class="form-horizontal" action="controller/ContratCasLibreActionController.php" method="post">
+                            <div class="modal-body">
                                 <?php include('include/cas-libre-modal.php'); ?>
-                        </div>
-                        <div class="modal-footer">
+                            </div>
+                            <div class="modal-footer">
                                 <div class="row-fluid">
                                     <div class="control-group">
                                         <input type="hidden" name="action" value="addCasLibre">
@@ -790,8 +787,8 @@
                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- addCasLibre box end -->
                     <!-- CONTRAT CAS LIBRE END -->
@@ -867,8 +864,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier status</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ReglementPrevuActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir changer le status de la date prévu ?</p>
                                                         <label class="control-label">Status</label>
@@ -881,6 +878,8 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus">
@@ -890,10 +889,10 @@
                                                             <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        <div class="controls">
+                                                        </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateStatusReglementPrevu box end -->
                                         <?php
@@ -956,28 +955,18 @@
                                 <?php
                                 }
                                 ?>
-                                <!--div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Print</a></li>
-                                        <li><a href="#">Save as PDF</a></li>
-                                        <li><a href="#">Export to Excel</a></li>
-                                    </ul>
-                                </div-->
                             </div>
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
 								<thead>
 									<tr>
-									    <th style="width: 15%">Actions</th>
-									    <th style="width: 10%">Pieces</th>
+									    <th class="hidden-phone" style="width: 15%">Actions</th>
+									    <th class="hidden-phone" style="width: 10%">Pieces</th>
 										<th style="width: 10%">Date.Opé/Rég</th>
-										<!--th style="width: 10%">Date.Rég</th-->
 										<th style="width: 10%">ModePaiement</th>
-										<th style="width: 10%">Compte</th>
-										<th style="width: 10%">N°.Opér</th>
+										<th class="hidden-phone" style="width: 10%">Compte</th>
+										<th class="hidden-phone" style="width: 10%">N°Opér</th>
 										<th style="width: 10%">Montant</th>
-										<th style="width: 15%">Observation</th>
+										<th class="hidden-phone" style="width: 15%">Observation</th>
 										<th style="width: 10%">Status</th>
 									</tr>
 								</thead>
@@ -1008,7 +997,7 @@
                                         } 
 									?>		
 									<tr class="odd gradeX">
-									    <td>
+									    <td class="hidden-phone">
 									        <a title="Imprimer Quittance" class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i></a>
     									    <?php
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
@@ -1019,7 +1008,7 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td class="hidden-phone">
                                             <a class="fancybox-button btn mini" data-rel="fancybox-button" title="Copie Pièce" href="<?= $operation->url() ?>">
                                                 <i class="icon-zoom-in"></i>    
                                             </a>
@@ -1028,12 +1017,11 @@
                                             </a>
                                         </td>
 										<td><?= date('d/m/Y', strtotime($operation->date())).'-'.date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
-										
 										<td><?= $operation->modePaiement() ?></td>
-										<td><?= $operation->compteBancaire() ?></td>
-										<td><?= $operation->numeroCheque() ?></td>
+										<td class="hidden-phone"><?= $operation->compteBancaire() ?></td>
+										<td class="hidden-phone"><?= $operation->numeroCheque() ?></td>
 										<td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
-										<td><?= $operation->observation() ?></td>
+										<td class="hidden-phone"><?= $operation->observation() ?></td>
 										<td><?= $status ?></td>
 									</tr>
 									<!-- updatePiece box begin-->
@@ -1042,8 +1030,8 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Modifier la pièce de réglement </h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
+                                        <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post" enctype="multipart/form-data">
+                                            <div class="modal-body">
                                                 <p>Êtes-vous sûr de vouloir modifier la pièce de réglement ?</p>
                                                 <div class="control-group">
                                                     <label class="right-label"></label>
@@ -1053,16 +1041,22 @@
                                                             <input type="file" name="urlPiece" />
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="action" value="updatePiece" />
-                                                    <input type="hidden" name="source" value="contrat" />
-                                                    <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
-                                                    <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
-                                                    <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
-                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <input type="hidden" name="action" value="updatePiece" />
+                                                        <input type="hidden" name="source" value="contrat" />
+                                                        <input type="hidden" name="codeContrat" value="<?= $codeContrat ?>" />
+                                                        <input type="hidden" name="idOperation" value="<?= $operation->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </form>
                                     </div>
                                     <!-- updateCopiePiece box end -->      	
 									<!-- validateOperation box begin-->
@@ -1071,8 +1065,11 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Valider Paiement Client </h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                        <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                            <div class="modal-body">
+                                                <p>Êtes-vous sûr de vouloir valider ce paiement client ?</p>
+                                            </div>
+                                            <div class="modal-footer">
                                                 <div class="control-group">
                                                     <input type="hidden" name="action" value="validate">
                                                     <input type="hidden" name="source" value="contrat">
@@ -1081,8 +1078,8 @@
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn blue" aria-hidden="true">Oui</button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- validateOperation box end -->
                                     <!-- cancelOperation box begin-->
@@ -1091,8 +1088,11 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Annuler Paiement Client </h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                        <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                            <div class="modal-body">
+                                                <p>Êtes-vous sûr de vouloir annuler ce paiement client ?</p>
+                                            </div>
+                                            <div class="modal-footer">
                                                 <div class="control-group">
                                                     <input type="hidden" name="action" value="cancel">
                                                     <input type="hidden" name="source" value="contrat">
@@ -1101,8 +1101,8 @@
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- cancelOperation box end -->
 									<!-- update box begin-->
@@ -1111,9 +1111,8 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Modifier Infos Opérations</h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal" action="controller/OperationActionController.php" method="post">
-                                                <p>Êtes-vous sûr de vouloir modifier les informations de cette opération ?</p>
+                                        <form class="form-horizontal" action="controller/OperationActionController.php" method="post">
+                                            <div class="modal-body">
                                                 <div class="control-group">
                                                      <label class="control-label" for="code">Date opération</label>
                                                      <div class="controls">
@@ -1183,6 +1182,8 @@
                                                         <textarea type="text" name="observation"><?= $operation->observation() ?></textarea>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="modal-footer">
                                                 <div class="control-group">
                                                     <input type="hidden" name="action" value="update">
                                                     <input type="hidden" name="source" value="contrat">
@@ -1195,8 +1196,8 @@
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- update box end --> 
                                     <!-- delete box begin-->
@@ -1205,9 +1206,11 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Supprimer Réglement Client </h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                        <form class="form-horizontal loginFrm" action="controller/OperationActionController.php" method="post">
+                                            <div class="modal-body">
                                                 <p>Êtes-vous sûr de vouloir supprimer ce réglement ?</p>
+                                            </div>
+                                            <div class="modal-footer">
                                                 <div class="control-group">
                                                     <input type="hidden" name="action" value="delete">
                                                     <input type="hidden" name="source" value="contrat">
@@ -1217,8 +1220,8 @@
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- delete box end --> 
 									<?php
@@ -1247,8 +1250,8 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             <h3>Ajouter Commission</h3>
                         </div>
-                        <div class="modal-body">
-                            <form class="form-horizontal loginFrm" action="controller/CommissionActionController.php" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal loginFrm" action="controller/CommissionActionController.php" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
                                 <div class="control-group">
                                      <label class="control-label" for="code">Date</label>
                                      <div class="controls">
@@ -1285,6 +1288,8 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
                                 <div class="control-group">
                                     <input type="hidden" name="action" value="add" />
                                     <input type="hidden" name="source" value="contrat" />
@@ -1297,8 +1302,8 @@
                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- addReglement box end -->
 					 <?php 
@@ -1341,11 +1346,11 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th>Actions</th>
+                                        <th class="hidden-phone">Actions</th>
                                         <th>Commissionnaire</th>
-                                        <th>Description</th>
+                                        <th class="hidden-phone">Description</th>
                                         <th>Montant</th>
-                                        <th>Date</th>
+                                        <th class="hidden-phone">Date</th>
                                         <th>état</th>
                                     </tr>
                                 </thead>
@@ -1358,7 +1363,7 @@
                                         } 
                                     ?>
                                     <tr class="odd gradeX">
-                                        <td>
+                                        <td class="hidden-phone">
                                             <?php
                                             if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
                                             ?>
@@ -1368,9 +1373,9 @@
                                             ?>
                                         </td>    
                                         <td><?= $commission->commissionnaire() ?></td>
-                                        <td><?= $commission->titre() ?></td>
+                                        <td class="hidden-phone"><?= $commission->titre() ?></td>
                                         <td><?= $commission->montant() ?></td>
-                                        <td><?= date('d/m/Y', strtotime($commission->date())) ?></td>
+                                        <td class="hidden-phone"><?= date('d/m/Y', strtotime($commission->date())) ?></td>
                                         <td><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
                                     </tr>
                                     <!-- updateCommission box begin-->
@@ -1379,8 +1384,8 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Modifier les informations de Commission </h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal" action="controller/CommissionActionController.php" method="post">
+                                        <form class="form-horizontal" action="controller/CommissionActionController.php" method="post">
+                                            <div class="modal-body">
                                                 <div class="control-group">
                                                     <label class="control-label">Commissionnaire</label>
                                                     <div class="controls">
@@ -1420,8 +1425,10 @@
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- updateCommission box end -->
                                     <!-- delete box begin-->
@@ -1430,9 +1437,11 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             <h3>Supprimer Client</h3>
                                         </div>
-                                        <div class="modal-body">
-                                            <form class="form-horizontal loginFrm" action="controller/CommssionActionController.php" method="post">
+                                        <form class="form-horizontal loginFrm" action="controller/CommssionActionController.php" method="post">
+                                            <div class="modal-body">
                                                 <p>Êtes-vous sûr de vouloir supprimer la commission de <?= $commission->commissionnaire() ?> ?</p>
+                                            </div>
+                                            <div class="modal-footer">
                                                 <div class="control-group">
                                                     <label class="right-label"></label>
                                                     <input type="hidden" name="idCommission" value="<?= $commission->id() ?>" />
@@ -1442,8 +1451,8 @@
                                                     <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                 </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <!-- delete box end -->     
                                     <?php
@@ -1462,8 +1471,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                         <h3>Observation Client</h3>
                     </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" action="controller/ContratActionController.php" method="post">
+                    <form class="form-horizontal" action="controller/ContratActionController.php" method="post">
+                        <div class="modal-body">
                             <div class="control-group">
                                 <label class="control-label">Observation</label>
                                 <div class="controls">
@@ -1480,8 +1489,10 @@
                                     <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </form>
                 </div>
                 <!-- addObservation box end -->
 				<!-- updateClient box begin-->
@@ -1490,8 +1501,8 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 						<h3>Modifier les informations du client </h3>
 					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" action="controller/ClientActionController.php" method="post">
+					<form class="form-horizontal" action="controller/ClientActionController.php" method="post">
+					   <div class="modal-body">
 							<div class="control-group">
 								<label class="control-label">Nom</label>
 								<div class="controls">
@@ -1540,18 +1551,20 @@
                                     <input type="text" name="adresseArabe" value="<?= $client->adresseArabe() ?>" <?= $readonly ?> />
                                 </div>  
                             </div>
-							<div class="control-group">
-							    <input type="hidden" name="action" value="update" />
-							    <input type="hidden" name="source" value="contrat" />
-								<input type="hidden" name="idClient" value="<?= $client->id() ?>" />
-								<input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
-								<div class="controls">	
-									<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-									<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-								</div>
-							</div>
-						</form>
-					</div>
+					    </div>
+					    <div class="modal-footer">
+					        <div class="control-group">
+                                <input type="hidden" name="action" value="update" />
+                                <input type="hidden" name="source" value="contrat" />
+                                <input type="hidden" name="idClient" value="<?= $client->id() ?>" />
+                                <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
+                                <div class="controls">  
+                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                </div>
+                            </div>
+				        </div>
+					</form>
 				</div>
 				<!-- updateClient box end -->
 				<!-- updateContrat box begin-->
@@ -1560,8 +1573,8 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 						<h3>Modifier les informations du contrat </h3>
 					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" action="controller/ContratActionController.php" method="post">
+					<form class="form-horizontal" action="controller/ContratActionController.php" method="post">
+					   <div class="modal-body">
 							<p>Êtes-vous sûr de vouloir modifier le contrat <strong>N°<?= $contrat->id() ?></strong>  ?</p>
 							<div class="control-group">
                                 <label class="control-label">Numéro Contrat</label>
@@ -1710,18 +1723,20 @@
                              		</select>
                             	</div>
                           	</div>
-							<div class="control-group">
-							    <input type="hidden" name="action" value="update" />
-							    <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
-								<input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
-								<input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
-								<div class="controls">	
-									<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-									<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-								</div>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="modal-footer">
+						    <div class="control-group">
+                                <input type="hidden" name="action" value="update" />
+                                <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                <input type="hidden" name="codeContrat" value="<?= $contrat->code() ?>" />
+                                <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                <div class="controls">  
+                                    <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                    <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                </div>
+                            </div>
+					    </div>
+					</form>
 				</div>
 				<!-- updateContrat box end -->		
 				<?php 
@@ -1830,9 +1845,6 @@
 </html>
 <?php
 }
-/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-	header('Location:dashboard.php');
-}*/
 else{
     header('Location:index.php');    
 }
