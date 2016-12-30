@@ -417,7 +417,7 @@
                                 <table class="table table-striped table-bordered  table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="width: 50%"><strong>Σ <?= $typeCharge ?></strong></th>
+                                            <th style="width: 50%"><strong>Σ <?= $nomTypeCharge ?></strong></th>
                                             <th style="width: 50%"><a><strong><?= $total ?>&nbsp;DH</strong></a></th>
                                         </tr>
                                     </tbody>
