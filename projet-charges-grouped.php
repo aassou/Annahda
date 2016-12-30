@@ -303,7 +303,7 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 70%">Type</th>
-                                            <th style="width: 30%">Total</th>
+                                            <th class="hidden-phone" style="width: 30%">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
