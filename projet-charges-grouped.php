@@ -194,23 +194,23 @@
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
-                                <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big stay-away" data-toggle="modal">
+                                <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <?php 
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
-                                <a style="margin-top:5px;" href="#addTypeCharge" data-toggle="modal" class="btn blue btn-fixed-width-big stay-away">
+                                <a style="margin-top:5px;" href="#addTypeCharge" data-toggle="modal" class="btn blue btn-fixed-width-big">
                                     <i class="icon-plus-sign"></i>&nbsp;Type Charge
                                 </a>
-                                <a style="margin-top:5px;" href="#addCharge" data-toggle="modal" class="btn green btn-fixed-width-big stay-away">
+                                <a style="margin-top:5px;" href="#addCharge" data-toggle="modal" class="btn green btn-fixed-width-big">
                                     <i class="icon-plus-sign"></i>&nbsp;Nouvelle Charge
                                 </a>
                                 <?php 
                                 }
                                 ?>
                             </div>
-                            <input style="margin-top:5px; width:98%" class="m-wrap stay-away" name="type" id="type" type="text" placeholder="Type..." />
+                            <input style="margin-top:5px; width:98%" class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
                         </div>
                         <!-- printCharge box begin-->
                         <div id="printCharges" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
