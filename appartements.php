@@ -276,6 +276,9 @@
                                                     ?>
 												    <ul class="dropdown-menu">
 												        <li>
+												            <a class="hidden-desktop">
+                                                                Prix: <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH
+                                                            </a>
 												        	<a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
 																Fiche descriptif
 															</a>
