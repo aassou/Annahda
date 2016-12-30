@@ -110,13 +110,13 @@
                         <div class="tab-pane" id="tab_1_4">
                             <div class="row-fluid add-portfolio">
                                 <div class="pull-left get-down">
-                                    <span><?= $projetNumber ?> Projets en Total</span>
+                                    <span><?= $projetNumber ?> Projets</span>
                                 </div>
                                 <?php
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
                                 <div class="pull-right">
-                                    <a href="#addProjet" class="btn icn-only green" data-toggle="modal">Ajouter Nouveau Projet <i class="icon-plus-sign m-icon-white"></i></a>                                  
+                                    <a href="#addProjet" class="btn icn-only green" data-toggle="modal"><i class="icon-plus-sign m-icon-white"></i>&nbsp;Nouveau Projet</a>                                  
                                 </div>
                                 <?php  
                                 }
@@ -128,8 +128,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Ajouter Nouveau Projet</h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal" action="controller/ProjetActionController.php" method="post">
+                                <form class="form-horizontal" action="controller/ProjetActionController.php" method="post">
+                                    <div class="modal-body">
                                         <div class="control-group">
                                             <label class="control-label">Nom</label>
                                             <div class="controls">
@@ -178,6 +178,8 @@
                                                 <input type="text" name="adresseArabe" />
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <div class="controls">
                                                 <input type="hidden" name="action" value="add" />  
@@ -185,8 +187,8 @@
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- addProjet box end -->
                             <!--end add-portfolio-->
@@ -216,9 +218,8 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                     <h3>Modifier Projet <?= $projet->nom() ?></h3>
                                 </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal" action="controller/ProjetActionController.php" method="post">
-                                        <p>Êtes-vous sûr de vouloir modifier ce projet ?</p>
+                                <form class="form-horizontal" action="controller/ProjetActionController.php" method="post">
+                                    <div class="modal-body">
                                         <div class="control-group">
                                             <label class="control-label">Nom</label>
                                             <div class="controls">
@@ -267,6 +268,8 @@
                                                 <input type="text" name="adresseArabe" value="<?= $projet->adresseArabe() ?>" />
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <div class="controls">
                                                 <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />  
@@ -275,8 +278,8 @@
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
                             <!-- updateProjet box end -->
                             <?php }//end foreach loop for projets elements ?>
