@@ -177,7 +177,7 @@
                                         foreach($annuaires as $annuaire){
                                         ?>
                                         <tr class="odd gradeX annuaire">
-                                            <td><a class="btn mini green hidden-phone" href="#updateAnnuaire<?= $annuaire->id() ?>" data-toggle="modal" data-id="<?= $annuaire->id() ?>"><i class="icon-refresh"></i></a></td>
+                                            <td class="hidden-phone"><a class="btn mini green" href="#updateAnnuaire<?= $annuaire->id() ?>" data-toggle="modal" data-id="<?= $annuaire->id() ?>"><i class="icon-refresh"></i></a></td>
                                             <td><?= $annuaire->nom().": ".$annuaire->description() ?></td>
                                             <td><?= $annuaire->telephone1() ?></td>
                                         </tr>     
@@ -254,7 +254,7 @@
                                         <tr class="odd gradeX annuaire">
                                             <td class="hidden-phone"></td>
                                             <td><?= $employe->nom() ?></td>
-                                            <td class="hidden-480"><?= $employe->telephone() ?></td>
+                                            <td><?= $employe->telephone() ?></td>
                                         </tr>     
                                         <?php
                                         }
