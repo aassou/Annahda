@@ -194,7 +194,6 @@
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
-                                <input style="margin-top:5px;" class="m-wrap btn-fixed-width-big stay-away" name="type" id="type" type="text" placeholder="Type..." />
                                 <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big stay-away" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
@@ -211,6 +210,7 @@
                                 }
                                 ?>
                             </div>
+                            <input style="margin-top:5px; width:98%" class="m-wrap stay-away" name="type" id="type" type="text" placeholder="Type..." />
                         </div>
                         <!-- printCharge box begin-->
                         <div id="printCharges" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
