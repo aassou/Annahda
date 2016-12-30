@@ -324,11 +324,11 @@
                                         <?php
                                         }//end of loop
                                         ?>
-                                        <tr>
+                                        <tr class="hidden-phone">
                                             <td></td>
                                             <th><strong>Total des charges</strong></th>
                                         </tr>
-                                        <tr>
+                                        <tr class="hidden-phone">
                                             <td></td>
                                             <th><strong><a><?= number_format($chargeManager->getTotal(), 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         </tr>
