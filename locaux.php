@@ -27,17 +27,6 @@
 			//test the locaux object number: if exists get locaux else do nothing
 			$locauxNumber = $locauxManager->getLocauxNumberByIdProjet($idProjet);
 			if($locauxNumber != 0){
-				/*$locauxPerPage = 10;
-		        $pageNumber = ceil($locauxNumber/$locauxPerPage);
-		        $p = 1;
-		        if(isset($_GET['p']) and ($_GET['p']>0 and $_GET['p']<=$pageNumber)){
-		            $p = $_GET['p'];
-		        }
-		        else{
-		            $p = 1;
-		        }
-		        $begin = ($p - 1) * $locauxPerPage;
-		        $pagination = paginate('locaux.php?idProjet='.$idProjet, '&p=', $pageNumber, $p);*/
 				$locaux = $locauxManager->getLocauxByIdProjet($idProjet);	
 			}
 		}
@@ -91,7 +80,7 @@
 					<div class="span12">
 						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
 						<h3 class="page-title">
-							Gestion des Locaux Commerciaux - Projet : <strong><?= $projet->nom() ?></strong> 
+							Gestion des Locaux Commerciaux Projet : <strong><?= $projet->nom() ?></strong> 
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -122,9 +111,9 @@
                         if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
                         ?>
 						<div class="get-down">
-						    <input class="pull-left m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
-                            <a href="#addLocaux" class="pull-right btn icn-only green" data-toggle="modal">Ajouter Nouveau Local <i class="icon-plus-sign m-icon-white"></i></a>
-                            <a href="controller/LocauxListPrintController.php?idProjet=<?= $idProjet ?>" class="pull-right btn icn-only blue stay-away" data-toggle="modal"><i class="icon-print m-icon-white"></i> Version Imprimable</a>
+						    <input style="margin-top:5px;" class="m-wrap stay-away btn-fixed-width-big" name="criteria" id="criteria" type="text" placeholder="Chercher par code, status..." />
+                            <a style="margin-top:5px;" href="#addLocaux" class="btn icn-only green stay-away btn-fixed-width-big" data-toggle="modal"><i class="icon-plus-sign m-icon-white"></i>&nbsp;Nouveau Local</a>
+                            <a style="margin-top:5px;" href="controller/LocauxListPrintController.php?idProjet=<?= $idProjet ?>" class="btn icn-only blue stay-away btn-fixed-width-big" data-toggle="modal"><i class="icon-print m-icon-white"></i>&nbsp;Version Imprimable</a>
                         </div>
                         <?php
                         }
@@ -135,8 +124,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouvel Local Commercial</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Code</label>
                                         <div class="controls">
@@ -185,6 +174,8 @@
                                             <input type="text" name="par" class="m-wrap">
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />  
@@ -193,8 +184,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addLocaux box end -->
 						<!-- BEGIN Terrain TABLE PORTLET-->
@@ -220,9 +211,8 @@
 										<tr>
 											<th>Code</th>
 											<th>Superficie</th>
-											<th>Façade</th>
-											<!--th>Prix</th-->
-											<th>Mezzanine</th>
+											<th class="hidden-phone">Façade</th>
+											<th class="hidden-phone">Mezzanine</th>
 											<th>Status</th>
 											<th></th>
 										</tr>
@@ -244,6 +234,7 @@
 												    ?>
 												    <ul class="dropdown-menu">
 												        <li>
+												            <a class="hidden-desktop">Prix: <?= number_format($locau->prix(), 2, ',', ' ') ?> DH</a>
 												        	<a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
 																Fiche descriptif
 															</a>
@@ -265,7 +256,6 @@
 											</td>
 											<td><?= $locau->superficie() ?>m<sup>2</sup></td>
 											<td class="hidden-phone"><?= $locau->facade() ?></td>
-											<!--td></td-->
 											<td class="hidden-phone">
 												<?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
 												<?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
@@ -341,22 +331,24 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le client <strong><?= $locau->par() ?></strong> </h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+											<form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le nom du client <strong><?= $locau->par() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Réservé par</label>
 														<input type="text" name="par" value="<?= $locau->par() ?>" />
 													</div>
-													<div class="control-group">
-														<input type="hidden" name="action" value="updateClient" />														
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-foter">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateClient" />                                                      
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>	
 										<!-- updateClient box end -->
 										<!-- change to disponible box begin-->
@@ -365,21 +357,23 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le status vers "Disponible"</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini red">Réservé</a> vers 
 														<a class="btn mini green">Disponible</a> ?</p>
-													<div class="control-group">
-													    <input type="hidden" name="action" value="updateStatus" />
-														<input type="hidden" name="status" value="Disponible" />
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">   
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateStatus" />
+                                                        <input type="hidden" name="status" value="Disponible" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- change to disponible box end -->	
 										<!-- change to reserve box begin-->
@@ -388,21 +382,23 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Changer le status vers "Réservé"</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir changer le status de 
 														<a class="btn mini green">Disponible</a> vers 
 														<a class="btn mini red">Réservé</a> ?</p>
-													<div class="control-group">
-													    <input type="hidden" name="action" value="updateStatus" />
-														<input type="hidden" name="status" value="Réservé" />
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateStatus" />
+                                                        <input type="hidden" name="status" value="Réservé" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- change to reserve box end -->	
 										<!-- add file box begin-->
@@ -411,22 +407,26 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Ajouter des pièces pour ce local</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxPiecesAddController.php" method="post" enctype="multipart/form-data">
+											<form class="form-horizontal" action="controller/LocauxPiecesAddController.php" method="post" enctype="multipart/form-data">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir ajouter des pièces pour ce local ?</p>
 													<div class="control-group">
 														<label class="right-label">Nom Pièce</label>
 														<input type="text" name="nom" />
 														<label class="right-label">Lien</label>
 														<input type="file" name="url" />
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<label class="right-label"></label>
-														<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-														<button type="submit" class="btn red" aria-hidden="true">Oui</button>
 													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <label class="right-label"></label>
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- add files box end -->	
 										<!-- update box begin-->
@@ -435,8 +435,8 @@
 												<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 												<h3>Modifier Infos Local commercial</h3>
 											</div>
-											<div class="modal-body">
-												<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											<form class="form-horizontal" action="controller/LocauxActionController.php" method="post">
+											     <div class="modal-body">
 													<p>Êtes-vous sûr de vouloir modifier les informations du local <strong><?= $locau->nom() ?></strong> ?</p>
 													<div class="control-group">
 														<label class="right-label">Code</label>
@@ -490,17 +490,19 @@
                                                             <input type="text" name="par" value="<?= $locau->par() ?>" />
                                                         </div>
                                                     </div>
-													<div class="control-group">
-													    <input type="hidden" name="action" value="update" />
-														<input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
-														<input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-														<div class="controls">	
-															<button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-															<button type="submit" class="btn red" aria-hidden="true">Oui</button>
-														</div>
-													</div>
-												</form>
-											</div>
+												 </div>
+												 <div class="modal-footer">
+												     <div class="control-group">
+                                                        <input type="hidden" name="action" value="update" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <div class="controls">  
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+											     </div>
+											</form>
 										</div>
 										<!-- update box end -->
 										<!-- delete box begin-->
@@ -509,9 +511,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer Local Commercial <strong><?= $locau->nom() ?></strong> </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer ce local <strong><?= $locau->nom() ?></strong> ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
@@ -520,8 +524,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- delete box end --> 	
 										<?php
@@ -529,11 +533,6 @@
 										}//end of if
 										?>
 									</tbody>
-									<?php
-									/*if($locauxNumber != 0){
-										echo $pagination;	
-									}*/
-									?>
 								</table>
 							</div>
 						</div>
