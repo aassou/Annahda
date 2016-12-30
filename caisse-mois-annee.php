@@ -85,7 +85,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="caisse-group.php">Gestion de la caisse - <strong>Société Annahda</strong></a>
+                                <a href="caisse-group.php">Gestion de la caisse <strong>Société Annahda</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -119,8 +119,8 @@
                                 <h3>Ajouter une opération à la caisse</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             </div>
-                            <div class="modal-body">
-                                <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                            <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Opération</label>
                                         <div class="controls">
@@ -160,6 +160,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -170,8 +172,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addCaisse box end -->  
                         <!-- printBilanCaisse box begin -->
@@ -180,8 +182,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Bilan de la Caisse </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les opérations de caisse à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -234,6 +236,8 @@
                                         </div>
                                     </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="societe" value="1" />
@@ -241,17 +245,17 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printBilanCaisse box end -->
                        <table class="table table-striped table-bordered table-advance table-hover">
                             <tbody>
                                 <tr>
-                                    <th style="width: 15%"><strong>Total des entrées</strong></th>
-                                    <th style="width: 18%"><a><strong><?= number_format($totalEntrees, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
-                                    <th style="width: 15%"><strong>Total des sorties</strong></th>
-                                    <th style="width: 18%"><a><strong><?= number_format($totalSorties, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Total des entrées</strong></th>
+                                    <th class="hidden-phone" style="width: 18%"><a><strong><?= number_format($totalEntrees, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
+                                    <th class="hidden-phone" style="width: 15%"><strong>Total des sorties</strong></th>
+                                    <th class="hidden-phone" style="width: 18%"><a><strong><?= number_format($totalSorties, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                     <th style="width: 15%"><strong>Solde de caisse</strong></th>
                                     <th style="width: 19%"><a><strong><?= number_format($totalCaisse, 2, ',', ' ') ?>&nbsp;DH</strong></a></th>
                                 </tr>
@@ -287,17 +291,7 @@
                                              Bilan de Caisse
                                         </a>
                                     </div>
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
                                 </div>
-                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
@@ -307,16 +301,15 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "manager" 
                                                 ) {
                                             ?>
-                                            <th style="width:10%">Actions</th>
+                                            <th class="hidden-phone" style="width:10%">Actions</th>
                                             <?php
                                             }
                                             ?>
-                                            <th style="width:15%">Date Opération</th>
-                                            <!--th style="width:10%">Montant</th-->
+                                            <th style="width:10%">DateOp</th>
                                             <th style="width:10%">Crédit</th>
                                             <th style="width:10%">Débit</th>
                                             <th style="width:10%">Destination</th>
-                                            <th style="width:45%">Designation</th>
+                                            <th class="hidden-phone" style="width:50%">Designation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -330,14 +323,13 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "manager" 
                                                 ) {
                                             ?>
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
                                                 <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
                                             </td>
                                             <?php
                                             }
                                             ?>
-                                            <!--td><?= $caisse->type() ?></td-->
                                             <td><?= date('d/m/Y', strtotime($caisse->dateOperation())) ?></td>
                                             <?php
                                             if ( $caisse->type() == "Entree" ) {
@@ -354,7 +346,7 @@
                                             }
                                             ?>
                                             <td><?= $caisse->destination() ?></td>
-                                            <td><?= $caisse->designation() ?></td>
+                                            <td class="hidden-phone"><?= $caisse->designation() ?></td>
                                         </tr>
                                         <!-- updateCaisse box begin -->
                                         <div id="updateCaisse<?= $caisse->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -362,8 +354,8 @@
                                                 <h3>Modifier une opération de caisse</h3>
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                             </div>
-                                            <div class="modal-body">
-                                                <form id="addCaisseForm" action="controller/CaisseActionController.php" method="post">
+                                            <form id="addCaisseForm" action="controller/CaisseActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <label class="control-label">Type Opération</label>
                                                         <div class="controls">
@@ -406,6 +398,8 @@
                                                             <input id="designation" type="text" name="designation" value="<?= $caisse->designation() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <div class="controls">  
                                                             <input type="hidden" name="action" value="update" />
@@ -417,8 +411,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateCaisse box end -->  
                                         <!-- delete box begin-->
@@ -427,9 +421,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer la ligne</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/CaisseActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/CaisseActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer cette ligne ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
@@ -440,8 +436,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- delete box end --> 
                                         <?php

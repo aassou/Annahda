@@ -85,7 +85,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="caisse-group-iaaza.php">Gestion de la caisse - <strong>Société Iaaza</strong></a>
+                                <a href="caisse-group-iaaza.php">Gestion de la caisse <strong>Société Iaaza</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -280,17 +280,7 @@
                                              Bilan de Caisse
                                         </a>
                                     </div>
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
                                 </div>
-                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
