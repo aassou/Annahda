@@ -80,7 +80,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Détails Contrat - Employé : <strong><?= strtoupper($employe->nom()) ?></strong> - Projet : <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
+                            Détails Contrat Employé <strong><?= strtoupper($employe->nom()) ?></strong> Projet <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -117,8 +117,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Nouveau Paiement</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ContratDetailsActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/ContratDetailsActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Date Opération</label>
                                         <div class="controls">
@@ -140,6 +140,8 @@
                                             <input type="text" name="numeroCheque" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="action" value="add" />
@@ -149,8 +151,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addPaiement box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -190,27 +192,18 @@
                                             Détails Contrat
                                         </a>
                                     </div>
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
                                 </div>
                                 <div class="scroller" data-height="500px" data-always-visible="1"><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
                                             <th style="width:15%">Date Opération</th>
-                                            <th style="width:15%">Numéro Chèque</th>
-                                            <th style="width:15%">Prix/Unité</th>
-                                            <th style="width:15%">Nombre Unités</th>
+                                            <th class="hidden-phone" style="width:15%">Numéro Chèque</th>
+                                            <th class="hidden-phone" style="width:15%">Prix/Unité</th>
+                                            <th class="hidden-phone" style="width:15%">Nombre Unités</th>
                                             <th style="width:15%">Montant</th>
-                                            <th style="width:15%"></th>
-                                            <th style="width:10%"></th>
+                                            <th class="hidden-phone" style="width:15%"></th>
+                                            <th class="hidden-phone" style="width:10%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -249,12 +242,12 @@
                                                     </ul>
                                                 </div>
                                             </td>
-                                            <td><?= $contrat->numeroCheque() ?></td>
-                                            <td><?= number_format($prixUnitaire, 2, ',', ' ') ?></td>
-                                            <td><?= $nombreUnites ?></td>
+                                            <td class="hidden-phone"><?= $contrat->numeroCheque() ?></td>
+                                            <td class="hidden-phone"><?= number_format($prixUnitaire, 2, ',', ' ') ?></td>
+                                            <td class="hidden-phone"><?= $nombreUnites ?></td>
                                             <td><?= number_format($contrat->montant(), 2, ',', ' ') ?></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td class="hidden-phone"></td>
+                                            <td class="hidden-phone"></td>
                                         </tr>
                                         <!-- updatePaiement box begin -->
                                         <div id="updateContrat<?= $contrat->id();?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -262,8 +255,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier Détails Contrat de  <?= $contratEmploye->employe() ?></h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratDetailsActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratDetailsActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <label class="control-label">Date Opération</label>
                                                         <div class="controls">
@@ -285,6 +278,8 @@
                                                             <input type="text" name="numeroCheque" value="<?= $contrat->numeroCheque() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="action" value="update" />
                                                         <input type="hidden" name="idContratDetails" value="<?= $contrat->id() ?>" />
@@ -293,8 +288,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updatePaiementContrat box end -->      
                                         <!-- delete box begin-->
@@ -303,9 +298,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer Paiement <?= $contratEmploye->employe() ?></h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ContratDetailsActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ContratDetailsActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer contrat <strong><?= $contratEmploye->employe() ?></strong> ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
@@ -315,8 +312,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- delete box end -->     
                                         <?php
@@ -327,10 +324,10 @@
                                 <table class="table">
                                     <thead style="background-color: #DDD">
                                         <tr>
-                                            <th style="width:15%"></th>
-                                            <th style="width:15%"></th>
-                                            <th style="width:15%"></th>
-                                            <th style="width:15%"></th>
+                                            <th class="hidden-phone" style="width:15%"></th>
+                                            <th class="hidden-phone"  style="width:15%"></th>
+                                            <th class="hidden-phone"  style="width:15%"></th>
+                                            <th class="hidden-phone"  style="width:15%"></th>
                                             <th style="width:15%">Total Payé</th>
                                             <th style="width:15%">Total à Payer</th>
                                             <th style="width:10%">Reste</th>
@@ -338,10 +335,10 @@
                                     </thead>
                                     <tbody>     
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td class="hidden-phone" ></td>
+                                            <td class="hidden-phone" ></td>
+                                            <td class="hidden-phone" ></td>
+                                            <td class="hidden-phone" ></td>
                                             <td><?= number_format($totalPaye, 2, ',', ' ') ?></td>
                                             <td><?= number_format($contratEmploye->total(), 2, ',', ' ') ?></td>
                                             <td><?= number_format($contratEmploye->total()-$totalPaye, 2, ',', ' ') ?></td>
