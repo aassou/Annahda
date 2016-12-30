@@ -119,7 +119,7 @@
 				<div class="row-fluid"> 
 					<div class="span12">
 						<div class="get-down">
-						    <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
+						    <input style="margin-top:5px;" class="m-wrap stay-away" name="criteria" id="criteria" type="text" placeholder="Chercher par code, status..." />
 						    <?php
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil()=="admin" ||
@@ -307,7 +307,7 @@
 											<td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
 											<td class="hidden-phone">
 												<?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
-												<?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
+												<?php if($appartement->cave()=="Avec"){ ?><a class="btn mini purple">Avec</a><?php } ?>
 											</td>
 											<td>
 												<?php
