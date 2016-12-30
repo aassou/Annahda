@@ -440,6 +440,8 @@
                                 <form class="form-horizontal loginFrm" action="controller/LivraisonDetailsIaazaActionController.php" method="post">
                                     <div class="modal-body">
                                         <p>Êtes-vous sûr de vouloir supprimer cet article ?</p>
+                                    </div>
+                                    <div class="modal-footer">
                                         <div class="control-group">
                                             <input type="hidden" name="action" value="delete" />
                                             <input type="hidden" name="mois" value="<?= $_GET['mois'] ?>" />
@@ -449,8 +451,6 @@
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
                                     </div>
                                 </form>
                             </div>
