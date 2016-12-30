@@ -133,16 +133,16 @@
                                             $_SESSION['userMerlaTrav']->profil()=="manager"
                                             ) {
                                         ?>
-                                        <a style="margin-top:5px" href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big red">Créer Clients et Contrats</a>
+                                        <a style="margin-top:5px" href="clients-add.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big red stay-away">Créer Clients et Contrats</a>
                                         <?php
                                         }
                                         ?>
-                                        <a style="margin-top:5px" href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big green">Listes Clients et Contrats</a>
+                                        <a style="margin-top:5px" href="contrats-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big green stay-away">Listes Clients et Contrats</a>
                                     </div>
                                     <div class="portfolio-info">
                                         <a style="margin-top:5px" href="contrats-desistes-list.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big yellow">Contrats Désistés</a>
-                                        <a style="margin-top:5px" href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big">Contrats employés</a>
-                                        <a style="margin-top:5px" href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-cyan">Statistiques</a>
+                                        <a style="margin-top:5px" href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big stay-away">Contrats employés</a>
+                                        <a style="margin-top:5px" href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-cyan stay-away">Statistiques</a>
                                     </div>
                                 </div>
                             </div>
