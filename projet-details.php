@@ -105,16 +105,16 @@
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
                         <div class="tab-pane" id="tab_1_4">
                             <div class="row-fluid portfolio-block" id="<?= $projet->id() ?>">
-                                <div class="span2 portfolio-text">
+                                <!--div class="span2 portfolio-text">
                                     <div class="portfolio-text-info">
                                         <a class="btn big blue"><?= $projet->nom() ?></a>
                                     </div>
-                                </div>
-                                <div class="span10" style="overflow:hidden;">
+                                </div-->
+                                <div class="span12" style="overflow:hidden;">
                                     <div class="portfolio-info">
-                                        <a style="margin-top:5px" href="terrain.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width black">Terrain</a>
-                                        <a style="margin-top:5px" href="appartements.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width brown">Appartements</a>
-                                        <a style="margin-top:5px" href="locaux.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width purple">Les locaux commerciaux</a>
+                                        <a style="margin-top:5px" href="terrain.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big black">Terrain</a>
+                                        <a style="margin-top:5px" href="appartements.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big brown">Appartements</a>
+                                        <a style="margin-top:5px" href="locaux.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big purple">Les locaux commerciaux</a>
                                     </div>
                                     <div class="portfolio-info">
                                         <?php
@@ -123,7 +123,7 @@
                                             || $_SESSION['userMerlaTrav']->profil()=="consultant" 
                                         ) {
                                         ?>
-                                        <a style="margin-top:5px" href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width dark-red">Charges du Projet</a>
+                                        <a style="margin-top:5px" href="projet-charges-grouped.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-red">Charges du Projet</a>
                                         <?php
                                         }
                                         ?>
