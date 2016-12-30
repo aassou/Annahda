@@ -84,7 +84,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a>Gestion de la caisse - <strong>Société Annahda</strong></a>
+                                <a>Gestion de la caisse <strong>Société Annahda</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -114,8 +114,8 @@
                                 <h3>Ajouter une opération à la caisse</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                             </div>
-                            <div class="modal-body">
-                                <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                            <form id="addCaisseForm" class="form-horizontal" action="controller/CaisseActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Opération</label>
                                         <div class="controls">
@@ -155,6 +155,8 @@
                                             <input id="designation" type="text" name="designation" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -163,8 +165,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addCaisse box end -->  
                         <!-- printBilanCaisse box begin -->
@@ -173,8 +175,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Bilan de la Caisse </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les opérations de caisse à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -227,6 +229,8 @@
                                         </div>
                                     </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="societe" value="1" />
@@ -234,8 +238,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printBilanCaisse box end -->
                        <table class="table table-striped table-bordered table-advance table-hover">
@@ -280,17 +284,7 @@
                                              Bilan de Caisse
                                         </a>
                                     </div>
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
                                 </div>
-                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
@@ -312,7 +306,6 @@
                                             $debit = $caisseManager->getTotalCaissesByMonthYearByType($mois, $annee, 'Sortie');
                                             $solde = $credit - $debit;
                                             ?>
-                                            <!--td><?= $caisse->type() ?></td-->
                                             <td>
                                                 <a class="btn mini" href="caisse-mois-annee.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
                                                     <strong><?= date('m/Y', strtotime($caisse->dateOperation())) ?></strong>
