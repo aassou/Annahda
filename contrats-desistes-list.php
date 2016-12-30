@@ -88,7 +88,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Liste des contrats désistés - Projet : <strong><?= $projet->nom() ?></strong>
+                            Liste des contrats désistés Projet : <strong><?= $projet->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -152,14 +152,14 @@
                                         <tr>
                                             <th style="width:5%">Actions</th>
                                             <th style="width:20%">Client</th>
-                                            <th style="width:20%" class="hidden-phone">Bien</th>
+                                            <th style="width:20%">Bien</th>
                                             <th style="width:10%">Date Contrat</th>
                                             <th style="width:10%" class="hidden-phone">Prix</th>
                                             <th style="width:10%" class="hidden-phone">Réglements</th>
                                             <th style="width:10%" class="hidden-phone">Reste</th>
                                             <th style="width:5%" class="hidden-phone">Status</th>
                                             <?php if(isset($_SESSION['print-quittance'])){ ?>
-                                            <th style="width:10%">Quittance</th>
+                                            <th class="hidden-phone" style="width:10%">Quittance</th>
                                             <?php 
                                             } ?>
                                         </tr>
@@ -223,8 +223,8 @@
                                                 </div>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
-                                            <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
-                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
+                                            <td><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
+                                            <td><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
@@ -240,7 +240,7 @@
                                             </td>
                                             <?php 
                                             if(isset($_SESSION['print-quittance']) and $operationsNumber>=1){ ?>
-                                                <td>
+                                                <td class="hidden-phone">
                                                     <a class="btn mini blue" href="controller/OperationPrintController.php?idOperation=<?= $operationManager->getLastIdByIdContrat($contrat->id()) ?>"> 
                                                         <i class="m-icon-white icon-print"></i> Imprimer
                                                     </a>
