@@ -113,8 +113,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau numéro</h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/AnnuaireActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/AnnuaireActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom</label>
                                         <div class="controls">
@@ -133,6 +133,8 @@
                                             <textarea name="description"></textarea>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <input type="hidden" name="action" value="add" />
                                         <input type="hidden" name="source" value="annuaire" />
@@ -141,8 +143,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addAnnuaire box end -->
                         <div class="portlet box blue">
@@ -167,7 +169,7 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <tbody>
                                         <tr>
-                                            <th style="background-color:grey">Actions</th>
+                                            <th class="hidden-phone" style="background-color:grey">Actions</th>
                                             <th style="background-color:grey">Nom</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -175,7 +177,7 @@
                                         foreach($annuaires as $annuaire){
                                         ?>
                                         <tr class="odd gradeX annuaire">
-                                            <td><a class="btn mini green" href="#updateAnnuaire<?= $annuaire->id() ?>" data-toggle="modal" data-id="<?= $annuaire->id() ?>"><i class="icon-refresh"></i></a></td>
+                                            <td><a class="btn mini green hidden-phone" href="#updateAnnuaire<?= $annuaire->id() ?>" data-toggle="modal" data-id="<?= $annuaire->id() ?>"><i class="icon-refresh"></i></a></td>
                                             <td><?= $annuaire->nom().": ".$annuaire->description() ?></td>
                                             <td><?= $annuaire->telephone1() ?></td>
                                         </tr>     
@@ -224,7 +226,7 @@
                                     </tbody>
                                     <tbody>
                                         <tr>
-                                            <th style="background-color:grey"></th>
+                                            <th class="hidden-phone" style="background-color:grey"></th>
                                             <th style="background-color:grey">Liste des Fournisseurs</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -232,7 +234,7 @@
                                         foreach($fournisseurs as $fournisseur){
                                         ?>
                                         <tr class="odd gradeX annuaire">
-                                            <td style="width:10%"></td>
+                                            <td class="hidden-phone" style="width:10%"></td>
                                             <td style="width:50%"><?= $fournisseur->nom() ?></td>
                                             <td style="width:40%"><?= $fournisseur->telephone1() ?></td>
                                         </tr>     
@@ -242,7 +244,7 @@
                                     </tbody>
                                     <tbody>
                                         <tr>
-                                            <th style="background-color:grey"></th>
+                                            <th class="hidden-phone" style="background-color:grey"></th>
                                             <th style="background-color:grey">Liste des Employé</th>
                                             <th style="background-color:grey">Téléphone</th>
                                         </tr>
@@ -250,7 +252,7 @@
                                         foreach($employes as $employe){
                                         ?>
                                         <tr class="odd gradeX annuaire">
-                                            <td></td>
+                                            <td class="hidden-phone"></td>
                                             <td><?= $employe->nom() ?></td>
                                             <td class="hidden-480"><?= $employe->telephone() ?></td>
                                         </tr>     
