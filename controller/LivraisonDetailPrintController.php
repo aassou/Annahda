@@ -42,7 +42,7 @@
 			$livraison = $livraisonManager->getLivraisonById($_GET['idLivraison']);
             $nomProjet = "Non mentionnée";
             if ( $livraison->idProjet() != 0 ) {
-                $nomProjet = $projetManager->getProjetById($livraison->idProjet());   
+                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();   
             }
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
