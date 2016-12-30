@@ -197,7 +197,7 @@
                             ?>
                             <div class="row'fluid">
                                 <div class="btn-group span4 projets">
-                                    <a style="width: 300px"  class="btn big blue dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <a style="width: 350px"  class="btn big blue dropdown-toggle" data-toggle="dropdown" href="#">
                                     <strong><?= $projet->nom() ?></strong> <i class="icon-angle-down"></i>
                                     </a>
                                     <ul class="dropdown-menu">
