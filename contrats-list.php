@@ -189,7 +189,7 @@
 										<tr class="odd gradeX">
 											<td>
 												<div class="btn-group">
-												    <a class="btn black mini dropdown-toggle" href="#" data-toggle="dropdown">
+												    <a class="btn black mini dropdown-toggle" data-toggle="dropdown">
 												    	Choisir 
 												        <i class="icon-angle-down"></i>
 												    </a>
@@ -207,9 +207,6 @@
 												        	<?php
                                                             }
                                                             ?>
-												        	<!--a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
-												        		Imprimer Contrat
-												        	</a-->
 												        	<a target="_blank" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat AR
                                                             </a>
