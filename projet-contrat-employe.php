@@ -80,7 +80,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des Contrats Employés - Projet : <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
+                            Gestion des Contrats Employés Projet : <strong><?= $projetManager->getProjetById($idProjet)->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -113,8 +113,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau employé </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/EmployeActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/EmployeActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom</label>
                                         <div class="controls">
@@ -151,19 +151,19 @@
                                             <input type="text" name="adresseArabe" value="" />
                                         </div>
                                     </div>
-                            </div>                                    
-                            <div class="modal-footer">
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="projet-contrat-employe" />
-                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
-                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                </div>                                    
+                                <div class="modal-footer">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input type="hidden" name="action" value="add" />
+                                                <input type="hidden" name="source" value="projet-contrat-employe" />
+                                                <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addEmploye box end -->
                         <!-- addContratEmploye box begin-->
@@ -172,8 +172,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter un nouveau contrat employé </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ContratEmployeActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/ContratEmployeActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Employé</label>
                                         <div class="controls">
@@ -313,8 +313,8 @@
                                             <textarea style="height:100px; width:300px" name="articlesArabes"></textarea>
                                         </div>
                                     </div>
-                            </div>
-                            <div class="modal-footer">
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
@@ -323,8 +323,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addPaiement box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -364,26 +364,17 @@
                                         <?php
                                         }
                                         ?>
-                                        <!--div class="btn-group pull-right">
-                                            <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="#">Print</a></li>
-                                                <li><a href="#">Save as PDF</a></li>
-                                                <li><a href="#">Export to Excel</a></li>
-                                            </ul>
-                                        </div-->
                                     </div>
                                     <table class="table table-striped table-bordered table-hover" id="sample_1">
                                         <thead>
                                             <tr>
-                                                <th style="width:15%">Action</th>
+                                                <th style="width:15%">Actions</th>
                                                 <th style="width:15%">Employé</th>
-                                                <th style="width:15%">Début - Fin</th>
-                                                <th style="width:15%">Prix / Unité</th>
-                                                <th style="width:10%">Nbr.Unit</th>
+                                                <th class="hidden-phone" style="width:15%">Début - Fin</th>
+                                                <th class="hidden-phone" style="width:15%">Prix/Unité</th>
+                                                <th class="hidden-phone" style="width:10%">Nbr.Unit</th>
                                                 <th style="width:10%">Total Payé</th>
-                                                <th style="width:10%">Total à Payer</th>
+                                                <th class="hidden-phone" style="width:10%">Total à Payer</th>
                                                 <th style="width:10%">Reste</th>
                                             </tr>
                                         </thead>
@@ -396,10 +387,10 @@
                                                     <?php
                                                     if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                     ?>
-                                                    <a class="btn mini red" href="#deleteContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                    <a class="btn mini red hidden-phone" href="#deleteContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                         <i class="icon-remove"></i>
                                                     </a>
-                                                    <a class="btn mini green" href="#updateContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                    <a class="btn mini green hidden-phone" href="#updateContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                         <i class="icon-refresh"></i>
                                                     </a>
                                                     <?php
@@ -411,22 +402,19 @@
                                                     <a class="btn mini blue" href="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" >
                                                         <i class="icon-file"></i>
                                                     </a>
-                                                    <!--a class="btn mini blue" href="#printContratEmployeArabe<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>" >
-                                                        <i class="icon-file"></i>
-                                                    </a-->
                                                 </td>
                                                 <td><?= $employesManager->getEmployeById($contrat->employe())->nom() ?></td> 
-                                                <td><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?> - <?= date('d/m/Y', strtotime($contrat->dateFinContrat()) ) ?></td>
-                                                <td>
+                                                <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateContrat()) ) ?> - <?= date('d/m/Y', strtotime($contrat->dateFinContrat()) ) ?></td>
+                                                <td class="hidden-phone">
                                                     <?= number_format($contrat->prixUnitaire(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite() ?><br/>
                                                     <?= number_format($contrat->prixUnitaire2(), 2, ',', ' ') ?>&nbsp;/&nbsp;<?= $contrat->unite2() ?>&nbsp;/&nbsp;<?= $contrat->nomUnite2() ?>
                                                 </td>
-                                                <td>
+                                                <td class="hidden-phone">
                                                     <?= $contrat->nombreUnites() ?><br/>
                                                     <?= $contrat->nombreUnites2() ?>
                                                 </td>
                                                 <td><?= number_format($contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>
-                                                <td><?= number_format($contrat->total(), 2, ',', ' ') ?></td>
+                                                <td class="hidden-phone"><?= number_format($contrat->total(), 2, ',', ' ') ?></td>
                                                 <td><?= number_format($contrat->total()-$contratDetaislManager->getContratDetailsTotalByIdContratEmploye($contrat->id()), 2, ',', ' ') ?></td>       
                                             </tr>      
                                             <!-- printContratArabe box begin-->
@@ -435,8 +423,8 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                     <h3>Imprimer Contrat Employé</h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <form class="form-horizontal" action="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" method="post">
+                                                <form class="form-horizontal" action="controller/ContratEmployeArabePrintController.php?idContratEmploye=<?= $contrat->id() ?>" method="post">
+                                                    <div class="modal-body">
                                                         <div class="control-group">
                                                             <label class="control-label">الشركة</label>
                                                             <div class="controls">
@@ -451,14 +439,16 @@
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="modal-footer">
                                                         <div class="control-group">
                                                             <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
                                                             <input type="hidden" name="idProjet" value="<?= $contrat->idProjet() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <!-- printContratArabe box end -->
                                             <!-- updatePaiement box begin -->
@@ -467,8 +457,8 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                     <h3>Modifier Contrat de  <?= $employesManager->getEmployeById($contrat->employe())->nom() ?></h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <form class="form-horizontal" action="controller/ContratEmployeActionController.php" method="post">
+                                                <form class="form-horizontal" action="controller/ContratEmployeActionController.php" method="post">
+                                                    <div class="modal-body">
                                                         <div class="control-group">
                                                             <label class="control-label">Employé</label>
                                                             <div class="controls">
@@ -594,16 +584,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                <div class="modal-footer">
+                                                    <div class="modal-footer">
                                                         <div class="control-group">
                                                             <input type="hidden" name="action" value="update" />
                                                             <input type="hidden" name="idContratEmploye" value="<?= $contrat->id() ?>" />
                                                             <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                        </div>    
+                                                    </div>
+                                                </form>
                                             </div>
                                             <!-- updatePaiementContrat box end -->      
                                             <!-- delete box begin-->
@@ -612,9 +602,11 @@
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                     <h3>Supprimer Contrat <?= $contrat->employe() ?></h3>
                                                 </div>
-                                                <div class="modal-body">
-                                                    <form class="form-horizontal loginFrm" action="controller/ContratEmployeActionController.php" method="post">
+                                                <form class="form-horizontal loginFrm" action="controller/ContratEmployeActionController.php" method="post">
+                                                    <div class="modal-body">
                                                         <p>Êtes-vous sûr de vouloir supprimer contrat <strong><?= $contrat->employe() ?></strong> ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
                                                         <div class="control-group">
                                                             <label class="right-label"></label>
                                                             <input type="hidden" name="action" value="delete" />
@@ -623,12 +615,11 @@
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                             <!-- delete box end -->
                                             <script>
-                                            
                                                 $('#nu<?= $contrat->id() ?>, #pu<?= $contrat->id() ?>, #nu2<?= $contrat->id() ?>, #pu2<?= $contrat->id() ?>').change(function(){
                                                     var nu = $('#nu<?= $contrat->id() ?>').val();
                                                     var pu = $('#pu<?= $contrat->id() ?>').val();
@@ -759,9 +750,6 @@
 </html>
 <?php
 }
-/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-    header('Location:dashboard.php');
-}*/
 else{
     header('Location:index.php');    
 }
