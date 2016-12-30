@@ -77,7 +77,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des charges - Projet : <strong><?= $projet->nom() ?></strong>
+                            Gestion des charges Projet : <strong><?= $projet->nom() ?></strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -111,8 +111,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter une nouvelle charge </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargeActionController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargeActionController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Type Charge</label>
                                         <div class="controls">
@@ -148,6 +148,8 @@
                                             <input type="text" name="societe" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -157,8 +159,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addCharge box end -->
                         <!-- addTypeCharge box begin-->
@@ -167,14 +169,16 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Ajouter Nouveau Type Charge </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                            <form class="form-horizontal" action="controller/TypeChargeActionController.php" method="post">
+                                <div class="modal-body">
                                     <div class="control-group">
                                         <label class="control-label">Nom Type Charge</label>
                                         <div class="controls">
                                             <input type="text" name="nom" value="" />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -183,25 +187,25 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- addTypeCharge box end -->
                         <!--**************************** CHARGES BEGIN ****************************-->
                         <div class="row-fluid">
                             <div class="input-box autocomplet_container">
-                                <input class="m-wrap" name="type" id="type" type="text" placeholder="Type..." />
-                                <a target="_blank" href="#printCharges" class="btn black" data-toggle="modal">
+                                <input style="margin-top:5px;" class="m-wrap btn-fixed-width-big stay-away" name="type" id="type" type="text" placeholder="Type..." />
+                                <a style="margin-top:5px;" href="#printCharges" class="btn black btn-fixed-width-big stay-away" data-toggle="modal">
                                     <i class="icon-print"></i>&nbsp;Imprimer liste des charges
                                 </a>
                                 <?php 
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
-                                <a href="#addTypeCharge" data-toggle="modal" class="btn blue pull-right">
-                                    Type Charge <i class="icon-plus-sign "></i>
+                                <a style="margin-top:5px;" href="#addTypeCharge" data-toggle="modal" class="btn blue btn-fixed-width-big stay-away">
+                                    <i class="icon-plus-sign"></i>&nbsp;Type Charge
                                 </a>
-                                <a href="#addCharge" data-toggle="modal" class="btn green pull-right stay-away">
-                                    Nouvelle Charge <i class="icon-plus-sign "></i>
+                                <a style="margin-top:5px;" href="#addCharge" data-toggle="modal" class="btn green btn-fixed-width-big stay-away">
+                                    <i class="icon-plus-sign"></i>&nbsp;Nouvelle Charge
                                 </a>
                                 <?php 
                                 }
@@ -214,8 +218,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Liste des Charges </h3>
                             </div>
-                            <div class="modal-body">
-                                <form class="form-horizontal" action="controller/ChargePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/ChargePrintController.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-body">
                                     <p><strong>Séléctionner les charges à imprimer</strong></p>
                                     <div class="control-group">
                                       <label class="control-label">Imprimer</label>
@@ -256,6 +260,8 @@
                                         </div>
                                     </div>
                                    </div>
+                                </div>
+                                <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -263,8 +269,8 @@
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                         <!-- printCharge box end -->
                         <!-- BEGIN Terrain TABLE PORTLET-->
@@ -318,8 +324,8 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Modifier Info Charge </h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/ChargeActionController.php" method="post">
+                                            <form class="form-horizontal" action="controller/ChargeActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <div class="control-group">
                                                         <label class="control-label">Type Charge</label>
                                                         <div class="controls">
@@ -357,6 +363,8 @@
                                                             <input type="text" name="societe" value="<?= $charge->societe() ?>" />
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
@@ -366,8 +374,8 @@
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- updateCharge box end -->            
                                         <!-- deleteCharge box begin-->
@@ -376,9 +384,11 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Supprimer la charge</h3>
                                             </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal loginFrm" action="controller/ChargeActionController.php" method="post">
+                                            <form class="form-horizontal loginFrm" action="controller/ChargeActionController.php" method="post">
+                                                <div class="modal-body">
                                                     <p>Êtes-vous sûr de vouloir supprimer cette charge <?= $charge->type() ?> ?</p>
+                                                </div>
+                                                <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
@@ -387,8 +397,8 @@
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                         <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- deleteCharge box end -->    
                                         <?php
