@@ -119,7 +119,7 @@
 				<div class="row-fluid"> 
 					<div class="span12">
 						<div class="get-down">
-						    <input style="margin-top:5px;" class="m-wrap stay-away" name="criteria" id="criteria" type="text" placeholder="Chercher par code, status..." />
+						    <input style="margin-top:5px;" class="m-wrap stay-away btn-fixed-width-big" name="criteria" id="criteria" type="text" placeholder="Chercher par code, status..." />
 						    <?php
                             if ( 
                                 $_SESSION['userMerlaTrav']->profil()=="admin" ||
