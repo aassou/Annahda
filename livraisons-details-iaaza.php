@@ -277,7 +277,8 @@
                             </a>
                             <?php  
                             if ( 
-                                $_SESSION['userMerlaTrav']->profil() == "admin" || 
+                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                $_SESSION['userMerlaTrav']->profil() == "manager" || 
                                 $_SESSION['userMerlaTrav']->profil() == "user" 
                                 ) {
                             ?>

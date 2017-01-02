@@ -179,64 +179,7 @@
                         </div>
                     </div>
                 </div>
-                <!--      BEGIN TILES      -->
-                <!-- BEGIN DASHBOARD STATS -->
-                <!--h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
-                <div class="row-fluid">
-                    <div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <div class="dashboard-stat yellow">
-                            <div class="visual">
-                                <i class="icon-signal"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                    <?= $operationsNumberWeek ?>    
-                                </div>
-                                <div class="desc">                                  
-                                    Paiements Clients
-                                </div>
-                            </div>                  
-                        </div>
-                    </div>
-                    <div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <div class="dashboard-stat green">
-                            <div class="visual">
-                                <i class="icon-shopping-cart"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">+<?= $livraisonsNumberWeek ?></div>
-                                <div class="desc">Livraisons</div>
-                            </div>                  
-                        </div>
-                    </div>
-                    <div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <div class="dashboard-stat blue">
-                            <div class="visual">
-                                <i class="icon-group"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">+<?= $clientNumberWeek ?></div>
-                                <div class="desc">Clients</div>
-                            </div>          
-                        </div>
-                    </div>  
-                    <div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <a class="more" href="caisse.php">
-                        <div class="dashboard-stat purple">
-                            <div class="visual">
-                                <i class="icon-money"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                    <?= number_format($caisseEntreesManager->getTotalCaisseEntrees()-$caisseSortiesManager->getTotalCaisseSorties(), '2', ',', ' ') ?>
-                                </div>
-                                <div class="desc">DH en caisse</div>
-                            </div>                  
-                        </div>
-                        </a>
-                    </div>  
-                </div-->
-                <!-- END DASHBOARD STATS -->
+                <!--      END TILES      -->
                 <!-- END PAGE HEADER-->
             </div>
             <!-- END PAGE CONTAINER-->  
