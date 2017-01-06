@@ -186,11 +186,11 @@
                                     <thead>
                                         <tr>
                                             <th class="hidden-phone">Actions</th>
-                                            <th>Nom/Prénom</th>
+                                            <th>Nom</th>
                                             <th class="hidden-phone">Date</th>
                                             <th>Bien</th>
-                                            <th>Inter.Prix</th>
-                                            <th>Inter.Supérficie</th>
+                                            <th>IPrix</th>
+                                            <th>ISupérficie</th>
                                             <th class="hidden-phone">Emp.Achat</th>
                                             <th class="hidden-phone">Emp.Vente</th>
                                         </tr>
