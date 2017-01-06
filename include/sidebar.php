@@ -36,6 +36,7 @@
 				or $currentPage=="fournisseurs-search.php"
 				or $currentPage=="clients.php"
 				or $currentPage=="clients-synthese.php"
+				or $currentPage=="clients-attente.php"
 				or $currentPage=="clients-modification.php"
 				or $currentPage=="contrats-synthese.php"
 				or $currentPage=="employes-projet-search.php"

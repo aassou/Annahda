@@ -288,6 +288,19 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="clients-attente.php">
+                            <div class="tile bg-dark-blue">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-group"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Clients en attente
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 						</div>
 					</div>
 				</div>

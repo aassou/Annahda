@@ -515,7 +515,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
                                             <th class="hidden-phone" style="width: 15%">Actions</th>
