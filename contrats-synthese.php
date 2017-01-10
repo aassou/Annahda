@@ -119,15 +119,6 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <div class="clearfix">
-                                    <!--div class="btn-group">
-                                        <a class="btn blue pull-right" href="">
-                                            <i class="icon-print"></i>
-                                             Version Imprimable
-                                        </a>
-                                    </div-->
-                                </div>
-                                <!--div class="scroller" data-height="500px" data-always-visible="1"--><!-- BEGIN DIV SCROLLER -->
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
@@ -135,7 +126,7 @@
                                             <th style="width:15%">Client</th>
                                             <th style="width:15%">Projet</th>
                                             <th style="width:15%" class="hidden-phone">Bien</th>
-                                            <th style="width:10%">Date Contrat</th>
+                                            <th style="width:10%">D.Contrat</th>
                                             <th style="width:10%" class="hidden-phone">Prix</th>
                                             <th style="width:10%" class="hidden-phone">Réglements</th>
                                             <th style="width:10%" class="hidden-phone">Reste</th>
@@ -238,7 +229,7 @@
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
                                             <td><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
-                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
+                                            <td><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente()-$sommeOperations, 2, ',', ' ') ?></td>
