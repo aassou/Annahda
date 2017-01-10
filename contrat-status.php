@@ -143,9 +143,9 @@
                                         <tr>
                                             <th>Client</th>
                                             <th>Tél</th>
-                                            <th>Projet</th>
+                                            <th class="hidden-phone">Projet</th>
                                             <th class="hidden-phone">Bien</th>
-                                            <th>Mnt</th>
+                                            <th class="hidden-phone">Mnt</th>
                                             <th class="hidden-phone">DPrév</th>
                                             <th class="hidden-phone">Status</th>
                                             <th>Action</th>
@@ -298,9 +298,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailB<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -374,14 +374,14 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Client</th>
-                                            <th style="width: 10%">Tél</th>
-                                            <th style="width: 10%">Projet</th>
-                                            <th class="hidden-phone" style="width: 20%">Bien</th>
-                                            <th style="width: 10%">Mnt</th>
-                                            <th class="hidden-phone" style="width: 10%">DPrév</th>
-                                            <th class="hidden-phone" style="width: 10%">Status</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th>Client</th>
+                                            <th>Tél</th>
+                                            <th class="hidden-phone">Projet</th>
+                                            <th class="hidden-phone">Bien</th>
+                                            <th class="hidden-phone">Mnt</th>
+                                            <th class="hidden-phone">DPrév</th>
+                                            <th class="hidden-phone">Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -423,9 +423,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailC<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -531,9 +531,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailD<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -607,13 +607,13 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Client</th>
-                                            <th style="width: 10%">Tél</th>
-                                            <th style="width: 10%">Projet</th>
-                                            <th class="hidden-phone" style="width: 20%">Bien</th>
-                                            <th style="width: 10%">Mnt</th>
-                                            <th class="hidden-phone" style="width: 10%">DPrév</th>
-                                            <th class="hidden-phone" style="width: 10%">Status</th>
+                                            <th>Client</th>
+                                            <th>Tél</th>
+                                            <th class="hidden-phone">Projet</th>
+                                            <th class="hidden-phone">Bien</th>
+                                            <th class="hidden-phone">Mnt</th>
+                                            <th class="hidden-phone">DPrév</th>
+                                            <th class="hidden-phone">Status</th>
                                             <th style="width: 10%">Actions</th>
                                         </tr>
                                     </thead>
@@ -656,9 +656,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailE<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -764,9 +764,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailF<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -840,13 +840,13 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Client</th>
-                                            <th style="width: 10%">Tél</th>
-                                            <th style="width: 10%">Projet</th>
-                                            <th class="hidden-phone" style="width: 20%">Bien</th>
-                                            <th style="width: 10%">Mnt</th>
-                                            <th class="hidden-phone" style="width: 10%">DPrév</th>
-                                            <th class="hidden-phone" style="width: 10%">Status</th>
+                                            <th>Client</th>
+                                            <th>Tél</th>
+                                            <th class="hidden-phone">Projet</th>
+                                            <th class="hidden-phone">Bien</th>
+                                            <th class="hidden-phone">Mnt</th>
+                                            <th class="hidden-phone">DPrév</th>
+                                            <th class="hidden-phone">Status</th>
                                             <th style="width: 10%">Action</th>
                                         </tr>
                                     </thead>
@@ -892,9 +892,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$nomBien ?></td>
-                                            <td><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailG<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -1000,9 +1000,9 @@
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($element->montant(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->date())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailH<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
