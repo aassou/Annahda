@@ -389,7 +389,7 @@
 												}
                                                 else if( $appartement->status()=="Vendu" ){
                                                 ?>
-                                                    <a class="btn mini" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>">
+                                                    <a href="#showBuyer<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>">
                                                         Pour
                                                     </a>
                                                 <?php    
@@ -406,6 +406,23 @@
 												?>
 											</td>
 										</tr>
+										<!-- showBuyer box begin -->
+                                        <div id="showBuyer<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Appartement Pour Client</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>Client :</strong><span class="pull-right"><?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?></span><br />
+                                                <strong>Prix :</strong><span class="pull-right"><?= number_format($appartement->prix(), 2, ',', ' ') ?>&nbsp;DH</span><br />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    <button class="btn" data-dismiss="modal"aria-hidden="true">OK</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- showBuyer box end -->
 										<!-- updateEtatAppartement box begin -->
                                         <div id="updateEtatAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
