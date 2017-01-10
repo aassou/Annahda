@@ -124,14 +124,15 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th class="hidden-phone">Action</th>
-                                            <th>Commissionnaire</th>
+                                            <th>Action</th>
+                                            <th>Nom</th>
+                                            <th class="hidden-desktop hidden-tablet">Détails</th>
                                             <th class="hidden-phone">Description</th>
-                                            <th>Montant</th>
-                                            <th>Projet</th>
-                                            <th>Bien</th>
+                                            <th class="hidden-phone">Montant</th>
+                                            <th class="hidden-phone">Projet</th>
+                                            <th class="hidden-phone">Bien</th>
                                             <th class="hidden-phone">Date</th>
-                                            <th>état</th>
+                                            <th class="hidden-phone">état</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -158,7 +159,7 @@
                                             } 
                                         ?>
                                         <tr class="odd gradeX">
-                                            <td class="hidden-phone">
+                                            <td>
                                                 <?php
                                                 if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
                                                 ?>
@@ -168,13 +169,37 @@
                                                 ?>
                                             </td>    
                                             <td><?= $commission->commissionnaire() ?></td>
+                                            <td><a href="#showDetails" class="btn mini blue" data-toggle="modal" data-id="<?= $commission->id()?>"><i class="icon-eye-open"></i></a></td> 
                                             <td class="hidden-phone"><?= $commission->titre() ?></td>
-                                            <td><?= $commission->montant() ?></td>
-                                            <td><?= $projet->nom() ?></td>
-                                            <td><?= $typeBien." - ".$bien->nom() ?></td>
+                                            <td class="hidden-phone"><?= number_format($commission->montant(), 2, ',', ' ') ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $typeBien." - ".$bien->nom() ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($commission->date())) ?></td>
-                                            <td><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
+                                            <td class="hidden-phone"><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
                                         </tr>
+                                        <!-- showDetails box begin-->
+                                        <div id="showDetails<?= $commission->id()?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Détails Commission de <?= $commission->commissionnaire() ?></h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>Projet :</strong><span class="pull-right"><?= $projet->nom() ?></span><br />
+                                                <strong>Bien :</strong><span class="pull-right"><?= $typeBien." - ".$bien->nom() ?></span><br />
+                                                <strong>Date :</strong><span class="pull-right"><?= date('d/m/Y', strtotime($commission->date())) ?></span><br />
+                                                <strong>Montant :</strong><span class="pull-right"><?= number_format($commission->montant(), 2, ',', ' ') ?></span><br />
+                                                <strong>état :</strong><span class="pull-right"><?= $commission->etat() ?></span><br />
+                                                <strong>Description :</strong><span class="pull-right"><?= $commission->titre() ?></span><br />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <button class="btn blue" data-dismiss="modal"aria-hidden="true">OK</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- showDetails box end -->  
                                         <!-- updateCommission box begin-->
                                         <div id="update<?= $commission->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
