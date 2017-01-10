@@ -159,12 +159,12 @@
                                             $etage = "";
                                             if($contrat->typeBien()=="appartement"){
                                                 $bien = $appartementManager->getAppartementById($contrat->idBien());
-                                                $typeBien = "Appartement";
+                                                $typeBien = "Appart";
                                                 $etage = "Etage ".$bien->niveau();
                                             }
                                             else{
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
-                                                $typeBien = "Local commercial";
+                                                $typeBien = "Local";
                                                 $etage = "";
                                             }
                                         ?>      
