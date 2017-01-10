@@ -154,8 +154,10 @@
                                                 $typeBien = "Appart";
                                             }
                                             $etatButton = "red";
+                                            $etat = "Non validée";
                                             if ( $commission->etat() == "V" ) {
                                                 $etatButton = "green";
+                                                $etat = "Validée";
                                             } 
                                         ?>
                                         <tr class="odd gradeX">
@@ -188,7 +190,7 @@
                                                 <strong>Bien :</strong><span class="pull-right"><?= $typeBien." - ".$bien->nom() ?></span><br />
                                                 <strong>Date :</strong><span class="pull-right"><?= date('d/m/Y', strtotime($commission->date())) ?></span><br />
                                                 <strong>Montant :</strong><span class="pull-right"><?= number_format($commission->montant(), 2, ',', ' ') ?></span><br />
-                                                <strong>état :</strong><span class="pull-right"><?= $commission->etat() ?></span><br />
+                                                <strong>État :</strong><span class="pull-right"><?= $etat ?></span><br />
                                                 <strong>Description :</strong><span class="pull-right"><?= $commission->titre() ?></span><br />
                                             </div>
                                             <div class="modal-footer">
