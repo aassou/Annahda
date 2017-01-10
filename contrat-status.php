@@ -32,7 +32,7 @@
         $casLibreToday = $contratCasLibreManager->getReglementToday();
         $casLibreWeek = $contratCasLibreManager->getReglementWeek();
         $casLibreMonth = $contratCasLibreManager->getReglementMonth();
-        //nombre des payments en retard
+        //nombre des payments Retard
         $numberPaiementsEnRetard = 
             $contratCasLibreManager->getReglementEnRetardNumber() + 
             $reglementPrevuManager->getReglementPrevuEnRetardNumber();
@@ -137,7 +137,7 @@
                         </div>
                         <div class="portlet-body">
                             <div class="clearfix">
-                                <strong>Liste des réglements en retards : <?= $numberPaiementsEnRetard ?> Paiements en retards</strong>
+                                <strong>Liste des réglements Retards : <?= $numberPaiementsEnRetard ?> Paiements Retards</strong>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
@@ -181,10 +181,10 @@
                                             $link = "";
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 $link = '#updateStatusReglementPrevuEnRetards'.$element->id();
-                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">Retard</a>';
                                             }
                                             else {
-                                                $link = '<a class="btn mini red blink_me">En retard</a>';
+                                                $link = '<a class="btn mini red blink_me">Retard</a>';
                                             }
                                         ?>
                                         <tr class="reglements">
@@ -289,10 +289,10 @@
                                             $link = "";
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 $link = '#updateStatusReglementCasLibreEnRetards'.$element->id();
-                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">Retard</a>';
                                             }
                                             else {
-                                                $link = '<a class="btn mini red blink_me">En retard</a>';
+                                                $link = '<a class="btn mini red blink_me">Retard</a>';
                                             }
                                         ?>
                                         <tr class="reglements">
@@ -614,7 +614,7 @@
                                             <th class="hidden-phone">Mnt</th>
                                             <th class="hidden-phone">DPrév</th>
                                             <th class="hidden-phone">Status</th>
-                                            <th>Actions</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
