@@ -127,7 +127,7 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th class="hidden-phone" style="width: 10%">Actions</th>
+                                        <th style="width: 10%"><span class="hidden-phone">Action</span></th>
                                         <th style="width: 20%">Client</th>
                                         <th class="hidden-phone" style="width: 10%">Projet</th>
                                         <th class="hidden-phone" style="width: 10%">Date.Opé</th>
@@ -169,7 +169,7 @@
                                         }
                                     ?>      
                                     <tr class="odd gradeX">
-                                        <td class="hidden-phone"><?= $action ?></td>
+                                        <td><?= $action ?></td>
                                         <td><?= $nomClient ?></td>
                                         <td class="hidden-phone"><?= $nomProjet ?></td>
                                         <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->date())) ?></td>
