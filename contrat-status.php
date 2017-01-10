@@ -181,18 +181,18 @@
                                             $link = "";
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 $link = '#updateStatusReglementPrevuEnRetards'.$element->id();
-                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">Rtrd</a>';
+                                                $link = '<a href="'.$link.'" data-toggle="modal" data-id="'.$element->id().'" class="btn mini red blink_me">En retard</a>';
                                             }
                                             else {
-                                                $link = '<a class="btn mini red blink_me">Rtrd</a>';
+                                                $link = '<a class="btn mini red blink_me">En retard</a>';
                                             }
                                         ?>
                                         <tr class="reglements">
                                             <td><a href="contrat.php?codeContrat=<?= $contrat->code() ?>" target="_blank"><?= $client->nom() ?></a></td>
                                             <td><?= $client->telephone1() ?></td>
-                                            <td><?= $projet->nom() ?></td>
+                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien.' - '.$niveau.'e: '.$bien->nom() ?></td>
-                                            <td><?= number_format($contrat->echeance()*$element->updated(), 2, ',', ' ') ?>DH</td>
+                                            <td class="hidden-phone"><?= number_format($contrat->echeance()*$element->updated(), 2, ',', ' ') ?>DH</td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($element->datePrevu())) ?></td>
                                             <td class="hidden-phone"><?= $link ?></td>
                                             <td><a href="#sendMailA<?= $element->id() ?>" data-toggle="modal" data-id="<?= $element->id() ?>" class="btn blue mini" title="Envoyer Email"><i class="icon-envelope-alt"></i></a></td>
@@ -614,7 +614,7 @@
                                             <th class="hidden-phone">Mnt</th>
                                             <th class="hidden-phone">DPrév</th>
                                             <th class="hidden-phone">Status</th>
-                                            <th style="width: 10%">Actions</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -847,7 +847,7 @@
                                             <th class="hidden-phone">Mnt</th>
                                             <th class="hidden-phone">DPrév</th>
                                             <th class="hidden-phone">Status</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
