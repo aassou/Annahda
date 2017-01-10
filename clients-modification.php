@@ -136,12 +136,12 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width:20%">Actions</th>
+                                            <th class="hidden-phone" style="width:20%">Actions</th>
                                             <th style="width:15%">Client</th>
                                             <th style="width:10%">Projet</th>
-                                            <th style="width:20%" class="hidden-phone">Bien</th>
-                                            <th style="width:10%">Date Contrat</th>
-                                            <th style="width:25%" class="hidden-phone">Note</th>
+                                            <th style="width:20%">Bien</th>
+                                            <th class="hidden-phone" style="width:10%">Date Contrat</th>
+                                            <th style="width:25%">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -167,7 +167,7 @@
                                             }
                                         ?>      
                                         <tr class="odd gradeX">
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <a class="btn mini green" target="_blank" title="Consulter Contrat" href="contrat.php?codeContrat=<?= $contrat->code() ?>">
                                                     <i class="icon-file"></i>    
                                                 </a>
@@ -182,10 +182,10 @@
                                                 </a>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
-                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
-                                            <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
+                                            <td><?= $projet->nom() ?></td>
+                                            <td><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
-                                            <td class="hidden-phone"><?= $contrat->note() ?></td>
+                                            <td><?= $contrat->note() ?></td>
                                         </tr>
                                         <!-- updateImageNote box begin-->
                                         <div id="updateImageNote<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
