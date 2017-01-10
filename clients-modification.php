@@ -136,12 +136,12 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th class="hidden-phone">Actions</th>
-                                            <th>Client</th>
-                                            <th>Projet</th>
-                                            <th>Bien</th>
-                                            <th class="hidden-phone">Date Contrat</th>
-                                            <th>Note</th>
+                                            <th class="hidden-phone" style="width:20%">Actions</th>
+                                            <th style="width:15%">Client</th>
+                                            <th style="width:10%">Projet</th>
+                                            <th style="width:20%">Bien</th>
+                                            <th class="hidden-phone" style="width:10%">Date Contrat</th>
+                                            <th style="width:25%">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
