@@ -99,9 +99,6 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid"> 
                     <div class="span12">
-                        <!--div class="get-down">
-                            <input class="m-wrap" name="criteria" id="criteria" type="text" placeholder="Chercher Par Code, Status..." />
-                        </div-->
                         <!-- BEGIN Terrain TABLE PORTLET-->
                         <?php 
                         if(isset($_SESSION['appartement-action-message']) 
@@ -145,7 +142,7 @@
                                         foreach($appartements as $appartement){
                                         ?>      
                                         <tr class="appartements">
-                                            <td class="hidden-phone">
+                                            <td>
                                                 <div class="btn-group">
                                                     <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
                                                     <ul class="dropdown-menu info-dropdown">
@@ -251,7 +248,7 @@
                                             $appartement = $appartementManager->getAppartementById($contrat->idBien());
                                         ?>      
                                         <tr class="appartements">
-                                            <td class="hidden-phone">
+                                            <td>
                                                 <div class="btn-group">
                                                     <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
                                                     <ul class="dropdown-menu info-dropdown">
@@ -289,10 +286,9 @@
                                                     ?>
                                                 </div>
                                             </td>
-                                            <td class="hidden-phone"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
-                                            <td class="hidden-phone"><?= $appartement->niveau() ?></td>
-                                            <!--td><a></a></td-->
-                                            <td><?= $appartement->superficie() ?> m<sup>2</sup></td>
+                                            <td><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
+                                            <td><?= $appartement->niveau() ?></td>
+                                            <td class="hidden-phone"><?= $appartement->superficie() ?> m<sup>2</sup></td>
                                             <td class="hidden-phone"><?= $appartement->facade() ?></td>
                                             <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
                                             <td class="hidden-phone">
@@ -322,9 +318,9 @@
                                             <th style="width:5%"></th>
                                             <th style="width:15%">Code</th>
                                             <th style="width:20%">Projet</th>
-                                            <th style="width:20%">Superficie</th>
-                                            <th style="width:20%">Façade</th>
-                                            <th style="width:5%">Mezzanine</th>
+                                            <th class="hidden-phone" style="width:20%">Superficie</th>
+                                            <th class="hidden-phone" style="width:20%">Façade</th>
+                                            <th class="hidden-phone" style="width:5%">Mezzanine</th>
                                             <th style="width:15%">Status</th>
                                         </tr>
                                     </thead>
@@ -383,10 +379,9 @@
                                                     ?>
                                                 </div>
                                             </td>
-                                            <td class="hidden-phone"><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
-                                            <td><?= $locau->superficie() ?></td>
+                                            <td><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
+                                            <td class="hidden-phone"><?= $locau->superficie() ?></td>
                                             <td class="hidden-phone"><?= $locau->facade() ?></td>
-                                            <!--td></td-->
                                             <td class="hidden-phone">
                                                 <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
@@ -472,10 +467,9 @@
                                                     ?>
                                                 </div>
                                             </td>
-                                            <td class="hidden-phone"><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
-                                            <td><?= $locau->superficie() ?></td>
+                                            <td><?= $projetManager->getProjetById($locau->idProjet())->nom() ?></td>
+                                            <td class="hidden-phone"><?= $locau->superficie() ?></td>
                                             <td class="hidden-phone"><?= $locau->facade() ?></td>
-                                            <!--td></td-->
                                             <td class="hidden-phone">
                                                 <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
