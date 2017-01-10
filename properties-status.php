@@ -133,11 +133,10 @@
                                             <th style="width: 5%">Code</th>
                                             <th style="width: 15%">Projet</th>
                                             <th style="width: 5%">Niveau</th>
-                                            <!--th style="width: 10%">Prix&nbsp;DH</th-->
-                                            <th style="width: 10%">Superficie</th>
-                                            <th style="width: 10%">Façade</th>
-                                            <th style="width: 25%">Nbr.Pièces</th>
-                                            <th style="width: 5%">Cave</th>
+                                            <th class="hidden-phone" style="width: 10%">Superficie</th>
+                                            <th class="hidden-phone" style="width: 10%">Façade</th>
+                                            <th class="hidden-phone" style="width: 25%">Nbr.Pièces</th>
+                                            <th class="hidden-phone" style="width: 5%">Cave</th>
                                             <th style="width: 10%">Status</th>
                                         </tr>
                                     </thead>
@@ -196,10 +195,9 @@
                                                     ?>
                                                 </div>
                                             </td>
-                                            <td class="hidden-phone"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
-                                            <td class="hidden-phone"><?= $appartement->niveau() ?></td>
-                                            <!--td><a></a></td-->
-                                            <td><?= $appartement->superficie() ?> m<sup>2</sup></td>
+                                            <td><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
+                                            <td><?= $appartement->niveau() ?></td>
+                                            <td class="hidden-phone"><?= $appartement->superficie() ?> m<sup>2</sup></td>
                                             <td class="hidden-phone"><?= $appartement->facade() ?></td>
                                             <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
                                             <td class="hidden-phone">
