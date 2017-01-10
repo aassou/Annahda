@@ -106,7 +106,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Liste des états des paiements clients
+                            Liste des paiements clients validés
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -121,7 +121,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="operations-status-group.php">Les états des paiements client</a>
+                                <a href="operations-status-group.php">Les paiements clients validés</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -137,7 +137,7 @@
                     <div class="span12">
                     <div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
-                            <h4>Liste des paiements clients</h4>
+                            <h4>Liste des paiements clients validés</h4>
                             <div class="tools">
                                 <a href="javascript:;" class="reload"></a>
                             </div>
@@ -159,35 +159,20 @@
                                  unset($_SESSION['operation-action-message']);
                                  unset($_SESSION['operation-type-message']);
                                 ?>
-                                <!--div class="btn-group">
-                                    <a class="btn blue pull-right" href="#addReglement" data-toggle="modal">
-                                        Nouveau Réglement&nbsp;<i class="icon-plus-sign"></i>
-                                    </a>
-                                </div-->
-                                <!--div class="btn-group pull-right">
-                                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Print</a></li>
-                                        <li><a href="#">Save as PDF</a></li>
-                                        <li><a href="#">Export to Excel</a></li>
-                                    </ul>
-                                </div-->
                             </div>
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10%">Actions</th>
+                                        <th style="width: 10%"><span class="hidden-phone">Action</span></th>
                                         <th style="width: 10%">Client</th>
                                         <th style="width: 10%">Projet</th>
-                                        <th style="width: 10%">Date.Opé</th>
-                                        <th style="width: 10%">Date.Rég</th>
-                                        <th style="width: 10%">ModePaiment</th>
-                                        <th style="width: 10%">Compte</th>
-                                        <th style="width: 10%">N°.Opé</th>
+                                        <th class="hidden-phone" style="width: 10%">Date.Opé</th>
+                                        <th class="hidden-phone" style="width: 10%">Date.Rég</th>
+                                        <th class="hidden-phone" style="width: 10%">ModePaiment</th>
+                                        <th class="hidden-phone" style="width: 10%">Compte</th>
+                                        <th class="hidden-phone" style="width: 10%">N°.Opé</th>
                                         <th style="width: 10%">Montant</th>
-                                        <th style="width: 10%">Status</th>
-                                        <!--th style="width: 10%">Quittance</th-->
+                                        <th class="hidden-phone" style="width: 10%">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -223,14 +208,13 @@
                                         <td><?= $action ?></td>
                                         <td><?= $nomClient ?></td>
                                         <td><?= $nomProjet ?></td>
-                                        <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
-                                        <td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
-                                        <td><?= $operation->modePaiement() ?></td>
-                                        <td><?= $operation->compteBancaire() ?></td>
-                                        <td><?= $operation->numeroCheque() ?></td>
+                                        <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+                                        <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
+                                        <td class="hidden-phone"><?= $operation->modePaiement() ?></td>
+                                        <td class="hidden-phone"><?= $operation->compteBancaire() ?></td>
+                                        <td class="hidden-phone"><?= $operation->numeroCheque() ?></td>
                                         <td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
-                                        <td><?= $status ?></td>
-                                        <!--td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td-->
+                                        <td class="hidden-phone"><?= $status ?></td>
                                     </tr>   
                                     <!-- validateOperation box begin-->
                                     <div id="validateOperation<?= $operation->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

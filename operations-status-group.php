@@ -169,7 +169,7 @@
                                         }
                                     ?>      
                                     <tr class="odd gradeX">
-                                        <td class="hidden"><?= $action ?></td>
+                                        <td class="hidden-phone"><?= $action ?></td>
                                         <td><?= $nomClient ?></td>
                                         <td class="hidden-phone"><?= $nomProjet ?></td>
                                         <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->date())) ?></td>
