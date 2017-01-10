@@ -184,7 +184,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width:10%;">Actions</th>
+                                            <th style="width:10%;"><span class="hidden-phone">Actions</span></th>
                                             <th class="hidden-phone" style="width:10%;">DateOpe</th>
                                             <th class="hidden-phone" style="width:10%;">DateVal</th>
                                             <th style="width:20%;">Libelle</th>
@@ -204,8 +204,8 @@
                                                 <?php
                                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 ?>
-                                                    <a href="#update<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini green"><i class="icon-refresh"></i></a>
-                                                    <a href="#delete<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini red"><i class="icon-remove"></i></a>
+                                                    <a href="#update<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini green hidden-phone"><i class="icon-refresh"></i></a>
+                                                    <a href="#delete<?= $releve->id() ?>" data-toggle="modal" data-id="<?= $releve->id() ?>" class="btn mini red hidden-phone"><i class="icon-remove"></i></a>
                                                 <?php  
                                                     //In this section we will process credit and debit element.
                                                     //The debit element will be added for fournisseur component
