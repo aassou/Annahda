@@ -130,11 +130,11 @@
                                         <th><span class="hidden-phone">Action</span></th>
                                         <th>Client</th>
                                         <th class="hidden-phone">Projet</th>
-                                        <th class="hidden-phone">Date.Opé</th>
-                                        <th class="hidden-phone">Date.Rég</th>
-                                        <th class="hidden-phone">ModePaiment</th>
+                                        <th class="hidden-phone">DOpér</th>
+                                        <th class="hidden-phone">DRégl</th>
+                                        <th class="hidden-phone">ModPaimnt</th>
                                         <th class="hidden-phone">Compte</th>
-                                        <th class="hidden-phone">N°.Opé</th>
+                                        <th class="hidden-phone">N°Opé</th>
                                         <th>Montant</th>
                                         <th>Status</th>
                                     </tr>
