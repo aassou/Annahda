@@ -189,8 +189,8 @@
                                             <th class="hidden-phone" style="width:10%;">DateVal</th>
                                             <th style="width:20%;">Libelle</th>
                                             <th style="width:10%;">Ref</th>
-                                            <th style="width:15%;">Débit</th>
-                                            <th style="width:15%;">Crédit</th>
+                                            <th style="width:15%;">Déb</th>
+                                            <th style="width:15%;">Créd</th>
                                             <th class="hidden-phone" style="width:10%;">Projet</th>
                                         </tr>
                                     </thead>
