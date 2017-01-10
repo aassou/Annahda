@@ -121,7 +121,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="operations-status-group.php">Les paiements clients validés</a>
+                                <a href="operations-status-group.php">Les états des paiements clients</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
