@@ -48,7 +48,7 @@
         }*/
         $mois = $_GET['mois'];
         $annee = $_GET['annee'];
-        $operations = "";
+        //$operations = "";
         //test the locaux object number: if exists get operations else do nothing
         //$operationsNumber = $operationManager->getOpertaionsNumberByIdContrat($contrat->id());
         $operations = $operationManager->getOperationsValideesByMonthYear($mois, $annee);

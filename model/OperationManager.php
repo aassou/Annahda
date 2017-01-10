@@ -296,7 +296,7 @@ class OperationManager{
         $operations = array();
         $query = $this->_db->query(
         "SELECT * FROM t_operation 
-        WHERE status<>2
+        WHERE status=1
         GROUP BY MONTH(dateReglement), YEAR(dateReglement)
         ORDER BY dateReglement DESC");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
