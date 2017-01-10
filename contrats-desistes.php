@@ -139,8 +139,8 @@
                                             <th style="width:5%">Actions</th>
                                             <th style="width:20%">Client</th>
                                             <th style="width:15%">Projet</th>
-                                            <th style="width:20%" class="hidden-phone">Bien</th>
-                                            <th style="width:10%">Date Contrat</th>
+                                            <th style="width:20%">Bien</th>
+                                            <th style="width:10%" class="hidden-phone">Date Contrat</th>
                                             <th style="width:10%" class="hidden-phone">Prix</th>
                                             <th style="width:10%" class="hidden-phone">Réglements</th>
                                             <th style="width:10%" class="hidden-phone">Reste</th>
@@ -194,8 +194,8 @@
                                                 </div>
                                             </td>
                                             <td><?= $clientManager->getClientById($contrat->idClient())->nom() ?></td>
-                                            <td class="hidden-phone"><?= $projet->nom() ?></td>
-                                            <td class="hidden-phone"><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
+                                            <td><?= $projet->nom() ?></td>
+                                            <td><?= $typeBien ?> - <?= $bien->nom() ?> - <?= $etage ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($contrat->dateCreation())) ?></td>
                                             <td class="hidden-phone"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= number_format($sommeOperations, 2, ',', ' ') ?></td>
