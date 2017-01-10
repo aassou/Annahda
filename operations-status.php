@@ -163,16 +163,16 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th style="width: 8%"><span class="hidden-phone">Action</span></th>
-                                        <th style="width: 12%">Client</th>
-                                        <th style="width: 10%">Projet</th>
-                                        <th class="hidden-phone" style="width: 10%">Date.Opé</th>
-                                        <th class="hidden-phone" style="width: 10%">Date.Rég</th>
-                                        <th class="hidden-phone" style="width: 10%">ModePaiment</th>
-                                        <th class="hidden-phone" style="width: 10%">Compte</th>
-                                        <th class="hidden-phone" style="width: 10%">N°.Opé</th>
-                                        <th style="width: 10%">Montant</th>
-                                        <th class="hidden-phone" style="width: 10%">Status</th>
+                                        <th><span class="hidden-phone">Action</span></th>
+                                        <th>Client</th>
+                                        <th>Projet</th>
+                                        <th class="hidden-phone">Date.Opé</th>
+                                        <th class="hidden-phone">Date.Rég</th>
+                                        <th class="hidden-phone">ModePaiment</th>
+                                        <th class="hidden-phone">Compte</th>
+                                        <th class="hidden-phone">N°.Opé</th>
+                                        <th>Montant</th>
+                                        <th class="hidden-phone">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
