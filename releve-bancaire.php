@@ -181,28 +181,17 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
-                                <div class="clearfix">
-                                    <!--div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Outils <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Print</a></li>
-                                            <li><a href="#">Save as PDF</a></li>
-                                            <li><a href="#">Export to Excel</a></li>
-                                        </ul>
-                                    </div-->
-                                </div>
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
                                             <th style="width:10%;">Actions</th>
-                                            <th style="width:10%;">DateOpe</th>
-                                            <th style="width:10%;">DateVal</th>
+                                            <th class="hidden-phone" style="width:10%;">DateOpe</th>
+                                            <th class="hidden-phone" style="width:10%;">DateVal</th>
                                             <th style="width:20%;">Libelle</th>
-                                            <th style="width:10%;">Reference</th>
+                                            <th style="width:10%;">Ref</th>
                                             <th style="width:15%;">Débit</th>
                                             <th style="width:15%;">Crédit</th>
-                                            <th style="width:10%;">Projet</th>
+                                            <th class="hidden-phone" style="width:10%;">Projet</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -234,15 +223,13 @@
                                                 }
                                                 ?>
                                             </td>    
-                                            <!--td><?php //date('d/m/Y', strtotime($releve->dateOpe())) ?></td-->
-                                            <!--td><?php //date('d/m/Y', strtotime($releve->dateVal())) ?></td-->
-                                            <td><?= $releve->dateOpe() ?></td>
-                                            <td><?= $releve->dateVal() ?></td>
+                                            <td class="hidden-phone"><?= $releve->dateOpe() ?></td>
+                                            <td class="hidden-phone"><?= $releve->dateVal() ?></td>
                                             <td><?= $releve->libelle() ?></td>
                                             <td><?= $releve->reference() ?></td>
                                             <td><?= number_format($releve->debit(), 2, ',', ' ' ) ?></td>
                                             <td><?= number_format($releve->credit(), 2, ',', ' ') ?></td>
-                                            <td><?= $releve->projet() ?></td>
+                                            <td class="hidden-phone"><?= $releve->projet() ?></td>
                                         </tr>
                                         <!-- updateReleve box begin-->
                                         <div id="update<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
