@@ -389,7 +389,7 @@
 												}
                                                 else if( $appartement->status()=="Vendu" ){
                                                 ?>
-                                                    <a href="#showBuyer<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>">
+                                                    <a class="btn mini" href="#showBuyer<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>" title="<?= $clientManager->getClientById($contratManager->getIdClientByIdProjetByIdBienTypeBien($idProjet, $appartement->id(), "appartement"))->nom() ?>">
                                                         Pour
                                                     </a>
                                                 <?php    
