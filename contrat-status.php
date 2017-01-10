@@ -141,14 +141,14 @@
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Client</th>
-                                            <th style="width: 10%">Tél</th>
-                                            <th style="width: 10%">Projet</th>
-                                            <th class="hidden-phone" style="width: 20%">Bien</th>
-                                            <th style="width: 10%">Mnt</th>
-                                            <th class="hidden-phone" style="width: 10%">DPrév</th>
-                                            <th class="hidden-phone" style="width: 10%">Status</th>
-                                            <th style="width: 10%">Action</th>
+                                            <th>Client</th>
+                                            <th>Tél</th>
+                                            <th>Projet</th>
+                                            <th class="hidden-phone">Bien</th>
+                                            <th>Mnt</th>
+                                            <th class="hidden-phone">DPrév</th>
+                                            <th class="hidden-phone">Status</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
