@@ -129,7 +129,7 @@
                                             <th style="width: 5%"></th>
                                             <th style="width: 5%">Code</th>
                                             <th style="width: 15%">Projet</th>
-                                            <th style="width: 5%">Niveau</th>
+                                            <th style="width: 5%">Niv</th>
                                             <th class="hidden-phone" style="width: 10%">Superficie</th>
                                             <th class="hidden-phone" style="width: 10%">Façade</th>
                                             <th class="hidden-phone" style="width: 25%">Nbr.Pièces</th>
