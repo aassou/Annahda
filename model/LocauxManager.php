@@ -58,6 +58,22 @@ class LocauxManager{
         $query->closeCursor();
 	}
 
+    //this method is used to update etatLocaux
+    public function updateEtatLocaux($titre, $superficie2, $prixDeclare, $avancePrixDeclare, $idLocaux){
+        $query = $this->_db->prepare('
+        UPDATE t_locaux
+        SET titre=:titre, superficie2=:superficie2, prixDeclare=:prixDeclare, avancePrixDeclare=:avancePrixDeclare 
+        WHERE id=:idLocaux') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idLocaux', $idLocaux);
+        $query->bindValue(':titre', $titre);
+        $query->bindValue(':superficie2', $superficie2);
+        $query->bindValue(':prixDeclare', $prixDeclare);
+        $query->bindValue(':avancePrixDeclare', $avancePrixDeclare);
+        $query->execute();
+        $query->closeCursor();
+    }
+
     //This method is used when a contract is done, so we need to change the price of our property
     //from the older one to the new price
     public function updatePrix($prix, $idLocaux){

@@ -63,6 +63,22 @@ class AppartementManager{
         $query->closeCursor();
 	}
     
+    //this method is used to update etatAppartement
+    public function updateEtatAppartement($titre, $superficie2, $prixDeclare, $avancePrixDeclare, $idAppartement){
+        $query = $this->_db->prepare('
+        UPDATE t_appartement 
+        SET titre=:titre, superficie2=:superficie2, prixDeclare=:prixDeclare, avancePrixDeclare=:avancePrixDeclare 
+        WHERE id=:idAppartement') 
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idAppartement', $idAppartement);
+        $query->bindValue(':titre', $titre);
+        $query->bindValue(':superficie2', $superficie2);
+        $query->bindValue(':prixDeclare', $prixDeclare);
+        $query->bindValue(':avancePrixDeclare', $avancePrixDeclare);
+        $query->execute();
+        $query->closeCursor();
+    }
+    
     //This method is used when a contract is done, so we need to change the price of our property
     //from the older one to the new price
     public function updatePrix($prix, $idAppartement){

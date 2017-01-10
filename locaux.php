@@ -235,6 +235,9 @@
 												    <ul class="dropdown-menu">
 												        <li>
 												            <a class="hidden-desktop">Prix: <?= number_format($locau->prix(), 2, ',', ' ') ?> DH</a>
+												            <a href="#updateEtatLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
+                                                               Changer État Local
+                                                            </a>
 												        	<a href="locaux-detail.php?idLocaux=<?= $locau->id() ?>&idProjet=<?= $locau->idProjet() ?>">
 																Fiche descriptif
 															</a>
@@ -322,9 +325,82 @@
                                                 </a>
                                                 <?php
                                                 }
-												?>
+												//Show locaux_status
+                                                if ( 
+                                                    $_SESSION['userMerlaTrav']->profil()=="admin" || 
+                                                    $_SESSION['userMerlaTrav']->profil()=="manager" ) 
+                                                {
+                                                ?>
+                                                <a class="btn mini dark-cyan" href="#statusLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">État LocalCom</a>
+                                                <?php    
+                                                }
+                                                ?>
 											</td>
 										</tr>
+										<!-- updateEtatLocaux box begin -->
+                                        <div id="updateEtatLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Changer l'état du local commercial <strong><?= $locau->nom() ?></strong> </h3>
+                                            </div>
+                                            <form class="form-inline" action="controller/LocauxActionController.php" method="post">
+                                                 <div class="modal-body">
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <label class="right-label">Titre Foncière</label>
+                                                            <input type="text" name="titre" value="<?= $locau->titre() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <label class="right-label">Supérifice</label>
+                                                            <input type="text" name="superficie2" value="<?= $locau->superficie2() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <label class="right-label">Prix déclaré</label>
+                                                            <input type="text" name="prixDeclare" value="<?= $locau->prixDeclare() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <div class="controls">    
+                                                            <label class="right-label">Avances sur prix déclaré</label>
+                                                            <input type="text" name="avancePrixDeclare" value="<?= $locau->avancePrixDeclare() ?>" />
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                                 <div class="modal-footer">
+                                                     <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateEtatLocaux" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                 </div>
+                                            </form>
+                                        </div>  
+                                        <!-- updateEtatLocaux box end -->
+                                        <!-- statusLocaux box begin -->
+                                        <div id="statusLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>État du local commercial</h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>Titre Foncière :</strong><span class="pull-right"><?= $locau->titre() ?></span><br />
+                                                <strong>Supérifice :</strong><span class="pull-right"><?= $locau->superficie2() ?>&nbsp;m<sup>2</sup></span><br />
+                                                <strong>Prix déclaré :</strong><span class="pull-right"><?= number_format($locau->prixDeclare(), 2, ',', ' ') ?>&nbsp;DH</span><br />
+                                                <strong>Avance sur prix déclaré :</strong><span class="pull-right"><?= number_format($locau->avancePrixDeclare(), 2, ',', ' ') ?>&nbsp;DH</span><br />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    <button class="btn dark-cyan" data-dismiss="modal"aria-hidden="true">OK</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- statusLocaux box end -->
 										<!-- updateClient box begin -->
 										<div id="updateClient<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
 											<div class="modal-header">
@@ -615,9 +691,6 @@
 </html>
 <?php
 }
-/*else if(isset($_SESSION['userMerlaTrav']) and $_SESSION->profil()!="admin"){
-	header('Location:dashboard.php');
-}*/
 else{
     header('Location:index.php');    
 }

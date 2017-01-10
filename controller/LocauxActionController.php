@@ -124,6 +124,30 @@
         $typeMessage = "success";
     }
     //Action UpdateStatus Processing End
+    //UPDATE ETATLOCAUX BEGIN
+    else if($action=="updateEtatLocaux"){
+        $idLocaux = $_POST['idLocaux'];
+        $titre = htmlentities($_POST['titre']);
+        $superficie2 = htmlentities($_POST['superficie2']);
+        $prixDeclare = htmlentities($_POST['prixDeclare']);
+        $avancePrixDeclare = htmlentities($_POST['avancePrixDeclare']);
+        $locauxManager->updateEtatLocaux($titre, $superficie2, $prixDeclare, $avancePrixDeclare, $idLocaux);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification état local commercial",
+            'target' => "Table des locaux commerciaux",
+            'description' => "Changement d'état du local commercial ID : ".$idLocaux." titre : ".$titre." - Supérficie : ".$superficie2." - Prix déclaré : ".$prixDeclare." - Avance sur prix déclaré : ".$avancePrixDeclare." - Projet : ".$nomProjet,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "Opération Valide : État Local Commercial Modifié avec succès.";
+        $typeMessage = "success";
+    }
+    //UPDATE ETATLOCAUX END
     //Action UpdateClient Processing Begin
     else if($action=="updateClient"){
         $idLocaux = $_POST['idLocaux'];

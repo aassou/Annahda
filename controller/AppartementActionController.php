@@ -122,6 +122,30 @@
         $actionMessage = "Opération Valide : Appartement Status Modifié avec succès.";
         $typeMessage = "success";
     }
+    //UPDATE ETATAPPARTEMENT BEGIN
+    else if($action=="updateEtatAppartement"){
+        $idAppartement = $_POST['idAppartement'];
+        $titre = htmlentities($_POST['titre']);
+        $superficie2 = htmlentities($_POST['superficie2']);
+        $prixDeclare = htmlentities($_POST['prixDeclare']);
+        $avancePrixDeclare = htmlentities($_POST['avancePrixDeclare']);
+        $appartementManager->updateEtatAppartement($titre, $superficie2, $prixDeclare, $avancePrixDeclare, $idAppartement);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification état appartement",
+            'target' => "Table des appartements",
+            'description' => "Changement d'état de l'appartement ID : ".$idAppartement." titre : ".$titre." - Supérficie : ".$superficie2." - Prix déclaré : ".$prixDeclare." - Avance sur prix déclaré : ".$avancePrixDeclare." - Projet : ".$nomProjet,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "Opération Valide : État Appartement Modifié avec succès.";
+        $typeMessage = "success";
+    }
+    //UPDATE ETATAPPARTEMENT END
     else if($action=="updateClient"){
         $idAppartement = $_POST['idAppartement'];
         $par = htmlentities($_POST['par']);

@@ -29,6 +29,7 @@
 				or $currentPage=="recherches.php"
 				or $currentPage=="compte-bancaire.php"
 				or $currentPage=="conges.php"
+				or $currentPage=="annuaire.php"
 				or $currentPage=="statistiques.php"
 				or $currentPage=="messages.php"
 				or $currentPage=="user-profil.php"

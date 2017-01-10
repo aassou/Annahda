@@ -4,6 +4,10 @@ class Locaux{
 	private $_id;
 	private $_nom;
 	private $_superficie;
+    private $_superficie2;
+    private $_titre;
+    private $_prixDeclare;
+    private $_avancePrixDeclare;
 	private $_facade;
 	private $_prix;
     private $_montantRevente;
@@ -44,6 +48,22 @@ class Locaux{
 	public function setSuperficie($superficie){
 		$this->_superficie = $superficie;
 	}
+    
+    public function setSuperficie2($superficie2){
+        $this->_superficie2 = $superficie2;
+    }
+    
+    public function setTitre($titre){
+        $this->_titre = $titre;
+    }
+    
+    public function setPrixDeclare($prixDeclare){
+        $this->_prixDeclare = $prixDeclare;
+    }
+    
+    public function setAvancePrixDeclare($avancePrixDeclare){
+        $this->_avancePrixDeclare = $avancePrixDeclare;
+    }
 	
 	public function setFacade($facade){
 		$this->_facade = $facade;
@@ -101,6 +121,22 @@ class Locaux{
 	public function superficie(){
 		return $this->_superficie;
 	}
+    
+    public function superficie2(){
+        return $this->_superficie2;
+    }
+    
+    public function titre(){
+        return $this->_titre;
+    }
+    
+    public function prixDeclare(){
+        return $this->_prixDeclare;
+    }
+    
+    public function avancePrixDeclare(){
+        return $this->_avancePrixDeclare;
+    }
 	
 	public function facade(){
 		return $this->_facade;
