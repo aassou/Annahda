@@ -169,7 +169,7 @@
                                                 ?>
                                             </td>    
                                             <td><?= $commission->commissionnaire() ?></td>
-                                            <td><a href="#showDetails" class="btn mini blue" data-toggle="modal" data-id="<?= $commission->id()?>"><i class="icon-eye-open"></i></a></td> 
+                                            <td class="hidden-desktop hidden-tablet"><a href="#showDetails<?= $commission->id()?>" class="btn mini blue" data-toggle="modal" data-id="<?= $commission->id()?>"><i class="icon-eye-open"></i></a></td> 
                                             <td class="hidden-phone"><?= $commission->titre() ?></td>
                                             <td class="hidden-phone"><?= number_format($commission->montant(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= $projet->nom() ?></td>
