@@ -124,13 +124,13 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th>Actions</th>
+                                            <th class="hidden-phone">Action</th>
                                             <th>Commissionnaire</th>
-                                            <th>Description</th>
+                                            <th class="hidden-phone">Description</th>
                                             <th>Montant</th>
                                             <th>Projet</th>
                                             <th>Bien</th>
-                                            <th>Date</th>
+                                            <th class="hidden-phone">Date</th>
                                             <th>état</th>
                                         </tr>
                                     </thead>
@@ -145,10 +145,12 @@
                                             if ( $typeBien == "localCommercial" ) {
                                                 $locauxManager = new LocauxManager($pdo);
                                                 $bien = $locauxManager->getLocauxById($contrat->idBien());
+                                                $typeBien = "Local";
                                             }
                                             else {
                                                 $appartementManager = new AppartementManager($pdo);
                                                 $bien = $appartementManager->getAppartementById($contrat->idBien());
+                                                $typeBien = "Appart";
                                             }
                                             $etatButton = "red";
                                             if ( $commission->etat() == "V" ) {
@@ -156,7 +158,7 @@
                                             } 
                                         ?>
                                         <tr class="odd gradeX">
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?php
                                                 if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
                                                 ?>
@@ -166,11 +168,11 @@
                                                 ?>
                                             </td>    
                                             <td><?= $commission->commissionnaire() ?></td>
-                                            <td><?= $commission->titre() ?></td>
+                                            <td class="hidden-phone"><?= $commission->titre() ?></td>
                                             <td><?= $commission->montant() ?></td>
                                             <td><?= $projet->nom() ?></td>
-                                            <td><?= ucfirst($typeBien)." - ".$bien->nom() ?></td>
-                                            <td><?= date('d/m/Y', strtotime($commission->date())) ?></td>
+                                            <td><?= $typeBien." - ".$bien->nom() ?></td>
+                                            <td class="hidden-phone"><?= date('d/m/Y', strtotime($commission->date())) ?></td>
                                             <td><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
                                         </tr>
                                         <!-- updateCommission box begin-->
