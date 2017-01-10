@@ -400,7 +400,7 @@
                                                     $_SESSION['userMerlaTrav']->profil()=="manager" ) 
                                                 {
                                                 ?>
-                                                <a class="btn mini dark-cyan" href="#statusAppartement<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">État Appartement</a>
+                                                <a class="btn mini dark-cyan" href="#statusAppartement<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">État</a>
                                                 <?php    
                                                 }
 												?>

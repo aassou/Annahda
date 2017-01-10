@@ -189,8 +189,8 @@
                                             <th>Nom</th>
                                             <th class="hidden-phone">Date</th>
                                             <th>Bien</th>
-                                            <th>IPrix</th>
-                                            <th>ISupérficie</th>
+                                            <th>Prix</th>
+                                            <th>Supérfi</th>
                                             <th class="hidden-phone">Emp.Achat</th>
                                             <th class="hidden-phone">Emp.Vente</th>
                                         </tr>

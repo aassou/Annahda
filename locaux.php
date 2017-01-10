@@ -331,7 +331,7 @@
                                                     $_SESSION['userMerlaTrav']->profil()=="manager" ) 
                                                 {
                                                 ?>
-                                                <a class="btn mini dark-cyan" href="#statusLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">État LocalCom</a>
+                                                <a class="btn mini dark-cyan" href="#statusLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">État</a>
                                                 <?php    
                                                 }
                                                 ?>
