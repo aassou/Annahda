@@ -39,6 +39,13 @@
           +
           $locauxManager->getTotalPrixLocauxByIdProjet($idProjet)
         );
+        
+        $valeursBiensNonVendus = 
+        ceil(
+            $appartementManager->getTotalPrixAppartementsNonVendusByIdProjet($idProjet)
+            +
+            $locauxManager->getTotalPrixLocauxNonVendusByIdProjet($idProjet)
+        );
 		
 		//get contacts ids and get sum of client operations
 		$idsContrats = $contratManager->getContratActifIdsByIdProjet($idProjet);
@@ -249,6 +256,10 @@
                 {
                     name: 'Valeur des biens vendus',
                     data: [<?= json_encode($sommePrixVente) ?>]
+                },
+                {
+                    name: 'Valeur des biens non vendus',
+                    data: [<?= json_encode($valeursBiensNonVendus) ?>]
                 },
                 {
                     name: 'Les charges',

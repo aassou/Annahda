@@ -142,6 +142,20 @@ class LocauxManager{
         $query->closeCursor();
         return $data['prixTotal'];
     }
+
+    public function getTotalPrixLocauxNonVendusByIdProjet($idProjet){
+        $query = $this->_db->prepare(
+        'SELECT SUM(prix) AS prixTotal 
+        FROM t_locaux 
+        WHERE idProjet=:idProjet
+        AND status="Disponible"')
+        or die(print_r($this->_db->errorInfo()));
+        $query->bindValue(':idProjet', $idProjet);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['prixTotal'];
+    }
     
     public function getLocauxNonVendu(){
         $locaux = array();
