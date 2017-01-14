@@ -114,9 +114,8 @@ class ProjetManager{
     public function getProjetsOrdered(){
         $projets = array();
         $query = $this->_db->query(
-        "SELECT * FROM t_projet 
-        WHERE nom LIKE 'Pro%'
-        ORDER BY substring(nom, 1, 9), substring(nom, 10)*1
+        "SELECT * FROM t_projet
+        ORDER BY orders
         ");
         //get result
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
