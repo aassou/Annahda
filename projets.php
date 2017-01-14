@@ -21,7 +21,7 @@
         //les sources
         $projetsManager = new ProjetManager($pdo);
         $projetNumber = $projetsManager->getProjetsNumber();
-        $projets = $projetsManager->getProjets();
+        $projets = $projetsManager->getProjetsOrdered();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
