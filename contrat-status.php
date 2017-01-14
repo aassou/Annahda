@@ -209,6 +209,18 @@
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
                                                     </div>
                                                     <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus" />
                                                             <input type="hidden" name="source" value="contrat" />
@@ -315,6 +327,18 @@
                                                 <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    
@@ -442,6 +466,18 @@
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
                                                     </div>
                                                     <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus" />
                                                             <input type="hidden" name="source" value="contrat" />
@@ -548,6 +584,18 @@
                                                 <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    
@@ -675,6 +723,18 @@
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
                                                     </div>
                                                     <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus" />
                                                             <input type="hidden" name="source" value="contrat" />
@@ -781,6 +841,18 @@
                                                 <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    
@@ -911,6 +983,18 @@
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
                                                     </div>
                                                     <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
                                                         <div class="controls">    
                                                             <input type="hidden" name="action" value="updateStatus" />
                                                             <input type="hidden" name="source" value="contrat" />
@@ -1017,6 +1101,18 @@
                                                 <form class="form-horizontal loginFrm" action="controller/SendMailClientController.php" method="post">
                                                     <div class="control-group">
                                                         <p>Êtes-vous sûr de vouloir envoyer un Email à <?= $client->nom() ?> ?</p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Sujet</label>
+                                                        <div class="controls">    
+                                                            <input type="text" name="subject" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Message</label>
+                                                        <div class="controls">    
+                                                            <textarea name="message"></textarea>
+                                                        </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <div class="controls">    

@@ -116,19 +116,6 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="commande-group-iaaza.php">
-                            <div class="tile bg-red">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-shopping-cart"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Les commandes
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
                             <a href="livraisons-group-iaaza.php">
                             <div class="tile bg-blue">
                                 <div class="corner"></div>
@@ -168,6 +155,19 @@
                                         La caisse
                                     </div>
                                     <div class="number">
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <a href="commande-group-iaaza.php">
+                            <div class="tile bg-red">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-shopping-cart"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Les commandes
                                     </div>
                                 </div>
                             </div>
