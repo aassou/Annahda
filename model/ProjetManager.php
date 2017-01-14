@@ -102,7 +102,7 @@ class ProjetManager{
 	
     public function getProjets(){
         $projets = array();
-        $query = $this->_db->query('SELECT * FROM t_projet ORDER BY cast(nom as unsigned)');
+        $query = $this->_db->query('SELECT * FROM t_projet ORDER BY cast(nom AS SIGNED INTEGER) ASC');
         //get result
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $projets[] = new Projet($data);
