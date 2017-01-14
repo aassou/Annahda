@@ -50,9 +50,9 @@
 		}
 		$sommeApportsClients = ($sommeOperationsClients);
 		$reliquat = $sommePrixVente - $sommeOperationsClients; 
-        $sommeCharges = 
-        $chargeCommunManager->getTotal() + $chargeManager->getTotalByIdProjet($idProjet);
-        $sommeCharges = ceil($sommeCharges);
+        /*$sommeCharges = 
+        $chargeCommunManager->getTotal() + $chargeManager->getTotalByIdProjet($idProjet);*/
+        $sommeCharges = ceil($chargeManager->getTotalByIdProjet($idProjet));
 		
         //Container 2 : Statistiques
         $sommeLivraisons = 0;
