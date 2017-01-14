@@ -65,8 +65,9 @@ class CollaborationManager{
 
 	public function getCollaborations(){
 		$collaborations = array();
-		$query = $this->_db->query('SELECT * FROM t_collaboration
-		ORDER BY id DESC');
+		$query = $this->_db->query(
+		'SELECT * FROM t_collaboration
+		ORDER BY status DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$collaborations[] = new Collaboration($data);
 		}
@@ -79,7 +80,7 @@ class CollaborationManager{
         $query = $this->_db->query(
         "SELECT * FROM t_collaboration
         WHERE status='X'
-        ORDER BY id DESC");
+        ORDER BY status DESC");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $collaborations[] = new Collaboration($data);
         }
