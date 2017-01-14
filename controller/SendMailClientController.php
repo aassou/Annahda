@@ -22,7 +22,7 @@ function classLoad ($myClass) {
     //$message = 'Bonjour Chèr(e)'.$client.','."\n"."nous vous envoyons cet Email pour vous rappeler de votre paiement prévu date du : ".date('d/m/Y', strtotime($datePaiement))."\n"."Nous vous souhaitons une bonne journée.Groupe Annahda Lil Iaamar";
     $headers = 'From: annahda@gmail.com' . "\r\n";
 
-    mail($emailClient, $subject, $message, $headers);
+    mail($emailClient, $subject, $message, $headers, "Content-Type: text/html; charset=UTF-8");
     $actionMessage = "Opération Valide : Email envoyé avec succès.";
     $typeMessage = "success";
     $_SESSION['mail-action-message'] = $actionMessage;
