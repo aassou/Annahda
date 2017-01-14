@@ -20,9 +20,11 @@ function classLoad ($myClass) {
     $message = htmlentities($_POST['message']);
     //$subject = 'Rappel sur paiement de régelement';
     //$message = 'Bonjour Chèr(e)'.$client.','."\n"."nous vous envoyons cet Email pour vous rappeler de votre paiement prévu date du : ".date('d/m/Y', strtotime($datePaiement))."\n"."Nous vous souhaitons une bonne journée.Groupe Annahda Lil Iaamar";
-    $headers = 'From: annahda@gmail.com' . "\r\n";
+    $headers[] = 'From: annahda@gmail.com' . "\r\n";
+    $headers[] = 'MIME-Version: 1.0';
+    $headers[] = 'Content-type: text/html; charset=utf-8';
 
-    mail($emailClient, $subject, $message, $headers, "Content-Type: text/html; charset=UTF-8");
+    mail($emailClient, $subject, $message, implode("\r\n", $headers));
     $actionMessage = "Opération Valide : Email envoyé avec succès.";
     $typeMessage = "success";
     $_SESSION['mail-action-message'] = $actionMessage;
