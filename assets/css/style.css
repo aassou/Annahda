@@ -136,6 +136,11 @@ General backgrounds
   background-color: #003366 !important;
 }
 
+.bg-dark-black {
+  background-image: none !important;
+  background-color: #000000 !important;
+}
+
 /***
 Apply fix for font awesome icons.
 ***/

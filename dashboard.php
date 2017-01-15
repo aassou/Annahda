@@ -301,6 +301,19 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="map.php" target="_blank">
+                            <div class="tile bg-dark-black">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-map-marker"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Emplacements Projets
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 						</div>
 					</div>
 				</div>
