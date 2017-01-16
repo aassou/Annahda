@@ -85,6 +85,8 @@
 					or $currentPage=="pieces-locaux.php"
 					or $currentPage=="appartements.php"
 					or $currentPage=="pieces-appartement.php"
+					or $currentPage=="syndique-group.php"
+					or $currentPage=="syndique-mois-annee.php"
 					or $currentPage=="clients-add.php"
 					or $currentPage=="contrats-add.php"
 					or $currentPage=="contrat.php"

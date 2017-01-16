@@ -144,6 +144,11 @@
                                         <a style="margin-top:5px" href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big stay-away">Contrats employés</a>
                                         <a style="margin-top:5px" href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-cyan stay-away">Statistiques</a>
                                     </div>
+                                    <div class="portfolio-info">
+                                        <a style="margin-top:5px" href="syndique-group.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-blue stay-away">Gestion Syndique</a>
+                                        <!--a style="margin-top:5px" href="projet-contrat-employe.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big stay-away">Contrats employés</a-->
+                                        <!--a style="margin-top:5px" href="suivi-projets.php?idProjet=<?= $projet->id() ?>" class="btn btn-fixed-width-big dark-cyan stay-away">Statistiques</a-->
+                                    </div>
                                 </div>
                             </div>
                             <br><br>     

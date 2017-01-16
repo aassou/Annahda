@@ -218,6 +218,29 @@
         });
         infowindow.open(map, markerAnnahda8S);
         //Annahda8S End
+        //Annahda7 Begin
+        var annahda7 = {lat: 35.150997, lng: -2.916925};
+        var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<p id="firstHeading" class="firstHeading"><strong>Annahda 7</strong></p>'+
+            '<div id="bodyContent">'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        var markerAnnahda7 = new google.maps.Marker({
+          position: annahda7,
+          map: map,
+          title: 'Annahda 7'
+        });
+        markerAnnahda7.addListener('click', function() {
+          infowindow.open(map, markerAnnahda7);
+        });
+        infowindow.open(map, markerAnnahda7);
+        //Annahda7 End
         //Annahda6 Begin
         var annahda6 = {lat: 35.150997, lng: -2.916925};
         var contentString = '<div id="content">'+

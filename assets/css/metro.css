@@ -232,6 +232,36 @@ select:focus {
   color: #fff !important;
 }
 
+.btn.dark-blue {
+  color: white; 
+  text-shadow: none;	
+  background-color: #003366;
+}
+.btn.dark-blue:hover, 
+.btn.dark-blue:focus, 
+.btn.dark-blue:active, 
+.btn.dark-blue.active, 
+.btn.dark-blue.disabled,
+.btn.dark-blue[disabled] { 
+  background-color: #003388 !important;
+  color: #fff !important;
+}
+
+.btn.dark-black {
+  color: white; 
+  text-shadow: none;	
+  background-color: #000000;
+}
+.btn.dark-black:hover, 
+.btn.dark-black:focus, 
+.btn.dark-black:active, 
+.btn.dark-black.active, 
+.btn.dark-black.disabled,
+.btn.dark-black[disabled] { 
+  background-color: #000012 !important;
+  color: #fff !important;
+}
+
 .mini 
 {
   height: 13px;
