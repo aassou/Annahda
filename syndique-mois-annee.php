@@ -25,7 +25,7 @@
         $idProjet = $_GET['idProjet'];
         $projet = $projetManager->getProjetById($idProjet);
         $projets = $projetManager->getProjets();    
-        $syndiques = $syndiqueManager->getSyndiquesByIdProjet($idProjet);
+        $syndiques = $syndiqueManager->getSyndiquesByIdProjetByMonthYear($idProjet, $mois, $annee);
         $caisses =$caisseManager->getCaissesByMonthYear($mois, $annee);
         $totalEntrees = $caisseManager->getTotalCaisseByTypeByMonthYear('Entree', $mois, $annee);
         $totalSorties = $caisseManager->getTotalCaisseByTypeByMonthYear('Sortie', $mois, $annee);

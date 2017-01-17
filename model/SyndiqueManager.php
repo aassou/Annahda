@@ -150,5 +150,24 @@ class SyndiqueManager{
         $query->closeCursor();
         return $data['total'];
     }
+    
+    public function getSyndiquesByIdProjetByMonthYear($idProjet, $month, $year){
+        $syndiques = array();
+        $query = $this->_db->prepare(
+        "SELECT * FROM t_syndique 
+        WHERE idProjet=:idProjet
+        AND MONTH(date) = :month
+        AND YEAR(date) = :year
+        ORDER BY date DESC");
+        $query->bindValue(':idProjet', $idProjet);
+        $query->bindValue(':month', $month);
+        $query->bindValue(':year', $year);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $syndiques[] = new Syndique($data);
+        }
+        $query->closeCursor();
+        return $syndiques;
+    }
 
 }
