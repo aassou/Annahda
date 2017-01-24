@@ -390,6 +390,7 @@
                     </div>	
 				</div>
 				<!-- END DASHBOARD STATS -->
+				<!-- END DASHBOARD STATS -->
 				<!-- BEGIN DASHBOARD FEEDS -->
 				<!-- ------------------------------------------------------ -->
 				<div class="row-fluid">
