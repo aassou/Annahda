@@ -20,7 +20,9 @@
         $typeChargeManager = new TypeChargeCommunManager($pdo);
         //
         $typeCharge = $_GET['type'];
-        $nomTypeCharge = $typeChargeManager->getTypeChargeById($typeCharge)->nom();
+        $typeChargeObject = $typeChargeManager->getTypeChargeById($typeCharge);
+        $idTypeCharge = $typeChargeObject->id();
+        $nomTypeCharge = $typeChargeObject->nom();
         $charges = $chargeManager->getChargesByType($typeCharge);
         $total = number_format($chargeManager->getTotalByType($typeCharge), 2, ',', ' ');
         $typeCharges = $typeChargeManager->getTypeCharges();
@@ -109,9 +111,7 @@
                                         <label class="control-label">Type Charge</label>
                                         <div class="controls">
                                             <select name="type">
-                                                <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
-                                                <?php } ?>
+                                                <option value="<?= $idTypeCharge ?>"><?= $nomTypeCharge ?></option>
                                             </select>
                                         </div>
                                     </div>
