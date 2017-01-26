@@ -21,7 +21,9 @@
         $typeChargeManager = new TypeChargeManager($pdo);
         //
         $typeCharge = $_GET['type'];
-        $nomTypeCharge = $typeChargeManager->getTypeChargeById($typeCharge)->nom();
+        $typeChargeObject = $typeChargeManager->getTypeChargeById($typeCharge);
+        $idTypeCharge = $typeChargeObject->id();
+        $nomTypeCharge = $typeChargeObject->nom();
         if(isset($_GET['idProjet']) and 
         ($_GET['idProjet'] >=1 and $_GET['idProjet'] <= $projetManager->getLastId()) ){
             $idProjet = $_GET['idProjet'];
@@ -124,9 +126,7 @@
                                         <label class="control-label">Type Charge</label>
                                         <div class="controls">
                                             <select name="type">
-                                                <?php foreach($typeCharges as $type){ ?>
-                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
-                                                <?php } ?>
+                                                <option value="<?= $idTypeCharge ?>"><?= $nomTypeCharge ?></option>
                                             </select>
                                         </div>
                                     </div>
