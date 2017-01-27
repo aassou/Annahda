@@ -324,8 +324,9 @@
                                                 ) {
                                             ?>
                                             <td class="hidden-phone">
-                                                <a class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
-                                                <a class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>    
+                                                <a title="Supprimer" class="btn mini red" href="#deleteCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-remove"></i></a>
+                                                <a title="Modifier" class="btn mini green" href="#updateCaisse<?= $caisse->id() ?>" data-toggle="modal" data-id="<?= $caisse->id() ?>"><i class="icon-refresh"></i></a>
+                                                <a title="Bon de Commande" class="btn mini blue" href="controller/CaisseBonPrintController.php?idCaisse=<?= $caisse->id() ?>" target="_blank"><i class="icon-print"></i></a>    
                                             </td>
                                             <?php
                                             }
