@@ -141,6 +141,21 @@ General backgrounds
   background-color: #000000 !important;
 }
 
+.bg-pink {
+  background-image: none !important;
+  background-color: #fa507b !important;
+}
+
+.bg-azure {
+  background-image: none !important;
+  background-color: #99CCFF !important;
+}
+
+.bg-solomon {
+  background-image: none !important;
+  background-color: #FFCC99 !important;
+}
+
 /***
 Apply fix for font awesome icons.
 ***/

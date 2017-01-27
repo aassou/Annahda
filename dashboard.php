@@ -314,6 +314,19 @@
                                 </div>
                             </div>
                             </a>
+                            <a href="clients-classement.php">
+                            <div class="tile bg-pink">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-star-empty"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Classement Clients
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
 						</div>
 					</div>
 				</div>
