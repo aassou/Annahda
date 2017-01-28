@@ -18,7 +18,7 @@
         $projetManager = new ProjetManager($pdo);
         $caisseManager = new CaisseIaazaManager($pdo);
         $projets = $projetManager->getProjets();    
-        $caisses =$caisseManager->getCaissesGroupByMonth();
+        $caisses = $caisseManager->getCaissesGroupByMonth();
         $totalCaisse = 
         $caisseManager->getTotalCaisseByType('Entree') - $caisseManager->getTotalCaisseByType('Sortie');
         $totalEntrees = $caisseManager->getTotalCaisseByType('Entree');
