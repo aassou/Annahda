@@ -21,7 +21,7 @@ function classLoad ($myClass) {
     $message = wordwrap($message, 70, "\r\n");
     //$subject = 'Rappel sur paiement de régelement';
     //$message = 'Bonjour Chèr(e)'.$client.','."\n"."nous vous envoyons cet Email pour vous rappeler de votre paiement prévu date du : ".date('d/m/Y', strtotime($datePaiement))."\n"."Nous vous souhaitons une bonne journée.Groupe Annahda Lil Iaamar";
-    $headers[] = 'From: annahda@gmail.com' . "\r\n".
+    $headers = 'From: annahda@gmail.com' . "\r\n".
     'MIME-Version: 1.0' . "\r\n".
     'Content-type: text/html; charset=utf-8';
 
