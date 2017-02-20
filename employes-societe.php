@@ -17,7 +17,7 @@
     	//les sources
 		$employeManager = new EmployeSocieteManager($pdo);
 		$employes = "";
-		//test the employeSociete object number: if exists get terrain else do nothing
+		//test the employeSociete object number: if exists get employes else do nothing
 		$employeNumber = $employeManager->getEmployeSocieteNumber();
 		if($employeNumber!=0){
 			$employeSocietePerPage = 10;
@@ -32,7 +32,7 @@
 	        $begin = ($p - 1) * $employeSocietePerPage;
 	        $pagination = paginate('employes-societe.php', '?p=', $pageNumber, $p);
 			$employesSociete = $employeManager->getEmployesSocieteByLimits($begin, $employeSocietePerPage);	
-	}
+	   }
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->

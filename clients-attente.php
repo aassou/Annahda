@@ -104,6 +104,12 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">Téléphone</label>
+                                        <div class="controls">
+                                            <input class="btn-fixed-width-big" type="text" name="tel"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">Date</label>
                                         <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
                                             <input name="date" id="date" class="btn-fixed-width-big m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
@@ -187,6 +193,7 @@
                                         <tr>
                                             <th class="hidden-phone">Actions</th>
                                             <th>Nom</th>
+                                            <th>Téléphone</th>
                                             <th class="hidden-phone">Date</th>
                                             <th>Bien</th>
                                             <th>Prix</th>
@@ -215,6 +222,7 @@
                                                 ?>
                                             </td>    
                                             <td><?= $client->nom() ?></td>
+                                            <td><?= $client->tel() ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($client->date())) ?></td>
                                             <td><?= $client->bien() ?></td>
                                             <td><?= $client->prix() ?></td>
@@ -235,6 +243,12 @@
                                                         <label class="control-label">Nom</label>
                                                         <div class="controls">
                                                             <input class="btn-fixed-width-big" type="text" name="nom" value="<?= $client->nom() ?>" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Téléphone</label>
+                                                        <div class="controls">
+                                                            <input class="btn-fixed-width-big" type="text" name="tel" value="<?= $client->tel() ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="control-group">

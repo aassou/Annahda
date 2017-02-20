@@ -12,10 +12,11 @@ class ClientAttenteManager{
 	//BAISC CRUD OPERATIONS
 	public function add(ClientAttente $clientAttente){
     	$query = $this->_db->prepare(' INSERT INTO t_clientattente (
-		nom, date, bien, prix, superficie, emplacementVente, emplacementAchat, created, createdBy)
-		VALUES (:nom, :date, :bien, :prix, :superficie, :emplacementVente, :emplacementAchat, :created, :createdBy)')
+		nom, tel, date, bien, prix, superficie, emplacementVente, emplacementAchat, created, createdBy)
+		VALUES (:nom, :tel, :date, :bien, :prix, :superficie, :emplacementVente, :emplacementAchat, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':nom', $clientAttente->nom());
+        $query->bindValue(':tel', $clientAttente->tel());
 		$query->bindValue(':date', $clientAttente->date());
 		$query->bindValue(':bien', $clientAttente->bien());
 		$query->bindValue(':prix', $clientAttente->prix());
@@ -30,11 +31,12 @@ class ClientAttenteManager{
 
 	public function update(ClientAttente $clientAttente){
     	$query = $this->_db->prepare(' UPDATE t_clientattente SET 
-		nom=:nom, date=:date, bien=:bien, prix=:prix, superficie=:superficie, emplacementVente=:emplacementVente, emplacementAchat=:emplacementAchat, updated=:updated, updatedBy=:updatedBy
+		nom=:nom, tel=:tel, date=:date, bien=:bien, prix=:prix, superficie=:superficie, emplacementVente=:emplacementVente, emplacementAchat=:emplacementAchat, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $clientAttente->id());
 		$query->bindValue(':nom', $clientAttente->nom());
+        $query->bindValue(':tel', $clientAttente->tel());
 		$query->bindValue(':date', $clientAttente->date());
 		$query->bindValue(':bien', $clientAttente->bien());
 		$query->bindValue(':prix', $clientAttente->prix());

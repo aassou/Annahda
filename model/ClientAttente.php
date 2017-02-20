@@ -4,6 +4,7 @@ class ClientAttente{
 	//attributes
 	private $_id;
 	private $_nom;
+    private $_tel;
 	private $_date;
 	private $_bien;
 	private $_prix;
@@ -35,9 +36,14 @@ class ClientAttente{
 	public function setId($id){
     	$this->_id = $id;
     }
+    
 	public function setNom($nom){
 		$this->_nom = $nom;
    	}
+    
+    public function setTel($tel){
+        $this->_tel = $tel;
+    }
 
 	public function setDate($date){
 		$this->_date = $date;
@@ -83,9 +89,14 @@ class ClientAttente{
 	public function id(){
     	return $this->_id;
     }
+	
 	public function nom(){
 		return $this->_nom;
    	}
+    
+    public function tel(){
+        return $this->_tel;
+    }
 
 	public function date(){
 		return $this->_date;

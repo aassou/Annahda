@@ -28,6 +28,7 @@
     if($action == "add"){
         if( !empty($_POST['nom']) ){
 			$nom = htmlentities($_POST['nom']);
+            $tel = htmlentities($_POST['tel']);
 			$date = htmlentities($_POST['date']);
 			$bien = htmlentities($_POST['bien']);
 			$prix = htmlentities($_POST['prix']);
@@ -39,6 +40,7 @@
             //create object
             $clientAttente = new ClientAttente(array(
 				'nom' => $nom,
+				'tel' => $tel,
 				'date' => $date,
 				'bien' => $bien,
 				'prix' => $prix,
@@ -64,6 +66,7 @@
         $idClientAttente = htmlentities($_POST['idClientAttente']);
         if(!empty($_POST['nom'])){
 			$nom = htmlentities($_POST['nom']);
+            $tel = htmlentities($_POST['tel']);
 			$date = htmlentities($_POST['date']);
 			$bien = htmlentities($_POST['bien']);
 			$prix = htmlentities($_POST['prix']);
@@ -72,9 +75,10 @@
 			$emplacementAchat = htmlentities($_POST['emplacementAchat']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$clientAttente = new ClientAttente(array(
+            $clientAttente = new ClientAttente(array(
 				'id' => $idClientAttente,
 				'nom' => $nom,
+				'tel' => $tel,
 				'date' => $date,
 				'bien' => $bien,
 				'prix' => $prix,
