@@ -14,7 +14,11 @@
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) 
-    and ( $_SESSION['userMerlaTrav']->profil()=="admin" OR $_SESSION['userMerlaTrav']->profil()=="consultant" ) ){
+    and (   $_SESSION['userMerlaTrav']->profil()=="admin" 
+            OR $_SESSION['userMerlaTrav']->profil()=="consultant" 
+            OR $_SESSION['userMerlaTrav']->profil()=="manager" 
+        )
+    ){
         //les sources
         $idProjet = 0;
         $projetManager = new ProjetManager($pdo);

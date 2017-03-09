@@ -11,7 +11,7 @@ class UserManager{
     //CRUD operations
     public function add(User $user){
         $query = $this->_db->prepare('INSERT INTO t_user (login, password, created, profil, status)
-                                VALUES (:login, :password, :created, :profil, :status)') or die(print_r($this->_db->errorInfo()));
+        VALUES (:login, :password, :created, :profil, :status)') or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':login', $user->login());
         $query->bindValue(':password', $user->password());
         $query->bindValue(':created', $user->created());
@@ -82,7 +82,7 @@ class UserManager{
 	
 	public function changePassword($newPassword, $idUser){
 		$query = $this->_db->prepare('UPDATE t_user SET password =:newPassword
-		WHERE id=:idUser') or die(print_r($this->_db->errorInfo()));;
+		WHERE id=:idUser') or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':newPassword', $newPassword);
         $query->bindValue(':idUser', $idUser);
         $query->execute();
@@ -111,6 +111,24 @@ class UserManager{
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
         return new User($data);
+    }
+    
+    public function getUserByLogin($login){
+        $query = $this->_db->prepare('SELECT * FROM t_user WHERE login=:login');
+        $query->bindValue(':login', $login);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return new User($data);
+    }
+    
+    public function getPasswordByLogin($login){
+        $query = $this->_db->prepare('SELECT password FROM t_user WHERE login=:login');
+        $query->bindValue(':login', $login);
+        $query->execute();
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['password'];
     }
     
 }
