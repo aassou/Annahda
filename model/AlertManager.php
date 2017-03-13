@@ -96,6 +96,7 @@ class AlertManager{
         $query = $this->_db->prepare('SELECT COUNT(*) AS alertNumber FROM t_alert WHERE status=0 AND createdBy=:createdBy');
         $query->bindValue(':createdBy', $createdBy);
         $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
         return $data['alertNumber'];
     }
 
@@ -103,6 +104,7 @@ class AlertManager{
     	$query = $this->_db->query(' SELECT id AS last_id FROM t_alert
 		ORDER BY id DESC LIMIT 0, 1');
 		$data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
 		$id = $data['last_id'];
 		return $id;
 	}

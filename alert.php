@@ -55,6 +55,8 @@
         <?php 
         include("include/top-menu.php"); 
         $alerts = $alertManager->getAlerts($_SESSION['userMerlaTrav']->login());
+        echo $alertNumber;
+        echo "----".$taskNumber;
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
