@@ -54,7 +54,7 @@
         <!-- BEGIN TOP NAVIGATION BAR -->
         <?php 
         include("include/top-menu.php"); 
-        $alerts = $alertManager->getAlerts();
+        $alerts = $alertManager->getAlerts($_SESSION['userMerlaTrav']->login());
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
@@ -156,26 +156,14 @@
                             }
                         ?>
                         <div class="span3 alert alert-block alert-<?= $statusClass ?> fade in">
-                            <?php
-                            if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                            ?>
                             <a href="#deleteAlert<?= $alert->id() ?>" class="close" data-toggle="modal" data-id="<?= $alert->id() ?>"></a>
-                            <?php  
-                            }
-                            ?>
                             <h4 class="alert-heading">Alerte</h4>
                             <p>
                                 <?= $alert->alert() ?>
                             </p>
                             <p>
-                                <?php
-                                if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                ?>
                                 <!--a class="btn red" href="#">Do this</a--> 
                                 <a class="btn <?= $actionClass ?>" href="#updateStatusAlert<?= $alert->id() ?>" data-toggle="modal" data-id="<?= $alert->id() ?>" ><?= $action ?></a>
-                                <?php  
-                                }
-                                ?>
                             </p>
                         </div>
                         <!-- updateStatusAlert box begin-->

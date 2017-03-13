@@ -115,7 +115,8 @@
                             unset($_SESSION['appartement-action-message']);
                             unset($_SESSION['appartement-type-message']);
                          ?>
-                        <div class="portlet box light-grey">
+                        <input style="margin-top:5px;" class="m-wrap stay-away btn-fixed-width-big" name="criteria" id="criteria" type="text" placeholder="Moteur de recherche..." />
+                        <div class="portlet box light-grey properties">
                             <div class="portlet-title">
                                 <h4>Liste des appartements</h4>
                                 <div class="tools">
@@ -141,7 +142,7 @@
                                         <?php
                                         foreach($appartements as $appartement){
                                         ?>      
-                                        <tr class="appartements">
+                                        <tr class="properties">
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
@@ -247,7 +248,7 @@
                                         foreach($appartementsRevendre as $contrat){
                                             $appartement = $appartementManager->getAppartementById($contrat->idBien());
                                         ?>      
-                                        <tr class="appartements">
+                                        <tr class="properties">
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
@@ -328,7 +329,7 @@
                                         <?php
                                         foreach($locaux as $locau){
                                         ?>      
-                                        <tr class="locaux">
+                                        <tr class="properties">
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="btn black dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
@@ -428,7 +429,7 @@
                                         foreach($locauxRevendre as $contrat){
                                             $locau = $locauxManager->getLocauxById($contrat->idBien());
                                         ?>      
-                                        <tr class="locaux">
+                                        <tr class="properties">
                                             <td>
                                                 <div class="btn-group">
                                                     <a class="btn mini green dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
@@ -526,11 +527,11 @@
             App.setPage("table_managed");
             App.init();
         });
-        $('.appartements').show();
+        $('.properties').show();
         $('#criteria').keyup(function(){
-            $('.appartements').hide();
+            $('.properties').hide();
            var txt = $('#criteria').val();
-           $('.appartements').each(function(){
+           $('.properties').each(function(){
                if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
                    $(this).show();
                }

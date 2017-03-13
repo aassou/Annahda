@@ -67,10 +67,13 @@ class AlertManager{
 		return new Alert($data);
 	}
 
-	public function getAlerts(){
+	public function getAlerts($createdBy){
 		$alerts = array();
-		$query = $this->_db->query('SELECT * FROM t_alert
-		ORDER BY id DESC');
+		$query = $this->_db->prepare('SELECT * FROM t_alert
+		WHERE createdBy=:createdBy
+		ORDER BY created DESC');
+        $query->bindValue(':createdBy', $createdBy);
+        $query->execute();
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$alerts[] = new Alert($data);
 		}
@@ -90,7 +93,7 @@ class AlertManager{
 	}
     
     public function getAlertsNumber(){
-        $query = $this->_db->query('SELECT COUNT(*) AS alertNumber FROM t_alert WHERE status=0');
+        $query = $this->_db->query('SELECT COUNT(*) AS alertNumber FROM t_alert WHERE status=0 AND createdBy=:createdBy');
         $data = $query->fetch(PDO::FETCH_ASSOC);
         return $data['alertNumber'];
     }

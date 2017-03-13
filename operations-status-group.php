@@ -99,7 +99,8 @@
                 <!-- BEGIN PAGE CONTENT-->
                 <div class="row-fluid">
                     <div class="span12">
-                        <div class="portlet box light-grey" id="detailsReglements">
+                        <input style="margin-top:5px;" class="m-wrap stay-away btn-fixed-width-big" name="criteria" id="criteria" type="text" placeholder="Moteur de recherche..." />
+                        <div class="portlet box light-grey operations" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Liste des paiements validés</h4>
                             <div class="tools">
@@ -127,16 +128,16 @@
                             <table class="table table-striped table-bordered table-hover" id="sample_1">
                                 <thead>
                                     <tr>
-                                        <th><span class="hidden-phone">Action</span></th>
-                                        <th>Client</th>
-                                        <th class="hidden-phone">Projet</th>
-                                        <th class="hidden-phone">DOpér</th>
-                                        <th class="hidden-phone">DRégl</th>
-                                        <th class="hidden-phone">ModPaimnt</th>
-                                        <th class="hidden-phone">Compte</th>
-                                        <th class="hidden-phone">N°Opé</th>
-                                        <th>Montant</th>
-                                        <th>Status</th>
+                                        <th style="width:5%" class="hidden-phone">Action</th>
+                                        <th style="width:15%">Client</th>
+                                        <th style="width:10%" class="hidden-phone">Projet</th>
+                                        <th style="width:10%" class="hidden-phone">DOpér</th>
+                                        <th style="width:10%" class="hidden-phone">DRégl</th>
+                                        <th style="width:10%" class="hidden-phone">ModPaimnt</th>
+                                        <th style="width:10%" class="hidden-phone">Compte</th>
+                                        <th style="width:10%" class="hidden-phone">N°Opé</th>
+                                        <th style="width:10%">Montant</th>
+                                        <th style="width:10%">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -168,8 +169,8 @@
                                             }
                                         }
                                     ?>      
-                                    <tr class="odd gradeX">
-                                        <td><?= $action ?></td>
+                                    <tr class="odd gradeX operations">
+                                        <td class="hidden-phone"><?= $action ?></td>
                                         <td><?= $nomClient ?></td>
                                         <td class="hidden-phone"><?= $nomProjet ?></td>
                                         <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->date())) ?></td>
@@ -349,6 +350,16 @@
                 else{
                 $("#showDateRange").show()
                 }
+            });
+            $('.operations').show();
+            $('#criteria').keyup(function(){
+                $('.operations').hide();
+               var txt = $('#criteria').val();
+               $('.operations').each(function(){
+                   if($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1){
+                       $(this).show();
+                   }
+                });
             });
         });
     </script>

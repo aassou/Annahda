@@ -21,7 +21,7 @@
         //obj and vars
         $taskNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
         $bugNumber = $bugManager->getBugsNumber();
-        $alertNumber = $alertManager->getAlertsNumber();
+        $alertNumber = $alertManager->getAlertsNumber($_SESSION['userMerlaTrav']->login());
         $todoNumber = $todoManager->getTodosNumberByUser($_SESSION['userMerlaTrav']->login());
         $todosToday = $todoManager->getTodosToday();
         $todosTodayInformation = $todoManager->getTodosTodayInformation();
