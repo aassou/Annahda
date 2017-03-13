@@ -95,6 +95,7 @@ class AlertManager{
     public function getAlertsNumber($createdBy){
         $query = $this->_db->prepare('SELECT COUNT(*) AS alertNumber FROM t_alert WHERE status=0 AND createdBy=:createdBy');
         $query->bindValue(':createdBy', $createdBy);
+        $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
         return $data['alertNumber'];
