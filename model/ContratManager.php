@@ -246,6 +246,17 @@ class ContratManager{
         return $ids;
     }
     
+    public function getContratActifIdBien(){
+        $ids = array();
+        $query = $this->_db->query(' SELECT idBien FROM t_contrat WHERE status="actif" AND typeBien="appartement"');
+        //get result
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $ids[] = $data['idBien'];
+        }
+        $query->closeCursor();
+        return $ids;
+    }
+    
     public function getContratActifIdsByIdProjet($idProjet){
         $ids = array();
         $query = $this->_db->prepare(
@@ -319,7 +330,16 @@ class ContratManager{
     public function getContratsDesistes(){
         $contrats = array();    
         $query = $this->_db->query("SELECT * FROM t_contrat WHERE status='annulle' ");
-        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $contrats[] = new Contrat($data);
+        }
+        $query->closeCursor();
+        return $contrats;
+    }
+    
+    public function getContratsActifs(){
+        $contrats = array();    
+        $query = $this->_db->query("SELECT * FROM t_contrat WHERE status='actif' ");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $contrats[] = new Contrat($data);
         }

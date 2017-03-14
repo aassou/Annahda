@@ -194,6 +194,18 @@ class AppartementManager{
         $query->closeCursor();
         return $appartements;
     }
+    
+    public function getAppartementsNoStatus(){
+        $appartements = array();
+        $query = $this->_db->query(
+        'SELECT * FROM t_appartement WHERE status=""')
+        or die(print_r($this->_db->errorInfo()));
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $appartements[] = new Appartement($data);
+        }
+        $query->closeCursor();
+        return $appartements;
+    }
 
     public function getAppartementByIdProjet($idProjet){
         $appartements = array();
