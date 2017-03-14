@@ -15,7 +15,7 @@
                             <input type="button" class="submit" value="">
                         </div>
                     </form>
-                    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                    <!-- END   RESPONSIVE QUICK SEARCH FORM -->
                 </li>
 				<li>
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -106,6 +106,7 @@
 					or $currentPage=="projet-charges-type.php"
 					or $currentPage=="projet-contrat-employe.php"
 					or $currentPage=="contrat-employe-detail.php"
+					or $currentPage=="sous-sol.php"
 					){
 						$gestionProjetClass = "active ";
 					}
