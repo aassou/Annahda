@@ -21,7 +21,7 @@
         $contratManager = new ContratManager($pdo);
         $clientManager = new ClientManager($pdo);
         $appartements = $appartementManager->getAppartementsNonVendu();
-        $appartementsRevendre = $contratManager->getAppartementsRevendre();
+        //$appartementsRevendre = $contratManager->getAppartementsRevendre();
         $locaux = $locauxManager->getLocauxNonVendu();
         $locauxRevendre = $contratManager->getLocauxRevendre();
 ?>
@@ -244,63 +244,7 @@
                                         <?php
                                         }//end of loop
                                         ?>
-                                        <?php
-                                        foreach($appartementsRevendre as $contrat){
-                                            $appartement = $appartementManager->getAppartementById($contrat->idBien());
-                                        ?>      
-                                        <tr class="properties">
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a class="btn green mini dropdown-toggle" data-toggle="dropdown"><i class="icon-exclamation-sign"></i></a>
-                                                    <ul class="dropdown-menu info-dropdown">
-                                                        <li>
-                                                            <a>
-                                                                Pour : <strong><?= $clientManager->getClientById($contrat->idClient())->nom() ?></strong> 
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a>
-                                                                Montant de Revente : <strong><?= $appartement->montantRevente() ?> DH</strong> 
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>    
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a style="width: 50px" class="btn mini dropdown-toggle" href="#" title="Prix : <?= number_format($appartement->prix(), 2, ',', ' ') ?> DH" data-toggle="dropdown">
-                                                        <?= $appartement->nom() ?> 
-                                                        <i class="icon-angle-down"></i>
-                                                    </a>
-                                                    <?php
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
-                                                    ?>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a href="appartement-detail.php?idAppartement=<?= $appartement->id() ?>&idProjet=<?= $appartement->idProjet() ?>">
-                                                                Fiche descriptif
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </td>
-                                            <td><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
-                                            <td><?= $appartement->niveau() ?></td>
-                                            <td class="hidden-phone"><?= $appartement->superficie() ?> m<sup>2</sup></td>
-                                            <td class="hidden-phone"><?= $appartement->facade() ?></td>
-                                            <td class="hidden-phone"><?= $appartement->nombrePiece() ?> pièces</td>
-                                            <td class="hidden-phone">
-                                                <?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
-                                                <?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
-                                            </td>
-                                            <td><a class="btn mini black">Revendre</a></td>
-                                        </tr>
-                                        <?php
-                                        }//end of loop
-                                        ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>
