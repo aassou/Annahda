@@ -126,7 +126,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group pull-right">
-                                        <a class="btn green" href="controller/StatusAppartements.php" data-toggle="modal">
+                                        <a target="_blank" class="btn green" href="controller/StatusAppartements.php" data-toggle="modal">
                                             <i class="icon-print"></i>
                                              État Appartements
                                         </a>
@@ -323,7 +323,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group pull-right">
-                                        <a class="btn green" href="controller/StatusLocaux.php" data-toggle="modal">
+                                        <a target="_blank" class="btn green" href="controller/StatusLocaux.php" data-toggle="modal">
                                             <i class="icon-print"></i>
                                              État Locaux Commerciaux
                                         </a>

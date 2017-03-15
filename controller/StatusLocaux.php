@@ -69,7 +69,7 @@ ob_start();
             <td style="width: 10%"><?= $locau->facade() ?></td>
             <td style="width: 10%"><?= $locau->mezzanine() ?></td>
             <td style="width: 10%"><?= $locau->status() ?></td>
-            <td style="width: 40%"><?php if( $locau->status()=="R&eacute;serv&eacute;" ){ echo $appartement->par(); } ?></td>
+            <td style="width: 40%"><?php if( $locau->status()=="R&eacute;serv&eacute;" ){ echo $locau->par(); } ?></td>
         </tr>
         <?php
         }//end of loop
