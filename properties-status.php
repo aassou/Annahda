@@ -89,7 +89,7 @@
                             </li>
                             <li>
                                 <i class="icon-home"></i>
-                                <a href="projets.php">Etats Immobilière</a>
+                                <a href="projets.php">États Immobilière</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -124,6 +124,14 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group pull-right">
+                                        <a class="btn green" href="controller/StatusAppartements.php" data-toggle="modal">
+                                            <i class="icon-print"></i>
+                                             État Appartements
+                                        </a>
+                                    </div>
+                                </div>
                                 <table class="table table-striped table-bordered table-hover" id="sample_2">
                                     <thead>
                                         <tr>
@@ -313,6 +321,14 @@
                                 </div>
                             </div>
                             <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group pull-right">
+                                        <a class="btn green" href="controller/StatusLocaux.php" data-toggle="modal">
+                                            <i class="icon-print"></i>
+                                             État Locaux Commerciaux
+                                        </a>
+                                    </div>
+                                </div>
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>

@@ -248,7 +248,7 @@ class ContratManager{
     
     public function getContratActifIdBien(){
         $ids = array();
-        $query = $this->_db->query(' SELECT idBien FROM t_contrat WHERE status="actif" AND typeBien="appartement"');
+        $query = $this->_db->query('SELECT idBien FROM t_contrat WHERE status="actif" AND typeBien="appartement"');
         //get result
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $ids[] = $data['idBien'];

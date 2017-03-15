@@ -406,6 +406,7 @@
 												?>
 											</td>
 										</tr>
+										<?php if( $appartement->status()=="Vendu" ){ ?>
 										<!-- showBuyer box begin -->
                                         <div id="showBuyer<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -423,6 +424,7 @@
                                             </div>
                                         </div>
                                         <!-- showBuyer box end -->
+                                        <?php } ?>
 										<!-- updateEtatAppartement box begin -->
                                         <div id="updateEtatAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
