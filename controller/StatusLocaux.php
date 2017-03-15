@@ -47,7 +47,7 @@ ob_start();
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
     <!--img src="../assets/img/logo_company.png" style="width: 110px" /-->
-    <h1>État Appartements</h1>
+    <h1>État Locaux Commerciaux</h1>
     <p>Imprimé le <?= date('d-m-Y') ?> | <?= date('h:i') ?> </p>
     <table>
         <tr>
