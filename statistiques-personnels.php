@@ -57,7 +57,7 @@
             //laila
             $lailaTasksTotalNumber = $taskManager->getTaskNumberByUser('laila')+$taskManager->getTaskDoneNumberByUser('laila');
             $lailaTasksNotDoneNumber = $taskManager->getTaskNumberByUser('laila');
-            $lailaTasksDoneNumber = $taskManager->getTaskDoneNumberByUser('lail');
+            $lailaTasksDoneNumber = $taskManager->getTaskDoneNumberByUser('laila');
             //ikram
             $ikramTasksTotalNumber = $taskManager->getTaskNumberByUser('ikram')+$taskManager->getTaskDoneNumberByUser('ikram');
             $ikramTasksNotDoneNumber = $taskManager->getTaskNumberByUser('ikram');
