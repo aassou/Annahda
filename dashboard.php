@@ -213,11 +213,7 @@
                                 </div>
                             </div>
                             </a>
-                            <?php
-                            if ( 
-                                $_SESSION['userMerlaTrav']->profil() == "admin" 
-                            ) {
-                            ?>
+                            <?php if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) { ?>
 							<a href="charges-communs-grouped.php">
                             <div class="tile bg-grey">
                                 <div class="tile-body">
@@ -272,9 +268,7 @@
 								</div>
 							</div>
 							</a>
-							<?php
-							}
-                            ?>
+							<?php } ?>
                             <a href="annuaire.php">
                             <div class="tile bg-dark-cyan">
                                 <div class="corner"></div>
@@ -315,7 +309,7 @@
                             </div>
                             </a>
                             <a href="clients-classement.php">
-                            <div class="tile bg-pink">
+                            <div class="tile bg-olive-2">
                                 <div class="corner"></div>
                                 <div class="tile-body">
                                     <i class="icon-star-empty"></i>
@@ -327,6 +321,21 @@
                                 </div>
                             </div>
                             </a>
+                            <?php if ( $_SESSION['userMerlaTrav']->login() == "admin" ) { ?>
+                            <a href="statistiques-personnels.php">
+                            <div class="tile bg-gray-2">
+                                <div class="corner"></div>
+                                <div class="tile-body">
+                                    <i class="icon-align-left"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Statistiques Personnels
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                            <?php } ?>
 						</div>
 					</div>
 				</div>

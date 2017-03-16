@@ -55,6 +55,7 @@
 				or $currentPage=="status.php"
 				or $currentPage=="contrats-desistes.php"
 				or $currentPage=="suivi-company.php"
+				or $currentPage=="statistiques-personnels.php"
 				or $currentPage=="charges-communs-type.php"
 				or $currentPage=="charges-communs-grouped.php"
 				or $currentPage=="releve-bancaire.php"

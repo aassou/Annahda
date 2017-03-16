@@ -58,6 +58,9 @@
         $myTasks = $taskManager->getTasksByUser($_SESSION['userMerlaTrav']->login());
         $tasksAffectedByMeToOther = 
         $taskManager->getTasksAffectedByMeToOther($_SESSION['userMerlaTrav']->login());
+        $myTasksTotalNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login())+$taskManager->getTaskDoneNumberByUser($_SESSION['userMerlaTrav']->login());
+        $myTasksNotDoneNumber = $taskManager->getTaskNumberByUser($_SESSION['userMerlaTrav']->login());
+        $myTasksDoneNumber = $taskManager->getTaskDoneNumberByUser($_SESSION['userMerlaTrav']->login()); 
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
@@ -97,6 +100,7 @@
                 <!-- BEGIN PORTLET-->
                 <div class="row-fluid">
                     <div class="span12">
+                        <div id="container" style="width:100%; height:400px;"></div>
                         <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Liste des tâches</h4>
@@ -416,6 +420,9 @@
     <script type="text/javascript" src="assets/js/jquery.pulsate.min.js"></script>
     <script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
     <script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <!-- ie8 fixes -->
     <!--[if lt IE 9]>
     <script src="assets/js/excanvas.js"></script>
@@ -427,6 +434,36 @@
             // initiate layout and plugins
             App.setPage("table_managed");  // set current page
             App.init();
+        });
+    </script>
+    <script> 
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column',
+                options3d: {
+                    enabled: true,
+                    alpha: 10,
+                    beta: 25,
+                    depth: 70
+                }
+            },
+            title: {
+                text: 'Statistiques des tâches personnelles - <?= ucfirst($_SESSION['userMerlaTrav']->login()) ?>'
+            },
+            plotOptions: {
+                column: {
+                    depth: 25
+                }
+            },
+            xAxis: {
+                categories: ['Total Tâches', 'Tâches réalisées', 'Tâches non réalisées']
+            },
+            series: [{
+                name: 'Tâches personnelles',
+                colorByPoint:true,
+                colors: ['#003366', '#35aa47', '#e02222'],
+                data: [<?= $myTasksTotalNumber ?>, <?= $myTasksDoneNumber ?>, <?= $myTasksNotDoneNumber ?>]
+            }]
         });
     </script>
     <!-- END JAVASCRIPTS -->

@@ -90,6 +90,16 @@ class TaskManager{
         return $data['taskNumber'];
     }
     
+    public function getTaskDoneNumberByUser($user){
+        $query = $this->_db->prepare(' SELECT COUNT(id) AS taskNumber FROM t_task WHERE user=:user AND status=1')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':user', $user);
+        $query->execute();      
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $query->closeCursor();
+        return $data['taskNumber'];
+    }
+    
     public function getTasksByUser($user){
         $tasks = array();
         $query = $this->_db->prepare('SELECT * FROM t_task WHERE user=:user
@@ -98,6 +108,19 @@ class TaskManager{
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $tasks[] = new Task($data);
+        }
+        $query->closeCursor();
+        return $tasks;
+    }
+    
+    public function getTasksStatusByUser($user){
+        $tasks = array();
+        $query = $this->_db->prepare('SELECT status FROM t_task WHERE user=:user
+        ORDER BY created ASC');
+        $query->bindValue(':user', $user);
+        $query->execute();
+        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+            $tasks[] = $data['status'];
         }
         $query->closeCursor();
         return $tasks;
