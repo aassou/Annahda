@@ -70,6 +70,10 @@
             $abdelghaniTasksTotalNumber = $taskManager->getTaskNumberByUser('abdelghani')+$taskManager->getTaskDoneNumberByUser('abdelghani');
             $abdelghaniTasksNotDoneNumber = $taskManager->getTaskNumberByUser('abdelghani');
             $abdelghaniTasksDoneNumber = $taskManager->getTaskDoneNumberByUser('abdelghani');
+            //hamid
+            $hamidTasksTotalNumber = $taskManager->getTaskNumberByUser('hamid')+$taskManager->getTaskDoneNumberByUser('hamid');
+            $hamidTasksNotDoneNumber = $taskManager->getTaskNumberByUser('hamid');
+            $hamidTasksDoneNumber = $taskManager->getTaskDoneNumberByUser('hamid');
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
@@ -165,7 +169,7 @@
                 text: 'Statistiques des tâches du personnel'
             },
             xAxis: {
-                categories: ['Rabie', 'Abdelghani', 'Laila', 'Tijani', 'Ikram']
+                categories: ['Rabie', 'Abdelghani', 'Hamid', 'Laila', 'Tijani', 'Ikram']
             },
             yAxis: {
                 min: 0,
@@ -206,10 +210,10 @@
             },
             series: [{
                 name: 'Tâches rélisées',
-                data: [<?= $adminTasksDoneNumber ?>, <?= $abdelghaniTasksDoneNumber ?>, <?= $lailaTasksDoneNumber ?>, <?= $tijaniTasksDoneNumber ?>, <?= $ikramTasksDoneNumber ?>]
+                data: [<?= $adminTasksDoneNumber ?>, <?= $abdelghaniTasksDoneNumber ?>, <?= $hamidTasksDoneNumber ?>, <?= $lailaTasksDoneNumber ?>, <?= $tijaniTasksDoneNumber ?>, <?= $ikramTasksDoneNumber ?>]
             }, {
                 name: 'Tâches non réalisées',
-                data: [<?= $adminTasksNotDoneNumber ?>, <?= $abdelghaniTasksNotDoneNumber ?>, <?= $lailaTasksNotDoneNumber ?>, <?= $tijaniTasksNotDoneNumber ?>, <?= $ikramTasksNotDoneNumber ?>]
+                data: [<?= $adminTasksNotDoneNumber ?>, <?= $abdelghaniTasksNotDoneNumber ?>, <?= $hamidTasksNotDoneNumber ?>, <?= $lailaTasksNotDoneNumber ?>, <?= $tijaniTasksNotDoneNumber ?>, <?= $ikramTasksNotDoneNumber ?>]
             }]
         });
     </script>
