@@ -217,7 +217,6 @@
             }]
         });
     </script>
-    <!------------------------- END HIGHCHARTS  --------------------------->
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
