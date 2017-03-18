@@ -203,13 +203,13 @@
 								<table class="table table-striped table-bordered table-hover" id="sample_1">
 									<thead>
 										<tr>
-										    <th style="width:5%"></th>
+										    <th class="hidden-phone" style="width:5%">Actions</th>
 											<th style="width:20%">Nom</th>
-											<th style="width:30%">Adresse</th>
+											<th class="hidden-phone" style="width:30%">Adresse</th>
 											<th style="width:10%">Tél1</th>
 											<th style="width:10%">Tél2</th>
-											<th style="width:10%">Fax</th>
-											<th style="width:15%">Email</th>
+											<th class="hidden-phone" style="width:10%">Fax</th>
+											<th class="hidden-phone" style="width:15%">Email</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -221,8 +221,8 @@
 										    <td class="hidden-phone"><a class="btn green mini" href="#update<?= $fournisseur->id();?>" data-toggle="modal" data-id="<?= $fournisseur->id(); ?>"><i class="icon-refresh"></i></a></td>
                                             <td><?= $fournisseur->nom() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->adresse()?></td>
-											<td class="hidden-phone"><?= $fournisseur->telephone1() ?></td>
-											<td class="hidden-phone"><?= $fournisseur->telephone2() ?></td>
+											<td><?= $fournisseur->telephone1() ?></td>
+											<td><?= $fournisseur->telephone2() ?></td>
 											<td class="hidden-phone"><?= $fournisseur->fax() ?></td>
 											<td class="hidden-phone"><a target="_blank" href="mailto:<?= $fournisseur->email() ?>"><?= $fournisseur->email() ?></a></td>
 										</tr>

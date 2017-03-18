@@ -13,15 +13,17 @@
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) and 
-    ($_SESSION['userMerlaTrav']->profil()=="admin") or ($_SESSION['userMerlaTrav']->profil()=="manager")){
-        //classes managers	
+    ($_SESSION['userMerlaTrav']->profil()=="admin") or ($_SESSION['userMerlaTrav']->profil()=="manager")){	
         $idProjet = $_GET['idProjet'];
+        //classes managers
+        $companyManager = new CompanyManager($pdo);
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
 		$operationManager = new OperationManager($pdo);
 		$appartementManager = new AppartementManager($pdo);
 		$locauxManager = new LocauxManager($pdo);
+        //objs and vars
 		$contratNumber = $contratManager->getContratsNumberByIdProjet($idProjet);
 		$contrats = $contratManager->getContratsActifsByIdProjet($idProjet);
 ob_start();
@@ -96,7 +98,8 @@ ob_start();
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;"></p>
+    <p style="text-align: center;font-size: 9pt;"><?= $company->nom()." - ".$company->adresse()." - RC ".$company->rc()."/ IF ".$company->ifs()."/ Patente ".$company->patente() ?> 
+        <br>Tél : 05 36 33 10 31 - Fax : 05 36 33 10 32 </p>
     </page_footer>
 </page>    
 <?php

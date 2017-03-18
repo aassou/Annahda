@@ -152,19 +152,19 @@
                                         if ( $operation->status() == 0 ) {
                                             $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>&nbsp;Non validé</a>';  
+                                                $status = '<a class="btn red mini" href="#validateOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-pause"></i>NonValidé</a>';  
                                             } 
                                             else{
-                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>&nbsp;Non validé</a>';
+                                                $status = '<a class="btn red mini"><i class="icon-pause"></i>NonValidé</a>';
                                             } 
                                         } 
                                         else if ( $operation->status() == 1 ) {
                                             if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
-                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $status = '<a class="btn blue mini" href="#cancelOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-ok"></i>Validé</a>';
                                                 $action = '<a class="btn green mini" href="#hideOperation'.$operation->id().'" data-toggle="modal" data-id="'.$operation->id().'"><i class="icon-off"></i></a>';   
                                             }
                                             else {
-                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>&nbsp;Validé</a>';
+                                                $status = '<a class="btn blue mini"><i class="icon-ok"></i>Validé</a>';
                                                 $action = '<a class="btn grey mini"><i class="icon-off"></i></a>'; 
                                             }
                                         }

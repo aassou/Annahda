@@ -15,6 +15,7 @@
     if( isset($_SESSION['userMerlaTrav']) ){
         //classes managers	
         $idProjet = 0;
+        $companyManager = new CompanyManager($pdo);
     	$projetManager = new ProjetManager($pdo);
 		$clientManager = new ClientManager($pdo);
 		$contratManager = new ContratManager($pdo);
@@ -24,6 +25,7 @@
 		if(isset($_GET['codeContrat']) and (bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 			$codeContrat = $_GET['codeContrat'];
 			$contrat = $contratManager->getContratByCode($codeContrat);
+            $company = $companyManager->getCompanyById($contrat->societeArabe());
 			$projet = $projetManager->getProjetById($contrat->idProjet());
 			$client = $clientManager->getClientById($contrat->idClient());
 			$sommeOperations = $operationManager->sommeOperations($contrat->id());
@@ -358,7 +360,7 @@ ob_start();
     <br><br>
     <page_footer>
     <hr/>
-    <p style="text-align: center;font-size: 9pt;">STE GROUPE ANNAHDA LIL IAAMAR SARL – Quartier Ouled Brahim N°B-1 en face Lycée Nador Jadid (Anaanaa), Nador. 
+    <p style="text-align: center;font-size: 9pt;"><?= $company->nom()." - ".$company->adresse()." - RC ".$company->rc()."/ IF ".$company->ifs()."/ Patente ".$company->patente() ?> 
         <br>Tél : 05 36 33 10 31 - Fax : 05 36 33 10 32 </p>
     </page_footer>
 </page>    

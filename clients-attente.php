@@ -193,13 +193,14 @@
                                         <tr>
                                             <th class="hidden-phone">Actions</th>
                                             <th>Nom</th>
-                                            <th>Téléphone</th>
+                                            <th class="hidden-phone">Téléphone</th>
                                             <th class="hidden-phone">Date</th>
-                                            <th>Bien</th>
-                                            <th>Prix</th>
-                                            <th>Supérfi</th>
+                                            <th class="hidden-phone">Bien</th>
+                                            <th class="hidden-phone">Prix</th>
+                                            <th class="hidden-phone">Supérfi</th>
                                             <th class="hidden-phone">Emp.Achat</th>
                                             <th class="hidden-phone">Emp.Vente</th>
+                                            <th class="hidden-desktop hidden-tablet">Détails</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -222,14 +223,39 @@
                                                 ?>
                                             </td>    
                                             <td><?= $client->nom() ?></td>
-                                            <td><?= $client->tel() ?></td>
+                                            <td class="hidden-phone"><?= $client->tel() ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($client->date())) ?></td>
-                                            <td><?= $client->bien() ?></td>
-                                            <td><?= $client->prix() ?></td>
-                                            <td><?= $client->superficie() ?></td>
+                                            <td class="hidden-phone"><?= $client->bien() ?></td>
+                                            <td class="hidden-phone"><?= $client->prix() ?></td>
+                                            <td class="hidden-phone"><?= $client->superficie() ?></td>
                                             <td class="hidden-phone"><?= $client->emplacementVente() ?></td>
                                             <td class="hidden-phone"><?= $client->emplacementAchat() ?></td>
+                                            <td class="hidden-desktop hidden-tablet"><a class="btn blue mini" data-toggle="modal" data-id="<?= $client->id() ?>" href="#showDetails<?= $client->id() ?>"><i class="icon-info-sign"></i></a></td>
                                         </tr>
+                                        <!-- showDetails box begin-->
+                                        <div id="showDetails<?= $client->id()?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Informations du client <?= $client->nom() ?></h3>
+                                            </div>
+                                            <div class="modal-body">
+                                                <strong>Téléphone :</strong><span class="pull-right"><?= $client->tel() ?></span><br />
+                                                <strong>Date :</strong><span class="pull-right"><?= date('d/m/Y', strtotime($client->date())) ?></span><br />
+                                                <strong>Bien :</strong><span class="pull-right"><?= $client->bien() ?></span><br />
+                                                <strong>Prix :</strong><span class="pull-right"><?= $client->prix() ?></span><br />
+                                                <strong>Superficie :</strong><span class="pull-right"><?= $client->superficie() ?></span><br />
+                                                <strong>Emplacement Vente :</strong><span class="pull-right"><?= $client->emplacementVente() ?></span><br />
+                                                <strong>Emplacement Achat :</strong><span class="pull-right"><?= $client->emplacementAchat() ?></span><br />
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <button class="btn blue" data-dismiss="modal"aria-hidden="true">OK</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- showDetails box end -->  
                                         <!-- updateClient box begin-->
                                         <div id="update<?= $client->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">

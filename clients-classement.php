@@ -160,9 +160,11 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <a class="btn green btn-fixed-width-big stay-away" href="#addClassementClient" data-toggle="modal">
+                                        <a class="btn green btn-fixed-width-big" href="#addClassementClient" data-toggle="modal">
                                             <i class="icon-plus-sign"></i>&nbsp;Classement Client
                                         </a>
+                                    </div>
+                                    <div class="btn-group">
                                         <a target="_blank" class="btn blue btn-fixed-width-big" href="controller/ClientClassementPrintController.php">
                                             <i class="icon-print"></i>&nbsp;Imprimer List
                                         </a>

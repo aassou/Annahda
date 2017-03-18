@@ -122,14 +122,14 @@
                                     <thead>
                                         <tr>
                                             <!--th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th-->
-                                            <th></th>
+                                            <th class="hidden-phone">Actions</th>
                                             <th>Nom</th>
-                                            <th class="hidden-480">CIN</th>
-                                            <th class="hidden-480">الاسم</th>
-                                            <th class="hidden-480">العنوان</th>
-                                            <th class="hidden-480">Adresse</th>
-                                            <th class="hidden-480">Tel1</th>
-                                            <th class="hidden-480">Email</th>
+                                            <th>CIN</th>
+                                            <th class="hidden-phone">الاسم</th>
+                                            <th class="hidden-phone">العنوان</th>
+                                            <th class="hidden-phone">Adresse</th>
+                                            <th>Tel1</th>
+                                            <th class="hidden-phone">Email</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,7 +138,7 @@
                                         ?>
                                         <tr class="odd gradeX">
                                             <!--td><input type="checkbox" class="checkboxes" value="1" /></td-->
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?php
                                                 if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
                                                 ?>
@@ -148,12 +148,12 @@
                                                 ?>
                                             </td>    
                                             <td><?= $client->nom() ?></td>
-                                            <td class="hidden-480"><?= $client->cin() ?></td>
-                                            <td class="hidden-480"><?= $client->nomArabe() ?></td>
-                                            <td class="hidden-480"><?= $client->adresseArabe() ?></td>
-                                            <td class="hidden-480"><?= $client->adresse() ?></td>
-                                            <td class="hidden-480"><?= $client->telephone1() ?></td>
-                                            <td class="hidden-480"><a href="mailto:<?= $client->email() ?>"><?= $client->email() ?></a></td>
+                                            <td><?= $client->cin() ?></td>
+                                            <td class="hidden-phone"><?= $client->nomArabe() ?></td>
+                                            <td class="hidden-phone"><?= $client->adresseArabe() ?></td>
+                                            <td class="hidden-phone"><?= $client->adresse() ?></td>
+                                            <td><?= $client->telephone1() ?></td>
+                                            <td class="hidden-phone"><a href="mailto:<?= $client->email() ?>"><?= $client->email() ?></a></td>
                                         </tr>
                                         <!-- updateClient box begin-->
                                         <div id="update<?= $client->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

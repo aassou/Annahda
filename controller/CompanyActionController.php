@@ -32,6 +32,9 @@
 			$nomArabe = htmlentities($_POST['nomArabe']);
 			$adresseArabe = htmlentities($_POST['adresseArabe']);
 			$directeur = htmlentities($_POST['directeur']);
+            $rc = htmlentities($_POST['rc']);
+            $ifs = htmlentities($_POST['ifs']);
+            $patente = htmlentities($_POST['patente']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             //create object
@@ -41,6 +44,9 @@
 				'nomArabe' => $nomArabe,
 				'adresseArabe' => $adresseArabe,
 				'directeur' => $directeur,
+				'rc' => $rc,
+				'ifs' => $ifs,
+				'patente' => $patente,
 				'created' => $created,
             	'createdBy' => $createdBy
 			));
@@ -64,15 +70,21 @@
 			$nomArabe = htmlentities($_POST['nomArabe']);
 			$adresseArabe = htmlentities($_POST['adresseArabe']);
 			$directeur = htmlentities($_POST['directeur']);
+            $rc = htmlentities($_POST['rc']);
+            $ifs = htmlentities($_POST['ifs']);
+            $patente = htmlentities($_POST['patente']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
-            			$company = new Company(array(
+            $company = new Company(array(
 				'id' => $idCompany,
 				'nom' => $nom,
 				'adresse' => $adresse,
 				'nomArabe' => $nomArabe,
 				'adresseArabe' => $adresseArabe,
 				'directeur' => $directeur,
+				'rc' => $rc,
+                'ifs' => $ifs,
+                'patente' => $patente,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));

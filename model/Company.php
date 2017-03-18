@@ -8,6 +8,9 @@ class Company{
 	private $_nomArabe;
 	private $_adresseArabe;
 	private $_directeur;
+    private $_rc;
+    private $_ifs;
+    private $_patente;
 	private $_created;
 	private $_createdBy;
 	private $_updated;
@@ -52,6 +55,18 @@ class Company{
 	public function setDirecteur($directeur){
 		$this->_directeur = $directeur;
    	}
+    
+    public function setRc($rc){
+        $this->_rc = $rc;
+    }
+    
+    public function setIfs($ifs){
+        $this->_ifs = $ifs;
+    }
+    
+    public function setPatente($patente){
+        $this->_patente = $patente;
+    }
 
 	public function setCreated($created){
         $this->_created = $created;
@@ -73,6 +88,7 @@ class Company{
 	public function id(){
     	return $this->_id;
     }
+    
 	public function nom(){
 		return $this->_nom;
    	}
@@ -92,6 +108,18 @@ class Company{
 	public function directeur(){
 		return $this->_directeur;
    	}
+    
+    public function rc(){
+        return $this->_rc;
+    }
+    
+    public function ifs(){
+        return $this->_ifs;
+    }
+    
+    public function patente(){
+        return $this->_patente;
+    }
 
 	public function created(){
         return $this->_created;

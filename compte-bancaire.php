@@ -158,7 +158,7 @@
                                 <table class="table table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
-                                            <th style="width:25%">Actions</th>
+                                            <th class="hidden-phone" style="width:25%">Actions</th>
                                             <th style="width:25%">Numéro compte</th>
                                             <th style="width:25%">Dénomination</th>
                                             <th style="width:25%">Date création</th>
@@ -169,7 +169,7 @@
                                         foreach($comptesBancaires as $compte){
                                         ?>      
                                         <tr>
-                                            <td><a class="btn green mini" href="#updateCompte<?= $compte->id();?>" data-toggle="modal" data-id="<?= $compte->id(); ?>"><i class="icon-refresh"></i></a></td>
+                                            <td class="hidden-phone"><a class="btn green mini" href="#updateCompte<?= $compte->id();?>" data-toggle="modal" data-id="<?= $compte->id(); ?>"><i class="icon-refresh"></i></a></td>
                                             <td><?= $compte->numero() ?></td>
                                             <td><?= $compte->denomination() ?></td>
                                             <td><?= date('d/m/Y', strtotime($compte->dateCreation())) ?></td>

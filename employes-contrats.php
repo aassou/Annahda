@@ -192,11 +192,11 @@
                                     <table class="table table-striped table-bordered table-hover" id="sample_1">
                                         <thead>
                                             <tr>
-                                                <th style="width:10%">Actions</th>
+                                                <th class="hidden-phone" style="width:10%">Actions</th>
                                                 <th style="width:15%">Nom</th>
-                                                <th style="width:20%">Adresse</th>
-                                                <th style="width:15%">الاسم</th>
-                                                <th style="width:20%">العنوان</th>
+                                                <th class="hidden-phone" style="width:20%">Adresse</th>
+                                                <th class="hidden-phone" style="width:15%">الاسم</th>
+                                                <th class="hidden-phone" style="width:20%">العنوان</th>
                                                 <th style="width:10%">CIN</th>
                                                 <th style="width:10%">Téléphone</th>
                                             </tr>
@@ -206,7 +206,7 @@
                                             foreach ( $employes as $employe ) {
                                             ?>
                                             <tr>
-                                                <td>
+                                                <td class="hidden-phone">
                                                     <a class="btn mini red" href="#delete<?= $employe->id();?>" data-toggle="modal" data-id="<?= $employe->id(); ?>">
                                                         <i class="icon-remove"></i>    
                                                     </a>
@@ -215,9 +215,9 @@
                                                     </a>
                                                 </td>
                                                 <td><?= $employe->nom() ?></td>
-                                                <td><?= $employe->adresse() ?></td>
-                                                <td><?= $employe->nomArabe() ?></td>
-                                                <td><?= $employe->adresseArabe() ?></td>
+                                                <td class="hidden-phone"><?= $employe->adresse() ?></td>
+                                                <td class="hidden-phone"><?= $employe->nomArabe() ?></td>
+                                                <td class="hidden-phone"><?= $employe->adresseArabe() ?></td>
                                                 <td><?= $employe->cin() ?></td>
                                                 <td><?= $employe->telephone() ?></td>
                                             </tr>

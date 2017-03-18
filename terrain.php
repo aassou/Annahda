@@ -211,7 +211,7 @@
 										foreach($terrains as $terrain){
 										?>		
 										<tr>
-											<td>
+											<td class="hidden-phone">
 											    <?php
 											    if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                                 ?>      
@@ -228,7 +228,7 @@
                                                 }
                                                 ?>      
 											</td>
-											<td><?= $terrain->emplacement() ?></td>
+											<td class="hidden-phone"><?= $terrain->emplacement() ?></td>
 											<td><?= $terrain->vendeur() ?></td>
 											<td class="hidden-phone"><?= $terrain->superficie() ?></td>
 											<td><?= number_format($terrain->prix(),2, ',', ' ') ?>&nbsp;DH</td>

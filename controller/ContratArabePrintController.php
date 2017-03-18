@@ -268,13 +268,9 @@ $htmlcontent = 'يعد هذا العقد عرفيا و ملزما لطرفيه �
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 //Contrat Footer:
-$pdf->Ln();
-$pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 16);
 $htmlcontent = '<strong>'.'الناظور في '.'</strong>'.date('d/m/Y', strtotime($contrat->dateCreation()));
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
-$pdf->Ln();
-$pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 16);
 $htmlcontent = '<strong style="text-align:center">'.'التوقيع '.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
@@ -282,10 +278,20 @@ $pdf->Ln();
 $pdf->SetFont('aealarabiya', '', 16);
 $htmlcontent = '<strong>'.'الطرف الأول '.'</strong>';
 for($i=0;$i<80;$i++) { $htmlcontent.= '&nbsp;'; } ;
-$htmlcontent .= '<strong>'.'الطرف الثاني '.'</strong>';
+$htmlcontent .= '<strong style="margin-left:200px">'.'الطرف الثاني '.'</strong>';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 // print newline
 $pdf->Ln();
+$pdf->Ln();
+$htmlcontent = '<hr/>';
+$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+$pdf->SetFont('aealarabiya', '', 10);
+$htmlcontent = '<p>شركة '.$company->nomArabe().' ش .م .م - ';
+$htmlcontent .= ' المقر الرئيسي '.$company->adresseArabe().' - ';
+$htmlcontent .= ' RC '.$company->rc().' / IF '.$company->ifs().' / Patente '.$company->patente().'</p>';
+$htmlcontent .= '<p style="text-align:center">Téléphone : 05 36 33 10 31 - Fax : 05 36 33 10 32</p>';
+$pdf->WriteHTML($htmlcontent, true, 0, true, 0);
+//$pdf->Ln();
 // ---------------------------------------------------------
 
 //Close and output PDF document

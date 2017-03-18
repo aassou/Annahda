@@ -379,15 +379,15 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "manager"  
                                                 ) {
                                             ?>
-                                            <th style="width: 10%">Actions</th>
+                                            <th class="hidden-phone" style="width: 10%">Actions</th>
                                             <?php
                                             }
                                             ?>
                                             <th style="width: 15%">Montant</th>
                                             <th style="width: 20%">Désignation</th>
-                                            <th style="width: 15%">Date Réglement</th>
-                                            <th style="width: 20%">Mode Paiement</th>
-                                            <th style="width: 20%">Numéro Opération</th>
+                                            <th style="width: 15%">D.Réglement</th>
+                                            <th class="hidden-phone" style="width: 20%">Mode Paiement</th>
+                                            <th class="hidden-phone" style="width: 20%">N°Opération</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -411,7 +411,7 @@
                                                 $_SESSION['userMerlaTrav']->profil() == "manager"  
                                                 ) {
                                             ?>
-                                            <td>                                                            
+                                            <td class="hidden-phone">                                                            
                                                 <a class="btn mini green" href="#updateReglement<?= $reglement->id();?>" data-toggle="modal" data-id="<?= $reglement->id(); ?>" title="Modifier">
                                                     <i class="icon-refresh"></i>
                                                 </a>
@@ -425,8 +425,8 @@
                                             <td><?= $reglement->montant() ?></td>
                                             <td><?= $destination ?></td>
                                             <td><?= date('d/m/Y', strtotime($reglement->dateReglement())) ?></td>
-                                            <td><?= $reglement->modePaiement() ?></td>
-                                            <td><?= $reglement->numeroCheque() ?></td>
+                                            <td class="hidden-phone"><?= $reglement->modePaiement() ?></td>
+                                            <td class="hidden-phone"><?= $reglement->numeroCheque() ?></td>
                                         </tr>
                                         <!-- updateReglement box begin-->
                                         <div id="updateReglement<?= $reglement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

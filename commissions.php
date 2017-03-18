@@ -124,15 +124,15 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th>Action</th>
+                                            <th class="hidden-phone">Action</th>
                                             <th>Nom</th>
-                                            <th class="hidden-desktop hidden-tablet">Détails</th>
                                             <th class="hidden-phone">Description</th>
-                                            <th class="hidden-phone">Montant</th>
+                                            <th>Montant</th>
                                             <th class="hidden-phone">Projet</th>
                                             <th class="hidden-phone">Bien</th>
                                             <th class="hidden-phone">Date</th>
                                             <th class="hidden-phone">état</th>
+                                            <th class="hidden-desktop hidden-tablet">Détails</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -161,7 +161,7 @@
                                             } 
                                         ?>
                                         <tr class="odd gradeX">
-                                            <td>
+                                            <td class="hidden-phone">
                                                 <?php
                                                 if ( $_SESSION['userMerlaTrav']->profil() != "consultant" ) {
                                                 ?>
@@ -170,14 +170,14 @@
                                                 }
                                                 ?>
                                             </td>    
-                                            <td><?= $commission->commissionnaire() ?></td>
-                                            <td class="hidden-desktop hidden-tablet"><a href="#showDetails<?= $commission->id()?>" class="btn mini blue" data-toggle="modal" data-id="<?= $commission->id()?>"><i class="icon-eye-open"></i></a></td> 
+                                            <td><?= $commission->commissionnaire() ?></td> 
                                             <td class="hidden-phone"><?= $commission->titre() ?></td>
-                                            <td class="hidden-phone"><?= number_format($commission->montant(), 2, ',', ' ') ?></td>
+                                            <td><?= number_format($commission->montant(), 2, ',', ' ') ?></td>
                                             <td class="hidden-phone"><?= $projet->nom() ?></td>
                                             <td class="hidden-phone"><?= $typeBien." - ".$bien->nom() ?></td>
                                             <td class="hidden-phone"><?= date('d/m/Y', strtotime($commission->date())) ?></td>
                                             <td class="hidden-phone"><a class="btn mini <?= $etatButton ?>"><?= $commission->etat() ?></a></td>
+                                            <td class="hidden-desktop hidden-tablet"><a href="#showDetails<?= $commission->id()?>" class="btn mini blue" data-toggle="modal" data-id="<?= $commission->id()?>"><i class="icon-eye-open"></i></a></td>
                                         </tr>
                                         <!-- showDetails box begin-->
                                         <div id="showDetails<?= $commission->id()?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

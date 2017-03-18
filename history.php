@@ -142,8 +142,8 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <th style="width: 20%">Cible</th>
-                                            <th style="width: 20%">Action</th>
+                                            <th class="hidden-phone" style="width: 20%">Cible</th>
+                                            <th class="hidden-phone" style="width: 20%">Action</th>
                                             <th style="width: 20%">Date de l'action</th>
                                             <th style="width: 20%">Réalisé par</th>
                                             <th style="width: 20%">Description</th>
@@ -154,8 +154,8 @@
                                         foreach ( $histories as $history ) {
                                         ?>
                                         <tr>
-                                            <td><?= $history->target() ?></td>
-                                            <td><?= $history->action() ?></td>
+                                            <td class="hidden-phone"><?= $history->target() ?></td>
+                                            <td class="hidden-phone"><?= $history->action() ?></td>
                                             <td><?= date('d/m/Y - H\hi\m', strtotime($history->created())) ?></td>
                                             <td><?= $history->createdBy() ?></td>
                                             <td><?= $history->description() ?></td>

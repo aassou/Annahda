@@ -120,6 +120,24 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label">RC</label>
+                                        <div class="controls">
+                                            <input type="text" name="rc" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">IF</label>
+                                        <div class="controls">
+                                            <input type="text" name="ifs" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Patente</label>
+                                        <div class="controls">
+                                            <input type="text" name="patente" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <label class="control-label">الاسم</label>
                                         <div class="controls">
                                             <input type="text" name="nomArabe" value="" />
@@ -186,12 +204,13 @@
                                     <table class="table table-striped table-bordered table-hover" id="sample_1">
                                         <thead>
                                             <tr>
-                                                <th style="width:10%">Actions</th>
+                                                <th class="hidden-phone" style="width:10%">Actions</th>
                                                 <th style="width:15%">Nom</th>
-                                                <th style="width:20%">Adresse</th>
-                                                <th style="width:10%">Directeur</th>
-                                                <th style="width:15%">الاسم</th>
-                                                <th style="width:20%">العنوان</th>
+                                                <th class="hidden-phone" style="width:15%">Adresse</th>
+                                                <th style="width:15%">Directeur</th>
+                                                <th style="width:15%">Données Juridiques</th>
+                                                <th class="hidden-phone" style="width:15%">الاسم</th>
+                                                <th class="hidden-phone" style="width:15%">العنوان</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -199,7 +218,7 @@
                                             foreach ( $companies as $company ) {
                                             ?>
                                             <tr>
-                                                <td>
+                                                <td class="hidden-phone">
                                                     <a class="btn mini red" href="#delete<?= $company->id();?>" data-toggle="modal" data-id="<?= $company->id(); ?>">
                                                         <i class="icon-remove"></i>    
                                                     </a>
@@ -208,10 +227,11 @@
                                                     </a>
                                                 </td>
                                                 <td><?= $company->nom() ?></td>
-                                                <td><?= $company->adresse() ?></td>
+                                                <td class="hidden-phone"><?= $company->adresse() ?></td>
                                                 <td><?= $company->directeur() ?></td>
-                                                <td><?= $company->nomArabe() ?></td>
-                                                <td><?= $company->adresseArabe() ?></td>
+                                                <td><?= "RC ".$company->rc()."/ IF ".$company->ifs()."/ Patente ".$company->patente() ?></td>
+                                                <td class="hidden-phone"><?= $company->nomArabe() ?></td>
+                                                <td class="hidden-phone"><?= $company->adresseArabe() ?></td>
                                             </tr>
                                             <!-- updateEmploye box begin-->
                                             <div id="update<?= $company->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -237,6 +257,24 @@
                                                             <label class="control-label">Directeur</label>
                                                             <div class="controls">
                                                                 <input type="text" name="directeur" value="<?= $company->directeur() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">RC</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="rc" value="<?= $company->rc() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">IF</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="ifs" value="<?= $company->ifs() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Patente</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="patente" value="<?= $company->patente() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">

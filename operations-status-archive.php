@@ -160,11 +160,11 @@
                                         <!--th style="width: 10%">Actions</th-->
                                         <th style="width: 20%">Client</th>
                                         <th style="width: 20%">Projet</th>
-                                        <th style="width: 10%">Date.Opé</th>
+                                        <th class="hidden-phone" style="width: 10%">Date.Opé</th>
                                         <th style="width: 10%">Date.Rég</th>
-                                        <th style="width: 10%">ModePaiment</th>
-                                        <th style="width: 10%">Compte</th>
-                                        <th style="width: 10%">N°.Opé</th>
+                                        <th class="hidden-phone" style="width: 10%">ModePaiment</th>
+                                        <th class="hidden-phone" style="width: 10%">Compte</th>
+                                        <th class="hidden-phone" style="width: 10%">N°.Opé</th>
                                         <th style="width: 10%">Montant</th>
                                         <!--th style="width: 10%">Status</th-->
                                         <!--th style="width: 10%">Quittance</th-->
@@ -203,11 +203,11 @@
                                         <!--td><?php //$action ?></td-->
                                         <td><?= $nomClient ?></td>
                                         <td><?= $nomProjet ?></td>
-                                        <td><?= date('d/m/Y', strtotime($operation->date())) ?></td>
+                                        <td class="hidden-phone"><?= date('d/m/Y', strtotime($operation->date())) ?></td>
                                         <td><?= date('d/m/Y', strtotime($operation->dateReglement())) ?></td>
-                                        <td><?= $operation->modePaiement() ?></td>
-                                        <td><?= $operation->compteBancaire() ?></td>
-                                        <td><?= $operation->numeroCheque() ?></td>
+                                        <td class="hidden-phone"><?= $operation->modePaiement() ?></td>
+                                        <td class="hidden-phone"><?= $operation->compteBancaire() ?></td>
+                                        <td class="hidden-phone"><?= $operation->numeroCheque() ?></td>
                                         <td><?= number_format($operation->montant(), 2, ',', ' ') ?>&nbsp;DH</td>
                                         <!--td><?php //$status ?></td-->
                                         <!--td><a class="btn mini blue" href="controller/QuittanceArabePrintController.php?idOperation=<?= $operation->id() ?>"><i class="m-icon-white icon-print"></i> Imprimer</a></td-->
