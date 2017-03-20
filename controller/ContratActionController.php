@@ -99,58 +99,60 @@
                 //SET NOTE-CLIENT SECTION END
                 //set the datePrevu for our object end
                 //CAS LIBRE PROCESSING BEGIN
-                if ( isset($_POST['show-cas-libre']) ) {
-                    $dates = array();
-                    $montants = array();
-                    $observations = array();
-                    for ( $i=1; $i<11; $i++ ) {
-                        if ( 
-                            ( isset($_POST['cas-libre-date'.$i]) and !empty($_POST['cas-libre-date'.$i]) ) 
-                            and isset($_POST['cas-libre-montant'.$i]) and !empty($_POST['cas-libre-montant'.$i]) ) {
-                            $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);
-                            $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);
+                if ( $echeance != 1 ) {
+                    if ( isset($_POST['show-cas-libre']) ) {
+                        $dates = array();
+                        $montants = array();
+                        $observations = array();
+                        for ( $i=1; $i<11; $i++ ) {
+                            if ( 
+                                ( isset($_POST['cas-libre-date'.$i]) and !empty($_POST['cas-libre-date'.$i]) ) 
+                                and isset($_POST['cas-libre-montant'.$i]) and !empty($_POST['cas-libre-montant'.$i]) ) {
+                                $dates[$i] = htmlentities($_POST['cas-libre-date'.$i]);
+                                $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);
+                                if ( isset($_POST['cas-libre-observation'.$i]) ) {
+                                    $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
+                                }   
+                                $contratCasLibreManager->add(
+                                    new ContratCasLibre(
+                                        array(
+                                            'date' => $dates[$i], 
+                                            'montant' => $montants[$i], 
+                                            'observation' => $observations[$i],
+                                            'status' => 0,
+                                            'codeContrat' => $codeContrat,
+                                            'created' => $created,
+                                            'createdBy' => $createdBy
+                                        )
+                                    )
+                                );
+                            }
+                            /*if ( isset($_POST['cas-libre-montant'.$i]) ) {
+                                $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);   
+                            }
                             if ( isset($_POST['cas-libre-observation'.$i]) ) {
                                 $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
-                            }   
-                            $contratCasLibreManager->add(
-                                new ContratCasLibre(
+                            }*/
+                        } 
+                    }
+                    else {
+                        //set the datePrevu for our object begin
+                        $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
+                        for ( $i=1; $i <= $condition; $i++ ) {
+                            $monthsNumber = "+".$nombreMois*$i." months";
+                            $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
+                            $reglementPrevuManager->add(
+                                new ReglementPrevu(
                                     array(
-                                        'date' => $dates[$i], 
-                                        'montant' => $montants[$i], 
-                                        'observation' => $observations[$i],
-                                        'status' => 0,
+                                        'datePrevu' => $datePrevu,
                                         'codeContrat' => $codeContrat,
+                                        'status' => 0,
                                         'created' => $created,
-                                        'createdBy' => $createdBy
+                                        'createdBy' =>$createdBy
                                     )
                                 )
                             );
                         }
-                        /*if ( isset($_POST['cas-libre-montant'.$i]) ) {
-                            $montants[$i] = htmlentities($_POST['cas-libre-montant'.$i]);   
-                        }
-                        if ( isset($_POST['cas-libre-observation'.$i]) ) {
-                            $observations[$i] = htmlentities($_POST['cas-libre-observation'.$i]);   
-                        }*/
-                    } 
-                }
-                else {
-                    //set the datePrevu for our object begin
-                    $condition = ceil( floatval($dureePaiement)/floatval($nombreMois) );
-                    for ( $i=1; $i <= $condition; $i++ ) {
-                        $monthsNumber = "+".$nombreMois*$i." months";
-                        $datePrevu = date('Y-m-d', strtotime($monthsNumber, strtotime($dateCreation)));
-                        $reglementPrevuManager->add(
-                            new ReglementPrevu(
-                                array(
-                                    'datePrevu' => $datePrevu,
-                                    'codeContrat' => $codeContrat,
-                                    'status' => 0,
-                                    'created' => $created,
-                                    'createdBy' =>$createdBy
-                                )
-                            )
-                        );
                     }
                 }
                 //else we have to put here our datePrevu processing

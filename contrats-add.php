@@ -532,6 +532,9 @@
 				var avance = $('#avance').val();
 				var nombreMois = $(this).val();
 				var echeance = Math.round( ( prixNegocie - avance ) / ( dureePaiement / nombreMois ) );
+				if ( echeance == 0 ) {
+				    echeance = 1;
+				}
 				$('#echeance').val(echeance);
 			});
 			$("#contratForm").validate({

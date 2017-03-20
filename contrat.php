@@ -172,15 +172,21 @@
 						(bool)$contratManager->getCodeContrat($_GET['codeContrat']) ){
 	                     $statistiquesResult = ceil((($operationManager->sommeOperations($contrat->id()) )/$contrat->prixVente())*100);
 						 $statusBar = "";
-						 if( $statistiquesResult>0 and $statistiquesResult<25 ){
-						 	$statusBar = "progress-danger";
-						 }
-						 else if( $statistiquesResult>=25 and $statistiquesResult<50 ){
-						 	$statusBar = "progress-warning";
-						 }
-						 else if( $statistiquesResult>=50 and $statistiquesResult<75 ){
-						 	$statusBar = "progress-success";
-						 }
+                         if ( $contrat->nombreMois() == 1 and $contrat->dureePaiement() == 1 and $contrat->echeance() == 1 ) {
+                             $statistiquesResult = 100;
+                             $statusBar = "progress-success";
+                         }
+                         else {
+                             if( $statistiquesResult>0 and $statistiquesResult<25 ){
+                                $statusBar = "progress-danger";
+                             }
+                             else if( $statistiquesResult>=25 and $statistiquesResult<50 ){
+                                $statusBar = "progress-warning";
+                             }
+                             else if( $statistiquesResult>=50 and $statistiquesResult<75 ){
+                                $statusBar = "progress-success";
+                             }
+                         }
 	                     ?>
 	                    <h3>Résumé du Contrat&nbsp;&nbsp;
 	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width-big stay-away" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
@@ -337,6 +343,23 @@
                                     <span class="sale-info">Avance</span> 
                                     <span class="sale-num"><?= number_format($contrat->avance(), 2, ',', ' ') ?>&nbsp;DH</span>
                                 </li>
+                                <?php if ( $contrat->nombreMois() == 1 and $contrat->dureePaiement() == 1 and $contrat->echeance() == 1 ) { ?>
+								<li>
+									<span class="sale-info">Réglements</span> 
+									<span class="sale-num">
+										<?= number_format($contrat->prixVente(), 2, ',', ' ') ?>&nbsp;DH
+									</span>
+								</li>
+								<li>
+									<span class="sale-info">Reste</span> 
+									<span class="sale-num">
+										<?= number_format(0, 2, ',', ' ') ?>&nbsp;DH
+									</span>
+								</li>
+								<?php 
+                                } 
+                                else {
+                                ?>
                                 <li>
                                     <span class="sale-info">Durée Paiement</span> 
                                     <span class="sale-num"><?= $contrat->dureePaiement() ?>&nbsp;Mois</span>
@@ -349,24 +372,19 @@
                                     <span class="sale-info">Echéance</span> 
                                     <span class="sale-num"><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</span>
                                 </li>
-								<li>
-									<?php
-									//if($contrat->avance()!=0 or $contrat->avance()!='NULL' ){
-									?>
-									<span class="sale-info">Réglements</span> 
-									<span class="sale-num">
-										<?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH
-									</span>
-									<?php
-									//}
-									?>
-								</li>
-								<li>
-									<span class="sale-info">Reste</span> 
-									<span class="sale-num">
-										<?= number_format($contrat->prixVente()-($sommeOperations), 2, ',', ' ') ?>&nbsp;DH
-									</span>
-								</li>
+                                <li>
+                                    <span class="sale-info">Réglements</span> 
+                                    <span class="sale-num">
+                                        <?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="sale-info">Reste</span> 
+                                    <span class="sale-num">
+                                        <?= number_format($contrat->prixVente()-($sommeOperations), 2, ',', ' ') ?>&nbsp;DH
+                                    </span>
+                                </li>
+                                <?php } ?>
 								<li>
                                     <span class="sale-info">Note</span> 
                                     <span class="sale-num">
@@ -794,7 +812,7 @@
                     <!-- CONTRAT CAS LIBRE END -->
                     <!-- DATES REGLEMENTS PREVU BEGIN -->
                     <?php 
-                    if ( $reglementPrevuNumber > 0 ) { 
+                    if ( $reglementPrevuNumber > 0 ) {
                     ?>
                     <div class="portlet box light-grey" id="reglementsPrevus">
                         <div class="portlet-title">
@@ -917,6 +935,7 @@
                     } 
                     ?>
                     <!-- DATES REGLEMENTS PREVU END -->
+                    <?php if ( $contrat->nombreMois() != 1 and $contrat->dureePaiement() != 1 and $contrat->echeance() != 1 ) { ?>
 					<div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Détails des réglements client</h4>
@@ -1243,6 +1262,7 @@
 						</div>
 						<br /><br />
 					 </div>
+					 <?php } ?>
 					 <!-- COMMSSIONS BEGIN -->
 					 <!-- addReglement box begin-->
                     <div id="addCommission" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >

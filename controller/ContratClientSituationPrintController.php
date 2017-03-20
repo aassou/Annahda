@@ -175,15 +175,19 @@ ob_start();
 			<tr>
 				<td style="width:25%"><strong>Observation</strong></td>
 				<td style="width:25%"><strong><?= $contrat->observationClient() ?></strong></td>
+				<?php if ( $contrat->nombreMois() != 1 and $contrat->dureePaiement() != 1 and $contrat->echeance() != 1 ) { ?>
 				<td style="width:25%"><strong>Réglements</strong></td>
 				<td style="width:25%"><strong><?= number_format($sommeOperations, 2, ',', ' ') ?>&nbsp;DH</strong></td>
+				<?php } ?>
 			</tr>
+			<?php if ( $contrat->nombreMois() != 1 and $contrat->dureePaiement() != 1 and $contrat->echeance() != 1 ) { ?>
 			<tr>
 				<td style="width:25%"></td>
                 <td style="width:25%"></td>
 				<td style="width:25%"><strong>Echeance</strong></td>
 				<td style="width:25%"><strong><?= number_format($contrat->echeance(), 2, ',', ' ') ?>&nbsp;DH</strong></td>
 			</tr>
+			<?php } ?>
 		</table>
 	</div>
 	<br>
@@ -310,6 +314,7 @@ ob_start();
     ?>
     <!-- CONTRAT CAS LIBRE END -->
     <!-- REGLEMENTS PAYES BEGIN -->
+    <?php if ( $contrat->nombreMois() != 1 and $contrat->dureePaiement() != 1 and $contrat->echeance() != 1 ) { ?>
     <div>
         <h4>Détails des réglements payés</h4>
         <br>
@@ -355,7 +360,8 @@ ob_start();
 			</tr>
 		</table>
 	</div>
-	<!-- REGLEMENTS PAYES BEGIN -->
+	<?php } ?>
+	<!-- REGLEMENTS PAYES END -->
     <br><br> 
     <br><br>
     <page_footer>
