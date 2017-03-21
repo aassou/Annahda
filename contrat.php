@@ -935,7 +935,6 @@
                     } 
                     ?>
                     <!-- DATES REGLEMENTS PREVU END -->
-                    <?php if ( $contrat->nombreMois() != 1 and $contrat->dureePaiement() != 1 and $contrat->echeance() != 1 ) { ?>
 					<div class="portlet box light-grey" id="detailsReglements">
                         <div class="portlet-title">
                             <h4>Détails des réglements client</h4>
@@ -1262,7 +1261,6 @@
 						</div>
 						<br /><br />
 					 </div>
-					 <?php } ?>
 					 <!-- COMMSSIONS BEGIN -->
 					 <!-- addReglement box begin-->
                     <div id="addCommission" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
