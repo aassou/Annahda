@@ -5,6 +5,7 @@ class Syndique{
 	private $_id;
 	private $_date;
 	private $_montant;
+    private $_status;
 	private $_idClient;
 	private $_idProjet;
 	private $_created;
@@ -39,6 +40,10 @@ class Syndique{
 	public function setMontant($montant){
 		$this->_montant = $montant;
    	}
+    
+    public function setStatus($status){
+        $this->_status = $status;
+    }
 
 	public function setIdClient($idClient){
 		$this->_idClient = $idClient;
@@ -75,6 +80,10 @@ class Syndique{
 	public function montant(){
 		return $this->_montant;
    	}
+    
+    public function status(){
+        return $this->_status;
+    }
 
 	public function idClient(){
 		return $this->_idClient;

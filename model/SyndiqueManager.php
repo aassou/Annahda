@@ -11,12 +11,13 @@ class SyndiqueManager{
 
 	//BAISC CRUD OPERATIONS
 	public function add(Syndique $syndique){
-    	$query = $this->_db->prepare(' INSERT INTO t_syndique (
-		date, montant, idClient, idProjet, created, createdBy)
-		VALUES (:date, :montant, :idClient, :idProjet, :created, :createdBy)')
+    	$query = $this->_db->prepare('INSERT INTO t_syndique (
+		date, montant, status, idClient, idProjet, created, createdBy)
+		VALUES (:date, :montant, :status, :idClient, :idProjet, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':date', $syndique->date());
 		$query->bindValue(':montant', $syndique->montant());
+        $query->bindValue(':status', $syndique->status());
 		$query->bindValue(':idClient', $syndique->idClient());
 		$query->bindValue(':idProjet', $syndique->idProjet());
 		$query->bindValue(':created', $syndique->created());
@@ -26,13 +27,15 @@ class SyndiqueManager{
 	}
 
 	public function update(Syndique $syndique){
-    	$query = $this->_db->prepare(' UPDATE t_syndique SET 
-		date=:date, montant=:montant, idClient=:idClient, idProjet=:idProjet, updated=:updated, updatedBy=:updatedBy
+    	$query = $this->_db->prepare('UPDATE t_syndique SET 
+		date=:date, status=:status, montant=:montant, idClient=:idClient, 
+		idProjet=:idProjet, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $syndique->id());
 		$query->bindValue(':date', $syndique->date());
 		$query->bindValue(':montant', $syndique->montant());
+        $query->bindValue(':status', $syndique->status());
 		$query->bindValue(':idClient', $syndique->idClient());
 		$query->bindValue(':idProjet', $syndique->idProjet());
 		$query->bindValue(':updated', $syndique->updated());
@@ -40,10 +43,18 @@ class SyndiqueManager{
 		$query->execute();
 		$query->closeCursor();
 	}
+    
+    public function updateStatus($idSyndique, $status){
+        $query = $this->_db->prepare('UPDATE t_syndique SET status=:status WHERE id=:id')
+        or die (print_r($this->_db->errorInfo()));
+        $query->bindValue(':id', $idSyndique);
+        $query->bindValue(':status', $status);
+        $query->execute();
+        $query->closeCursor();
+    }
 
 	public function delete($id){
-    	$query = $this->_db->prepare(' DELETE FROM t_syndique
-		WHERE id=:id')
+    	$query = $this->_db->prepare('DELETE FROM t_syndique WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
 		$query->execute();
@@ -51,8 +62,7 @@ class SyndiqueManager{
 	}
 
 	public function getSyndiqueById($id){
-    	$query = $this->_db->prepare(' SELECT * FROM t_syndique
-		WHERE id=:id')
+    	$query = $this->_db->prepare('SELECT * FROM t_syndique WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $id);
 		$query->execute();		
@@ -63,8 +73,7 @@ class SyndiqueManager{
 
 	public function getSyndiques(){
 		$syndiques = array();
-		$query = $this->_db->query('SELECT * FROM t_syndique
-		ORDER BY id DESC');
+		$query = $this->_db->query('SELECT * FROM t_syndique ORDER BY id DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$syndiques[] = new Syndique($data);
 		}
@@ -75,9 +84,7 @@ class SyndiqueManager{
     public function getSyndiquesByIdProjet($idProjet){
         $syndiques = array();
         $query = $this->_db->prepare(
-        'SELECT * FROM t_syndique
-        WHERE idProjet=:idProjet
-        ORDER BY id DESC');
+        'SELECT * FROM t_syndique WHERE idProjet=:idProjet ORDER BY id DESC');
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
@@ -90,9 +97,7 @@ class SyndiqueManager{
     public function getSyndiquesTotalByIdProjet($idProjet){
         $syndiques = array();
         $query = $this->_db->prepare(
-        'SELECT SUM(montant) AS total FROM t_syndique
-        WHERE idProjet=:idProjet
-        ORDER BY id DESC');
+        'SELECT SUM(montant) AS total FROM t_syndique WHERE idProjet=:idProjet ORDER BY id DESC');
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -102,8 +107,7 @@ class SyndiqueManager{
 
 	public function getSyndiquesByLimits($begin, $end){
 		$syndiques = array();
-		$query = $this->_db->query('SELECT * FROM t_syndique
-		ORDER BY id DESC LIMIT '.$begin.', '.$end);
+		$query = $this->_db->query('SELECT * FROM t_syndique ORDER BY id DESC LIMIT '.$begin.', '.$end);
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$syndiques[] = new Syndique($data);
 		}
@@ -112,8 +116,7 @@ class SyndiqueManager{
 	}
 
 	public function getLastId(){
-    	$query = $this->_db->query(' SELECT id AS last_id FROM t_syndique
-		ORDER BY id DESC LIMIT 0, 1');
+    	$query = $this->_db->query(' SELECT id AS last_id FROM t_syndique ORDER BY id DESC LIMIT 0, 1');
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$id = $data['last_id'];
 		return $id;

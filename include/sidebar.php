@@ -108,6 +108,7 @@
 					or $currentPage=="projet-contrat-employe.php"
 					or $currentPage=="contrat-employe-detail.php"
 					or $currentPage=="sous-sol.php"
+					or $currentPage=="syndique.php"
 					){
 						$gestionProjetClass = "active ";
 					}

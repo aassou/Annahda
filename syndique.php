@@ -16,20 +16,14 @@
     if( isset($_SESSION['userMerlaTrav']) ){
         //class managers
         $projetManager = new ProjetManager($pdo);
-        $caisseManager = new CaisseManager($pdo);
         $clientManager = new ClientManager($pdo);
         $syndiqueManager = new SyndiqueManager($pdo);
         //obj and vars
-        $mois = $_GET['mois'];
-        $annee = $_GET['annee'];
         $idProjet = $_GET['idProjet'];
         $projet = $projetManager->getProjetById($idProjet);
         $projets = $projetManager->getProjets();    
-        $syndiques = $syndiqueManager->getSyndiquesByIdProjetByMonthYear($idProjet, $mois, $annee);
-        $caisses =$caisseManager->getCaissesByMonthYear($mois, $annee);
-        $totalEntrees = $caisseManager->getTotalCaisseByTypeByMonthYear('Entree', $mois, $annee);
-        $totalSorties = $caisseManager->getTotalCaisseByTypeByMonthYear('Sortie', $mois, $annee);
-        $totalCaisse = $totalEntrees - $totalSorties;
+        $syndiques = $syndiqueManager->getSyndiquesByIdProjet($idProjet);
+        $totalSyndiquePaiementsClient = $syndiqueManager->getSyndiquesTotalByIdProjet($idProjet);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -99,11 +93,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="syndique-group.php?idProjet=<?= $idProjet ?>">Gestion Syndique</a>
-                                <i class="icon-angle-right"></i>
-                            </li>
-                            <li>
-                                <a><strong><?= $mois ?>/<?= $annee ?></strong></a>
+                                <a>Gestion Syndique</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -160,9 +150,8 @@
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="syndique-mois-annee" />
-                                            <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                            <input type="hidden" name="annee" value="<?= $annee ?>" />        
+                                            <input type="hidden" name="source" value="syndique" />
+                                            <input type="hidden" name="status" value="Non Valide" />     
                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                             <input type="hidden" id="idClient" name="idClient" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
@@ -271,12 +260,20 @@
                                     }
                                     ?>
                                     <div class="btn-group pull-right">
-                                        <a class="btn green" href="#printCaisseBilan" data-toggle="modal">
+                                        <a class="btn green" href="" data-toggle="modal">
                                             <i class="icon-print"></i>
-                                             Bilan de Caisse
+                                             Bilan de syndique
                                         </a>
                                     </div>
                                 </div>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td style="width: 70%"><strong>Total Paiements Clients</strong></td>
+                                            <td style="width: 30%"><strong><a><?= number_format($totalSyndiquePaiementsClient, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                        </tr>
+                                    </thead>
+                                </table>    
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
@@ -293,12 +290,21 @@
                                             <th style="width:40%">Client</th>
                                             <th style="width:20%">Date Paiement</th>
                                             <th style="width:20%">Montant</th>
+                                            <?php if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) { ?>
+                                            <th style="width:10%">Status</th>
+                                            <?php } ?>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         foreach($syndiques as $syndique){
                                             $nomClient = $clientManager->getClientById($syndique->idClient())->nom();
+                                            $colorBtn = 'red';
+                                            $statusToUpdate = "Valide";
+                                            if ( $syndique->status() == "Valide" ) {
+                                                $colorBtn = 'green';
+                                                $statusToUpdate = "Non Valide";    
+                                            }
                                         ?>      
                                         <tr class="odd gradeX">
                                             <?php
@@ -308,8 +314,9 @@
                                                 ) {
                                             ?>
                                             <td class="hidden-phone">
-                                                <a class="btn mini red" href="#deleteSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>"><i class="icon-remove"></i></a>
-                                                <a class="btn mini green" href="#updateSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>"><i class="icon-refresh"></i></a>    
+                                                <a class="btn mini red" href="#deleteSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>" title="Supprimer"><i class="icon-remove"></i></a>
+                                                <a class="btn mini green" href="#updateSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>" title="Modifier"><i class="icon-refresh"></i></a>
+                                                <a class="btn mini blue" href="controller/QuittanceSyndiqueController.php?idSyndique=<?= $syndique->id() ?>" target="_blank" title="Quittance"><i class="icon-print"></i></a>    
                                             </td>
                                             <?php
                                             }
@@ -317,6 +324,9 @@
                                             <td><?= $nomClient ?></td>
                                             <td><?= date('d/m/Y', strtotime($syndique->date())) ?></td>
                                             <td><?= number_format($syndique->montant(), 2, ',', ' ') ?></td>
+                                            <?php if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) { ?>
+                                            <td><a class="btn mini <?= $colorBtn ?>" href="#updateStatus<?= $syndique->id() ?>" data-toggle="modal" data-id=<?= $syndique->id() ?>><?= $syndique->status() ?></a></td>
+                                            <?php } ?>
                                         </tr>
                                         <!-- updateSyndique box begin -->
                                         <div id="updateSyndique<?= $syndique->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
@@ -351,10 +361,9 @@
                                                     <div class="control-group">
                                                         <div class="controls">  
                                                             <input type="hidden" name="action" value="update" />
-                                                            <input type="hidden" name="source" value="syndique-mois-annee" />
-                                                            <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                            <input type="hidden" name="annee" value="<?= $annee ?>" />        
+                                                            <input type="hidden" name="source" value="syndique" />        
                                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                            <input type="hidden" name="idSyndique" value="<?= $syndique->id() ?>" />
                                                             <input type="hidden" id="idClient[]" name="idClient" value="<?= $syndique->idClient() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -364,6 +373,32 @@
                                             </form>
                                         </div>
                                         <!-- updateSyndique box end -->  
+                                        <!-- updateStatus box begins-->
+                                        <div id="updateStatus<?= $syndique->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <h3>Modifier Status Paiement Syndique</h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                            </div>
+                                            <form class="form-horizontal" action="controller/SyndiqueActionController.php" method="post">
+                                                <div class="modal-body">
+                                                    <p class="dangerous-action"><strong>Êtes-vous sûr de vouloir changer le status de "<?= $syndique->status() ?>" vers "<?= $statusToUpdate ?>"?</strong></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="control-group">
+                                                        <div class="controls">  
+                                                            <input type="hidden" name="action" value="updateStatus" />
+                                                            <input type="hidden" name="source" value="syndique" />
+                                                            <input type="hidden" name="status" value="<?= $statusToUpdate ?>" />            
+                                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                            <input type="hidden" name="idSyndique" value="<?= $syndique->id() ?>" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- updateStatus box ends-->
                                         <!-- deleteSyndique box begin-->
                                         <div id="deleteSyndique<?= $syndique->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
@@ -372,15 +407,13 @@
                                             </div>
                                             <form class="form-horizontal loginFrm" action="controller/SyndiqueActionController.php" method="post">
                                                 <div class="modal-body">
-                                                    <p>Êtes-vous sûr de vouloir supprimer ce paiement du client <strong><?= $nomClient ?></strong>, du montant <strong><?= number_format($syndique->montant(), 2, ',', ' ') ?>&nbsp;DH</strong> ?</p>
+                                                    <p class="dangerous-action">Êtes-vous sûr de vouloir supprimer ce paiement du client <strong><?= strtoupper($nomClient) ?></strong>, du montant <strong><?= number_format($syndique->montant(), 2, ',', ' ') ?>&nbsp;DH</strong> ?</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="control-group">
                                                         <label class="right-label"></label>
                                                         <input type="hidden" name="action" value="delete" />
-                                                        <input type="hidden" name="source" value="syndique-mois-annee" />
-                                                        <input type="hidden" name="mois" value="<?= $mois ?>" />
-                                                        <input type="hidden" name="annee" value="<?= $annee ?>" /> 
+                                                        <input type="hidden" name="source" value="syndique" />
                                                         <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                                         <input type="hidden" name="idSyndique" value="<?= $syndique->id() ?>" />
                                                         <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>

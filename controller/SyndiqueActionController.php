@@ -31,6 +31,7 @@
         if(!empty($_POST['date']) and !empty($_POST['idClient']) and !empty($_POST['montant'])){
 			$date = htmlentities($_POST['date']);
 			$montant = htmlentities($_POST['montant']);
+            $status = htmlentities($_POST['status']);
 			$idClient = htmlentities($_POST['idClient']);
 			$createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
@@ -38,6 +39,7 @@
             $syndique = new Syndique(array(
 				'date' => $date,
 				'montant' => $montant,
+				'status' => $status,
 				'idClient' => $idClient,
 				'idProjet' => $idProjet,
 				'created' => $created,
@@ -45,32 +47,23 @@
 			));
             //add it to db
             $syndiqueManager->add($syndique);
-            $actionMessage = "Opération Valide : Syndique Ajouté(e) avec succès.";  
+            $actionMessage = "Opération Valide : Ligne Syndique Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
         else{
             $actionMessage = "Erreur Ajout Paiement au Syndique : Vous devez remplir tous les champs!";
             $typeMessage = "error";
         }
-        
-        if (isset($_POST['source']) and $_POST['source'] == "syndique-group"){
-            $redirectLink = "Location:../syndique-group.php?idProjet=$idProjet";
-        }
-        else{
-            $mois = htmlentities($_POST['mois']);
-            $annee = htmlentities($_POST['annee']);
-            $redirectLink = "Location:../syndique-mois-annee.php?idProjet=$idProjet&mois=$mois&annee=$annee";
-        }
+        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
     }
     //Action Add Processing End
     //Action Update Processing Begin
     else if($action == "update"){
         $idSyndique = htmlentities($_POST['idSyndique']);
-        $mois = htmlentities($_POST['mois']);
-        $annee = htmlentities($_POST['annee']);
         if(!empty($_POST['date']) and !empty($_POST['idClient']) and !empty($_POST['montant'])){
 			$date = htmlentities($_POST['date']);
 			$montant = htmlentities($_POST['montant']);
+            $status = htmlentities($_POST['status']);
 			$idClient = htmlentities($_POST['idClient']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
@@ -78,13 +71,14 @@
 				'id' => $idSyndique,
 				'date' => $date,
 				'montant' => $montant,
+				'status' => $status,
 				'idClient' => $idClient,
 				'idProjet' => $idProjet,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));
             $syndiqueManager->update($syndique);
-            $actionMessage = "Opération Valide : Syndique Modifié(e) avec succès.";
+            $actionMessage = "Opération Valide : Ligne Syndique Modifié(e) avec succès.";
             $typeMessage = "success";
         }
         else{
@@ -92,19 +86,28 @@
             $typeMessage = "error";
         }
         //redirection Link
-        $redirectLink = "Location:../syndique-mois-annee.php?idProjet=$idProjet&mois=$mois&annee=$annee";
+        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
     }
     //Action Update Processing End
+    //Action UpdateStatus Processing Begin
+    else if($action == "updateStatus"){
+        $idSyndique = htmlentities($_POST['idSyndique']);
+        $status = htmlentities($_POST['status']);
+        $syndiqueManager->updateStatus($idSyndique, $status);
+        $actionMessage = "Opération Valide : Status Modifié(e) avec succès.";
+        $typeMessage = "success";
+        //redirection Link
+        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
+    }
+    //Action UpdateStatus Processing End
     //Action Delete Processing Begin
     else if($action == "delete"){
         $idSyndique = htmlentities($_POST['idSyndique']);
-        $mois = htmlentities($_POST['mois']);
-        $annee = htmlentities($_POST['annee']);
         $syndiqueManager->delete($idSyndique);
-        $actionMessage = "Opération Valide : Syndique supprimé(e) avec succès.";
+        $actionMessage = "Opération Valide : Ligne Syndique supprimé(e) avec succès.";
         $typeMessage = "success";
         //redirection Link
-        $redirectLink = "Location:../syndique-mois-annee.php?idProjet=$idProjet&mois=$mois&annee=$annee";
+        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
     }
     //Action Delete Processing End
     $_SESSION['syndique-action-message'] = $actionMessage;
