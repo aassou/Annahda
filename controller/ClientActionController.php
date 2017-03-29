@@ -41,7 +41,7 @@
     $historyManager = new HistoryManager($pdo);
     //process starts
     //Case 1 : CRUD Add Action 
-    if($action == "add"){
+    if($action == "add") {
         $idProjet = htmlentities($_POST['idProjet']);
         $codeClient = "";
         $client = "";
@@ -57,7 +57,7 @@
         }
         //if we don't get any customer information from the clients-add.php page, 
         //then there is one of two cases to treat
-        else if( empty($_POST['idClient']) ){
+        else if ( empty($_POST['idClient']) ) {
             //Case 1 :  if we tray to force the creation of an existing customer
             //we get an error message indicating that we do have a customer with that name 
             if( !empty($_POST['cin'])){

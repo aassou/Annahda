@@ -277,16 +277,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>
-                                            <?php
-                                            if ( 
-                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                                $_SESSION['userMerlaTrav']->profil() == "manager" 
-                                                ) {
-                                            ?>
                                             <th class="hidden-phone" style="width:10%">Actions</th>
-                                            <?php
-                                            }
-                                            ?>
                                             <th style="width:40%">Client</th>
                                             <th style="width:20%">Date Paiement</th>
                                             <th style="width:20%">Montant</th>
@@ -307,20 +298,22 @@
                                             }
                                         ?>      
                                         <tr class="odd gradeX">
-                                            <?php
-                                            if ( 
-                                                $_SESSION['userMerlaTrav']->profil() == "admin" ||
-                                                $_SESSION['userMerlaTrav']->profil() == "manager" 
-                                                ) {
-                                            ?>
                                             <td class="hidden-phone">
+                                                <?php if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) { ?>
                                                 <a class="btn mini red" href="#deleteSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>" title="Supprimer"><i class="icon-remove"></i></a>
+                                                <?php } ?>
+                                                <?php
+                                                if ( 
+                                                    $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                                    $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                                    ) {
+                                                ?>
                                                 <a class="btn mini green" href="#updateSyndique<?= $syndique->id() ?>" data-toggle="modal" data-id="<?= $syndique->id() ?>" title="Modifier"><i class="icon-refresh"></i></a>
-                                                <a class="btn mini blue" href="controller/QuittanceSyndiqueController.php?idSyndique=<?= $syndique->id() ?>" target="_blank" title="Quittance"><i class="icon-print"></i></a>    
+                                                <a class="btn mini blue" href="controller/QuittanceSyndiqueController.php?idSyndique=<?= $syndique->id() ?>" target="_blank" title="Quittance"><i class="icon-print"></i></a>
+                                                <?php
+                                                }
+                                                ?>    
                                             </td>
-                                            <?php
-                                            }
-                                            ?>
                                             <td><?= $nomClient ?></td>
                                             <td><?= date('d/m/Y', strtotime($syndique->date())) ?></td>
                                             <td><?= number_format($syndique->montant(), 2, ',', ' ') ?></td>

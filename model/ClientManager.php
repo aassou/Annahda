@@ -208,14 +208,12 @@ class ClientManager{
 	public function exists($nom){
         $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_client WHERE REPLACE(nom, ' ', '') LIKE REPLACE(:nom, ' ', '') ");
         $query->execute(array(':nom' => $nom));
-        //get result
         return $query->fetchColumn();
     }
 
     public function existsCIN($cin){
         $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_client WHERE REPLACE(cin, ' ', '') LIKE REPLACE(:cin, ' ', '') ");
         $query->execute(array(':cin' => $cin));
-        //get result
         return $query->fetchColumn();
     }
 }
