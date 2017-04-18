@@ -266,7 +266,8 @@
 											<td>
 												<?php
 												if($locau->status()=="R&eacute;serv&eacute;"){ 
-												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" 
+												        or $_SESSION['userMerlaTrav']->profil()=="manager" ) {    
 												?>
 													<a class="btn mini red" href="#changeToDisponible<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Réservé
@@ -282,7 +283,8 @@
                                                 ?>
 												<?php 
 												if($locau->status()=="Disponible"){ 
-												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" 
+												    or $_SESSION['userMerlaTrav']->profil()=="manager" ) {  
 												?>
 													<a class="btn mini green" href="#changeToReserve<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 														Disponible
@@ -303,7 +305,8 @@
 											<td>
 												<?php
 												if( $locau->status() == "R&eacute;serv&eacute;" ){
-												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {  
+												    if ( $_SESSION['userMerlaTrav']->profil()=="admin" 
+                                                    or $_SESSION['userMerlaTrav']->profil()=="manager" ) {  
 												?>
 												<a class="btn mini" title="<?= $locau->par() ?>" href="#updateClient<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>">
 													Pour
