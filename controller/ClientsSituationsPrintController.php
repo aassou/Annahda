@@ -38,6 +38,7 @@ ob_start();
 	    border-collapse: collapse;
 	    width:auto;
 	    border: 1px solid black;
+	    font-size: 11px;
 	}
 	td, th{
 		padding : 5px;
@@ -108,7 +109,7 @@ ob_start();
     
     require('../lib/html2pdf/html2pdf.class.php');
     try{
-        $pdf = new HTML2PDF('P', 'A4', 'fr');
+        $pdf = new HTML2PDF('L', 'A4', 'fr');
         $pdf->pdf->SetDisplayMode('fullpage');
         $pdf->writeHTML($content);
 		$fileName = "FicheSituationClient-".date('Ymdhi').'.pdf';
