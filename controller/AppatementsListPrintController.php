@@ -95,7 +95,7 @@ ob_start();
     
     require('../lib/html2pdf/html2pdf.class.php');
     try{
-        $pdf = new HTML2PDF('P', 'A4', 'fr');
+        $pdf = new HTML2PDF('L', 'A4', 'fr');
         $pdf->pdf->SetDisplayMode('fullpage');
         $pdf->writeHTML($content);
         $fileName = "AppartementsList-".date('Ymdhi').'.pdf';

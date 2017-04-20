@@ -497,7 +497,9 @@ class ContratManager{
         $contrats = array();    
         $query = $this->_db->prepare(
         'SELECT * FROM t_contrat 
-        WHERE revendre=:revendre AND typeBien=:typeBien');
+        WHERE revendre=:revendre 
+        AND typeBien=:typeBien
+        AND idProjet != 42');
         $query->bindValue(':revendre', 1);
         $query->bindValue(':typeBien', 'appartement');
         $query->execute();
