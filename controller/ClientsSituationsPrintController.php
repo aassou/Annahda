@@ -26,6 +26,7 @@
         //objs and vars
 		$contratNumber = $contratManager->getContratsNumberByIdProjet($idProjet);
 		$contrats = $contratManager->getContratsActifsByIdProjet($idProjet);
+        $company = $companyManager->getCompanyById($contrats[0]->societeArabe());
 ob_start();
 ?>
 <style type="text/css">
