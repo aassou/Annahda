@@ -187,7 +187,9 @@
                                                         <i class="icon-angle-down"></i>
                                                     </a>
                                                     <?php
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"
+                                                    ) {
                                                     ?>
                                                     <ul class="dropdown-menu">
                                                         <li>
@@ -231,7 +233,9 @@
                                                 ?>
                                                 <?php 
                                                 if ( $appartement->status()=="R&eacute;serv&eacute;" ) {
-                                                     if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {   
+                                                     if ( $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                          $_SESSION['userMerlaTrav']->profil()=="manager"
+                                                     ) {   
                                                 ?>
                                                     <a class="btn mini red" href="#changeToDisponible<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>">
                                                         Réservé
@@ -268,7 +272,7 @@
                                                         </li>
                                                         <li>
                                                             <a>
-                                                                Montant de Revente : <strong><?= $appartement->montantRevente() ?> DH</strong> 
+                                                                Montant de Revente : <strong><?= number_format($appartement->montantRevente(), 2, ',', ' ') ?> DH</strong> 
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -281,7 +285,8 @@
                                                         <i class="icon-angle-down"></i>
                                                     </a>
                                                     <?php
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {
+                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager") {
                                                     ?>
                                                     <ul class="dropdown-menu">
                                                         <li>
@@ -304,8 +309,37 @@
                                                 <?php if($appartement->cave()=="Sans"){ ?><a class="btn mini black">Sans</a><?php } ?>
                                                 <?php if($appartement->cave()=="Avec"){ ?><a class="btn mini blue">Avec</a><?php } ?>
                                             </td>
-                                            <td><a class="btn mini black">Revendre</a></td>
+                                            <td><a href="#updateMontantReventeAppartement<?= $appartement->id() ?>" data-toggle="modal" data-id="<?= $appartement->id() ?>" class="btn mini black">Revendre</a></td>
                                         </tr>
+                                        <!-- updateMontantReventeAppartement box end -->
+                                        <div id="updateMontantReventeAppartement<?= $appartement->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier le prix de revente de l'appartement </h3>
+                                            </div>
+                                            <form class="form-horizontal loginFrm" action="controller/AppartementActionController.php" method="post">
+                                                <div class="modal-body">
+                                                    <p>Êtes-vous sûr de vouloir modifier le prix de cet appartement ?</p>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Montant Revente</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="montantRevente" value="<?= $appartement->montantRevente() ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateMontantReventeApartement" />
+                                                        <input type="hidden" name="source" value="properties-status" />
+                                                        <input type="hidden" name="idAppartement" value="<?= $appartement->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="42" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- updateMontantReventeAppartement box end -->
                                         <?php
                                         }//end of loop
                                         ?>
@@ -382,7 +416,9 @@
                                                         <i class="icon-angle-down"></i>
                                                     </a>
                                                     <?php
-                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) {    
+                                                    if ( $_SESSION['userMerlaTrav']->profil()=="admin" ||
+                                                        $_SESSION['userMerlaTrav']->profil()=="manager"
+                                                    ) {    
                                                     ?>
                                                     <ul class="dropdown-menu">
                                                         <li>
@@ -491,8 +527,37 @@
                                                 <?php if($locau->mezzanine()=="Sans"){ ?><a class="btn mini black"><?= $locau->mezzanine() ?></a><?php } ?>
                                                 <?php if($locau->mezzanine()=="Avec"){ ?><a class="btn mini blue"><?= $locau->mezzanine() ?></a><?php } ?>
                                             </td>
-                                            <td><a class="btn mini black">Revendre</a></td>
+                                            <td><a href="#updateMontantReventeLocaux<?= $locau->id() ?>" data-toggle="modal" data-id="<?= $locau->id() ?>" class="btn mini black">Revendre</a></td>
                                         </tr>
+                                        <!-- updateMontantReventeAppartement box end -->
+                                        <div id="updateMontantReventeLocaux<?= $locau->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Modifier le prix de revente du local commercial </h3>
+                                            </div>
+                                            <form class="form-horizontal loginFrm" action="controller/LocauxActionController.php" method="post">
+                                                <div class="modal-body">
+                                                    <p>Êtes-vous sûr de vouloir modifier le prix de ce local commercial ?</p>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Montant Revente</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="montantRevente" value="<?= $locau->montantRevente() ?>" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="action" value="updateMontantReventeLocaux" />
+                                                        <input type="hidden" name="source" value="properties-status" />
+                                                        <input type="hidden" name="idLocaux" value="<?= $locau->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="42" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- updateMontantReventeLocaux box end -->
                                         <?php
                                         }//end of loop
                                         ?>

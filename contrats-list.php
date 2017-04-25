@@ -214,7 +214,9 @@
                                                                 Imprimer Contrat FR
                                                             </a>
 												        	<?php
-												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" ){ 
+												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" || 
+                                                                $_SESSION['userMerlaTrav']->profil() == "manager"
+                                                            ){ 
     												        	if( $contrat->status()=="actif" ){
     															?>
     															<a style="color:red" href="#desisterContrat<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">

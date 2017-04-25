@@ -57,7 +57,8 @@ ob_start();
             <th style="width:10%">Façade</th>
             <th style="width:10%">Mezzanine</th>
             <th style="width:10%">Status</th>
-            <th style="width:40%"></th>
+            <th style="width:10%">Prix</th>
+            <th style="width:30%">Détails Revente</th>
         </tr>
         <?php
         foreach ( $locaux as $locau ) {
@@ -69,7 +70,8 @@ ob_start();
             <td style="width: 10%"><?= $locau->facade() ?></td>
             <td style="width: 10%"><?= $locau->mezzanine() ?></td>
             <td style="width: 10%"><?= $locau->status() ?></td>
-            <td style="width: 40%"><?php if( $locau->status()=="R&eacute;serv&eacute;" ){ echo $locau->par(); } ?></td>
+            <td style="width: 10%"><?= number_format($locau->prix(), 2, ',', ' ') ?> DH</td>
+            <td style="width: 30%"><?php if( $locau->status()=="R&eacute;serv&eacute;" ){ echo strtoupper($locau->par()); } ?></td>
         </tr>
         <?php
         }//end of loop
@@ -85,7 +87,8 @@ ob_start();
             <td style="width: 10%"><?= $locau->facade() ?></td>
             <td style="width: 10%"><?= $locau->mezzanine() ?></td>
             <td style="width: 10%">Revendre</td>
-            <td style="width: 40%"><?= $clientManager->getClientById($contrat->idClient())->nom()." : ".number_format($locau->montantRevente(), 2, ',', ' ')." DH" ?></td>
+            <td style="width: 10%"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?> DH</td>            
+            <td style="width: 30%"><?= strtoupper($clientManager->getClientById($contrat->idClient())->nom())." : ".number_format($locau->montantRevente(), 2, ',', ' ')." DH" ?></td>
         </tr>
         <?php
         }//end of loop

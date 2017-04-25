@@ -24,6 +24,7 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
+    $redirectLink = "Location:../appartements.php?idProjet=".$idProjet;
     $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     if($action == "add"){
         if( !empty($_POST['code']) ){
@@ -146,6 +147,28 @@
         $typeMessage = "success";
     }
     //UPDATE ETATAPPARTEMENT END
+    //UPDATE MontantReventeApartement BEGIN
+    else if($action=="updateMontantReventeApartement"){
+        $idAppartement = $_POST['idAppartement'];
+        $montantRevente = htmlentities($_POST['montantRevente']);
+        $appartementManager->updateMontantRevente($montantRevente, $idAppartement);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification Montant Revente Appartement",
+            'target' => "Table des appartements",
+            'description' => "Modification Montant Revente Appartement ID : ".$idAppartement." Montant Revente : ".$montantRevente,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "Opération Valide : Montant Revente Appartement Modifié avec succès.";
+        $typeMessage = "success";
+        $redirectLink = "Location:../properties-status.php";
+    }
+    //UPDATE MontantReventeApartement END
     else if($action=="updateClient"){
         $idAppartement = $_POST['idAppartement'];
         $par = htmlentities($_POST['par']);
@@ -188,5 +211,5 @@
     
     $_SESSION['appartement-action-message'] = $actionMessage;
     $_SESSION['appartement-type-message'] = $typeMessage;
-    header('Location:../appartements.php?idProjet='.$idProjet);
+    header($redirectLink);
     

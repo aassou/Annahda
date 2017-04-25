@@ -24,6 +24,7 @@
     $locauxManager = new LocauxManager($pdo);
     $projetManager = new ProjetManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
+    $redirectLink = "Location:../locaux.php?idProjet=".$idProjet;
     $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //Action Add Processing Begin
     if($action == "add"){
@@ -148,6 +149,28 @@
         $typeMessage = "success";
     }
     //UPDATE ETATLOCAUX END
+    //UPDATE MontantReventeLocaux BEGIN
+    else if($action=="updateMontantReventeLocaux"){
+        $idLocaux = $_POST['idLocaux'];
+        $montantRevente = htmlentities($_POST['montantRevente']);
+        $locauxManager->updateMontantRevente($montantRevente, $idLocaux);
+        //add history data to db
+        $createdBy = $_SESSION['userMerlaTrav']->login();
+        $created = date('Y-m-d h:i:s');
+        $history = new History(array(
+            'action' => "Modification Montant Revente local commercial",
+            'target' => "Table des appartements",
+            'description' => "Modification Montant Revente Local Commercial ID : ".$idLocaux." Montant Revente : ".$montantRevente,
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
+        $actionMessage = "Opération Valide : Montant Revente Local Commercial Modifié avec succès.";
+        $typeMessage = "success";
+        $redirectLink = "Location:../properties-status.php";
+    }
+    //UPDATE MontantReventeLocaux END
     //Action UpdateClient Processing Begin
     else if($action=="updateClient"){
         $idLocaux = $_POST['idLocaux'];
@@ -193,5 +216,5 @@
     //Action Delete Processing End
     $_SESSION['locaux-action-message'] = $actionMessage;
     $_SESSION['locaux-type-message'] = $typeMessage;
-    header('Location:../locaux.php?idProjet='.$idProjet);
+    header($redirectLink);
     

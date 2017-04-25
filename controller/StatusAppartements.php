@@ -54,12 +54,13 @@ ob_start();
             <th style="width: 5%">Code</th>
             <th style="width: 10%">Projet</th>
             <th style="width: 5%">Niv</th>
-            <th style="width: 10%">Superficie</th>
-            <th style="width: 10%">Façade</th>
+            <th style="width: 5%">Superficie</th>
+            <th style="width: 5%">Façade</th>
             <th style="width: 25%">Nbr.Pièces</th>
             <th style="width: 5%">Cave</th>
             <th style="width: 10%">Status</th>
-            <th style="width: 20%"></th>
+            <th style="width: 10%">Prix</th>
+            <th style="width: 20%">Détails Revente</th>
         </tr>
         <?php
         foreach ( $appartements as $appartement ) {
@@ -68,12 +69,13 @@ ob_start();
             <td style="width: 5%"><?= $appartement->nom() ?> </td>
             <td style="width: 10%"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
             <td style="width: 5%"><?= $appartement->niveau() ?>Et</td>
-            <td style="width: 10%"><?= $appartement->superficie() ?> m<sup>2</sup></td>
-            <td style="width: 10%"><?= $appartement->facade() ?></td>
-            <td style="width: 25%"><?= $appartement->nombrePiece() ?> pièces</td>
+            <td style="width: 5%"><?= $appartement->superficie() ?></td>
+            <td style="width: 5%"><?= $appartement->facade() ?></td>
+            <td style="width: 25%"><?= $appartement->nombrePiece() ?></td>
             <td style="width: 5%"><?= $appartement->cave() ?></td>
             <td style="width: 10%"><?= $appartement->status() ?></td>
-            <td style="width: 20%"><?php if( $appartement->status()=="R&eacute;serv&eacute;" ){ echo $appartement->par(); } ?></td>
+            <td style="width: 10%"><?= number_format($appartement->prix(), 2, ',', ' ') ?> DH</td>
+            <td style="width: 20%"><?php if( $appartement->status()=="R&eacute;serv&eacute;" ){ echo strtoupper($appartement->par()); } ?></td>
         </tr>
         <?php
         }//end of loop
@@ -86,12 +88,13 @@ ob_start();
             <td style="width: 5%"><?= $appartement->nom() ?> </td>
             <td style="width: 10%"><?= $projetManager->getProjetById($appartement->idProjet())->nom() ?></td>
             <td style="width: 5%"><?= $appartement->niveau() ?>Et</td>
-            <td style="width: 10%"><?= $appartement->superficie() ?> m<sup>2</sup></td>
-            <td style="width: 10%"><?= $appartement->facade() ?></td>
-            <td style="width: 25%"><?= $appartement->nombrePiece() ?> pièces</td>
+            <td style="width: 5%"><?= $appartement->superficie() ?></td>
+            <td style="width: 5%"><?= $appartement->facade() ?></td>
+            <td style="width: 25%"><?= $appartement->nombrePiece() ?></td>
             <td style="width: 5%"><?= $appartement->cave() ?></td>
             <td style="width: 10%">Revendre</td>
-            <td style="width: 20%"><?= $clientManager->getClientById($contrat->idClient())->nom()." : ".number_format($appartement->montantRevente(), 2, ',', ' ')." DH" ?></td>
+            <td style="width: 10%"><?= number_format($contrat->prixVente(), 2, ',', ' ') ?> DH</td>
+            <td style="width: 20%"><?= strtoupper($clientManager->getClientById($contrat->idClient())->nom())." : ".number_format($appartement->montantRevente(), 2, ',', ' ')." DH" ?></td>
         </tr>
         <?php
         }//end of loop
