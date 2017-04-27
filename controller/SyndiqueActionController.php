@@ -24,8 +24,10 @@
     $idProjet = htmlentities($_POST['idProjet']);
 
     //Component Class Manager
-
+    $clientManager   = new ClientManager($pdo);
+    $projetManager   = new ProjetManager($pdo); 
     $syndiqueManager = new SyndiqueManager($pdo);
+    $historyManager  = new HistoryManager($pdo);
 	//Action Add Processing Begin
     if($action == "add"){
         if(!empty($_POST['date']) and !empty($_POST['idClient']) and !empty($_POST['montant'])){
@@ -47,6 +49,16 @@
 			));
             //add it to db
             $syndiqueManager->add($syndique);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Ajout",
+                'target' => "Table de Syndique",
+                'description' => "Ajout d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)." - Client : ".$clientManager->getClientById($idClient)." - Montant : ".$montant." DH",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Ligne Syndique Ajouté(e) avec succès.";  
             $typeMessage = "success";
         }
@@ -78,6 +90,16 @@
             	'updatedBy' => $updatedBy
 			));
             $syndiqueManager->update($syndique);
+            //add history data to db
+            $history = new History(array(
+                'action' => "Modification",
+                'target' => "Table de Syndique",
+                'description' => "Modification d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)." - Client : ".$clientManager->getClientById($idClient)." - Montant : ".$montant." DH",
+                'created' => $created,
+                'createdBy' => $createdBy
+            ));
+            //add it to db
+            $historyManager->add($history);
             $actionMessage = "Opération Valide : Ligne Syndique Modifié(e) avec succès.";
             $typeMessage = "success";
         }
@@ -94,6 +116,16 @@
         $idSyndique = htmlentities($_POST['idSyndique']);
         $status = htmlentities($_POST['status']);
         $syndiqueManager->updateStatus($idSyndique, $status);
+        //add history data to db
+        $history = new History(array(
+            'action' => "Modification Status",
+            'target' => "Table de Syndique",
+            'description' => "Modification de status de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet),
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Status Modifié(e) avec succès.";
         $typeMessage = "success";
         //redirection Link
@@ -104,6 +136,16 @@
     else if($action == "delete"){
         $idSyndique = htmlentities($_POST['idSyndique']);
         $syndiqueManager->delete($idSyndique);
+        //add history data to db
+        $history = new History(array(
+            'action' => "Suppression",
+            'target' => "Table de Syndique",
+            'description' => "Suppression de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet),
+            'created' => $created,
+            'createdBy' => $createdBy
+        ));
+        //add it to db
+        $historyManager->add($history);
         $actionMessage = "Opération Valide : Ligne Syndique supprimé(e) avec succès.";
         $typeMessage = "success";
         //redirection Link
