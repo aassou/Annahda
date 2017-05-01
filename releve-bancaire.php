@@ -14,22 +14,22 @@
     session_start();
     if(isset($_SESSION['userMerlaTrav'])){
         //classes managers
-        $releveBancaireManager = new ReleveBancaireManager($pdo);
-        $chargesCommunsManager = new ChargeCommunManager($pdo);
+        $releveBancaireManager   = new ReleveBancaireManager($pdo);
+        $chargesCommunsManager   = new ChargeCommunManager($pdo);
         $typeChargeCommunManager = new TypeChargeCommunManager($pdo);
         $typeChargeProjetManager = new TypeChargeManager($pdo);
-        $projetManager = new ProjetManager($pdo);
-        $compteBancaireManager = new CompteBancaireManager($pdo);
+        $projetManager           = new ProjetManager($pdo);
+        $compteBancaireManager   = new CompteBancaireManager($pdo);
         //obj and vars
         $typeChargesCommuns = $typeChargeCommunManager->getTypeCharges();
         $typeChargesProjets = $typeChargeProjetManager->getTypeCharges();
-        $projets = $projetManager->getProjets();
-        $releveBancaires = $releveBancaireManager->getReleveBancaires();
-        $comptesBancaires = $compteBancaireManager->getCompteBancaires();
-        $debit = $releveBancaireManager->getTotalDebit();
-        $credit = $releveBancaireManager->getTotalCredit();
-        $solde = $credit - $debit;
-        
+        $projets            = $projetManager->getProjets();
+        $releveBancaires    = $releveBancaireManager->getReleveBancaires();
+        $comptesBancaires   = $compteBancaireManager->getCompteBancaires();
+        $debit              = $releveBancaireManager->getTotalDebit();
+        $credit             = $releveBancaireManager->getTotalCredit();
+        $solde              = $credit - $debit;
+        var_dump($_SESSION['testajax'])      
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -64,7 +64,7 @@
         <!-- BEGIN TOP NAVIGATION BAR -->
         <?php 
         include("include/top-menu.php"); 
-        $alerts = $alertManager->getAlerts();
+        //$alerts = $alertManager->getAlerts();
         ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
@@ -308,7 +308,7 @@
                                         </div>
                                         <!-- updateReleve box end -->
                                         <!-- processFournisseur box begin-->
-                                        <div id="processFournisseur<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div id="processFournisseur<?= $releve->id() ?>" class="modal modal-big hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Affecter opération débit au système</h3>
@@ -387,13 +387,13 @@
                                         </div>
                                         <!-- processFournisseur box end -->
                                         <!-- processClient box begin-->
-                                        <div id="processClient<?= $releve->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                        <div id="processClient<?= $releve->id() ?>" class="modal modal-big hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                                 <h3>Affecter opération crédit au système</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal" action="controller/ReleveBancaireActionController.php" method="post">
+                                                <form class="form-horizontal processClient">
                                                     <div class="control-group">
                                                         <label class="control-label">Action</label>
                                                         <div class="controls">
@@ -449,10 +449,9 @@
                                                         <input type="hidden" name="observation" value="<?= $releve->libelle() ?>" />
                                                         <input type="hidden" name="reference" value="<?= $releve->reference() ?>" />
                                                         <input type="hidden" name="action" value="process-client" />
-                                                        <input type="hidden" name="idOperation" id="idOperation" value="" />
                                                         <div class="controls">  
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
-                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                            <input type="submit" name="submit" value="Oui" class="btn red" aria-hidden="true">
                                                         </div>
                                                     </div>
                                                 </form>
@@ -544,58 +543,70 @@
             // initiate layout and plugins
             App.setPage("table_managed");
             App.init();
-        });
-        //processFournisseur begin
-        $(".chargesProjetsElements").hide();
-        $('.destinations').on('change',function(){
-            if ( $(this).val() === "ChargesCommuns" ) {
-                $(".chargesCommunsElements").show();
-                $(".chargesProjetsElements").hide();
-            }
-            else if ( $(this).val() === "ChargesProjets" ) {
-                $(".chargesProjetsElements").show();
-                $(".chargesCommunsElements").hide();
-            }
-            else {
-                $(".chargesCommunsElements").hide();
-                $(".chargesProjetsElements").hide();    
-            }
-            
-        }); 
-        //processFournisseur end
-        //processClient begin
-        $('.projet-contrat').change(function(){
-            var idProjet = $(this).val();
-            var data = 'idProjet='+idProjet;
-            $.ajax({
-                type: "POST",
-                url: "projets-contrats.php",
-                data: data,
-                cache: false,
-                success: function(html){
-                    $('.contrat-client').html(html);
+            //processFournisseur begin
+            $(".chargesProjetsElements").hide();
+            $('.destinations').on('change',function(){
+                if ( $(this).val() === "ChargesCommuns" ) {
+                    $(".chargesCommunsElements").show();
+                    $(".chargesProjetsElements").hide();
                 }
+                else if ( $(this).val() === "ChargesProjets" ) {
+                    $(".chargesProjetsElements").show();
+                    $(".chargesCommunsElements").hide();
+                }
+                else {
+                    $(".chargesCommunsElements").hide();
+                    $(".chargesProjetsElements").hide();    
+                }
+                
+            }); 
+            //processFournisseur end
+            //processClient begin
+            $('.projet-contrat').change(function(){
+                var idProjet = $(this).val();
+                var data     = 'idProjet='+idProjet;
+                $.ajax({
+                    type: "POST",
+                    url: "projets-contrats.php",
+                    data: data,
+                    cache: false,
+                    success: function(html){
+                        $('.contrat-client').html(html);
+                    }
+                });
+            });
+            //synthese client
+            $('.contrat-client').change(function(){
+                var idContrat = $(this).val();
+                var data      = 'idContrat='+idContrat;
+                $.ajax({
+                    type: "POST",
+                    url: "synthese-client.php",
+                    data: data,
+                    cache: false,
+                    success: function(html){
+                        $('.synthese-client').html(html);
+                    }
+                });
+            });
+            //Update Client Operations based on ReleveBancaire Informations
+            $('.processClient').submit(function(e){
+                e.preventDefault(); // Prevent Default Submission
+                $.ajax({
+                    url: 'releve-bancaire-process-client.php',
+                    type: 'POST',
+                    data: $(this).serialize(), // it will serialize the form data
+                    dataType: 'html'
+                })
+                .done(function(data){
+                    alert(data);
+                    location.reload();
+                })
+                .fail(function(){
+                    alert('Ajax Submit Failed ...'); 
+                });
             });
         });
-        //synthese client
-        $('.contrat-client').change(function(){
-            var idContrat = $(this).val();
-            var data = 'idContrat='+idContrat;
-            $.ajax({
-                type: "POST",
-                url: "synthese-client.php",
-                data: data,
-                cache: false,
-                success: function(html){
-                    $('.synthese-client').html(html);
-                }
-            });
-        });
-        //processClient end
-        function assignIdOperation(){
-            var idOperation = $(this).val();
-            ('#idOperation').val(idOperation);
-        }
     </script>
     <!-- END JAVASCRIPTS -->
 </body>

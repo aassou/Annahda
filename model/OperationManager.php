@@ -139,7 +139,7 @@ class OperationManager{
     
     public function getOperationsByIdContrat($idContrat){
         $operations = array();
-        $query = $this->_db->prepare('SELECT * FROM t_operation WHERE idContrat=:idContrat ORDER BY id DESC');
+        $query = $this->_db->prepare('SELECT * FROM t_operation WHERE idContrat=:idContrat ORDER BY date ASC, status DESC');
         $query->bindValue(':idContrat', $idContrat);
         $query->execute();
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {

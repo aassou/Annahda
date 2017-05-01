@@ -231,14 +231,14 @@
             $updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             //echo $_POST['idOperation'];
-            if ( isset($_POST['idOperation']) ) {
-                $idOperation = $_POST['idOperation'];
+            if ( isset($_POST['operationValue']) ) {
+                $idOperation = $_POST['operationValue'];
                 $operation = 
                 new Operation(array('id' => $idOperation, 'date' => $dateOperation, 'dateReglement' => $dateReglement, 'status' => $status,
                 'montant' => $montant, 'compteBancaire' => $compteBancaire, 'observation' => $observation, 'reference' => $reference,
                 'modePaiement'=>$modePaiement, 'numeroCheque' => $numeroOperation,   
                 'updatedBy' => $updatedBy, 'updated' => $updated));
-                print_r($operation);
+                //print_r($operation);
                 //$operationManager->add($operation);
                 $operationManager->updateByReleveActionController($operation);
                 $releveBancaireManager->hide($idReleveBancaire);
@@ -283,5 +283,5 @@
     if ( isset($_POST['source']) and $_POST['source'] == "releve-bancaire-archive" ) {
         $redirectLink = "Location:../releve-bancaire-archive.php";
     }
-    //header($redirectLink);
+    header($redirectLink);
 

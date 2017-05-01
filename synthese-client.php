@@ -21,13 +21,13 @@
         $operationManager = new OperationManager($pdo);
         //begin processing
         $idContrat = htmlentities($_POST['idContrat']);
-        $requete = "SELECT * FROM t_operation WHERE idContrat = '".$idContrat."'";
+        $requete = "SELECT * FROM t_operation WHERE idContrat = '".$idContrat."' ORDER BY status ASC, date ASC";
         // exécution de la requête
         $resultat = $pdo->query($requete) or die(print_r($bdd->errorInfo()));
         // résultats
         while ( $operation = $resultat->fetch(PDO::FETCH_ASSOC)) {
             $status = "Non Validé";
-            $checkbox = '<input onclick="assignIdOperation()" class="span1" type="radio" name="operationValue" value="'.$operation['id'].'" />';
+            $checkbox = '<input class="span1" type="radio" name="operationValue" value="'.$operation['id'].'" />';
             $classStatus = "input-error-text";
             if ( $operation['status'] != 0 ) {
                 $status = "Validé";
