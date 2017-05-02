@@ -17,6 +17,7 @@ $dateReglement = DateTime::createFromFormat('d/m/Y', trim($dateReglement));
 $dateOperation = $dateOperation->format('Y-m-d'); 
 $dateReglement = $dateReglement->format('Y-m-d'); 
 //$designation = htmlentities($_POST['designation']);
+//var_dump($_POST);
 if ( $projetContrat == "Ignorer" ) {
     $releveBancaireManager->delete($idReleveBancaire);
     $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";

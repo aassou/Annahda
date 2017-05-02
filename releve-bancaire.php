@@ -29,7 +29,7 @@
         $debit              = $releveBancaireManager->getTotalDebit();
         $credit             = $releveBancaireManager->getTotalCredit();
         $solde              = $credit - $debit;
-        var_dump($_SESSION['testajax'])      
+        //var_dump($_SESSION['testajax'])      
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -393,7 +393,7 @@
                                                 <h3>Affecter opération crédit au système</h3>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="form-horizontal processClient">
+                                                <form class="form-horizontal processClient" action="releve-bancaire-process-client.php" method="post">
                                                     <div class="control-group">
                                                         <label class="control-label">Action</label>
                                                         <div class="controls">
@@ -426,22 +426,9 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <strong>Synthèse client</strong>
-                                                    <br />
-                                                    <div class="tab-pane ">
-                                                        <div class="controls controls-row">
-                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateOpé" />
-                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="DateRég" />
-                                                            <input disabled="disabled" class="span3 m-wrap input-bold-text" type="text" value="Montant" />
-                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Compte" />
-                                                            <input disabled="disabled" class="span2 m-wrap input-bold-text" type="text" value="Chèque" />
-                                                            <input disabled="disabled" class="span1 m-wrap input-bold-text" type="text" value="V" />
-                                                        </div>
-                                                    </div>
-                                                    <div class="tab-pane synthese-client">
-                                                    </div>
                                                     <div class="control-group">
                                                         <input type="hidden" name="idReleveBancaire" value="<?= $releve->id() ?>" />
+                                                        <input type="hidden" name="idOperation" class="idOperation" value="" />
                                                         <input type="hidden" name="montant" value="<?= $releve->credit() ?>" />
                                                         <input type="hidden" name="compte-bancaire" value="<?= $numeroCompte ?>" />
                                                         <input type="hidden" name="dateOperation" value="<?= $releve->dateOpe() ?>" />
@@ -584,8 +571,10 @@
                     url: "synthese-client.php",
                     data: data,
                     cache: false,
-                    success: function(html){
-                        $('.synthese-client').html(html);
+                    success: function(data){
+                        //$('.synthese-client').html('');
+                        $(data).appendTo(".processClient");
+                        //$('.synthese-client').html(data);
                     }
                 });
             });
@@ -605,6 +594,10 @@
                 .fail(function(){
                     alert('Ajax Submit Failed ...'); 
                 });
+            });
+            $('.operationValue').change(function (){
+                var idOperation = $(this).val();
+                $('.idOperation').val(idOperation);
             });
         });
     </script>
