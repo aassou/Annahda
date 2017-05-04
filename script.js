@@ -32,6 +32,36 @@ function setItemClient(item1, item2, item3, item4, item5, item6, item7, item8, i
 	// hide proposition list
 	$('#clientList').hide();
 }
+//client section
+function autocompletClientName() {
+	var min_length = 1; // min caracters to display the autocomplete
+	var idParking = arguments[0];
+	var clientName = '#nomClient'+idParking;
+	var clientList = '#clientList'+idParking;
+	var keyword = $(clientName).val();
+	if (keyword.length >= min_length) {
+		$.ajax({
+			url: 'ajax-refresh-client-name.php',
+			type: 'POST',
+			data: {keyword:keyword, number:idParking},
+			success:function(data){
+				$(clientList).show();
+				$(clientList).html(data);
+			}
+		});
+	} 
+	else {
+		$(clientList).hide();
+	}
+}
+function setNameClient(name, number){
+	// change input value
+	var nomClient = '#nomClient'+number;
+	var clientList = '#clientList'+number;
+	$(nomClient).val(name);
+	// hide proposition list
+	$(clientList).hide();
+}
 ///
 //fournisseur section
 function autocompletFournisseur() {

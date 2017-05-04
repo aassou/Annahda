@@ -15,14 +15,14 @@
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
         //class managers
-        $projetManager = new ProjetManager($pdo);
-        $clientManager = new ClientManager($pdo);
+        $projetManager   = new ProjetManager($pdo);
+        $clientManager   = new ClientManager($pdo);
         $syndiqueManager = new SyndiqueManager($pdo);
         //obj and vars
-        $idProjet = $_GET['idProjet'];
-        $projet = $projetManager->getProjetById($idProjet);
-        $projets = $projetManager->getProjets();    
-        $syndiques = $syndiqueManager->getSyndiquesByIdProjet($idProjet);
+        $idProjet                     = $_GET['idProjet'];
+        $projet                       = $projetManager->getProjetById($idProjet);
+        $projets                      = $projetManager->getProjets();    
+        $syndiques                    = $syndiqueManager->getSyndiquesByIdProjet($idProjet);
         $totalSyndiquePaiementsClient = $syndiqueManager->getSyndiquesTotalByIdProjet($idProjet);
 ?>
 <!DOCTYPE html>

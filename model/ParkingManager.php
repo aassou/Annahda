@@ -27,11 +27,12 @@ class ParkingManager{
 
 	public function update(Parking $parking){
     	$query = $this->_db->prepare('UPDATE t_parking SET 
-		status=:status, idContrat=:idContrat, updated=:updated, updatedBy=:updatedBy
+		status=:status, pour=:pour,idContrat=:idContrat, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $parking->id());
 		$query->bindValue(':status', $parking->status());
+        $query->bindValue(':pour', $parking->pour());
 		$query->bindValue(':idContrat', $parking->idContrat());
 		$query->bindValue(':updated', $parking->updated());
 		$query->bindValue(':updatedBy', $parking->updatedBy());

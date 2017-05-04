@@ -5,6 +5,7 @@ class Parking{
 	private $_id;
 	private $_code;
 	private $_status;
+    private $_pour;
 	private $_idProjet;
 	private $_idContrat;
 	private $_created;
@@ -39,6 +40,10 @@ class Parking{
 	public function setStatus($status){
 		$this->_status = $status;
    	}
+    
+    public function setPour($pour){
+        $this->_pour = $pour;
+    }
 
 	public function setIdProjet($idProjet){
 		$this->_idProjet = $idProjet;
@@ -75,6 +80,10 @@ class Parking{
 	public function status(){
 		return $this->_status;
    	}
+    
+    public function pour(){
+        return $this->_pour;
+    }
 
 	public function idProjet(){
 		return $this->_idProjet;

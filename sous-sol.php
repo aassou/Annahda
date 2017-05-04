@@ -13,13 +13,18 @@
     //classes loading end
     session_start();
     if ( isset($_SESSION['userMerlaTrav']) ) {
-        $idProjet = 0;
-        $projetManager = new ProjetManager($pdo);
-        $parkingManager = new ParkingManager($pdo);
+        $idProjet           = 0;
+        $projetManager      = new ProjetManager($pdo);
+        $parkingManager     = new ParkingManager($pdo);
+        $contratManager     = new ContratManager($pdo);
+        $clientManager      = new ClientManager($pdo);
+        $appartementManager = new AppartementManager($pdo);
+        $locauxManager      = new LocauxManager($pdo);
         if(isset($_GET['idProjet']) and ($_GET['idProjet'])>0 and $_GET['idProjet']<=$projetManager->getLastId()){
             $idProjet = $_GET['idProjet'];
-            $projet = $projetManager->getProjetById($idProjet);
+            $projet   = $projetManager->getProjetById($idProjet);
             $parkings = $parkingManager->getParkingsByIdProjet($idProjet);
+            $contrats = $contratManager->getContratsActifsByIdProjet($idProjet);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -128,8 +133,10 @@
                             <?php 
                             foreach ($parkings as $parking) { 
                                 $colorStatus = "red";
+                                $status      = " -> Réservé pour ".strtoupper($parking->pour());
                                 if ( $parking->status() == "Disponible" ) {
                                     $colorStatus = "green";
+                                    $status      = "";
                                 }
                             ?>
                             <a href="#actionParking<?= $parking->id() ?>" data-toggle="modal" data-id="<?= $parking->id() ?>">
@@ -139,7 +146,7 @@
                                 </div>
                                 <div class="tile-object">
                                     <div class="name">
-                                        <?= "Parking ".$parking->code() ?>
+                                        <?= "Parking ".$parking->code().$status ?>
                                     </div>
                                     <div class="number">
                                     </div>
@@ -162,6 +169,30 @@
                                                     <option disabled="disabled">---------------------------------------</option>
                                                     <option value="Disponbile">Disponible</option>
                                                     <option value="Reservé">Reservé</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group autocomplet_container">
+                                            <label class="control-label">Client</label>
+                                            <div class="controls">
+                                                <select name="client">
+                                                    <option value="<?= $parking->pour() ?>"><?= $parking->pour() ?></option>
+                                                    <option disabled="disabled">-------------------------------------------------------</option>
+                                                    <?php 
+                                                    foreach( $contrats as $contrat ){
+                                                        $client = $clientManager->getClientById($contrat->idClient());
+                                                        $bien = "";
+                                                        if ( $contrat->typeBien() == "appartement" ) {
+                                                            $appartement = $appartementManager->getAppartementById($contrat->idBien());
+                                                            $bien = "Appart ".$appartement->nom();
+                                                        } 
+                                                        else if( $contrat->typeBien() == "localCommercial" ) {
+                                                            $local = $locauxManager->getLocauxById($contrat->idBien());
+                                                            $bien = "Local ".$local->nom();
+                                                        }
+                                                    ?>
+                                                    <option value="<?= $client->nom()." : ".$bien ?>"><?= $client->nom()." : ".$bien ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -240,7 +271,8 @@
     <script src="assets/js/excanvas.js"></script>
     <script src="assets/js/respond.js"></script>
     <![endif]-->
-    <script src="assets/js/app.js"></script>        
+    <script type="text/javascript" src="script.js"></script>   
+    <script src="assets/js/app.js"></script>                 
     <script>
         jQuery(document).ready(function() {         
             // initiate layout and plugins

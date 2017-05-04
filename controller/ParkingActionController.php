@@ -66,11 +66,13 @@
         if(!empty($_POST['idParking'])){
             $idParking = htmlentities($_POST['idParking']);
 			$status = htmlentities($_POST['status']);
+            $client = htmlentities($_POST['client']);
 			$updatedBy = $_SESSION['userMerlaTrav']->login();
             $updated = date('Y-m-d h:i:s');
             $parking = new Parking(array(
 				'id' => $idParking,
 				'status' => $status,
+				'pour' => $client,
 				'updated' => $updated,
             	'updatedBy' => $updatedBy
 			));
