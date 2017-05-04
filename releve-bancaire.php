@@ -23,7 +23,7 @@
         //obj and vars
         $typeChargesCommuns = $typeChargeCommunManager->getTypeCharges();
         $typeChargesProjets = $typeChargeProjetManager->getTypeCharges();
-        $projets            = $projetManager->getProjets();
+        $projets            = $projetManager->getProjetsOrdered();
         $releveBancaires    = $releveBancaireManager->getReleveBancaires();
         $comptesBancaires   = $compteBancaireManager->getCompteBancaires();
         $debit              = $releveBancaireManager->getTotalDebit();
