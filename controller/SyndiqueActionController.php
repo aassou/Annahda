@@ -53,7 +53,7 @@
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table de Syndique",
-                'description' => "Ajout d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)." - Client : ".$clientManager->getClientById($idClient)." - Montant : ".$montant." DH",
+                'description' => "Ajout d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)->nom()." - Client : ".$clientManager->getClientById($idClient)->nom()." - Montant : ".$montant." DH",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -94,7 +94,7 @@
             $history = new History(array(
                 'action' => "Modification",
                 'target' => "Table de Syndique",
-                'description' => "Modification d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)." - Client : ".$clientManager->getClientById($idClient)." - Montant : ".$montant." DH",
+                'description' => "Modification d'une operation au Syndique - Projet: ".$projetManager->getProjetById($idProjet)->nom()." - Client : ".$clientManager->getClientById($idClient)->nom()." - Montant : ".$montant." DH",
                 'created' => $created,
                 'createdBy' => $createdBy
             ));
@@ -120,7 +120,7 @@
         $history = new History(array(
             'action' => "Modification Status",
             'target' => "Table de Syndique",
-            'description' => "Modification de status de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet),
+            'description' => "Modification de status de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet)->nom(),
             'created' => $created,
             'createdBy' => $createdBy
         ));
@@ -140,7 +140,7 @@
         $history = new History(array(
             'action' => "Suppression",
             'target' => "Table de Syndique",
-            'description' => "Suppression de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet),
+            'description' => "Suppression de l'operation de syndique ID : ".$idSyndique."- Projet : ".$projetManager->getProjetById($idProjet)->nom(),
             'created' => $created,
             'createdBy' => $createdBy
         ));

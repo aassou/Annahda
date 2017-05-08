@@ -10,37 +10,37 @@ class ChargeSyndiqueManager{
     }
 
 	//BAISC CRUD OPERATIONS
-	public function add(Charge $charge){
+	public function add(ChargeSyndique $chargeSyndique){
     	$query = $this->_db->prepare(' INSERT INTO t_chargesyndique (
 		type, dateOperation, montant, societe, designation, idProjet, created, createdBy)
 		VALUES (:type, :dateOperation, :montant, :societe, :designation, :idProjet, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
-		$query->bindValue(':type', $charge->type());
-		$query->bindValue(':dateOperation', $charge->dateOperation());
-		$query->bindValue(':montant', $charge->montant());
-		$query->bindValue(':societe', $charge->societe());
-		$query->bindValue(':designation', $charge->designation());
-		$query->bindValue(':idProjet', $charge->idProjet());
-		$query->bindValue(':created', $charge->created());
-		$query->bindValue(':createdBy', $charge->createdBy());
+		$query->bindValue(':type', $chargeSyndique->type());
+		$query->bindValue(':dateOperation', $chargeSyndique->dateOperation());
+		$query->bindValue(':montant', $chargeSyndique->montant());
+		$query->bindValue(':societe', $chargeSyndique->societe());
+		$query->bindValue(':designation', $chargeSyndique->designation());
+		$query->bindValue(':idProjet', $chargeSyndique->idProjet());
+		$query->bindValue(':created', $chargeSyndique->created());
+		$query->bindValue(':createdBy', $chargeSyndique->createdBy());
 		$query->execute();
 		$query->closeCursor();
 	}
 
-	public function update(Charge $charge){
+	public function update(ChargeSyndique $chargeSyndique){
     	$query = $this->_db->prepare(' UPDATE t_chargesyndique SET 
 		type=:type, dateOperation=:dateOperation, montant=:montant, 
 		societe=:societe, designation=:designation, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
-		$query->bindValue(':id', $charge->id());
-		$query->bindValue(':type', $charge->type());
-		$query->bindValue(':dateOperation', $charge->dateOperation());
-		$query->bindValue(':montant', $charge->montant());
-		$query->bindValue(':societe', $charge->societe());
-		$query->bindValue(':designation', $charge->designation());
-		$query->bindValue(':updated', $charge->updated());
-		$query->bindValue(':updatedBy', $charge->updatedBy());
+		$query->bindValue(':id', $chargeSyndique->id());
+		$query->bindValue(':type', $chargeSyndique->type());
+		$query->bindValue(':dateOperation', $chargeSyndique->dateOperation());
+		$query->bindValue(':montant', $chargeSyndique->montant());
+		$query->bindValue(':societe', $chargeSyndique->societe());
+		$query->bindValue(':designation', $chargeSyndique->designation());
+		$query->bindValue(':updated', $chargeSyndique->updated());
+		$query->bindValue(':updatedBy', $chargeSyndique->updatedBy());
 		$query->execute();
 		$query->closeCursor();
 	}
@@ -54,7 +54,7 @@ class ChargeSyndiqueManager{
 		$query->closeCursor();
 	}
 
-	public function getChargeById($id){
+	public function getChargeSyndiqueById($id){
     	$query = $this->_db->prepare(' SELECT * FROM t_chargesyndique
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
@@ -62,34 +62,34 @@ class ChargeSyndiqueManager{
 		$query->execute();		
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$query->closeCursor();
-		return new Charge($data);
+		return new ChargeSyndique($data);
 	}
 
-	public function getCharges(){
-		$charges = array();
+	public function getChargeSyndiques(){
+		$chargeSyndiques = array();
 		$query = $this->_db->query('SELECT * FROM t_chargesyndique
 		ORDER BY id DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
-			$charges[] = new Charge($data);
+			$chargeSyndiques[] = new ChargeSyndique($data);
 		}
 		$query->closeCursor();
-		return $charges;
+		return $chargeSyndiques;
 	}
     
-    public function getChargesByIdProjet($idProjet){
-        $charges = array();
+    public function getChargeSyndiquesByIdProjet($idProjet){
+        $chargeSyndiques = array();
         $query = $this->_db->prepare('SELECT * FROM t_chargesyndique WHERE idProjet=:idProjet ORDER BY dateOperation DESC');
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $charges[] = new Charge($data);
+            $chargeSyndiques[] = new ChargeSyndique($data);
         }
         $query->closeCursor();
-        return $charges;
+        return $chargeSyndiques;
     }
     
-    public function getChargesByIdProjetByType($idProjet, $type){
-        $charges = array();
+    public function getChargeSyndiquesByIdProjetByType($idProjet, $type){
+        $chargeSyndiques = array();
         $query = $this->_db->prepare(
         "SELECT * FROM t_chargesyndique 
         WHERE idProjet=:idProjet 
@@ -99,37 +99,37 @@ class ChargeSyndiqueManager{
         $query->bindValue(':type', $type);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $charges[] = new Charge($data);
+            $chargeSyndiques[] = new ChargeSyndique($data);
         }
         $query->closeCursor();
-        return $charges;
+        return $chargeSyndiques;
     }
     
-    public function getChargesByGroupByIdProjet($idProjet){
-        $charges = array();
+    public function getChargeSyndiquesByGroupByIdProjet($idProjet){
+        $chargeSyndiques = array();
         $query = $this->_db->prepare('SELECT id, type, SUM(montant) AS montant FROM t_chargesyndique WHERE idProjet=:idProjet GROUP BY type');
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $charges[] = new Charge($data);
+            $chargeSyndiques[] = new ChargeSyndique($data);
         }
         $query->closeCursor();
-        return $charges;
+        return $chargeSyndiques;
     }
 
-	public function getChargesByLimits($begin, $end){
-		$charges = array();
+	public function getChargeSyndiquesByLimits($begin, $end){
+		$chargeSyndiques = array();
 		$query = $this->_db->query('SELECT * FROM t_chargesyndique
 		ORDER BY id DESC LIMIT '.$begin.', '.$end);
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
-			$charges[] = new Charge($data);
+			$chargeSyndiques[] = new ChargeSyndique($data);
 		}
 		$query->closeCursor();
-		return $charges;
+		return $chargeSyndiques;
 	}
     
-    public function getChargesByIdProjetByDates($idProjet, $dateFrom, $dateTo){
-        $charges = array();
+    public function getChargeSyndiquesByIdProjetByDates($idProjet, $dateFrom, $dateTo){
+        $chargeSyndiques = array();
         $query = $this->_db->prepare('SELECT * FROM t_chargesyndique WHERE idProjet=:idProjet
         AND dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
         $query->bindValue(':idProjet', $idProjet);
@@ -137,14 +137,14 @@ class ChargeSyndiqueManager{
         $query->bindValue(':dateTo', $dateTo);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $charges[] = new Charge($data);
+            $chargeSyndiques[] = new ChargeSyndique($data);
         }
         $query->closeCursor();
-        return $charges;
+        return $chargeSyndiques;
     }
     
-    public function getChargesByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type){
-        $charges = array();
+    public function getChargeSyndiquesByIdProjetByDatesByType($idProjet, $dateFrom, $dateTo, $type){
+        $chargeSyndiques = array();
         $query = $this->_db->prepare('SELECT * FROM t_chargesyndique WHERE idProjet=:idProjet AND type=:type
         AND dateOperation BETWEEN :dateFrom AND :dateTo ORDER BY dateOperation DESC');
         $query->bindValue(':idProjet', $idProjet);
@@ -153,10 +153,10 @@ class ChargeSyndiqueManager{
         $query->bindValue(':type', $type);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
-            $charges[] = new Charge($data);
+            $chargeSyndiques[] = new ChargeSyndique($data);
         }
         $query->closeCursor();
-        return $charges;
+        return $chargeSyndiques;
     }
     
     public function getTotalByIdProjet($idProjet){

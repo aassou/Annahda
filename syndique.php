@@ -15,15 +15,24 @@
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
         //class managers
-        $projetManager   = new ProjetManager($pdo);
-        $clientManager   = new ClientManager($pdo);
-        $syndiqueManager = new SyndiqueManager($pdo);
+        $projetManager     = new ProjetManager($pdo);
+        $clientManager     = new ClientManager($pdo);
+        $syndiqueManager   = new SyndiqueManager($pdo);
+        $chargeManager     = new ChargeSyndiqueManager($pdo);
+        $typeChargeManager = new TypeChargeSyndiqueManager($pdo);
         //obj and vars
         $idProjet                     = $_GET['idProjet'];
         $projet                       = $projetManager->getProjetById($idProjet);
         $projets                      = $projetManager->getProjets();    
+        //syndique
         $syndiques                    = $syndiqueManager->getSyndiquesByIdProjet($idProjet);
         $totalSyndiquePaiementsClient = $syndiqueManager->getSyndiquesTotalByIdProjet($idProjet);
+        //chargeSyndique
+        $typeCharges          = $typeChargeManager->getTypeChargeSyndiques();
+        $charges              = $chargeManager->getChargeSyndiquesByIdProjet($idProjet);
+        $totalChargesSyndique = $chargeManager->getTotalByIdProjet($idProjet);
+        //solde
+        $solde = $totalSyndiquePaiementsClient - $totalChargesSyndique;
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -168,7 +177,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                                 <h3>Imprimer Bilan de la Caisse </h3>
                             </div>
-                            <form class="form-horizontal" action="controller/CaissePrintController.php" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="controller/SyndiqueBilanPrintController.php" method="post" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <p><strong>Séléctionner les opérations de caisse à imprimer</strong></p>
                                     <div class="control-group">
@@ -235,6 +244,14 @@
                             </form>
                         </div>
                         <!-- printBilanCaisse box end -->
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td style="width: 70%"><strong>Solde (Paiements Syndique - Charges )</strong></td>
+                                    <td style="width: 30%"><strong><a><?= number_format($solde, 2, ',', ' ') ?>&nbsp;DH</a></strong></td>
+                                </tr>
+                            </thead>
+                        </table>   
                        <div class="portlet box light-grey">
                             <div class="portlet-title">
                                 <h4>Gestion Syndique</h4>
@@ -253,14 +270,14 @@
                                     <div class="btn-group pull-left">
                                         <a class="btn blue" href="#addSyndique" data-toggle="modal">
                                             <i class="icon-plus-sign"></i>
-                                             Ajouter
+                                             Syndique
                                         </a>
                                     </div>
                                     <?php
                                     }
                                     ?>
                                     <div class="btn-group pull-right">
-                                        <a class="btn green" href="" data-toggle="modal">
+                                        <a class="btn green" href="controller/SyndiqueBilanPrintController.php?idProjet=<?= $idProjet ?>" data-toggle="modal" target="_blank">
                                             <i class="icon-print"></i>
                                              Bilan de syndique
                                         </a>
@@ -274,7 +291,7 @@
                                         </tr>
                                     </thead>
                                 </table>    
-                                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                <table class="table table-striped table-bordered table-hover" id="sample_2">
                                     <thead>
                                         <tr>
                                             <th class="hidden-phone" style="width:10%">Actions</th>
@@ -357,6 +374,7 @@
                                                             <input type="hidden" name="source" value="syndique" />        
                                                             <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
                                                             <input type="hidden" name="idSyndique" value="<?= $syndique->id() ?>" />
+                                                            <input type="hidden" name="status" value="<?= $syndique->status() ?>" />
                                                             <input type="hidden" id="idClient[]" name="idClient" value="<?= $syndique->idClient() ?>" />
                                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
@@ -422,6 +440,276 @@
                                     </tbody>
                                 </table>
                                 </div><!-- END DIV SCROLLER -->
+                            </div>
+                            <!-- Charges Syndique -->
+                            <!-- addCharge box begin-->
+                            <div id="addCharge" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h3>Ajouter une nouvelle charge </h3>
+                                </div>
+                                <form class="form-horizontal" action="controller/ChargeSyndiqueActionController.php" method="post" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="control-group">
+                                            <label class="control-label">Type Charge</label>
+                                            <div class="controls">
+                                                <select name="type">
+                                                    <?php foreach($typeCharges as $type) { ?>
+                                                    <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Date Opération</label>
+                                            <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                             </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Montant</label>
+                                            <div class="controls">
+                                                <input type="text" name="montant" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">Désignation</label>
+                                            <div class="controls">
+                                                <input type="text" name="designation" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                <input type="hidden" name="action" value="add" />    
+                                                <input type="hidden" name="source" value="syndique" />
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- addCharge box end -->
+                            <!-- addTypeCharge box begin-->
+                            <div id="addTypeCharge" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                    <h3>Ajouter Nouveau Type Charge </h3>
+                                </div>
+                                <form class="form-horizontal" action="controller/TypeChargeSyndiqueActionController.php" method="post">
+                                    <div class="modal-body">
+                                        <div class="control-group">
+                                            <label class="control-label">Nom Type Charge</label>
+                                            <div class="controls">
+                                                <input type="text" name="nom" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                <input type="hidden" name="action" value="add" />
+                                                <input type="hidden" name="source" value="syndique" />     
+                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- addTypeCharge box end -->
+                            <div class="portlet box light-grey">
+                                <div class="portlet-title">
+                                    <h4>Gestion des charges syndique</h4>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="reload"></a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="clearfix">
+                                        <?php
+                                        if ( 
+                                            $_SESSION['userMerlaTrav']->profil() == "admin" ||
+                                            $_SESSION['userMerlaTrav']->profil() == "manager" 
+                                            ) {
+                                        ?>
+                                        <div class="btn-group pull-left">
+                                            <a class="btn blue stay-away" href="#addTypeCharge" data-toggle="modal">
+                                                <i class="icon-plus-sign"></i>
+                                                 Type Charge
+                                            </a>
+                                        </div>
+                                        <div class="btn-group pull-left">
+                                            <a class="btn green" href="#addCharge" data-toggle="modal">
+                                                <i class="icon-plus-sign"></i>
+                                                 Charge
+                                            </a>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <?php if(isset($_SESSION['typeCharge-action-message'])
+                                    and isset($_SESSION['typeCharge-type-message'])){
+                                        $message = $_SESSION['typeCharge-action-message'];
+                                        $typeMessage = $_SESSION['typeCharge-type-message'];
+                                    ?>
+                                        <div class="alert alert-<?= $typeMessage ?>">
+                                            <button class="close" data-dismiss="alert"></button>
+                                            <?= $message ?>      
+                                        </div>
+                                    <?php } 
+                                        unset($_SESSION['typeCharge-action-message']);
+                                        unset($_SESSION['typeCharge-type-message']);
+                                    ?>
+                                    <?php if(isset($_SESSION['charge-action-message'])
+                                    and isset($_SESSION['charge-type-message'])){
+                                        $message = $_SESSION['charge-action-message'];
+                                        $typeMessage = $_SESSION['charge-type-message'];
+                                    ?>
+                                        <div class="alert alert-<?= $typeMessage ?>">
+                                            <button class="close" data-dismiss="alert"></button>
+                                            <?= $message ?>      
+                                        </div>
+                                    <?php } 
+                                        unset($_SESSION['charge-action-message']);
+                                        unset($_SESSION['charge-type-message']);
+                                    ?>
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td style="width: 70%"><strong>Total Charges Syndique</strong></td>
+                                                <td style="width: 30%"><strong><a><?= number_format($totalChargesSyndique, 2, ',' , ' ') ?>&nbsp;DH</a></strong></td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                    <table class="table table-striped table-bordered table-hover" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                <?php
+                                                if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
+                                                ?>
+                                                <th class="hidden-phone" style="width: 10%">Actions</th>
+                                                <?php
+                                                } 
+                                                ?>
+                                                <th style="width: 20%">Type</th>
+                                                <th style="width: 20%">DateOp</th>
+                                                <th style="width: 30%">Désignation</th>
+                                                <th style="width: 20%">Montant</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach($charges as $charge){
+                                            ?>      
+                                            <tr class="charges">
+                                                <?php
+                                                if ( $_SESSION['userMerlaTrav']->profil()=="admin" ) { 
+                                                ?>
+                                                <td class="hidden-phone">
+                                                    <a class="btn mini green" title="Modifier" href="#updateCharge<?= $charge->id();?>" data-toggle="modal" data-id="<?= $charge->id(); ?>"><i class="icon-refresh"></i></a>
+                                                    <a class="btn mini red" title="Supprimer" href="#deleteCharge<?= $charge->id() ?>" data-toggle="modal" data-id="<?= $charge->id() ?>"><i class="icon-remove"></i></a>
+                                                </td>
+                                                <?php  
+                                                } 
+                                                ?>
+                                                <td><?= $typeChargeManager->getTypeChargeSyndiqueById($charge->type())->nom() ?></td>
+                                                <td class="hidden-phone"><?= date('d/m/Y', strtotime($charge->dateOperation())) ?></td>
+                                                <td><?= $charge->designation() ?></td>
+                                                <td><?= number_format($charge->montant(), 2, ',', ' ') ?></td>
+                                            </tr>
+                                            <!-- updateCharge box begin-->
+                                            <div id="updateCharge<?= $charge->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h3>Modifier Info Charge </h3>
+                                                </div>
+                                                <form class="form-horizontal" action="controller/ChargeSyndiqueActionController.php" method="post">
+                                                    <div class="modal-body">
+                                                        <div class="control-group">
+                                                            <label class="control-label">Type Charge</label>
+                                                            <div class="controls">
+                                                                <select name="type">
+                                                                    <option value="<?= $charge->type() ?>"><?= $typeChargeManager->getTypeChargeSyndiqueById($charge->type())->nom() ?></option>
+                                                                    <option disabled="disabled">-------------</option>
+                                                                    <?php foreach($typeCharges as $type){ ?>
+                                                                        <option value="<?= $type->id() ?>"><?= $type->nom() ?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Date Opération</label>
+                                                            <div class="controls date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                                <input name="dateOperation" id="dateOperation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= $charge->dateOperation() ?>" />
+                                                                <span class="add-on"><i class="icon-calendar"></i></span>
+                                                             </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Montant</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="montant" value="<?= $charge->montant() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">Désignation</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="designation" value="<?= $charge->designation() ?>" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="control-group">
+                                                            <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                            <input type="hidden" name="action" value="update" />
+                                                            <input type="hidden" name="source" value="syndique" />
+                                                            <div class="controls">  
+                                                                <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                                <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- updateCharge box end -->            
+                                            <!-- deleteCharge box begin-->
+                                            <div id="deleteCharge<?= $charge->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                    <h3>Supprimer la charge</h3>
+                                                </div>
+                                                <form class="form-horizontal loginFrm" action="controller/ChargeSyndiqueActionController.php" method="post">
+                                                    <div class="modal-body">
+                                                        <p class="dangerous-action">Êtes-vous sûr de vouloir supprimer cette charge ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div class="control-group">
+                                                            <label class="right-label"></label>
+                                                            <input type="hidden" name="idCharge" value="<?= $charge->id() ?>" />
+                                                            <input type="hidden" name="idProjet" value="<?= $idProjet ?>" />
+                                                            <input type="hidden" name="action" value="delete" />
+                                                            <input type="hidden" name="source" value="syndique" />
+                                                            <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                            <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- deleteCharge box end -->    
+                                            <?php
+                                            }//end of loop
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                    <!--/div--><!-- END DIV SCROLLER --> 
+                                </div>
                             </div>
                            </div>
                         </div>

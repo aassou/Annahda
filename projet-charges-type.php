@@ -300,7 +300,7 @@
                                     <a href="javascript:;" class="reload"></a>
                                 </div>
                             </div>
-                        <div class="portlet-body">
+                            <div class="portlet-body">
                                 <table class="table table-striped table-bordered table-hover" id="sample_1">
                                     <thead>
                                         <tr>

@@ -48,13 +48,13 @@ else{
         //$operationManager->add($operation);
         $operationManager->updateByReleveActionController($operation);
         $releveBancaireManager->hide($idReleveBancaire);
-        $actionMessage = "<strong>Opération Valide</strong> : Releve Bancaire traité avec succès.";
+        $actionMessage = "<strong>Opération Valide</strong> : Relevé Bancaire traité avec succès.";
         $typeMessage = "success";
-        echo "yyyyy";
+        echo "Opération Valide";
     }
     else {
         $actionMessage = "<strong>Erreur Opération</strong> : Vous devez choisir l'opération à mettre à jours.";
         $typeMessage = "error";
-        echo "nnnnn";
+        echo "Opération echouée";
     }
 }

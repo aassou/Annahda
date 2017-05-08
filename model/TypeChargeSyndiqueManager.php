@@ -10,27 +10,27 @@ class TypeChargeSyndiqueManager{
     }
 
 	//BAISC CRUD OPERATIONS
-	public function add(TypeCharge $typeCharge){
+	public function add(TypeChargeSyndique $typeChargeSyndique){
     	$query = $this->_db->prepare(' INSERT INTO t_typechargesyndique (
 		nom, created, createdBy)
 		VALUES (:nom, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
-		$query->bindValue(':nom', $typeCharge->nom());
-		$query->bindValue(':created', $typeCharge->created());
-		$query->bindValue(':createdBy', $typeCharge->createdBy());
+		$query->bindValue(':nom', $typeChargeSyndique->nom());
+		$query->bindValue(':created', $typeChargeSyndique->created());
+		$query->bindValue(':createdBy', $typeChargeSyndique->createdBy());
 		$query->execute();
 		$query->closeCursor();
 	}
 
-	public function update(TypeCharge $typeCharge){
+	public function update(TypeChargeSyndique $typeChargeSyndique){
     	$query = $this->_db->prepare(' UPDATE t_typechargesyndique SET 
 		nom=:nom, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
-		$query->bindValue(':id', $typeCharge->id());
-		$query->bindValue(':nom', $typeCharge->nom());
-		$query->bindValue(':updated', $typeCharge->updated());
-		$query->bindValue(':updatedBy', $typeCharge->updatedBy());
+		$query->bindValue(':id', $typeChargeSyndique->id());
+		$query->bindValue(':nom', $typeChargeSyndique->nom());
+		$query->bindValue(':updated', $typeChargeSyndique->updated());
+		$query->bindValue(':updatedBy', $typeChargeSyndique->updatedBy());
 		$query->execute();
 		$query->closeCursor();
 	}
@@ -44,7 +44,7 @@ class TypeChargeSyndiqueManager{
 		$query->closeCursor();
 	}
 
-	public function getTypeChargeById($id){
+	public function getTypeChargeSyndiqueById($id){
     	$query = $this->_db->prepare(' SELECT * FROM t_typechargesyndique
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
@@ -52,28 +52,28 @@ class TypeChargeSyndiqueManager{
 		$query->execute();		
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$query->closeCursor();
-		return new TypeCharge($data);
+		return new TypeChargeSyndique($data);
 	}
 
-	public function getTypeCharges(){
-		$typeCharges = array();
+	public function getTypeChargeSyndiques(){
+		$typeChargeSyndiques = array();
 		$query = $this->_db->query('SELECT * FROM t_typechargesyndique ORDER BY id DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
-			$typeCharges[] = new TypeCharge($data);
+			$typeChargeSyndiques[] = new TypeChargeSyndique($data);
 		}
 		$query->closeCursor();
-		return $typeCharges;
+		return $typeChargeSyndiques;
 	}
 
-	public function getTypeChargesByLimits($begin, $end){
-		$typeCharges = array();
+	public function getTypeChargeSyndiquesByLimits($begin, $end){
+		$typeChargeSyndiques = array();
 		$query = $this->_db->query('SELECT * FROM t_typechargesyndique
 		ORDER BY id DESC LIMIT '.$begin.', '.$end);
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
-			$typeCharges[] = new TypeCharge($data);
+			$typeChargeSyndiques[] = new TypeChargeSyndique($data);
 		}
 		$query->closeCursor();
-		return $typeCharges;
+		return $typeChargeSyndiques;
 	}
 
 	public function getLastId(){
@@ -84,9 +84,9 @@ class TypeChargeSyndiqueManager{
 		return $id;
 	}
     
-    public function exists($nomTypeCharge){
+    public function exists($nomTypeChargeSyndique){
         $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_typechargesyndique WHERE REPLACE(nom, ' ', '') LIKE REPLACE(:nom, ' ', '') ");
-        $query->execute(array(':nom' => $nomTypeCharge));
+        $query->execute(array(':nom' => $nomTypeChargeSyndique));
         //get result
         return $query->fetchColumn();
     }
