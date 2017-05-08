@@ -67,7 +67,7 @@ class CollaborationManager{
 		$collaborations = array();
 		$query = $this->_db->query(
 		'SELECT * FROM t_collaboration
-		ORDER BY status DESC');
+		ORDER BY status DESC, created DESC');
 		while($data = $query->fetch(PDO::FETCH_ASSOC)){
 			$collaborations[] = new Collaboration($data);
 		}

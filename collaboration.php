@@ -18,8 +18,8 @@
             $showTodos = 1;    
         }
         //classes managers
-        $usersManager = new UserManager($pdo);
-        $mailManager = new MailManager($pdo);
+        $usersManager         = new UserManager($pdo);
+        $mailManager          = new MailManager($pdo);
         $collaborationManager = new CollaborationManager($pdo);
         //classes and vars
         //users number
@@ -172,8 +172,9 @@
                                             <!--th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th-->
                                             <th style="width:10%">Actions</th>
                                             <th style="width:20%">Titre</th>
-                                            <th style="width:50%">Description</th>
+                                            <th style="width:35%">Description</th>
                                             <th style="width:10%">Durée</th>
+                                            <th style="width:15%">Date</th>
                                             <th style="width:10%">Status</th>
                                         </tr>
                                     </thead>
@@ -191,6 +192,7 @@
                                             <td style="width:20%"><?= $idea->titre() ?></td>
                                             <td style="width:50%"><?= $idea->description() ?></td>
                                             <td style="width:10%"><?= $idea->duree() ?></td>
+                                            <td style="width:10%"><?= date('d/m/Y', strtotime($idea->created())) ?></td>
                                             <td style="width:10%"><a class="btn <?= $status ?>"><?= $idea->status() ?></a></td>
                                         </tr>
                                         <!-- update box begin-->
