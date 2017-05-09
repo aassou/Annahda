@@ -213,6 +213,9 @@
                                                             <a target="_blank" href="controller/ContratPrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Imprimer Contrat FR
                                                             </a>
+                                                            <a target="_blank" href="controller/LettreRecommandeePrintController.php?idContrat=<?= $contrat->id() ?>">
+                                                                Lettre recommandée
+                                                            </a>
 												        	<?php
 												        	if( $_SESSION['userMerlaTrav']->profil() == "admin" || 
                                                                 $_SESSION['userMerlaTrav']->profil() == "manager"
