@@ -133,7 +133,7 @@ $htmlcontent .= '،  العنوان و الموطن المختار و المحد
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 $pdf->Ln();
 $pdf->Ln();
-$htmlcontent = 'أصالة عن نفسي أمنح موافقتي لشركة : '.$company->nomArabe().'، ش .م .م  في شخص ممثلها القانوني, و الكائن مقرها الاجتماعي ب'.$company->adresseArabe().'.';
+$htmlcontent = 'أصالة عن نفسي أمنح موافقتي لشركة : '.$company->nomArabe().'،   في شخص ممثلها القانوني, و الكائن مقرها الاجتماعي ب'.$company->adresseArabe().'.';
 $pdf->WriteHTML($htmlcontent, true, 0, true, 0);
 //$pdf->SetFont('aealarabiya', '', 18);
 //$pdf->Cell(0, 12, 'نص العقد',0,1,'C');
