@@ -242,7 +242,10 @@
                                                                 }    
                                                                 else if ( $contrat->revendre() == 1 ) {
                                                                     $revendreTitle = "<strong>Annuler la Revente</strong>";
-                                                                ?>  
+                                                                ?>
+                                                                <a target="_blank" style="color:blue" href="controller/RevendrePrintController.php?idContrat=<?= $contrat->id() ?>">
+                                                                    Contrat de Revente
+                                                                </a>  
                                                                 <a style="color:red" href="#updateRevendre<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
                                                                     Annuler Revente
                                                                 </a>    
