@@ -189,12 +189,22 @@
                          }
 	                     ?>
 	                    <h3>Résumé du Contrat&nbsp;&nbsp;
-	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width-big stay-away" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
+	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width stay-away" href="controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
-	                    	<a style="margin-top:5px;" class="btn green btn-fixed-width-big stay-away" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
-                                <i class="icon-print"></i>&nbsp;Imprimer Contrat
+	                    	<a style="margin-top:5px;" class="btn green btn-fixed-width stay-away" href="controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
+                                <i class="icon-print"></i>&nbsp;Contrat
                             </a>
+                            <?php if ( $contrat->revendre() == 1 ) { ?>
+                            <a target="_blank" style="margin-top:5px;" class="btn red btn-fixed-width stay-away" href="controller/RevendrePrintController.php?idContrat=<?= $contrat->id() ?>">
+                                <i class="icon-print"></i>&nbsp;Attestation de Revente
+                            </a>
+                            <?php } ?>
+                            <?php if ( $contrat->prixVente()-($sommeOperations) == 0 ) { ?>
+                            <a target="_blank" style="margin-top:5px;" class="btn black btn-fixed-width stay-away" href="controller/PaiementCompletPrintController.php?idContrat=<?= $contrat->id() ?>">
+                                <i class="icon-print"></i>&nbsp;Attestation Paiement Complet
+                            </a>
+                            <?php } ?>
 	                    </h3>
 	                    
 	                    <h4 style="text-align: center">Avancement du contrat</h4>
