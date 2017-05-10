@@ -18,10 +18,13 @@
         if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
             $showTodos = 1;    
         }
-        //les sources
+        //class managers
         $projetsManager = new ProjetManager($pdo);
+        $companyManager = new CompanyManager($pdo);
+        //obj and vars
+        $companies    = $companyManager->getCompanys(); 
         $projetNumber = $projetsManager->getProjetsNumber();
-        $projets = $projetsManager->getProjetsOrdered();
+        $projets      = $projetsManager->getProjetsOrdered();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -116,7 +119,7 @@
                                 if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                 ?>
                                 <div class="pull-right">
-                                    <a href="#addProjet" class="btn icn-only green" data-toggle="modal"><i class="icon-plus-sign m-icon-white"></i>&nbsp;Nouveau Projet</a>                                  
+                                    <a href="projet-add.php" class="btn icn-only green"><i class="icon-plus-sign m-icon-white"></i>&nbsp;Nouveau Projet</a>                                  
                                 </div>
                                 <?php  
                                 }
@@ -202,10 +205,11 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li><a href="projet-details.php?idProjet=<?= $projet->id() ?>">Gestion du projet</a></li>
+                                        <li><a href="#contratConstruction<?= $projet->id() ?>" data-toggle="modal" data-id="<?= $projet->id() ?>" class="dangerous-action">Contrat de Construction</a></li>
                                         <?php
                                         if ( $_SESSION['userMerlaTrav']->profil() == "admin" ) {
                                         ?>
-                                        <li><a href="#updateProjet<?= $projet->id() ?>" data-toggle="modal" data-id="<?= $projet->id(); ?>">Modifier</a></li>
+                                        <li><a href="projet-update.php?idProjet=<?= $projet->id() ?>">Modifier</a></li>
                                         <?php
                                         }
                                         ?>
@@ -213,67 +217,41 @@
                                 </div>
                             </div>
                             <!-- updateProjet box begin-->
-                            <div id="updateProjet<?= $projet->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                            <div id="contratConstruction<?= $projet->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                                    <h3>Modifier Projet <?= $projet->nom() ?></h3>
+                                    <h3>Contrat de construction <?= $projet->nom() ?></h3>
                                 </div>
-                                <form class="form-horizontal" action="controller/ProjetActionController.php" method="post">
+                                <form target="_blank" class="form-horizontal" action="controller/ContratConstructionPrintController.php" method="post">
                                     <div class="modal-body">
                                         <div class="control-group">
-                                            <label class="control-label">Nom</label>
+                                            <label class="control-label">Société 1</label>
                                             <div class="controls">
-                                                <input type="text" name="nom" value="<?= $projet->nom() ?>"/>
+                                                <select name="company1">
+                                                    <?php foreach ( $companies as $companie ) { ?>
+                                                    <option value="<?= $companie->id() ?>"><?= $companie->nom() ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label">Titre</label>
-                                            <div class="controls">
-                                                <input type="text" name="titre" value="<?= $projet->titre() ?>"/>
-                                            </div>
+                                            <label class="control-label">ET</label>
                                         </div>
                                         <div class="control-group">
-                                            <label class="control-label">Budget</label>
+                                            <label class="control-label">Société 2</label>
                                             <div class="controls">
-                                                <input type="text" name="budget" value="<?= $projet->budget() ?>" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">Superficie</label>
-                                            <div class="controls">
-                                                <input type="text" name="superficie" value="<?= $projet->superficie() ?>" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">Adresse</label>
-                                            <div class="controls">
-                                                <textarea type="text" name="adresse"><?= $projet->adresse() ?></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">Description</label>
-                                            <div class="controls">
-                                                <textarea type="text" name="description"><?= $projet->description() ?></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">اسم المشروع</label>
-                                            <div class="controls">
-                                                <input type="text" name="nomArabe" value="<?= $projet->nomArabe() ?>" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label">عنوان المشروع</label>
-                                            <div class="controls">
-                                                <input type="text" name="adresseArabe" value="<?= $projet->adresseArabe() ?>" />
+                                                <select name="company2">
+                                                    <?php foreach ( $companies as $companie ) { ?>
+                                                    <option value="<?= $companie->id() ?>"><?= $companie->nom() ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="control-group">
                                             <div class="controls">
-                                                <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />  
-                                                <input type="hidden" name="action" value="update" />  
+                                                <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
                                                 <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                                 <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                             </div>

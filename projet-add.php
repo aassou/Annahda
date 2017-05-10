@@ -54,7 +54,7 @@
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
+	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
 		<?php include("include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
@@ -72,12 +72,12 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
-								<a>Accueil</a> 
+								<a href="dashboard.php">Accueil</a> 
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
 								<i class="icon-briefcase"></i>
-								<a>Gestion des projets</a>
+								<a href="projets.php">Gestion des projets</a>
 								<i class="icon-angle-right"></i>
 							</li>
 							<li><a>Nouveau projet</a></li>
@@ -89,28 +89,21 @@
 				<!-- BEGIN PAGE CONTENT-->
 				<div class="row-fluid">
 					<div class="span12">
-                         <?php if(isset($_SESSION['projet-add-success'])){ ?>
-                         	<div class="alert alert-success">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['projet-add-success'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['projet-add-success']);
-                         ?>
-                         <?php if(isset($_SESSION['projet-add-error'])){ ?>
-                         	<div class="alert alert-error">
-								<button class="close" data-dismiss="alert"></button>
-								<?= $_SESSION['projet-add-error'] ?>		
-							</div>
-                         <?php } 
-                         	unset($_SESSION['projet-add-error']);
+                         <?php
+                        if(isset($_SESSION['projet-action-message']) and isset($_SESSION['projet-type-message'])){
+                            $message = $_SESSION['projet-action-message'];
+                            $typeMessage = $_SESSION['projet-type-message'];
+                        ?>
+                            <div class="alert alert-<?= $typeMessage ?>">
+                                <button class="close" data-dismiss="alert"></button>
+                                <?= $message ?>     
+                            </div>
+                         <?php 
+                         } 
+                         unset($_SESSION['projet-action-message']);
+                         unset($_SESSION['projet-type-message']);
                          ?>
 						<div class="tab-pane active" id="tab_1">
-							<div class="row-fluid add-portfolio">
-								<div class="pull-left">
-									<a href="projet-list.php" class="btn icn-only green"><i class="m-icon-swapleft m-icon-white"></i> Retour vers Liste des projets</a>
-								</div>
-							</div>
                            <div class="portlet box grey">
                               <div class="portlet-title">
                                  <h4><i class="icon-edit"></i>Ajouter un nouveau projet</h4>
@@ -121,25 +114,41 @@
                               </div>
                               <div class="portlet-body form">
                                  <!-- BEGIN FORM-->
-                                 <form action="controller/ProjetAddController.php" method="POST" class="horizontal-form">
+                                 <form id="addProjetForm" action="controller/ProjetActionController.php" method="POST" class="horizontal-form">
                                     <div class="row-fluid">
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="nomProjet">Nom du Projet</label>
-                                             <div class="controls">
-                                                <input type="text" id="nomProjet" name="nomProjet" class="m-wrap span12">
-                                             </div>
-                                          </div>
+                                        <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="nomArabe">اسم المشروع <sup class="dangerous-action">*</sup></label>
+                                               <div class="controls">
+                                                   <input type="text" id="nomArabe" name="nomArabe" class="m-wrap span12" />
+                                               </div>
+                                           </div>
                                        </div>
-                                       <div class="span4 ">
-                                          <div class="control-group">
-                                             <label class="control-label" for="budget">Budget</label>
-                                             <div class="controls">
-                                                <input type="text" id="budget" name="budget" class="m-wrap span12">
-                                             </div>
-                                          </div>
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="adresseArabe">عنوان المشروع <sup class="dangerous-action">*</sup></label>
+                                               <div class="controls">
+                                                   <input type="text" id="adresseArabe" name="adresseArabe" class="m-wrap span12" />
+                                               </div>
+                                           </div>
                                        </div>
-                                       <div class="span4 ">
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label">Nom <sup class="dangerous-action">*</sup></label>
+                                               <div class="controls">
+                                                   <input type="text" name="nom" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label">Titre</label>
+                                               <div class="controls">
+                                                   <input type="text" name="titre" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
                                           <div class="control-group">
                                              <label class="control-label" for="superficie">Superficie</label>
                                              <div class="controls">
@@ -147,27 +156,161 @@
                                              </div>
                                           </div>
                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                       <div class="span6 ">
+                                       <div class="span2">
                                           <div class="control-group">
-                                             <label class="control-label" for="adresse">Adresse</label>
+                                             <label class="control-label" for="budget">Budget</label>
                                              <div class="controls">
-                                             	<textarea name="adresse" class="large m-wrap" rows="3"></textarea>
+                                                <input type="text" id="budget" name="budget" class="m-wrap span12">
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span6 ">
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="numeroLot">Numero Lot</label>
+                                               <div class="controls">
+                                                   <input type="text" id="numeroLot" name="numeroLot" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="numeroAutorisation">Numero Autorisation</label>
+                                               <div class="controls">
+                                                   <input type="text" id="numeroAutorisation" name="numeroAutorisation" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="nombreEtages">Nombre Etages</label>
+                                               <div class="controls">
+                                                   <input type="text" id="nombreEtages" name="nombreEtages" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="sousSol">Surface Sous-Sol</label>
+                                               <div class="controls">
+                                                   <input type="text" id="sousSol" name="sousSol" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="rezDeChausser">Surface Rez De Chausser</label>
+                                               <div class="controls">
+                                                   <input type="text" id="rezDeChausser" name="rezDeChausser" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="mezzanin">Surface Mezzanin</label>
+                                               <div class="controls">
+                                                   <input type="text" id="mezzanin" name="mezzanin" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="cageEscalier">Surface Cage Escaliers</label>
+                                               <div class="controls">
+                                                   <input type="text" id="cageEscalier" name="cageEscalier" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                           <div class="control-group">
+                                               <label class="control-label" for="terrase">Surface Terrasse</label>
+                                               <div class="controls">
+                                                   <input type="text" id="terrase" name="terrase" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="superficieEtages">Surface 1er-Nème Etage</label>
+                                               <div class="controls">
+                                                   <input type="text" id="superficieEtages" name="superficieEtages" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span1">
+                                          <div class="control-group">
+                                               <label class="control-label" for="delai">Delai/Mois</label>
+                                               <div class="controls">
+                                                   <input type="text" id="delai" name="delai" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="prixParMetreHT">Prix/m² HT</label>
+                                               <div class="controls">
+                                                   <input type="text" id="prixParMetreHT" name="prixParMetreHT" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span1">
+                                          <div class="control-group">
+                                               <label class="control-label" for="TVA">TVA</label>
+                                               <div class="controls">
+                                                   <input type="text" id="TVA" name="TVA" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                       <div class="span2">
+                                          <div class="control-group">
+                                               <label class="control-label" for="prixParMetreTTC">Prix/m² TTC</label>
+                                               <div class="controls">
+                                                   <input type="text" id="prixParMetreTTC" name="prixParMetreTTC" class="m-wrap span12" />
+                                               </div>
+                                           </div>
+                                       </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="adresse">Adresse <sup class="dangerous-action">*</sup></label>
+                                             <div class="controls">
+                                             	<textarea style="width:270px;" name="adresse" class="m-wrap span12" rows="3"></textarea>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="description">Description</label>
                                              <div class="controls">
-    											<textarea name="description" class="large m-wrap" rows="3"></textarea>
+    											<textarea style="width:270px;" name="description" class="m-wrap span12" rows="3"></textarea>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="architecte">Architecte</label>
+                                             <div class="controls">
+                                                <textarea style="width:270px;" id="architecte" name="architecte" class="m-wrap span12" rows="3"></textarea>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="bet">Bet</label>
+                                             <div class="controls">
+                                                <textarea style="width:270px;" id="bet" name="bet" class="m-wrap span12" rows="3"></textarea>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="form-actions">
-                                    	<button type="reset" class="btn red">Annuler</button>
+                                        <input type="hidden" name="action" value="add" />  
+                                        <p class="dangerous-action">* : Champs obligatoires</p>
+                                    	<a href="projets.php" class="btn red"><i class="m-icon-swapleft m-icon-white"></i>&nbsp;Retour</a>
                                        	<button type="submit" class="btn black">Ajouter <i class="icon-plus-sign"></i></button>
                                     </div>
                                  </form>
@@ -207,12 +350,81 @@
 	<script type="text/javascript" src="assets/uniform/jquery.uniform.min.js"></script>
 	<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
 	<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+	<script src="assets/jquery-validation/jquery.validate.js" type="text/javascript"></script>
 	<script src="assets/js/app.js"></script>		
 	<script>
 		jQuery(document).ready(function() {			
 			// initiate layout and plugins
 			//App.setPage("table_editable");
 			App.init();
+			$('#prixParMetreHT, #TVA').change(function(){
+                var prixParMetreHT = +$('#prixParMetreHT').val();
+                var TVA = +$('#TVA').val();
+                var prixParMetreTTC = prixParMetreHT + TVA;
+                $('#prixParMetreTTC').val(prixParMetreTTC);
+            });
+            //validate form begins
+            $("#addProjetForm").validate({
+                 rules:{
+                   nom: {
+                       required: true
+                   },
+                   nomArabe: {
+                       required: true
+                   },
+                   adresse: {
+                       required: true
+                   },
+                   adresseArabe: {
+                       required: true
+                   },
+                   superficie: {
+                       number: true
+                   },
+                   budget: {
+                       number: true
+                   },
+                   nombreEtages: {
+                       number: true
+                   },
+                   sousSol: {
+                       number: true
+                   },
+                   rezDeChausser: {
+                       number: true
+                   },
+                   mezzanin: {
+                       number: true
+                   },
+                   cageEscalier: {
+                       number: true
+                   },
+                   terrase: {
+                       number: true
+                   },
+                   budget: {
+                       number: true
+                   },
+                   superficieEtages: {
+                       number: true
+                   },
+                   delai: {
+                       number: true
+                   },
+                   prixParMetreHT: {
+                       number: true
+                   },
+                   prixParMetreTTC: {
+                       number: true
+                   },
+                   TVA: {
+                       number: true
+                   }
+                 },
+                 errorClass: "error-class",
+                 validClass: "valid-class"
+            });
+            //validate form ends
 		});
 	</script>
 </body>

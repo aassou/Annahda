@@ -18,8 +18,14 @@ class ProjetManager{
     //CRUD operations
     public function add(Projet $projet){
         $query = $this->_db->prepare(
-        'INSERT INTO t_projet (nom, nomArabe, titre, adresse, adresseArabe, superficie, description, budget, createdBy, created)
-        VALUES (:nom, :nomArabe, :titre, :adresse, :adresseArabe, :superficie, :description, :budget, :createdBy, :created)') 
+        'INSERT INTO t_projet (nom, nomArabe, titre, adresse, adresseArabe, superficie, description, budget, 
+        numeroLot, numeroAutorisation, nombreEtages, sousSol, rezDeChausser, mezzanin, cageEscalier, 
+        terrase, superficieEtages, delai, prixParMetreTTC, prixParMetreHT, TVA, architecte, bet, 
+        createdBy, created)
+        VALUES (:nom, :nomArabe, :titre, :adresse, :adresseArabe, :superficie, :description, :budget,
+        :numeroLot, :numeroAutorisation, :nombreEtages, :sousSol, :rezDeChausser, :mezzanin, :cageEscalier, 
+        :terrase, :superficieEtages, :delai, :prixParMetreTTC, :prixParMetreHT, :TVA, :architecte, :bet,  
+        :createdBy, :created)') 
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':nom', $projet->nom());
         $query->bindValue(':nomArabe', $projet->nomArabe());
@@ -29,6 +35,21 @@ class ProjetManager{
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':budget', $projet->budget());
+        $query->bindValue(':numeroLot', $projet->numeroLot()); 
+        $query->bindValue(':numeroAutorisation', $projet->numeroAutorisation()); 
+        $query->bindValue(':nombreEtages', $projet->nombreEtages()); 
+        $query->bindValue(':sousSol', $projet->sousSol()); 
+        $query->bindValue(':rezDeChausser', $projet->rezDeChausser()); 
+        $query->bindValue(':mezzanin', $projet->mezzanin()); 
+        $query->bindValue(':cageEscalier', $projet->cageEscalier()); 
+        $query->bindValue(':terrase', $projet->terrase()); 
+        $query->bindValue(':superficieEtages', $projet->superficieEtages()); 
+        $query->bindValue(':delai', $projet->delai()); 
+        $query->bindValue(':prixParMetreTTC', $projet->prixParMetreTTC()); 
+        $query->bindValue(':prixParMetreHT', $projet->prixParMetreHT()); 
+        $query->bindValue(':TVA', $projet->TVA()); 
+        $query->bindValue(':architecte', $projet->architecte()); 
+        $query->bindValue(':bet', $projet->bet());
         $query->bindValue(':created', $projet->created());
         $query->bindValue(':createdBy', $projet->createdBy());
         $query->execute();
@@ -39,7 +60,11 @@ class ProjetManager{
         $query = $this->_db->prepare(
         'UPDATE t_projet SET nom=:nom, nomArabe=:nomArabe, titre=:titre, adresse=:adresse, 
         adresseArabe=:adresseArabe, superficie=:superficie, description=:description, 
-        budget=:budget, updatedBy=:updatedBy, updated=:updated WHERE id=:id')
+        budget=:budget, numeroLot=:numeroLot, numeroAutorisation=:numeroAutorisation, 
+        nombreEtages=:nombreEtages, sousSol=:sousSol, rezDeChausser=:rezDeChausser, mezzanin=:mezzanin,
+        cageEscalier=:cageEscalier, terrase=:terrase, superficieEtages=:superficieEtages, delai=:delai,
+        prixParMetreTTC=:prixParMetreTTC, prixParMetreHT=:prixParMetreHT, TVA=:TVA, architecte=:architecte, 
+        bet=:bet, updatedBy=:updatedBy, updated=:updated WHERE id=:id')
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $projet->id());
         $query->bindValue(':nom', $projet->nom());
@@ -50,6 +75,21 @@ class ProjetManager{
         $query->bindValue(':description', $projet->description());
         $query->bindValue(':superficie', $projet->superficie());
         $query->bindValue(':budget', $projet->budget());
+        $query->bindValue(':numeroLot', $projet->numeroLot()); 
+        $query->bindValue(':numeroAutorisation', $projet->numeroAutorisation()); 
+        $query->bindValue(':nombreEtages', $projet->nombreEtages()); 
+        $query->bindValue(':sousSol', $projet->sousSol()); 
+        $query->bindValue(':rezDeChausser', $projet->rezDeChausser()); 
+        $query->bindValue(':mezzanin', $projet->mezzanin()); 
+        $query->bindValue(':cageEscalier', $projet->cageEscalier()); 
+        $query->bindValue(':terrase', $projet->terrase()); 
+        $query->bindValue(':superficieEtages', $projet->superficieEtages()); 
+        $query->bindValue(':delai', $projet->delai()); 
+        $query->bindValue(':prixParMetreTTC', $projet->prixParMetreTTC()); 
+        $query->bindValue(':prixParMetreHT', $projet->prixParMetreHT()); 
+        $query->bindValue(':TVA', $projet->TVA()); 
+        $query->bindValue(':architecte', $projet->architecte()); 
+        $query->bindValue(':bet', $projet->bet());
         $query->bindValue(':updated', $projet->updated());
         $query->bindValue(':updatedBy', $projet->updatedBy());
         $query->execute();
