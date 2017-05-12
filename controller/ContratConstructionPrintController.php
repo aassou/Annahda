@@ -27,7 +27,14 @@
 ob_start();
 ?>
 <style type="text/css">
-    table{
+    .bottom{
+        width:100%;
+        font-size: 14px;        
+        padding: 5px;
+        font-weight: bold;
+        margin-top: 100px;
+    }
+    .title{
         width:100%;
         border: solid 5px black;
         padding: 5px;
@@ -55,7 +62,7 @@ ob_start();
     <h2 style="font-size:22px; text-align: center;">Province de Nador</h2>
     <h3 style="font-size:18px; text-align: center;">Municipalité de Nador</h3>
     <br>
-    <table style="margin-top:200px">
+    <table class="title" style="margin-top:200px">
         <tr>
             <td style="font-size:30px; text-align: center; width:100%; padding: 20px;">
                 <span style="text-decoration: underline"><strong>CONTRAT</strong><br><br>
@@ -246,7 +253,12 @@ ob_start();
     <p style="text-align: left; font-size: 14px;">
     Fait à Nador, le <?= date('d/m/Y') ?> en 3 (trois) exemplaires de 5 pages. Ce contrat n’a aucune valeur juridique sans légalisation des autorités locales.
     </p>
-    <p><span style="text-align: right">Lu et acceptée</span><span style="text-align: right">Lu et acceptée</span></p>
+    <table class="bottom">
+        <tr>
+            <td style="width: 70%">Lu et acceptée</td>
+            <td style="width: 50%">Lu et acceptée</td>
+        </tr>
+    </table>        
     <page_footer>
     </page_footer>
 </page>    
