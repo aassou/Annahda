@@ -29,7 +29,8 @@ ob_start();
 <style type="text/css">
     table{
         width:100%;
-        border: solid 1px black;
+        border: solid 5px black;
+        padding: 5px;
     }
     .article{
         font-size:11pt;
@@ -54,26 +55,26 @@ ob_start();
     <h2 style="font-size:22px; text-align: center;">Province de Nador</h2>
     <h3 style="font-size:18px; text-align: center;">Municipalité de Nador</h3>
     <br>
-    <table style="margin-top:300px">
+    <table style="margin-top:200px">
         <tr>
-            <td style="font-size:30px; text-align: center; width:100%">
-                CONTRAT<br><br>
-                Objet: Contrat de Construction d'un Immeuble<br><br>
-                <?= $projet->description() ?><br><br>
-                LOT N° <?= $projet->numeroLot() ?>
+            <td style="font-size:30px; text-align: center; width:100%; padding: 20px;">
+                <span style="text-decoration: underline"><strong>CONTRAT</strong><br><br>
+                Objet : Contrat de Construction d'un Immeuble</span><br><br>
+                <strong><?= $projet->description() ?></strong><br><br>
+                LOT N° <strong><?= $projet->numeroLot() ?></strong>
             </td>
         </tr>    
     </table>
     <p style="text-decoration: underline; margin-top:400px; font-size: 16px;">Entre les sousignés:</p>
     <p style="font-size: 14px;text-align: justify">
     La Société <?= $company1->nom() ?> dont le siège se trouve à <?= $company1->adresse() ?> représentée aux fins 
-    des présentes par Mr. <?= $company1->directeur() ?> CIN  N° S 486672 agissant en tant que GERANT, inscrite au registre du commerce de Nador Sous le N° <?= $company1->rc() ?> .et ayant <?= $company1->patente() ?> Comme numéro de patente. Désigné ci- après par : «Entrepreneur».    
+    des présentes par Mr. <?= $company1->directeur() ?> CIN  N° <?= $company1->cinDirecteur() ?> agissant en tant que GERANT, inscrite au registre du commerce de Nador Sous le N° <?= $company1->rc() ?> .et ayant <?= $company1->patente() ?> Comme numéro de patente. Désigné ci- après par : «Entrepreneur».    
     </p>
     <p style="text-align: right; text-decoration:underline; font-size: 14px;">D'une part</p>
     <p style="text-align: left; text-decoration:underline; font-size: 14px;">ET</p>
     <p style="font-size: 14px;text-align: justify">
     La Société <?= $company2->nom() ?> dont le siège se trouve à <?= $company2->adresse() ?> représentée aux fins 
-    des présentes par Mr. <?= $company2->directeur() ?> CIN  N° S 486672 agissant en tant que GERANT, inscrite au registre du commerce de Nador Sous le N° <?= $company2->rc() ?> .et ayant <?= $company2->patente() ?> Comme numéro de patente. Désigné ci- après par : «Entrepreneur».    
+    des présentes par Mr. <?= $company2->directeur() ?> CIN  N° <?= $company2->cinDirecteur() ?> agissant en tant que GERANT, inscrite au registre du commerce de Nador Sous le N° <?= $company2->rc() ?> .et ayant <?= $company2->patente() ?> Comme numéro de patente. Désigné ci- après par : «Entrepreneur».    
     </p>
     <p style="text-align: right; text-decoration:underline; font-size: 14px;">D'autre part</p>
     <p style="font-size: 14px;text-align: justify">
@@ -95,7 +96,7 @@ ob_start();
     </p>
     <p style="text-align: left; font-size: 14px;">
     <span style="text-decoration: underline;font-weight: bold">Article 2</span> : Vu l’autorisation N° 
-    <?= $projet->numeroAutorisation() ?>. Datant du DATE. Et délivrée par le président du conseil municipal de Nador, le projet sera conçue sur 
+    <?= $projet->numeroAutorisation() ?>. Datant du <?= date('d/m/Y', strtotime($projet->dateAutorisation())) ?>. Et délivrée par le président du conseil municipal de Nador, le projet sera conçue sur 
     une surface totale approximative de <?= $projet->superficie() ?> m<sup>2</sup>, à savoir :
     <br>
     <ul>

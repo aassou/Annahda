@@ -12,14 +12,16 @@ class CompanyManager{
 	//BAISC CRUD OPERATIONS
 	public function add(Company $company){
     	$query = $this->_db->prepare(' INSERT INTO t_company (
-		nom, adresse, nomArabe, adresseArabe, directeur, rc, ifs, patente, created, createdBy)
-		VALUES (:nom, :adresse, :nomArabe, :adresseArabe, :directeur, :rc, :ifs, :patente, :created, :createdBy)')
+		nom, adresse, nomArabe, adresseArabe, directeur, cinDirecteur, rc, ifs, patente, created, createdBy)
+		VALUES (:nom, :adresse, :nomArabe, :adresseArabe, :directeur, :cinDirecteur, :rc, :ifs, 
+        :patente, :created, :createdBy)')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':nom', $company->nom());
 		$query->bindValue(':adresse', $company->adresse());
 		$query->bindValue(':nomArabe', $company->nomArabe());
 		$query->bindValue(':adresseArabe', $company->adresseArabe());
 		$query->bindValue(':directeur', $company->directeur());
+        $query->bindValue(':cinDirecteur', $company->cinDirecteur());
         $query->bindValue(':rc', $company->rc());
         $query->bindValue(':ifs', $company->ifs());
         $query->bindValue(':patente', $company->patente());
@@ -32,7 +34,7 @@ class CompanyManager{
 	public function update(Company $company){
     	$query = $this->_db->prepare(' UPDATE t_company SET 
 		nom=:nom, adresse=:adresse, nomArabe=:nomArabe, adresseArabe=:adresseArabe, directeur=:directeur, 
-		rc=:rc, ifs=:ifs, patente=:patente, updated=:updated, updatedBy=:updatedBy
+		cinDirecteur=:cinDirecteur, rc=:rc, ifs=:ifs, patente=:patente, updated=:updated, updatedBy=:updatedBy
 		WHERE id=:id')
 		or die (print_r($this->_db->errorInfo()));
 		$query->bindValue(':id', $company->id());
@@ -41,6 +43,7 @@ class CompanyManager{
 		$query->bindValue(':nomArabe', $company->nomArabe());
 		$query->bindValue(':adresseArabe', $company->adresseArabe());
 		$query->bindValue(':directeur', $company->directeur());
+        $query->bindValue(':cinDirecteur', $company->cinDirecteur());
         $query->bindValue(':rc', $company->rc());
         $query->bindValue(':ifs', $company->ifs());
         $query->bindValue(':patente', $company->patente());

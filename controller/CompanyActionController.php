@@ -32,6 +32,7 @@
 			$nomArabe = htmlentities($_POST['nomArabe']);
 			$adresseArabe = htmlentities($_POST['adresseArabe']);
 			$directeur = htmlentities($_POST['directeur']);
+            $cinDirecteur = htmlentities($_POST['cinDirecteur']);
             $rc = htmlentities($_POST['rc']);
             $ifs = htmlentities($_POST['ifs']);
             $patente = htmlentities($_POST['patente']);
@@ -44,6 +45,7 @@
 				'nomArabe' => $nomArabe,
 				'adresseArabe' => $adresseArabe,
 				'directeur' => $directeur,
+				'cinDirecteur' => $cinDirecteur,
 				'rc' => $rc,
 				'ifs' => $ifs,
 				'patente' => $patente,
@@ -70,6 +72,7 @@
 			$nomArabe = htmlentities($_POST['nomArabe']);
 			$adresseArabe = htmlentities($_POST['adresseArabe']);
 			$directeur = htmlentities($_POST['directeur']);
+            $cinDirecteur = htmlentities($_POST['cinDirecteur']);
             $rc = htmlentities($_POST['rc']);
             $ifs = htmlentities($_POST['ifs']);
             $patente = htmlentities($_POST['patente']);
@@ -82,6 +85,7 @@
 				'nomArabe' => $nomArabe,
 				'adresseArabe' => $adresseArabe,
 				'directeur' => $directeur,
+				'cinDirecteur' => $cinDirecteur,
 				'rc' => $rc,
                 'ifs' => $ifs,
                 'patente' => $patente,

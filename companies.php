@@ -114,9 +114,15 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Directeur</label>
+                                        <label class="control-label">Gérant</label>
                                         <div class="controls">
                                             <input type="text" name="directeur" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">CIN Gérant</label>
+                                        <div class="controls">
+                                            <input type="text" name="cinDirecteur" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -228,7 +234,7 @@
                                                 </td>
                                                 <td><?= $company->nom() ?></td>
                                                 <td class="hidden-phone"><?= $company->adresse() ?></td>
-                                                <td><?= $company->directeur() ?></td>
+                                                <td><?= $company->directeur() ?> - CIN : <?= $company->cinDirecteur() ?></td>
                                                 <td><?= "RC ".$company->rc()."/ IF ".$company->ifs()."/ Patente ".$company->patente() ?></td>
                                                 <td class="hidden-phone"><?= $company->nomArabe() ?></td>
                                                 <td class="hidden-phone"><?= $company->adresseArabe() ?></td>
@@ -254,9 +260,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="control-group">
-                                                            <label class="control-label">Directeur</label>
+                                                            <label class="control-label">Gérant</label>
                                                             <div class="controls">
                                                                 <input type="text" name="directeur" value="<?= $company->directeur() ?>" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label">CIN Gérant</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="cinDirecteur" value="<?= $company->cinDirecteur() ?>" />
                                                             </div>
                                                         </div>
                                                         <div class="control-group">

@@ -8,6 +8,7 @@ class Company{
 	private $_nomArabe;
 	private $_adresseArabe;
 	private $_directeur;
+    private $_cinDirecteur;
     private $_rc;
     private $_ifs;
     private $_patente;
@@ -55,6 +56,10 @@ class Company{
 	public function setDirecteur($directeur){
 		$this->_directeur = $directeur;
    	}
+    
+    public function setCinDirecteur($cinDirecteur){
+        $this->_cinDirecteur = $cinDirecteur;
+    }
     
     public function setRc($rc){
         $this->_rc = $rc;
@@ -108,6 +113,10 @@ class Company{
 	public function directeur(){
 		return $this->_directeur;
    	}
+    
+    public function cinDirecteur(){
+        return $this->_cinDirecteur;
+    }
     
     public function rc(){
         return $this->_rc;

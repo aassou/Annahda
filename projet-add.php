@@ -39,6 +39,7 @@
 	<link href="assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
 	<link rel="stylesheet" type="text/css" href="assets/chosen-bootstrap/chosen/chosen.css" />
+	<link rel="stylesheet" type="text/css" href="assets/bootstrap-datepicker/css/datepicker.css" />
 	<link rel="stylesheet" href="assets/data-tables/DT_bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="assets/uniform/css/uniform.default.css" />
 	<link rel="shortcut icon" href="favicon.ico" />
@@ -116,7 +117,7 @@
                                  <!-- BEGIN FORM-->
                                  <form id="addProjetForm" action="controller/ProjetActionController.php" method="POST" class="horizontal-form">
                                     <div class="row-fluid">
-                                        <div class="span2">
+                                        <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="nomArabe">اسم المشروع <sup class="dangerous-action">*</sup></label>
                                                <div class="controls">
@@ -124,7 +125,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="adresseArabe">عنوان المشروع <sup class="dangerous-action">*</sup></label>
                                                <div class="controls">
@@ -132,7 +133,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label">Nom <sup class="dangerous-action">*</sup></label>
                                                <div class="controls">
@@ -140,7 +141,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label">Titre</label>
                                                <div class="controls">
@@ -148,7 +149,9 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="superficie">Superficie</label>
                                              <div class="controls">
@@ -156,7 +159,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                              <label class="control-label" for="budget">Budget</label>
                                              <div class="controls">
@@ -164,9 +167,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="numeroLot">Numero Lot</label>
                                                <div class="controls">
@@ -174,7 +175,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="numeroAutorisation">Numero Autorisation</label>
                                                <div class="controls">
@@ -182,7 +183,20 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
+                                          <div class="control-group">
+                                             <label class="control-label" for="dateAutorisation">Date d'Autorisation</label>
+                                             <div class="controls">
+                                                <div class="input-append date date-picker" data-date="" data-date-format="yyyy-mm-dd">
+                                                    <input name="dateAutorisation" id="dateAutorisation" class="m-wrap m-ctrl-small date-picker" type="text" value="<?= date('Y-m-d') ?>" />
+                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                 </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="nombreEtages">Nombre Etages</label>
                                                <div class="controls">
@@ -190,7 +204,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="sousSol">Surface Sous-Sol</label>
                                                <div class="controls">
@@ -198,7 +212,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="rezDeChausser">Surface Rez De Chausser</label>
                                                <div class="controls">
@@ -206,7 +220,9 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="mezzanin">Surface Mezzanin</label>
                                                <div class="controls">
@@ -214,9 +230,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                    </div>
-                                    <div class="row-fluid">
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="cageEscalier">Surface Cage Escaliers</label>
                                                <div class="controls">
@@ -224,7 +238,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                            <div class="control-group">
                                                <label class="control-label" for="terrase">Surface Terrasse</label>
                                                <div class="controls">
@@ -232,7 +246,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="superficieEtages">Surface 1er-Nème Etage</label>
                                                <div class="controls">
@@ -240,7 +254,9 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span1">
+                                    </div>
+                                    <div class="row-fluid">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="delai">Delai/Mois</label>
                                                <div class="controls">
@@ -248,7 +264,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="prixParMetreHT">Prix/m² HT</label>
                                                <div class="controls">
@@ -256,7 +272,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span1">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="TVA">TVA</label>
                                                <div class="controls">
@@ -264,7 +280,7 @@
                                                </div>
                                            </div>
                                        </div>
-                                       <div class="span2">
+                                       <div class="span3">
                                           <div class="control-group">
                                                <label class="control-label" for="prixParMetreTTC">Prix/m² TTC</label>
                                                <div class="controls">
@@ -342,6 +358,9 @@
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>		
 	<script src="assets/js/jquery.blockui.js"></script>
 	<script src="assets/js/jquery.cookie.js"></script>
+	<script src="assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>   
+    <script type="text/javascript" src="assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="assets/bootstrap-daterangepicker/date.js"></script>
 	<!-- ie8 fixes -->
 	<!--[if lt IE 9]>
 	<script src="assets/js/excanvas.js"></script>

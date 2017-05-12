@@ -20,6 +20,7 @@ class Projet{
     private $_budget;
     private $_numeroLot;
     private $_numeroAutorisation;
+    private $_dateAutorisation;
     private $_nombreEtages;
     private $_sousSol;
     private $_rezDeChausser;
@@ -96,6 +97,10 @@ class Projet{
     
     public function setNumeroAutorisation($numeroAutorisation){
         $this->_numeroAutorisation = $numeroAutorisation;
+    }
+    
+    public function setDateAutorisation($dateAutorisation){
+        $this->_dateAutorisation = $dateAutorisation;
     }
     
     public function setNombreEtages($nombreEtages){
@@ -210,6 +215,10 @@ class Projet{
     
     public function numeroAutorisation(){
         return $this->_numeroAutorisation;
+    }
+    
+    public function dateAutorisation(){
+        return $this->_dateAutorisation;
     }
     
     public function nombreEtages(){

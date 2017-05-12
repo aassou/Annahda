@@ -37,6 +37,7 @@
             $description = htmlentities($_POST['description']);
             $numeroLot = htmlentities($_POST['numeroLot']);
             $numeroAutorisation = htmlentities($_POST['numeroAutorisation']);
+            $dateAutorisation = htmlentities($_POST['dateAutorisation']);
             $nombreEtages = htmlentities($_POST['nombreEtages']);
             $sousSol = htmlentities($_POST['sousSol']);
             $rezDeChausser = htmlentities($_POST['rezDeChausser']);
@@ -54,8 +55,9 @@
             $created = date('Y-m-d h:i:s');
             //create object
             $projet = 
-            new Projet(array('nom' => $nom, 'nomArabe' => $nomArabe, 'titre' => $titre, 'superficie' => $superficie, 
-            'budget' => $budget, 'numeroLot' => $numeroLot, 'numeroAutorisation' => $numeroAutorisation,
+            new Projet(array('nom' => $nom, 'nomArabe' => $nomArabe, 'titre' => $titre, 
+            'superficie' => $superficie, 'budget' => $budget, 'numeroLot' => $numeroLot, 
+            'numeroAutorisation' => $numeroAutorisation, 'dateAutorisation' => $dateAutorisation,
             'nombreEtages' => $nombreEtages, 'sousSol' => $sousSol, 'rezDeChausser' => $rezDeChausser,
             'mezzanin' => $mezzanin, 'cageEscalier' => $cageEscalier, 'terrase' => $terrase,
             'superficieEtages' => $superficieEtages, 'delai' => $delai, 'prixParMetreTTC' => $prixParMetreTTC,
@@ -98,6 +100,7 @@
             $description = htmlentities($_POST['description']);
             $numeroLot = htmlentities($_POST['numeroLot']);
             $numeroAutorisation = htmlentities($_POST['numeroAutorisation']);
+            $dateAutorisation = htmlentities($_POST['dateAutorisation']);
             $nombreEtages = htmlentities($_POST['nombreEtages']);
             $sousSol = htmlentities($_POST['sousSol']);
             $rezDeChausser = htmlentities($_POST['rezDeChausser']);
@@ -116,12 +119,13 @@
             $projet = 
             new Projet(array('id' => $idProjet, 'nom' => $nom, 'nomArabe' => $nomArabe, 'titre' => $titre, 
             'budget' => $budget,  'numeroLot' => $numeroLot, 'numeroAutorisation' => $numeroAutorisation,
-            'nombreEtages' => $nombreEtages, 'sousSol' => $sousSol, 'rezDeChausser' => $rezDeChausser,
-            'mezzanin' => $mezzanin, 'cageEscalier' => $cageEscalier, 'terrase' => $terrase,
-            'superficieEtages' => $superficieEtages, 'delai' => $delai, 'prixParMetreTTC' => $prixParMetreTTC,
-            'prixParMetreHT' => $prixParMetreHT, 'TVA' => $TVA, 'architecte' => $architecte, 'bet' => $bet,
-            'superficie' => $superficie, 'adresse' => $adresse, 'adresseArabe' => $adresseArabe, 
-            'description' => $description, 'updatedBy' => $updatedBy, 'updated' => $updated));
+            'dateAutorisation' => $dateAutorisation, 'nombreEtages' => $nombreEtages, 'sousSol' => $sousSol, 
+            'rezDeChausser' => $rezDeChausser, 'mezzanin' => $mezzanin, 'cageEscalier' => $cageEscalier, 
+            'terrase' => $terrase, 'superficieEtages' => $superficieEtages, 'delai' => $delai, 
+            'prixParMetreTTC' => $prixParMetreTTC, 'prixParMetreHT' => $prixParMetreHT, 'TVA' => $TVA, 
+            'architecte' => $architecte, 'bet' => $bet, 'superficie' => $superficie, 'adresse' => $adresse, 
+            'adresseArabe' => $adresseArabe, 'description' => $description, 'updatedBy' => $updatedBy, 
+            'updated' => $updated));
             $projetManager->update($projet);
             //add History data
             $createdBy = $_SESSION['userMerlaTrav']->login();
