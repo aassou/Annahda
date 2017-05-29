@@ -361,7 +361,7 @@ class ContratManager{
     
     public function getContratsActifsByIdProjet($idProjet){
         $contrats = array();    
-        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='actif'");
+        $query = $this->_db->prepare("SELECT * FROM t_contrat WHERE idProjet=:idProjet AND status='actif' ORDER BY typeBien ASC, idBien ASC");
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
