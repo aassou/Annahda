@@ -558,6 +558,9 @@
 															<input type="text" name="prix" value="<?= $locau->prix() ?>" />
 														</div>
 													</div>
+													<?php
+                                                    if ( $locau->status() != "Vendu" ){ 
+                                                    ?>
 													<div class="control-group">
 														<label class="right-label">Status</label>
 														<div class="controls">
@@ -569,6 +572,21 @@
 															</select>
 														</div>
 													</div>
+													<?php
+                                                    } 
+                                                    else {
+                                                    ?>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="status">Status</label>
+                                                        <div class="controls">
+                                                            <select name="status" id="status" class="m-wrap">
+                                                                <option value="Vendu">Vendu</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>         
+                                                    <?php
+                                                    }
+                                                    ?>
 													<div class="control-group">
 														<div class="controls">
 															<label class="right-label">Mezzanine</label>
