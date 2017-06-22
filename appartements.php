@@ -639,6 +639,18 @@
                                                     </div>
                                                     <?php
                                                     } 
+                                                    else {
+                                                    ?>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="status">Status</label>
+                                                        <div class="controls">
+                                                            <select style="width:150px" name="status" id="status" class="m-wrap">
+                                                                <option value="Vendu">Vendu</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>	       
+                                                    <?php
+                                                    }
                                                     ?>
                                                     <div class="control-group">
                                                         <label class="control-label" for="cave">Cave</label>
