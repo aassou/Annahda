@@ -259,6 +259,9 @@
                                                             <a target="_blank" href="controller/ProcurationPrintController.php?idContrat=<?= $contrat->id() ?>">
                                                                 Procuration
                                                             </a>
+                                                            <a href="#autorisation<?= $contrat->id() ?>" data-toggle="modal" data-id="<?= $contrat->id() ?>">
+                                                                Autorisation
+                                                            </a>
 												        </li>
 												    </ul>
 												</div>
@@ -292,6 +295,36 @@
                                             unset($_SESSION['print-quittance']); 
 											?>
 										</tr>
+										<!-- autorisation box begin-->
+                                        <div id="autorisation<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                                <h3>Imprimer Autorisation</h3>
+                                            </div>
+                                            <form target="_blank" class="form-horizontal loginFrm" action="controller/AutorisationPrintController.php" method="post">
+                                                <div class="modal-body">
+                                                    <div class="control-group">
+                                                        <label class="control-label">موضوع الموافقة</label>
+                                                        <div class="controls">
+                                                            <select name="compteur">
+                                                                <option value="ساعة الماء الصالح للشرب">ساعة الماء الصالح للشرب</option>
+                                                                <option value="عداد الكهرباء">عداد الكهرباء</option>
+                                                                <option value="ساعة الماء الصالح للشرب و عداد الكهرباء"> ساعة الماء الصالح للشرب و عداد الكهرباء</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="control-group">
+                                                        <input type="hidden" name="idContrat" value="<?= $contrat->id() ?>" />
+                                                        <input type="hidden" name="idProjet" value="<?= $projet->id() ?>" />
+                                                        <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
+                                                        <button type="submit" class="btn red" aria-hidden="true">Oui</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- autorisation box end -->
 										<!-- printContratArabe box begin-->
                                         <div id="printContratArabe<?= $contrat->id() ?>" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                             <div class="modal-header">
