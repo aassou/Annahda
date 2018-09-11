@@ -2,12 +2,12 @@
 	<div class="container-fluid">
 		<!-- BEGIN LOGO -->
 		<a class="brand">
-		<img src="assets/img/big-logo-new.png" alt="logo" />
+		<img src="../assets/img/big-logo-new.png" alt="logo" />
 		</a>
 		<!-- END LOGO -->
 		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 		<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
-		<img src="assets/img/menu-toggler.png" alt="" />
+		<img src="../assets/img/menu-toggler.png" alt="" />
 		</a>          
 		<!-- END RESPONSIVE MENU TOGGLER -->				
 		<!-- BEGIN TOP NAVIGATION MENU -->		

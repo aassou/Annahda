@@ -1,11 +1,11 @@
 <?php
 	//classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
@@ -76,14 +76,14 @@
 	<!-- BEGIN HEADER -->
 	<div class="header navbar navbar-inverse navbar-fixed-top">
 		<!-- BEGIN TOP NAVIGATION BAR -->
-		<?php include("include/top-menu.php"); ?>	
+		<?php include("../include/top-menu.php"); ?>
 		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->	
 	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
-		<?php include("include/sidebar.php"); ?>
+		<?php include("../include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
@@ -91,48 +91,9 @@
 			<div class="container-fluid">
 				<!-- BEGIN PAGE HEADER-->
 				<div class="row-fluid">
-					<div class="span12">
-						<h3 class="page-title">
-							Accueil
-						</h3>
-					</div>
+					<div class="span12"></div>
 				</div>
-				<!--      BEGIN TILES      -->
-				<div class="row-fluid">
-					<div class="span12">
-						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Iaaza</h4>
-						<div class="tiles">
-						    <a href="caisse-group-iaaza.php">
-                            <div class="tile bg-yellow">
-                                <div class="tile-body">
-                                    <i class="icon-money"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        La caisse
-                                    </div>
-                                    <div class="number">
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
-                            <a href="livraisons-group-iaaza.php">
-                            <div class="tile bg-blue">
-                                <div class="corner"></div>
-                                <div class="tile-body">
-                                    <i class="icon-truck"></i>
-                                </div>
-                                <div class="tile-object">
-                                    <div class="name">
-                                        Les livraisons
-                                    </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div><!--  Tiles Iaaza End -->
-                    </div>
-                </div>    
-                
+
                 <?php
                 if ( 
                     $_SESSION['userMerlaTrav']->profil() == "admin"
@@ -143,7 +104,7 @@
                 ?>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Annahda</h4>
+                        <h4 class="breadcrumb"><i class="icon-home"></i> Accueil</h4>
                         <div class="tiles">
 						    <a href="caisse-group.php">
                             <div class="tile bg-purple">
@@ -341,7 +302,7 @@
 				</div>
 				<!--      BEGIN TILES      -->
 				<!-- BEGIN DASHBOARD STATS -->
-				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
+				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et statistiques de la semaine</h4>
 				<div class="row-fluid">
 					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
 						<div class="dashboard-stat red">
@@ -566,7 +527,7 @@
 											?>
 											<div class="row-fluid">
 												<div class="span6 user-info">
-													<img alt="" src="assets/img/avatar.png" />
+													<img alt="" src="assets/d/avatar.png" />
 													<div class="details">
 														<div>
 															<a href="#"><?php //echo $mail->sender() ?></a> 

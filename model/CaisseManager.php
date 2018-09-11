@@ -227,8 +227,7 @@ class CaisseManager{
 
     public function getCaissesGroupByMonth(){
         $caisses = array();
-        $query = $this->_db->query(
-        "SELECT * FROM t_caisse 
+        $query = $this->_db->query("SELECT * FROM t_caisse 
         GROUP BY MONTH(dateOperation), YEAR(dateOperation)
         ORDER BY dateOperation DESC");
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
