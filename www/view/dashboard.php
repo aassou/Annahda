@@ -1,11 +1,11 @@
 <?php
 	//classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
@@ -76,14 +76,14 @@
 	<!-- BEGIN HEADER -->
 	<div class="header navbar navbar-inverse navbar-fixed-top">
 		<!-- BEGIN TOP NAVIGATION BAR -->
-		<?php include("include/top-menu.php"); ?>	
+		<?php include("../include/top-menu.php"); ?>	
 		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->	
 	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
-		<?php include("include/sidebar.php"); ?>
+		<?php include("../include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
