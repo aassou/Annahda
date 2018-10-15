@@ -13,14 +13,14 @@ services:
     db:
         image: mysql:5.7
         ports: 
-            - "3306:3306"
+            - "3307:3307"
         environment:
             MYSQL_DATABASE: annahda
-            MYSQL_USER: root
+            MYSQL_USER: user
             MYSQL_PASSWORD: test
             MYSQL_ROOT_PASSWORD: test 
         volumes:
-            - ./dump:/docker-entrypoint-initdb.d
+            - ./db:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
             - default

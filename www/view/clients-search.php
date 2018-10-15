@@ -1,17 +1,5 @@
 <?php
-//classes loading begin
-    function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
-        }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
-        }
-    }
-    spl_autoload_register("classLoad"); 
-    include('config.php');  
-    include('lib/pagination.php');
-    //classes loading end
+    include('../autoload.php');
     session_start();
     if(isset($_SESSION['userMerlaTrav']) and $_SESSION['userMerlaTrav']->profil()=="admin"){
     	//les services

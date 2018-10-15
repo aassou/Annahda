@@ -10,7 +10,7 @@
     }
     spl_autoload_register("classLoad"); 
     include('config.php');  
-    include('lib/pagination.php');
+    include('../lib/pagination.php');
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav']) ){

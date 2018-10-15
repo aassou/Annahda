@@ -1,5 +1,5 @@
 <?php
-include('config.php');  
+include('../autoload.php');
 if(isset($_POST['typeBien'])){
 	$typeBien = htmlentities($_POST['typeBien']);
 	$idProjet = htmlentities($_POST['idProjet']);
