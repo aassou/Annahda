@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
 	include('../lib/pagination.php');
     //classes loading end
     session_start();
@@ -86,9 +86,7 @@
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->			
 			<div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span12"></div>
-                </div>
+                <div class="row-fluid"><div class="span12"></div></div>
 				<div class="row-fluid">
 					<div class="span12">
 						<ul class="breadcrumb">
@@ -103,10 +101,13 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
+                                <i class="icon-building"></i>
                                 <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>
-							<li><a><strong>Gestion des appartements</strong></a></li>
+							<li>
+                                <a><strong>Gestion des appartements</strong></a>
+                            </li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>

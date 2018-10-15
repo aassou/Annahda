@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config/config.php');
 $keyword = '%'.$_POST['keyword'].'%';
 //$idParking = htmlentities($_POST['number']);
 $number = $_POST['number'];

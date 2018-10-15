@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
 	include('../lib/pagination.php');
     include('../lib/image-processing.php');
     //classes loading end
@@ -121,6 +121,7 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
+                                <i class="icon-building"></i>
                                 <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>

@@ -1,16 +1,19 @@
 <?php
 //classes loading begin
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
-    include('lib/pagination.php');
+    include('../config/config.php');  
+    include('../lib/pagination.php');
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav']) 
@@ -59,29 +62,27 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid">
+                    <div class="span12"></div>
+                </div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
-                        <h3 class="page-title">
-                            Gestion des charges Projet <strong><?= $projet->nom() ?></strong>
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
-                                <i class="icon-dashboard"></i>
+                                <i class="icon-home"></i>
                                 <a href="dashboard.php">Accueil</a> 
                                 <i class="icon-angle-right"></i>
                             </li>
@@ -91,12 +92,13 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <strong><?= $projet->nom() ?></strong></a> 
+                                <i class="icon-building"></i>
+                                <a href="projet-details.php?idProjet=<?= $idProjet ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
                                 <i class="icon-bar-chart"></i>
-                                <a>Gestion des charges</a> 
+                                <a><strong>Gestion des charges</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
         }
     }
     spl_autoload_register("classLoad");
-    include('config.php');
+    include('../config/config.php');
     include('../lib/pagination.php');
     //classes loading end
     session_start();
@@ -71,13 +71,9 @@ ini_set('display_errors', 1);
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
-                        <h3 class="page-title">
-                            Gestion de la caisse
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -86,7 +82,7 @@ ini_set('display_errors', 1);
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a>Gestion de la caisse <strong>Société Annahda</strong></a>
+                                <a><strong>Gestion de la caisse</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

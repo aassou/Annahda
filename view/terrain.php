@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
@@ -90,10 +90,13 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
+                                <i class="icon-building"></i>
                                 <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>
-							<li><a><strong>Gestion des terrains</strong></a></li>
+							<li>
+                                <a><strong>Gestion des terrains</strong></a>
+                            </li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
 					</div>

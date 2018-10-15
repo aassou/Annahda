@@ -102,8 +102,9 @@ class CommandeManager{
 	}
 
 	public function getLastId(){
-    	$query = $this->_db->query(' SELECT id AS last_id FROM t_commande
-		ORDER BY id DESC LIMIT 0, 1');
+    	$query = $this->_db->query(
+    	    'SELECT id AS last_id FROM t_commande 
+            ORDER BY id DESC LIMIT 0, 1');
 		$data = $query->fetch(PDO::FETCH_ASSOC);
 		$id = $data['last_id'];
 		return $id;
@@ -112,13 +113,14 @@ class CommandeManager{
     /**********************************************************************************************/
     /***********                                 New Methods                              *********/
     /**********************************************************************************************/
-    
+
     public function getCommandesGroupByMonth(){
         $commandes = array();
         $query = $this->_db->query(
-        "SELECT * FROM t_commande 
-        GROUP BY MONTH(dateCommande), YEAR(dateCommande)
-        ORDER BY dateCommande DESC");
+            'SELECT * FROM t_commande 
+            GROUP BY MONTH(dateCommande), YEAR(dateCommande) 
+            ORDER BY dateCommande DESC'
+        );
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $commandes[] = new Commande($data);
         }

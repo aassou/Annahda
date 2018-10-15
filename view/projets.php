@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
     include('../lib/pagination.php');
     //classes loading end
     session_start();
@@ -72,7 +72,6 @@ ini_set('display_errors', 1);
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12"></div>
                 </div>
@@ -86,7 +85,7 @@ ini_set('display_errors', 1);
                             </li>
                             <li>
                                 <i class="icon-briefcase"></i>
-                                <a>Gestion des projets</a>
+                                <a><strong>Gestion des projets</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

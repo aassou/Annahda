@@ -1,16 +1,16 @@
 <?php
 //classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
-    include('lib/pagination.php');
+    include('../config/config.php');  
+    include('../lib/pagination.php');
     //classes loading end
     session_start();
     if ( isset($_SESSION['userMerlaTrav']) ) {
@@ -63,26 +63,22 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
-                        <h3 class="page-title">
-                            Gestion des commandes - Société Iaaza</strong>
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -91,7 +87,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="commande-group-iaaza.php">Gestion des commandes <strong>Société Iaaza</strong></a>
+                                <a href="commande-group.php">Gestion des commandes</a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -249,7 +245,7 @@
                                                 <?php
                                                 }
                                                 ?>
-                                                <a class="btn mini" href="commande-details-iaaza.php?codeCommande=<?= $commande->codeLivraison() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Commande" >
+                                                <a class="btn mini" href="commande-details.php?codeCommande=<?= $commande->codeLivraison() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Commande" >
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                                 <a class="btn mini blue" href="../controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" title="Imprimer Bon Commande" >

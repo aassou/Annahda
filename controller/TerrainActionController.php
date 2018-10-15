@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -112,5 +112,5 @@
     
     $_SESSION['terrain-action-message'] = $actionMessage;
     $_SESSION['terrain-type-message'] = $typeMessage;
-    header('Location:../terrain.php?idProjet='.$idProjet);
+    header('Location:../view/terrain.php?idProjet='.$idProjet);
     

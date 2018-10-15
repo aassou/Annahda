@@ -9,7 +9,7 @@ function imageProcessing($source, $path){
 			if(in_array($extensionUpload, $extensionsAutorise)){
 				$nameUpload = basename($source['name']);
 				$nameUpload = uniqid().$nameUpload;
-				move_uploaded_file($source['tmp_name'], '..'.$path.$nameUpload);
+				move_uploaded_file($source['tmp_name'], $path.$nameUpload);
 				$image = $path.$nameUpload;
 			}
 		}

@@ -1,15 +1,15 @@
 <?php
 //classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');  
     //classes loading end
     session_start();
     if(isset($_SESSION['userMerlaTrav'])){
@@ -62,7 +62,7 @@
     <!-- BEGIN CONTAINER -->    
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">

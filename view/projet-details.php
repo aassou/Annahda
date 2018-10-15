@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
     include('../lib/pagination.php');
     //classes loading end
     session_start();
@@ -83,7 +83,10 @@
                                 <a href="projets.php">Gestion des projets</a>
                                 <i class="icon-angle-right"></i>
                             </li>
-                            <li><a><strong>Projet <?= $projet->nom() ?></strong></a></li>
+                            <li>
+                                <i class="icon-building"></i>
+                                <a><strong>Projet <?= $projet->nom() ?></strong></a>
+                            </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>

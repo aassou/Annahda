@@ -19,7 +19,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -53,7 +53,7 @@
             $codeClient = $client->code();
             $actionMessage = "<strong>Opération Valide : </strong>Client Récuperé avec succès.";
             $typeMessage = "info";
-            $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
+            $redirectLink = 'Location:../view/contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
         }
         //if we don't get any customer information from the clients-add.php page, 
         //then there is one of two cases to treat
@@ -65,7 +65,7 @@
                 if( $clientManager->existsCIN($cin) ){
                     $actionMessage = "<strong>Erreur Création Client : </strong>Un client existe déjà avec ce CIN : <strong>".$cin."</strong>.";
                     $typeMessage = "error";
-                    $redirectLink = 'Location:../clients-add.php?idProjet='.$idProjet;
+                    $redirectLink = 'Location:../view/clients-add.php?idProjet='.$idProjet;
                 }
                 //Case 2 :  The customer doesn't exist, so we add to our database, 
                 //and the send its generated code to the contrats-add.php url   
@@ -102,14 +102,14 @@
                     //result processes   
                     $actionMessage = "<strong>Opération Valide : </strong>Client Ajouté(e) avec succès.";
                     $typeMessage = "success";
-                    $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
+                    $redirectLink = 'Location:../view/contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
                 }
             }
             //This is a simple form validation, the field Nom should not be empty
             else{
                 $actionMessage = "<strong>Erreur Création Client : </strong>Vous devez remplir au moins le champ <strong>&lt;Nom&gt;</strong>.";
                 $typeMessage = "error";
-                $redirectLink = 'Location:../clients-add.php?idProjet='.$idProjet;
+                $redirectLink = 'Location:../view/clients-add.php?idProjet='.$idProjet;
             }   
         }
     }
@@ -151,20 +151,20 @@
             $actionMessage = "<strong>Opération Valide : </strong>Client Modifié(e) avec succès.";
             $typeMessage = "success";
             if( $source == "contrat" ){
-                $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+                $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat;
             }
             else if( $source="clients" ){
-                $redirectLink = "Location:../clients-list.php";   
+                $redirectLink = "Location:../view/clients-list.php";
             }
         }
         else{
             $actionMessage = "<strong>Erreur Modification Client : </strong>Vous devez remplir le champ <strong>&lt;Nom&gt;</strong>.";
             $typeMessage = "error";
             if( $source == "contrat" ){
-                $redirectLink = "Location:../contrat.php?codeContrat=".$codeClient;
+                $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeClient;
             }
             else if( $source == "clients" ){
-                $redirectLink = "Location:../clients.php";   
+                $redirectLink = "Location:../view/clients.php";
             }
         }
     }
@@ -185,14 +185,14 @@
         $historyManager->add($history);*/
         $actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../clients-list.php";
+        $redirectLink = "Location:../view/clients-list.php";
     }
     else if($action=="search"){
         $clientName = htmlentities($_POST['clientName']);
         $_SESSION['searchClientResult'] = $clientManager->getClientBySearch($clientName, 1);
         //$actionMessage = "<strong>Opération Valide : </strong>Client Supprimé(e) avec succès.";
         //$typeMessage = "success";
-        $redirectLink = "Location:../clients-search.php";
+        $redirectLink = "Location:../view/clients-search.php";
     }
     
     $_SESSION['client-action-message'] = $actionMessage;

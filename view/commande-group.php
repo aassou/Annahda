@@ -1,16 +1,18 @@
 <?php
-//classes loading begin
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+    //classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
-    include('lib/pagination.php');
+    include('../config/config.php');  
+    include('../lib/pagination.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
@@ -20,7 +22,7 @@
         $commandeManager = new CommandeManager($pdo);
         $projets = $projetManager->getProjets();
         $fournisseurs = $fournisseurManager->getFournisseurs();    
-        $commandes =$commandeManager->getCommandesGroupByMonth();
+        $commandes = $commandeManager->getCommandesGroupByMonth();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -54,26 +56,22 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
-                        <h3 class="page-title">
-                            Gestion des commandes : Société Iaaza
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -82,7 +80,7 @@
                             </li>
                             <li>
                                 <i class="icon-shopping-cart"></i>
-                                <a>Gestion des commandes - <strong>Société Iaaza</strong></a>
+                                <a><strong>Gestion des commandes</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -271,7 +269,7 @@
                                             $annee = date('Y', strtotime($commande->dateCommande()));
                                             ?>
                                             <td>
-                                                <a class="btn mini" href="commande-mois-annee-iaaza.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
+                                                <a class="btn mini" href="commande-mois-annee.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
                                                     <strong><?= date('m/Y', strtotime($commande->dateCommande())) ?></strong>
                                                 </a>
                                             </td>

@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config/config.php');
 $keyword = '%'.$_POST['keyword'].'%';
 $sql = "SELECT * FROM t_client WHERE nom LIKE (:keyword) ORDER BY id ASC LIMIT 0, 10";
 $query = $pdo->prepare($sql);

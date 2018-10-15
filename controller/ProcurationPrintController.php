@@ -11,7 +11,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include("../config/config.php");
     include('../lib/image-processing.php');
     require_once('../lib/tcpdf/tcpdf.php');
     //classes loading end

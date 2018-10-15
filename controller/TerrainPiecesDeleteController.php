@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -20,6 +20,6 @@
 	$piecesTerrainManager->delete($idPieceTerrain);
 	//delete file from the disk
 	$_SESSION['pieces-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimé avec succès.";
-	header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+	header('Location:../view/terrain.php?idProjet='.$idProjet.'#listTerrain');
     
     

@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config/config.php');
 include('model/ReglementPrevu.php');
 include('model/ReglementPrevuManager.php');
 $prixNegocie = htmlentities($_POST['prixNegocie']);

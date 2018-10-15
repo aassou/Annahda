@@ -1,15 +1,15 @@
 <?php
     //classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');  
     //classes loading end
     session_start();
     if ( isset($_SESSION['userMerlaTrav']) ) {
@@ -56,25 +56,22 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->    
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h3 class="page-title">
-                            Gestion Sous-sol - Projet : <strong><?= $projet->nom() ?></strong>
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -87,11 +84,12 @@
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-building"></i>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a>Gestion Sous-Sol</a>
+                                <strong><a>Gestion Sous-Sol</strong></a>
                             </li>
                         </ul>
                     </div>

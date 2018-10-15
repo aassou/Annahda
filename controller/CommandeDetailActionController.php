@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include("../config/config.php");
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -24,7 +24,7 @@
     $mois = $_POST['mois'];
     $annee = $_POST['annee'];
     $codeCommande = $_POST['codeCommande'];
-    $redirectLink = "Location:../commande-details-iaaza.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
+    $redirectLink = "Location:../commande-details.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
     //Component Class Manager
 
     $commandeDetailManager = new CommandeDetailManager($pdo);

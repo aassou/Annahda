@@ -107,10 +107,13 @@ class ChargeManager{
     
     public function getChargesByGroupByIdProjet($idProjet){
         $charges = array();
+        $this->_db = new PDO('mysql:host=localhost;dbname=immo', 'root', 'ana');
         $query = $this->_db->prepare('SELECT id, type, SUM(montant) AS montant FROM t_charge WHERE idProjet=:idProjet GROUP BY type');
         $query->bindValue(':idProjet', $idProjet);
         $query->execute();
-        while($data = $query->fetch(PDO::FETCH_ASSOC)){
+        //var_dump($query->errorInfo());die;
+        while($query->fetch(PDO::FETCH_ASSOC)){
+            $data = $query->fetch(PDO::FETCH_ASSOC);
             $charges[] = new Charge($data);
         }
         $query->closeCursor();

@@ -195,9 +195,9 @@
                     $gestionCommandeClass="";
                     if(
                     $currentPage=="commande-group.php"
-                    or $currentPage=="commande-group-iaaza.php"
-                    or $currentPage=="commande-details-iaaza.php"
-                    or $currentPage=="commande-mois-annee-iaaza.php"
+                    or $currentPage=="commande-group.php"
+                    or $currentPage=="commande-details.php"
+                    or $currentPage=="commande-mois-annee.php"
                     ){
                         $gestionCommandeClass = "active ";
                     } 
@@ -231,9 +231,9 @@
                             $_SESSION['userMerlaTrav']->profil() == "consultant" 
                             ) {
                         ?>
-                        <li <?php if($currentPage=="commande-group-iaaza.php"
-                                    or $currentPage=="commande-details-iaaza.php"
-                                    or $currentPage=="commande-mois-annee-iaaza.php"
+                        <li <?php if($currentPage=="commande-group.php"
+                                    or $currentPage=="commande-details.php"
+                                    or $currentPage=="commande-mois-annee.php"
                                     ){?> class="active" <?php } ?> >
                             <a href="commande-group-iaaza.php">Société Iaaza</a>
                         </li>

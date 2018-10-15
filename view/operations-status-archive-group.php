@@ -1,16 +1,16 @@
 <?php
 //classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
-    include('lib/pagination.php');
+    include('../config/config.php');
+    include('../lib/pagination.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
@@ -50,26 +50,22 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>   
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
             <!-- BEGIN PAGE CONTAINER-->            
             <div class="container-fluid">
-                <!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
-                        <h3 class="page-title">
-                            Archive des opérations des paiements clients
-                        </h3>
                         <ul class="breadcrumb">
                             <li>
                                 <i class="icon-home"></i>
@@ -81,7 +77,9 @@
                                 <a href="configuration.php">Paramètrages</a>
                                 <i class="icon-angle-right"></i>
                             </li>
-                            <li><a>Archive des opérations des paiements clients</a></li>
+                            <li>
+                                <a><strong>Archive des opérations des paiements clients</strong></a>
+                            </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>

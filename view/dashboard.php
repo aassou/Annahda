@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     if ( isset($_SESSION['userMerlaTrav']) ) {
@@ -89,11 +89,7 @@
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->
 			<div class="container-fluid">
-				<!-- BEGIN PAGE HEADER-->
-				<div class="row-fluid">
-					<div class="span12"></div>
-				</div>
-
+				<div class="row-fluid"><div class="span12"></div></div>
                 <?php
                 if ( 
                     $_SESSION['userMerlaTrav']->profil() == "admin"
@@ -104,7 +100,12 @@
                 ?>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4 class="breadcrumb"><i class="icon-home"></i> Accueil</h4>
+                        <ul class="breadcrumb">
+                            <li>
+                                <i class="icon-home"></i>
+                                <a href="dashboard.php"><strong>Accueil</strong></a>
+                            </li>
+                        </ul>
                         <div class="tiles">
 						    <a href="caisse-group.php">
                             <div class="tile bg-purple">
@@ -120,7 +121,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="commande-group-iaaza.php">
+                            <a href="commande-group.php">
                             <div class="tile bg-red">
                                 <div class="corner"></div>
                                 <div class="tile-body">

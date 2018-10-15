@@ -1,16 +1,16 @@
 <?php
 	//classes loading begin
     function classLoad ($myClass) {
-        if(file_exists('model/'.$myClass.'.php')){
-            include('model/'.$myClass.'.php');
+        if(file_exists('../model/'.$myClass.'.php')){
+            include('../model/'.$myClass.'.php');
         }
-        elseif(file_exists('controller/'.$myClass.'.php')){
-            include('controller/'.$myClass.'.php');
+        elseif(file_exists('../controller/'.$myClass.'.php')){
+            include('../controller/'.$myClass.'.php');
         }
     }
     spl_autoload_register("classLoad"); 
-    include('config.php');  
-	include('lib/pagination.php');
+    include('../config/config.php');  
+	include('../lib/pagination.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ) {
@@ -118,26 +118,22 @@
 	<!-- BEGIN HEADER -->
 	<div class="header navbar navbar-inverse navbar-fixed-top">
 		<!-- BEGIN TOP NAVIGATION BAR -->
-		<?php include("include/top-menu.php"); ?>	
+		<?php include("../include/top-menu.php"); ?>	
 		<!-- END TOP NAVIGATION BAR -->
 	</div>
 	<!-- END HEADER -->
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container row-fluid sidebar-closed">
 		<!-- BEGIN SIDEBAR -->
-		<?php include("include/sidebar.php"); ?>
+		<?php include("../include/sidebar.php"); ?>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN PAGE CONTAINER-->			
 			<div class="container-fluid">
-				<!-- BEGIN PAGE HEADER-->
+                <div class="row-fluid"><div class="span12"></div></div>
 				<div class="row-fluid">
 					<div class="span12">
-						<!-- BEGIN PAGE TITLE & BREADCRUMB-->			
-						<h3 class="page-title">
-							Résumé Contrat Client Projet : <strong><?= $projet->nom() ?></strong>
-						</h3>
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home"></i>
@@ -150,7 +146,8 @@
 								<i class="icon-angle-right"></i>
 							</li>
 							<li>
-                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <strong><?= $projet->nom() ?></strong></a>
+                                <i class="icon-building"></i>
+                                <a href="projet-details.php?idProjet=<?= $projet->id() ?>">Projet <?= $projet->nom() ?></a>
                                 <i class="icon-angle-right"></i>
                             </li>
 							<li>
@@ -158,7 +155,7 @@
 							    <i class="icon-angle-right"></i>
 							</li>
 							<li>
-                                <a>Résumé contrat</a>
+                            <a><strong>Résumé contrat</strong></a>
                             </li>
 						</ul>
 						<!-- END PAGE TITLE & BREADCRUMB-->
@@ -188,24 +185,24 @@
                              }
                          }
 	                     ?>
-	                    <h3>Résumé du Contrat&nbsp;&nbsp;
-	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width stay-away" href="../controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
+
+	                    	<a style="margin-top:5px;" class="btn blue btn-fixed-width-big stay-away" href="../controller/ContratClientSituationPrintController.php?codeContrat=<?= $contrat->code() ?>">
 	                    		<i class="icon-print"></i>&nbsp;Version Imprimable
 	                    	</a>
-	                    	<a style="margin-top:5px;" class="btn green btn-fixed-width stay-away" href="../controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
+	                    	<a style="margin-top:5px;" class="btn green btn-fixed-width-big stay-away" href="../controller/ContratArabePrintController.php?idContrat=<?= $contrat->id() ?>">
                                 <i class="icon-print"></i>&nbsp;Contrat
                             </a>
                             <?php if ( $contrat->revendre() == 1 ) { ?>
-                            <a target="_blank" style="margin-top:5px;" class="btn red btn-fixed-width stay-away" href="../controller/RevendrePrintController.php?idContrat=<?= $contrat->id() ?>">
+                            <a target="_blank" style="margin-top:5px;" class="btn red btn-fixed-width-big stay-away" href="../controller/RevendrePrintController.php?idContrat=<?= $contrat->id() ?>">
                                 <i class="icon-print"></i>&nbsp;Attestation de Revente
                             </a>
                             <?php } ?>
                             <?php if ( $contrat->prixVente()-($sommeOperations) == 0 ) { ?>
-                            <a target="_blank" style="margin-top:5px;" class="btn black btn-fixed-width stay-away" href="../controller/PaiementCompletPrintController.php?idContrat=<?= $contrat->id() ?>">
+                            <a target="_blank" style="margin-top:5px;" class="btn black btn-fixed-width-big stay-away" href="../controller/PaiementCompletPrintController.php?idContrat=<?= $contrat->id() ?>">
                                 <i class="icon-print"></i>&nbsp;Attestation Paiement Complet
                             </a>
                             <?php } ?>
-	                    </h3>
+
 	                    
 	                    <h4 style="text-align: center">Avancement du contrat</h4>
 	                    <div class="progress <?= $statusBar ?>">
