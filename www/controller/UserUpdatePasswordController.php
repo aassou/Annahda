@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
 	
@@ -29,4 +29,4 @@
 	else{
 		$_SESSION['password-update-error']="<strong>Erreur Mot de passe</strong> : Vous devez saisir votre ancien mot de passe pour créer un nouveau.";
 	}
-	header('Location:../user-profil.php');
+	header('Location:../view/view/user-profil.php');

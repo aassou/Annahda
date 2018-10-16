@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -66,7 +66,7 @@
             $actionMessage = "Erreur Ajout Paiement au Syndique : Vous devez remplir tous les champs!";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
+        $redirectLink = "Location:../view/syndique.php?idProjet=$idProjet";
     }
     //Action Add Processing End
     //Action Update Processing Begin
@@ -108,7 +108,7 @@
             $typeMessage = "error";
         }
         //redirection Link
-        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
+        $redirectLink = "Location:../view/syndique.php?idProjet=$idProjet";
     }
     //Action Update Processing End
     //Action UpdateStatus Processing Begin
@@ -129,7 +129,7 @@
         $actionMessage = "Opération Valide : Status Modifié(e) avec succès.";
         $typeMessage = "success";
         //redirection Link
-        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
+        $redirectLink = "Location:../view/syndique.php?idProjet=$idProjet";
     }
     //Action UpdateStatus Processing End
     //Action Delete Processing Begin
@@ -149,7 +149,7 @@
         $actionMessage = "Opération Valide : Ligne Syndique supprimé(e) avec succès.";
         $typeMessage = "success";
         //redirection Link
-        $redirectLink = "Location:../syndique.php?idProjet=$idProjet";
+        $redirectLink = "Location:../view/syndique.php?idProjet=$idProjet";
     }
     //Action Delete Processing End
     $_SESSION['syndique-action-message'] = $actionMessage;

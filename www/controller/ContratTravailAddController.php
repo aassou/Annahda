@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -38,5 +38,5 @@
     else{
         $_SESSION['contrat-add-error'] = "<strong> خطأ في التسجيل</strong>"."يجب ادخال  الاسم ";
     }
-	header('Location:../contrats-travail.php?idProjet='.$idProjet);
+	header('Location:../view/view/contrats-travail.php?idProjet='.$idProjet);
     

@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -24,7 +24,7 @@
     //The History Component is used in all ActionControllers to mention a historical version of each action
     $historyManager = new HistoryManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
-    $redirectLink = "Location:../appartements.php?idProjet=".$idProjet;
+    $redirectLink = "Location:../view/appartements.php?idProjet=".$idProjet;
     $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     if($action == "add"){
         if( !empty($_POST['code']) ){
@@ -166,7 +166,7 @@
         $historyManager->add($history);
         $actionMessage = "Opération Valide : Montant Revente Appartement Modifié avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../properties-status.php";
+        $redirectLink = "Location:../view/properties-status.php";
     }
     //UPDATE MontantReventeApartement END
     else if($action=="updateClient"){

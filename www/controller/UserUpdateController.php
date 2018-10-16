@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -19,6 +19,6 @@
     $userManager = new UserManager($pdo);
 	$userManager->updateProfil($idUser, $profil);
 	$_SESSION['user-update-success'] = "<strong>Opération valide</strong> : Profil Utlisateur est modifié avec succès.";
-	header('Location:../users.php');
+	header('Location:../view/view/users.php');
     
     

@@ -2,168 +2,341 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/view/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/404.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/view/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/view/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax-refresh-client-name.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/ajax-refresh-client-name.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax-refresh-client.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/ajax-refresh-client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax-refresh-employe-projet.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/ajax-refresh-employe-projet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax-refresh-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/ajax-refresh-fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ajax-refresh-projet.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/ajax-refresh-projet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/alert.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/alert.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/annuaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/annuaire.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appartement-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/appartement-detail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appartements.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/appartements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/jquery-validation/demo/marketo/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/assets/jquery-validation/demo/marketo/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/jquery-validation/demo/marketo/step2.htm" beforeDir="false" afterPath="$PROJECT_DIR$/assets/jquery-validation/demo/marketo/step2.htm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/autoload_process.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/autoload_process.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bugs.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/bugs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-entrees.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-entrees.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-mois-annee-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-mois-annee.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-mois-annee.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse-sorties.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse-sorties.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caisse.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/caisse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charges-communs-grouped.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/charges-communs-grouped.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/charges-communs-type.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/charges-communs-type.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-attente.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-attente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-classement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-load.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-load.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-modification.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-modification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients-synthese.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients-synthese.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/clients.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/collaboration.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/collaboration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/commande-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/commande-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/commande-mois-annee-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/commissions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/companies.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/companies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compte-bancaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/compte-bancaire.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/configuration.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrat-employe-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrat-employe-detail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrat-status-backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrat-status-backup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrat-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrat-status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrat.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-desistes-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-desistes-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-desistes.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-desistes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-synthese.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-synthese.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contrats-travail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/contrats-travail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/debug_page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employe-projet-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employe-projet-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employe-societe-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employe-societe-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employes-contrats.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employes-contrats.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employes-projet-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employes-projet-search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employes-projet.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employes-projet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/employes-societe.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/employes-societe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/view/favicon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fix-issues.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fix-issues.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fournisseur-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fournisseur-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fournisseur-reglement.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fournisseur-reglement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fournisseurs-reglements.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fournisseurs-reglements.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fournisseurs-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fournisseurs-search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fournisseurs.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/fournisseurs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/history-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/history.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraison-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraison-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraison-fournisseur-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraison-fournisseur-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraison-pieces.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraison-pieces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraison.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraison.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraison3.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraison3.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-details.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur-mois-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur-mois-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur-mois.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur-mois.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livraisons2.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/livraisons2.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locaux-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/locaux-detail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/locaux.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/locaux.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/logout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/map.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/messages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations-status-archive-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/operations-status-archive-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations-status-archive.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/operations-status-archive.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations-status-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/operations-status-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/operations-status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/operations.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/operations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pieces-appartement.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/pieces-appartement.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pieces-locaux.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/pieces-locaux.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-add.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-charges-grouped.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-charges-grouped.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-charges-type.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-charges-type.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-charges.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-charges.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-contrat-employe.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-contrat-employe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-details.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-search.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projet-update.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projet-update.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projets-contrats.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projets-contrats.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projets.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/projets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/properties-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/properties-status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recherches.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/recherches.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/reglements-fournisseur-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reglements-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/reglements-fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/releve-bancaire-archive.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/releve-bancaire-archive.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/releve-bancaire-process-client.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/releve-bancaire-process-client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/releve-bancaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/releve-bancaire.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/view/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/signup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sous-sol.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/sous-sol.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistiques-personnels.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/statistiques-personnels.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/statistiques.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/statistiques.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/status.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/status.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suivi-company.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/suivi-company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/suivi-projets.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/suivi-projets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/syndique-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/syndique-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/syndique.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/syndique.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/synthese-client.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/synthese-client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/tasks.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/terrain.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/terrain.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_tcpdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/test_tcpdf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/todo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type-charges-communs.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/type-charges-communs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type-charges.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/type-charges.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types-biens.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/types-biens.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-profil.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/user-profil.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/view/users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/autoload.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/annahda.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/annahda.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AlertActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AlertActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AnnuaireActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AnnuaireActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AppartementActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AppartementActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AppartementFichePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AppartementFichePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AppartementPiecesActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AppartementPiecesActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AppatementsListPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AppatementsListPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/AutorisationPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/AutorisationPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/BugActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/BugActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseBonPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseBonPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseIaazaActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseIaazaActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaissePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaissePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ChargeActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ChargeActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ChargeCommunActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ChargeCommunActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ChargeCommunPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ChargeCommunPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ChargePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ChargePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ChargeSyndiqueActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ChargeSyndiqueActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientAttenteActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientAttenteActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientClassementActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientClassementActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientClassementPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientClassementPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientFichePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientFichePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientsDesistesSituationsPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientsDesistesSituationsPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ClientsSituationsPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ClientsSituationsPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CollaborationActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CollaborationActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CommandeActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CommandeActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CommandeDetailActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CommandeDetailActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CommandePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CommandePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CommissionActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CommissionActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CompanyActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CompanyActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CompteBancaireActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CompteBancaireActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratActivationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratActivationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratArabePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratArabePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratCasLibreActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratCasLibreActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratClientSituationPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratClientSituationPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratConstructionPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratConstructionPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratDesistementPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratDesistementPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratDetailsActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratDetailsActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratDetailsPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratDetailsPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratEmployeActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratEmployeActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratEmployeArabePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratEmployeArabePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratTravailAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratTravailAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratTravailDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratTravailDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratTravailReglementAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratTravailReglementAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ContratTravailUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ContratTravailUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetCongeAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetCongeAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetCongeDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetCongeDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetCongeUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetCongeUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/FournisseurActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/FournisseurActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/HistoryActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/HistoryActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/HistoryPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/HistoryPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LettreRecommandeePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LettreRecommandeePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonBilanPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonBilanPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonDetailPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonDetailPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonDetailsActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonDetailsActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonDetailsIaazaActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonDetailsIaazaActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonIaazaActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonIaazaActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonPiecesAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonPiecesDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonPiecesDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LocauxActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LocauxFichePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxFichePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LocauxListPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxListPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LocauxPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxPiecesAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/LocauxPiecesDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxPiecesDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/MailAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/MailAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ObservationClientActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ObservationClientActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/OperationActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/OperationActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/OperationPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/OperationPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/OperationUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/OperationUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/OperationUpdateNumeroChequeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/OperationUpdateNumeroChequeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/PaiementCompletPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/PaiementCompletPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ParkingActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ParkingActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ProcurationPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ProcurationPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ProjetActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ProjetActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/QuittanceArabePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/QuittanceArabePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/QuittanceAvancePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/QuittanceAvancePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/QuittanceEmployePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/QuittanceEmployePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/QuittanceSyndiqueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/QuittanceSyndiqueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReglementFournisseurActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReglementFournisseurActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReglementFournisseurIaazaActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReglementFournisseurIaazaActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReglementFournisseurPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReglementFournisseurPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReglementFournisseurUpdateChequeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReglementFournisseurUpdateChequeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReglementPrevuActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReglementPrevuActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReleveBancaireActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReleveBancaireActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/ReleveBancaireArchiveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/ReleveBancaireArchiveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/RevendrePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/RevendrePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/SearchClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/SearchClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/SendMailClientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/SendMailClientController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/StatusAppartements.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/StatusAppartements.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/StatusLocaux.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/StatusLocaux.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/SyndiqueActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/SyndiqueActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/SyndiqueBilanPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/SyndiqueBilanPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TaskActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TaskActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainPiecesAddController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainPiecesDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainPiecesDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TerrainUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TodoActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TodoActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TypeChargeActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TypeChargeActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TypeChargeCommunActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TypeChargeCommunActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TypeChargeSyndiqueActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TypeChargeSyndiqueActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/TypeSyndiqueActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TypeSyndiqueActionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/UserDeleteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserDeleteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/UserUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserUpdateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/UserUpdatePasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserUpdatePasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/include/delete-task.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/delete-task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/404.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/404.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/alert.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/alert.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/annuaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/annuaire.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/appartement-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/appartement-detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/appartements.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/appartements.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/bugs.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/bugs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/charges-communs-grouped.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/charges-communs-grouped.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/charges-communs-type.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/charges-communs-type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-attente.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-attente.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-classement.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-classement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-modification.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-modification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients-synthese.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-synthese.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/clients.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/collaboration.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/collaboration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commissions.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commissions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/companies.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/companies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/compte-bancaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/compte-bancaire.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/configuration.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/configuration.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrat-employe-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrat-employe-detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrat-status-backup.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrat-status-backup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrat-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrat-status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrat.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-desistes-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-desistes-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-desistes.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-desistes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-synthese.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-synthese.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/contrats-travail.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/contrats-travail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employe-projet-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employe-projet-profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employe-societe-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employe-societe-profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employes-contrats.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employes-contrats.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employes-projet-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employes-projet-search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employes-projet.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employes-projet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/employes-societe.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/employes-societe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/fournisseur-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/fournisseur-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/fournisseur-reglement.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/fournisseur-reglement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/fournisseurs-reglements.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/fournisseurs-reglements.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/fournisseurs-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/fournisseurs-search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/fournisseurs.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/fournisseurs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/history-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/history-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/history.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/history.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraison-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraison-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraison-fournisseur-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraison-fournisseur-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraison-pieces.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraison-pieces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraison.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraison.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraison3.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraison3.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons2.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/locaux-detail.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/locaux-detail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/locaux.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/locaux.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/map.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/map.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/messages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/operations-status-archive-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/operations-status-archive-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/operations-status-archive.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/operations-status-archive.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/operations-status-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/operations-status-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/operations-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/operations-status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/operations.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/operations.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/pieces-appartement.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/pieces-appartement.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/pieces-locaux.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/pieces-locaux.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-add.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-charges-grouped.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-charges-grouped.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-charges-type.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-charges-type.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-charges.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-charges.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-contrat-employe.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-contrat-employe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-search.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-search.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projet-update.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projet-update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/projets.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/projets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/properties-status.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/properties-status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/recherches.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/recherches.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/releve-bancaire-archive.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/releve-bancaire-archive.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/releve-bancaire.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/releve-bancaire.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/sous-sol.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/sous-sol.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/statistiques-personnels.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/statistiques-personnels.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/statistiques.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/statistiques.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/status.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/status.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/suivi-company.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/suivi-company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/suivi-projets.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/suivi-projets.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/syndique-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/syndique-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/syndique.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/syndique.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/tasks.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/terrain.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/terrain.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/todo.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/todo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/type-charges-communs.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/type-charges-communs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/type-charges.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/type-charges.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/user-profil.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/user-profil.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/users.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-2024748613">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="php" value="24" />
+          <entry key="yml" value="36" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PHP" value="24" />
+          <entry key="YAML" value="36" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="php" value="11" />
+          <entry key="sql" value="1" />
+          <entry key="yml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PHP" value="11" />
+          <entry key="SQL" value="1" />
+          <entry key="YAML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.php.composer.actions" />
+      <usages-collector id="statistics.php.composer.command.options" />
+      <usages-collector id="statistics.php.new.test" />
+      <usages-collector id="statistics.vcs.git.usages" />
+      <usages-collector id="statistics.php.new.class" />
+      <usages-collector id="statistics.php.rename.constructor" />
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/index.php">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+            <state relative-caret-position="264">
+              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>&lt;?php include(&quot;include/sidebar.php&quot;); ?&gt;</find>
+      <find>include('../config.php');</find>
+      <find>&lt;?php include(&quot;include/top-menu.php&quot;); ?&gt;</find>
+      <find>&lt;?php include(&quot;include/top-menu.php&quot;); ?&gt;</find>
+      <find>header('Location:../</find>
+      <find>include(&quot;include/top-menu.php&quot;);</find>
+      <find>Annahda</find>
+      <find>Location:../</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
+      <replace>include('../config/config.php');</replace>
+      <replace>&lt;?php include(&quot;../include/top-menu.php&quot;); ?&gt;</replace>
+      <replace>header('Location:../view/</replace>
+      <replace>include(&quot;../include/top-menu.php&quot;);</replace>
+      <replace>MarocInvest2AS</replace>
+      <replace>Location:../view/</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/www/</dir>
+      <dir>$PROJECT_DIR$/www/view</dir>
+      <dir>$PROJECT_DIR$/www/controller</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -172,6 +345,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/www/config/config.php" />
+        <option value="$PROJECT_DIR$/db/annahda.sql" />
+        <option value="$PROJECT_DIR$/www/view/projets.php" />
+        <option value="$PROJECT_DIR$/www/view/projet-add.php" />
+        <option value="$PROJECT_DIR$/www/view/projet-details.php" />
+        <option value="$PROJECT_DIR$/www/controller/AlertActionController.php" />
+        <option value="$PROJECT_DIR$/www/view/collaboration.php" />
+        <option value="$PROJECT_DIR$/www/view/dashboard.php" />
+        <option value="$PROJECT_DIR$/www/controller/CaisseActionController.php" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
       </list>
     </option>
   </component>
@@ -183,17 +366,20 @@
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
-      <path value="$PROJECT_DIR$/assets/chosen-bootstrap/package.json" />
-      <path value="$PROJECT_DIR$/assets/jquery-file-upload/package.json" />
-      <path value="$PROJECT_DIR$/assets/jquery-file-upload/server/node/package.json" />
-      <path value="$PROJECT_DIR$/assets/jquery-validation/package.json" />
+      <path value="$PROJECT_DIR$/www/assets/chosen-bootstrap/package.json" />
+      <path value="$PROJECT_DIR$/www/assets/jquery-file-upload/package.json" />
+      <path value="$PROJECT_DIR$/www/assets/jquery-file-upload/server/node/package.json" />
+      <path value="$PROJECT_DIR$/www/assets/jquery-validation/package.json" />
     </packageJsonPaths>
   </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="292" />
-    <option name="y" value="24" />
-    <option name="width" value="1400" />
-    <option name="height" value="1028" />
+    <option name="x" value="1984" />
+    <option name="y" value="-11" />
+    <option name="width" value="1857" />
+    <option name="height" value="1092" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -212,7 +398,7 @@
             <path>
               <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
               <item name="Annahda" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -257,35 +443,35 @@
       <workItem from="1528032634198" duration="290000" />
       <workItem from="1528033193448" duration="79000" />
       <workItem from="1528033452576" duration="87000" />
+      <workItem from="1539676396109" duration="4320000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2374000" />
+    <option name="totallyTimeSpent" value="6694000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
+    <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18867925" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19071311" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32975295" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,41 +481,94 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/view/ajax-refresh-client.php" />
+    <entry file="file://$PROJECT_DIR$/controller/AlertActionController.php" />
+    <entry file="file://$PROJECT_DIR$/index.php" />
+    <entry file="file://$PROJECT_DIR$/www/model/Alert.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/projet-add.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="506">
+          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/AlertActionController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/AlertActionController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/annahda.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/ajax-refresh-client.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/annahda.sql">
+    <entry file="file://$PROJECT_DIR$/www/view/projets.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-441" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/AlertActionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="4" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="1188">
+          <caret line="78" column="59" selection-start-line="78" selection-start-column="59" selection-end-line="78" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
+    <entry file="file://$PROJECT_DIR$/db/annahda.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="1" column="17" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        <state relative-caret-position="11691">
+          <caret line="964" column="34" selection-start-line="964" selection-start-column="34" selection-end-line="964" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/projet-details.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="42" column="55" lean-forward="true" selection-start-line="42" selection-start-column="55" selection-end-line="42" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/config.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/BugActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1233" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/AlertActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1166">
+          <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/collaboration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="51" column="44" lean-forward="true" selection-start-line="51" selection-start-column="44" selection-end-line="51" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/CaisseActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="133" column="43" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
         </state>
       </provider>
     </entry>

@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -86,5 +86,5 @@
     //Action Delete Processing End
     $_SESSION['bug-action-message'] = $actionMessage;
     $_SESSION['bug-type-message'] = $typeMessage;
-    header('Location:../bugs.php');
+    header('Location:../view/view/bugs.php');
 

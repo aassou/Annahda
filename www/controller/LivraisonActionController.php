@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -63,22 +63,22 @@
             $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
             $actionMessage = "<strong>Erreur Ajout Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
             //test the source of this request for the reason of exact redirection
             if ( isset($_POST['source']) and $_POST['source'] == "livraisons-group" ) {
-                $redirectLink = "Location:../livraisons-group.php";    
+                $redirectLink = "Location:../view/livraisons-group.php";
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois" ) {
-                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;    
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-list" ) {
                 $mois = htmlentities($_POST['mois']);
                 $annee = htmlentities($_POST['annee']);
-                $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;    
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
             }
         }
     }
@@ -122,13 +122,13 @@
             $actionMessage = "<strong>Erreur Modification Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
         }
-        //$redirectLink = "Location:../livraisons-fournisseur.php?idFournisseur=".$idFournisseur;
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        //$redirectLink = "Location:../view/livraisons-fournisseur.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         //this case treat the updated request comming from livraisons-details.php page,
         //not livraisons-fournisseur.php page
         if( isset($_POST['source']) and $_POST['source']=="details-livraison" ){
             $codeLivraison = $_POST['codeLivraison'];
-            $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
     }
     else if($action == "updateStatus"){
@@ -154,7 +154,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Status Modifiée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         
     }
     else if($action=="delete"){
@@ -180,7 +180,7 @@
         $livraisonDetailManager->deleteLivraison($idLivraison);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         
     }
     

@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     //post input processing   
@@ -18,6 +18,6 @@
     $contratTravailManager = new ContratTravailManager($pdo);
 	$contratTravailManager->delete($idContrat);
 	$_SESSION['contrat-delete-success']="<strong>تم حذف العقد بنجاح</strong>";
-	header('Location:../contrats-travail.php?idProjet='.$idProjet);
+	header('Location:../view/view/contrats-travail.php?idProjet='.$idProjet);
     
     

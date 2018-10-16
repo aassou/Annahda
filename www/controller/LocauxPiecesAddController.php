@@ -16,9 +16,9 @@
 	
 	$idProjet = htmlentities($_POST['idProjet']);
 	$idLocaux = htmlentities($_POST['idLocaux']);
-	$redirect = 'Location:../locaux.php?idProjet='.$idProjet;
+	$redirect = 'Location:../view/locaux.php?idProjet='.$idProjet;
 	if( $_GET['p']==2 ){
-		$redirect = 'Location:../locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet;	
+		$redirect = 'Location:../view/locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet;
 	}
 	if(file_exists($_FILES['url']['tmp_name']) || is_uploaded_file($_FILES['url']['tmp_name'])) {
 		$url = imageProcessing($_FILES['url'], '/pieces/pieces_locaux/');

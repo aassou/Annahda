@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     if( isset($_SESSION['userMerlaTrav']) ){
@@ -25,7 +25,7 @@
         	$idContrat = $_GET['idContrat'];
         }
 		else{
-			header('Location:../dashboard.php');
+			header('Location:../view/view/dashboard.php');
 			exit;
 		}
         $contrat = $contratManager->getContratById($idContrat);

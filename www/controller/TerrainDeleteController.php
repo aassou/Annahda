@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -19,6 +19,6 @@
     $terrainManager = new TerrainManager($pdo);
 	$terrainManager->delete($idTerrain);
 	$_SESSION['terrain-delete-success'] = "<strong>Opération valide : </strong>Terrain supprimé avec succès.";
-	header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+	header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
     
     

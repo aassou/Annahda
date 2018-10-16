@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -74,5 +74,5 @@
     
     $_SESSION['appartement-piece-action-message'] = $actionMessage;
     $_SESSION['appartement-piece-type-message'] = $typeMessage;
-    header('Location:../appartements.php?idProjet='.$idProjet);
+    header('Location:../view/view/appartements.php?idProjet='.$idProjet);
     

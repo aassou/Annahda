@@ -21,7 +21,7 @@
 		$nom = htmlentities($_POST['nom']);    
 		if( $employeManager->exists($nom) ){
 			$_SESSION['employe-add-error'] = "<strong>Erreur Ajout Employé : </strong>Un employé existe déjà avec ce nom : ".$nom.".";
-			header('Location:../employes-projet.php?idProjet='.$idProjet);
+			header('Location:../view/view/employes-projet.php?idProjet='.$idProjet);
 			exit;
 		}
 		else{
@@ -38,12 +38,12 @@
 	        
 	        $employeManager->add($employe);
 			$_SESSION['employe-add-success'] = "<strong>Opération valide : </strong>L'employé '".$nom."' est ajouté au système avec succès.";
-			header('Location:../employes-projet.php?idProjet='.$idProjet);	
+			header('Location:../view/view/employes-projet.php?idProjet='.$idProjet);
 		}
 	}
 	else{
         $_SESSION['employe-add-error'] = "<strong>Erreur Ajout Employé : </strong>Vous devez remplir au moins le champ 'Nom'.";
-		header('Location:../employes-projet.php?idProjet='.$idProjet);
+		header('Location:../view/view/employes-projet.php?idProjet='.$idProjet);
 		exit;
     }
 	

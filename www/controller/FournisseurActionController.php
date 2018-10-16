@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -69,12 +69,12 @@
             $typeMessage = "error";
         }
         //in this line we specify the response url basing on the source of our request
-        $redirectLink = "Location:../fournisseurs.php";
+        $redirectLink = "Location:../view/fournisseurs.php";
         if( isset($_POST['source']) and $_POST['source']=='livraisons-group' ) {
-            $redirectLink = "Location:../livraisons-group.php";   
+            $redirectLink = "Location:../view/livraisons-group.php";
         }
         else if( isset($_POST['source']) and $_POST['source']=='livraisons-group-iaaza' ) {
-            $redirectLink = "Location:../livraisons-group-iaaza.php";   
+            $redirectLink = "Location:../view/livraisons-group-iaaza.php";
         }
     }
     //Action Add Processing End
@@ -114,7 +114,7 @@
             $actionMessage = "<strong>Erreur Modification Fournisseur</strong> : Vous devez remplir le champ <strong>Nom</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../fournisseurs.php";
+        $redirectLink = "Location:../view/fournisseurs.php";
     }
     //Action Update Processing End
     //Action Delete Processing Begin
@@ -136,7 +136,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : fournisseur Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../fournisseurs.php";
+        $redirectLink = "Location:../view/fournisseurs.php";
     }
     //Action Delete Processing End
     $_SESSION['fournisseur-action-message'] = $actionMessage;

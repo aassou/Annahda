@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -21,6 +21,6 @@
 	$livraisonPiecesManager->delete($idPieceLivraison);
 	//delete file from the disk
 	$_SESSION['piece-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimée avec succès.";
-	header('Location:../livraison-pieces.php?idProjet='.$idProjet.'&idLivraison='.$idLivraison);
+	header('Location:../view/view/livraison-pieces.php?idProjet='.$idProjet.'&idLivraison='.$idLivraison);
     
     

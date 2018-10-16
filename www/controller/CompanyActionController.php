@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -112,5 +112,5 @@
     //Action Delete Processing End
     $_SESSION['company-action-message'] = $actionMessage;
     $_SESSION['company-type-message'] = $typeMessage;
-    header('Location:../companies.php');
+    header('Location:../view/view/companies.php');
 

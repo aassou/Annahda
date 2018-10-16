@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -19,4 +19,4 @@
     $congeManager = new EmployeProjetCongeManager($pdo);
 	$congeManager->delete($idConge);
 	$_SESSION['conge-delete-success'] = "<strong>Opération valide : </strong>Congé supprimé avec succès.";
-	header('Location:../employe-projet-profile.php?idEmploye='.$idEmploye);
+	header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);

@@ -26,11 +26,11 @@
         $congeManager = new EmployeProjetCongeManager($pdo);
         $congeManager->add($conge);
 		$_SESSION['conge-add-success'] = "<strong>Opération valide : </strong>Le congé est ajouté avec succès.";
-		header('Location:../employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
 	}
 	else{
         $_SESSION['conge-add-error'] = "<strong>Erreur Ajout Congé : </strong>Vous devez remplir tous les champs.";
-		header('Location:../employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
 		exit;
     }
 	

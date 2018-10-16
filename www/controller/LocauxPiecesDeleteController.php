@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -21,6 +21,6 @@
 	$piecesLocauxManager->delete($idPieceLocaux);
 	//delete file from the disk
 	$_SESSION['pieces-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimé avec succès.";
-	header('Location:../locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet);
+	header('Location:../view/view/locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet);
     
     

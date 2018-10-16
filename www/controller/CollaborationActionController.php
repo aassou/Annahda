@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -92,5 +92,5 @@
     //Action Delete Processing End
     $_SESSION['collaboration-action-message'] = $actionMessage;
     $_SESSION['collaboration-type-message'] = $typeMessage;
-    header('Location:../collaboration.php');
+    header('Location:../view/view/collaboration.php');
 

@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -66,21 +66,21 @@
         $redirectLink = "";
         if( isset($_POST['source']) ) {
             if( $_POST['source'] == 'livraisons-group' ) {
-                $redirectLink = "Location:../livraisons-group.php";   
+                $redirectLink = "Location:../view/livraisons-group.php";
             }
             else if( $_POST['source'] == 'livraisons-fournisseur-mois' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;
             }
             else if ( $_POST['source'] == "livraisons-fournisseur-mois-list" ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
                 $mois = htmlentities($_POST['mois']);
                 $annee = htmlentities($_POST['annee']);
-                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
             }
             else if( $_POST['source'] == 'reglements-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../reglements-fournisseur.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../view/reglements-fournisseur.php?idFournisseur=".$idFournisseur;
             }   
         }
     }
@@ -121,7 +121,7 @@
             $actionMessage = "<strong>Erreur Modification Réglement</strong> : Vous devez remplir les champs <strong>Montant</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../reglements-fournisseur.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/reglements-fournisseur.php?idFournisseur=".$idFournisseur;
     }
     else if($action=="delete"){
         $idReglement = $_POST['idReglement'];
@@ -143,7 +143,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Réglement Supprimé avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../reglements-fournisseur.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/reglements-fournisseur.php?idFournisseur=".$idFournisseur;
     }
     
     $_SESSION['reglement-action-message'] = $actionMessage;

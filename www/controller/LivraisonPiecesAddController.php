@@ -23,9 +23,9 @@
 		$livraisonPiecesManager = new LivraisonPiecesManager($pdo);
 		$livraisonPiecesManager->add($livraisonPieces);
 		$_SESSION['pieces-add-success'] = "<strong>Opération valide : </strong>La pièce a été ajoutée avec succès.";
-		header('Location:../livraisons-list.php?idProjet='.$idProjet);
+		header('Location:../view/view/livraisons-list.php?idProjet='.$idProjet);
 	}
 	else{
 		$_SESSION['pieces-add-error'] = "<strong>Erreur Ajout Documents Livraison : </strong>Vous devez ajouté un lien.";
-		header('Location:../livraisons-list.php?idProjet='.$idProjet);
+		header('Location:../view/view/livraisons-list.php?idProjet='.$idProjet);
 	}

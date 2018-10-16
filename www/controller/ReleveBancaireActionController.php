@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     /****** Include the EXCEL Reader Factory ***********/
     //error_reporting(0);
@@ -279,9 +279,9 @@
     //Action DeleteReleveActuel Processing End
     $_SESSION['releveBancaire-action-message'] = $actionMessage;
     $_SESSION['releveBancaire-type-message'] = $typeMessage;
-    $redirectLink = "Location:../releve-bancaire.php";
+    $redirectLink = "Location:../view/releve-bancaire.php";
     if ( isset($_POST['source']) and $_POST['source'] == "releve-bancaire-archive" ) {
-        $redirectLink = "Location:../releve-bancaire-archive.php";
+        $redirectLink = "Location:../view/releve-bancaire-archive.php";
     }
     header($redirectLink);
 

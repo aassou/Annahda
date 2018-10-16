@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -172,5 +172,5 @@
     //Action Delete List Of Tasks Processing End
     $_SESSION['task-action-message'] = $actionMessage;
     $_SESSION['task-type-message'] = $typeMessage;
-    header('Location:../tasks.php');
+    header('Location:../view/view/tasks.php');
 

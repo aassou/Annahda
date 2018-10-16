@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();    
     //post input processing
@@ -21,9 +21,9 @@
 	$appartementManager = new AppartementManager($pdo);
 	//create classes
 	$contrat = $contratManager->getContratById($idContrat);
-	$redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+	$redirectLink = 'Location:../view/contrats-list.php?idProjet='.$idProjet;
 	if( isset($_GET['p']) and $_GET['p']==99 ){
-		$redirectLink = 'Location:../clients-search.php';
+		$redirectLink = 'Location:../view/clients-search.php';
 	}
 	if( $contrat->typeBien()=="appartement" ){
 		if( $appartementManager->getAppartementById($contrat->idBien())->status()=="Non" ){

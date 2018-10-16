@@ -1,5 +1,5 @@
 <?php 
-    include('../config.php');  
+    include('../config/config.php');
     include('../model/TodoManager.php');
     $todoManager = new TodoManager($pdo);
     $task_id = $_GET['idTask'];

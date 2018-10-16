@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -65,22 +65,22 @@
             $historyManager->add($history);
             $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
             $actionMessage = "<strong>Erreur Ajout Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
             //test the source of this request for the reason of exact redirection
             if ( isset($_POST['source']) and $_POST['source'] == "livraisons-group-iaaza" ) {
-                $redirectLink = "Location:../livraisons-group-iaaza.php";    
+                $redirectLink = "Location:../view/livraisons-group-iaaza.php";
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-iaaza" ) {
-                $redirectLink = "Location:../livraisons-fournisseur-mois-iaaza.php?idFournisseur=".$idFournisseur;    
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois-iaaza.php?idFournisseur=".$idFournisseur;
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-list-iaaza" ) {
                 $mois = htmlentities($_POST['mois']);
                 $annee = htmlentities($_POST['annee']);
-                $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;    
+                $redirectLink = "Location:../view/livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
             }
         }
     }
@@ -126,14 +126,14 @@
             $actionMessage = "<strong>Erreur Modification Livraison</strong> : Vous devez remplir le champ <strong>N° BL</strong>.";
             $typeMessage = "error";
         }
-        //$redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        //$redirectLink = "Location:../view/livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         //this case treat the updated request comming from livraisons-details.php page,
         //not livraisons-fournisseur.php page
         if( isset($_POST['source']) and $_POST['source']=="details-livraison-iaaza" ){
             $codeLivraison = $_POST['codeLivraison'];
-            //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            //$redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
     }
     else if($action == "updateStatus"){
@@ -159,7 +159,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Status Modifiée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         
     }
     else if($action=="delete"){
@@ -185,8 +185,8 @@
         $livraisonDetailManager->deleteLivraison($idLivraison);
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Supprimée avec succès.";
         $typeMessage = "success";
-        //$redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
-        $redirectLink = "Location:../livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
+        //$redirectLink = "Location:../view/livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/livraisons-fournisseur-mois-list-iaaza.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
     }
     
     $_SESSION['livraison-action-message'] = $actionMessage;

@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -151,5 +151,5 @@
     //Action Delete Processing End
     $_SESSION['contratEmploye-action-message'] = $actionMessage;
     $_SESSION['contratEmploye-type-message'] = $typeMessage;
-    header('Location:../projet-contrat-employe.php?idProjet='.$idProjet);
+    header('Location:../view/view/projet-contrat-employe.php?idProjet='.$idProjet);
 

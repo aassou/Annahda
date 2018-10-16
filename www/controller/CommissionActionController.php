@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -58,10 +58,10 @@
         }
         //test request url to set response url
         if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
-            $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat#commissions";
+            $redirectLink = "Location:../view/contrat.php?codeContrat=$codeContrat#commissions";
         }
         else {
-            $redirectLink = "Location:../commissions.php";
+            $redirectLink = "Location:../view/commissions.php";
         }
     }
     //Action Add Processing End
@@ -95,10 +95,10 @@
         //test request url to set response url
         if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
             $idProjet = htmlentities($_POST['idProjet']);
-            $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat#commissions";
+            $redirectLink = "Location:../view/contrat.php?codeContrat=$codeContrat#commissions";
         }
         else {
-            $redirectLink = "Location:../commissions.php";
+            $redirectLink = "Location:../view/commissions.php";
         }
     }
     //Action Update Processing End

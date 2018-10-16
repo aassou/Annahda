@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -78,12 +78,12 @@
             $historyManager->add($history);
             $actionMessage = "Opération Valide : Projet Ajouté avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../projets.php";
+            $redirectLink = "Location:../view/projets.php";
         }
         else{
             $actionMessage = "Erreur Ajout Projet : Vous devez remplir tous les champs obligatoires *";
             $typeMessage = "error";
-            $redirectLink = "Location:../projet-add.php";
+            $redirectLink = "Location:../view/projet-add.php";
         }
     }
     else if($action == "update"){
@@ -146,7 +146,7 @@
             $actionMessage = "Erreur Modification Projet : Vous devez remplir le champ <strong>Nom</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../projet-update.php?idProjet=$idProjet";
+        $redirectLink = "Location:../view/projet-update.php?idProjet=$idProjet";
     }
     
     $_SESSION['projet-action-message'] = $actionMessage;

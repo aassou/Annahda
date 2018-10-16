@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -125,5 +125,5 @@
     //Action Delete Processing End
     $_SESSION['CompteBancaire-action-message'] = $actionMessage;
     $_SESSION['CompteBancaire-type-message'] = $typeMessage;
-    header('Location:../compte-bancaire.php');
+    header('Location:../view/view/compte-bancaire.php');
 

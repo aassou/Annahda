@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -96,5 +96,5 @@
     //Action Delete Processing End
     $_SESSION['parking-action-message'] = $actionMessage;
     $_SESSION['parking-type-message'] = $typeMessage;
-    header('Location:../sous-sol.php?idProjet='.$idProjet);
+    header('Location:../view/view/sous-sol.php?idProjet='.$idProjet);
 

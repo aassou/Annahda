@@ -23,9 +23,9 @@
 		$pieceTerrainManager = new PiecesTerrainManager($pdo);
 		$pieceTerrainManager->add($pieceTerrain);
 		$_SESSION['pieces-add-success'] = "<strong>Opération valide : </strong>La pièce a été ajouté avec succès.";
-		header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+		header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
 	}
 	else{
 		$_SESSION['pieces-add-error'] = "<strong>Erreur Ajout Pièces Terrain : </strong>Vous devez ajouté un lien.";
-		header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+		header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
 	}

@@ -27,11 +27,11 @@
         $salaireManager = new EmployeProjetSalaireManager($pdo);
         $salaireManager->add($salaire);
 		$_SESSION['salaire-add-success'] = "<strong>Opération valide : </strong>Le salaire est ajouté avec succès.";
-		header('Location:../employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
 	}
 	else{
         $_SESSION['salaire-add-error'] = "<strong>Erreur Ajout Salaire : </strong>Vous devez remplir au moins le champ 'Salaire'.";
-		header('Location:../employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
 		exit;
     }
 	

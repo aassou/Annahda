@@ -20,7 +20,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -222,13 +222,13 @@
                 $notesClientManager->add($notesClient);
                 $actionMessage = "<strong>Opération valide : </strong>Contrat Client ajouté(e) avec succès.";
                 $typeMessage = "success";
-                $redirectLink = 'Location:../contrat.php?codeContrat='.$codeContrat;
+                $redirectLink = 'Location:../view/contrat.php?codeContrat='.$codeContrat;
             }
         }
         else{
             $actionMessage = "<strong>Erreur Création Contrat : </strong>Veuillez vérifier les champs saisies.";
             $typeMessage = "error";    
-            $redirectLink = 'Location:../contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
+            $redirectLink = 'Location:../view/contrats-add.php?idProjet='.$idProjet.'&codeClient='.$codeClient;
         }
     }
     //Action Add Processing End
@@ -339,15 +339,15 @@
             }
             $actionMessage = "<strong>Opération Valide : </strong>Contrat modifié(e) avec succès.";
             $typeMessage = "success";
-            $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+            $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat;
             if ( isset($_POST['source']) and $_POST['source'] == "clients-list" ) {
-                $redirectLink = "Location:../clients-list.php";    
+                $redirectLink = "Location:../view/clients-list.php";
             }
         }
         else{
             $actionMessage = "<strong>Erreur Modification Client : </strong>Vous devez remplir le champ <strong>&lt;Prix de vente&gt;</strong>.";
             $typeMessage = "error";
-            $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+            $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat;
         }
     }
     //Action Update Processing End
@@ -366,9 +366,9 @@
             $actionMessage = "<strong>Erreur Modification Image Note : </strong>Vous devez séléctionner un fichier.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat."&idProjet=".$idProjet;
+        $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat."&idProjet=".$idProjet;
         if ( isset($_POST['source']) and $_POST['source'] == "clients-modification" ) {
-            $redirectLink = "Location:../clients-modification.php";    
+            $redirectLink = "Location:../view/clients-modification.php";
         }
     }
     //Action UpdateImageNote Processing END
@@ -381,7 +381,7 @@
         //after the delete of our contract, we should change the property status to "Disponible"
         $actionMessage = "<strong>Opération Valide : </strong>Observation ajouté(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat";
+        $redirectLink = "Location:../view/contrat.php?codeContrat=$codeContrat";
     }
     //Action UpdateObservation Processing End 
     //Action Delete Processing Begin
@@ -403,7 +403,7 @@
         //after the delete of our contract, we should change the property status to "Disponible"
         $actionMessage = "<strong>Opération Valide : </strong>Contrat Supprimé(e) avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../contrats-desistes-list.php?idProjet=".$idProjet;
+        $redirectLink = "Location:../view/contrats-desistes-list.php?idProjet=".$idProjet;
     }
     //Action Delete Processing End
     //Action Desister Processing Begin
@@ -434,9 +434,9 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération valide : </strong>Le contrat est désisté avec succès.";
         $typeMessage = "success";
-        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        $redirectLink = 'Location:../view/contrats-list.php?idProjet='.$idProjet;
         if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
-            $redirectLink = 'Location:../clients-search.php';
+            $redirectLink = 'Location:../view/clients-search.php';
         }
     }
     //Action Desister Processing End
@@ -497,9 +497,9 @@
             }
         }
         //set the redirect link
-        $redirectLink = 'Location:../contrats-desistes-list.php?idProjet='.$idProjet;
+        $redirectLink = 'Location:../view/contrats-desistes-list.php?idProjet='.$idProjet;
         if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
-            $redirectLink = 'Location:../clients-search.php';
+            $redirectLink = 'Location:../view/clients-search.php';
         }    
     }
     //Action Activer Processing End
@@ -539,9 +539,9 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération valide : </strong>Le contrat est modifié avec succès.";
         $typeMessage = "success";
-        $redirectLink = 'Location:../contrats-list.php?idProjet='.$idProjet;
+        $redirectLink = 'Location:../view/contrats-list.php?idProjet='.$idProjet;
         if( isset($_POST["source"]) and $_POST["source"] == "clients-search" ){
-            $redirectLink = 'Location:../clients-search.php';
+            $redirectLink = 'Location:../view/clients-search.php';
         }
     }
     //Action Update Revendre Processing End

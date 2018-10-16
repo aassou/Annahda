@@ -38,7 +38,7 @@
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
         <?php 
-            include("include/top-menu.php"); 
+            include("../include/top-menu.php");
             //admin
             $adminTasksTotalNumber = $taskManager->getTaskNumberByUser('admin')+$taskManager->getTaskDoneNumberByUser('admin');
             $adminTasksNotDoneNumber = $taskManager->getTaskNumberByUser('admin');
@@ -70,7 +70,7 @@
     <!-- BEGIN CONTAINER -->    
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
@@ -97,7 +97,7 @@
                 </div>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4><i class="icon-bar-chart"></i> Statistiques du personnel de la société Groupe Annahda</h4>
+                        <h4><i class="icon-bar-chart"></i> Statistiques du personnel de la société Groupe MarocInvest2AS</h4>
                         <hr class="line">
                         <div id="container" style="width:100%; height:400px;"></div>
                     </div>

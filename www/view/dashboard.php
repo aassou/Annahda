@@ -21,7 +21,7 @@
         $compteBancaire = new CompteBancaireManager($pdo);
 		//classes and vars
 		//users number
-		$soldeCaisseAnnahda = $caisseManager->getTotalCaisseByType("Entree") - $caisseManager->getTotalCaisseByType("Sortie");
+		$soldeCaisseMarocInvest2AS = $caisseManager->getTotalCaisseByType("Entree") - $caisseManager->getTotalCaisseByType("Sortie");
         $soldeCaisseIaaza = $caisseIaazaManager->getTotalCaisseByType("Entree") - $caisseIaazaManager->getTotalCaisseByType("Sortie");
 		$projetNumber = ($projetManager->getProjetsNumber());
 		$usersNumber = $usersManager->getUsersNumber();
@@ -82,12 +82,10 @@
 				<div class="row-fluid">
 					<div class="span12">
 						<h3 class="page-title">
-							Accueil
 						</h3>
 					</div>
 				</div>
-				<!--      BEGIN TILES      -->
-				<div class="row-fluid">
+				<!--div class="row-fluid">
 					<div class="span12">
 						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Iaaza</h4>
 						<div class="tiles">
@@ -118,9 +116,9 @@
                                 </div>
                             </div>
                             </a>
-                        </div><!--  Tiles Iaaza End -->
+                        </div>
                     </div>
-                </div>    
+                </div-->
                 
                 <?php
                 if ( 
@@ -132,7 +130,7 @@
                 ?>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Annahda</h4>
+                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Société MarocInvest2AS</h4>
                         <div class="tiles">
 						    <a href="caisse-group.php">
                             <div class="tile bg-purple">
@@ -377,9 +375,9 @@
 							</div>
 							<div class="details">
 								<div class="number">
-									<?= number_format($soldeCaisseAnnahda, '2', ',', ' ') ?>
+									<?= number_format($soldeCaisseMarocInvest2AS, '2', ',', ' ') ?>
 								</div>
-								<div class="desc">Caisse Annahda</div>
+								<div class="desc">Caisse MarocInvest2AS</div>
 							</div>					
 						</div>
 						</a>

@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -27,7 +27,7 @@
         }
         else {
             $_SESSION['terrain-update-error']="<strong>Erreur Modification Terrain</strong> : La valeur du champ 'Superficie' est incorrecte !";
-            header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+            header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
             exit;
         }
         if(filter_var($_POST['prix'], FILTER_VALIDATE_FLOAT)==true){
@@ -35,7 +35,7 @@
         }
         else {
             $_SESSION['terrain-update-error']="<strong>Erreur Modification Terrain</strong> : La valeur du champ 'Prix' est incorrecte !";
-            header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+            header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
             exit;
         }
 		if(filter_var($_POST['fraisAchat'], FILTER_VALIDATE_FLOAT)==true){
@@ -43,7 +43,7 @@
         }
         else {
             $_SESSION['terrain-update-error']="<strong>Erreur Modification Terrain</strong> : La valeur du champ 'Fais d'achat' est incorrecte !";
-            header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+            header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
             exit;
         }
         
@@ -56,5 +56,5 @@
     else{
         $_SESSION['terrain-update-error'] = "<strong>Erreur Modification Terrain : </strong>Vous devez remplir au moins le champ 'Vendeur'.";
     }
-	header('Location:../terrain.php?idProjet='.$idProjet.'#listTerrain');
+	header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
     

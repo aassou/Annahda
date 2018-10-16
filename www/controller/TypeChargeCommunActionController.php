@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -86,13 +86,13 @@
     //Action Delete Processing End
     $_SESSION['typeCharge-action-message'] = $actionMessage;
     $_SESSION['typeCharge-type-message'] = $typeMessage;
-    $redirectLink = "Location:../charges-communs-grouped.php";
+    $redirectLink = "Location:../view/charges-communs-grouped.php";
     if( isset($_POST['typeCharge']) and isset($_POST['source']) and $_POST['source']=="charges-communs-type" ) {
         $typeCharge = htmlentities($_POST['typeCharge']);
-        $redirectLink = "Location:../charges-communs-type.php?type=".$typeCharge;
+        $redirectLink = "Location:../view/charges-communs-type.php?type=".$typeCharge;
     }
     else if( isset($_POST['source']) and $_POST['source'] == "type-charges-communs" ) {
-        $redirectLink = "Location:../type-charges-communs.php";
+        $redirectLink = "Location:../view/type-charges-communs.php";
     }
     header($redirectLink);
     

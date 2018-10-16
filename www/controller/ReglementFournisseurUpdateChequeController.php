@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -21,5 +21,5 @@
         $reglementFournisseurManager = new ReglementFournisseurManager($pdo);
         $reglementFournisseurManager->updateNumeroCheque($numeroCheque, $idReglement);
     }
-    header('Location:../fournisseurs-reglements.php?idFournisseur='.$idFournisseur.'#listFournisseurs');
+    header('Location:../view/view/fournisseurs-reglements.php?idFournisseur='.$idFournisseur.'#listFournisseurs');
     

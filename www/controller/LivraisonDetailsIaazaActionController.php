@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -57,14 +57,14 @@
             $historyManager->add($history);*/
             $actionMessage = "<strong>Opération Valide</strong> : Article Ajouté avec succès.";  
             $typeMessage = "success";
-            //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            //$redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
             $actionMessage = "<strong>Erreur Ajout Article</strong> : Vous devez remplir les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
             $typeMessage = "error";
-            //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
-            $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            //$redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+            $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
     }
     //Action Add Processing End
@@ -100,8 +100,8 @@
             $actionMessage = "<strong>Erreur Modification Article</strong> : Vous devez remplir les champs <strong>Prix unitaire</strong> et <strong>Quantité</strong>.";
             $typeMessage = "error";
         }
-        //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
-        $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+        //$redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+        $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
     }
     //Action Update Processing End
     //Action Delete Processing Begin
@@ -121,8 +121,8 @@
         $historyManager->add($history);*/
         $actionMessage = "<strong>Opération Valide</strong> : Article Supprimé avec succès.";
         $typeMessage = "success";
-        //$redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
-        $redirectLink = "Location:../livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+        //$redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison;
+        $redirectLink = "Location:../view/livraisons-details-iaaza.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
     }
     //Action Delete Processing End
     $_SESSION['livraison-detail-action-message'] = $actionMessage;

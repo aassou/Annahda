@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -85,7 +85,7 @@
     //set redirections
     if ( isset($_POST['source']) and $_POST['source'] == "contrat" ) {
         $codeContrat = htmlentities($_POST['codeContrat']);
-        $redirectLink = "Location:../contrat.php?codeContrat=$codeContrat";
+        $redirectLink = "Location:../view/contrat.php?codeContrat=$codeContrat";
     }
     //set session vars
     $_SESSION['observationClient-action-message'] = $actionMessage;

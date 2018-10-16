@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -19,4 +19,4 @@
     $salaireManager = new EmployeSocieteSalaireManager($pdo);
 	$salaireManager->delete($idSalaire);
 	$_SESSION['salaire-delete-success'] = "<strong>Opération valide : </strong>Salaire supprimé avec succès.";
-	header('Location:../employe-societe-profile.php?idEmploye='.$idEmploye);
+	header('Location:../view/view/employe-societe-profile.php?idEmploye='.$idEmploye);

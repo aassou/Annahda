@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -63,18 +63,18 @@
             $typeMessage = "error";
         }
         //in this line we specify the response url basing on the source of our request
-        $redirectLink = "Location:../reglements.php";
+        $redirectLink = "Location:../view/reglements.php";
         if( isset($_POST['source']) ) {
             if( $_POST['source'] == 'livraisons-group' ) {
-                $redirectLink = "Location:../livraisons-group-iaaza.php";   
+                $redirectLink = "Location:../view/livraisons-group-iaaza.php";
             }
             else if( $_POST['source'] == 'reglements-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../view/reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
             }
             else if( $_POST['source'] == 'livraisons-fournisseur' ) {
                 $idFournisseur = htmlentities($_POST['idFournisseur']);
-                $redirectLink = "Location:../livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;   
+                $redirectLink = "Location:../view/livraisons-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
             }   
         }
     }
@@ -115,7 +115,7 @@
             $actionMessage = "<strong>Erreur Modification Réglement</strong> : Vous devez remplir les champs <strong>Montant</strong>.";
             $typeMessage = "error";
         }
-        $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
     }
     else if($action=="delete"){
         $idReglement = $_POST['idReglement'];
@@ -137,7 +137,7 @@
         $historyManager->add($history);
         $actionMessage = "<strong>Opération Valide</strong> : Réglement Supprimée avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
+        $redirectLink = "Location:../view/reglements-fournisseur-iaaza.php?idFournisseur=".$idFournisseur;
     }
     
     $_SESSION['reglement-action-message'] = $actionMessage;

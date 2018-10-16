@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -142,6 +142,6 @@
     //Action Delete Processing End
     $_SESSION['charge-action-message'] = $actionMessage;
     $_SESSION['charge-type-message'] = $typeMessage;
-    $redirectLink = "Location:../syndique.php?idProjet=".$idProjet."#sample_1";
+    $redirectLink = "Location:../view/syndique.php?idProjet=".$idProjet."#sample_1";
     header($redirectLink);
 

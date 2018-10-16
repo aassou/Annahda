@@ -78,14 +78,14 @@
     <!-- BEGIN HEADER -->
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
-        <?php include("include/top-menu.php"); ?>   
+        <?php include("../include/top-menu.php"); ?>
         <!-- END TOP NAVIGATION BAR -->
     </div>
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->    
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">
@@ -96,7 +96,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Statistiques globales de la société Annahda
+                            Statistiques globales de la société MarocInvest2AS
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -106,7 +106,7 @@
                             </li>
                             <li>
                                 <i class="icon-bar-chart"></i>
-                                <a>Statistiques Globales - <strong>Société Annahda</strong></a>
+                                <a>Statistiques Globales - <strong>Société MarocInvest2AS</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -115,7 +115,7 @@
                 <!--      BEGIN TILES      -->
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4><i class="icon-bar-chart"></i> Statistiques des projets de la société Annahda</h4>
+                        <h4><i class="icon-bar-chart"></i> Statistiques des projets de la société MarocInvest2AS</h4>
                         <hr class="line">
                         <div id="container1" style="width:100%; height:400px;"></div>
                     </div>

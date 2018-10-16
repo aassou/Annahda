@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -110,5 +110,5 @@
     //Action Delete Processing End
     $_SESSION['todo-action-message'] = $actionMessage;
     $_SESSION['todo-type-message'] = $typeMessage;
-    header('Location:../todo.php');
+    header('Location:../view/view/todo.php');
 

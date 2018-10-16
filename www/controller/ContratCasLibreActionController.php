@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -90,7 +90,7 @@
         } 
         $actionMessage = "<strong>Opération Valide : </strong>Contrat Cas Libre ajouté avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat;
+        $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat;
     }
     //Action addCasLibre Processing End
     //Action Update Processing Begin
@@ -120,7 +120,7 @@
         }
         $codeContrat = htmlentities($_POST['codeContrat']);
         $idProjet = htmlentities($_POST['idProjet']);
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
+        $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
     }
     //Action Update Processing End
     //Action UpdateStatus Processing Begin
@@ -130,7 +130,7 @@
         $contratCasLibreManager->updateStatus($idContratCasLibre, $status);
         $codeContrat = htmlentities($_POST['codeContrat']);
         $idProjet = htmlentities($_POST['idProjet']);
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
+        $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
     }
     //Action UpdateStatus Processing End
     //Action Delete Processing Begin
@@ -141,7 +141,7 @@
         $typeMessage = "success";
         $codeContrat = htmlentities($_POST['codeContrat']);
         $idProjet = htmlentities($_POST['idProjet']);
-        $redirectLink = "Location:../contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
+        $redirectLink = "Location:../view/contrat.php?codeContrat=".$codeContrat.'&idProjet='.$idProjet.'#contratCasLibre';
     }
     //Action Delete Processing End
     $_SESSION['contratCasLibre-action-message'] = $actionMessage;

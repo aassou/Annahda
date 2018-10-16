@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -25,4 +25,4 @@
     else{
         $_SESSION['mail-add-error'] = "Vous devez tapez un message !";
     }
-    header('Location:../messages.php');
+    header('Location:../view/view/messages.php');

@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -24,7 +24,7 @@
     $locauxManager = new LocauxManager($pdo);
     $projetManager = new ProjetManager($pdo);
     $idProjet = htmlentities($_POST['idProjet']);
-    $redirectLink = "Location:../locaux.php?idProjet=".$idProjet;
+    $redirectLink = "Location:../view/locaux.php?idProjet=".$idProjet;
     $nomProjet = $projetManager->getProjetById($idProjet)->nom();
     //Action Add Processing Begin
     if($action == "add"){
@@ -168,7 +168,7 @@
         $historyManager->add($history);
         $actionMessage = "Opération Valide : Montant Revente Local Commercial Modifié avec succès.";
         $typeMessage = "success";
-        $redirectLink = "Location:../properties-status.php";
+        $redirectLink = "Location:../view/properties-status.php";
     }
     //UPDATE MontantReventeLocaux END
     //Action UpdateClient Processing Begin

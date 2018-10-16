@@ -47,7 +47,7 @@
     <div class="header navbar navbar-inverse navbar-fixed-top">
         <!-- BEGIN TOP NAVIGATION BAR -->
         <?php 
-        include("include/top-menu.php"); 
+        include("../include/top-menu.php");
         $todos = $todoManager->getTodosByUser($_SESSION['userMerlaTrav']->login());
         ?>   
         <!-- END TOP NAVIGATION BAR -->
@@ -56,7 +56,7 @@
     <!-- BEGIN CONTAINER -->    
     <div class="page-container row-fluid sidebar-closed">
         <!-- BEGIN SIDEBAR -->
-        <?php include("include/sidebar.php"); ?>
+        <?php include("../include/sidebar.php"); ?>
         <!-- END SIDEBAR -->
         <!-- BEGIN PAGE -->
         <div class="page-content">

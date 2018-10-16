@@ -8,7 +8,7 @@ function classLoad ($myClass) {
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     require_once('../lib/tcpdf/tcpdf.php');
     //classes loading end
@@ -30,4 +30,4 @@ function classLoad ($myClass) {
     $typeMessage = "success";
     $_SESSION['mail-action-message'] = $actionMessage;
     $_SESSION['mail-type-message'] = $typeMessage;
-    header('Location:../contrat-status.php');
+    header('Location:../view/view/contrat-status.php');

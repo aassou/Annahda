@@ -9,7 +9,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     //classes loading end
     session_start();
     
@@ -18,6 +18,6 @@
     $userManager = new UserManager($pdo);
 	$userManager->delete($idUser);
 	$_SESSION['user-delete-success'] = "<strong>Opération valide</strong> : Utlisateur supprimé avec succès.";
-	header('Location:../users.php');
+	header('Location:../view/view/users.php');
     
     

@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -87,9 +87,9 @@
     //Action Delete Processing End
     $_SESSION['typeCharge-action-message'] = $actionMessage;
     $_SESSION['typeCharge-type-message'] = $typeMessage;
-    $redirectLink = "Location:../syndique.php?idProjet=".$idProjet."#sample_1";
+    $redirectLink = "Location:../view/syndique.php?idProjet=".$idProjet."#sample_1";
     if( isset($_POST['source']) and $_POST['source'] == "type-charges" ) {
-        $redirectLink = "Location:../type-charges-syndique.php";
+        $redirectLink = "Location:../view/type-charges-syndique.php";
     }
     header($redirectLink);
     

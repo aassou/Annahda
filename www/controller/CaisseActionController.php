@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -132,14 +132,14 @@
     //Action Delete Processing End
     $_SESSION['caisse-action-message'] = $actionMessage;
     $_SESSION['caisse-type-message'] = $typeMessage;
-    $redirecktLink = 'Location:../caisse.php';
+    $redirecktLink = 'Location:../view/caisse.php';
     if ( isset ($_POST['source']) and $_POST['source'] == "caisse-group" ) {
-        $redirecktLink = "Location:../caisse-group.php";
+        $redirecktLink = "Location:../view/caisse-group.php";
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "caisse-mois-annee" ) {
         $mois = $_POST['mois'];
         $annee = $_POST['annee'];
-        $redirecktLink = "Location:../caisse-mois-annee.php?mois=".$mois."&annee=".$annee;
+        $redirecktLink = "Location:../view/caisse-mois-annee.php?mois=".$mois."&annee=".$annee;
     } 
     header($redirecktLink);
 

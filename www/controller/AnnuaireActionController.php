@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -92,5 +92,5 @@
     //Action Delete Processing End
     $_SESSION['annuaire-action-message'] = $actionMessage;
     $_SESSION['annuaire-type-message'] = $typeMessage;
-    header('Location:../annuaire.php');
+    header('Location:../view/view/annuaire.php');
 

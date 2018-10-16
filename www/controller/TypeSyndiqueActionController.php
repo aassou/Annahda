@@ -10,7 +10,7 @@
         }
     }
     spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    include('../config/config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -84,5 +84,5 @@
     //Action Delete Processing End
     $_SESSION['typeSyndique-action-message'] = $actionMessage;
     $_SESSION['typeSyndique-type-message'] = $typeMessage;
-    header('Location:../file-name-please.php');
+    header('Location:../view/view/file-name-please.php');
 
