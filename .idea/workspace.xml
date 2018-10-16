@@ -2,7 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/www/view/clients-synthese.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-synthese.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/CaissePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaissePrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +58,7 @@
         <counts>
           <entry key="Dockerfile" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="php" value="14" />
+          <entry key="php" value="15" />
           <entry key="sql" value="3" />
           <entry key="yml" value="1" />
         </counts>
@@ -49,7 +66,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Dockerfile" value="1" />
-          <entry key="PHP" value="14" />
+          <entry key="PHP" value="15" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="3" />
           <entry key="YAML" value="1" />
@@ -69,8 +86,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/view/clients-synthese.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="242">
+              <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -90,6 +107,7 @@
       <find>t_company</find>
       <find>`</find>
       <find>../view/view/</find>
+      <find>Société Iaaza</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -101,6 +119,7 @@
       <replace>Location:../view/</replace>
       <replace>include(&quot;../config/config.php&quot;);</replace>
       <replace>../view/</replace>
+      <replace>Société MarocInvest2AS</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/www/</dir>
@@ -226,12 +245,12 @@
       <workItem from="1528033193448" duration="79000" />
       <workItem from="1528033452576" duration="87000" />
       <workItem from="1539676396109" duration="11504000" />
-      <workItem from="1539699931993" duration="684000" />
+      <workItem from="1539699931993" duration="909000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14562000" />
+    <option name="totallyTimeSpent" value="14787000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
@@ -383,10 +402,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/commande-details-iaaza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="525" column="2" lean-forward="true" selection-start-line="525" selection-start-column="2" selection-end-line="525" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/view/clients-synthese.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        <state relative-caret-position="242">
+          <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
         </state>
       </provider>
     </entry>

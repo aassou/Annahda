@@ -182,7 +182,7 @@
                                     or $currentPage=="livraisons-details-iaaza.php"
                                     or $currentPage=="reglements-fournisseur-iaaza.php"
                                     ){?> class="active" <?php } ?> >
-                            <a href="livraisons-group-iaaza.php">Société Iaaza</a>
+                            <a href="livraisons-group-iaaza.php">Société MarocInvest2AS</a>
                         </li>
                         <?php
                         }
@@ -235,7 +235,7 @@
                                     or $currentPage=="commande-details-iaaza.php"
                                     or $currentPage=="commande-mois-annee-iaaza.php"
                                     ){?> class="active" <?php } ?> >
-                            <a href="commande-group-iaaza.php">Société Iaaza</a>
+                            <a href="commande-group-iaaza.php">Société MarocInvest2AS</a>
                         </li>
                         <?php
                         }
@@ -286,7 +286,7 @@
                             ) {
                         ?>
                         <li <?php if($currentPage=="caisse-group-iaaza.php"){?> class="active" <?php } ?> >
-                            <a href="caisse-group-iaaza.php">Société Iaaza</a>
+                            <a href="caisse-group-iaaza.php">Société MarocInvest2AS</a>
                         </li>
                         <?php
                         }

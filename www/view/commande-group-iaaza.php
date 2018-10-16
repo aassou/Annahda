@@ -60,7 +60,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des commandes : Société Iaaza
+                            Gestion des commandes : Société MarocInvest2AS
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -70,7 +70,7 @@
                             </li>
                             <li>
                                 <i class="icon-shopping-cart"></i>
-                                <a>Gestion des commandes - <strong>Société Iaaza</strong></a>
+                                <a>Gestion des commandes - <strong>Société MarocInvest2AS</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

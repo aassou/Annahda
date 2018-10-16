@@ -28,7 +28,7 @@
         }
         else if ( $societe == 2 ) {
             $caisseManager = new CaisseIaazaManager($pdo);
-            $titre = "Société Iaaza";
+            $titre = "Société MarocInvest2AS";
         }
         
         $criteria = htmlentities($_POST['criteria']);

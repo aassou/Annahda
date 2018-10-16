@@ -98,7 +98,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société Iaaza</strong></a>
+                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société MarocInvest2AS</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>

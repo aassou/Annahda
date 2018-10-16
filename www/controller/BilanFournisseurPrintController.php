@@ -33,7 +33,7 @@
             $livraisonManager = new LivraisonIaazaManager($pdo);
             $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
             $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
-            $titreSociete = "Société Iaaza";
+            $titreSociete = "Société MarocInvest2AS";
         }
         //classes and vars
         $idFournisseur = $_POST['idFournisseur'];

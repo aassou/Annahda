@@ -84,7 +84,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a>Gestion de la caisse <strong>Société Iaaza</strong></a>
+                                <a>Gestion de la caisse <strong>Société MarocInvest2AS</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

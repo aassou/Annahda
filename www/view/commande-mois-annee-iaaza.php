@@ -69,7 +69,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des commandes - Société Iaaza</strong>
+                            Gestion des commandes - Société MarocInvest2AS</strong>
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -79,7 +79,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="commande-group-iaaza.php">Gestion des commandes <strong>Société Iaaza</strong></a>
+                                <a href="commande-group-iaaza.php">Gestion des commandes <strong>Société MarocInvest2AS</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>

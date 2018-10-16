@@ -18,7 +18,7 @@
         $titreLivraison ="";
         $hrefLivraisonBilanPrintController = "";
         $livraisonListDeleteLink = "";
-        $titreLivraison ="Société Iaaza";
+        $titreLivraison ="Société MarocInvest2AS";
         $livraisonNumber = $livraisonManager->getLivraisonNumber();
         if($livraisonNumber != 0){
             $livraisons = $livraisonManager->getLivraisonsByGroup();
@@ -87,7 +87,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a>Gestion des livraisons <strong>Société Iaaza</strong></a>
+                                <a>Gestion des livraisons <strong>Société MarocInvest2AS</strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
