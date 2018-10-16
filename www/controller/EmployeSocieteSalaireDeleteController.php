@@ -19,4 +19,4 @@
     $salaireManager = new EmployeSocieteSalaireManager($pdo);
 	$salaireManager->delete($idSalaire);
 	$_SESSION['salaire-delete-success'] = "<strong>Opération valide : </strong>Salaire supprimé avec succès.";
-	header('Location:../view/view/employe-societe-profile.php?idEmploye='.$idEmploye);
+	header('Location:../view/employe-societe-profile.php?idEmploye='.$idEmploye);

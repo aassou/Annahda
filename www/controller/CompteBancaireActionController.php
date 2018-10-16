@@ -125,5 +125,5 @@
     //Action Delete Processing End
     $_SESSION['CompteBancaire-action-message'] = $actionMessage;
     $_SESSION['CompteBancaire-type-message'] = $typeMessage;
-    header('Location:../view/view/compte-bancaire.php');
+    header('Location:../view/compte-bancaire.php');
 

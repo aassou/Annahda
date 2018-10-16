@@ -112,5 +112,5 @@
     
     $_SESSION['terrain-action-message'] = $actionMessage;
     $_SESSION['terrain-type-message'] = $typeMessage;
-    header('Location:../view/view/terrain.php?idProjet='.$idProjet);
+    header('Location:../view/terrain.php?idProjet='.$idProjet);
     

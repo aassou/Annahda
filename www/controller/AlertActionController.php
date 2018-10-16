@@ -93,5 +93,5 @@
     //Action Delete Processing End
     $_SESSION['alert-action-message'] = $actionMessage;
     $_SESSION['alert-type-message'] = $typeMessage;
-    header('Location:../view/view/alert.php');
+    header('Location:../view/alert.php');
 

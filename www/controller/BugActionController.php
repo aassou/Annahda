@@ -86,5 +86,5 @@
     //Action Delete Processing End
     $_SESSION['bug-action-message'] = $actionMessage;
     $_SESSION['bug-type-message'] = $typeMessage;
-    header('Location:../view/view/bugs.php');
+    header('Location:../view/bugs.php');
 

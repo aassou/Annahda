@@ -96,5 +96,5 @@
     //Action Delete Processing End
     $_SESSION['parking-action-message'] = $actionMessage;
     $_SESSION['parking-type-message'] = $typeMessage;
-    header('Location:../view/view/sous-sol.php?idProjet='.$idProjet);
+    header('Location:../view/sous-sol.php?idProjet='.$idProjet);
 

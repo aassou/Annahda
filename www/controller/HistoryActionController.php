@@ -88,5 +88,5 @@
     //Action Delete Processing End
     $_SESSION['history-action-message'] = $actionMessage;
     $_SESSION['history-type-message'] = $typeMessage;
-    header('Location:../view/view/file-name-please.php');
+    header('Location:../view/file-name-please.php');
 

@@ -19,4 +19,4 @@
     $congeManager = new EmployeProjetCongeManager($pdo);
 	$congeManager->delete($idConge);
 	$_SESSION['conge-delete-success'] = "<strong>Opération valide : </strong>Congé supprimé avec succès.";
-	header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
+	header('Location:../view/employe-projet-profile.php?idEmploye='.$idEmploye);

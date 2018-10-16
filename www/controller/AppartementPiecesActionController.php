@@ -74,5 +74,5 @@
     
     $_SESSION['appartement-piece-action-message'] = $actionMessage;
     $_SESSION['appartement-piece-type-message'] = $typeMessage;
-    header('Location:../view/view/appartements.php?idProjet='.$idProjet);
+    header('Location:../view/appartements.php?idProjet='.$idProjet);
     

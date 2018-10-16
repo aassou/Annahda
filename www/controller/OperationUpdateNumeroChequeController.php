@@ -22,10 +22,10 @@
         $operationsManager = new OperationManager($pdo);
         $operationsManager->updateNumeroCheque($numeroCheque, $idOperation);
         $_SESSION['operation-update-success']="<strong>Opération valide : </strong>Numéro de chèque modifiée avec succès.";
-        header('Location:../view/view/operations.php?idContrat='.$idContrat.'&idProjet='.$idProjet);
+        header('Location:../view/operations.php?idContrat='.$idContrat.'&idProjet='.$idProjet);
     }
     else{
         $_SESSION['operation-update-error'] = "<strong>Erreur modification opération : </strong>Vous devez remplir le champ 'Numéro de chèque'.";
-        header('Location:../view/view/operations.php?idContrat='.$idContrat.'&idProjet='.$idProjet);
+        header('Location:../view/operations.php?idContrat='.$idContrat.'&idProjet='.$idProjet);
     }
     

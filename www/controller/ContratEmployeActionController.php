@@ -151,5 +151,5 @@
     //Action Delete Processing End
     $_SESSION['contratEmploye-action-message'] = $actionMessage;
     $_SESSION['contratEmploye-type-message'] = $typeMessage;
-    header('Location:../view/view/projet-contrat-employe.php?idProjet='.$idProjet);
+    header('Location:../view/projet-contrat-employe.php?idProjet='.$idProjet);
 

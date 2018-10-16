@@ -38,7 +38,7 @@
 		if( $param==2 ){
 			$location = "employe-societe-profile.php?idEmploye=".$idEmploye; 
 		}
-		header('Location:../view/view/'.$location);
+		header('Location:../view/'.$location);
 	}
 	else{
         $_SESSION['employe-update-error'] = "<strong>Erreur Modification Employé : </strong>Vous devez remplir au moins le champ 'Nom'.";
@@ -46,7 +46,7 @@
 		if( $param==2 ){
 			$location = "employe-societe-profile.php?idEmploye=".$idEmploye; 
 		}
-		header('Location:../view/view/'.$location);
+		header('Location:../view/'.$location);
 		exit;
     }
 	

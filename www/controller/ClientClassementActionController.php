@@ -80,5 +80,5 @@
     //Action Delete Processing End
     $_SESSION['clientClassement-action-message'] = $actionMessage;
     $_SESSION['clientClassement-type-message'] = $typeMessage;
-    header('Location:../view/view/clients-classement.php');
+    header('Location:../view/clients-classement.php');
 

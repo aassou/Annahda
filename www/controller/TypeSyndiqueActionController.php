@@ -84,5 +84,5 @@
     //Action Delete Processing End
     $_SESSION['typeSyndique-action-message'] = $actionMessage;
     $_SESSION['typeSyndique-type-message'] = $typeMessage;
-    header('Location:../view/view/file-name-please.php');
+    header('Location:../view/file-name-please.php');
 

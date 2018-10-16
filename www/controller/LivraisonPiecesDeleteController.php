@@ -21,6 +21,6 @@
 	$livraisonPiecesManager->delete($idPieceLivraison);
 	//delete file from the disk
 	$_SESSION['piece-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimée avec succès.";
-	header('Location:../view/view/livraison-pieces.php?idProjet='.$idProjet.'&idLivraison='.$idLivraison);
+	header('Location:../view/livraison-pieces.php?idProjet='.$idProjet.'&idLivraison='.$idLivraison);
     
     

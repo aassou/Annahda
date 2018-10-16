@@ -21,6 +21,6 @@
 	$piecesLocauxManager->delete($idPieceLocaux);
 	//delete file from the disk
 	$_SESSION['pieces-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimé avec succès.";
-	header('Location:../view/view/locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet);
+	header('Location:../view/locaux-detail.php?idLocaux='.$idLocaux.'&idProjet='.$idProjet);
     
     

@@ -19,6 +19,6 @@
     $userManager = new UserManager($pdo);
 	$userManager->updateProfil($idUser, $profil);
 	$_SESSION['user-update-success'] = "<strong>Opération valide</strong> : Profil Utlisateur est modifié avec succès.";
-	header('Location:../view/view/users.php');
+	header('Location:../view/users.php');
     
     

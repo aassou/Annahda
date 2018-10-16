@@ -108,5 +108,5 @@
     //Action Delete Processing End
     $_SESSION['clientAttente-action-message'] = $actionMessage;
     $_SESSION['clientAttente-type-message'] = $typeMessage;
-    header('Location:../view/view/clients-attente.php');
+    header('Location:../view/clients-attente.php');
 

@@ -92,5 +92,5 @@
     //Action Delete Processing End
     $_SESSION['annuaire-action-message'] = $actionMessage;
     $_SESSION['annuaire-type-message'] = $typeMessage;
-    header('Location:../view/view/annuaire.php');
+    header('Location:../view/annuaire.php');
 

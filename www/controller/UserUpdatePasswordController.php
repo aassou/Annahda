@@ -29,4 +29,4 @@
 	else{
 		$_SESSION['password-update-error']="<strong>Erreur Mot de passe</strong> : Vous devez saisir votre ancien mot de passe pour créer un nouveau.";
 	}
-	header('Location:../view/view/user-profil.php');
+	header('Location:../view/user-profil.php');

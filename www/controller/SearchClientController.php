@@ -27,13 +27,13 @@
 		$recherche = htmlentities($_POST['search']);
 		$clientManager = new ClientManager($pdo);
 		$_SESSION['searchClientResult'] = $clientManager->getClientBySearch($recherche, $testRadio);
-		header('Location:../view/view/clients-search.php');
+		header('Location:../view/clients-search.php');
     }
     else{
         $_SESSION['client-search-error'] = 
         "<strong>Erreur Recherche Client</strong> : Vous devez séléctionner un choix 'Nom' ou 'CIN' 
         et 'Tapez votre recherche'";
-		header('Location:../view/view/clients-search.php');
+		header('Location:../view/clients-search.php');
     }
     
     

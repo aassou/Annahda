@@ -31,5 +31,5 @@
     else{
         $_SESSION['contrat-reglement-add-error'] = "<strong> خطأ في التسجيل</strong>"."يجب ادخال المبلغ  ";
     }
-	header('Location:../view/view/contrats-travail.php?idProjet='.$idProjet);
+	header('Location:../view/contrats-travail.php?idProjet='.$idProjet);
     

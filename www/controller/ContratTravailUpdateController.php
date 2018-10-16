@@ -39,5 +39,5 @@
     else{
         $_SESSION['contrat-update-error'] = "<strong> خطأ في التسجيل</strong>"."يجب ادخال  الاسم ";
     }
-	header('Location:../view/view/contrats-travail.php?idProjet='.$idProjet);
+	header('Location:../view/contrats-travail.php?idProjet='.$idProjet);
     

@@ -92,5 +92,5 @@
     //Action Delete Processing End
     $_SESSION['collaboration-action-message'] = $actionMessage;
     $_SESSION['collaboration-type-message'] = $typeMessage;
-    header('Location:../view/view/collaboration.php');
+    header('Location:../view/collaboration.php');
 

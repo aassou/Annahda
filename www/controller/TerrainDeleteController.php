@@ -19,6 +19,6 @@
     $terrainManager = new TerrainManager($pdo);
 	$terrainManager->delete($idTerrain);
 	$_SESSION['terrain-delete-success'] = "<strong>Opération valide : </strong>Terrain supprimé avec succès.";
-	header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
+	header('Location:../view/terrain.php?idProjet='.$idProjet.'#listTerrain');
     
     

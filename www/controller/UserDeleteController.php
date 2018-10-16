@@ -18,6 +18,6 @@
     $userManager = new UserManager($pdo);
 	$userManager->delete($idUser);
 	$_SESSION['user-delete-success'] = "<strong>Opération valide</strong> : Utlisateur supprimé avec succès.";
-	header('Location:../view/view/users.php');
+	header('Location:../view/users.php');
     
     

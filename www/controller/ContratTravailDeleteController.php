@@ -18,6 +18,6 @@
     $contratTravailManager = new ContratTravailManager($pdo);
 	$contratTravailManager->delete($idContrat);
 	$_SESSION['contrat-delete-success']="<strong>تم حذف العقد بنجاح</strong>";
-	header('Location:../view/view/contrats-travail.php?idProjet='.$idProjet);
+	header('Location:../view/contrats-travail.php?idProjet='.$idProjet);
     
     

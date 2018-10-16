@@ -19,6 +19,6 @@
     $employeManager = new EmployeProjetManager($pdo);
 	$employeManager->delete($idEmploye);
 	$_SESSION['employe-delete-success'] = "<strong>Opération valide : </strong>Employé supprimé avec succès.";
-	header('Location:../view/view/employes-projet.php?idProjet='.$idProjet);
+	header('Location:../view/employes-projet.php?idProjet='.$idProjet);
     
     

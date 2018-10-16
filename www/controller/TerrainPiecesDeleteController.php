@@ -20,6 +20,6 @@
 	$piecesTerrainManager->delete($idPieceTerrain);
 	//delete file from the disk
 	$_SESSION['pieces-delete-success'] = "<strong>Opération valide : </strong>Pièce supprimé avec succès.";
-	header('Location:../view/view/terrain.php?idProjet='.$idProjet.'#listTerrain');
+	header('Location:../view/terrain.php?idProjet='.$idProjet.'#listTerrain');
     
     

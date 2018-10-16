@@ -26,7 +26,7 @@
         }
         else {
             $_SESSION['terrain-add-error']="<strong>Erreur Ajout Terrain</strong> : La valeur du champ 'Superficie' est incorrecte !";
-            header('Location:../view/view/terrain.php?idProjet='.$idProjet);
+            header('Location:../view/terrain.php?idProjet='.$idProjet);
             exit;
         }
         if(filter_var($_POST['prix'], FILTER_VALIDATE_FLOAT)==true){
@@ -34,7 +34,7 @@
         }
         else {
             $_SESSION['terrain-add-error']="<strong>Erreur Ajout Terrain</strong> : La valeur du champ 'Prix' est incorrecte !";
-            header('Location:../view/view/terrain.php?idProjet='.$idProjet);
+            header('Location:../view/terrain.php?idProjet='.$idProjet);
             exit;
         }
 		if(filter_var($_POST['fraisAchat'], FILTER_VALIDATE_FLOAT)==true){
@@ -42,7 +42,7 @@
         }
         else {
             $_SESSION['terrain-add-error']="<strong>Erreur Ajout Terrain</strong> : La valeur du champ 'Fais d'achat' est incorrecte !";
-            header('Location:../view/view/terrain.php?idProjet='.$idProjet);
+            header('Location:../view/terrain.php?idProjet='.$idProjet);
             exit;
         }
         $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -57,5 +57,5 @@
     else{
         $_SESSION['terrain-add-error'] = "<strong>Erreur Ajout Terrain : </strong>Vous devez remplir au moins le champ 'Vendeur'.";
     }
-	header('Location:../view/view/terrain.php?idProjet='.$idProjet);
+	header('Location:../view/terrain.php?idProjet='.$idProjet);
     

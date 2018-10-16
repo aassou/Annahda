@@ -26,11 +26,11 @@
         $congeManager = new EmployeProjetCongeManager($pdo);
         $congeManager->update($conge);
 		$_SESSION['conge-update-success'] = "<strong>Opération valide : </strong>Les infos du congé sont modifiées avec succès.";
-		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/employe-projet-profile.php?idEmploye='.$idEmploye);
 	}
 	else{
         $_SESSION['conge-update-error'] = "<strong>Erreur Modification Congé : </strong>Vous devez remplir tous les champs";
-		header('Location:../view/view/employe-projet-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/employe-projet-profile.php?idEmploye='.$idEmploye);
 		exit;
     }
 	

@@ -28,11 +28,11 @@
         $salaireManager = new EmployeSocieteSalaireManager($pdo);
         $salaireManager->update($salaire);
 		$_SESSION['salaire-update-success'] = "<strong>Opération valide : </strong>Les infos du salaire sont modifiées avec succès.";
-		header('Location:../view/view/employe-societe-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/employe-societe-profile.php?idEmploye='.$idEmploye);
 	}
 	else{
         $_SESSION['salaire-update-error'] = "<strong>Erreur Modification Salaire : </strong>Vous devez remplir au moins le champ 'Salaire'.";
-		header('Location:../view/view/employe-societe-profile.php?idEmploye='.$idEmploye);
+		header('Location:../view/employe-societe-profile.php?idEmploye='.$idEmploye);
 		exit;
     }
 	

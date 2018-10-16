@@ -172,5 +172,5 @@
     //Action Delete List Of Tasks Processing End
     $_SESSION['task-action-message'] = $actionMessage;
     $_SESSION['task-type-message'] = $typeMessage;
-    header('Location:../view/view/tasks.php');
+    header('Location:../view/tasks.php');
 

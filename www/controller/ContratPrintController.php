@@ -25,7 +25,7 @@
         	$idContrat = $_GET['idContrat'];
         }
 		else{
-			header('Location:../view/view/dashboard.php');
+			header('Location:../view/dashboard.php');
 			exit;
 		}
         $contrat = $contratManager->getContratById($idContrat);
