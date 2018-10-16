@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="" />
+    <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,27 +22,27 @@
         <counts>
           <entry key="gitignore" value="7" />
           <entry key="php" value="24" />
-          <entry key="yml" value="36" />
+          <entry key="yml" value="38" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PHP" value="24" />
           <entry key="PLAIN_TEXT" value="7" />
-          <entry key="YAML" value="36" />
+          <entry key="YAML" value="38" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gitignore" value="1" />
-          <entry key="php" value="11" />
+          <entry key="php" value="12" />
           <entry key="sql" value="2" />
           <entry key="yml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PHP" value="11" />
+          <entry key="PHP" value="12" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="2" />
           <entry key="YAML" value="1" />
@@ -60,8 +62,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docker-compose.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+            <state relative-caret-position="681">
+              <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/controller/UserSignInController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -78,6 +89,7 @@
       <find>include(&quot;include/top-menu.php&quot;);</find>
       <find>Annahda</find>
       <find>Location:../</find>
+      <find>include(&quot;../view/config.php&quot;);</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -87,11 +99,13 @@
       <replace>include(&quot;../include/top-menu.php&quot;);</replace>
       <replace>MarocInvest2AS</replace>
       <replace>Location:../view/</replace>
+      <replace>include(&quot;../config/config.php&quot;);</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/www/</dir>
       <dir>$PROJECT_DIR$/www/view</dir>
       <dir>$PROJECT_DIR$/www/controller</dir>
+      <dir>$PROJECT_DIR$</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -110,8 +124,9 @@
         <option value="$PROJECT_DIR$/www/view/collaboration.php" />
         <option value="$PROJECT_DIR$/www/view/dashboard.php" />
         <option value="$PROJECT_DIR$/www/controller/CaisseActionController.php" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/www/controller/UserSignInController.php" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
       </list>
     </option>
   </component>
@@ -157,6 +172,17 @@
               <item name="Annahda" type="462c0819:PsiDirectoryNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Annahda" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Annahda" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -200,15 +226,16 @@
       <workItem from="1528032634198" duration="290000" />
       <workItem from="1528033193448" duration="79000" />
       <workItem from="1528033452576" duration="87000" />
-      <workItem from="1539676396109" duration="5811000" />
+      <workItem from="1539676396109" duration="6106000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8185000" />
+    <option name="totallyTimeSpent" value="8480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19071311" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -222,7 +249,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32760474" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32760474" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -329,10 +356,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/UserSignInController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" selection-start-line="12" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="24" lean-forward="true" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+        <state relative-caret-position="681">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
         </state>
       </provider>
     </entry>
