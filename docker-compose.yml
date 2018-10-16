@@ -35,6 +35,7 @@ services:
             MYSQL_USER: root
             MYSQL_PASSWORD: test
             MYSQL_ROOT_PASSWORD: test 
-            PMA_HOST: db
+        depends_on:
+            - db
 volumes:
     persistent:
