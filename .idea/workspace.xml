@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/BilanFournisseurPrintController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseIaazaBonPrintController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/CaissePrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaissePrintController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/Livraison2BilanPrintController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +23,7 @@
         <counts>
           <entry key="Dockerfile" value="22" />
           <entry key="gitignore" value="7" />
-          <entry key="php" value="24" />
+          <entry key="php" value="43" />
           <entry key="sql" value="6" />
           <entry key="yml" value="40" />
         </counts>
@@ -48,7 +31,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="22" />
-          <entry key="PHP" value="24" />
+          <entry key="PHP" value="43" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="SQL" value="6" />
           <entry key="YAML" value="40" />
@@ -58,7 +41,7 @@
         <counts>
           <entry key="Dockerfile" value="1" />
           <entry key="gitignore" value="1" />
-          <entry key="php" value="15" />
+          <entry key="php" value="16" />
           <entry key="sql" value="3" />
           <entry key="yml" value="1" />
         </counts>
@@ -66,7 +49,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Dockerfile" value="1" />
-          <entry key="PHP" value="15" />
+          <entry key="PHP" value="16" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="3" />
           <entry key="YAML" value="1" />
@@ -83,11 +66,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/view/clients-synthese.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="242">
               <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="379" column="56" selection-start-line="379" selection-start-column="56" selection-end-line="379" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -108,6 +100,7 @@
       <find>`</find>
       <find>../view/view/</find>
       <find>Société Iaaza</find>
+      <find>iaaza</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -142,7 +135,6 @@
         <option value="$PROJECT_DIR$/www/view/projet-details.php" />
         <option value="$PROJECT_DIR$/www/controller/AlertActionController.php" />
         <option value="$PROJECT_DIR$/www/view/collaboration.php" />
-        <option value="$PROJECT_DIR$/www/view/dashboard.php" />
         <option value="$PROJECT_DIR$/www/controller/CaisseActionController.php" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/www/controller/UserSignInController.php" />
@@ -150,6 +142,7 @@
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/db/annahda.sql" />
         <option value="$PROJECT_DIR$/www/view/clients-synthese.php" />
+        <option value="$PROJECT_DIR$/www/view/dashboard.php" />
       </list>
     </option>
   </component>
@@ -245,18 +238,18 @@
       <workItem from="1528033193448" duration="79000" />
       <workItem from="1528033452576" duration="87000" />
       <workItem from="1539676396109" duration="11504000" />
-      <workItem from="1539699931993" duration="909000" />
+      <workItem from="1539699931993" duration="1325000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14787000" />
+    <option name="totallyTimeSpent" value="15203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1985" y="-4" width="1855" height="1084" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19292426" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19292426" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -268,7 +261,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.40923738" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.19119227" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32975295" />
@@ -353,13 +346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="133" column="43" selection-start-line="133" selection-start-column="43" selection-end-line="133" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -413,6 +399,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="11" column="56" lean-forward="true" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="379" column="56" selection-start-line="379" selection-start-column="56" selection-end-line="379" selection-end-column="56" />
         </state>
       </provider>
     </entry>

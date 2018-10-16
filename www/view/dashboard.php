@@ -330,7 +330,7 @@
 				<!-- BEGIN DASHBOARD STATS -->
 				<h4 class="breadcrumb"><i class="icon-table"></i> Bilans et Statistiques Pour Cette Semaine</h4>
 				<div class="row-fluid">
-					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat red">
 							<div class="visual">
 								<i class="icon-signal"></i>
@@ -345,7 +345,7 @@
 							</div>					
 						</div>
 					</div>
-					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat green">
 							<div class="visual">
 								<i class="icon-shopping-cart"></i>
@@ -356,7 +356,7 @@
 							</div>					
 						</div>
 					</div>
-					<div class="span2 responsive" data-tablet="span2" data-desktop="span2">
+					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
 						<div class="dashboard-stat blue">
 							<div class="visual">
 								<i class="icon-group"></i>
@@ -377,26 +377,11 @@
 								<div class="number">
 									<?= number_format($soldeCaisseMarocInvest2AS, '2', ',', ' ') ?>
 								</div>
-								<div class="desc">Caisse MarocInvest2AS</div>
+								<div class="desc">Caisse</div>
 							</div>					
 						</div>
 						</a>
 					</div>
-					<div class="span3 responsive" data-tablet="span3" data-desktop="span3">
-                        <a class="more" href="caisse-group-iaaza.php">
-                        <div class="dashboard-stat yellow">
-                            <div class="visual">
-                                <i class="icon-money"></i>
-                            </div>
-                            <div class="details">
-                                <div class="number">
-                                    <?= number_format($soldeCaisseIaaza, '2', ',', ' ') ?>
-                                </div>
-                                <div class="desc">Caisse Iaaza</div>
-                            </div>                  
-                        </div>
-                        </a>
-                    </div>	
 				</div>
 				<!-- END DASHBOARD STATS -->
 				<!-- END DASHBOARD STATS -->
