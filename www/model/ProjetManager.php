@@ -1,21 +1,27 @@
 <?php
+
 /**
- * This is a ModelManager class for the Project component
- * Created By : AASSOU Abdelilah
- * Date       : 03/11/2015
- * Github     : @aassou
- * email      : aassou.abdelilah@gmail.com
+ * Class ProjetManager
  */
 class ProjetManager{
-    //attributes
+
+    /**
+     * @var
+     */
     private $_db;
-    
-    //constructor
+
+    /**
+     * ProjetManager constructor.
+     * @param $db
+     */
     public function __construct($db){
         $this->_db = $db;
     }
-    
-    //CRUD operations
+
+
+    /**
+     * @param Projet $projet
+     */
     public function add(Projet $projet){
         $query = $this->_db->prepare(
         'INSERT INTO t_projet (nom, nomArabe, titre, adresse, adresseArabe, superficie, description, budget, 
@@ -56,7 +62,10 @@ class ProjetManager{
         $query->execute();
         $query->closeCursor();
     }
-    
+
+    /**
+     * @param Projet $projet
+     */
     public function update(Projet $projet){
         $query = $this->_db->prepare(
         'UPDATE t_projet SET nom=:nom, nomArabe=:nomArabe, titre=:titre, adresse=:adresse, 
@@ -98,21 +107,31 @@ class ProjetManager{
         $query->execute();
         $query->closeCursor();
     }
-	
+
+    /**
+     * @param $idProjet
+     */
 	public function delete($idProjet){
 		$query = $this->_db->prepare('DELETE FROM t_projet WHERE id=:idProjet');
 		$query->bindValue(':idProjet', $idProjet);
 		$query->execute();
 		$query->closeCursor();
 	}
-    
+
+    /**
+     * @return mixed
+     */
     public function getProjetsNumber(){
         $query = $this->_db->query('SELECT COUNT(*) AS projectNumbers FROM t_projet');
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $query->closeCursor();
         return $data['projectNumbers'];
     }
-    
+
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getProjetNameById($id){
         $query = $this->_db->prepare('SELECT nom FROM t_projet WHERE id=:id');
         $query->bindValue(':id', $id);
@@ -121,7 +140,11 @@ class ProjetManager{
         $query->closeCursor();
         return $data['nom'];
     }
-    
+
+    /**
+     * @param $recherche
+     * @return mixed
+     */
 	public function getProjetBySearch($recherche){
 		$query = $this->_db->prepare("SELECT id FROM t_projet WHERE REPLACE(nom, ' ', '') LIKE REPLACE(:recherche, ' ', '')");
 		$query->bindValue(':recherche', $recherche);
@@ -131,7 +154,10 @@ class ProjetManager{
         $query->closeCursor();
         return $data['id'];
 	}
-	
+
+    /**
+     * @return array
+     */
 	public function getProjetsIds(){
 		$projetsId = array();
         $query = $this->_db->query('SELECT id FROM t_projet ORDER BY id ASC');
@@ -142,7 +168,10 @@ class ProjetManager{
         $query->closeCursor();
         return $projetsId;
 	}
-	
+
+    /**
+     * @return array
+     */
     public function getProjets(){
         $projets = array();
         $query = $this->_db->query('SELECT * FROM t_projet ORDER BY cast(nom AS SIGNED INTEGER) ASC');
@@ -153,7 +182,10 @@ class ProjetManager{
         $query->closeCursor();
         return $projets;
     }
-    
+
+    /**
+     * @return array
+     */
     public function getProjetsOrdered(){
         $projets = array();
         $query = $this->_db->query(
@@ -167,7 +199,12 @@ class ProjetManager{
         $query->closeCursor();
         return $projets;
     }
-	
+
+    /**
+     * @param $begin
+     * @param $end
+     * @return array
+     */
 	public function getProjetsByLimits($begin, $end){
         $projets = array();
         $query = $this->_db->query('SELECT * FROM t_projet ORDER BY id DESC LIMIT '.$begin.' , '.$end);
@@ -178,7 +215,11 @@ class ProjetManager{
         $query->closeCursor();
         return $projets;
     }
-    
+
+    /**
+     * @param $id
+     * @return Projet
+     */
     public function getProjetById($id){
         $query = $this->_db->prepare('SELECT * FROM t_projet WHERE id=:id');
         $query->bindValue(':id', $id);
@@ -187,17 +228,35 @@ class ProjetManager{
         $query->closeCursor();
         return new Projet($data);
     }
-    
+
+    /**
+     * @return mixed
+     */
     public function getLastId(){
         $query = $this->_db->query('SELECT id AS last_id FROM t_projet ORDER BY id DESC LIMIT 0, 1');
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $id = $data['last_id'];
         return $id;
     }
-	
+
+    /**
+     * @param $nomProjet
+     * @return mixed
+     */
 	public function exists($nomProjet){
         $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_projet WHERE REPLACE(nom, ' ', '') LIKE REPLACE(:nomProjet, ' ', '') ");
         $query->execute(array(':nomProjet' => $nomProjet));
+        //get result
+        return $query->fetchColumn();
+    }
+
+    /**
+     * @param $idProjet
+     * @return mixed
+     */
+    public function projectIdExists($idProjet){
+        $query = $this->_db->prepare(" SELECT COUNT(*) FROM t_projet WHERE id=:idProjet");
+        $query->execute(array(':idProjet' => $idProjet));
         //get result
         return $query->fetchColumn();
     }

@@ -1,15 +1,7 @@
 <?php
-    //classes loading begin
-    function classLoad ($myClass) {
-        if(file_exists('../model/'.$myClass.'.php')){
-            include('../model/'.$myClass.'.php');
-        }
-        elseif(file_exists('../controller/'.$myClass.'.php')){
-            include('../controller/'.$myClass.'.php');
-        }
-    }
-    spl_autoload_register("classLoad"); 
-    include('../config/config.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+    include('../autoload.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
@@ -51,7 +43,10 @@
             $livraisonManager->add($livraison);
             //add history data to db
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
-            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+            $nomProjet = 'Plusieurs Projets';
+            if ($idProjet != 0) {
+                $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+            }
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des livraisons",

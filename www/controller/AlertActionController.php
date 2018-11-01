@@ -1,20 +1,6 @@
 <?php
-
-    //classes loading begin
-    function classLoad ($myClass) {
-        if(file_exists('../model/'.$myClass.'.php')){
-            include('../model/'.$myClass.'.php');
-        }
-        elseif(file_exists('../controller/'.$myClass.'.php')){
-            include('../controller/'.$myClass.'.php');
-        }
-    }
-    spl_autoload_register("classLoad"); 
-    include('../config/config.php');
-    include('../lib/image-processing.php');
-    //classes loading end
+    include('../autoload.php');
     session_start();
-    
     //post input processing
     $action = htmlentities($_POST['action']);
     //This var contains result message of CRUD action

@@ -5,7 +5,7 @@ class FournisseurManager{
     
     //constructor
     public function __construct($db){
-        $this->_db = $db;
+        $this->_db = new PDO('mysql:host=db;dbname=annahda', 'root', 'test');
     }
     
     //CRUD operations
