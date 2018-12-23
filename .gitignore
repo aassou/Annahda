@@ -1,1 +1,4 @@
 .idea/*
+www/config/*
+docker-compose.yml
+db/
