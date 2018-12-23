@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/www/controller/UserActivationCronJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserActivationCronJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/UserChangeStatusController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserChangeStatusController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/UserSignUpController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/UserSignUpController.php" afterDir="false" />
-    </list>
+    <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +16,13 @@
             <state relative-caret-position="242">
               <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/controller/TypeSyndiqueActionController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1461" />
           </provider>
         </entry>
       </file>
@@ -201,18 +204,17 @@
       <workItem from="1539699931993" duration="1325000" />
       <workItem from="1541542129165" duration="210000" />
       <workItem from="1545576520253" duration="5322000" />
-      <workItem from="1545594820168" duration="498000" />
+      <workItem from="1545594820168" duration="1085000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22426000" />
+    <option name="totallyTimeSpent" value="23013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26149586" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26149586" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -224,7 +226,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2669633" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2669633" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32975295" />
@@ -505,6 +507,11 @@
         <state relative-caret-position="198">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/TypeSyndiqueActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1461" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/controller/UserActivationCronJob.php">
