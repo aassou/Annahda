@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/www/view/clients-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/clients-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,10 +13,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/view/clients-list.php">
+        <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="307">
+              <caret line="176" column="22" lean-forward="true" selection-start-line="176" selection-start-column="22" selection-end-line="176" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -104,8 +104,8 @@
         <option value="$PROJECT_DIR$/www/view/dashboard.php" />
         <option value="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" />
         <option value="$PROJECT_DIR$/www/view/suivi-company.php" />
-        <option value="$PROJECT_DIR$/www/include/sidebar.php" />
         <option value="$PROJECT_DIR$/www/view/clients-list.php" />
+        <option value="$PROJECT_DIR$/www/include/sidebar.php" />
       </list>
     </option>
   </component>
@@ -189,18 +189,18 @@
       <workItem from="1539676396109" duration="11504000" />
       <workItem from="1539699931993" duration="1325000" />
       <workItem from="1541542129165" duration="210000" />
-      <workItem from="1545576520253" duration="4728000" />
+      <workItem from="1545576520253" duration="5016000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21334000" />
+    <option name="totallyTimeSpent" value="21622000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26869807" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26869807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -212,7 +212,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2669633" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.2669633" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32975295" />
@@ -446,13 +446,6 @@
         <state relative-caret-position="-1188" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="158" column="19" lean-forward="true" selection-start-line="158" selection-start-column="19" selection-end-line="158" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/controller/CommandeActionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="299">
@@ -464,6 +457,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="176" column="22" lean-forward="true" selection-start-line="176" selection-start-column="22" selection-end-line="176" selection-end-column="22" />
         </state>
       </provider>
     </entry>

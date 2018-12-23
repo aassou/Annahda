@@ -169,7 +169,7 @@
                 <?php 
                     $gestionCaisseClass="";
                     if(
-                    $currentPage=="caisse.php" or
+                    $currentPage=="caisse-group.php" or
                     $currentPage=="caisse-group.php" or
                     $currentPage=="caisse-mois-annee.php"
                     ){
@@ -177,7 +177,7 @@
                     } 
                 ?> 
                 <li class="<?= $gestionCaisseClass; ?>">
-                    <a href="caisse.php">
+                    <a href="caisse-group.php">
                     <i class="icon-money"></i> 
                     <span class="title">Gestion Caisses</span>
                     <span class="arrow "></span>
