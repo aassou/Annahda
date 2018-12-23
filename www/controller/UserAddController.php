@@ -14,7 +14,7 @@ include("../config/config.php");
 //classes loading end
 session_start();
 
-$redirectLink='../users.php';
+$redirectLink='../view/users.php';
 
 if(empty($_POST['login']) || empty($_POST['password']) || empty($_POST['rpassword'])){
     $_SESSION['user-add-error'] = "<strong>Erreur Ajout Utilisateur</strong> : Tous les champs sont obligatoires";
