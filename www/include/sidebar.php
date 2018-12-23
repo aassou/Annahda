@@ -150,9 +150,9 @@
                     $gestionCommandeClass="";
                     if(
                     $currentPage=="commande-group.php"
-                    or $currentPage=="commande-group-iaaza.php"
-                    or $currentPage=="commande-details-iaaza.php"
-                    or $currentPage=="commande-mois-annee-iaaza.php"
+                    or $currentPage=="commande-group.php"
+                    or $currentPage=="commande-details.php"
+                    or $currentPage=="commande-mois-annee.php"
                     ){
                         $gestionCommandeClass = "active ";
                     } 
@@ -169,12 +169,9 @@
                 <?php 
                     $gestionCaisseClass="";
                     if(
-                    $currentPage=="caisse.php" or 
-                    $currentPage=="caisse-iaaza.php" or
+                    $currentPage=="caisse.php" or
                     $currentPage=="caisse-group.php" or
-                    $currentPage=="caisse-mois-annee.php" or
-                    $currentPage=="caisse-group-iaaza.php" or
-                    $currentPage=="caisse-mois-annee-iaaza.php"
+                    $currentPage=="caisse-mois-annee.php"
                     ){
                         $gestionCaisseClass = "active ";
                     } 

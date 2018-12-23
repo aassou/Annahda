@@ -79,7 +79,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="commande-group-iaaza.php">Gestion des commandes </a>
+                                <a href="commande-group.php">Gestion des commandes </a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -237,7 +237,7 @@
                                                 <?php
                                                 }
                                                 ?>
-                                                <a class="btn mini" href="commande-details-iaaza.php?codeCommande=<?= $commande->codeLivraison() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Commande" >
+                                                <a class="btn mini" href="commande-details.php?codeCommande=<?= $commande->codeLivraison() ?>&mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>" title="Voir Détail Commande" >
                                                     <i class="icon-eye-open"></i>
                                                 </a>
                                                 <a class="btn mini blue" href="../controller/CommandePrintController.php?idCommande=<?= $commande->id() ?>&societe=2" title="Imprimer Bon Commande" >

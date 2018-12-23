@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/www/controller/CaisseIaazaActionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/CaisseIaazaActionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +19,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
+            <state relative-caret-position="263">
+              <caret line="171" column="50" selection-start-line="171" selection-start-column="50" selection-end-line="171" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/controller/CommandeActionController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="120" column="75" selection-start-line="120" selection-start-column="46" selection-end-line="120" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -47,6 +60,10 @@
       <find>Société MarocInvest2AS</find>
       <find>&lt;strong&gt;&lt;?= $titreLivraison ?&gt;&lt;/strong&gt;</find>
       <find>MarocInvest2AS</find>
+      <find>href=&quot;javascript</find>
+      <find>caisse-iaaza.php</find>
+      <find>caisse-mois-annee-iaaza.php</find>
+      <find>caisse-group-iaaza.php</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -61,13 +78,16 @@
       <replace>Société MarocInvest2AS</replace>
       <replace>include('../config/config.php')</replace>
       <replace />
+      <replace>caisse.php</replace>
+      <replace>caisse-mois-annee.php</replace>
+      <replace>caisse-group.php</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/www/</dir>
       <dir>$PROJECT_DIR$/www/controller</dir>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/www</dir>
       <dir>$PROJECT_DIR$/www/view</dir>
+      <dir>$PROJECT_DIR$/www/</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -131,12 +151,6 @@
               <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
               <item name="Annahda" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Annahda" type="462c0819:PsiDirectoryNode" />
-              <item name="www" type="462c0819:PsiDirectoryNode" />
               <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -185,12 +199,12 @@
       <workItem from="1539676396109" duration="11504000" />
       <workItem from="1539699931993" duration="1325000" />
       <workItem from="1541542129165" duration="210000" />
-      <workItem from="1545576520253" duration="4121000" />
+      <workItem from="1545576520253" duration="4422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20727000" />
+    <option name="totallyTimeSpent" value="21028000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
@@ -442,10 +456,17 @@
         <state relative-caret-position="-1188" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/controller/CommandeActionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="120" column="75" selection-start-line="120" selection-start-column="46" selection-end-line="120" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
+        <state relative-caret-position="263">
+          <caret line="171" column="50" selection-start-line="171" selection-start-column="50" selection-end-line="171" selection-end-column="50" />
         </state>
       </provider>
     </entry>

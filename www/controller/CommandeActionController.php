@@ -54,11 +54,11 @@
             $commandeManager->add($commande);
             $actionMessage = "Opération Valide : Commande Ajouté(e) avec succès.";  
             $typeMessage = "success";
-            $redirectLink = "Location:../view/commande-details-iaaza.php?codeCommande=".$codeLivraison."&mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/commande-details.php?codeCommande=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
         else{
-            if ( isset($_POST['source']) and $_POST['source'] == "commande-group-iaaza" ) {
-                $redirectLink = "Location:../view/commande-group-iaaza.php";
+            if ( isset($_POST['source']) and $_POST['source'] == "caisse-group" ) {
+                $redirectLink = "Location:../view/commande-group.php";
             } 
             $actionMessage = "Erreur Ajout commande : Vous devez remplir le champ 'Numéro Commande'.";
             $typeMessage = "error";
@@ -98,10 +98,10 @@
             $typeMessage = "error";
         }
         if ( isset($_POST['source']) and $_POST['source'] == "commande-mois-annee-iaaza" ) {
-            $redirectLink = "Location:../view/commande-mois-annee-iaaza.php?mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/commande-mois-annee.php?mois=".$mois."&annee=".$annee;
         }
         else if ( isset($_POST['source']) and $_POST['source'] == "commande-details-iaaza" ) {
-            $redirectLink = "Location:../view/commande-details-iaaza.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/commande-details.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
         }
     }
     //Action Update Processing End
@@ -118,7 +118,7 @@
         $actionMessage = "Opération Valide : Commande supprimé(e) avec succès.";
         $typeMessage = "success";
         if ( isset($_POST['source']) and $_POST['source'] == "commande-mois-annee-iaaza" ) {
-            $redirectLink = "Location:../view/commande-mois-annee-iaaza.php?mois=".$mois."&annee=".$annee;
+            $redirectLink = "Location:../view/commande-mois-annee.php?mois=".$mois."&annee=".$annee;
         }
     }
     //Action Delete Processing End

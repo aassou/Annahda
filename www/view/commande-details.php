@@ -92,11 +92,11 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="commande-group-iaaza.php">Gestion des commandes </a>
+                                <a href="commande-group.php">Gestion des commandes </a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="commande-mois-annee-iaaza.php?mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>">
+                                <a href="commande-mois-annee.php?mois=<?= $_GET['mois'] ?>&annee=<?= $_GET['annee'] ?>">
                                     <strong><?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong>
                                 </a>
                                 <i class="icon-angle-right"></i>

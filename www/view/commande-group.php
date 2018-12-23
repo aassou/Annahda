@@ -147,7 +147,7 @@
                                     <div class="control-group">
                                         <div class="controls">  
                                             <input type="hidden" name="action" value="add" />
-                                            <input type="hidden" name="source" value="commande-group-iaaza" />        
+                                            <input type="hidden" name="source" value="caisse-group" />
                                             <button class="btn" data-dismiss="modal"aria-hidden="true">Non</button>
                                             <button type="submit" class="btn red" aria-hidden="true">Oui</button>
                                         </div>
@@ -259,7 +259,7 @@
                                             $annee = date('Y', strtotime($commande->dateCommande()));
                                             ?>
                                             <td>
-                                                <a class="btn mini" href="commande-mois-annee-iaaza.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
+                                                <a class="btn mini" href="commande-mois-annee.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
                                                     <strong><?= date('m/Y', strtotime($commande->dateCommande())) ?></strong>
                                                 </a>
                                             </td>

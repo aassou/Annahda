@@ -296,7 +296,7 @@
                                             $solde = $credit - $debit;
                                             ?>
                                             <td>
-                                                <a class="btn mini" href="caisse-mois-annee-iaaza.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
+                                                <a class="btn mini" href="caisse-mois-annee.php?mois=<?= $mois ?>&annee=<?= $annee ?>">
                                                     <strong><?= date('m/Y', strtotime($caisse->dateOperation())) ?></strong>
                                                 </a>
                                             </td>

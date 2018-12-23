@@ -24,7 +24,7 @@
     $mois = $_POST['mois'];
     $annee = $_POST['annee'];
     $codeCommande = $_POST['codeCommande'];
-    $redirectLink = "Location:../view/commande-details-iaaza.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
+    $redirectLink = "Location:../view/commande-details.php?codeCommande=".$codeCommande."&mois=".$mois."&annee=".$annee;
     //Component Class Manager
 
     $commandeDetailManager = new CommandeDetailManager($pdo);

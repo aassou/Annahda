@@ -89,7 +89,7 @@
 					<div class="span12">
 						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société MarocInvest2AS</h4>
 						<div class="tiles">
-						    <a href="caisse-group-iaaza.php">
+						    <a href="caisse-group.php">
                             <div class="tile bg-yellow">
                                 <div class="tile-body">
                                     <i class="icon-money"></i>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                             </a>
-                            <a href="commande-group-iaaza.php">
+                            <a href="commande-group.php">
                             <div class="tile bg-red">
                                 <div class="corner"></div>
                                 <div class="tile-body">

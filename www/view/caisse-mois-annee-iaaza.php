@@ -85,7 +85,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="caisse-group-iaaza.php">Gestion de la caisse </a>
+                                <a href="caisse-group.php">Gestion de la caisse </a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>

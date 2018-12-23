@@ -134,12 +134,12 @@
     $_SESSION['caisse-type-message'] = $typeMessage;
     $redirecktLink = 'Location:../view/caisse-iaaza.php';
     if ( isset ($_POST['source']) and $_POST['source'] == "caisse-group-iaaza" ) {
-        $redirecktLink = "Location:../view/caisse-group-iaaza.php";
+        $redirecktLink = "Location:../view/caisse-group.php";
     }
     else if ( isset($_POST['source']) and $_POST['source'] == "caisse-mois-annee-iaaza" ) {
         $mois = $_POST['mois'];
         $annee = $_POST['annee'];
-        $redirecktLink = "Location:../view/caisse-mois-annee-iaaza.php?mois=".$mois."&annee=".$annee;
+        $redirecktLink = "Location:../view/caisse-mois-annee.php?mois=".$mois."&annee=".$annee;
     } 
     header($redirecktLink);
 
