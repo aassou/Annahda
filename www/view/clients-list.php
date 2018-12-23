@@ -5,9 +5,7 @@
         //les sources
         $clientsManager = new ClientManager($pdo);
         $clientNumber = $clientsManager->getClientsNumber();
-        if($clientNumber!=0){
-            $clients = $clientsManager->getClients();     
-        }
+        $clients = $clientsManager->getClients();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
