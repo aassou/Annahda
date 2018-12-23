@@ -72,7 +72,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a>Gestion de la caisse <strong>Société MarocInvest2AS</strong></a>
+                                <a>Gestion de la caisse </a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

@@ -2,20 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetCongeAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetCongeAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetCongeUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetCongeUpdateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetSalaireUpdateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeProjetUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeProjetUpdateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteSalaireUpdateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/EmployeSocieteUpdateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/EmployeSocieteUpdateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/LivraisonPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LivraisonPiecesAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/LocauxPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/LocauxPiecesAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/controller/TerrainPiecesAddController.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/controller/TerrainPiecesAddController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/view/suivi-company.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/suivi-company.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,19 +35,17 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/controller/AppartementActionController.php">
+        <entry file="file://$PROJECT_DIR$/www/view/compte-bancaire.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="35" />
-            </state>
+            <state relative-caret-position="-1188" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
+        <entry file="file://$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-353">
-              <caret line="181" column="54" selection-start-line="181" selection-start-column="54" selection-end-line="181" selection-end-column="54" />
+            <state relative-caret-position="242">
+              <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -62,6 +69,12 @@
       <find>iaaza</find>
       <find>var_dum</find>
       <find>include('../config.php')</find>
+      <find>- Société MarocInvest2AS</find>
+      <find>: Société MarocInvest2AS</find>
+      <find>- &lt;strong&gt;Société MarocInvest2AS&lt;/strong&gt;</find>
+      <find>&lt;strong&gt;Société MarocInvest2AS&lt;/strong&gt;</find>
+      <find>Société MarocInvest2AS</find>
+      <find>&lt;strong&gt;&lt;?= $titreLivraison ?&gt;&lt;/strong&gt;</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -75,13 +88,14 @@
       <replace>../view/</replace>
       <replace>Société MarocInvest2AS</replace>
       <replace>include('../config/config.php')</replace>
+      <replace />
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/www/</dir>
-      <dir>$PROJECT_DIR$/www/view</dir>
       <dir>$PROJECT_DIR$/www/controller</dir>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/www</dir>
+      <dir>$PROJECT_DIR$/www/view</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -102,12 +116,14 @@
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/db/annahda.sql" />
         <option value="$PROJECT_DIR$/www/view/clients-synthese.php" />
-        <option value="$PROJECT_DIR$/www/view/dashboard.php" />
         <option value="$PROJECT_DIR$/www/controller/UserAddController.php" />
         <option value="$PROJECT_DIR$/docker-compose.yml.dist" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
         <option value="$PROJECT_DIR$/www/include/sidebar.php" />
+        <option value="$PROJECT_DIR$/www/view/dashboard.php" />
+        <option value="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" />
+        <option value="$PROJECT_DIR$/www/view/suivi-company.php" />
       </list>
     </option>
   </component>
@@ -191,16 +207,15 @@
       <workItem from="1539676396109" duration="11504000" />
       <workItem from="1539699931993" duration="1325000" />
       <workItem from="1541542129165" duration="210000" />
-      <workItem from="1545576520253" duration="2990000" />
+      <workItem from="1545576520253" duration="3917000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19596000" />
+    <option name="totallyTimeSpent" value="20523000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26869807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -331,9 +346,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/controller/LivraisonActionController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -433,6 +445,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-353">
           <caret line="181" column="54" selection-start-line="181" selection-start-column="54" selection-end-line="181" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/debug_page.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="132" column="86" selection-start-line="132" selection-start-column="86" selection-end-line="132" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/compte-bancaire.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1188" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
         </state>
       </provider>
     </entry>

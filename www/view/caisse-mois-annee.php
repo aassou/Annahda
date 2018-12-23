@@ -73,7 +73,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="caisse-group.php">Gestion de la caisse <strong>Société MarocInvest2AS</strong></a>
+                                <a href="caisse-group.php">Gestion de la caisse </a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>

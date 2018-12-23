@@ -96,7 +96,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Statistiques globales de la société MarocInvest2AS
+                            Statistiques globales
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -106,7 +106,7 @@
                             </li>
                             <li>
                                 <i class="icon-bar-chart"></i>
-                                <a>Statistiques Globales - <strong>Société MarocInvest2AS</strong></a>
+                                <a>Statistiques Globales</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -115,7 +115,7 @@
                 <!--      BEGIN TILES      -->
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4><i class="icon-bar-chart"></i> Statistiques des projets de la société MarocInvest2AS</h4>
+                        <h4><i class="icon-bar-chart"></i> Statistiques des projets</h4>
                         <hr class="line">
                         <div id="container1" style="width:100%; height:400px;"></div>
                     </div>

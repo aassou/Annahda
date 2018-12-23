@@ -74,7 +74,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion de la caisse - Société MarocInvest2AS
+                            Gestion de la caisse
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -84,7 +84,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a>Gestion de la caisse - Société MarocInvest2AS</a>
+                                <a>Gestion de la caisse</a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

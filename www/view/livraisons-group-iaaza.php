@@ -77,7 +77,7 @@
                     <div class="span12">
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->           
                         <h3 class="page-title">
-                            Gestion des livraisons <strong><?= $titreLivraison ?></strong>
+                            Gestion des livraisons
                         </h3>
                         <ul class="breadcrumb">
                             <li>
@@ -87,7 +87,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a>Gestion des livraisons <strong>Société MarocInvest2AS</strong></a>
+                                <a>Gestion des livraisons </a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->

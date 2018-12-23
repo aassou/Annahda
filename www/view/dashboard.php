@@ -130,7 +130,7 @@
                 ?>
                 <div class="row-fluid">
                     <div class="span12">
-                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Société MarocInvest2AS</h4>
+                        <h4 class="breadcrumb"><i class="icon-hand-right"></i> Accueil</h4>
                         <div class="tiles">
 						    <a href="caisse-group.php">
                             <div class="tile bg-purple">
