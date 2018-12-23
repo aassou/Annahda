@@ -9,7 +9,7 @@ function classLoad ($myClass) {
     }
 }
 spl_autoload_register("classLoad");
-include("../config.php");
+include("../config/config.php");
 //classes loading end
 session_start();
 

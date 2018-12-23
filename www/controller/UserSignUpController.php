@@ -10,11 +10,11 @@ function classLoad ($myClass) {
     }
 }
 spl_autoload_register("classLoad");
-include("../config.php");
+include("../config/config.php");
 //classes loading end
 session_start();
 
-$redirectLink='../signup.php';
+$redirectLink='../view/signup.php';
 
 if(empty($_POST['login']) || empty($_POST['password']) || empty($_POST['rpassword'])){
     $_SESSION['signup-error'] = "<strong>Erreur Inscription</strong> : Tous les champs sont obligatoires";

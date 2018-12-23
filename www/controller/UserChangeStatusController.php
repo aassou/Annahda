@@ -14,7 +14,7 @@ include("../config.php");
 //classes loading end
 session_start();
 
-$redirectLink='../users.php';
+$redirectLink='../view/users.php';
 $idUser = $_GET['idUser'];
 $userManager = new UserManager($pdo);
 $status = $userManager->getStatusById($idUser);
