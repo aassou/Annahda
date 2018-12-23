@@ -130,64 +130,19 @@
                     $currentPage=="livraisons-group.php"
                     or $currentPage=="livraisons-fournisseur.php"
                     or $currentPage=="livraisons-details.php"
-                    or $currentPage=="livraisons-group-iaaza.php"
-                    or $currentPage=="livraisons-fournisseur-iaaza.php"
-                    or $currentPage=="livraisons-details-iaaza.php"
                     or $currentPage=="reglements-fournisseur.php"
-                    or $currentPage=="reglements-fournisseur-iaaza.php"
                     or $currentPage=="livraisons-fournisseur-mois-list.php"
                     or $currentPage=="livraisons-fournisseur-mois.php"
-                    or $currentPage=="livraisons-fournisseur-mois-iaaza.php"
-                    or $currentPage=="livraisons-fournisseur-mois-list-iaaza.php"
                     ){
                         $gestionLivraisonClass = "active ";
                     } 
                 ?> 
-                <li class="<?= $gestionLivraisonClass; ?> has-sub ">
+                <li class="<?= $gestionLivraisonClass; ?>">
                     <a href="javascript:;">
                     <i class="icon-truck"></i> 
                     <span class="title">Gestion Livraisons</span>
                     <span class="arrow "></span>
                     </a>
-                    <ul class="sub">
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="livraisons-group.php"
-                                    or $currentPage=="livraisons-fournisseur.php"
-                                    or $currentPage=="livraisons-details.php"
-                                    or $currentPage=="reglements-fournisseur.php"
-                                    or $currentPage=="livraisons-fournisseur-mois.php"
-                                    or $currentPage=="livraisons-fournisseur-mois-list.php"
-                                    ){
-                            ?> class="active" <?php } ?> >
-                            <a href="livraisons-group.php">Société Annahda</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="livraisons-group-iaaza.php"
-                                    or $currentPage=="livraisons-fournisseur-iaaza.php"
-                                    or $currentPage=="livraisons-details-iaaza.php"
-                                    or $currentPage=="reglements-fournisseur-iaaza.php"
-                                    ){?> class="active" <?php } ?> >
-                            <a href="livraisons-group-iaaza.php">Société MarocInvest2AS</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
                 </li>
                 <!---------------------------- Livraisons End    -------------------------------------------->
                 <!---------------------------- Commandes Begin  -------------------------------------------->
@@ -202,45 +157,12 @@
                         $gestionCommandeClass = "active ";
                     } 
                 ?> 
-                <li class="<?= $gestionCommandeClass; ?> has-sub ">
+                <li class="<?= $gestionCommandeClass; ?>">
                     <a href="javascript:;">
                     <i class="icon-shopping-cart"></i> 
                     <span class="title">Gestion Commandes</span>
                     <span class="arrow "></span>
                     </a>
-                    <ul class="sub">
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="commande-group.php"
-                                    ){
-                            ?> class="active" <?php } ?> >
-                            <a href="commande-group.php">Société Annahda</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="commande-group-iaaza.php"
-                                    or $currentPage=="commande-details-iaaza.php"
-                                    or $currentPage=="commande-mois-annee-iaaza.php"
-                                    ){?> class="active" <?php } ?> >
-                            <a href="commande-group-iaaza.php">Société MarocInvest2AS</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
                 </li>
                 <!---------------------------- Commandes End    -------------------------------------------->
                 <!---------------------------- Caisse Begin  -------------------------------------------->
@@ -257,41 +179,12 @@
                         $gestionCaisseClass = "active ";
                     } 
                 ?> 
-                <li class="<?= $gestionCaisseClass; ?> has-sub ">
+                <li class="<?= $gestionCaisseClass; ?>">
                     <a href="javascript:;">
                     <i class="icon-money"></i> 
                     <span class="title">Gestion Caisses</span>
                     <span class="arrow "></span>
                     </a>
-                    <ul class="sub">
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION['userMerlaTrav']->profil() == "manager" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="caisse-group.php"){
-                            ?> class="active" <?php } ?> >
-                            <a href="caisse-group.php">Société Annahda</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                        <?php
-                        if ( 
-                            $_SESSION["userMerlaTrav"]->profil() == "admin" ||
-                            $_SESSION["userMerlaTrav"]->profil() == "user" ||
-                            $_SESSION['userMerlaTrav']->profil() == "consultant" 
-                            ) {
-                        ?>
-                        <li <?php if($currentPage=="caisse-group-iaaza.php"){?> class="active" <?php } ?> >
-                            <a href="caisse-group-iaaza.php">Société MarocInvest2AS</a>
-                        </li>
-                        <?php
-                        }
-                        ?>
-                    </ul>
                 </li>
                 <!---------------------------- Caisse End    -------------------------------------------->
 				<!---------------------------- Parametrage Begin  -------------------------------------------->
