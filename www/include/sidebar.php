@@ -138,7 +138,7 @@
                     } 
                 ?> 
                 <li class="<?= $gestionLivraisonClass; ?>">
-                    <a href="javascript:;">
+                    <a href="livraisons-group.php">
                     <i class="icon-truck"></i> 
                     <span class="title">Gestion Livraisons</span>
                     <span class="arrow "></span>
@@ -158,7 +158,7 @@
                     } 
                 ?> 
                 <li class="<?= $gestionCommandeClass; ?>">
-                    <a href="javascript:;">
+                    <a href="commande-group.php">
                     <i class="icon-shopping-cart"></i> 
                     <span class="title">Gestion Commandes</span>
                     <span class="arrow "></span>
@@ -180,7 +180,7 @@
                     } 
                 ?> 
                 <li class="<?= $gestionCaisseClass; ?>">
-                    <a href="javascript:;">
+                    <a href="caisse.php">
                     <i class="icon-money"></i> 
                     <span class="title">Gestion Caisses</span>
                     <span class="arrow "></span>

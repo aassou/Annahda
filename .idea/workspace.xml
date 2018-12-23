@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87123f7a-3345-4292-b2b2-41dd3143145b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/caisse-mois-annee.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/dashboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/dashboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-details.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-details.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur-mois.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/livraisons-group.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/livraisons-group.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur-iaaza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/reglements-fournisseur.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/view/suivi-company.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/view/suivi-company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/include/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/include/sidebar.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,18 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/view/compte-bancaire.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1188" />
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php">
+        <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+            <state relative-caret-position="374">
+              <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -75,6 +46,7 @@
       <find>&lt;strong&gt;Société MarocInvest2AS&lt;/strong&gt;</find>
       <find>Société MarocInvest2AS</find>
       <find>&lt;strong&gt;&lt;?= $titreLivraison ?&gt;&lt;/strong&gt;</find>
+      <find>MarocInvest2AS</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;?php include(&quot;../include/sidebar.php&quot;); ?&gt;</replace>
@@ -120,10 +92,10 @@
         <option value="$PROJECT_DIR$/docker-compose.yml.dist" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/www/include/sidebar.php" />
         <option value="$PROJECT_DIR$/www/view/dashboard.php" />
         <option value="$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php" />
         <option value="$PROJECT_DIR$/www/view/suivi-company.php" />
+        <option value="$PROJECT_DIR$/www/include/sidebar.php" />
       </list>
     </option>
   </component>
@@ -154,6 +126,12 @@
               <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
               <item name="Annahda" type="462c0819:PsiDirectoryNode" />
               <item name="www" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Annahda" type="462c0819:PsiDirectoryNode" />
+              <item name="www" type="462c0819:PsiDirectoryNode" />
+              <item name="include" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Annahda" type="b2602c69:ProjectViewProjectNode" />
@@ -207,15 +185,16 @@
       <workItem from="1539676396109" duration="11504000" />
       <workItem from="1539699931993" duration="1325000" />
       <workItem from="1541542129165" duration="210000" />
-      <workItem from="1545576520253" duration="3917000" />
+      <workItem from="1545576520253" duration="4121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20523000" />
+    <option name="totallyTimeSpent" value="20727000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26869807" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -441,13 +420,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-353">
-          <caret line="181" column="54" selection-start-line="181" selection-start-column="54" selection-end-line="181" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/view/debug_page.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -458,15 +430,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/view/compte-bancaire.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1188" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/view/commande-mois-annee-iaaza.php">
+    <entry file="file://$PROJECT_DIR$/www/include/sidebar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+        <state relative-caret-position="374">
+          <caret line="140" column="49" selection-start-line="140" selection-start-column="49" selection-end-line="140" selection-end-column="49" />
         </state>
       </provider>
     </entry>
