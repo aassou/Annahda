@@ -34,13 +34,17 @@
 		if( isset($_GET['codeLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonByCode($_GET['codeLivraison']);
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
-			if ( $livraison->idProjet() != 0 ) {
+			if ( $livraison->idProjet() != 0 and $livraison->idProjet() != -1 ) {
 			    $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
                 $idProjet = $projetManager->getProjetById($livraison->idProjet())->id();    
 			} 
+            else if ($livraison->idProjet() == -1) {
+                $nomProjet = $livraison->autreProjet();
+                $idProjet = -1;
+            }
             else {
-                $nomProjet = "Non mentionné";
-                $idProjet = "";    
+                $nomProjet = "Plusieurs projets";
+                $idProjet = 0;
             }
             
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());
@@ -115,7 +119,7 @@
 							</li>
 							<li>
                                 <a href="livraisons-fournisseur-mois.php?idFournisseur=<?= $livraison->idFournisseur() ?>">
-                                    Livraisons de <strong><?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?></strong>
+                                    Livraisons de <?= $fournisseurManager->getFournisseurById($livraison->idFournisseur())->nom() ?>
                                 </a>
                                 <i class="icon-angle-right"></i>
                             </li>

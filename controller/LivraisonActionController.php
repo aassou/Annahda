@@ -10,14 +10,14 @@ ini_set('display_errors', 1);
             include('../controller/'.$myClass.'.php');
         }
     }
-    spl_autoload_register("classLoad"); 
-    include('../config.php');  
+    spl_autoload_register("classLoad");
+    include('../config.php');
     include('../lib/image-processing.php');
     //classes loading end
     session_start();
-    
+
     //post input processing
-var_dump($_POST);die;
+
     $action = htmlentities($_POST['action']);
     //In this session variable we put all the POST, to get it in the contrats-add file
     //in case of error, and this help the user to do not put again what he filled out.
@@ -36,7 +36,7 @@ var_dump($_POST);die;
     if($action == "add"){
         if( !empty($_POST['libelle']) and !empty($_POST['dateLivraison']) ){
             $idProjet = htmlentities($_POST['idProjet']);
-            $autreProjet = 'test';//htmlentities($_POST['autreProjet']);
+            $autreProjet = htmlentities($_POST['autreProjet']);
             $libelle = htmlentities($_POST['libelle']);
             $designation = htmlentities($_POST['designation']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
@@ -47,19 +47,19 @@ var_dump($_POST);die;
             $mois = date('m', strtotime($dateLivraison));
             $annee = date('Y', strtotime($dateLivraison));
             //create object
-            $livraison = 
+            $livraison =
             new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet,'idFournisseur' => $idFournisseur,
+            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet, 'idFournisseur' => $idFournisseur,
             'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
 
-            if ($idProjet === 0 ) {
+            if ($idProjet == 0 ) {
                 $nomProjet = 'Plusieurs projets';
             }
-            else if ($idProjet === -1 ) {
+            else if ($idProjet == -1 ) {
                 $nomProjet = $autreProjet;
             }
             else {
@@ -75,7 +75,7 @@ var_dump($_POST);die;
             ));
             //add it to db
             $historyManager->add($history);
-            $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";  
+            $actionMessage = "<strong>Opération Valide</strong> : Livraison Ajoutée avec succès.";
             $typeMessage = "success";
             $redirectLink = "Location:../livraisons-details.php?codeLivraison=".$codeLivraison."&mois=".$mois."&annee=".$annee;
         }
@@ -84,15 +84,15 @@ var_dump($_POST);die;
             $typeMessage = "error";
             //test the source of this request for the reason of exact redirection
             if ( isset($_POST['source']) and $_POST['source'] == "livraisons-group" ) {
-                $redirectLink = "Location:../livraisons-group.php";    
+                $redirectLink = "Location:../livraisons-group.php";
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois" ) {
-                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;    
+                $redirectLink = "Location:../livraisons-fournisseur-mois.php?idFournisseur=".$idFournisseur;
             }
             else if ( isset($_POST['source']) and $_POST['source'] == "livraisons-fournisseur-mois-list" ) {
                 $mois = htmlentities($_POST['mois']);
                 $annee = htmlentities($_POST['annee']);
-                $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;    
+                $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
             }
         }
     }
@@ -111,9 +111,9 @@ var_dump($_POST);die;
             //these next data are used to know the month and the year of a supply demand
             $mois = date('m', strtotime($dateLivraison));
             $annee = date('Y', strtotime($dateLivraison));
-            $livraison = 
+            $livraison =
             new Livraison(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur,
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
             //add history data to db
@@ -162,7 +162,7 @@ var_dump($_POST);die;
         $status = htmlentities($_POST['status']);
         if ( !empty($_POST['bl']) ) {
             foreach ( $_POST['bl'] as $bl ) {
-                $livraisonManager->updateStatus($bl, $status);       
+                $livraisonManager->updateStatus($bl, $status);
             }
         }
         //add history data to db
@@ -180,7 +180,7 @@ var_dump($_POST);die;
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Status Modifiée avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
-        
+
     }
     else if($action=="delete"){
         $livraisonDetailManager = new LivraisonDetailManager($pdo);
@@ -206,7 +206,7 @@ var_dump($_POST);die;
         $actionMessage = "<strong>Opération Valide</strong> : Livraison Supprimée avec succès.";
         $typeMessage = "success";
         $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
-        
+
     }
 
     $_SESSION['livraison-action-message'] = $actionMessage;

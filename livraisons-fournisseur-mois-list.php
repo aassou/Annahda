@@ -534,8 +534,11 @@
                                         foreach($livraisons as $livraison){
                                             $grandTotal += $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
                                             $nomProjet = "Plusieurs Projets";
-                                            if ( $livraison->idProjet() != 0 ) {
+                                            if ( $livraison->idProjet() != 0 && $livraison->idProjet() != -1) {
                                                 $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                                            }
+                                            else if ( $livraison->idProjet() == -1 ) {
+                                                $nomProjet = $livraison->autreProjet();
                                             }
                                             else {
                                                 $nomProjet = "Plusieurs Projets";

@@ -232,7 +232,7 @@
                                     <div id="autreProjetDiv" class="control-group hidden">
                                         <label class="control-label">Nom Autre Projet</label>
                                         <div class="controls">
-                                            <input required="required" id="autreProjet" type="text" name="autreProjet" value="" />
+                                            <input id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
