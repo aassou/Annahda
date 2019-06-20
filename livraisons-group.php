@@ -220,12 +220,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
-                                            <select name="idProjet">
+                                            <select id="idProjet" name="idProjet">
                                                 <option value="0">Plusieurs Projets</option>
+                                                <option value="-1">Autre Projet</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div id="autreProjetDiv" class="control-group hidden">
+                                        <label class="control-label">Nom Autre Projet</label>
+                                        <div class="controls">
+                                            <input required="required" id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -496,6 +503,17 @@
             // initiate layout and plugins
             //App.setPage("table_editable");
             App.init();
+
+            $('#idProjet').on('change', function () {
+                let idProjet = $('#idProjet').val();
+                console.log(idProjet);
+                if (idProjet == -1) {
+                    $('#autreProjetDiv').removeClass('hidden');
+                }
+                else {
+                    $('#autreProjetDiv').addClass('hidden');
+                }
+            });
         });
         $('.livraisons').show();
         $('#provider').keyup(function(){
@@ -507,29 +525,29 @@
                }
             });
         });
-        $("#addLivraisonForm").validate({
-            rules:{
-                libelle:{
-                    required:true
-                }
-            },
-            errorClass: "error-class",
-            validClass: "valid-class"
-        });
-        $("#addReglementForm").validate({
-            rules:{
-                montant:{
-                    number: true,
-                    required:true
-                },
-                numeroOperation:{
-                    number: true,
-                    required:true
-                }
-            },
-            errorClass: "error-class",
-            validClass: "valid-class"
-        });
+        // $("#addLivraisonForm").validate({
+        //     rules:{
+        //         libelle:{
+        //             required:true
+        //         }
+        //     },
+        //     errorClass: "error-class",
+        //     validClass: "valid-class"
+        // });
+        // $("#addReglementForm").validate({
+        //     rules:{
+        //         montant:{
+        //             number: true,
+        //             required:true
+        //         },
+        //         numeroOperation:{
+        //             number: true,
+        //             required:true
+        //         }
+        //     },
+        //     errorClass: "error-class",
+        //     validClass: "valid-class"
+        // });
     </script>
 </body>
 <!-- END BODY -->

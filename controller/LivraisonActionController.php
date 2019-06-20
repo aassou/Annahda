@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
     //classes loading begin
     function classLoad ($myClass) {
         if(file_exists('../model/'.$myClass.'.php')){
@@ -15,6 +17,7 @@
     session_start();
     
     //post input processing
+var_dump($_POST);die;
     $action = htmlentities($_POST['action']);
     //In this session variable we put all the POST, to get it in the contrats-add file
     //in case of error, and this help the user to do not put again what he filled out.
@@ -33,6 +36,7 @@
     if($action == "add"){
         if( !empty($_POST['libelle']) and !empty($_POST['dateLivraison']) ){
             $idProjet = htmlentities($_POST['idProjet']);
+            $autreProjet = 'test';//htmlentities($_POST['autreProjet']);
             $libelle = htmlentities($_POST['libelle']);
             $designation = htmlentities($_POST['designation']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
@@ -45,13 +49,23 @@
             //create object
             $livraison = 
             new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet,'idFournisseur' => $idFournisseur,
             'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
-            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+
+            if ($idProjet === 0 ) {
+                $nomProjet = 'Plusieurs projets';
+            }
+            else if ($idProjet === -1 ) {
+                $nomProjet = $autreProjet;
+            }
+            else {
+                $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+            }
+
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des livraisons",
@@ -87,6 +101,7 @@
         $annee = htmlentities($_POST['annee']);
         if(!empty($_POST['libelle'])){
             $idProjet = htmlentities($_POST['idProjet']);
+            $autreProjet = htmlentities($_POST['autreProjet']);
             $id = htmlentities($_POST['idLivraison']);
             $libelle = htmlentities($_POST['libelle']);
             $designation = htmlentities($_POST['designation']);
@@ -103,7 +118,17 @@
             $livraisonManager->update($livraison);
             //add history data to db
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
-            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+
+            if ($idProjet === 0 ) {
+                $nomProjet = 'Plusieurs projets';
+            }
+            else if ($idProjet === 0 ) {
+                $nomProjet = $autreProjet;
+            }
+            else {
+                $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+            }
+
             $createdBy = $_SESSION['userMerlaTrav']->login();
             $created = date('Y-m-d h:i:s');
             $history = new History(array(
@@ -183,7 +208,7 @@
         $redirectLink = "Location:../livraisons-fournisseur-mois-list.php?idFournisseur=".$idFournisseur."&mois=".$mois."&annee=".$annee;
         
     }
-    
+
     $_SESSION['livraison-action-message'] = $actionMessage;
     $_SESSION['livraison-type-message'] = $typeMessage;
     header($redirectLink);

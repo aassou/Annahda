@@ -33,6 +33,7 @@
     if($action == "add"){
         if( !empty($_POST['libelle']) ){
             $idProjet = htmlentities($_POST['idProjet']);
+            $autreProjet = htmlentities($_POST['autreProjet']);
             $libelle = htmlentities($_POST['libelle']);
             $status = 0;
             $designation = htmlentities($_POST['designation']);
@@ -47,7 +48,7 @@
             //create object
             $livraison = 
             new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle, 'status' => $status,
-            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet,'idFournisseur' => $idFournisseur,
             'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
             //add it to db
             $livraisonManager->add($livraison);
@@ -89,6 +90,7 @@
         $annee = htmlentities($_POST['annee']);
         if(!empty($_POST['libelle'])){
             $idProjet = htmlentities($_POST['idProjet']);
+            $autreProjet = htmlentities($_POST['autreProjet']);
             $id = htmlentities($_POST['idLivraison']);
             $idFournisseur = htmlentities($_POST['idFournisseur']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
@@ -102,7 +104,7 @@
             $annee = date('Y', strtotime($dateLivraison));
             $livraison = 
             new LivraisonIaaza(array('id' => $id, 'dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'designation' => $designation, 'idProjet' => $idProjet, 'idFournisseur' => $idFournisseur, 
+            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet'=> $autreProjet,'idFournisseur' => $idFournisseur,
             'updatedBy' => $updatedBy, 'updated' => $updated));
             $livraisonManager->update($livraison);
             //add history data to db

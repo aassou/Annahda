@@ -420,6 +420,9 @@
             $locauxManager->changeStatus($contrat->idBien(), "Disponible");
         }
         $contratManager->desisterContrat($idContrat);
+        if( $contrat->revendre() == 1 ){
+            $contratManager->updateRevendre($idContrat, 0);
+        }
         //add history data to db
         $createdBy = $_SESSION['userMerlaTrav']->login();
         $created = date('Y-m-d h:i:s');

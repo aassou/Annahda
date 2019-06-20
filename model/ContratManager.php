@@ -499,9 +499,11 @@ class ContratManager{
         'SELECT * FROM t_contrat 
         WHERE revendre=:revendre 
         AND typeBien=:typeBien
-        AND idProjet != 42');
+        AND idProjet != 42
+        AND status<>:status');
         $query->bindValue(':revendre', 1);
         $query->bindValue(':typeBien', 'appartement');
+        $query->bindValue(':status', 'Disponible');
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $contrats[] = new Contrat($data);
@@ -514,9 +516,12 @@ class ContratManager{
         $contrats = array();    
         $query = $this->_db->prepare(
         'SELECT * FROM t_contrat 
-        WHERE revendre=:revendre AND typeBien=:typeBien');
+        WHERE revendre=:revendre 
+        AND typeBien=:typeBien
+        AND status<>:status');
         $query->bindValue(':revendre', 1);
         $query->bindValue(':typeBien', 'localCommercial');
+        $query->bindValue(':status', 'Disponible');
         $query->execute();
         while($data = $query->fetch(PDO::FETCH_ASSOC)){
             $contrats[] = new Contrat($data);

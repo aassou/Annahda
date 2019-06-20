@@ -336,6 +336,19 @@
                             </div>
                             </a>
                             <?php } ?>
+                            <a href="contrat-status.php">
+                                <div class="tile bg-blue-3">
+                                    <div class="corner"></div>
+                                    <div class="tile-body">
+                                        <i class="icon-group"></i>
+                                    </div>
+                                    <div class="tile-object">
+                                        <div class="name">
+                                            Etats clients
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
 						</div>
 					</div>
 				</div>

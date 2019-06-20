@@ -14,6 +14,7 @@ class Livraison{
     private $_modePaiement;
     private $_idFournisseur;
     private $_idProjet;
+    private $_autreProjet;
 	private $_code;
     private $_created;
     private $_createdBy;
@@ -83,6 +84,10 @@ class Livraison{
     
     public function setIdProjet($idProjet){
         $this->_idProjet = $idProjet;
+    }
+
+    public function setAutreProjet($autreProjet){
+        $this->_autreProjet = $autreProjet;
     }
     
     public function setIdFournisseur($idFournisseur){
@@ -160,6 +165,10 @@ class Livraison{
     
     public function idProjet(){
         return $this->_idProjet;
+    }
+
+    public function autreProjet(){
+        return $this->_autreProjet;
     }
     
 	public function code(){
