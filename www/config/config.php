@@ -1,7 +1,7 @@
 <?php
 
 try{
-    $pdo = new PDO('mysql:host=db;dbname=annahda', 'root', 'test');
+    $pdo = new PDO('mysql:host=db;dbname=db', 'user', '*********');
     //openssl encryption params
     $password = "";
     $method = "";
