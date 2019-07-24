@@ -1,4 +1,4 @@
-.idea/*
+q.idea/*
 www/config/*
 docker-compose.yml
 db/
