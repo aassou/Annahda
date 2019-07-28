@@ -33,7 +33,7 @@
             $livraisonManager = new LivraisonIaazaManager($pdo);
             $livraisonDetailManager = new LivraisonDetailIaazaManager($pdo);
             $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
-            $titreSociete = "Société Iaaza";
+            $titreSociete = "Société Benmeskour Construction";
         }
         //classes and vars
         $idFournisseur = $_POST['idFournisseur'];
@@ -153,11 +153,17 @@ ob_start();
         <?php
         foreach( $livraisons as $livraison ) {
             $nomProjet = "";
-            if ( $livraison->idProjet() == 0 ) {
-                $nomProjet = "Non mentionné";
+            if ( $livraison->idProjet() != 0 and $livraison->idProjet() != -1 ) {
+                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                $idProjet = $projetManager->getProjetById($livraison->idProjet())->id();
+            }
+            else if ($livraison->idProjet() == -1) {
+                $nomProjet = $livraison->autreProjet();
+                $idProjet = -1;
             }
             else {
-                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                $nomProjet = "Plusieurs projets";
+                $idProjet = 0;
             }
         ?>      
         <tr>

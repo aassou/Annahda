@@ -163,12 +163,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
-                                            <select name="idProjet">
+                                            <select id="idProjet" name="idProjet">
                                                 <option value="0">Plusieurs Projets</option>
+                                                <option value="-1">Autre Projet</option>
                                                 <?php foreach($projets as $projet){ ?>
-                                                <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                    <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div id="autreProjetDiv" class="control-group hidden">
+                                        <label class="control-label">Nom Autre Projet</label>
+                                        <div class="controls">
+                                            <input id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -373,7 +380,7 @@
                                         <th></th>
                                         <th><strong><a><?= number_format($grandTotalLivraisons, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                         <th class="hidden-phone"><strong><a><?= number_format($grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
-                                        <th class="hidden-phone"><strong><a><?= number_format($totalLivraison - $grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
+                                        <th class="hidden-phone"><strong><a><?= number_format($grandTotalLivraisons - $grandTotalReglements, 2, ',', ' ') ?>&nbsp;DH</a></strong></th>
                                     </tr>
                                 </table>
                                 </div><!-- END DIV SCROLLER -->
@@ -425,6 +432,17 @@
             //App.setPage("table_editable");
             App.init();
         });
+
+        $('#idProjet').on('change', function () {
+            let idProjet = $('#idProjet').val();
+            if (idProjet == -1) {
+                $('#autreProjetDiv').removeClass('hidden');
+            }
+            else {
+                $('#autreProjetDiv').addClass('hidden');
+            }
+        });
+
         $('.livraisons').show();
         $('#provider').keyup(function(){
            $('.livraisons').hide();

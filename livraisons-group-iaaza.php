@@ -30,7 +30,7 @@
         $titreLivraison ="";
         $hrefLivraisonBilanPrintController = "";
         $livraisonListDeleteLink = "";
-        $titreLivraison ="Société Iaaza";
+        $titreLivraison ="Société Benmeskour Construction";
         $livraisonNumber = $livraisonManager->getLivraisonNumber();
         if($livraisonNumber != 0){
             $livraisons = $livraisonManager->getLivraisonsByGroup();
@@ -99,7 +99,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a>Gestion des livraisons <strong>Société Iaaza</strong></a>
+                                <a>Gestion des livraisons <strong> <?= $titreLivraison ?></strong></a>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -209,12 +209,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
-                                            <select name="idProjet">
-                                                <option value="0">Non mentionné</option>
+                                            <select name="idProjet" id="idProjet">
+                                                <option value="0">Plusieurs Projets</option>
+                                                <option value="-1">Autre Projet</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div id="autreProjetDiv" class="control-group hidden">
+                                        <label class="control-label">Nom Autre Projet</label>
+                                        <div class="controls">
+                                            <input id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -391,13 +398,6 @@
                                         <?php
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
-                                            $nomProjet = "Non mentionné";
-                                            if ( $livraison->idProjet() != 0 ) {
-                                                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
-                                            }
-                                            else {
-                                                $nomProjet = "Non mentionné";
-                                            }
                                             $livraisonsIds = $livraisonManager->getLivraisonIdsByIdFournisseur($livraison->idFournisseur());
                                             $totalDetailsLivraisons = 0;
                                             foreach($livraisonsIds as $idl){
@@ -492,6 +492,17 @@
             // initiate layout and plugins
             //App.setPage("table_editable");
             App.init();
+
+            $('#idProjet').on('change', function () {
+                let idProjet = $('#idProjet').val();
+                console.log(idProjet);
+                if (idProjet == -1) {
+                    $('#autreProjetDiv').removeClass('hidden');
+                }
+                else {
+                    $('#autreProjetDiv').addClass('hidden');
+                }
+            });
         });
         $('.livraisons').show();
         $('#provider').keyup(function(){

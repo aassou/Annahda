@@ -30,7 +30,7 @@
         $titreLivraison ="Liste de toutes les livraisons";
         $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php";
         $livraisonListDeleteLink = "";
-        $titreLivraison ="Société Iaaza";
+        $titreLivraison ="Société Benmeskour Construction";
         $livraisonNumber = $livraisonManager->getLivraisonNumber();
         //if($livraisonNumber != 0){
         $idFournisseur = $_GET['idFournisseur'];
@@ -38,7 +38,7 @@
         
         $totalReglement = $reglementsFournisseurManager->getTotalReglement();
         $totalLivraison = $livraisonDetailManager->getTotalLivraison(); 
-        $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=1";
+        $hrefLivraisonBilanPrintController = "controller/Livraison2BilanPrintController.php?societe=2";
         //}
 ?>
 <!DOCTYPE html>
@@ -101,7 +101,7 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société Iaaza</strong></a>
+                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong><?= $titreLivraison ?></strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
@@ -163,12 +163,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
-                                            <select name="idProjet">
+                                            <select name="idProjet" id="idProjet">
                                                 <option value="0">Plusieurs Projets</option>
+                                                <option value="-1">Autre Projet</option>
                                                 <?php foreach($projets as $projet){ ?>
-                                                <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
+                                                    <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div id="autreProjetDiv" class="control-group hidden">
+                                        <label class="control-label">Nom Autre Projet</label>
+                                        <div class="controls">
+                                            <input id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -424,6 +431,16 @@
             // initiate layout and plugins
             //App.setPage("table_editable");
             App.init();
+
+            $('#idProjet').on('change', function () {
+                let idProjet = $('#idProjet').val();
+                if (idProjet == -1) {
+                    $('#autreProjetDiv').removeClass('hidden');
+                }
+                else {
+                    $('#autreProjetDiv').addClass('hidden');
+                }
+            });
         });
         $('.livraisons').show();
         $('#provider').keyup(function(){

@@ -11,15 +11,16 @@ class LivraisonIaazaManager{
     //CRUD operations
     public function add(LivraisonIaaza $livraison){
         $query = $this->_db->prepare(
-        'INSERT INTO t_livraison_iaaza (dateLivraison, libelle, designation, status, idFournisseur, idProjet, code)
-        VALUES (:dateLivraison, :libelle, :designation, :status, :idFournisseur, :idProjet, :code)') 
+        'INSERT INTO t_livraison_iaaza (
+        dateLivraison, libelle, designation, idFournisseur, idProjet, autreProjet, code)
+        VALUES (:dateLivraison, :libelle, :designation, :idFournisseur, :idProjet, :autreProjet, :code)')
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
-        $query->bindValue(':status', $livraison->status());
         $query->bindValue(':designation', $livraison->designation());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':idProjet', $livraison->idProjet());
+        $query->bindValue(':autreProjet', $livraison->autreProjet());
 		$query->bindValue(':code', $livraison->code());
         $query->execute();
         $query->closeCursor();
@@ -28,13 +29,14 @@ class LivraisonIaazaManager{
     public function update(LivraisonIaaza $livraison){
         $query = $this->_db->prepare(
         'UPDATE t_livraison_iaaza SET dateLivraison=:dateLivraison, libelle=:libelle, designation=:designation,
-        idProjet=:idProjet, idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
+        idProjet=:idProjet, autreProjet=:autreProjet, idFournisseur=:idFournisseur, updated=:updated, updatedBy=:updatedBy
         WHERE id=:id') or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':id', $livraison->id());
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());
 		$query->bindValue(':libelle', $livraison->libelle());
         $query->bindValue(':designation', $livraison->designation());
         $query->bindValue(':idProjet', $livraison->idProjet());
+        $query->bindValue(':autreProjet', $livraison->autreProjet());
         $query->bindValue(':idFournisseur', $livraison->idFournisseur());
         $query->bindValue(':updated', $livraison->updated());
         $query->bindValue(':updatedBy', $livraison->updatedBy());

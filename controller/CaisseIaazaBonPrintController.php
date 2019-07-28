@@ -45,7 +45,7 @@ ob_start();
     }
 </style>
 <page backtop="15mm" backbottom="20mm" backleft="10mm" backright="10mm">
-    <h4>Bon de caisse - Société Iaaza</h4>
+    <h4>Bon de caisse - Société Benmeskour Construction</h4>
     <table>
         <tr>
             <th style="width:20%">Date Opération</th>

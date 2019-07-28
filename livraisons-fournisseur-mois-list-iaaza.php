@@ -162,15 +162,17 @@
                             </li>
                             <li>
                                 <i class="icon-truck"></i>
-                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société Iaaza</strong></a>
+                                <a href="livraisons-group-iaaza.php">Gestion des livraisons <strong>Société Benmeskour Construction</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <a href="livraisons-fournisseur-mois-iaaza.php?idFournisseur=<?= $idFournisseur ?>">Livraisons de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?> 
+                                <a href="livraisons-fournisseur-mois-iaaza.php?idFournisseur=<?= $idFournisseur ?>">
+                                    Livraisons de <strong><?= $fournisseurManager->getFournisseurById($idFournisseur)->nom() ?></strong>
+                                </a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>
-                                <?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong></a>
+                                <strong><?= $_GET['mois'] ?>/<?= $_GET['annee'] ?></strong>
                             </li>
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
@@ -218,12 +220,19 @@
                                     <div class="control-group">
                                         <label class="control-label">Projet</label>
                                         <div class="controls">
-                                            <select name="idProjet">
+                                            <select name="idProjet" id="idProjet">
                                                 <option value="0">Plusieurs Projets</option>
+                                                <option value="-1">Autre Projet</option>
                                                 <?php foreach($projets as $projet){ ?>
                                                 <option value="<?= $projet->id() ?>"><?= $projet->nom() ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div id="autreProjetDiv" class="control-group hidden">
+                                        <label class="control-label">Nom Autre Projet</label>
+                                        <div class="controls">
+                                            <input id="autreProjet" type="text" name="autreProjet" value="" />
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -545,9 +554,12 @@
                                         if($livraisonNumber != 0){
                                         foreach($livraisons as $livraison){
                                             $grandTotal += $livraisonDetailManager->getTotalLivraisonByIdLivraison($livraison->id());
-                                            $nomProjet = "Plusieurs Projets";
-                                            if ( $livraison->idProjet() != 0 ) {
+                                            $nomProjet = "";
+                                            if ( $livraison->idProjet() != 0 && $livraison->idProjet() != -1) {
                                                 $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                                            }
+                                            else if ( $livraison->idProjet() == -1 ) {
+                                                $nomProjet = $livraison->autreProjet();
                                             }
                                             else {
                                                 $nomProjet = "Plusieurs Projets";
@@ -774,6 +786,16 @@
             // initiate layout and plugins
             App.setPage("table_managed");
             App.init();
+
+            $('#idProjet').on('change', function () {
+                let idProjet = $('#idProjet').val();
+                if (idProjet == -1) {
+                    $('#autreProjetDiv').removeClass('hidden');
+                }
+                else {
+                    $('#autreProjetDiv').addClass('hidden');
+                }
+            });
         });
         $('.livraisons').show();
         $('#nomProjet').keyup(function(){

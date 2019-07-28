@@ -11,7 +11,8 @@ class LivraisonManager{
     //CRUD operations
     public function add(Livraison $livraison){
         $query = $this->_db->prepare(
-        'INSERT INTO t_livraison (dateLivraison, libelle, designation, idFournisseur, idProjet, autreProjet, code)
+        'INSERT INTO t_livraison (
+        dateLivraison, libelle, designation, idFournisseur, idProjet, autreProjet, code)
         VALUES (:dateLivraison, :libelle, :designation, :idFournisseur, :idProjet, :autreProjet, :code)')
         or die(print_r($this->_db->errorInfo()));
         $query->bindValue(':dateLivraison', $livraison->dateLivraison());

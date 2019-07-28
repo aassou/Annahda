@@ -85,7 +85,7 @@
                             </li>
                             <li>
                                 <i class="icon-money"></i>
-                                <a href="caisse-group-iaaza.php">Gestion de la caisse <strong>Société Iaaza</strong></a>
+                                <a href="caisse-group-iaaza.php">Gestion de la caisse <strong>Société Benmeskour Construction</strong></a>
                                 <i class="icon-angle-right"></i>
                             </li>
                             <li>

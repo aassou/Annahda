@@ -48,9 +48,19 @@ ini_set('display_errors', 1);
             $annee = date('Y', strtotime($dateLivraison));
             //create object
             $livraison =
-            new Livraison(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle,
-            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet, 'idFournisseur' => $idFournisseur,
-            'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
+            new Livraison(
+                array(
+                    'dateLivraison' => $dateLivraison,
+                    'libelle' => $libelle,
+                    'designation' => $designation,
+                    'idProjet' => $idProjet,
+                    'autreProjet' => $autreProjet,
+                    'idFournisseur' => $idFournisseur,
+                    'code' => $codeLivraison,
+                    'createdBy' => $createdBy,
+                    'created' => $created
+                )
+            );
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db

@@ -40,9 +40,18 @@
 		$projet = "Vide";
 		if( isset($_GET['idLivraison']) ){
 			$livraison = $livraisonManager->getLivraisonById($_GET['idLivraison']);
-            $nomProjet = "Non mentionnée";
-            if ( $livraison->idProjet() != 0 ) {
-                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();   
+            $nomProjet = "";
+            if ( $livraison->idProjet() != 0 and $livraison->idProjet() != -1 ) {
+                $nomProjet = $projetManager->getProjetById($livraison->idProjet())->nom();
+                $idProjet = $projetManager->getProjetById($livraison->idProjet())->id();
+            }
+            else if ($livraison->idProjet() == -1) {
+                $nomProjet = $livraison->autreProjet();
+                $idProjet = -1;
+            }
+            else {
+                $nomProjet = "Plusieurs projets";
+                $idProjet = 0;
             }
 			$fournisseur = $fournisseurManager->getFournisseurById($livraison->idFournisseur());
 			$livraisonDetail = $livraisonDetailManager->getLivraisonsDetailByIdLivraison($livraison->id());

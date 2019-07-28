@@ -100,7 +100,7 @@
 				<!--      BEGIN TILES      -->
 				<div class="row-fluid">
 					<div class="span12">
-						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Iaaza</h4>
+						<h4 class="breadcrumb"><i class="icon-hand-right"></i> Société Benmeskour Construction</h4>
 						<div class="tiles">
 						    <a href="caisse-group-iaaza.php">
                             <div class="tile bg-yellow">

@@ -37,7 +37,6 @@
             $libelle = htmlentities($_POST['libelle']);
             $status = 0;
             $designation = htmlentities($_POST['designation']);
-            //$type = htmlentities($_POST['type']);
             $dateLivraison = htmlentities($_POST['dateLivraison']);
             $codeLivraison = uniqid().date('YmdHis');
             $createdBy = $_SESSION['userMerlaTrav']->login();
@@ -47,14 +46,34 @@
             $annee = date('Y', strtotime($dateLivraison));
             //create object
             $livraison = 
-            new LivraisonIaaza(array('dateLivraison' => $dateLivraison, 'libelle' => $libelle, 'status' => $status,
-            'designation' => $designation, 'idProjet' => $idProjet, 'autreProjet' => $autreProjet,'idFournisseur' => $idFournisseur,
-            'code' => $codeLivraison, 'createdBy' => $createdBy, 'created' => $created));
+            new LivraisonIaaza(
+                array(
+                    'dateLivraison' => $dateLivraison,
+                    'libelle' => $libelle,
+                    'designation' => $designation,
+                    'idProjet' => $idProjet,
+                    'autreProjet' => $autreProjet,
+                    'idFournisseur' => $idFournisseur,
+                    'code' => $codeLivraison,
+                    'createdBy' => $createdBy,
+                    'created' => $created
+                )
+            );//var_dump($livraison);die;
             //add it to db
             $livraisonManager->add($livraison);
             //add history data to db
             $nomFournisseur = $fournisseurManager->getFournisseurById($idFournisseur)->nom();
-            $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+
+            if ($idProjet == 0 ) {
+                $nomProjet = 'Plusieurs projets';
+            }
+            else if ($idProjet == -1 ) {
+                $nomProjet = $autreProjet;
+            }
+            else {
+                $nomProjet = $projetManager->getProjetById($idProjet)->nom();
+            }
+
             $history = new History(array(
                 'action' => "Ajout",
                 'target' => "Table des livraisons",

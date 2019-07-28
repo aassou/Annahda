@@ -34,7 +34,7 @@
             $reglementsFournisseurManager = new ReglementFournisseurIaazaManager($pdo);
             $livraisonNumber = $livraisonManager->getLivraisonNumber();
             if($livraisonNumber != 0){
-                $titreLivraison ="Bilan des livraisons et réglements - Société Iaaza";
+                $titreLivraison ="Bilan des livraisons et réglements - Société Benmeskour Construction";
                 $livraisons = $livraisonManager->getLivraisonsByGroup();
                 $totalReglement = $reglementsFournisseurManager->getTotalReglement();
                 $totalLivraison = $livraisonDetailManager->getTotalLivraison();     
